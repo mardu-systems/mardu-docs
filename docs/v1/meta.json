@@ -3,6 +3,8 @@
   "root": "version",
   "pages": [
     "index",
+    "grundlagen-begriffe",
+    "neuerungen",
     "erste-schritte",
     "uebersicht-monitoring",
     "buchungen",
@@ -16,6 +18,9 @@
     "automationen",
     "server-einstellungen",
     "sicherheit-betrieb",
+    "inbetriebnahme",
+    "api-integration",
+    "nachweise-datenschutz",
     "fehlersuche"
   ]
 }
