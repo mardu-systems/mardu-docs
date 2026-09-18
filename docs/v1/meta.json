@@ -14,13 +14,14 @@
     "benutzer-rollen",
     "zutritt-verwalten",
     "geraete-verwalten",
+    "inbetriebnahme",
     "buchungen-verwalten",
     "automationen",
+    "integrationen",
     "server-einstellungen",
     "sicherheit-betrieb",
-    "inbetriebnahme",
-    "api-integration",
     "nachweise-datenschutz",
+    "api-integration",
     "fehlersuche"
   ]
 }
