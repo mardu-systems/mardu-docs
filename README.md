@@ -34,8 +34,12 @@ automatisch einen Versions-Switcher (`/docs/v1/...` ↔ `/docs/v2/...`).
 
 1. `docs/vX/mein-thema.mdx` mit `title` + `description` im Frontmatter
    (kein `# H1` im Body – der Titel kommt aus dem Frontmatter).
-2. Dateiname (ohne Endung) in `docs/vX/meta.json` unter `pages` eintragen.
-3. Commit + Push hier, danach Submodule-Bump in den Consumern
+2. Rolle als Sidebar-Icon setzen (`icon:` mit Lucide-Name):
+   `ShieldCheck` (Administration), `Users` (Benutzer), `Wrench`
+   (Installieren), `Code2` (Entwickeln), `CalendarClock` (Koordination),
+   `BookOpen` (alle). Consumer färben danach ein.
+3. Dateiname (ohne Endung) in `docs/vX/meta.json` unter `pages` eintragen.
+4. Commit + Push hier, danach Submodule-Bump in den Consumern
    (Website zeigt die Seite automatisch in Sidebar, TOC und Suche).
 
 ## Neue Version anlegen (z. B. v3)
