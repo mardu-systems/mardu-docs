@@ -1,4 +1,8 @@
 {
   "title": "Dokumentation",
-  "pages": ["index", "v1"]
+  "pages": [
+    "index",
+    "v1",
+    "api"
+  ]
 }
