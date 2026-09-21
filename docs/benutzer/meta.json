@@ -1,0 +1,12 @@
+{
+  "title": "Benutzer",
+  "pages": [
+    "index",
+    "erste-schritte",
+    "uebersicht-monitoring",
+    "buchungen",
+    "zutritt",
+    "geraete-status",
+    "kompetenzen"
+  ]
+}

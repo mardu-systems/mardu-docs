@@ -1,0 +1,14 @@
+{
+  "title": "Administration",
+  "pages": [
+    "index",
+    "benutzer-rollen",
+    "zutritt-verwalten",
+    "geraete-verwalten",
+    "automationen",
+    "integrationen",
+    "server-einstellungen",
+    "sicherheit-betrieb",
+    "nachweise-datenschutz"
+  ]
+}

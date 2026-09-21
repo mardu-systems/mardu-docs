@@ -2,6 +2,11 @@
   "title": "Dokumentation",
   "pages": [
     "index",
-    "v1"
+    "ueberblick",
+    "benutzer",
+    "koordination",
+    "administration",
+    "installieren",
+    "entwickeln"
   ]
 }
