@@ -3,6 +3,7 @@
   "pages": [
     "index",
     "inbetriebnahme",
-    "abnahme-uebergabe"
+    "abnahme-uebergabe",
+    "stoerung-vor-ort"
   ]
 }

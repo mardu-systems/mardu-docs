@@ -3,6 +3,9 @@
   "pages": [
     "index",
     "api-integration",
+    "http-api",
+    "mqtt-events",
+    "mcp-anbindung",
     "API"
   ]
 }
