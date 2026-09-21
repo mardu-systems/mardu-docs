@@ -1,7 +1,6 @@
 {
   "title": "Administration",
   "pages": [
-    "index",
     "benutzer-rollen",
     "zutritt-verwalten",
     "geraete-verwalten",

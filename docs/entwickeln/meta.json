@@ -1,7 +1,6 @@
 {
   "title": "Entwickeln",
   "pages": [
-    "index",
     "api-integration",
     "http-api",
     "mqtt-events",
