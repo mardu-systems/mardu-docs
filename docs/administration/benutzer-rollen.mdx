@@ -1,138 +1,156 @@
 ---
 title: Benutzer und Rollen
-description: Benutzer einladen und verwalten, Rollen und Zuständigkeiten zuweisen.
+description: Benutzer anlegen, verwalten und Rollen zuweisen.
 ---
 
-import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-
-Gilt für: Administration.
 
 ## Benutzer einladen und anlegen
 
-Ein neues Benutzerkonto legst du unter **Benutzerverwaltung → Benutzer → Benutzer hinzufügen** an. Im Dialog trägst du die Benutzerdaten ein und wählst, wie die Person ihr Passwort erhält. Rollen und Gruppen weist du nach dem Anlegen zu.
+Öffne **Benutzerverwaltung → Benutzer → Benutzer hinzufügen**. Die Bilder zeigen fiktive Beispielkonten.
 
-<Callout type="info" title="Voraussetzung">
-  Du benötigst die Berechtigung zum Anlegen von Benutzern. Wenn die Schaltfläche fehlt, lass deine Berechtigungen von einem Administrator prüfen.
-</Callout>
-
-### 1. Benutzerdaten eintragen
-
-Fülle die Angaben für die Person aus, deren Konto du anlegen möchtest. Die Telefonnummer ist optional; alle anderen Angaben in diesem Abschnitt sind erforderlich.
-
-| Feld | Was du einträgst |
-| --- | --- |
-| Vorname und Nachname | Den Namen der Person, jeweils höchstens 75 Zeichen. |
-| Benutzername | Einen noch nicht vergebenen Anmeldenamen mit mindestens 6 Zeichen, zum Beispiel `lina.berger`. |
-| E-Mail | Die E-Mail-Adresse der Person. Sie muss gültig sein und darf noch keinem anderen Konto zugeordnet sein. |
-| Telefonnummer (optional) | Falls benötigt, eine noch nicht vergebene Nummer mit 6–30 Zeichen. Ziffern, Leerzeichen, Klammern, Bindestrich, Punkt und ein führendes `+` sind möglich. Sonst lässt du das Feld leer. |
-
-![Dialog Benutzer hinzufügen mit ausgefüllten Benutzerdaten für Lina Berger und ausgewählter Einladung per E-Mail.](./bilder/benutzer-anlegen-einladung.png)
-
-*Beispiel mit fiktiven Benutzerdaten. Unter „Anmeldung“ ist die Einladung bereits vorausgewählt. Du vergibst dabei kein Passwort für die Person.*
-
-### 2. Anmeldeverfahren wählen
-
-| Verfahren | Was du erledigst | Was danach passiert |
-| --- | --- | --- |
-| Einladung per E-Mail senden | Benutzerdaten eintragen und das Konto anlegen. | Die Person setzt ihr Passwort über den Einladungslink. Danach muss ein Administrator das Konto freigeben. |
-| Passwort festlegen | Passwort und Bestätigung eintragen; bei Bedarf die Passwortänderung erzwingen. | Das Konto wird aktiv angelegt. Eine vorgeschriebene E-Mail-Bestätigung bleibt erforderlich. |
+1. Trage **Vorname, Nachname, Benutzername und E-Mail** ein. Die Telefonnummer ist optional. Der Benutzername braucht mindestens 6 Zeichen; Benutzername und E-Mail dürfen im System noch nicht vergeben sein.
+2. Wähle das Anmeldeverfahren:
 
 <Tabs items={['Mit Einladung', 'Mit Passwort']}>
   <Tab value="Mit Einladung">
-    Die Auswahl **„Einladung per E-Mail senden“** ist voreingestellt. Nach dem Anlegen wird der Versand der Einladungs-E-Mail angestoßen. Die Person öffnet den Link und legt ihr Passwort selbst fest.
+    **„Einladung per E-Mail senden“** ist voreingestellt. Die Person legt ihr Passwort selbst fest;
+    anschließend musst du das [Konto freigeben](#einladung-abschlie%C3%9Fen-und-konto-freigeben).
 
-    **Das Konto bleibt zunächst inaktiv.** Die Annahme der Einladung allein reicht noch nicht zur Anmeldung: Anschließend gibt ein Administrator das Konto frei. Den Ablauf findest du unter [Einladung abschließen und Konto freigeben](#einladung-abschlie%C3%9Fen-und-konto-freigeben).
+    ![Benutzer hinzufügen mit den Angaben für Lina Berger und ausgewählter Einladung.](./bilder/benutzer-anlegen-einladung.png)
+
   </Tab>
   <Tab value="Mit Passwort">
-    Wähle **„Passwort festlegen“**. Trage das Passwort in **beide Felder** ein. Die Angaben müssen übereinstimmen, auch wenn du **„Passwortänderung erzwingen“** einschaltest.
+    Wähle **„Passwort festlegen“** und trage dasselbe Passwort in beide Felder ein. Es braucht
+    mindestens 6 Zeichen und muss die Passwortrichtlinie erfüllen. Mit **„Passwortänderung
+    erzwingen“** muss die Person das Initialpasswort bei der ersten Anmeldung ändern. Übermittle
+    es ihr über euren vorgesehenen Weg.
 
-    Mit eingeschalteter Passwortänderung heißt das erste Feld **„Initiales Passwort“**. Die Person muss dieses Passwort bei ihrer ersten Anmeldung ändern. Übermittle ihr das Initialpasswort über euren dafür vorgesehenen Weg.
+    Das Konto wird aktiv angelegt. Eine E-Mail-Bestätigung kann je nach Anmelderichtlinie erforderlich sein.
 
-    Das Passwort muss mindestens 6 Zeichen haben. Je nach konfigurierter Passwortrichtlinie können mehr Zeichen, Ziffern, Groß- und Kleinbuchstaben oder Sonderzeichen erforderlich sein. Der Server prüft diese zusätzlichen Anforderungen beim Speichern und zeigt bei einer Ablehnung den Grund an.
+    ![Passwortanlage mit Bestätigungsfeld und erzwungener Änderung bei der ersten Anmeldung.](./bilder/benutzer-anlegen-passwort.png)
 
-    Das Konto wird aktiv angelegt. Wenn die Anmelderichtlinie eine bestätigte E-Mail-Adresse verlangt, muss die Person ihre Adresse vor der Anmeldung bestätigen.
   </Tab>
 </Tabs>
 
-![Dialog mit ausgewählter Passwortanlage, ausgefülltem Initialpasswort und Bestätigungsfeld sowie eingeschalteter Passwortänderung beim ersten Login.](./bilder/benutzer-anlegen-passwort.png)
+3. Prüfe die Angaben und wähle **„Benutzer anlegen“**.
 
-*Auch bei einem Initialpasswort füllst du beide Passwortfelder aus. Die eingegebenen Passwörter werden verdeckt dargestellt.*
-
-<Callout type="warn" title="Wechsel zwischen Einladung und Passwort">
-  Wenn du das Anmeldeverfahren wechselst, werden beide Passwortfelder geleert und „Passwortänderung erzwingen“ ausgeschaltet. Benutzerdaten bleiben erhalten. Gib ein Passwort nach dem Wechsel zur Passwortanlage erneut ein.
-</Callout>
-
-### 3. Konto anlegen
-
-Prüfe vor dem Speichern insbesondere die E-Mail-Adresse und das gewählte Anmeldeverfahren. Wähle dann **„Benutzer anlegen“**. Während der Anlage kannst du die Angaben nicht verändern.
-
-Bei Erfolg schließt sich der Dialog. Die Meldung **„Benutzer erstellt“** erscheint und die Benutzerliste wird aktualisiert. Bei einer Einladung bedeutet das, dass das Konto angelegt und der E-Mail-Versand angestoßen wurde; die Meldung bestätigt noch keine Zustellung der E-Mail.
-
-<Callout title="Rollen und Gruppen folgen nach der Anlage">
-  Jedes neue Konto erhält zunächst die Rolle **Basic**. Öffne anschließend die Benutzerzeile und den Reiter **„Berechtigungen“**, um weitere direkte Rollen zuzuweisen. Über **„Benutzergruppen verwalten“** legst du Gruppenmitgliedschaften fest. Für Gruppenmitglieder gelten die Rollen, die der Gruppe zugewiesen sind.
-</Callout>
+Neue Konten erhalten die Rolle **Basic**. Weitere Rollen und Gruppen weist du [nach der Anlage zu](#rollen-und-gruppen-zuweisen).
 
 ### Einladung abschließen und Konto freigeben
 
-<Steps>
-  <Step>
-    #### Die Person nimmt die Einladung an
+1. Die Person öffnet den Einladungslink und setzt ihr Passwort. Ihre E-Mail-Adresse ist danach bestätigt.
+2. Öffne unter **Benutzerverwaltung → Benutzer → Registrierungen** das Konto mit **„Wartet auf Freigabe“**.
+3. Prüfe das Konto und wähle **„Freigeben“**. Beim Ablehnen ist eine Begründung erforderlich; sie wird der Person per E-Mail mitgeteilt.
 
-    Die Person öffnet den Link aus der E-Mail und setzt ihr Passwort. Danach ist die E-Mail-Adresse bestätigt, das Konto wartet aber noch auf die Freigabe.
-  </Step>
-  <Step>
-    #### Ein Administrator prüft die Registrierung
-
-    Unter **Benutzerverwaltung → Benutzer** zeigt der Abschnitt **„Registrierungen“** die offenen Konten. Prüfe das Konto mit dem Status **„Wartet auf Freigabe“** und die vorgesehenen Rollen und Gruppen.
-  </Step>
-  <Step>
-    #### Konto freigeben
-
-    Wähle **„Freigeben“** und bestätige die Entscheidung im folgenden Dialog. Danach kann sich die Person anmelden. Wenn du das Konto ablehnst, ist eine Begründung erforderlich; sie wird der Person per E-Mail mitgeteilt.
-  </Step>
-</Steps>
-
-![Abschnitt Registrierungen mit dem Beispielkonto lina.berger@example.com, Status Wartet auf Freigabe und den Aktionen Freigeben und Ablehnen.](./bilder/benutzer-freigabe.png)
-
-*Die Einladung ist bereits angenommen. Mit „Freigeben“ startest du die Entscheidung über dieses Konto.*
-
-### Wenn die Anlage nicht klappt
-
-Deine Angaben bleiben bei einem Fehler im Dialog erhalten. Lies die Meldung am Feld oder im unteren Bereich des Dialogs, korrigiere die Angabe und speichere erneut.
-
-![Abschnitt Anmeldung mit unterschiedlich eingegebenen Passwörtern und der Meldung Passwörter stimmen nicht überein unter dem Bestätigungsfeld.](./bilder/benutzer-anlegen-fehler.png)
-
-*In diesem Beispiel stimmt die Bestätigung nicht mit dem Initialpasswort überein. Trage dasselbe Passwort in beide Felder ein.*
-
-| Meldung oder Situation | Nächster Schritt |
-| --- | --- |
-| Benutzername, E-Mail-Adresse oder Telefonnummer ist bereits vergeben | Suche zuerst in der Benutzerliste nach dem vorhandenen Konto. Verwende nur dann einen anderen Wert, wenn du eine andere Person anlegst. |
-| Passwortbestätigung fehlt oder stimmt nicht überein | Fülle beide Passwortfelder mit demselben Passwort aus. Das gilt auch für ein Initialpasswort. |
-| Passwort erfüllt die Richtlinie nicht | Passe das Passwort entsprechend der Servermeldung an und wiederhole es im Bestätigungsfeld. |
-| „Benutzer anlegen“ ist nicht auswählbar | Prüfe, ob alle Pflichtfelder und bei Passwortanlage beide Passwortfelder gültig ausgefüllt sind. |
-| Person hat die Einladung angenommen, kann sich aber noch nicht anmelden | Prüfe im Abschnitt „Registrierungen“, ob das Konto noch auf Freigabe wartet. |
-| Einladungs-E-Mail ist nicht angekommen | Lass die Person den Spam-Ordner prüfen. Prüfe die gespeicherte E-Mail-Adresse und bei weiterhin fehlender Nachricht den E-Mail-Versand der Installation. Lege nicht erneut dasselbe Konto an. |
-
-Wenn du den Dialog mit geänderten Angaben schließt, fragt er nach, ob du die Änderungen verwerfen möchtest. Wähle **„Weiterbearbeiten“**, um im Dialog zu bleiben, oder **„Änderungen verwerfen“**, um ohne Anlage abzubrechen.
+<Accordions>
+  <Accordion title="Freigabe ansehen">
+    ![Registrierung von Lina Berger mit den Aktionen Freigeben und
+    Ablehnen.](./bilder/benutzer-freigabe.png)
+  </Accordion>
+</Accordions>
 
 ## Benutzer verwalten
 
-- [ ] TODO: suchen, filtern, Daten ändern, deaktivieren und reaktivieren.
-- [ ] TODO: Benutzergruppen und deren Wirkung erklären (Mitglieder, Rollen, Bereiche).
-- [ ] TODO: Konten bei Austritt sperren: Ablauf und Fristen.
+Suche unter **Benutzerverwaltung → Benutzer** nach Name, Benutzername oder E-Mail. Nutze bei Bedarf die Filter. Klicke auf eine Benutzerzeile, um die Details zu öffnen.
 
-## Rollen
+![Benutzerliste mit Suche, Filtern und fiktiven Konten.](./bilder/benutzer-verwalten-liste.png)
 
-- [ ] TODO: Rollen anlegen, duplizieren und löschen.
-- [ ] TODO: Berechtigungen zuweisen und Rollen entziehen.
-- [ ] TODO: wirksame Berechtigungen je Benutzer prüfen.
+Standardmäßig siehst du **Benutzer, E-Mail, Kontostatus und Rollen**. Über **„Ansicht“** kannst du **Gruppen, Quelle, 2FA, Tags, letzte Anmeldung, Erstellungsdatum und ID** zusätzlich einblenden. Die Quelle nennt den Kontoanbieter, 2FA zeigt den Schutzstatus. Klicke auf Rollen oder Gruppen, um alle Zuordnungen zu sehen.
 
-## Zuständigkeiten
+**„Aktiv“** erlaubt die Anmeldung, sofern die Anmelderichtlinie erfüllt ist. **„Deaktiviert“** sperrt neue Anmeldungen. Zugewiesene Tags bestätigen keine Zutrittsberechtigung.
 
-- [ ] TODO: Bereiche anlegen und verantwortliche Rollen zuordnen.
-- [ ] TODO: Beispiel: Standort mit Geräten und Anträgen.
+Wenn nicht alle Reiter sichtbar sind, blättere mit den Pfeilen links und rechts. Unter **„Metriken“** siehst du Zugänge und aktive Sitzungen; die Grafik lässt sich als Balken oder Linien anzeigen.
 
-## Abgrenzung
+<Accordions>
+  <Accordion title="Metriken ansehen">
+    ![Metriken von Lina Berger mit Zugangsereignissen, Erfolgsquote, aktiven Sitzungen
+    und Balkendiagramm.](./bilder/benutzer-verwalten-metriken.png)
+  </Accordion>
+</Accordions>
 
-- [ ] TODO: Anmelderichtlinien und Zwei-Faktor-Pflicht festlegen (→ [Sicherheit und Betrieb](sicherheit-betrieb)).
+### Benutzerdaten ändern
+
+1. Klicke auf die Benutzerzeile. Die Details öffnen sich im Reiter **„Eigenschaften“**. Ändere die benötigten Angaben oder das Profilbild.
+2. Wähle **„Speichern“**. Beim Schließen mit ungespeicherten Änderungen kannst du weiterbearbeiten oder sie verwerfen.
+
+Optionale Angaben entfernst du durch Leeren des Feldes. Für Auswahlfelder und das Geburtsdatum steht **„Leeren“** zur Verfügung. Speichere anschließend die Änderung.
+
+Der Benutzername wird nur angezeigt. E-Mail-Änderungen nimmt die Person nach Bestätigung im eigenen Profil vor, sofern das Konto dies unterstützt. Als vom **LDAP- oder OIDC-Anbieter verwaltet** gekennzeichnete Angaben sind in Mardu schreibgeschützt; Änderungen erfolgen beim Anbieter.
+
+<Accordions>
+  <Accordion title="Eigenschaften ansehen">
+    ![Eigenschaften von Lina Berger mit Kontostatus und 2FA im
+    Kopfbereich.](./bilder/benutzer-verwalten-eigenschaften.png)
+  </Accordion>
+</Accordions>
+
+### Rollen und Gruppen zuweisen
+
+Öffne **„Berechtigungen“**. Direkte Rollen gelten für das einzelne Konto. Gruppenrollen gelten für die Mitglieder der Gruppe.
+
+**Direkte Rollen ändern:**
+
+1. Öffne die Rollenauswahl und wähle Rollen an oder ab.
+2. Bestätige mit **„Anwenden“**, dann mit **„Rollen speichern“**.
+
+**Gruppenmitgliedschaften ändern:**
+
+1. Wähle **„Mitgliedschaften verwalten“** und ändere die Gruppenauswahl.
+2. Bestätige die Auswahl mit **„Anwenden“**, dann mit **„Speichern“** im Dialog für die Gruppenmitgliedschaften.
+
+**„Anwenden“ allein speichert keine Zuweisung.** Eine entfernte Rolle kann über eine andere Gruppe oder eine direkte Zuweisung weiterhin gelten. Die Admin-Rolle lässt sich nur entfernen, wenn mindestens zwei andere Administratoren verbleiben.
+
+![Berechtigungen mit der direkten Rolle Basic und der Gruppe Werkstatt, die Bedienung zuweist.](./bilder/benutzer-verwalten-berechtigungen.png)
+
+### Konten deaktivieren und reaktivieren
+
+1. Öffne **„Sicherheit“ → „Gefahrenbereich“**.
+2. Wähle **„Benutzer deaktivieren“** und bestätige. Zum Reaktivieren wählst du **„Benutzer aktivieren“**.
+
+Neue Anmeldungen werden gesperrt; bestehende Zugriffe enden nicht sofort. Rollen, Gruppen und Zutrittszuweisungen bleiben erhalten. Prüfe sie vor einer Reaktivierung. **Administrator-Konten können nicht deaktiviert werden.** Für offene Registrierungen gilt der [Freigabeablauf](#einladung-abschlie%C3%9Fen-und-konto-freigeben).
+
+<Accordions>
+  <Accordion title="Deaktivierung ansehen">
+    <div className="max-w-sm">
+      ![Bestätigung der Deaktivierung eines
+      Benutzerkontos.](./bilder/benutzer-verwalten-deaktivieren.png)
+    </div>
+  </Accordion>
+</Accordions>
+
+### Benutzer löschen
+
+Öffne **„Sicherheit“ → „Gefahrenbereich“ → „Benutzer löschen“**. Prüfe das Konto und die Löschfolgen und bestätige mit **„Löschen“**. Für mehrere Konten nutzt du die Kontrollkästchen in der Liste und die gemeinsame Löschaktion.
+
+**Administrator-Konten und das eigene Konto können nicht gelöscht werden.** Soll das Konto erhalten bleiben, [deaktiviere es](#konten-deaktivieren-und-reaktivieren).
+
+<Accordions>
+  <Accordion title="Löschbestätigung ansehen">
+    <div className="max-w-sm">
+      ![Löschbestätigung für Lina Berger mit der Vorschau der
+      Löschfolgen.](./bilder/benutzer-verwalten-loeschen.png)
+    </div>
+  </Accordion>
+</Accordions>
+
+Bestätigte Sicherheitsaktionen werden sofort ausgeführt. Das Verwerfen ungespeicherter Profiländerungen macht sie nicht rückgängig.
+
+## Wenn etwas nicht klappt
+
+| Problem                          | Nächster Schritt                                                                                            |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Eine Aktion fehlt                | Lass deine Berechtigungen für diese Aktion prüfen.                                                          |
+| Eine Angabe ist bereits vergeben | Suche nach dem vorhandenen Konto.                                                                           |
+| Die Einladung fehlt              | Prüfe Spam-Ordner, gespeicherte Adresse und E-Mail-Versand. Eine Erfolgsmeldung bestätigt keine Zustellung. |
+| Die Anmeldung klappt nicht       | Prüfe Kontostatus, E-Mail-Bestätigung, 2FA und eine noch offene Freigabe.                                   |
+
+Bei Eingabefehlern bleiben die Angaben erhalten. Korrigiere die markierten Felder entsprechend der Meldung und speichere erneut.
+
+<Accordions>
+  <Accordion title="Fehlerbeispiel ansehen">
+    ![Passwortbestätigung mit der Meldung, dass die Passwörter nicht
+    übereinstimmen.](./bilder/benutzer-anlegen-fehler.png)
+  </Accordion>
+</Accordions>
