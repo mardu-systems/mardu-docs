@@ -6,6 +6,28 @@ description: Benutzer anlegen, verwalten und Rollen zuweisen.
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
+## Was ist ein Benutzer?
+
+Ein Benutzerkonto steht für eine Person in Mardu. Es ordnet ihr Anmeldung, Berechtigungen, Nachweise, Buchungen und Zutrittsereignisse zu. Je nach zugewiesenen Rechten kann die Person ihr Profil pflegen, Ressourcen buchen, Zugänge beantragen oder Verwaltungsaufgaben übernehmen.
+
+**Wie entsteht ein Konto?**
+
+- Eine Administration legt es **mit Einladung oder Passwort** an.
+- Die Person **registriert sich selbst**, wenn die Selbstregistrierung aktiviert ist.
+- Es wird aus einem angebundenen **LDAP-Verzeichnis synchronisiert** oder bei der ersten Anmeldung über einen **OIDC-Anbieter angelegt**, wenn die automatische Kontoanlage erlaubt ist.
+
+Je nach Anmeldeverfahren und Richtlinie sind eine E-Mail-Bestätigung und eine Freigabe erforderlich, bevor die Person das Konto nutzen kann.
+
+**Was kann einem Benutzer zugeordnet werden?**
+
+| Zuordnung                  | Zweck                                                                                                                                             |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Rollen**                 | Legen fest, welche Funktionen und Verwaltungsaktionen die Person in Mardu nutzen darf.                                                            |
+| **Benutzergruppen**        | Fassen Personen zusammen. Die der Gruppe zugewiesenen Rollen gelten für ihre Mitglieder.                                                          |
+| **Kompetenzen und Badges** | Dokumentieren Fähigkeiten und Nachweise, etwa eine Maschineneinweisung. Anerkannte, gültige Nachweise können Voraussetzung für einen Zugang sein. |
+| **Zugänge**                | Erlauben die Nutzung bestimmter Ressourcen unter den dafür festgelegten Bedingungen.                                                              |
+| **Tags**                   | Identifizieren die Person am Zutrittspunkt, etwa mit einem RFID-Tag. Eine Tag-Zuweisung allein gewährt keinen Zugang.                             |
+
 ## Benutzer einladen und anlegen
 
 Öffne **Benutzerverwaltung → Benutzer → Benutzer hinzufügen**. Die Bilder zeigen fiktive Beispielkonten.
@@ -61,12 +83,12 @@ Standardmäßig siehst du **Benutzer, E-Mail, Kontostatus und Rollen**. Über **
 
 **„Aktiv“** erlaubt die Anmeldung, sofern die Anmelderichtlinie erfüllt ist. **„Deaktiviert“** sperrt neue Anmeldungen. Zugewiesene Tags bestätigen keine Zutrittsberechtigung.
 
-Wenn nicht alle Reiter sichtbar sind, blättere mit den Pfeilen links und rechts. Unter **„Metriken“** siehst du Zugänge und aktive Sitzungen; die Grafik lässt sich als Balken oder Linien anzeigen.
+Wenn nicht alle Reiter sichtbar sind, blättere mit den Pfeilen links und rechts. Ein angeklickter Reiter rückt möglichst in die Mitte. Unter **„Metriken“** siehst du Zugänge und aktive Sitzungen; die Grafik lässt sich als Balken oder Linien anzeigen.
 
 <Accordions>
   <Accordion title="Metriken ansehen">
-    ![Metriken von Lina Berger mit Zugangsereignissen, Erfolgsquote, aktiven Sitzungen
-    und Balkendiagramm.](./bilder/benutzer-verwalten-metriken.png)
+    ![Metriken von Lina Berger mit Zugangsereignissen, Erfolgsquote, aktiven Sitzungen und
+    Balkendiagramm.](./bilder/benutzer-verwalten-metriken.png)
   </Accordion>
 </Accordions>
 
@@ -83,6 +105,10 @@ Der Benutzername wird nur angezeigt. E-Mail-Änderungen nimmt die Person nach Be
   <Accordion title="Eigenschaften ansehen">
     ![Eigenschaften von Lina Berger mit Kontostatus und 2FA im
     Kopfbereich.](./bilder/benutzer-verwalten-eigenschaften.png)
+  </Accordion>
+  <Accordion title="Präferenzen ansehen">
+    ![Sprachpräferenz und Zeitzone mit gleich hoch ausgerichteten Eingabefeldern und
+    Zeitvorschau.](./bilder/benutzer-verwalten-praeferenzen.png)
   </Accordion>
 </Accordions>
 
@@ -104,10 +130,23 @@ Der Benutzername wird nur angezeigt. E-Mail-Änderungen nimmt die Person nach Be
 
 ![Berechtigungen mit der direkten Rolle Basic und der Gruppe Werkstatt, die Bedienung zuweist.](./bilder/benutzer-verwalten-berechtigungen.png)
 
+### Benutzergruppen verwalten
+
+Öffne **„Benutzergruppen“** und klicke auf eine Gruppe. In **„Übersicht“** änderst du Name und Beschreibung. Über **„Mitglieder“** und **„Zugewiesene Rollen“** änderst du die Zuordnungen; bestätige die Auswahl mit **„Anwenden“** und anschließend mit **„Speichern“**. Die Pfeile neben den Reitern zeigen weitere Bereiche an.
+
+<Accordions>
+  <Accordion title="Benutzergruppe ansehen">
+    ![Benutzergruppe Werkstatt mit beschrifteten Reitern, Pfeilnavigation und
+    Gruppendaten.](./bilder/benutzergruppen-verwalten.png)
+  </Accordion>
+</Accordions>
+
 ### Konten deaktivieren und reaktivieren
 
 1. Öffne **„Sicherheit“ → „Gefahrenbereich“**.
 2. Wähle **„Benutzer deaktivieren“** und bestätige. Zum Reaktivieren wählst du **„Benutzer aktivieren“**.
+
+Beide Aktionen findest du auch im Dreipunktmenü der Benutzerzeile. Dort ist ebenfalls eine Bestätigung erforderlich.
 
 Neue Anmeldungen werden gesperrt; bestehende Zugriffe enden nicht sofort. Rollen, Gruppen und Zutrittszuweisungen bleiben erhalten. Prüfe sie vor einer Reaktivierung. **Administrator-Konten können nicht deaktiviert werden.** Für offene Registrierungen gilt der [Freigabeablauf](#einladung-abschlie%C3%9Fen-und-konto-freigeben).
 
