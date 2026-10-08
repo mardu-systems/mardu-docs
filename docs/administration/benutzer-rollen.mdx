@@ -83,7 +83,7 @@ Standardmäßig siehst du **Benutzer, E-Mail, Kontostatus und Rollen**. Über **
 
 **„Aktiv“** erlaubt die Anmeldung, sofern die Anmelderichtlinie erfüllt ist. **„Deaktiviert“** sperrt neue Anmeldungen. Zugewiesene Tags bestätigen keine Zutrittsberechtigung.
 
-Wenn nicht alle Reiter sichtbar sind, blättere mit den Pfeilen links und rechts. Ein angeklickter Reiter rückt möglichst in die Mitte. Unter **„Metriken“** siehst du Zugänge und aktive Sitzungen; die Grafik lässt sich als Balken oder Linien anzeigen.
+Wenn nicht alle Reiter sichtbar sind, scrolle die Reiterleiste horizontal. Ein Verlauf am Rand zeigt weitere Reiter an. Ein angeklickter Reiter rückt möglichst in die Mitte. Unter **„Metriken“** siehst du erlaubte und abgelehnte Zugangsentscheidungen für sieben UTC-Kalendertage einschließlich des heutigen Tages. Die Grafik zählt alle gespeicherten Entscheidungen im Zeitraum; die Liste darunter zeigt bis zu fünf neueste Einträge. Ohne Entscheidungen bleibt der Anteil erlaubter Zugänge leer. **„Aktuell aktive Sitzungen“** zählt offene Sitzungen unabhängig vom Startdatum. Die Grafik lässt sich als Balken oder Linien anzeigen.
 
 <Accordions>
   <Accordion title="Metriken ansehen">
@@ -96,6 +96,8 @@ Wenn nicht alle Reiter sichtbar sind, blättere mit den Pfeilen links und rechts
 
 1. Klicke auf die Benutzerzeile. Die Details öffnen sich im Reiter **„Eigenschaften“**. Ändere die benötigten Angaben oder das Profilbild.
 2. Wähle **„Speichern“**. Beim Schließen mit ungespeicherten Änderungen kannst du weiterbearbeiten oder sie verwerfen.
+
+Die Sprachpräferenz zeigt **„Deutsch“** oder **„English“**. Gespeicherte regionale Sprachcodes wie `de-DE` und `en-US` werden der jeweiligen Sprache zugeordnet. Solange du die Sprachpräferenz nicht änderst, bleibt der gespeicherte Code erhalten.
 
 Optionale Angaben entfernst du durch Leeren des Feldes. Für Auswahlfelder und das Geburtsdatum steht **„Leeren“** zur Verfügung. Speichere anschließend die Änderung.
 
@@ -114,7 +116,9 @@ Der Benutzername wird nur angezeigt. E-Mail-Änderungen nimmt die Person nach Be
 
 ### Rollen und Gruppen zuweisen
 
-Öffne **„Berechtigungen“**. Direkte Rollen gelten für das einzelne Konto. Gruppenrollen gelten für die Mitglieder der Gruppe.
+Öffne **„Berechtigungen“**. Unter **„Effektive Berechtigungen“** siehst du die gespeicherten Rechte aus direkten Rollen und Benutzergruppen. Klappe die Liste auf, um je Recht die zuweisende Rolle und gegebenenfalls die Gruppe zu sehen. Ein Recht kann mehrere Quellen haben; der Gruppenlink öffnet deren Rollenzuweisungen.
+
+Unter **„Direkte Rollen“** verwaltest du Rollen für das einzelne Konto. Gruppenrollen gelten für die Mitglieder der Gruppe. Die Übersicht zeigt gespeicherte Zuweisungen; Zutrittsfreigaben und Anmeldebedingungen werden separat geprüft.
 
 **Direkte Rollen ändern:**
 
@@ -128,7 +132,7 @@ Der Benutzername wird nur angezeigt. E-Mail-Änderungen nimmt die Person nach Be
 
 **„Anwenden“ allein speichert keine Zuweisung.** Eine entfernte Rolle kann über eine andere Gruppe oder eine direkte Zuweisung weiterhin gelten. Die Admin-Rolle lässt sich nur entfernen, wenn mindestens zwei andere Administratoren verbleiben.
 
-![Berechtigungen mit der direkten Rolle Basic und der Gruppe Werkstatt, die Bedienung zuweist.](./bilder/benutzer-verwalten-berechtigungen.png)
+![Effektive Berechtigungen mit Herkunft aus direkten Rollen und Benutzergruppen.](./bilder/benutzer-verwalten-berechtigungen.png)
 
 ### Benutzergruppen verwalten
 
