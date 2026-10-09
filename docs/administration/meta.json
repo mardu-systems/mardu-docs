@@ -2,6 +2,7 @@
   "title": "Administration",
   "pages": [
     "benutzer-rollen",
+    "badges-verwalten",
     "zutritt-verwalten",
     "geraete-verwalten",
     "automationen",

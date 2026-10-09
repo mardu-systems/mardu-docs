@@ -1,0 +1,71 @@
+---
+title: Badges verwalten
+description: Badge-Inhalte und Voraussetzungen bearbeiten, Versionen ansehen und Vergaben verwalten.
+---
+
+## Ein Badge öffnen
+
+Öffne **Kompetenzen → Badges** und wähle ein Badge aus. Das Sheet zeigt Informationen und Eingabefelder
+in derselben Ansicht. Mit dem Recht zum Bearbeiten kannst du lokale Badges direkt ändern.
+Importierte Originale bleiben schreibgeschützt; über **Weitere Angaben → Lokale Kopie erstellen** erstellst du
+mit dem Recht zum Anlegen eine eigene Variante.
+
+Die Screenshots zeigen die vorhandenen Oberflächenkomponenten mit fiktiven Beispieldaten.
+
+![Badge-Sheet mit Eigenschaften, Aktivstatus und Auswahl der Inhaltsversion.](./bilder/badge-eigenschaften.png)
+
+## Eigenschaften ändern
+
+Unter **Eigenschaften** bearbeitest du Name, Beschreibung, Symbol, Aktivstatus und Gültigkeitsdauer.
+Die Gültigkeitsdauer gilt für neue Vergaben und Erneuerungen. Bestehende Vergaben behalten ihre
+bisherige Gültigkeit. **Unbefristet** entfernt eine geplante Ablaufzeit.
+
+Änderungen bleiben zunächst ungespeichert. **Neue Version speichern** speichert einen neuen Inhaltsstand
+und lässt das Sheet geöffnet. Die neue Version wird zur aktuellen Version. Bei einem Fehler bleiben
+Eingaben erhalten; du kannst sie korrigieren und erneut speichern.
+
+## Voraussetzungen und Kriterien
+
+Unter **Voraussetzungen** findest du drei Abschnitte:
+
+- **Voraussetzungen:** Alle Anforderungsgruppen müssen erfüllt sein. Je Gruppe gibst du Fähigkeiten und
+  die Mindestanzahl gültiger Kompetenznachweise an. Bei einer Mindestanzahl gleich der Anzahl der
+  ausgewählten Fähigkeiten sind alle erforderlich. Ohne Gruppen findet keine automatische Prüfung statt.
+- **Zugeordnete Fähigkeiten:** Beschreiben die Fähigkeiten des Badges und referenzieren bestimmte
+  Inhaltsversionen. Die Zuordnung allein macht eine Fähigkeit nicht zur geprüften Voraussetzung.
+- **Erwerbskriterien:** Beschreiben zusätzliche Bedingungen und manuelle Prüfungen. Dieser Text wird
+  nicht automatisch ausgewertet. Der optionale Link führt zu ausführlichen Kriterien; Leeren entfernt ihn.
+
+Die Prüfung von Voraussetzungen vergibt kein Badge automatisch. Eine administrative Vergabe ist eine
+separate Aktion. Ein Lernweg enthält Badges; er ist keine Voraussetzung für ein einzelnes Badge.
+
+![Badge-Voraussetzungen mit Anforderungsgruppe und zugeordneten Fähigkeiten.](./bilder/badge-voraussetzungen.png)
+
+## Frühere Versionen ansehen
+
+Die **Versionsauswahl im Header** öffnet einen früheren Inhaltsstand in denselben Tabs, schreibgeschützt.
+Der Hinweis nennt die angezeigte und die aktuelle Version. **Aktuelle Version öffnen** führt zurück zum
+bearbeitbaren Stand. Wenn du ungespeicherte Änderungen hast, kannst du weiterbearbeiten oder sie vor
+dem Versionswechsel verwerfen.
+
+Unter **Versionen** siehst du erhaltene Inhaltsstände und welche Inhaltsfelder sich gegenüber dem
+vorherigen Stand unterscheiden. Der Aktivstatus gehört zum gesamten Badge und wird nicht als
+historischer Aktivstatus dargestellt.
+
+![Schreibgeschützte historische Badge-Version mit Rückkehr zur aktuellen Version.](./bilder/badge-version-historisch.png)
+
+## Vergaben und Lernwege
+
+Unter **Vergaben** siehst du Personen, Status, Gültigkeit und die Inhaltsversion ihrer Vergabe.
+Eine neue Badge-Version verändert bestehende Vergaben nicht. Neue Vergaben und Erneuerungen verwenden
+den aktuellen gespeicherten Stand.
+
+Mit dem Recht zur Vergabe kannst du neue Vergaben anlegen, bestehende erneuern oder widerrufen.
+Beim Ansehen einer historischen Version und während ungespeicherter Änderungen sind diese Aktionen
+nicht verfügbar. Kehre dafür zur aktuellen Version zurück und speichere deine Änderungen.
+Eine lokale Badge-Vergabe dokumentiert einen Erwerb; sie gewährt allein keinen Ressourcenzugriff.
+
+Unter **Lernwege** stehen Lernwege, die dieses Badge enthalten oder als Abschluss-Badge verwenden.
+Unter **Weitere Angaben** findest du Herkunft, Kennung, gegebenenfalls Importangaben, Export,
+lokale Kopien und Veröffentlichungen. Export und Veröffentlichungen beziehen sich auf die aktuelle
+gespeicherte Version.
