@@ -11,6 +11,12 @@ Wähle den Zeitraum und die Auflösung oberhalb der Karten. Linien zeigen den Ve
 
 Die Hauptzahl kann einen Zeitraum zusammenfassen. Angaben wie aktuell aktive Sitzungen oder belegte Verbindungen beschreiben dagegen den zuletzt erfassten Zustand. Bei einem Wechsel von Zeitraum, Bereich oder Gerät werden die passenden Daten neu geladen.
 
+Bei **Datenbank → Transaktionen** nennt die Hauptzahl die Summe im gewählten Zeitraum oder die durchschnittlichen Transaktionen pro Sekunde. Die Balken zeigen die Summe aus Commits und Rollbacks je Zeitabschnitt; dessen Dauer steht über dem Diagramm. Beim Darüberfahren siehst du den Beginn und das Ende des Abschnitts sowie die Commits und Rollbacks. Deadlocks sind eine separate Ereigniszahl über dem Diagramm. Die Balken summieren alle gelieferten Messwerte, statt einzelne Messpunkte auszuwählen. Rollbacks und Deadlocks unter der Hauptzahl beziehen sich ebenfalls auf den gewählten Zeitraum.
+
+Diese Zahlen zählen Transaktionen der Anwendungsdatenbank, einschließlich Hintergrundabfragen und Monitoring. Sie entsprechen keiner Anzahl von Benutzeraktionen. Abschnitte ohne Messwerte bleiben leer; fehlende Werte werden nicht als null Transaktionen gezählt.
+
+![Transaktionen als gemeinsame Balken aus Commits und Rollbacks je 30 Minuten, mit Zeitraum im Tooltip](bilder/datenbank-transaktionen.png)
+
 ## Fehlende und begrenzte Messwerte
 
 **Keine Messwerte** bedeutet, dass keine passende Messung verfügbar ist. Eine Null bedeutet einen gemessenen Wert von null. Lücken im Diagramm werden nicht als Null aufgefüllt. Manche Hostwerte, etwa Temperatur oder Containergrenzen, sind auf dem jeweiligen System nicht verfügbar.
