@@ -1,63 +1,77 @@
 # mardu-docs
 
-Zentrale Produkt-Dokumentation für Website und Software aus einer Quelle
-(Fumadocs-MDX). Dieses Repo wird als **Git-Submodule** in die
-Consumer-Repos eingehängt – Inhalte hier pflegen, nie in den Consumern.
+Produktdokumentation für Website und Software aus einer Quelle
+(Fumadocs-MDX). Dieses Repository wird als Git-Submodule in die Consumer
+eingehängt. Inhalte und Bilder werden hier gepflegt.
 
-## Mount-Punkte
+Die [Dokumentationsregeln](AGENTS.md) gelten auch für begleitende Dokumentation
+im Software-Repository. [TODO.md](TODO.md) enthält Bestandsbewertung,
+Prioritäten und den Arbeitsplan; die konkreten Schreibaufträge stehen auf den
+betroffenen Seiten. Die Administration wird zuerst vervollständigt.
 
-- Website: `mardu-systems/websites` → `apps/mardu-de/content`
-- Software: Software-Repo → `content/docs` bzw. `content` (siehe dort)
+## Mount-Punkte und Quelle
 
-Beide Mounts zeigen auf `docs/` in diesem Repo; die Consumer lesen ab
-`content/docs` (Fumadocs `dir`).
+- Website: `mardu-systems/websites` → `apps/mardu-de/content`.
+- Software: `mardu-systems/web` → `content/docs`; im übergeordneten
+  Software-Repository unter `web/content/docs`.
 
-## Struktur
+Die Mounts enthalten dieses Repository. Die veröffentlichte Inhaltsquelle ist
+sein Unterordner `docs/`. Der Software-Consumer liest ihn über
+`lib/source.ts` als `content/docs/docs`. Die Konfiguration weiterer Consumer
+muss vor einer Änderung separat geprüft werden.
 
+## Vorhandene Struktur
+
+```text
+AGENTS.md                 # Dokumentationsregeln, keine Produktseite
+README.md                 # Ablage und Pflege
+TODO.md                   # Bestandsbewertung und Arbeitsplan, keine Produktseite
+docs/
+  index.mdx               # Wegweiser
+  meta.json               # Bereiche der Navigation
+  ueberblick/
+  administration/
+  benutzer/
+  koordination/
+  installieren/
+  entwickeln/
 ```
-./
-  README.md          # diese Datei
-  docs/
-    meta.json        # Wurzel: listet nur index + Versionsordner
-    index.mdx        # Landing (/docs) mit Versionswahl
-    v2/meta.json     # { "title": "v2", "root": "version", "pages": [...] }
-    v2/*.mdx         # aktuelle Inhalte
-    v1/meta.json     # vorheriger Stand, nur noch bei Bedarf pflegen
-    v1/*.mdx
-```
 
-Versionierung folgt dem Fumadocs-Prinzip **Root Type**: Jeder Ordner mit
-`"root": "version"` ist eine austauschbare Version, die Website rendert
-automatisch einen Versions-Switcher (`/docs/v1/...` ↔ `/docs/v2/...`).
+Die Inhalte sind derzeit nach Zielgruppen und Aufgaben geordnet. Es gibt im
+vorhandenen Bestand keine `v1/`- oder `v2/`-Versionsordner. Eine spätere
+Versionierung wird erst nach Prüfung der Consumer eingeführt.
 
-## Neue Seite anlegen
+Jeder Bereich hat eine `index.mdx` und eine `meta.json`. Bilder liegen im
+zugehörigen `bilder/`-Ordner. Der Software-Consumer ergänzt die API-Referenz
+aus OpenAPI; generierte API-Seiten werden hier nicht von Hand gepflegt.
 
-1. `docs/vX/mein-thema.mdx` mit `title` + `description` im Frontmatter
-   (kein `# H1` im Body – der Titel kommt aus dem Frontmatter).
-2. Dateiname (ohne Endung) in `docs/vX/meta.json` unter `pages` eintragen.
-3. Commit + Push hier, danach Submodule-Bump in den Consumern
-   (Website zeigt die Seite automatisch in Sidebar, TOC und Suche).
+## Seite erstellen oder ändern
 
-## Neue Version anlegen (z. B. v3)
+1. Vorhandene Seiten und die [Regeln](AGENTS.md) lesen; Zielgruppe und
+   Hauptzweck festlegen.
+2. Die Seite im passenden Bereich unter `docs/` mit `title` und
+   `description` im Frontmatter pflegen. Kein zusätzliches H1 im Inhalt.
+3. Neue Seite in der passenden `meta.json` und gegebenenfalls in der
+   Rollen-/Slugliste des Consumers aufnehmen. Bestehende URLs erhalten.
+4. Verhalten mit UI und Backend prüfen; vorhandene Begriffe, Verträge und
+   Anleitungen wiederverwenden. Unfertige Inhalte als Entwurf kennzeichnen.
+5. Links, Anker, Bilder, MDX und die gerenderte Consumer-Seite prüfen.
+   Den Arbeitsplan erst nach Abnahme aktualisieren.
 
-1. `docs/v2/` nach `docs/v3/` kopieren, Inhalte anpassen.
-2. `title` in `v3/meta.json` auf `"v3"` setzen.
-3. `v3` in Wurzel-`meta.json` **vor** `v2` in `pages` eintragen (neueste zuerst).
-4. Tag setzen (`docs-v3.0.0`); Software-Release pinnt den passenden Tag,
-   die Website zeigt alle Versionen an.
+## Consumer-Stände
 
-## Consumer-Update (Submodule-Bump)
+Bei einer Änderung gehören die Inhalte ins Docs-Repository und bei einem
+autorisierten Release der passende Submodule-Verweis in den Consumer. Software,
+Website und Dokumentation müssen auf einen zueinander passenden Stand zeigen.
 
-```bash
-# im Consumer-Repo, im Submodule-Ordner:
-git fetch origin && git checkout docs-vX.Y.Z
-# danach im Consumer:
-git add <submodule-pfad> && git commit -m "chore(docs): bump ..."
-```
+Eine Inhaltsänderung ist kein Auftrag für Commit, Push, Submodule-Bump oder
+Veröffentlichung. Die Website wurde in der Bestandsaufnahme vom 10. Oktober 2026
+nicht ausgeführt.
 
 ## Hinweise
 
-- Kein `README.md` (oder andere Nicht-Content-Dateien) unter `docs/`
-  ablegen – jede `.md`/`.mdx`-Datei dort wird eine öffentliche Seite.
-- UI-Strings der Doku-Oberfläche (Deutsch) liegen beim Consumer
-  (Website: `apps/mardu-de/lib/docs-i18n.ts`), nicht hier.
+- Planungsdateien, Agentenanweisungen und README bleiben außerhalb von
+  `docs/`: Markdown/MDX darin wird als Produktinhalt geladen.
+- UI-Texte der Doku-Oberfläche gehören zum jeweiligen Consumer.
+- Noch fehlende Dokumentations- oder Linkprüfungen als Grenze nennen;
+  keine nicht vorhandenen CI-Prüfungen behaupten.
