@@ -3,20 +3,23 @@ title: Automationen und KI-Anbindung
 description: Ereignisse für Automationen nutzen, Editor-Zugang und MCP-Verbindungen für Entwickler.
 ---
 
-Gilt für: Entwickler.
+Diese Seite ist ein Entwurf. MCP-Client und Node-RED-Flow erhalten getrennte
+Anleitungen; sie verwenden unterschiedliche Zugänge und Betriebsbedingungen.
 
-## Ereignisse für Automationen
+## MCP-Client verbinden
 
-- [ ] TODO: verfügbare Ereignisquellen auflisten.
-- [ ] TODO: Editor-Zugang beantragen und Sitzungen verwalten.
+- [ ] TODO: Server-MCP-Richtlinie und tatsächlich angebotenen Transport/Endpunkt prüfen; persönliche Verbindung im [Profil](../ueberblick/profil.mdx) anlegen.
+- [ ] TODO: Einmal angezeigten Token außerhalb des Repositories speichern, Client konfigurieren und lesendes Werkzeug mit fiktiven Daten prüfen.
+- [ ] TODO: Delegierte Rechte, aktuelle Benutzerrechte und Serverrichtlinie als gemeinsame Grenze erklären; Toolauswahl, Schreib-/Löschfreigabe und eigene/fremde Daten beachten.
+- [ ] TODO: Ablauf, Rotation und Widerruf einer eigenen Verbindung erklären; deaktivierte Richtlinie, ungültiges Token und Rate-Limit behandeln. Keine separate administrative Antragsfreigabe voraussetzen.
 
-## MCP-Verbindungen
+## Node-RED und Ereignisse
 
-- [ ] TODO: Freigabe beantragen: Zweck, Fähigkeiten und Laufzeit nennen.
-- [ ] TODO: Schlüssel beziehen, speichern und rotieren.
-- [ ] TODO: erlaubte Aktionen je Verbindung beschreiben.
-- [ ] TODO: eigene Verbindungen prüfen und widerrufen.
+- [ ] TODO: Einrichtung/Editor unter [Automationen](../administration/automationen.mdx) wiederverwenden; verfügbare Mardu-Nodes und Ereignisverträge referenzieren.
+- [ ] TODO: Kleinen Flow mit vorhandener Verbindung und zugewiesener Ressource deployen und Ergebnis prüfen; Editorzugang, Flow-Rechte und Laufzeitzugriff unterscheiden.
+- [ ] TODO: Protokollpacks, Versionen, Zeitlimits und Fehler aus den aktuellen Automation-Verträgen belegen; nicht unterstützte Varianten nennen.
 
-## Aufgabenverteilung
+## Echtzeit und Aufgabenverteilung
 
-- [ ] TODO: Aufgabenverteilung zwischen Entwicklung und Administration festhalten.
+- [ ] TODO: Vorhandene SignalR-Hubs mit Authentifizierung, Gruppen, Ereignissen und Wiederverbindung dokumentieren oder aus einer ergänzenden Anleitung verlinken.
+- [ ] TODO: Administration richtet Richtlinien und Anbindungen ein; Entwicklung verwendet zugelassene Verbindungen. Organisatorische Zuständigkeiten als Beispiel markieren.

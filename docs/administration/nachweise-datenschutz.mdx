@@ -3,24 +3,30 @@ title: Nachweise und Datenschutz
 description: Audit-Ereignisse, Aufbewahrung und Betroffenenrechte für Prüfer und Beauftragte.
 ---
 
-Gilt für: Administration, Auditoren, Datenschutzbeauftragte.
+Diese Seite ist ein Entwurf. Sie beschreibt später vorhandene Daten und
+Verwaltungswege. Organisatorische und rechtliche Vorgaben werden als solche
+gekennzeichnet; die Software legt nicht automatisch jede Aufbewahrungsfrist fest.
 
-## Audit-Ereignisse
+## Audit suchen und exportieren
 
-- [ ] TODO: beschreiben, welche Ereignisse protokolliert werden (Anmeldung, Zutritt, Verwaltung).
-- [ ] TODO: Filter, Zeitraum und Export für Prüfungen beschreiben (→ [Sicherheit und Betrieb](sicherheit-betrieb)).
+- [ ] TODO: Audit-Leserecht und zusätzliches Exportrecht nennen; Suche, Benutzer-, Ereignis-, Entitäts- und Zeitraumfilter anhand der tatsächlichen UI erklären.
+- [ ] TODO: Ereignisdetails mit Vorher-/Nachher-Werten lesen; Verwaltungsänderungen, Anmeldehistorie und Zutrittsprotokolle als unterschiedliche Quellen behandeln.
+- [ ] TODO: Gefilterten Export als CSV beziehungsweise Excel erstellen; Zeitraum/Zeitzone, Umfang, mögliche Grenzen, leere Ergebnisse und Zugriff auf die Datei erklären.
+- [ ] TODO: Nachweisgrenzen nennen: gespeicherte Entscheidung bestätigt keine physische Türaktion; fehlender Auditdatensatz ist kein Beweis, dass eine Aktion nicht stattfand.
 
-## Aufbewahrung und Löschung
+## Datenarten und Aufbewahrung
 
-- [ ] TODO: Aufbewahrungsfristen je Datenart nennen (Protokolle, Anträge, Konten).
-- [ ] TODO: Lösch- und Sperrfristen sowie Zuständigkeit beschreiben.
+- [ ] TODO: Kontodaten, Anmeldehistorie, Audit, Zutrittsentscheidungen/-sitzungen, Buchungen, Kompetenznachweise, Benachrichtigungen und technische Messwerte erfassen.
+- [ ] TODO: Tatsächlich konfigurierte Aufbewahrung und Löschprozesse pro Datenart mit Quelle, Einheit und Grenzen dokumentieren; nicht konfigurierte oder unklare Datenarten ausdrücklich nennen.
+- [ ] TODO: Kontodeaktivierung, Kontolöschung, widerrufene Vergabe und historische Protokolle unterscheiden; Löschvorschau und erhaltene Daten prüfen.
 
-## Betroffenenrechte
+## Auskunft, Berichtigung und Löschung
 
-- [ ] TODO: Auskunft: welche Daten wo einsehbar sind, Ablauf der Anfrage.
-- [ ] TODO: Berichtigung und Löschung: Antragsweg und Fristen.
+- [ ] TODO: Vorhandene Datenansichten und Exportwege für eine Person zusammensuchen; Umfang, Identitätsprüfung und Verantwortliche als organisatorischen Ablauf beschreiben.
+- [ ] TODO: Berichtigung lokaler Daten und anbieterverwalteter LDAP-/OIDC-Angaben unterscheiden; Zuständigkeit und Einschränkungen nennen.
+- [ ] TODO: Verfügbarkeit eines vollständigen Auskunfts-/Löschvorgangs prüfen; fehlende Sammelfunktion als Grenze dokumentieren. Gesetzliche Fristen und organisationsabhängige Vorgaben separat prüfen.
 
-## Rollen und Trennung
+## Öffentlich geteilte Inhalte und Zugriffsgrenzen
 
-- [ ] TODO: beschreiben, wer Nachweise einsehen darf und wie Zugriffe begrenzt sind.
-- [ ] TODO: Trennung von Betrieb und Prüfung beschreiben.
+- [ ] TODO: Veröffentlichte Kompetenz-/Badge-Definitionen von persönlichen Nachweisen unterscheiden; mögliche Autorenangaben, Vorschau, Zurückziehen und bereits heruntergeladene Kopien erklären.
+- [ ] TODO: Leserechte, Exportrechte und objektbezogene Zutrittsrechte begrenzen; organisatorische Trennung von Betrieb und Prüfung als mögliches Rollenmodell erläutern.

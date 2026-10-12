@@ -3,31 +3,45 @@ title: Servereinstellungen
 description: Systemweite Einstellungen, Überwachung und Datensicherung.
 ---
 
+Diese Seite ist ein Entwurf. Die Feldreferenz wird aus den vorhandenen
+Einstellungs-DTOs und Validatoren erstellt; Startwerte eines leeren Formulars
+dürfen nicht als Serverdefaults übernommen werden.
+
+## Einstellungen lesen und speichern
+
+- [ ] TODO: Navigation, Leserechte und Bearbeitungsrechte je Abschnitt erklären; Suche, Pflichtfelder, Leeren, Validierung, Speichern, Abbrechen und fehlgeschlagenes Speichern zeigen.
+- [ ] TODO: Durch Deployment oder Umgebungsvariable gesperrte Felder, Konfigurationsquelle, schreibgeschützte Identitäten und Neustarthinweise erklären. Sofortige Übernahme und gespeicherte Änderung mit Neustartbedarf unterscheiden.
+
 ## Globale Einstellungen
 
-- [ ] TODO: Organisationsdaten, Standards und deren Wirkung beschreiben.
-- [ ] TODO: Zeitzone und regionale Vorgaben festlegen.
+- [ ] TODO: Projektname/-beschreibung, Standardsprache, Zeitzone und Installationskennung dokumentieren; globale Vorgaben von persönlichen Präferenzen unterscheiden.
+- [ ] TODO: Wartungsmodus/-meldung, Cloud-Schalter und Grenze gleichzeitiger Maschinensitzungen anhand der verwendenden Services prüfen. Keine Anmeldesperre oder Cloudfunktion aus dem Feldnamen ableiten.
 
-## Anmelderichtlinie
+## Registrierung und Anmelderichtlinie
 
-- [ ] TODO: Selbst-Registrierung erlauben oder sperren, Standardrollen festlegen.
-- [ ] TODO: Kennwortregeln und Anmeldeversuche beschreiben (→ [Sicherheit und Betrieb](sicherheit-betrieb)).
+- [ ] TODO: Deaktivierte, direkte und freigabepflichtige Selbstregistrierung sowie E-Mail-Bestätigung, Standardrolle, Linkgültigkeit und OIDC-Freigabe erklären; administrative Kontoanlage separat behandeln.
+- [ ] TODO: Kennwortregeln, Fehlversuchssperre, passwortlose Anmeldung, Passkeys, Wiederherstellungscodes und Administratorpflichten in einer Feldreferenz beschreiben.
+- [ ] TODO: Tokenlaufzeiten mit Einheiten, Grenzen und dem im API-Vertrag ausgewiesenen Neustartbedarf erklären; praktische Änderung und Aussperrungsfälle unter [Sicherheit und Betrieb](sicherheit-betrieb.mdx) ausarbeiten.
 
 ## Zertifikate
 
-- [ ] TODO: Server- und MQTT-Zertifikate hochladen, prüfen und ersetzen.
-- [ ] TODO: Ablauf überwachen und rechtzeitig erneuern.
+- [ ] TODO: Zertifikat hochladen, Metadaten und Ablauf prüfen, unter gleicher Identität ersetzen und löschen; PFX beziehungsweise PEM mit Schlüssel, Passwort, Rechte und Fehler erklären.
+- [ ] TODO: Gespeichertes Zertifikat und aktive Verwendung für MQTT, HTTP oder Proxy unterscheiden; Zuweisung und Neustartbedarf je Verbraucher belegen. Keine automatische Erneuerung behaupten.
 
-## Überwachung und Fehlerberichte
+## Monitoring und Fehlerberichte
 
-- [ ] TODO: Monitoring-Einstellungen (Abtastung, Aufbewahrung, Schwellen) beschreiben.
-- [ ] TODO: Fehlerberichte mit Einwilligung verwalten.
+- [ ] TODO: Messwerterfassung, Aufbewahrung, Auflösung und aktivierte Quellen dokumentieren; tatsächliche Felder und Grenzen verwenden. Alarmierung nur beschreiben, wenn ein entsprechender Monitor vorhanden ist.
+- [ ] TODO: Fehlerberichtsdienst, Zieladresse, Freigabe/Einwilligung, Datenumfang, Test und Abschalten erklären; client- und serverseitige Erfassung unterscheiden.
 
-## Datensicherung
+## Weitere Einstellungsbereiche
 
-- [ ] TODO: Sicherung einrichten, prüfen und Wiederherstellung beschreiben.
-- [ ] TODO: Zuständigkeit und Rhythmus festlegen.
+- [ ] TODO: E-Mail, LDAP/OIDC und IP500 mit tatsächlichem Menüpfad unter [Integrationen](integrationen.mdx) verlinken.
+- [ ] TODO: DESFire-Tagparameter, Schlüsselquelle, Versionen und Änderungsauswirkungen mit den vorhandenen Verträgen abgleichen; Geheimnisse nie als Beispieldaten zeigen.
+- [ ] TODO: Ressourcen-/Buchungsregeln, Open-Badges-Ausstellung, Automationen und MCP zu ihren Aufgabenanleitungen verlinken.
 
-## Anbindungen
+## Sicherung und Wiederherstellung
 
-- [ ] TODO: auf die eigene Seite verweisen, hier nur Überblick (→ [Integrationen](integrationen)).
+Die vorhandene Backup-Seite ist noch nicht freigegeben. Eine Anleitung zum
+Einrichten einer Dashboard-Sicherung kann deshalb derzeit nicht geschrieben werden.
+
+- [ ] TODO: Einen geprüften externen Sicherungs-/Wiederherstellungsablauf unter [Sicherheit und Betrieb](sicherheit-betrieb.mdx) dokumentieren; Datenbank, Dateien, Konfiguration und erforderliches Schlüsselmaterial nach Betriebsform berücksichtigen. Die Dashboard-Einschränkung nennen.

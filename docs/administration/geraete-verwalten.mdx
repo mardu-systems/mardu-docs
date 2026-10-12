@@ -3,33 +3,38 @@ title: Geräte verwalten
 description: Geräte anlegen und provisionieren, Zutrittspunkte pflegen, Firmware verteilen.
 ---
 
-## Geräte anlegen
+Diese Seite ist ein Entwurf. Die Aufgaben unten werden zu Anleitungen mit
+Rechten, Voraussetzungen, Schritten, Ergebnis und Fehlerhilfe ausgearbeitet.
 
-- [ ] TODO: Gerät anlegen und Netz-/Standortdaten erfassen.
-- [ ] TODO: Gerätetypen und deren Pflichtangaben unterscheiden.
-- [ ] TODO: Provisionierung starten und Status überwachen.
+## Gerät anlegen und provisionieren
 
-## Zutrittspunkte
+- [ ] TODO: Benötigte Geräte- und Netzwerkrechte sowie die tatsächlich unterstützten Gerätetypen nennen; erforderliche Identität, Zertifikat beziehungsweise Manifest, Netzwerk und optionale Angaben anhand des Anlageformulars und der Validierung erklären.
+- [ ] TODO: Gerät suchen, anlegen und Details öffnen; einen bereits vorhandenen Datensatz, doppelte Identität und ungültige Anlageangaben behandeln.
+- [ ] TODO: Netzwerkaufnahme und Provisionierung unterscheiden; Start, beobachtbare Zustände, Abschlusskriterium, Abbruch beziehungsweise erneuten Versuch und fehlende Erreichbarkeit erklären. Keine manuellen HTTP-Schritte für den automatischen Schlüsselaustausch angeben.
 
-- [ ] TODO: Zutrittspunkte anlegen, benennen und Geräten zuordnen.
-- [ ] TODO: Einstellungen je Zutrittspunkt (Zeitprofile, Verhalten) beschreiben.
+## Endpunkte und Zuordnungen
 
-## Geräteeinstellungen
+- [ ] TODO: Gerät, signierten Geräte-Endpunkt, Zutrittspunkt und Ressource unterscheiden. Beschreiben, wo vorhandene Endpunkte angezeigt werden; nicht als frei anlegbare Endpunkte darstellen.
+- [ ] TODO: Reader, Aktor und Messwert-Endpunkt ihrem Zweck zuordnen; Voraussetzungen, aktive Zuordnung, Konflikte und Umzug einer Zuordnung erklären. Zutrittskonfiguration unter [Zutritt verwalten](zutritt-verwalten.mdx), Messwertzuordnung unter [Ressourcen](../koordination/ressourcen.mdx) ausarbeiten.
 
-- [ ] TODO: zentrale Einstellungen und deren Wirkung je Gerätetyp.
-- [ ] TODO: Kennzahlen und Gerätestatus deuten.
+## Einstellungen, Status und Diagnose
 
-## Firmware (OTA)
+- [ ] TODO: Namen und optionale Angaben ändern; gerätespezifische Einstellungen, Grenzen, Speichern, Übertragung zum Gerät und fehlende Bestätigung unterscheiden.
+- [ ] TODO: Status, letzte Meldung, Provisionierungszustand, Netzwerkzuordnung, Logs und Metriken erklären; fehlende oder alte Messwerte von einem gemessenen Nullwert unterscheiden.
+- [ ] TODO: Ein Beispiel für „offline“, fehlerhafte Provisionierung und nicht ausgeführte Geräteaktion mit nächstem Prüfschritt schreiben. Geräteanzeige nicht mit bestätigtem Türzustand gleichsetzen.
 
-- [ ] TODO: Firmware-Stand prüfen und Updates anstoßen.
-- [ ] TODO: Update-Verlauf und Fehlschläge deuten, Wiederholung anstoßen.
+## Firmware verteilen
 
-## Tags
+- [ ] TODO: Over-the-Air-Update (OTA) erklären; Firmware-Artefakt bereitstellen, Version und Gerätekompatibilität prüfen sowie benötigte Rechte und Netzwerkvoraussetzungen nennen.
+- [ ] TODO: Update starten, Status und Historie lesen, Update abbrechen und erneut versuchen; fehlendes Artefakt, laufendes Update und nicht erreichbares Gerät behandeln. Einen automatischen Rollback nur bei belegter Unterstützung beschreiben.
 
-- [ ] TODO: Tag-Anmeldung starten, Tags zuordnen und sperren.
-- [ ] TODO: DESFire-/Transponder-Hinweise je Leser aufnehmen.
-- [ ] TODO: Tag-Einstellungen je Standort prüfen (→ [Integrationen](integrationen)).
+## Tags anmelden und verwalten
 
-## Außer Betrieb nehmen
+- [ ] TODO: Tag als Identifikation von Zutrittsfreigabe unterscheiden; unterstützte Tags und Leser, Smartphone-App, sichere Verbindung und benötigte Rechte nennen.
+- [ ] TODO: Anmeldung starten, QR-/App-Verbindung, Fortschritt und Abschluss mit fiktiven Daten zeigen; abgelaufene oder fehlgeschlagene Anmeldung, Erneuerung und Abbruch behandeln.
+- [ ] TODO: Tag einer Person zuordnen, Status/Gültigkeit prüfen, sperren oder widerrufen und verlorenen Tag ersetzen; bestehende Konten und Zugänge als getrennte Zuordnungen erklären.
+- [ ] TODO: DESFire-Konfiguration unter [Servereinstellungen](server-einstellungen.mdx) verlinken. Keine Schlüssel oder produktiven QR-Token in Bildern zeigen; diese Aufgaben später als eigene Tag-Anleitung ausarbeiten.
 
-- [ ] TODO: Gerät deaktivieren, Zugänge entziehen und aus dem Katalog entfernen.
+## Gerät außer Betrieb nehmen
+
+- [ ] TODO: Stilllegung und Löschung unterscheiden; aktive Hardwarezuordnungen, Messwertzuordnungen und vorhandene Zugangshistorie vorab prüfen. Löschvorschau, blockierte Löschung und erhaltene Historie erklären; Folgen für Ressourcen separat nennen.

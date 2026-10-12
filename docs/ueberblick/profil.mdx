@@ -3,25 +3,28 @@ title: Eigenes Profil
 description: Kontodaten, Anmeldesicherheit, Sitzungen und Benachrichtigungen verwalten.
 ---
 
-Gilt für: Bediener, Administration.
+Diese Seite ist teilweise ausgearbeitet. Die Anleitung beschreibt das eigene Konto;
+administrative Änderungen an anderen Konten stehen unter
+[Benutzer und Rollen](../administration/benutzer-rollen.mdx).
 
 ## Kontodaten
 
-- [ ] TODO: Name, E-Mail und Anzeigebild ändern; E-Mail-Wechsel und Bestätigung.
-- [ ] TODO: fehlende Angaben nach Aufforderung vervollständigen (Onboarding-Hinweis).
+- [ ] TODO: Tatsächlich bearbeitbare Angaben, Profilbild, Sprache und Zeitzone ändern; optionale Werte leeren, speichern und Fehler erklären. Lokale und vom Anbieter verwaltete Felder unterscheiden.
+- [ ] TODO: E-Mail-Wechsel mit Passwort/Bestätigung und vorhandenem Kontoanbieter prüfen; gewünschte Adresse von bereits bestätigter Adresse unterscheiden.
+- [ ] TODO: Angeforderte Pflichtangaben vervollständigen; Ergebnis und weiteren Anmelde-/Onboarding-Ablauf anhand vorhandener Bedingungen erklären.
 
 ## Anmeldesicherheit
 
-- [ ] TODO: Passwort ändern und Anforderungen nennen.
-- [ ] TODO: Zwei-Faktor einrichten, App wechseln, Wiederherstellungscodes sichern.
-- [ ] TODO: erzwungene Wiederherstellungscodes: Ablauf beim ersten Anmelden.
-- [ ] TODO: Passkeys registrieren und verwalten.
+- [ ] TODO: Passwort mit der wirksamen Richtlinie ändern; altes Passwort, Bestätigung, externe Konten und Fehler behandeln.
+- [ ] TODO: Zwei-Faktor-Authentifizierung (2FA) einrichten, prüfen und deaktivieren; vorgeschriebene 2FA und administrative Wiederherstellung unterscheiden.
+- [ ] TODO: Wiederherstellungscodes erzeugen, einmalige Anzeige, Verwendung und Neuerzeugung erklären; alte Codes und tatsächliche Vorgabe beim Anmelden prüfen.
+- [ ] TODO: Passkey registrieren, benennen und entfernen/deaktivieren; HTTPS, unterstütztes Gerät und Serverrichtlinie prüfen.
 
 ## Sitzungen
 
-- [ ] TODO: aktive Sitzungen einsehen und einzelne abmelden.
-- [ ] TODO: erklären, wann eine Abmeldung auf allen Geräten sinnvoll ist.
-- [ ] TODO: unbekannte Sitzung deuten und melden.
+- [ ] TODO: Eigene Anmeldesitzungen lesen und einzelne widerrufen; aktuelle Sitzung, Browser/IP, letzte Verwendung und Aussagegrenzen erklären.
+- [ ] TODO: Alle eigenen Sitzungen beziehungsweise alle außer der aktuellen widerrufen; Wirkung auf Token-Erneuerung und bereits gültige Zugriffe belegen.
+- [ ] TODO: Unbekannte Anmeldung prüfen und mit passenden Angaben melden; Anmeldehistorie von Zutrittssitzungen unterscheiden.
 
 ## Benachrichtigungen
 
@@ -31,20 +34,21 @@ Klicke auf einen Eintrag, um den vollständigen Text und weitere Details zu sehe
 
 ![Benachrichtigungen mit Postfachreitern, Suche und Filtern.](./bilder/benachrichtigungen.png)
 
-- [ ] TODO: Kanäle (App, E-Mail, Push) und Ereignisse je Bereich beschreiben.
-- [ ] TODO: Ruhezeiten und Zusammenfassungen erklären.
-- [ ] TODO: Push-Geräte verwalten (anmelden, entfernen).
+- [ ] TODO: Ereignis-/Kanaleinstellungen für App, E-Mail und Web-Push ändern; zulässige und verpflichtende Kanäle sowie Ausnahmen für Sicherheitsereignisse erklären.
+- [ ] TODO: Ruhezeiten mit Zeitzone, Stummschaltung und Zusammenfassungen anhand der unterstützten Ereignisse erklären; erwartetes Ergebnis und Ausnahmen nennen.
+- [ ] TODO: Push-Gerät anmelden, Browserberechtigung prüfen und entfernen; abgeschalteten Versand und fehlerhafte Zustellung behandeln.
 
 ## Externe Konten
 
-- [ ] TODO: Badge-Account verknüpfen und Verknüpfung lösen.
+- [ ] TODO: Persönlichen Badge-Anbieter verknüpfen, synchronisieren und trennen; einmal angezeigte Tokens, Identitätszuordnung und administrative Anbieter-Einrichtung unterscheiden.
+- [ ] TODO: Eigene MCP-Agentenverbindung mit erlaubten Fähigkeiten und Laufzeit erstellen, Token einmal übernehmen, rotieren und widerrufen; Serverrichtlinie und fehlende Rechte erklären.
 
 ## Erscheinungsbild
 
-- [ ] TODO: Farbschema und Anzeigeeinstellungen beschreiben.
-- [ ] TODO: Zeitzone, Datums- und Zahlenformate einstellen.
+- [ ] TODO: Tatsächlich angebotene Theme-/Anzeigeeinstellungen ändern; Speicherung, Systemvorgabe und persönliche Dashboard-Anordnung unterscheiden.
+- [ ] TODO: Sprache und Zeitzone sowie daraus abgeleitete Formate erklären; eigenständige Datums-/Zahlenformatwahl nur bei vorhandener Einstellung beschreiben.
 
 ## Bedienhilfen
 
-- [ ] TODO: Schriftgröße, Kontrast und reduzierte Bewegung beschreiben.
-- [ ] TODO: Tastaturbedienung der wichtigsten Bereiche nennen.
+- [ ] TODO: Vorhandene Bedienhilfe-Einstellungen prüfen; Browserzoom, Kontrast und reduzierte Bewegung nicht als Produktregler versprechen, wenn nur Browser/System sie steuert.
+- [ ] TODO: Tastaturbedienung für Navigation, Dialoge und Formularfehler mit vorhandener UI prüfen und beschreiben.

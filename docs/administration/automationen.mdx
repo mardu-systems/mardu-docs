@@ -3,22 +3,29 @@ title: Automationen
 description: Überblick über Automationen und Zugang zum Editor.
 ---
 
-## Überblick
+Diese Seite ist ein Entwurf. Serveranbindung, Editor-Sitzung und ein ausgeführter
+Flow sind verschiedene Zustände und brauchen getrennte Prüfungen.
 
-- [ ] TODO: Zweck von Automationen und Beispiele aus dem Alltag nennen.
-- [ ] TODO: Voraussetzungen (Berechtigung, Verfügbarkeit) beschreiben.
+## Verbindung einrichten
 
-## Editor öffnen
+- [ ] TODO: Zweck und ein begrenztes Beispiel erklären; Voraussetzungen für Node-RED-Runtime, erreichbare Verbindung, HTTPS/Proxy und benötigte Automations-, Einstellungs- und Editorrechte nennen.
+- [ ] TODO: Modul, Adapter und Verbindung einrichten; verfügbare Server-/Deployment-Schalter, gesperrte Felder und gespeicherte Kopplung von tatsächlicher Erreichbarkeit unterscheiden.
+- [ ] TODO: Ressourcen und Aktionen zuweisen; Ressource, Zutrittspunkt und Geräte-Endpunkt unterscheiden. Änderungen erweitern Rechte nur im Rahmen der delegierbaren Berechtigungen.
+- [ ] TODO: Verbindung prüfen, reparieren, Zugangsdaten erneuern und widerrufen; Bestätigung, Fehler und Auswirkung auf Editor/Flows erklären. Prüfung und Reparatur nicht gleichsetzen.
 
-- [ ] TODO: Editor starten, Sitzungen und deren Gültigkeit erklären.
-- [ ] TODO: Erste Schritte im Editor: öffnen, prüfen, schließen.
-- [ ] TODO: Sitzungen widerrufen und Zugriff entziehen.
+## Editor und Flow verwenden
 
-## Ausführungen prüfen
+- [ ] TODO: Editor öffnen, Status prüfen und schließen; Sitzungslaufzeit, Ablauf, Wiederöffnung, Widerruf beim Schließen und erforderliche Rechte anhand des Vertrages erklären.
+- [ ] TODO: Einen kleinen Flow erstellen, prüfen, deployen und deaktivieren; erklären, dass Öffnen des Editors keinen Flow ausführt oder deployt. Node-Referenz unter [Entwickeln](../entwickeln/mcp-anbindung.mdx) verlinken.
+- [ ] TODO: Verbindungsfehler, fehlende Rechte, abgelaufene Sitzung und nicht erreichbare Runtime mit konkreten nächsten Schritten behandeln.
 
-- [ ] TODO: beschreiben, wo Ausführungen und deren Ergebnisse einsehbar sind.
-- [ ] TODO: Fehler deuten und an die richtige Stelle melden.
+## Pflichtfreigabe im Zugang
 
-## Abgrenzung
+- [ ] TODO: Flow-Einstellungen öffnen, bereits zugewiesene Zugangsressourcen wählen, Pflichtfreigabe und Zeitlimit speichern oder entfernen; Voraussetzungen an deployte Flows und Bestätigung erklären.
+- [ ] TODO: Veraltete Flow-Version, deaktiviertes Modul, nicht erreichbare Runtime und Entfernen einer bestehenden Pflicht behandeln; Folgen für neue versus bereits laufende Entscheidungen belegen.
+- [ ] TODO: Timeout, Ablehnung und Gerätezustellung unterscheiden; keine zusätzlichen Ressourcen- oder API-Rechte durch ein Flow-Formular behaupten.
 
-- [ ] TODO: Adapter und Anbindungen liegen bei den Integrationen (→ [Integrationen](integrationen)).
+## Betrieb und Diagnose
+
+- [ ] TODO: Tatsächlich verfügbare Ausführungs-/Ergebnisansichten prüfen; vorhandene API, Laufzeitlogs und UI getrennt beschreiben. Keine vollständige Ausführungshistorie ohne Beleg versprechen.
+- [ ] TODO: Modul/Verbindung abschalten, Wirkung auf Navigation und neue Editor-Sitzungen prüfen, Flows und bestehende Zugangsanforderungen nach einer Störung kontrollieren.

@@ -3,20 +3,18 @@ title: MQTT-Ereignisse beziehen
 description: Broker-Zugang, Topic-Struktur, Beispielereignisse und Zugriffsregeln.
 ---
 
-Gilt für: Entwickler.
+Diese Seite ist ein Entwurf. Informationsmeldungen, Gerätebefehle,
+Telemetrie und interne Automation-Kommunikation haben unterschiedliche Verträge.
 
-## Zugang
+## Verbindung und Zugriffsregeln
 
-- [ ] TODO: Broker-Zugangsdaten beziehen und hinterlegen.
-- [ ] TODO: Adresse, Port und TLS beschreiben.
+- [ ] TODO: Broker, Adresse/Port, TLS, Benutzer und ACLs aus der administrativen [MQTT-Einrichtung](../administration/integrationen.mdx) beziehen.
+- [ ] TODO: Begrenztes Testabonnement einrichten; erlaubte Topics, Wildcards und anonymen Informationsbereich gegen aktuelle Brokerregeln prüfen.
+- [ ] TODO: Falsches Passwort, nicht erlaubtes Topic, TLS-Fehler und offline Broker unterscheiden; Zugangsdaten nicht in Beispielausgaben zeigen.
 
-## Topics und Ereignisse
+## Topics und Payloads
 
-- [ ] TODO: Topic-Struktur dokumentieren (Informations-, Befehls-, Telemetrie-Themen).
-- [ ] TODO: Beispielereignisse je Thema zeigen.
-- [ ] TODO: Ereignisformate und Versionierung beschreiben.
-
-## Zugriffsregeln
-
-- [ ] TODO: Lese- und Schreibrechte je Thema nennen.
-- [ ] TODO: Test-Abonnement einrichten und Nachrichten prüfen.
+- [ ] TODO: Aktuelle Topic-Kataloge und Geräteprotokollversionen verlinken; ältere IP500-/Legacy-Verträge eindeutig mit Version kennzeichnen.
+- [ ] TODO: Pro Topic Richtung, Zweck, Rechte, Payload, Einheit, QoS/Retain und beobachtbares Ergebnis nur mit Vertragsbeleg beschreiben.
+- [ ] TODO: Gültige Beispiele für Information und Telemetrie ausführen; schreibende Gerätebefehle nur mit Testhardware beziehungsweise ausdrücklich als ungeprüft erklären.
+- [ ] TODO: Nachricht, gespeicherte Entscheidung und Gerätebestätigung unterscheiden; Duplikate, Wiederverbindung und Versionskonflikt behandeln.

@@ -1,9 +1,4 @@
 {
   "title": "Überblick",
-  "pages": [
-    "grundlagen-begriffe",
-    "neuerungen",
-    "profil",
-    "fehlersuche"
-  ]
+  "pages": ["grundlagen-begriffe", "benutzerkonten", "neuerungen", "profil", "fehlersuche"]
 }

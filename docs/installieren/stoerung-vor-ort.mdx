@@ -3,24 +3,21 @@ title: Störung vor Ort
 description: LED-Codes deuten, Netzwerk prüfen, Gerät neu starten und eskalieren.
 ---
 
-Gilt für: Techniker.
+Diese Seite ist ein Entwurf. Gerätespezifische Anzeigen und Neustartfolgen
+werden erst nach Abgleich mit Firmware- und Hardwareunterlagen beschrieben.
 
-## Statusanzeigen deuten
+## Fehler eingrenzen
 
-- [ ] TODO: LED-Codes und Blinkfolgen je Gerätetyp auflisten.
-- [ ] TODO: Normalzustand von Fehlerzuständen abgrenzen.
+- [ ] TODO: Gerät, Firmwarestand, letzte Verbindung und tatsächlichen Zustand aufnehmen; [administrative Diagnose](../administration/geraete-verwalten.mdx) verlinken.
+- [ ] TODO: LED-/Displaycodes pro unterstütztem Gerät mit Quelle erklären; keine gemeinsamen Blinkfolgen aus dem Backend ableiten.
+- [ ] TODO: Stromversorgung, Kabel/Funk und Gatewayverbindung prüfen; Netzwerkfehler von Provisionierungs-, Zuordnungs- und Berechtigungsfehlern unterscheiden.
 
-## Netzwerk prüfen
+## Wiederanlauf
 
-- [ ] TODO: Erreichbarkeit prüfen (Kabel, WLAN, Funk).
-- [ ] TODO: Zugangsdaten und Anbindung erneut einrichten.
-
-## Neustart und Wiederherstellung
-
-- [ ] TODO: geordneten Neustart beschreiben und Wartezeiten nennen.
-- [ ] TODO: erneute Provisionierung anstoßen und Status deuten.
+- [ ] TODO: Unterstützten Neustart mit Voraussetzungen, Folgen für Sitzungen und dokumentierter Wartebedingung beschreiben; keinen pauschalen Reset oder feste Dauer erfinden.
+- [ ] TODO: Erneute Provisionierung nur im passenden Fehlerfall und mit bestehenden Verwaltungsrechten erklären; erhaltene Identität/Zuordnungen und mögliche Sperren prüfen.
+- [ ] TODO: Zustand nach Wiederanlauf mit einem erlaubten und verweigerten Test prüfen; offene Gerätebestätigung als Einschränkung nennen.
 
 ## Eskalation
 
-- [ ] TODO: beschreiben, wann ein Vorgang an die Administration geht.
-- [ ] TODO: welche Angaben eine Meldung enthalten muss (Gerät, Zeitpunkt, Codes, Fotos).
+- [ ] TODO: Meldung mit Gerät, Firmwarestand, Zeit/Zeitzone, Netzwerk, beobachtetem Zustand und bisherigen Schritten erstellen; passende Zuständigkeit und sensible Bildinhalte beachten.

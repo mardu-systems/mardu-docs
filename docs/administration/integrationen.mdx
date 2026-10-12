@@ -3,41 +3,49 @@ title: Integrationen
 description: Externe Anbindungen einrichten und betreiben – MQTT, Verzeichnisse, Netzwerk, E-Mail, Tags, MCP.
 ---
 
-Jede Anbindung getrennt prüfen und dokumentieren.
+Diese Seite ist ein Entwurf. Jede Anbindung braucht eine geprüfte Anleitung zu
+Voraussetzungen, Rechten, Einrichtung, Verbindungstest, Betrieb und Abschalten.
+Der tatsächliche Menüpfad kann unter Servereinstellungen oder Integrationen liegen.
 
 ## MQTT
 
-- [ ] TODO: Broker einrichten: Adresse, Port, TLS und Zertifikate.
-- [ ] TODO: MQTT-Benutzer anlegen, Passwörter vergeben, Zugriffsregeln (ACLs) pflegen.
-- [ ] TODO: Verbindung prüfen und Störungen deuten.
-- [ ] TODO: Topic-Referenz vorstellen und zulässige Bereiche nennen.
+- [ ] TODO: Eingebetteten Broker, optionalen ausgehenden MQTT-Client und Geräte-/Informations-Themen unterscheiden; Adresse, Port, TLS, Zertifikate und tatsächlichen Neustartbedarf erklären.
+- [ ] TODO: MQTT-Benutzer erstellen, ändern, Passwort ersetzen, deaktivieren beziehungsweise löschen; Rollen und Lese-/Schreibregeln (ACLs) mit einem begrenzten Beispiel erklären. Keine gemeinsamen Konfigurations-Zugangsdaten voraussetzen.
+- [ ] TODO: Brokerstatus, Verbindungstest und Topic-Katalog erklären; anonyme Bereiche, Wildcards und verweigertes Abonnement behandeln. Payloads unter [MQTT für Entwickler](../entwickeln/mqtt-events.mdx) verlinken.
 
-## Verzeichnisdienste
+## LDAP
 
-- [ ] TODO: LDAP anbinden: Server, Zugangsdaten, Benutzer- und Gruppenabgleich.
-- [ ] TODO: Attribut-Zuordnung und Rollen-Regeln beschreiben.
-- [ ] TODO: Synchronisation prüfen und Fehler deuten.
+- [ ] TODO: Verzeichnisdienst (LDAP) erklären; Server, TLS, Dienstkonto, Suchbasis und Filter, Attributzuordnung, Test und Speichern beschreiben.
+- [ ] TODO: Benutzer-/Gruppenabgleich und Rollenzuordnung anhand der vorhandenen Regeln erklären; externe Schreibhoheit, Synchronisationsstatus, Konflikte, deaktivierte Konten und erneuten Abgleich behandeln.
+- [ ] TODO: Trennen einer Anbindung und Folgen für bestehende Konten/Anmeldung belegen; Zugangsdaten und Maskierung im Formular erklären.
 
-## Single Sign-on
+## Anmeldung über OpenID Connect
 
-- [ ] TODO: OIDC-Anbieter anlegen: Client-Daten, Endpunkte, Bereiche.
-- [ ] TODO: Anmeldeschaltfläche prüfen und Test-Anmeldung beschreiben.
+- [ ] TODO: OIDC-Anbieter mit Issuer, Client-Daten, Callback-Adresse, Scopes und Claims einrichten; tatsächlich erforderliche Angaben und Rechte erklären.
+- [ ] TODO: Testanmeldung, erste Kontoanlage, Freigabepflicht, Konto-Verknüpfung und anbieterverwaltete Profilfelder erklären; Verhalten bei Konflikten oder abgeschaltetem Anbieter prüfen.
 
-## Netzwerk
+## Netzwerk und Gateways
 
-- [ ] TODO: IP500-Netzwerk einrichten und Erreichbarkeit der Geräte prüfen.
-- [ ] TODO: Zugangsdaten und Anbindung verwalten.
+- [ ] TODO: IP500-Konfiguration von Geräteaufnahme und Gatewayverwaltung unterscheiden; benötigte Betriebsform, Gatewaystatus, Netzwerkzuordnung und erneuten Abgleich dokumentieren.
+- [ ] TODO: BLE-/andere Gatewayvarianten gegen die tatsächlich vorhandene UI prüfen und entsprechend als bedienbaren Ablauf oder technische Einschränkung beschreiben.
 
-## E-Mail-Versand
+## E-Mail
 
-- [ ] TODO: Versand einrichten, Absender und Testnachricht.
-- [ ] TODO: Vorlagen für Einladungen und Zurücksetzen prüfen.
+- [ ] TODO: SMTP, Absender, Verschlüsselung, Zugangsdaten und Testempfänger konfigurieren; erfolgreich gespeicherte Konfiguration von einer zugestellten Testnachricht unterscheiden.
+- [ ] TODO: Einladung, E-Mail-Bestätigung, Zurücksetzen und Benachrichtigung als Versandfälle erklären; Vorlagenänderung nur bei vorhandener Bedienmöglichkeit beschreiben. Fehler und deaktivierten Versand behandeln.
 
-## Tags
+## Open Badges und externe Anbieter
 
-- [ ] TODO: Tag-Einstellungen und Leser je Standort prüfen (→ [Geräte verwalten](geraete-verwalten)).
+- [ ] TODO: Eigene Ausstellung, externe Synchronisierung, Anbieter, Anerkennung und externe Vergaben als getrennte Aufgaben erklären; benötigte Rechte je Bereich nennen.
+- [ ] TODO: Ausstellerdaten und erreichbare öffentliche Adresse konfigurieren; Ausstellungsvoraussetzungen, Prüfung und Fehler mit [Badges verwalten](badges-verwalten.mdx) verbinden.
+- [ ] TODO: Anbieter registrieren, aktivieren und synchronisieren; unterstützte Formate, Zugangsdaten, Herkunft, Identitätszuordnung und ausstehende Anerkennung erklären.
+- [ ] TODO: Persönliche Anbieter-Verknüpfung unter [Eigenes Profil](../ueberblick/profil.mdx) erklären; administrative Anbieterpflege und eigene Tokens nicht vermischen.
 
-## KI-Anbindung (MCP)
+## Automationen
 
-- [ ] TODO: Agentenzugänge anlegen, Fähigkeiten begrenzen und Schlüssel verwalten.
-- [ ] TODO: Zugriffe prüfen und widerrufen.
+- [ ] TODO: Servermodul, Node-RED-Verbindung, Adapter, zugewiesene Ressourcen, erlaubte Aktionen, Prüfen, Reparieren und Widerrufen unter [Automationen](automationen.mdx) ausarbeiten; hier den Einstieg verlinken.
+
+## MCP
+
+- [ ] TODO: Model Context Protocol (MCP) erklären; Serverrichtlinie, persönliche Verbindungen, Schreib-/Löschwerkzeuge, maximale Laufzeit und Rechtebegrenzung dokumentieren.
+- [ ] TODO: Abschalten, gesperrte Deployment-Felder und Fehlerfälle beschreiben; persönliche Agententokens unter [Eigenes Profil](../ueberblick/profil.mdx), Clientkonfiguration unter [MCP-Anbindung](../entwickeln/mcp-anbindung.mdx) ausarbeiten.

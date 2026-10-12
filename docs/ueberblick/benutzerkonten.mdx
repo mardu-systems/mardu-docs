@@ -1,0 +1,68 @@
+---
+title: Benutzerkonten, Rollen und Zugänge
+description: Wie Benutzerkonten entstehen und wie Rollen, Gruppen, Badges und Tags ihre Nutzung bestimmen.
+---
+
+Ein Benutzerkonto steht für eine Person in Mardu. Es ordnet ihr Anmeldung, Berechtigungen, Nachweise, Buchungen und Zutrittsereignisse zu. Das Konto ermöglicht, Aktionen der Person zuzuordnen und ihre Rechte zu verwalten.
+
+Diese Erklärung richtet sich an Personen, die Mardu nutzen oder Benutzerkonten verwalten. Die Schritte zum Anlegen und Bearbeiten stehen unter [Benutzer und Rollen](../administration/benutzer-rollen.mdx).
+
+## Was kann ein Benutzer tun?
+
+Welche Funktionen die Person nutzen darf, hängt von ihren zugewiesenen Rechten ab. Dazu können die Pflege des eigenen Profils, Ressourcenbuchungen, Zugangsbeantragungen oder Verwaltungsaufgaben gehören. Ein angelegtes Konto erhält nicht automatisch Zugriff auf alle Funktionen oder Ressourcen.
+
+Dabei werden drei Fragen getrennt geprüft:
+
+| Frage                                                              | Was dafür zählt                                                                                                |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| Darf sich die Person anmelden?                                     | Kontostatus und Anmeldebedingungen, etwa E-Mail-Bestätigung, Freigabe und Zwei-Faktor-Authentifizierung (2FA). |
+| Darf sie eine Funktion im Dashboard nutzen?                        | Berechtigungen aus direkt zugewiesenen Rollen und aus den Rollen ihrer Benutzergruppen.                        |
+| Darf sie eine Ressource nutzen oder einen Zutrittspunkt passieren? | Die für diesen Zugang festgelegten Bedingungen, zum Beispiel eine Freigabe oder ein gültiger Nachweis.         |
+
+Ein aktives Konto kann deshalb trotzdem eine Anmeldebedingung noch nicht erfüllen. Ebenso bedeutet die Leseberechtigung für Geräte im Dashboard nicht, dass die Person eine Maschine nutzen darf.
+
+## Wie entsteht ein Konto?
+
+Es gibt mehrere Wege. Welche davon verfügbar sind, hängt von der Einrichtung des Systems ab.
+
+| Weg                                    | Ablauf                                                                                                                                              |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Einladung durch die Administration     | Das Konto wird angelegt. Die Person setzt ihr Passwort über den Einladungslink; anschließend wird das Konto freigegeben.                            |
+| Anlage mit Passwort                    | Die Administration legt ein Initialpasswort fest. Eine Passwortänderung bei der ersten Anmeldung kann vorgeschrieben werden.                        |
+| Selbstregistrierung                    | Die Person registriert sich selbst, wenn dies aktiviert ist. Je nach Richtlinie ist zusätzlich eine Freigabe erforderlich.                          |
+| Verzeichnissynchronisierung            | Eine eingerichtete LDAP-Anbindung übernimmt Personen aus einem externen Benutzerverzeichnis.                                                        |
+| Anmeldung über einen externen Anbieter | Bei einer eingerichteten OpenID-Connect-Anbindung (OIDC) kann die erste Anmeldung ein Konto anlegen, wenn die automatische Kontoanlage erlaubt ist. |
+
+Ein lokales Konto verwaltet Mardu selbst. Bei externen Konten kann der Anbieter bestimmte Angaben verwalten. Solche Felder sind in Mardu gekennzeichnet und schreibgeschützt; Änderungen erfolgen beim Anbieter.
+
+## Welche Zuordnungen gehören zum Konto?
+
+| Zuordnung              | Zweck                                                                                                                                                   |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Rollen                 | Weisen Berechtigungen für Funktionen und Aktionen in Mardu zu. Eine direkte Rolle ist dem einzelnen Konto zugewiesen.                                   |
+| Benutzergruppen        | Ordnen mehrere Personen einer Gruppe zu. Die Rollen der Gruppe gelten für alle Mitglieder.                                                              |
+| Fähigkeiten und Badges | Halten Fähigkeiten und Nachweise fest, zum Beispiel eine Maschineneinweisung. Gültige, anerkannte Nachweise können Voraussetzung für einen Zugang sein. |
+| Zugänge                | Erlauben die Nutzung bestimmter Ressourcen unter den dafür festgelegten Bedingungen.                                                                    |
+| Tags                   | Identifizieren die Person am Zutrittspunkt, etwa über einen RFID-Tag. Die Tag-Zuweisung allein gewährt keinen Zugang.                                   |
+
+Die Person kann dieselbe Rolle direkt und über mehrere Gruppen erhalten. Entfernst du nur eine dieser Zuweisungen, kann die Rolle über die übrigen Zuweisungen weiterhin gelten. In der Administration zeigt **„Effektive Berechtigungen“** die gespeicherten Rechte mit ihren Quellen.
+
+Benutzergruppen und Zutrittspunktgruppen haben unterschiedliche Aufgaben: Eine Benutzergruppe ordnet Personen und Rollen zu; eine Zutrittspunktgruppe bezeichnet Zutrittsziele.
+
+## Was bewirkt eine Deaktivierung?
+
+Eine Deaktivierung sperrt neue Anmeldungen und erhält das Konto mit seinen Zuordnungen. Sie ist keine Löschung und beendet bestehende Zugriffe nicht sofort. Vor einer Reaktivierung sollten die erhaltenen Rollen, Gruppen und Zutrittszuweisungen geprüft werden.
+
+Die konkreten Schritte und Einschränkungen stehen unter [Konten deaktivieren und reaktivieren](../administration/benutzer-rollen.mdx#konten-deaktivieren-und-reaktivieren).
+
+## Weiterführende Anleitungen
+
+- [Benutzer einladen und anlegen](../administration/benutzer-rollen.mdx#benutzer-einladen-und-anlegen)
+- [Rollen und Gruppen zuweisen](../administration/benutzer-rollen.mdx#rollen-und-gruppen-zuweisen)
+- [Badges verwalten](../administration/badges-verwalten.mdx)
+- [Zutritt verwalten](../administration/zutritt-verwalten.mdx)
+
+## Offene Dokumentationsaufgaben
+
+- [ ] TODO: Begriffe und Aussagen mit dem ausgearbeiteten Glossar und aktuellen Kontoanbieter-/Anmeldebedingungen abgleichen; Rollenrechte von objektbezogenen Verwaltungszuweisungen unterscheiden.
+- [ ] TODO: Folgen von Deaktivierung, verbleibenden Tokens, Zutrittsfreigaben und Tags anhand der aktuellen Services prüfen; ergänzende Sicherheits- und Verlustanleitungen verlinken.

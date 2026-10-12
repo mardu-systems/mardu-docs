@@ -3,28 +3,38 @@ title: Zutritt verwalten
 description: Zugänge gewähren, Katalog pflegen und Anträge entscheiden.
 ---
 
-## Zugänge
+Diese Seite ist teilweise ausgearbeitet. Die offenen Aufgaben müssen gegen das
+aktuelle Ressourcen- und Zutrittsmodell geprüft werden.
 
-- [ ] TODO: Zugang anlegen: Person, Zutrittspunkt, Zeitraum, Bedingungen.
-- [ ] TODO: Zugänge ändern, entziehen und Verlauf prüfen.
-- [ ] TODO: Zugänge je Bereich (Scope) zuweisen und prüfen.
+## Ressourcen, Bereiche und Zutrittspunkte
 
-## Zutrittskatalog
+- [ ] TODO: Ressource, Zugangsbereich (Scope), Zutrittspunkt und Geräte-Endpunkt anhand eines Raum- und Maschinenbeispiels erklären; [Ressourcen einrichten](../koordination/ressourcen.mdx) verlinken.
+- [ ] TODO: Bereich für eine Ressource erstellen, Bedingungen und Zugangsart konfigurieren; Freigabe, Buchung, Kompetenzanforderung, Aufsicht und Zeitbedingungen nur nach tatsächlich angebotener Auswahl dokumentieren.
+- [ ] TODO: Zutrittspunkt anlegen und Reader/Aktor zuordnen; wirksame Konfiguration, fehlende Endpunkte, doppelte aktive Zuordnung und Umzug behandeln.
 
-- [ ] TODO: Katalogeinträge und Vorlagen beschreiben und pflegen.
-- [ ] TODO: Zusammenhang Katalog, Bereich und Gerät erklären.
+## Verwaltungsrechte und Verantwortlichkeiten
 
-## Anträge entscheiden
+- [ ] TODO: Allgemeine Berechtigungen von Zuweisungen für eine Ressource oder einen Zugangsbereich unterscheiden; Lesen, Freigaben, Anträge, Hardware, Protokolle, Sitzungen und Delegation erklären.
+- [ ] TODO: Verwaltungsrechte an Person, Benutzergruppe oder Rolle zuweisen und widerrufen; delegierbare Rechte, Geltungsbereich und Grenzen für untergeordnete Ressourcen belegen.
+- [ ] TODO: Zuständigkeit für Kompetenzfreigabe und physische Aufsicht von Verwaltungsrechten unterscheiden; typische Ursache für unsichtbare Einträge erklären.
 
-- [ ] TODO: Antragsliste, Prüfung, Genehmigung und Ablehnung mit Begründung.
-- [ ] TODO: Rückfragen stellen und Fristen nennen.
-- [ ] TODO: Nachweise zu Anträgen prüfen.
+## Zugänge freigeben und entziehen
 
-## Protokolle und Sitzungen
+- [ ] TODO: Freigabe anlegen, Gültigkeit und Empfänger auswählen, ändern, widerrufen beziehungsweise löschen; unterstützte Empfängertypen und Folgen für vorhandene Zugriffe prüfen.
+- [ ] TODO: Konflikte durch veraltete Änderungsstände behandeln; eine gespeicherte Freigabe von einer erfolgreich erfüllten Zutrittsbedingung unterscheiden.
 
-- [ ] TODO: Zutrittsereignisse filtern und exportieren (falls vorhanden).
-- [ ] TODO: Auffälligkeiten (verweigerter Zutritt, Tür offengehalten) deuten.
-- [ ] TODO: Sitzungsverlauf je Zutrittspunkt nachvollziehen.
+## Katalog und Anträge
+
+- [ ] TODO: Katalogsichtbarkeit und anforderbaren Zugang einstellen; Unterschied zwischen Katalogangebot, eigener Berechtigung und genehmigtem Antrag erklären.
+- [ ] TODO: Antrag öffnen, Voraussetzungen und Nachweise prüfen, genehmigen oder mit Begründung ablehnen; Verantwortlichkeiten, erzeugte Freigabe und konkurrierende Entscheidungen erklären.
+- [ ] TODO: Rückfragen, Vertretung, Fristen und Statuswerte nur beschreiben, soweit vorhandene UI und API sie unterstützen; organisatorische Absprachen separat nennen.
+
+## Protokolle, Sitzungen und Hardwarezustand
+
+- [ ] TODO: Zutrittsentscheidungen filtern, Details lesen und Ablehnungsgründe erklären; Export nur bei belegtem Endpunkt und UI beschreiben.
+- [ ] TODO: Aktive Sitzungen, Sitzungsübernahmen und Verlauf lesen; Beenden mit Rechten, Begründung und Bestätigung erklären.
+- [ ] TODO: Gespeichertes Sitzungsende und Zustellung des Gerätebefehls unterscheiden; ausstehende/fehlgeschlagene Bestätigung und Wiederholung anhand vorhandener Zustellzustände behandeln.
+- [ ] TODO: Offline-Gerät, fehlender Nachweis, unpassender Zeitraum, Wartung und fehlende Freigabe als getrennte Prüfpfade erklären; physische Türmeldungen nur bei vorhandener Hardwareunterstützung nennen.
 
 ## Zugangsmetriken
 
@@ -36,6 +46,9 @@ In den Details eines Benutzers, Geräts oder Zutrittspunkts zeigt **„Metriken�
 
 Es werden nur Bereiche berücksichtigt, deren Protokolle beziehungsweise Sitzungen du ansehen darfst. Die Zahlen beschreiben gespeicherte Entscheidungen; sie bestätigen keine physische Geräteaktion. Bereits gelöschte Protokolle können nicht nachträglich gezählt werden.
 
-## Abgrenzung
+- [ ] TODO: Die Metrikbeschreibung mit Benutzer-, Geräte- und Zutrittspunktansicht abgleichen; UTC-Zeitraum, fünf neueste Einträge, Rechte, gelöschte Historie und verfügbare Diagrammarten ohne widersprüchliche Doppelbeschreibung erklären.
 
-- [ ] TODO: auf Bediener-Sicht verweisen (→ [Zutritt](zutritt)).
+## Eigene Zugänge
+
+Die Sicht der Person und das Stellen eines eigenen Antrags werden unter
+[Zutritt für Benutzer](../benutzer/zutritt.mdx) beschrieben.

@@ -3,27 +3,24 @@ title: HTTP-API nutzen
 description: Basis-URL, Authentifizierung, Beispielaufrufe, Raten und Fehlercodes.
 ---
 
-Gilt für: Entwickler.
+Diese Seite ist ein Entwurf. Beispiele werden aus dem aktuellen OpenAPI-Vertrag
+und den verwendenden Services erstellt und mit fiktiven Daten geprüft.
 
-## Zugang
+## Authentifizierung und Rechte
 
-- [ ] TODO: Basis-URL und Projekt-Scope beschreiben.
-- [ ] TODO: Token beziehen, speichern und mitsenden.
-- [ ] TODO: Testzugang und Testprojekt beschreiben.
+- [ ] TODO: API-Basisadresse von Dashboard-Projektroute unterscheiden; Version und konkrete Authentifizierungsendpunkte belegen.
+- [ ] TODO: Token beziehen, Bearer-Header verwenden, Erneuerung und Widerruf erklären; Tokenlaufzeit, 2FA-/Passkey-/Bestätigungsbedingungen berücksichtigen.
+- [ ] TODO: Allgemeine Aktionsrechte und objektbezogene Ressourcen-/Zugangsrechte unterscheiden; eigene Daten und administrative Listen getrennt behandeln.
 
-## Beispielaufrufe
+## Beispielaufrufe und Verträge
 
-- [ ] TODO: Lesen (Liste und Detail) als Beispiel zeigen.
-- [ ] TODO: Anlegen und Ändern als Beispiel zeigen.
-- [ ] TODO: auf die passenden Referenzseiten verweisen.
+- [ ] TODO: Lesende Liste/Details sowie einen Anlege-/Änderungsablauf mit gültigem Request, Response und prüfbarem Ergebnis ausführen.
+- [ ] TODO: Pflicht/optional, Null/Leer, Defaults, Validierung und Einheiten im passenden Beispiel erklären; OpenAPI-Seiten verlinken und generierte Schemas nicht manuell pflegen.
+- [ ] TODO: Pagination, Filter, Statuswerte und Versions-/Konfliktprüfung mit belegten Endpunkten zeigen; eine Änderung nach veraltetem Stand behandeln.
+- [ ] TODO: Asynchrone Aktion und bestätigte Geräteausführung unterscheiden; erforderliche Statusabfrage oder Echtzeitereignisse erklären.
 
-## Raten und Fehler
+## Fehler und Betrieb
 
-- [ ] TODO: Begrenzungen und empfohlene Abrufintervalle nennen.
-- [ ] TODO: Fehlercodes und deren Bedeutung auflisten.
-- [ ] TODO: Versionshinweise und Kompatibilität beschreiben.
-
-## Zugangsdaten pflegen
-
-- [ ] TODO: Schlüssel rotieren und widerrufen.
-- [ ] TODO: Protokollierung für Integrationen beschreiben.
+- [ ] TODO: Tatsächliche ProblemDetails-/Validierungsantworten und passende 400/401/403/404/409/429/503-Fälle dokumentieren; nicht jeden Status jedem Endpunkt zuschreiben.
+- [ ] TODO: Ratenbegrenzung, Retry und zulässige Abrufweise aus vorhandenen Policies belegen; keine allgemeine feste Rate erfinden.
+- [ ] TODO: Kompatibilität, Zugangsdatenwechsel und sichere Protokollierung anhand des verwendeten Zugangstyps erklären; API-Schlüssel nicht voraussetzen, wenn JWT verwendet wird.
