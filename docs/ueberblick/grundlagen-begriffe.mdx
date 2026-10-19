@@ -1,25 +1,74 @@
 ---
 title: Grundlagen und Begriffe
-description: Kernbegriffe, Rollenmodell und warum Inhalte je nach Berechtigung abweichen.
+description: Konten, Ressourcen, Freigaben, Buchungen und Nachweise voneinander unterscheiden.
 ---
 
-Diese Seite ist ein Entwurf. Sie wird als Grundlage für die
-Administrator-Anleitungen zuerst vervollständigt.
+Mardu ordnet Personen, Ressourcen und deren Nutzungsbedingungen einander zu. Ein
+Mitglied kann etwa eine Werkstattressource buchen, eine Einweisung nachweisen
+und eine Freigabe besitzen. Diese Angaben erfüllen unterschiedliche Bedingungen;
+keine einzelne davon bestätigt automatisch die physische Nutzung.
 
 ## System und Begriffe
 
-- [ ] TODO: Zweck von Mardu und Beziehung zwischen Personen, Ressourcen, Geräten, Zutritt, Buchungen und Kompetenzen in einem kurzen Beispiel erklären.
-- [ ] TODO: Projekt beziehungsweise ausgewählten Server und Standalone-Betrieb erklären; keine Projektmitgliedschaft oder Einladung zur Serverauswahl voraussetzen.
-- [ ] TODO: Ressource, Zugangsbereich (Scope), Zutrittspunkt, Geräte-Endpunkt und Hardwarezuordnung definieren; physische Nutzung von einer Dashboard-Berechtigung unterscheiden.
-- [ ] TODO: Freigabe, Antrag, Katalogangebot, Benutzergruppe, Tag, Provisionierung und Automation kurz erklären; Begriffe aus der aktuellen UI verwenden.
-- [ ] TODO: Fähigkeit, Badge-Definition, Inhaltsversion, Vergabe, Nachweis, Standard, Lernweg und Bewertung unterscheiden; gemeinsam benötigte Definitionen hier pflegen.
+| Begriff              | Bedeutung                                                                                                                                                        |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Server / Projekt     | Der ausgewählte Mardu-Server und sein Datenkontext. In einer festen Installation ist der Zielserver vorgegeben; im Mehrprojektbetrieb kann die Auswahl wechseln. |
+| Benutzerkonto        | Die Identität einer Person mit Anmeldung, Profil und Zuordnungen.                                                                                                |
+| Ressource            | Ein verwaltetes Nutzungsziel, zum Beispiel Raum, Bereich oder Maschine. Ressourcen können in einer Hierarchie stehen.                                            |
+| Zugangsbereich       | Ein Zielbereich, für den Zugangsregeln und Freigaben ausgewertet werden.                                                                                         |
+| Zutrittspunkt        | Ein konkretes Zutrittsziel mit zugeordneten technischen Ein- oder Ausgängen.                                                                                     |
+| Geräte-Endpunkt      | Ein technisch adressierbarer Teil eines Geräts; eine Zuordnung verbindet ihn mit einer Aufgabe oder einem Ziel.                                                  |
+| Freigabe             | Eine Zuordnung für eine Person, Gruppe oder ein Medium mit Zeitraum und gegebenenfalls Nutzungszeiten.                                                           |
+| Katalogangebot       | Eine für dich sichtbare Ressource mit ihren Bedingungen und angebotenen Anfrageaktionen.                                                                         |
+| Berechtigungsanfrage | Eine Bitte um Freigabe. Erst die Entscheidung und die resultierende Zuordnung bestimmen das weitere Ergebnis.                                                    |
+| Buchung              | Eine Reservierung von Ressource, Zeitraum und Anzahl; eine offene Genehmigung ist noch keine bestätigte Buchung.                                                 |
+| Zutrittsmedium / Tag | Eine Karte oder ein Transponder zur Identifikation. Medienstatus, Zeitraum und Ressourcenrechte werden getrennt geprüft.                                         |
+| Provisionierung      | Technische Einrichtung eines Geräts oder Mediums. Sie ersetzt keine persönliche Berechtigungsvergabe.                                                            |
+| Automation           | Ein eingerichteter Ablauf, der auf Ereignisse reagiert oder erlaubte Aktionen ausführt. Seine Verwaltung gehört nicht zur persönlichen Benutzeransicht.          |
+
+Ein offline gemeldetes Gerät, eine gesendete Aktion und ein bestätigter physischer
+Zustand sind nicht dasselbe. Meldungen und Messwerte müssen mit ihrem Zeitpunkt
+und ihrer Quelle gelesen werden.
+
+## Kompetenzen und Nachweise
+
+| Begriff                             | Bedeutung                                                                                                                             |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Fähigkeit / Kompetenz               | Die beschriebene Fähigkeit, etwa eine bestimmte Maschine bedienen zu können.                                                          |
+| Badge-Definition und Inhaltsversion | Beschreibung eines Nachweises und ein bestimmter Stand dieser Beschreibung; noch keine persönliche Vergabe.                           |
+| Vergabe                             | Die Zuordnung einer Einweisung oder eines Nachweises zu einer Person.                                                                 |
+| Signierter Nachweis / Credential    | Ein ausgestellter Nachweis, dessen Aussteller und technische Prüfung gesondert betrachtet werden können.                              |
+| Standard                            | Ein Bezugsrahmen für Kompetenz- oder Nachweisdefinitionen.                                                                            |
+| Lernweg                             | Eine angeordnete Folge von Lern- oder Nachweisanforderungen.                                                                          |
+| Bewertung                           | Eine Prüfung einer Anforderung oder Fähigkeit; sie ist von der späteren Vergabe zu unterscheiden.                                     |
+| Anerkennung                         | Die Entscheidung, wie ein fremder Nachweis im vorgesehenen Zusammenhang berücksichtigt wird. Ein Import allein ist keine Anerkennung. |
+
+[Meine Qualifikationen](../benutzer/kompetenzen.mdx) trennt persönliche
+Einweisungen, lokale Vergaben und importierte beziehungsweise signierte Nachweise.
 
 ## Konten, Rollen und Navigation
 
-Die bereits ausgearbeitete Erklärung steht unter
-[Benutzerkonten, Rollen und Zugänge](benutzerkonten.mdx).
+Rollen weisen Rechte für Funktionen zu. Benutzergruppen ordnen Personen und
+Gruppenrollen zu. Die Herkunft einer Funktionsberechtigung ist von einer
+physischen Ressourcenfreigabe und einer objektbezogenen Verwaltungszuständigkeit
+zu unterscheiden. [Benutzerkonten, Rollen und Zugänge](./benutzerkonten.mdx)
+erklärt die Zusammenhänge.
 
-- [ ] TODO: Doku-Bereiche als Einstiege für Aufgaben erklären; sie sind keine vollständige Liste fest eingebauter Berechtigungsrollen.
-- [ ] TODO: Hauptbereiche anhand aktueller Navigation vorstellen; sichtbare Menüs von tatsächlich erlaubten Aktionen unterscheiden.
-- [ ] TODO: Anmeldesitzung, Zutrittssitzung und Editor-Sitzung sowie deren unterschiedliche Folgen beim Beenden definieren.
-- [ ] TODO: Fehlenden Menüpunkt, fehlende objektbezogene Berechtigung, falschen Server und nicht erfüllte Zutrittsbedingung in einer kurzen Prüfliste unterscheiden; [Fehlersuche](fehlersuche.mdx) verlinken.
+Die Dokumentationsbereiche sind Lesereinstiege, keine Systemrollen. Die Benutzeransicht zeigt eigene
+Aufgaben; ein berechtigter Verwaltungswechsel führt zu administrativen Aufgaben.
+Die Sichtbarkeit eines Menüpunkts ersetzt nicht die Prüfung einer einzelnen Aktion.
+
+## Welche Sitzung ist gemeint?
+
+- Eine **Anmeldesitzung** gehört zur Webanmeldung. Ihre Verwaltung steht im Profil.
+- Eine **Zutrittssitzung** beschreibt einen Zutritts- beziehungsweise Nutzungsvorgang.
+- Eine **Editor-Sitzung** ist ein zeitlich begrenzter Zugang zu einem freigegebenen
+  technischen Editor, etwa für Automationen.
+
+Das Beenden einer dieser Sitzungen beendet nicht pauschal alle anderen. Auch eine
+Buchungsstornierung, ein Kartenwiderruf und eine Konto-Deaktivierung sind getrennte
+Vorgänge mit unterschiedlichen Auswirkungen.
+
+Wenn etwas fehlt, prüfe zuerst Konto und Server, danach Funktionsrecht,
+Objektzuständigkeit und Nutzungsbedingungen. Die [Fehlerhilfe](./fehlersuche.mdx)
+ordnet die passenden nächsten Schritte zu.

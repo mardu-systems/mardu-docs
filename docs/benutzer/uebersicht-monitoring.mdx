@@ -3,6 +3,10 @@ title: Übersicht und Systemstatus
 description: Dashboards, Messwerte und Zeiträume lesen.
 ---
 
+Diese Anleitung beschreibt Verwaltungs- und Betriebsmetriken und setzt die
+entsprechenden Leserechte voraus. Das Dashboard der persönlichen Benutzeransicht
+ist separat unter [Persönliches Dashboard](./dashboard.mdx) beschrieben.
+
 Die **Übersicht** zeigt dein ausgewähltes Dashboard. Unter **Betrieb → Systemstatus** findest du die freigegebenen Systemmetriken nach Bereichen. In den Gerätedetails zeigt **Metriken** Messwerte für dieses Gerät.
 
 ## Zeitraum und Diagramme
@@ -13,7 +17,7 @@ Die Hauptzahl kann einen Zeitraum zusammenfassen. Angaben wie aktuell aktive Sit
 
 Bei **Datenbank → Transaktionen** nennt die Hauptzahl die Summe im gewählten Zeitraum oder die durchschnittlichen Transaktionen pro Sekunde. Die Balken zeigen die Summe aus Commits und Rollbacks je Zeitabschnitt; dessen Dauer steht über dem Diagramm. Beim Darüberfahren siehst du den Beginn und das Ende des Abschnitts sowie die Commits und Rollbacks. Deadlocks sind eine separate Ereigniszahl über dem Diagramm. Die Balken summieren alle gelieferten Messwerte, statt einzelne Messpunkte auszuwählen. Rollbacks und Deadlocks unter der Hauptzahl beziehen sich ebenfalls auf den gewählten Zeitraum.
 
-Diese Zahlen zählen Transaktionen der Anwendungsdatenbank, einschließlich Hintergrundabfragen und Monitoring. Sie entsprechen keiner Anzahl von Benutzeraktionen. Abschnitte ohne Messwerte bleiben leer; fehlende Werte werden nicht als null Transaktionen gezählt.
+Diese Zahlen zählen Transaktionen der Anwendungsdatenbank, einschließlich Hintergrundabfragen und Monitoring. Sie entsprechen keiner Anzahl von Benutzeraktionen.
 
 ![Transaktionen als gemeinsame Balken aus Commits und Rollbacks je 30 Minuten, mit Zeitraum im Tooltip](bilder/datenbank-transaktionen.png)
 
@@ -35,13 +39,16 @@ Neue Karten erhalten eine zur Darstellung passende Standardgröße. Breitere Dia
 
 ## Zutrittsmetriken
 
-Die Metriken in Benutzer-, Geräte- und Zutrittspunktdetails zeigen gewährte und abgelehnte Entscheidungen für sieben UTC-Kalendertage einschließlich heute. Die Erfolgsquote verwendet alle Entscheidungen dieses Zeitraums; ohne Entscheidungen erscheint **–**. **Aktuell aktive Sitzungen** gilt unabhängig von diesem Zeitraum. Darunter stehen die fünf neuesten Entscheidungen.
+Die [Zugangsmetriken](../administration/zutritt-verwalten.mdx#zugangsmetriken)
+in Benutzer-, Geräte- und Zutrittspunktdetails haben einen eigenen Zeitraum.
+Dort sind Kennzahlen, aktuelle Sitzungen und die Grenzen der Anzeige erklärt.
 
 ![Systemstatus mit Zeitraum, Messwerten und Datenlücken](bilder/systemstatus-metriken.png)
 
 ## Benachrichtigungen
 
-Über die Glocke öffnest du Eingang, ungelesene Mitteilungen und Archiv. Die Benachrichtigungseinstellungen findest du im eigenen Profil.
+Die Glocke öffnet den [persönlichen Posteingang](./benachrichtigungen.mdx).
+Versandoptionen änderst du im Profil unter **Benachrichtigungen**.
 
 ## Offene Dokumentationsaufgaben
 

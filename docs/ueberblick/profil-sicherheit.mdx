@@ -1,0 +1,90 @@
+---
+title: E-Mail und Anmeldesicherheit
+description: Eigene E-Mail, Passwort, Zwei-Faktor-Anmeldung, Wiederherstellungscodes und Passkeys verwalten.
+---
+
+Öffne **Mein Profil → Sicherheit** beziehungsweise im Profil **Authentifizierung**.
+Du benötigst passende Profilrechte. Bei einem extern verwalteten Konto können
+E-Mail- oder Passwortänderungen dem Anbieter vorbehalten sein; die Anzeige nennt
+diese Einschränkung. Die Anmeldeverfahren hängen von der Serverrichtlinie ab.
+
+## E-Mail-Adresse ändern
+
+1. Wähle **E-Mail-Adresse ändern**.
+2. Gib die neue Adresse und dein aktuelles lokales Passwort ein.
+3. Wähle **Bestätigungslink anfordern**.
+4. Öffne die Bestätigung an der neuen Adresse und prüfe die Rückmeldung.
+
+Die Anforderung allein ändert die bestätigte Adresse noch nicht. Die neue Adresse
+muss sich von der bisherigen unterscheiden. Ein ungültiger, bereits verwendeter
+oder abgelaufener Link wird abgelehnt; fordere bei Bedarf einen neuen Link an.
+Ohne die erforderliche lokale Passwortprüfung ist dieser Änderungsweg nicht
+verfügbar. Schließe bei einem externen Konto den Vorgang beim zuständigen Anbieter ab.
+
+## Passwort ändern
+
+1. Öffne **Passwort ändern** und lies die geladenen Passwortanforderungen.
+2. Gib das aktuelle Passwort, das neue Passwort und dessen Bestätigung ein.
+3. Wähle **Passwort speichern** und prüfe die Rückmeldung.
+
+Die Anforderungen stammen aus der aktuellen Serverrichtlinie. Verwende keine
+pauschale Mindestlänge aus einer fremden Anleitung. Bei einem Ladefehler lade die
+Anforderungen erneut. Ein falsches aktuelles Passwort, ungleiche Bestätigung oder
+eine Richtlinienverletzung verhindern die Änderung. Allgemeine Speicherfehler
+bleiben im Dialog sichtbar; du kannst die Eingaben korrigieren.
+
+## Zwei-Faktor-Anmeldung einrichten
+
+1. Starte die Schlüsselerzeugung im Bereich **Zwei-Faktor-Authentifizierung**.
+2. Scanne den QR-Code mit deiner Authenticator-App oder übernimm den angezeigten
+   manuellen Schlüssel. Teile diesen Schlüssel nicht mit anderen Personen.
+3. Gib den aktuellen sechsstelligen Code ein und bestätige die Aktivierung.
+4. Erzeuge beziehungsweise übernimm die anschließend angezeigten
+   Wiederherstellungscodes und bestätige ihre Sicherung.
+
+Erst der erfolgreiche Abschluss bestätigt die Einrichtung. Bei ungültigen Codes
+prüfe den gewählten Eintrag in der App und die Uhrzeit des Geräts. Ein Netzwerkfehler
+ist keine bestätigte Aktivierung; lies den anschließend geladenen Kontostatus.
+Bei vorgeschriebener Einrichtung musst du den Ablauf vor der normalen Nutzung
+abschließen.
+
+Ist eine Deaktivierungsaktion freigegeben, lies die Bestätigung vor dem Ausführen.
+Eine vorgeschriebene Zwei-Faktor-Anmeldung lässt sich über das Profil nicht
+abschalten. Der Server prüft den Vorgang; ein abgelehnter Sicherheitsvorgang ist
+keine erfolgreiche Deaktivierung. Für den Verlust aller Faktoren benötigst du den
+Wiederherstellungsweg des Standorts, keine Umgehung der Kontorichtlinie.
+
+## Wiederherstellungscodes sichern
+
+Die Code-Verwaltung setzt eine aktivierte Zwei-Faktor-Anmeldung voraus. Richte
+sie zuerst ein; ein Direktaufruf der Code-Seite ersetzt die Einrichtung nicht.
+
+Öffne **Wiederherstellungscodes verwalten**. Bereits früher erzeugte Codes werden
+hier nicht erneut aus dem Konto ausgelesen. Eine Neuerzeugung erstellt neue Codes
+und ersetzt den bisherigen Satz. Führe sie erst aus, wenn du die neuen Codes
+anschließend übernehmen kannst.
+
+Kopiere oder lade die neu angezeigten Codes herunter und bewahre sie getrennt vom
+Anmeldegerät auf. Bestätige ihre Sicherung. Im verpflichtenden Ablauf lässt sich
+die Anzeige erst danach abschließen. Behandle Codes wie Zugangsdaten und verwende
+jeden nur einmal. Nach einer Anmeldung mit Wiederherstellungscode fordert der
+Anmeldeablauf die Erneuerung und Sicherung des Codesatzes.
+
+## Passkey hinzufügen oder deaktivieren
+
+Du brauchst einen unterstützten Browser, einen geeigneten Geräteschutz oder
+Sicherheitsschlüssel und einen für Passkeys nutzbaren Ursprung, üblicherweise HTTPS.
+Die Oberfläche meldet fehlende Browserunterstützung.
+
+1. Öffne den Passkey-Bereich und starte das Hinzufügen eines Passkeys.
+2. Wähle **Passkey registrieren** und folge dem Browserdialog für Authenticator,
+   Fingerabdruck, Gesichtserkennung oder Sicherheitsschlüssel.
+3. Prüfe nach erfolgreicher Registrierung den Eintrag in deiner Passkey-Liste.
+
+Ein abgebrochener Browserdialog registriert keinen fertigen Passkey. Deaktiviere
+einen nicht mehr benötigten Eintrag über die angebotene Aktion und Bestätigung.
+Behalte einen anderen nutzbaren Anmeldeweg, bevor du einen Zugang entfernst.
+Ein Ladefehler ist keine leere Passkey-Liste; verwende die Wiederholung.
+
+Bei unbekannten Anmeldungen prüfe zusätzlich [Sitzungen](./profil-sitzungen.mdx).
+Weitere Hilfe steht unter [Anmeldeprobleme](./fehlersuche.mdx#anmeldung).

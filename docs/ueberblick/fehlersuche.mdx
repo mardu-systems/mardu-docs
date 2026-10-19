@@ -1,29 +1,92 @@
 ---
-title: Fehlersuche
-description: Häufige Probleme bei Anmeldung, Berechtigung, Buchung und Geräten lösen.
+title: Fehlerhilfe für das Mitgliederportal
+description: Anmeldung, fehlende Rechte, Buchungskonflikte, Nachweise und Ladefehler anhand des sichtbaren Problems prüfen.
 ---
 
-Diese Seite ist ein Entwurf. Jeder Fehlerfall braucht beobachtbares Symptom,
-mögliche Ursache, überprüfbaren nächsten Schritt und eine Grenze der Selbsthilfe.
+Prüfe zuerst Server, Konto, Zeitpunkt und die konkrete Meldung. Ein Ladefehler,
+eine leere Liste und eine fehlende Berechtigung sind verschiedene Zustände.
+Die folgenden Schritte betreffen die eigene Benutzeransicht. Sie setzen keinen
+eingebauten Support- oder Ticketprozess voraus.
 
 ## Anmeldung
 
-- [ ] TODO: Falsche Zugangsdaten, deaktiviertes Konto, Fehlversuchssperre, ausstehende Freigabe und unbestätigte E-Mail anhand vorhandener Meldungen unterscheiden.
-- [ ] TODO: Fehlende/abgelaufene Einladung oder Passwortlink behandeln; den tatsächlich verfügbaren Versand-/Wiederherstellungsweg verlinken.
-- [ ] TODO: 2FA-Code, Wiederherstellungscode und Passkey-Probleme erklären; erforderliche Richtlinie, Zeitabgleich, Browserunterstützung und angemessene administrative Hilfe prüfen.
+| Beobachtung                                         | Nächster Schritt                                                                                                      |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Zugangsdaten werden abgelehnt                       | Prüfe Kennung und Server. Nutze den angebotenen Passwortweg; bei externen Konten den zuständigen Anbieter.            |
+| Konto deaktiviert oder Freigabe ausstehend          | Wende dich an die Administration. Weitere Passwortversuche ändern den Kontostatus nicht.                              |
+| E-Mail noch nicht bestätigt                         | Verwende den vorgesehenen Bestätigungsweg. Für abgelaufene oder benutzte Links brauchst du einen neuen Vorgang.       |
+| Zu viele Versuche                                   | Beachte die Meldung und warte, statt schnelle Wiederholungen zu senden.                                               |
+| Authenticator-Code ungültig                         | Prüfe den richtigen Kontoeintrag und die Gerätezeit. Verwende nur den ausdrücklich angebotenen Wiederherstellungsweg. |
+| Passkey nicht verfügbar                             | Prüfe Browserunterstützung, Ursprung und Authenticator. Nutze einen vorhandenen alternativen Anmeldeweg.              |
+| Sicherheits- oder Profilvervollständigung erscheint | Schließe den verlangten Ablauf ab; eine Rückkehr zur normalen Navigation ersetzt ihn nicht.                           |
+
+Die vollständigen Schritte stehen unter [Erste Schritte](../benutzer/erste-schritte.mdx)
+und [Anmeldesicherheit](./profil-sicherheit.mdx).
 
 ## Fehlender Zugriff
 
-- [ ] TODO: Falschen Server, abgelaufene Anmeldesitzung, fehlendes Funktionsrecht und fehlende Ressourcen-Zuweisung unterscheiden; keine Zutrittsanfrage als Lösung für jedes fehlende Menü nennen.
-- [ ] TODO: Ladefehler und nicht erreichbare API von leerem Ergebnis und fehlender Berechtigung unterscheiden; erneutes Laden und Ansprechpartner nennen.
+**Zur Verwaltung** fehlt ohne passenden Verwaltungsbereich. Das ist für ein
+normales Mitglied erwartbar. Fehlt eine persönliche Aktion, prüfe Server,
+Berechtigung und die Bedingungen des betreffenden Objekts. Ein alter offener
+Dialog gewährt nach einem Rechteverlust keine weiteren Rechte.
 
-## Buchung, Zugang und Gerät
+Eine gültige Einweisung, eine bestätigte Buchung, ein aktives Medium und eine
+Freigabe erfüllen unterschiedliche Bedingungen. Prüfe unter
+[Zugänge & Ressourcen](../benutzer/zutritt.mdx) den Zeitraum, die Zeitzone und die
+weiteren Voraussetzungen. Bei einer verweigerten physischen Nutzung notiere
+Ressource, Zeitpunkt und Meldung; eine Portal-Anzeige beweist keinen Türzustand.
 
-- [ ] TODO: Zeit-/Kapazitätskonflikt, Fristen und noch offene Freigabe erklären; [Buchungen](../benutzer/buchungen.mdx) verlinken.
-- [ ] TODO: Verweigerte Zugangsentscheidung durch Freigabe, Nachweis, Zeitbedingung oder Ressourcenzustand von fehlender Gerätebestätigung unterscheiden.
-- [ ] TODO: Offline-Gerät und unbekannten physischen Zustand behandeln; [Gerätestatus](../benutzer/geraete-status.mdx) und [administrative Diagnose](../administration/geraete-verwalten.mdx) verlinken.
+## Buchung und Kalender
 
-## Benachrichtigungen und Support
+| Problem                                        | Abhilfe                                                                                                              |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Gewünschter Zeitraum nicht verfügbar           | Prüfe aktuelle Belegung, Kapazität, Dauer, Öffnungszeiten und Ressourcensperren.                                     |
+| Positive Prüfung, Speichern trotzdem abgelehnt | Die Belegung kann sich verändert haben. Prüfe die Verfügbarkeit erneut; deine Eingaben bleiben bei Fehlern erhalten. |
+| Änderung oder Stornierung fehlt                | Prüfe Status, Rechte und ausgewählten Umfang von Termin, Serie oder Ressourcengruppe.                                |
+| Kalender zeigt alte Termine                    | Prüfe Dateiimport gegenüber Abo und das Abrufintervall des Kalenderprogramms.                                        |
+| Abo ist nicht erreichbar                       | Prüfe Serveradresse, Zeitraum und ob der Link ersetzt oder widerrufen wurde. Teile den Link nicht öffentlich.        |
 
-- [ ] TODO: Profilkanäle, Ruhezeiten, E-Mail-Versand und Push-Berechtigung prüfen; Sicherheits-/Pflichtkanäle und Zustellgrenzen erklären.
-- [ ] TODO: Störungsmeldung mit Zeitpunkt/Zeitzone, betroffener Funktion, fiktiver Kennung, Fehlermeldung und Schritten beschreiben; sensible Inhalte in Screenshots entfernen.
+Siehe [Meine Buchungen](../benutzer/buchungen.mdx) und
+[Kalender verwenden](../benutzer/kalender.mdx).
+
+## Nachweise und Zutrittsmedien
+
+Fehlende, zukünftige, ausgesetzte, widerrufene oder abgelaufene Einweisungen werden
+nicht durch eine Browseraktualisierung gültig. Ein unbekannter Prüfstatus ist
+keine Bestätigung. Bei falschen Daten benötigst du die zuständige ausstellende
+oder verwaltende Stelle. Prüfe bei importierten Nachweisen zusätzlich
+[Nachweisquellen](./profil-nachweisquellen.mdx).
+
+Suche ein vermisstes Medium in [Meine Zutrittsmedien](./profil-zutrittsmedien.mdx)
+und prüfe dessen Zeitraum. Melde einen Verlust an den Standort; die Profilansicht
+enthält keine eigene Verlustsperre oder Ersatzbestellung.
+
+## Benachrichtigungen
+
+Prüfe Reiter, Suche und Filter im [Posteingang](../benutzer/benachrichtigungen.mdx).
+Empfang und Sichtbarkeit hängen bei Betriebsmeldungen von aktuellen Rechten und
+Zuständigkeiten ab. Einstellungen erschaffen keinen Empfangsanspruch.
+Bei fehlender E-Mail, SMS oder Push-Nachricht prüfe die angebotene Kanalwahl und
+die zuständige Zustellinfrastruktur; ein gespeicherter Schalter bestätigt keinen
+Versand. Kritische Meldungen können persönliche Ruhezeiten umgehen.
+
+## Ladefehler und ungespeicherte Änderungen
+
+Verwende die Wiederholung im betroffenen Bereich. Eine frühere Anzeige ist nicht
+automatisch der aktuelle Stand. Nach einem Fehler beim Speichern bleiben Entwürfe
+zur Korrektur erhalten; lies die Rückmeldung vor einem weiteren Versuch.
+Bei einer konkurrierenden Änderung kann das Laden des gespeicherten Stands deinen
+Entwurf verwerfen: bestätige dies bewusst.
+
+Speichere vor einem Wechsel. Nicht jeder Browser erlaubt die Abbruchprüfung von
+Zurück/Vorwärts. Neuladen, Tab-Schließen, Sitzungsablauf oder Rechteverlust können
+die weitere Bearbeitung beenden; ein verworfener flüchtiger Entwurf ist nicht aus
+einem serverseitigen Entwurfsarchiv wiederherstellbar.
+
+## Angaben für eine Rückfrage
+
+Nenne den betroffenen Bereich, Ressource oder Vorgang, Zeitpunkt mit Zeitzone,
+die Meldung und bereits ausgeführte Schritte. Gib keine Passwörter, Faktoren,
+Wiederherstellungscodes, Tokens oder Kalenderlinks weiter. Screenshots dürfen nur
+die notwendigen Angaben zeigen. Für Server- oder Hardwarediagnose ist die
+[Administration](../administration/index.mdx) zuständig.

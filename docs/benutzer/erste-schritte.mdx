@@ -1,25 +1,70 @@
 ---
 title: Erste Schritte
-description: Anmelden, Projekt wählen und sich im Webinterface orientieren.
+description: Am richtigen Server anmelden, die Benutzeransicht öffnen und die erste eigene Aufgabe erledigen.
 ---
 
-Diese Seite ist ein Entwurf. Ein Lernweg zur ersten Anmeldung folgt nach den
-für Administratoren erforderlichen Grundlagen.
+Nach diesem Einstieg kennst du die Navigation und kannst dein Profil prüfen oder
+eine eigene Buchung vorbereiten. Du benötigst die Adresse deines Standorts und
+ein dort nutzbares Konto.
 
-## Voraussetzungen und Anmeldung
+## Vor dem Start
 
-- [ ] TODO: Einladung, Anlage mit Passwort, Selbstregistrierung und externen Anbieter als unterschiedliche Kontowege erklären; [Konten und Anmeldebedingungen](../ueberblick/benutzerkonten.mdx) verlinken.
-- [ ] TODO: Anmeldung mit dem tatsächlich angebotenen Kennungsfeld und Verfahren zeigen; 2FA-/Passkey-Abfrage, erzwungene Einrichtung und offene Freigabe behandeln.
-- [ ] TODO: „Passwort vergessen“, E-Mail-Bestätigung und abgelaufene Links mit den vorhandenen Wiederherstellungswegen erklären.
-- [ ] TODO: Browser-/Gerätevoraussetzungen nur anhand geprüfter Unterstützung nennen; HTTPS und Passkey-Voraussetzungen dort erwähnen, wo sie gebraucht werden.
+Eine Einladung, ein administrativ angelegtes Konto, eine freigabepflichtige
+Registrierung und die Anmeldung über einen externen Anbieter sind unterschiedliche
+Wege. Verwende den für deinen Standort vorgesehenen Weg. Eine Registrierung ist
+nur möglich, wenn sie angeboten wird. Eine offene Kontofreigabe ersetzt die
+Anmeldung noch nicht. [Konten und Anmeldebedingungen](../ueberblick/benutzerkonten.mdx)
+erklärt die Unterschiede.
 
-## Server und Projekt wählen
+Im Mehrprojektbetrieb wählst du den Server beziehungsweise das Projekt. Bei einer
+fest eingerichteten Installation entfällt die freie Serverwahl. Konten und Daten
+verschiedener Server sind getrennt; ein gleichlautender Kontoname macht sie nicht
+zu demselben Konto.
 
-- [ ] TODO: Server-/Projektauswahl im Mehrprojektbetrieb und festen Server im Standalone-Betrieb erklären; tatsächliche Reihenfolge vor/nach Anmeldung prüfen.
-- [ ] TODO: Projektwechsel, erneute Anmeldung und getrennte Sitzungen zeigen; keinen organisationsbezogenen Einladungsprozess zur Serverauswahl erfinden.
+## Anmelden
 
-## Oberfläche und erste Aufgabe
+1. Öffne die Webadresse deines Standorts und prüfe den ausgewählten Server.
+2. Verwende eines der angebotenen Anmeldeverfahren. Bei Passwortanmeldung gibst du
+   deine Kennung und dein Passwort ein; externe Anmeldung, Passkeys und
+   Passwortlos-Verfahren hängen von der Einrichtung ab.
+3. Erledige eine verlangte zweite Prüfung. Verwende bei einer Code-Abfrage den
+   aktuellen Code deiner Authenticator-App oder die ausdrücklich angebotene
+   Wiederherstellungscode-Option.
+4. Falls eine Sicherheits- oder Profilvervollständigung vorgeschrieben ist,
+   schließe sie ab. Bei vorgeschriebener Zwei-Faktor-Einrichtung sichere auch die
+   angezeigten Wiederherstellungscodes.
 
-- [ ] TODO: Seitenleiste, Übersicht, Fachbereiche, Kontomenü, Glocke und Hilfe mit aktueller Oberfläche erklären; nur vorhandene Suche anbieten.
-- [ ] TODO: Das [eigene Profil](../ueberblick/profil.mdx) prüfen und eine erste eigene Buchung oder einen Zugangs-Antrag mit fiktiven Daten durchführen.
-- [ ] TODO: Ergebnis und häufige Fehler im Lernweg behandeln; Administrator-Aufgaben zur [Administration](../administration/index.mdx) verlinken.
+Danach öffnet sich die Benutzeransicht. Bei einem späteren Projekteinstieg landest
+du ebenfalls dort. Eine vorhandene Anmeldung kann beim Projektwechsel erneut
+verwendet werden; andernfalls musst du dich am Zielserver anmelden.
+
+Nutze bei vergessenem Passwort den angebotenen Wiederherstellungsweg. Ein
+abgelaufener oder bereits benutzter Bestätigungslink braucht einen neuen Vorgang;
+bei extern verwalteten Konten kann der Anbieter zuständig sein. Wiederholte
+Anmeldeversuche lösen keine ausstehende Kontofreigabe.
+
+## Profil prüfen und nächste Aufgabe wählen
+
+1. Öffne **Mein Profil** und dann **Profil**. Prüfe Name und Kontaktdaten; auf dem
+   Handy öffnest du dafür **Profildaten** in der Bereichsliste.
+2. Ändere bei Bedarf eine erlaubte Angabe und speichere den betroffenen Bereich.
+   Verlasse die Seite mit ungespeicherten Änderungen nur nach bewusstem Verwerfen.
+3. Wechsle zu **Meine Buchungen** und öffne **Neue Buchung**, wenn die Aktion
+   angeboten wird. Wähle eine Ressource und prüfe einen Zeitraum. Du kannst die
+   Vorbereitung abbrechen, ohne eine Buchung zu erzeugen.
+4. Wenn du einen Zugang benötigst, lies unter [Zugänge & Ressourcen](./zutritt.mdx)
+   zuerst die Voraussetzungen. Ein Antrag ist nur bei anforderbaren Ressourcen verfügbar.
+
+Die ausführlichen Schritte stehen unter [Profil](../ueberblick/profil.mdx),
+[Buchungen](./buchungen.mdx) und [Berechtigungsanfragen](./berechtigungsanfragen.mdx).
+
+## Orientierung und Abmelden
+
+Die vier Fachbereiche findest du am Desktop oben und am Handy unten. Die Glocke
+öffnet deinen persönlichen Posteingang. Über **Mein Profil → Abmelden** verlässt
+du die Anmeldung. Beim Wechsel oder Abmelden können ungespeicherte Entwürfe eine
+Bestätigung erfordern. Angezeigte Einmalcodes musst du vorher sichern.
+
+Fehlt eine Aktion, prüfe zuerst Server und Konto. Ein Ladefehler ist kein Beleg
+für fehlende Rechte oder eine leere Liste. [Fehlerhilfe](../ueberblick/fehlersuche.mdx)
+nennt die passenden nächsten Schritte.

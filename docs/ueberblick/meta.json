@@ -1,4 +1,17 @@
 {
   "title": "Überblick",
-  "pages": ["grundlagen-begriffe", "benutzerkonten", "neuerungen", "profil", "fehlersuche"]
+  "pages": [
+    "grundlagen-begriffe",
+    "benutzerkonten",
+    "neuerungen",
+    "profil",
+    "profil-sicherheit",
+    "profil-zutrittsmedien",
+    "profil-sitzungen",
+    "profil-benachrichtigungen",
+    "profil-erscheinungsbild",
+    "profil-nachweisquellen",
+    "profil-mcp",
+    "fehlersuche"
+  ]
 }

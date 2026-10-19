@@ -1,54 +1,113 @@
 ---
 title: Eigenes Profil
-description: Kontodaten, Anmeldesicherheit, Sitzungen und Benachrichtigungen verwalten.
+description: Eigene Kontodaten und das Profilbild ändern und die passenden Sicherheits- und Einstellungshilfen finden.
 ---
 
-Diese Seite ist teilweise ausgearbeitet. Die Anleitung beschreibt das eigene Konto;
-administrative Änderungen an anderen Konten stehen unter
-[Benutzer und Rollen](../administration/benutzer-rollen.mdx).
+Über **Mein Profil → Profil** öffnest du dein eigenes Konto. Auf dem Handy siehst
+du zunächst eine Bereichsliste; **Profildaten** öffnet die Angaben. Am Desktop
+bleibt die Profilnavigation daneben sichtbar. Dieselben Formulare sind auch aus
+der Verwaltung erreichbar. Rücksprünge bleiben im jeweils geöffneten Rahmen.
+
+Zum Lesen brauchst du Profil-Leserechte, zum Ändern die entsprechenden
+Profil-Änderungsrechte. Verwaltungsrechte erlauben in dieser Ansicht keine
+Bearbeitung eines fremden Kontos.
+
+![Mobile Profilübersicht mit Kontodaten, Sicherheit, Zutrittsmedien und weiteren Verbindungen](bilder/profil-navigation-mobil.png)
+
+Beispiel mit fiktiven Daten. Wähle einen Bereich aus der Liste; der Zurück-Link
+der Unterseite führt wieder hierher. Technische Verbindungen stehen weiter unten.
 
 ## Kontodaten
 
-- [ ] TODO: Tatsächlich bearbeitbare Angaben, Profilbild, Sprache und Zeitzone ändern; optionale Werte leeren, speichern und Fehler erklären. Lokale und vom Anbieter verwaltete Felder unterscheiden.
-- [ ] TODO: E-Mail-Wechsel mit Passwort/Bestätigung und vorhandenem Kontoanbieter prüfen; gewünschte Adresse von bereits bestätigter Adresse unterscheiden.
-- [ ] TODO: Angeforderte Pflichtangaben vervollständigen; Ergebnis und weiteren Anmelde-/Onboarding-Ablauf anhand vorhandener Bedingungen erklären.
+1. Öffne **Profil** beziehungsweise **Profildaten**.
+2. Prüfe die Kontaktdaten und persönlichen Angaben.
+3. Ändere die erlaubten Werte und speichere den betroffenen Bereich.
+4. Warte auf die Erfolgsmeldung. Das Speichern einer Karte speichert nicht
+   automatisch ungespeicherte Änderungen anderer Karten.
+
+| Angabe               | Wirkung und Grenzen                                                                    |
+| -------------------- | -------------------------------------------------------------------------------------- |
+| Vorname und Nachname | Kontonamen; erforderliche Namen dürfen nicht leer gespeichert werden.                  |
+| Telefonnummer        | Optionale Kontaktangabe; eine gespeicherte Nummer ist kein Nachweis ihrer Bestätigung. |
+| Anzeigename          | Persönliche Darstellung des Namens.                                                    |
+| Geburtsdatum         | Persönliche Datumsangabe; verwende die angebotene Datumseingabe.                       |
+| Sprache              | Im Konto gespeicherte Sprachvorgabe.                                                   |
+| Kontozeitzone        | Zeitzone für serverseitige Abläufe und Benachrichtigungen.                             |
+
+Optionale Werte können in den dafür angebotenen Eingaben geleert und gespeichert
+werden. Ein ungültiger Wert wird mit Feldfehler abgelehnt. Vom Anmeldedienst
+verwaltete Angaben sind gekennzeichnet oder schreibgeschützt; ändere sie beim
+zuständigen Anbieter. Ein zwischenzeitlicher Wechsel der Verwaltung kann auch
+beim Speichern zu einer Ablehnung führen.
+
+Die E-Mail-Adresse änderst du über **Authentifizierung**, nicht durch Überschreiben
+einer Kontaktanzeige.
+
+## Profilbild
+
+Wähle ein Bild im angebotenen Uploadfeld oder ziehe es hinein. Beachte die dort
+angezeigten Dateiformate und Größenlimits: JPEG, PNG oder WebP bis 2 MB; SVG wird
+nicht als Profilbild angenommen. Verschiebe den Ausschnitt durch Ziehen
+oder mit den vier Richtungsschaltflächen und passe ihn am beschrifteten Zoom-Regler
+an. Auf dem Handy steht eine große Vorschau im Vordergrund. Speichere das Ergebnis
+mit der angebotenen Aktion; eine Vorschau allein ändert das Konto noch nicht.
+
+**Bild entfernen** löscht das aktuelle Profilbild unmittelbar nach erfolgreicher
+Ausführung; dafür ist kein weiteres Speichern der Kontodaten nötig.
+**Zurücksetzen** verwirft dagegen die aktuelle Bildauswahl und ihren Ausschnitt.
+Schlägt Upload oder Speichern fehl, bleibt der Fehler im Bereich sichtbar.
+
+## Profil vervollständigen
+
+Wenn erforderliche Angaben fehlen, führt dich der angebotene Vervollständigungsweg
+zu den betreffenden Feldern. Prüfe die markierten Angaben, speichere sie und setze
+danach den vorgesehenen Ablauf fort. Ein Ladefehler ist keine Aufforderung,
+unbekannte Werte durch leere Standardangaben zu überschreiben.
 
 ## Anmeldesicherheit
 
-- [ ] TODO: Passwort mit der wirksamen Richtlinie ändern; altes Passwort, Bestätigung, externe Konten und Fehler behandeln.
-- [ ] TODO: Zwei-Faktor-Authentifizierung (2FA) einrichten, prüfen und deaktivieren; vorgeschriebene 2FA und administrative Wiederherstellung unterscheiden.
-- [ ] TODO: Wiederherstellungscodes erzeugen, einmalige Anzeige, Verwendung und Neuerzeugung erklären; alte Codes und tatsächliche Vorgabe beim Anmelden prüfen.
-- [ ] TODO: Passkey registrieren, benennen und entfernen/deaktivieren; HTTPS, unterstütztes Gerät und Serverrichtlinie prüfen.
+[E-Mail, Passwort, Zwei-Faktor-Anmeldung, Wiederherstellungscodes und Passkeys](./profil-sicherheit.mdx)
+haben eigene Abläufe. Sichere Einmalcodes vor dem Verlassen der Anzeige.
 
 ## Sitzungen
 
-- [ ] TODO: Eigene Anmeldesitzungen lesen und einzelne widerrufen; aktuelle Sitzung, Browser/IP, letzte Verwendung und Aussagegrenzen erklären.
-- [ ] TODO: Alle eigenen Sitzungen beziehungsweise alle außer der aktuellen widerrufen; Wirkung auf Token-Erneuerung und bereits gültige Zugriffe belegen.
-- [ ] TODO: Unbekannte Anmeldung prüfen und mit passenden Angaben melden; Anmeldehistorie von Zutrittssitzungen unterscheiden.
+[Eigene Sitzungen](./profil-sitzungen.mdx) zeigt Anmeldungen und deren Widerruf.
+Anmeldesitzungen sind keine Zutrittssitzungen an Türen oder Maschinen.
 
 ## Benachrichtigungen
 
-Öffne die Glocke im Dashboard. **„Eingang“** zeigt nicht archivierte Mitteilungen, **„Ungelesen“** nur ungelesene und **„Archiv“** die archivierten Einträge. Mit Suche, Priorität und Kategorie grenzt du die Liste ein.
+Die Glocke öffnet den [Posteingang](../benutzer/benachrichtigungen.mdx).
+[Benachrichtigungseinstellungen](./profil-benachrichtigungen.mdx) steuern die
+angebotenen Versandoptionen. Lesen und Einstellungen sind unterschiedliche Aufgaben.
 
-Klicke auf einen Eintrag, um den vollständigen Text und weitere Details zu sehen. Die Symbole rechts markieren ihn als gelesen oder ungelesen und archivieren ihn. Im Archiv kannst du ihn in den Eingang zurückholen. Oben markierst du alle Mitteilungen als gelesen oder archivierst die gelesenen. Nach dem Archivieren lässt sich die Aktion über **„Rückgängig“** zurücknehmen.
+## Zutrittsmedien
 
-![Benachrichtigungen mit Postfachreitern, Suche und Filtern.](./bilder/benachrichtigungen.png)
-
-- [ ] TODO: Ereignis-/Kanaleinstellungen für App, E-Mail und Web-Push ändern; zulässige und verpflichtende Kanäle sowie Ausnahmen für Sicherheitsereignisse erklären.
-- [ ] TODO: Ruhezeiten mit Zeitzone, Stummschaltung und Zusammenfassungen anhand der unterstützten Ereignisse erklären; erwartetes Ergebnis und Ausnahmen nennen.
-- [ ] TODO: Push-Gerät anmelden, Browserberechtigung prüfen und entfernen; abgeschalteten Versand und fehlerhafte Zustellung behandeln.
+[Meine Zutrittsmedien](./profil-zutrittsmedien.mdx) zeigt deine Karten und Transponder
+mit Status und Gültigkeit. Dieser Bereich vergibt keine Ressourcenfreigabe.
 
 ## Externe Konten
 
-- [ ] TODO: Persönlichen Badge-Anbieter verknüpfen, synchronisieren und trennen; einmal angezeigte Tokens, Identitätszuordnung und administrative Anbieter-Einrichtung unterscheiden.
-- [ ] TODO: Eigene MCP-Agentenverbindung mit erlaubten Fähigkeiten und Laufzeit erstellen, Token einmal übernehmen, rotieren und widerrufen; Serverrichtlinie und fehlende Rechte erklären.
+[Nachweisquellen](./profil-nachweisquellen.mdx) verwaltet persönliche Verbindungen
+und Importe. [MCP-Verbindungen](./profil-mcp.mdx) verbindet geeignete Agenten mit den
+angebotenen Fähigkeiten, sofern der Standort dies aktiviert hat.
 
 ## Erscheinungsbild
 
-- [ ] TODO: Tatsächlich angebotene Theme-/Anzeigeeinstellungen ändern; Speicherung, Systemvorgabe und persönliche Dashboard-Anordnung unterscheiden.
-- [ ] TODO: Sprache und Zeitzone sowie daraus abgeleitete Formate erklären; eigenständige Datums-/Zahlenformatwahl nur bei vorhandener Einstellung beschreiben.
+[Darstellung und Formate](./profil-erscheinungsbild.mdx) erklärt Theme,
+Anzeigezeitzone, Datums-/Zahlenformate und die vorhandenen Bedienhilfen.
 
 ## Bedienhilfen
 
-- [ ] TODO: Vorhandene Bedienhilfe-Einstellungen prüfen; Browserzoom, Kontrast und reduzierte Bewegung nicht als Produktregler versprechen, wenn nur Browser/System sie steuert.
-- [ ] TODO: Tastaturbedienung für Navigation, Dialoge und Formularfehler mit vorhandener UI prüfen und beschreiben.
+Verwende Tab und Umschalt + Tab für den Fokuswechsel; aktivierte Steuerelemente
+lassen sich über ihre üblichen Tastaturaktionen bedienen. Fehler erscheinen beim
+betroffenen Bereich.
+
+## Ungespeicherte Änderungen
+
+Bei internen Wechseln, Abmeldung und Projektwechsel kannst du weiterarbeiten oder
+Änderungen verwerfen. Neuladen und Tab-Schließen verwenden die Browserwarnung.
+Der Schutz von Zurück/Vorwärts hängt davon ab, ob der Browser den Wechsel abbrechen
+kann. Speichere Änderungen deshalb vor einem wichtigen Wechsel bewusst.
+Passwörter und Einmalzugänge werden nicht als wiederherstellbarer Formularentwurf
+im Browserspeicher abgelegt. Ein Rechteverlust oder Sitzungsablauf kann den Zugriff
+beenden, bevor du einen Entwurf fertigstellen kannst.

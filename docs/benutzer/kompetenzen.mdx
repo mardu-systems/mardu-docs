@@ -1,23 +1,78 @@
 ---
-title: Kompetenzen und Nachweise
-description: Eigene Kompetenzen einsehen, Lernpfade verfolgen und externe Badges verknüpfen.
+title: Meine Qualifikationen
+description: Eigene Einweisungen, lokale Vergaben und importierte Nachweise mit Status und Gültigkeit lesen.
 ---
 
-Diese Seite ist ein Entwurf. Eigener Nachweis, Badge-Definition und
-Verwaltungsaufgabe werden getrennt beschrieben.
+Unter **Meine Qualifikationen**, auf dem Handy **Nachweise**, findest du drei
+getrennte Datenarten. Du brauchst Leserechte für dein eigenes Profil. Auch mit
+Verwaltungsrechten werden hier ausschließlich deine Nachweise angezeigt.
 
-## Eigene Nachweise lesen
+## Einweisungen & Kompetenzen
 
-- [ ] TODO: Tatsächlich verfügbare eigene Kompetenz-/Badge-Ansicht und Rechte erklären; Status, Gültigkeit, Herkunft, Aussteller und Inhaltsversion lesen.
-- [ ] TODO: Lokale Vergabe, signiertes Credential und anerkannten Nachweis unterscheiden; Zusammenhang mit einer konkreten Zugangsanforderung erklären.
-- [ ] TODO: Abgelaufenen oder widerrufenen Nachweis und fehlende Anerkennung mit zuständiger Stelle behandeln.
+Prüfe bei einer Einweisung den Namen, den angezeigten Zustand und die aktuelle
+Wirksamkeit. Beginn, Ende und nächste erforderliche Prüfung beantworten
+unterschiedliche Fragen.
 
-## Lernwege und Bewertung
+| Anzeige                                           | Bedeutung                                                                                                |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Ausstehend                                        | Die Vergabe ist noch nicht als wirksam bestätigt.                                                        |
+| Gültig                                            | Die aktuelle Prüfung bewertet die Vergabe als wirksam.                                                   |
+| Erneute Prüfung erforderlich                      | Eine weitere Prüfung ist vorgesehen; beachte die aktuelle Wirksamkeit gesondert.                         |
+| Ausgesetzt, widerrufen, abgelaufen oder abgelehnt | Die Vergabe ist nicht wie eine aktuell wirksame Einweisung verwendbar.                                   |
+| Derzeit nicht gültig                              | Der Datensatz ist aktuell nicht wirksam, auch wenn ein gespeicherter Zustand noch nicht angepasst wurde. |
+| Unbekannter Zustand                               | Eine verlässliche Zustandszuordnung ist nicht verfügbar; daraus folgt keine Anerkennung.                 |
 
-- [ ] TODO: Lernweg öffnen und angezeigten Fortschritt/Abschluss erklären; Voraussetzungen und einen notwendigen nächsten Schritt anhand vorhandener Daten zeigen.
-- [ ] TODO: Eigene Bewertungsanfrage und tatsächlich verfügbare Angaben/Aktionen prüfen; Status und Ergebnis erklären. Keine Dokumenteinreichung oder Rückfrage ohne belegte Unterstützung versprechen.
-- [ ] TODO: Bewertung und administrative Vergabe unter [Bewertungen](../koordination/bewertungen.mdx) beziehungsweise [Badges verwalten](../administration/badges-verwalten.mdx) verlinken.
+Ein zukünftiger Gültigkeitsbeginn ist keine heutige Freigabe. Ein fehlendes
+Ablaufdatum wird als **Kein Ablaufdatum angegeben** gekennzeichnet, nicht durch
+ein erfundenes Datum ersetzt. Eine nächste erforderliche Prüfung ist nicht
+notwendigerweise dasselbe wie das Gültigkeitsende.
 
-## Externe Konten und Nachweise
+## Lokale Nachweise
 
-- [ ] TODO: Persönliche Anbieter-Verknüpfung, Synchronisierung und Trennung im [Profil](../ueberblick/profil.mdx) ausarbeiten; importierte Badges und Anerkennung als getrennte Schritte erklären.
+Hier stehen deine lokalen Vergaben mit Name, Symbol, Ausstellungsdatum,
+Gültigkeit und gegebenenfalls Widerrufszeitpunkt. Frühere, abgelaufene und
+widerrufene Vergaben bleiben sichtbar. Blättere bei mehr als 20 Einträgen weiter.
+Mehrere Vergaben desselben Nachweises sind nicht zwingend Dubletten; sie können
+unterschiedliche Ausstellungen dokumentieren.
+
+## Importierte & signierte Nachweise
+
+1. Suche den Nachweis und lies Name, Aussteller, Quelle und Prüfstatus.
+2. Prüfe das Ablaufdatum getrennt vom Prüfstatus.
+3. Öffne **Nachweis ansehen** für die vorhandenen Metadaten.
+4. Verwende den angebotenen Original-Download, wenn du den Nachweis außerhalb
+   von Mardu benötigst. Ein fehlgeschlagener Download kann erneut versucht werden.
+
+Der Prüfstatus kann unter anderem eine gültige oder ungültige Signatur,
+Widerruf, Aussetzung, Ablauf, fehlendes Ausstellervertrauen oder eine unbekannte
+Prüfung kennzeichnen. **Unbekannt** bedeutet nicht **gültig**. Eine geprüfte
+Signatur ersetzt nicht die Prüfung des Zeitraums und keine standortbezogene
+Anerkennungsentscheidung. Die Seitennavigation zeigt weitere eigene Nachweise.
+
+## Grenzen und Korrekturen
+
+Diese Seite vergibt, verlängert oder importiert keine Nachweise. Eine Einweisung,
+lokale Vergabe und ein signierter Nachweis werden nicht automatisch ineinander
+umgewandelt. Auch ein gültiger Nachweis gewährt nicht automatisch einen
+[Ressourcenzugang](./zutritt.mdx).
+
+Für fehlende oder falsche Einweisungen wende dich an die zuständige Person deines
+Standorts. Verknüpfungen und persönliche Importe werden unter
+[Nachweisquellen im Profil](../ueberblick/profil-nachweisquellen.mdx) verwaltet.
+Lernwege, Bewertungen und administrative Vergaben gehören zu den jeweils
+angebotenen Koordinations- und Verwaltungsbereichen; diese persönliche Ansicht
+ist kein Schulungsbuchungs- oder Uploadformular.
+
+Jeder der drei Bereiche hat eigene Lade-, Fehler- und Leerzustände. Ein Fehler
+in einer Quelle macht vorhandene Daten einer anderen Quelle nicht ungültig.
+Wiederhole die fehlgeschlagene Abfrage; verwechsle sie nicht mit „keine Nachweise“.
+
+## Ansicht am Desktop und Handy
+
+Die Beispiele zeigen die vorhandene Oberfläche mit fiktiven Mitgliedsdaten.
+Am Desktop siehst du die drei Quellen untereinander; auf dem Handy scrollst du
+durch dieselben Bereiche. **Nachweise** in der unteren Navigation bleibt erreichbar.
+
+![Die drei Qualifikationsbereiche mit einer Einweisung, einem lokalen Nachweis und einem importierten Nachweis](bilder/qualifikationen-desktop.png)
+
+![Mobile Einweisung mit Status, Gültigkeitszeitraum und nächster Prüfung](bilder/qualifikationen-mobil.png)
