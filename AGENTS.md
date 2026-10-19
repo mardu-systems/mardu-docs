@@ -18,6 +18,8 @@ relevant sind.
   Mittel, bevor du neue Abstraktionen, Werkzeuge oder Abhängigkeiten einführst.
 - Erhalte bestehende URLs und die Navigation nach Zielgruppen. Lege keine leeren
   Ordner für Dokumentationstypen an und strukturiere nicht ohne Auftrag alles um.
+- Beginne relative MDX-Seitenverweise mit `./` oder `../`, damit die vorhandene
+  Fumadocs-Linkauflösung sie in Seitenadressen umwandelt; prüfe auch Abschnittsanker.
 - Jede veröffentlichte MDX-Seite erhält `title` und `description` im Frontmatter.
   Kein zusätzliches H1 im Inhalt; der Consumer zeigt den Seitentitel bereits an.
   Trage neue Seiten in die passende `meta.json` ein.
@@ -59,6 +61,9 @@ Wähle für jede Seite einen Hauptzweck:
   verständlich und kennzeichnet Annahmen oder Abwägungen.
 - Halte gemeinsam benötigte Begriffe an einer Stelle und verlinke dorthin,
   statt Definitionen über mehrere Seiten zu duplizieren.
+- Vermeide pauschale „Weiter“-Abschnitte und wiederholte Linklisten. Setze Verweise
+  bei der passenden Aufgabe. Wiederhole ein Ziel nur, wenn ein anderer Ablauf oder
+  eine notwendige Voraussetzung dies begründet; Warnungen gehören vor die jeweilige Aktion.
 
 ## Aufgaben, Ergebnisse und Sprache
 

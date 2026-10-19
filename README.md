@@ -6,8 +6,10 @@ eingehängt. Inhalte und Bilder werden hier gepflegt.
 
 Die [Dokumentationsregeln](AGENTS.md) gelten auch für begleitende Dokumentation
 im Software-Repository. [TODO.md](TODO.md) enthält Bestandsbewertung,
-Prioritäten und den Arbeitsplan; die konkreten Schreibaufträge stehen auf den
-betroffenen Seiten. Die Administration wird zuerst vervollständigt.
+Prioritäten und den Arbeitsplan. [BENUTZER-REVIEW.md](BENUTZER-REVIEW.md) hält den
+Vergleich mit acht Dokumentationen und die Übernahme für Mardu fest. Der Auftrag vom 19. Oktober 2026 ergänzt die
+Anleitungen zur Benutzeransicht des Webportals; die frühere Bestandsbewertung
+und offene Aufgaben anderer Zielgruppen bleiben dort nachvollziehbar.
 
 ## Mount-Punkte und Quelle
 
@@ -37,9 +39,20 @@ docs/
   entwickeln/
 ```
 
-Die Inhalte sind derzeit nach Zielgruppen und Aufgaben geordnet. Es gibt im
-vorhandenen Bestand keine `v1/`- oder `v2/`-Versionsordner. Eine spätere
-Versionierung wird erst nach Prüfung der Consumer eingeführt.
+Die aktuellen Inhalte sind nach Zielgruppen und Aufgaben geordnet. Die früheren
+Website-Adressen unter `v1/` und `v2/` bleiben als historische Einstiege erhalten
+und verweisen auf die Dokumentationsübersicht. Sie bezeichnen keinen freigegebenen
+Softwarestand und stehen nicht in der aktuellen Navigation. Eine spätere
+Release-Versionierung wird erst nach Prüfung der Consumer eingeführt.
+
+Der Bestand umfasst 48 aktuelle MDX-Seiten und die zwei historischen Einstiege.
+Die Benutzeranleitungen decken Einstieg,
+Dashboard, Ressourcen und Freigaben, Berechtigungsanfragen, Buchungen,
+Kalender, Qualifikationen, Posteingang und die persönlichen Profilbereiche ab.
+Bestehende Profil-URLs unter `ueberblick/` bleiben erhalten. Im Software-Consumer
+gehören sie zum Fokus **Benutzer** und bleiben aus **Überblick** erreichbar.
+Die vorhandene Anleitung zu Systemmetriken gehört zum Verwaltungsfokus;
+das persönliche Dashboard hat eine eigene Anleitung.
 
 Jeder Bereich hat eine `index.mdx` und eine `meta.json`. Bilder liegen im
 zugehörigen `bilder/`-Ordner. Der Software-Consumer ergänzt die API-Referenz

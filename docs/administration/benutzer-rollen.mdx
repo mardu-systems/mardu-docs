@@ -10,8 +10,6 @@ Hier verwaltest du Benutzerkonten, ihre Rollenzuweisungen und Gruppenmitgliedsch
 
 ## Was ist ein Benutzer?
 
-Ein Benutzerkonto steht für eine Person in Mardu. Welche Funktionen sie nutzen darf, hängt von ihren Berechtigungen und den Bedingungen des jeweiligen Zugangs ab.
-
 [Benutzerkonten, Rollen und Zugänge](../ueberblick/benutzerkonten.mdx) erklärt, wie Konten entstehen und wie Rollen, Gruppen, Badges und Tags zusammenhängen.
 
 ## Voraussetzungen
@@ -103,7 +101,7 @@ Der Benutzername wird nur angezeigt. E-Mail-Änderungen nimmt die Person nach Be
 3. Entferne optionale Angaben durch Leeren des Feldes. Bei Auswahlfeldern und dem Geburtsdatum wählst du **„Leeren“**.
 4. Wähle **„Speichern“**.
 
-**Ergebnis:** Die Änderungen sind am Konto gespeichert. Beim Schließen mit ungespeicherten Änderungen kannst du weiterbearbeiten oder sie verwerfen.
+**Ergebnis:** Die Änderungen sind am Konto gespeichert.
 
 Änderungen an Eigenschaften, Profilbild, **„Zwei-Faktor-Authentifizierung erzwingen“**, direkten Rollen, Gruppen und deiner Metrikansicht bleiben beim Tabwechsel erhalten. **„Speichern“** unten im Benutzerfenster übernimmt die Änderungen. **„Abbrechen“** fragt bei ungespeicherten Änderungen nach, ob du sie verwerfen möchtest. Schlägt ein Teil des Speicherns fehl, bleibt das Fenster offen; bereits gespeicherte Änderungen bleiben bestehen.
 
@@ -122,7 +120,7 @@ Bei schmalen Benutzerfenstern stehen Bildauswahl und Vorschau untereinander.
 
 Öffne in den Benutzerdetails **„Berechtigungen“**. Für **„Effektive Berechtigungen“** brauchst du die Leserechte für Benutzerrollen, Benutzergruppen und Gruppenrollen. Die Übersicht zeigt die Rechte aus direkten Rollen und Benutzergruppen. Wenn du die Auswahl änderst, aktualisieren sich Rollen, Gruppen und Rechte als Vorschau. Diese Änderungen gelten erst nach **„Speichern“**. Klappe die Liste auf, um je Recht die zuweisende Rolle und gegebenenfalls die Gruppe zu sehen. Ein Recht kann mehrere Quellen haben; der Gruppenlink öffnet deren Rollenzuweisungen.
 
-Unter **„Direkte Rollen“** verwaltest du Rollen für das einzelne Konto. Gruppenrollen gelten für die Mitglieder der Gruppe. Die Übersicht zeigt die aktuelle Auswahl; Zutrittsfreigaben und Anmeldebedingungen werden separat geprüft.
+Zutrittsfreigaben und Anmeldebedingungen werden separat geprüft.
 
 **Direkte Rollen ändern:**
 
@@ -164,18 +162,10 @@ Du brauchst Leserechte für die Gruppe und die angezeigten Zuordnungen. Zum Änd
 2. Prüfe die Kennzahlen und den **„Zugangsverlauf“**. Die Karten verwenden dieselben Diagramme wie das Dashboard.
 3. Vergleiche die Werte mit **„Letzte Zugänge“**. Bei Bedarf lade die Daten über **„Zugangsmetriken aktualisieren“** neu.
 
-Die Anzeige berücksichtigt nur Zugänge, die du sehen darfst. Sie umfasst sieben Kalendertage nach koordinierter Weltzeit (UTC), einschließlich des heutigen Tages bis zum Laden der Daten. Die Tagesgrenzen können deshalb von deiner lokalen Zeitzone abweichen; der heutige Tag ist noch unvollständig.
+Zeitraum, Kennzahlen und Sichtbarkeitsgrenzen sind unter
+[Zugangsmetriken](./zutritt-verwalten.mdx#zugangsmetriken) beschrieben.
 
-| Anzeige                  | Bedeutung                                                                                                   |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------- |
-| Zugangsentscheidungen    | Alle gespeicherten erlaubten und abgelehnten Entscheidungen im Zeitraum.                                    |
-| Anteil erlaubter Zugänge | Erlaubte Entscheidungen geteilt durch alle Entscheidungen. Ohne Entscheidungen steht hier **„–“**.          |
-| Abgelehnt                | Anzahl abgelehnter Entscheidungen im Zeitraum.                                                              |
-| Aktuell aktive Sitzungen | Offene Zutrittssitzungen, unabhängig vom Startdatum. Dies sind keine Anmeldesitzungen am Dashboard.         |
-| Zugangsverlauf           | Entscheidungen pro UTC-Kalendertag.                                                                         |
-| Letzte Zugänge           | Bis zu fünf neueste Entscheidungen im Zeitraum; die Kennzahlen sind nicht auf diese fünf Einträge begrenzt. |
-
-**Ansicht anpassen:** Mit den Lese- und Bearbeitungsrechten für Dashboards kannst du **„Ansicht bearbeiten“** wählen. Verschiebe oder vergrößere Karten, entferne nicht benötigte Anzeigen und füge sie über **„Kennzahl hinzufügen“** wieder hinzu. Sind alle Kennzahlen enthalten, ist **„Alle Kennzahlen hinzugefügt“** deaktiviert. Nach dem Entfernen einer Karte kannst du sie wieder hinzufügen. In den Karteneinstellungen kannst du beim Zugangsverlauf zwischen Balken, Linien und Fläche wählen. Bestätige deine Änderungen mit **„Speichern“** unten im Benutzerfenster.
+**Ansicht anpassen:** Mit den Lese- und Bearbeitungsrechten für Dashboards kannst du **„Ansicht bearbeiten“** wählen. Verschiebe oder vergrößere Karten, entferne nicht benötigte Anzeigen und füge sie über **„Kennzahl hinzufügen“** wieder hinzu. Sind alle Kennzahlen enthalten, ist **„Alle Kennzahlen hinzugefügt“** deaktiviert. In den Karteneinstellungen kannst du beim Zugangsverlauf zwischen Balken, Linien und Fläche wählen. Bestätige deine Änderungen mit **„Speichern“** unten im Benutzerfenster.
 
 Du hast **eine eigene Metrikansicht für alle Benutzer**. Öffnest du ein anderes Konto, bleibt die Anordnung erhalten und es werden dessen Werte angezeigt. Andere Administratoren haben ihre eigene Ansicht. Ohne Dashboard-Leserecht siehst du die Standardanzeige, sofern du Zugänge lesen darfst. Wurde deine Ansicht zwischenzeitlich in einem anderen Fenster geändert, wird das Speichern abgelehnt. Verwirf deinen Entwurf und lade die Ansicht über **„Zugangsmetriken aktualisieren“** neu.
 

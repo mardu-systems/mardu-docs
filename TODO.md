@@ -1,7 +1,8 @@
 # Dokumentationsbestand und Arbeitsplan
 
-Stand: 10. Oktober 2026. Erst die Administration vervollständigen, danach die
-übrigen Zielgruppen. Dieser Arbeitsplan liegt außerhalb von `docs/` und ist keine
+Aktualisierung: 19. Oktober 2026. Die Benutzeransicht wurde auf gesonderten Auftrag
+ausgearbeitet; ihr Prüfstand folgt unten. Die Bestandsbewertung und Prioritäten
+vom 10. Oktober bleiben als damalige Planung erhalten. Dieser Arbeitsplan liegt außerhalb von `docs/` und ist keine
 veröffentlichte Produktseite. Die konkreten Schreibaufträge stehen bei den
 betroffenen Seiten; hier stehen Reihenfolge, Abdeckung und übergreifende Aufgaben.
 
@@ -11,7 +12,7 @@ im aktuellen lokalen Arbeitsstand. Dieser enthält noch nicht veröffentlichte
 Änderungen. Es gab keine angemeldete Live-Abnahme und keine Hardwareprüfung.
 Ein vorhandener Endpunkt belegt noch keinen vollständigen Ablauf im Dashboard.
 
-## Bewertung des vorhandenen Bestands
+## Bewertung des vorhandenen Bestands am 10. Oktober 2026
 
 | Bereich        | Seiten | Stand vor dieser Überarbeitung                                                                                                 | Konsequenz                                                                                    |
 | -------------- | -----: | ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
@@ -92,7 +93,7 @@ müssen den tatsächlichen Menüpfad nennen; die Doku-Zuordnung ersetzt ihn nich
 - [ ] P1: Doku und Consumer am selben überprüften Arbeits-/Release-Stand testen; die Website ist ein weiterer Consumer und wurde hier nicht ausgeführt. Commit, Push und Veröffentlichung benötigen einen entsprechenden Auftrag.
 - [ ] P2: Den Doku-Feedbackweg und einen Standort-Ansprechpartner beschreiben, ohne eine eingebaute Support- oder Ticketfunktion vorauszusetzen.
 
-## Was danach insgesamt noch dokumentiert werden muss
+## Geplante Folgearbeiten aus der Bestandsaufnahme vom 10. Oktober
 
 | Bereich      | Nach der Administrator-Runde zu schreiben                                                                                                                                 | Abhängigkeit                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -106,6 +107,9 @@ müssen den tatsächlichen Menüpfad nennen; die Doku-Zuordnung ersetzt ihn nich
 Die überarbeiteten TODOs aller Zielgruppen sind Schreibaufträge. Bei noch nicht
 abgeglichenem Verhalten verlangen sie ausdrücklich eine Verfügbarkeitsprüfung,
 statt Funktionen, Statuswerte, Fristen oder Rückfragen zu versprechen.
+
+Die Zeilen **Überblick** und **Benutzer** sind durch die Benutzerrunde vom 19. Oktober für die vorhandene Web-Selbstbedienung ausgearbeitet. Release-Neuerungen,
+administrative Lernwege und die übrigen Zielgruppen bleiben separate Aufgaben.
 
 ## Quellen für die nächste Ausarbeitung
 
@@ -144,3 +148,184 @@ fehlenden Eintrag in der Consumer-Slugliste. Die vorhandenen Tests decken diese
 konkrete Auslassung noch nicht ab; der P0-Auftrag bleibt offen. Live-Rendering,
 angemeldete Abläufe, Website-Consumer und Hardware wurden nicht geprüft. Es wurden
 keine API-/DTO-Verträge, Anwendungskomponenten oder Bilder verändert.
+
+## Benutzerrunde vom 19. Oktober 2026
+
+Auftrag: die vorhandene Benutzeransicht des Webportals vollständig innerhalb der
+bestehenden Fumadocs-Struktur beschreiben und den Fokus **Benutzer** anpassen.
+Diese Runde dokumentiert den lokalen Arbeitsstand; sie veröffentlicht keinen
+Release und ändert weder Backend-Verträge noch Funktionen der nativen App.
+
+### Abdeckung
+
+- [x] Einstieg und Anmeldung einschließlich vorgeschalteter Sicherheitsabläufe,
+      Projektkontext, Desktop-/Mobilnavigation und Verwaltungswechsel.
+- [x] Persönliches Dashboard, Widget-Konfiguration, Speicherung, Konflikte und Datenfehler.
+- [x] Ressourcen und eigene Freigaben, Gültigkeit, Zeitfenster, Voraussetzungen und
+      Grenzen gegenüber einer Hardware-Zutrittsentscheidung.
+- [x] Eigene Berechtigungsanfragen mit allen Bearbeitungsständen und Rücknahme.
+- [x] Eigene Buchungen, Wiederholungen, kombinierte Ressourcen, Änderungen,
+      Stornierungsumfang, Anwesenheit und Fehler-/Entwurfszustände.
+- [x] Einmaliger Kalenderexport und persönliches Kalenderabo: Erstellen, einmalige
+      Linkanzeige, Ersetzen, Widerruf, Erreichbarkeit und Abrufintervall.
+- [x] Einweisungen, lokale Vergaben sowie importierte/signierte Nachweise getrennt
+      mit Wirksamkeit, Prüfstatus, Gültigkeit, Details und Original-Download.
+- [x] Persönlicher Posteingang mit Lesestatus, Archiv, Wiederherstellung, Filtern
+      und rechtenabhängiger Empfängersicht; Versandpräferenzen separat.
+- [x] Profilbild und Kontodaten, E-Mail/Passwort, 2FA, Wiederherstellungscodes,
+      Passkeys, Sitzungen, Zutrittsmedien, Darstellung, Nachweisquellen und MCP.
+- [x] Grundlagen, Kontowegweiser, allgemeine Einstiege und Fehlerhilfe aktualisiert.
+- [x] Vorhandene Profil-URLs erhalten. Gemeinsame Anleitungen bleiben aus
+      **Überblick** erreichbar und aktivieren eindeutig **Benutzer**. Aufgaben stehen
+      vor **Profil und Hilfe**. Systemmetriken bleiben unter ihrer bisherigen URL
+      erhalten und gehören im Consumer zum Verwaltungsfokus.
+- [x] Drei Screenshots der vorhandenen UI mit fiktiven Mitgliedsdaten ergänzt;
+      Ansicht am Desktop und Handy geprüft. Das vorhandene Postfachbild bleibt erhalten.
+
+Die 48 Produktseiten enthalten elf neue Anleitungen. Die 19 Seiten des
+Benutzerfokus (einschließlich Einstieg und gemeinsamer Profil-/Hilfeseiten) sind
+für die vorhandene Web-Selbstbedienung ausgearbeitet. Aufgaben anderer Zielgruppen
+werden dadurch nicht als abgeschlossen bewertet. Nicht angebotene Vorgänge wie
+Verlustsperre, Ersatzbestellung, Ticketsystem oder Schulungsverwaltung sind als
+Grenzen beschrieben.
+
+### Prüfstand und Grenzen
+
+- [x] Alle 48 MDX-Seiten kompiliert; Frontmatter, zusätzliche H1, `meta.json`,
+      187 lokale Seiten-/Datei-/Anker-/Bildverweise und 23 Bild-Alternativtexte geprüft.
+- [x] 100 Tests in den fünf vorhandenen Testdateien für Doku-Navigation, Portalrahmen,
+      Qualifikationen, Ressourcen und persönliches Dashboard erfolgreich; davon 29
+      Doku-Navigationstests einschließlich neuer Seiten, eindeutiger Fokuszuordnung
+      und erhaltener gemeinsamer Einstiege.
+- [x] Typecheck und ESLint für die geänderte Consumer-Navigation erfolgreich.
+      Auch die gesamte Web-Lintprüfung endet ohne Fehler, mit 14 bestehenden Warnungen.
+- [x] Produktionsbuild erfolgreich, einschließlich TypeScript-Prüfung.
+- [x] 23 Doku-Routen jeweils bei 1440 und 390 Pixeln geprüft: HTTP 200,
+      keine offenen Schreibaufträge auf den geprüften Seiten, kein seitliches Überlaufen
+      und keine Laufzeitfehler. Neue Bildbeispiele zusätzlich visuell geprüft.
+- [x] Client-Navigation von Überblick zu Profil und Anmeldesicherheit geprüft:
+      bestehende URLs und Benutzerfokus bleiben erhalten. Der bisherige Systemmetriken-Link
+      bleibt im Verwaltungsfokus erreichbar.
+- [x] Übersetzungsprüfung erfolgreich: deutsche und englische Kataloge mit je 5904 Schlüsseln.
+- [x] React-Prüfung erfolgreich, keine Fehler; 540 bestehende Warnungen im gesamten
+      Web-Arbeitsstand. Diese Dokumentationsrunde ist keine Bereinigung dieser Warnungen.
+- [x] Angemeldeter Leseabgleich mit dem vorhandenen Administratorkonto über acht
+      Portal-/Profilrouten. Es wurden keine Kontodaten, Buchungen oder Zugänge verändert.
+- [x] Mitgliedsdarstellung für Qualifikationen und mobile Profilnavigation mit
+      fiktiven API-Antworten geprüft; dabei kein Verwaltungswechsel sichtbar.
+- [x] Nachprüfung mit einem eigens angelegten lokalen Mitgliedskonto durchgeführt;
+      der konkrete Umfang und verbleibende externe Voraussetzungen stehen unten.
+- [x] Website-Consumer lokal mit dem aktuellen Inhalt und aktivierter bestehender
+      Doku-Funktion geprüft; öffentliche Website separat geprüft, siehe unten.
+- [ ] Physischer Zutritt und externe Anbieter: nicht ausgeführt.
+
+Vorhandene API-/DTO-Dokumentation und UI-Komponenten wurden als Quellen verwendet;
+keine APIs, DTOs oder Dependencies verändert. Prüfungen belegen den aktuellen lokalen
+Arbeitsstand, keinen veröffentlichten Software-/Dokumentationsstand. Commit,
+Submodule-Verweise, Push und Veröffentlichung bleiben einem entsprechenden Auftrag
+vorbehalten.
+
+## Nachprüfung mit Mitgliedskonto und Website
+
+Die ausführliche Auswertung samt Quellenvergleich steht in
+[BENUTZER-REVIEW.md](BENUTZER-REVIEW.md). Acht Produktdokumentationen wurden
+verglichen. Übernommen sind ein geführter Einstieg, Voraussetzungen vor der Aktion,
+erkennbare Ergebnisse und passende Weiterführungen. Die Schnellnavigation bleibt
+an den persönlichen Aufgaben ausgerichtet; optionale Verbindungen stehen hinten.
+
+- [x] Ein separates lokales Mitglied mit der vorhandenen Rolle Basic angelegt,
+      zwölf effektive Rechte geprüft und über die tatsächliche Passwortanmeldung
+      angemeldet. Andere Rollen und Konten wurden nicht verändert.
+- [x] Vier Portalbereiche und zehn Profil-/Sicherheitsrouten jeweils bei 1440 und
+      390 Pixeln geprüft: 28 erfolgreiche Routenaufrufe, kein Verwaltungswechsel,
+      keine administrativen Datenabfragen und nach den Korrekturen keine Laufzeitfehler
+      oder seitliches Überlaufen.
+- [x] Eigene Profiländerung gespeichert und nach erneutem Laden bestätigt.
+- [x] Neue Buchung samt Details, Einzel-ICS, eigenem Kalenderfeed, einmaliger
+      Linkerzeugung, Ersetzung und Widerruf geprüft. Ersetzter und widerrufener Link
+      werden abgewiesen. Der Testtermin wurde storniert und sein Status erneut gelesen.
+- [x] Mehrere reale eigene Serien angelegt; der Export enthält alle zehn expliziten
+      Testtermine aus fünf Serien. Sämtliche erzeugten Testtermine sind storniert.
+- [x] Ungespeicherte Profil- und Buchungsänderungen lösen die bestehende Warnung aus;
+      Verwerfen erlaubt den Wechsel. Dashboard-Editor und Anfrageformular öffnen mit
+      den vorhandenen Komponenten für das Mitglied.
+- [x] Qualifikationen, Freigaben, Zutrittsmedien und Posteingang mit dem echten
+      Mitgliedskontext geprüft. Das neue Mitglied hat dort zunächst keine eigenen
+      Vergaben oder Nachrichten. Tests für gefüllte Statusvarianten bleiben ergänzend
+      erforderlich; leere Daten belegen keine tatsächliche externe Ausstellung.
+- [x] Zwei Live-Befunde in gemeinsamen Profilbausteinen korrigiert: gespeicherte
+      Theme-Auswahl und browserabhängige Formatvorschauen erst nach Hydration anzeigen;
+      abgewiesene automatische Recovery-Code-Erzeugung ohne unbehandelte Promise-Ablehnung.
+      Regressionstests und erneute Desktop-/Mobilprüfung erfolgreich.
+- [x] 107 Webtests in sieben Testdateien und sämtliche 110 Website-Tests in 29
+      Dateien erfolgreich. Davon prüfen 25 Website-Tests die Doku-/Fokusstruktur.
+- [x] Typechecks beider Consumer und Übersetzungsprüfung erfolgreich. Web-Reactprüfung
+      ohne Fehler, weiterhin 540 Warnungen im gesamten Arbeitsstand. Website-Lint ohne
+      Fehler; bei den korrigierten Web-Komponenten keine Lintfehler.
+- [x] Beauftragte Folgekorrektur des CMS-Befunds: Den fest eingebauten Ersatz für
+      `PAYLOAD_SECRET` in `apps/mardu-de/payload.config.ts` entfernt. Fehlende, leere
+      und ausschließlich aus Leerraum bestehende Werte verhindern das Laden der
+      Konfiguration; gesetzte Werte bleiben unverändert. Vier Regressionstests
+      prüfen diesen gemeinsamen Eingang. Vor der Korrektur drei erwartete Fehler,
+      danach vier erfolgreiche Tests. Eine unabhängige Prüfung fand keinen
+      konkreten verbleibenden Umgehungsweg oder Rückschritt.
+- [x] Vollständiger Website-Reactcheck nach dieser Korrektur erfolgreich: 425 Dateien,
+      keine Fehler, weiterhin 160 Warnungen. Keine Regeln unterdrückt. Alle 114
+      Website-Tests in 30 Dateien sowie Lint, Typecheck und Produktionsbuild erfolgreich.
+      Schlüsselanforderung für Entwicklung, Build, Laufzeit und CLI im Website-README
+      und in der Deployment-Dokumentation ergänzt. Keine API-/DTO-Änderung.
+- [x] React-Prüfung der geänderten Website-Dateien erfolgreich: keine Befunde.
+- [x] Aktuellen kanonischen Inhalt in den vorhandenen Website-Mount übernommen;
+      die alten Versionsdateien und URLs bleiben erhalten. Fumadocs, Logo, Suche und
+      vorhandene Fokus-/Baumlogik wiederverwendet.
+- [x] Im lokalen Website-Consumer 23 Doku-Routen jeweils auf Desktop und Handy geprüft;
+      keine Entwurfsmarker auf diesen Seiten, kein Überlaufen und keine Laufzeitfehler.
+      Fokuswechsel, Profil-URLs, Suche, neue Inhalte und Bilder funktionieren.
+- [x] Bestehende Website-URLs `/docs/v1` und `/docs/v2` liefern weiterhin HTTP 200.
+- [x] Öffentliche Website geprüft: `/docs/benutzer` liefert HTTP 404. Dokumentation ist
+      in der bestehenden Website-Konfiguration standardmäßig deaktiviert. Für den
+      lokalen Test wurde nur der Prozess mit `MARDU_DE_ENABLE_DOCS=true` gestartet.
+- [x] Produktionsbuilds beider Consumer erfolgreich abgeschlossen, einschließlich
+      TypeScript-Prüfung und statischer Seitenerzeugung im Website-Consumer.
+- [x] Doku-Einstieg im gemeinsamen Kontomenü ergänzt: Im Portal öffnet er direkt
+      `/docs/benutzer`, in der Verwaltung `/docs/administration`. Die Verwaltungs-Sidebar
+      verwendet ebenfalls diesen Einstieg; keine Rollenprüfung und kein Projektpräfix
+      für Doku-URLs. Bestehende Navigation und Menükomponenten wiederverwendet.
+- [x] Folgeprüfung des Einstiegs: Mitglied im Portal, Administrator im Portal und
+      Administrator in der Verwaltung jeweils auf Desktop und Handy erfolgreich
+      geprüft. Alle sechs Fälle öffnen den passenden Fokus im neuen Tab. Eine zunächst
+      abgelaufene lokale Verwaltungssitzung wurde vor der erfolgreichen Prüfung erneuert.
+      21 Navigations-/Portaltests, Typecheck, betroffene Lintprüfungen,
+      Übersetzungsprüfung und Produktionsbuild erfolgreich. Der volle Web-Reactcheck
+      bleibt ohne Fehler bei 540 bestehenden Warnungen.
+- [x] Website nach CMS-Korrektur erneut geprüft: 23 Doku-Routen in beiden
+      Bildschirmgrößen ohne Entwurfsmarker, seitliches Überlaufen oder Laufzeitfehler;
+      Fokuswechsel und bestehende Profil-/Metrik-URLs funktionieren. Der anonyme
+      bestehende CMS-Endpunkt `/api/users/me` antwortet lokal mit HTTP 200.
+
+Die Testzugänge werden nicht mit der Dokumentation ausgeliefert. Der lokale
+Testbenutzer bleibt für Folgeprüfungen bestehen. Zugriffsanfragen wurden als
+Formular geprüft, ohne eine Bearbeitungsentscheidung anderer Personen zu simulieren.
+
+## Redaktionelle Prüfung des übrigen Bestands
+
+- [x] Alle 48 Produktseiten auf Wiederholungen geprüft; 22 Seiten inhaltlich
+      gestrafft. Übersichtslisten, Profilverweise und wiederholte Erklärungen
+      gekürzt; die Zugangsmetriken stehen unter Administration an einer Stelle.
+      Voraussetzungen, Warnungen, Entwurfskennzeichnungen, URLs und Abschnittsanker
+      bleiben erhalten. Die gemeinsamen Dokumentationsregeln halten dieses Vorgehen fest.
+- [x] Bei der Browserprüfung einen bestehenden Auflösungsfehler gefunden:
+      Fumadocs verarbeitet relative MDX-Verweise nur mit `./` oder `../` als
+      Seitenverweise. 93 Verweise korrigiert; insgesamt 36 Produktseiten angepasst.
+      Der ergänzte Test verwendet den vorhandenen Fumadocs-Loader und prüft die
+      Verweise des aktuellen Inhalts, ohne historische Versionen umzuschreiben.
+- [x] Alle 48 Seiten in der Website bei 1440 und 390 Pixeln geprüft: HTTP 200,
+      passende Überschriften, aufgelöste Seitenverweise, kein seitliches Überlaufen
+      und keine Laufzeitfehler. Der Sprung zur Metrikreferenz funktioniert mit Anker.
+- [x] 48 MDX-Seiten, 189 lokale Link-/Bildziele, 23 Bilder und die Navigation
+      geprüft; keine Befunde. 26 Doku-Tests und die gesamte Website-Suite mit 115
+      Tests erfolgreich; Typecheck und Lint der ergänzten Testdatei erfolgreich.
+Externe Anmelde-/Nachweisanbieter, echte Passkey-Geräte, zugestellte E-Mails/SMS/Push
+und Hardware sind nicht live abgenommen. Diese Grenzen werden nicht als bestandene
+Ende-zu-Ende-Abläufe gezählt. Es wurden keine API-/DTO-Verträge oder Dependencies
+verändert und keine Änderungen veröffentlicht.
