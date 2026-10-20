@@ -1,55 +1,77 @@
 ---
 title: Eigene MCP-Verbindungen
-description: Persönliche Agentenzugänge nur bei aktivierter Funktion erstellen, ersetzen und widerrufen.
+description: Persönliche Agentenzugänge erstellen, im Client einrichten, erneuern und widerrufen.
 ---
 
-**MCP-Verbindungen** im Profil richtet sich an Personen, die einen kompatiblen
-Agenten mit Mardu verbinden möchten. MCP steht für Model Context Protocol. Der
-Bereich ist optional und kann auf dem Server deaktiviert sein. Ein sichtbarer
-Profileintrag bedeutet nicht, dass bereits ein Agentenzugang freigegeben ist.
+Über **MCP-Verbindungen** im Profil verbindest du kompatible Agenten mit Mardu.
+MCP steht für Model Context Protocol. Der Standort muss MCP und persönliche
+Verbindungen freigeben. Zum Lesen brauchst du Profil-Leserechte, für Änderungen
+Profil-Änderungsrechte.
 
-Zum Anzeigen brauchst du Profil-Leserechte; Erstellen, Ersetzen und Widerrufen
-benötigen Änderungsrechte. Der Server begrenzt die angebotenen Fähigkeiten.
-Eine Verbindung erhält nicht automatisch alle Rechte deines Kontos.
+Die Abbildungen zeigen die vorhandene Oberfläche mit fiktiven Daten bei
+aktiviertem MCP. Der abgebildete Token ist ein ungültiges Dokumentationsbeispiel.
 
 ## Verbindung erstellen
 
-1. Öffne **MCP-Verbindungen** und warte auf den geladenen Funktionsstatus.
-2. Wenn die Funktion aktiviert ist, starte die angebotene neue Verbindung.
-3. Gib einen Namen ein, wähle die erforderlichen Fähigkeiten und bei Bedarf die
-   angebotene Laufzeit in Tagen.
-4. Bestätige die Erstellung und übernimm den angezeigten Zugang in deinen
-   kompatiblen Client.
-5. Sichere die Zugangsdaten vor dem Verlassen der einmaligen Anzeige.
+1. Öffne **Mein Profil → Profil → MCP-Verbindungen**.
+2. Wähle **Verbindung erstellen**.
+3. Fülle die Angaben aus und wähle nur die benötigten Berechtigungen.
+4. Wähle **Token erstellen**.
 
-Vergib nur die für den vorgesehenen Auftrag benötigten Fähigkeiten. Eine
-deaktivierte Funktion, fehlende Fähigkeiten oder ein nur lesender Zugriff können
-die Erstellung verhindern. Die Anleitung zum tatsächlichen Client-Anschluss steht
-unter [MCP-Anbindung](../entwickeln/mcp-anbindung.mdx); hier richtest du keine
-serverweite MCP-Richtlinie ein.
+| Feld | Eingabe |
+| --- | --- |
+| Name | Wiedererkennbarer Name mit höchstens 128 Zeichen, etwa „Buchungsassistent“. |
+| Gültigkeit in Tagen (optional) | Leer für den Serverstandard oder eine kürzere Laufzeit. Die Servergrenze kann unter den angezeigten 365 Tagen liegen. |
+| Berechtigungen | Mindestens eine auswählen. Angeboten werden nur eigene, von MCP unterstützte und am Standort freigegebene Rechte. |
+
+![Ausgefüllter MCP-Erstellungsdialog mit Name, 30 Tagen Gültigkeit und einer ausgewählten Leseberechtigung](bilder/profil-mcp-erstellen.png)
+
+Nach dem Erstellen erscheinen **MCP-Route** und **Bearer-Token** genau einmal.
+Kopiere sie, bevor du **Ich habe den Token gespeichert** wählst. Behandle echte
+Tokens wie Passwörter und teile sie nicht in Bildern oder Supportnachrichten.
+
+![Einmalige MCP-Zugangsanzeige mit Route und ausdrücklich ungültigem Beispieltoken](bilder/profil-mcp-zugangsdaten.png)
+
+## Zugang im Client eintragen
+
+1. Wähle im kompatiblen Client eine MCP-Verbindung über **Streamable HTTP**.
+2. Ergänze die angezeigte **MCP-Route** um die erreichbare HTTPS-Adresse deines
+   Servers. Beispiel: `https://mardu.example.invalid` und `/mcp` ergeben
+   `https://mardu.example.invalid/mcp`; ersetze die Beispieladresse durch deinen Server.
+3. Hinterlege den **Bearer-Token** im Authentifizierungsfeld des Clients.
+   Falls der Client Header verlangt, verwende `Authorization: Bearer <dein-token>`.
+4. Prüfe die Verbindung mit einer erlaubten lesenden Aktion.
+
+Die ausgewählten Rechte gelten zusätzlich zu deinen aktuellen Kontorechten und
+der Serverrichtlinie. Eine Verbindung erweitert deine eigenen Rechte nicht.
 
 ## Zugang ersetzen oder widerrufen
 
-Prüfe Name, Status, Berechtigungen und Laufzeit der vorhandenen Verbindung.
-Die angebotene Ersetzung erzeugt neue Zugangsdaten; übernimm sie im Client.
-Die bisherigen Zugangsdaten dürfen danach nicht weiter verwendet werden.
+Die Übersicht zeigt Name, Status, Ablaufdatum und ausgewählte Berechtigungen.
+Weitere Verbindungen erreichst du über die Seitennavigation.
 
-Widerrufe eine nicht mehr benötigte Verbindung mit der angebotenen Bestätigung.
-Ein Widerruf beendet diesen Agentenzugang, nicht dein Benutzerkonto und keine
-anderen unabhängigen Verbindungen. Behandle die einmal angezeigten Daten wie ein
-Passwort und teile sie nicht in Bildern oder Supportnachrichten.
+![Aktive eigene MCP-Verbindung mit Ablaufdatum, Leseberechtigung und Aktionen Token erneuern und Widerrufen](bilder/profil-mcp.png)
+
+### Token erneuern
+
+**Token erneuern** macht den bisherigen Token sofort ungültig. Kopiere den neu
+angezeigten Token und ersetze ihn in deinem Client. Das Ablaufdatum der Verbindung
+bleibt dabei unverändert. Nach Ablauf benötigst du eine neue Verbindung.
+
+### Verbindung widerrufen
+
+Wähle **Widerrufen** und bestätige **Verbindung widerrufen**. Der Token wird sofort
+und dauerhaft ungültig; die Verbindung bleibt als **Inaktiv** sichtbar.
+
+![Bestätigung zum Widerrufen einer MCP-Verbindung mit Hinweis auf die sofortige Ungültigkeit des Tokens](bilder/profil-mcp-widerrufen.png)
 
 ## Deaktiviert, leer oder fehlerhaft
 
-**Deaktiviert** ist eine Serverentscheidung und kein Ladefehler. Eine erfolgreich
-geladene leere Liste bedeutet, dass keine Verbindung angezeigt wird. Bei einem
-Abfragefehler verwende **Neu laden**. Eine fehlgeschlagene Mutation braucht eine
-neue Prüfung des Stands; eine alte Anzeige beweist keinen erfolgreichen Widerruf.
+- **Deaktiviert:** Die Administration muss MCP beziehungsweise persönliche Verbindungen freigeben.
+- **Nur Lesezugriff:** Du benötigst Profil-Änderungsrechte zum Erstellen, Erneuern und Widerrufen.
+- **Keine Berechtigungen angeboten:** Für dein Konto sind keine delegierbaren MCP-Rechte freigegeben.
+- **Erstellen abgelehnt:** Prüfe Laufzeit und Meldung. Die Zahl aktiver Verbindungen ist am Standort begrenzt.
+- **Ladefehler:** Verwende **Neu laden**. Bei Speicherfehlern bleiben Formulareingaben bis zum Verwerfen erhalten.
 
-![MCP-Profilbereich bei auf dem Server deaktivierter Funktion](bilder/profil-mcp.png)
-
-Beispiel aus der Testumgebung: Die deaktivierte Funktion bietet keine Erstellung an.
-
-Laufende Änderungen und noch nicht gesicherte einmalige Zugangsdaten sind vor
-unbeabsichtigtem Verlassen geschützt. Ohne nutzbaren Zugang oder ausreichende
-Fähigkeiten kann der Client keine entsprechende Aktion ausführen.
+Ist der Token verloren, erneuere ihn. Ist die Verbindung abgelaufen oder widerrufen,
+erstelle eine neue. Prüfe bei Verbindungsfehlern auch Serveradresse und Client-Einstellungen.

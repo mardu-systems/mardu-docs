@@ -4,48 +4,30 @@ description: Anmeldesitzungen prüfen, andere Sitzungen widerrufen und unbekannt
 ---
 
 Öffne **Mein Profil → Aktive Sitzungen** oder im Profil **Sitzungen**.
-Du siehst deine eigenen Anmeldesitzungen. Die Anzeige benötigt Profil-Leserechte;
-Widerruf benötigt die entsprechenden Änderungsrechte.
+Zum Lesen brauchst du Profil-Leserechte, zum Widerrufen Änderungsrechte.
 
 ## Sitzung erkennen
 
-Prüfe Gerätetyp, Betriebssystem, Browser, IP-Adresse, letzten Aktivitätszeitpunkt
-und Status. Suche und Gerätefilter grenzen die Liste ein. Am Desktop erscheinen
-die Angaben als Tabelle, auf dem Handy als einzelne Einträge mit ihren Aktionen.
-
-**Aktuell** kennzeichnet die vom Server zugeordnete aktuelle Sitzung. Browser-
-und Gerätenamen allein beweisen keine Identität. Eine IP-Adresse kann geteilt
-werden, etwa durch ein Standortnetz oder einen Vermittlungsdienst; Ortsangaben
-sind keine bestätigte Anwesenheit einer Person.
+Prüfe Gerät, Betriebssystem, Browser, IP-Adresse und letzte Aktivität. Suche und
+Gerätefilter grenzen die Liste ein. **Aktuell** kennzeichnet deine derzeitige Sitzung.
+IP- und Ortsangaben allein belegen keine Identität oder Anwesenheit.
 
 ![Eigene Sitzungen mit aktuellem Gerät und Aktionen zum Abmelden anderer Sitzungen](bilder/profil-sitzungen.png)
 
-Beispiel mit fiktiven Geräten und für Dokumentationszwecke reservierten IP-Adressen.
+Fiktive Geräte und IP-Adressen.
 
 ## Einzelne oder andere Sitzungen widerrufen
 
-Verwende die Aktion an einer anderen Sitzung, wenn du sie nicht mehr brauchst
-oder nicht zuordnen kannst. Prüfe die Rückmeldung und lade die Liste neu.
-Die aktuelle Sitzung wird nicht anhand eines ähnlichen Browsernamens als fremd
-behandelt.
+Wähle **Abmelden** an einer nicht mehr benötigten Sitzung.
+**Andere abmelden** erhält deine aktuelle Sitzung.
+**Alle abmelden** beendet auch deine Anmeldung; verwende dies nur, wenn du dich
+anschließend wieder anmelden kannst.
 
-Die Sammelaktion für **andere Sitzungen** lässt die aktuelle Sitzung bestehen.
-Die Aktion für **alle Sitzungen** schließt auch deine aktuelle Anmeldung ein;
-bestätige sie nur, wenn du dich anschließend erneut anmelden kannst. Die
-Bestätigungsdialoge nennen den jeweiligen Umfang.
-
-Ein Widerruf beendet die Möglichkeit zur Sitzungserneuerung. Bereits ausgegebene
-Zugriffstoken und andere Zugangsarten können eigenen Laufzeiten unterliegen.
-Leite daraus keine sofortige Sperrung einer NFC-Karte oder einer physischen
-Zutrittssitzung ab. Das sind getrennte Vorgänge.
+Ein Widerruf verhindert die Sitzungserneuerung; bereits ausgegebene Zugriffstoken
+können bis zu ihrem Ablauf gelten. Zutrittsmedien werden dadurch nicht gesperrt.
 
 ## Unbekannte Anmeldung oder Ladefehler
 
-Wenn du eine Sitzung nicht zuordnen kannst, beende sie nach Prüfung und kontrolliere
-[Passwort, Passkeys und Zwei-Faktor-Anmeldung](./profil-sicherheit.mdx). Nenne der
-zuständigen Administration Zeitpunkt und beobachtete Verbindungsdaten, ohne
-Passwörter oder Tokens weiterzugeben.
-
-Eine fehlgeschlagene Abfrage bedeutet nicht „keine Sitzungen“. Verwende die
-Wiederholung im Fehlerbereich. Bei einem fehlgeschlagenen Widerruf prüfe den
-aktuell geladenen Stand, bevor du von einer beendeten Sitzung ausgehst.
+Beende unbekannte Sitzungen und prüfe deine [Anmeldesicherheit](./profil-sicherheit.mdx).
+Bei Ladefehlern wiederhole die Abfrage. Nach einem fehlgeschlagenen Widerruf lade
+den Stand neu, bevor du die Sitzung als beendet betrachtest.
