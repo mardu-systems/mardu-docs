@@ -108,3 +108,49 @@ Der bei der Erstprüfung gefundene Secret-Fallback in `payload.config.ts` wurde 
 anschließenden Auftrag entfernt und mit Regressionstests geprüft. Die vollständige
 Website-Reactprüfung läuft ohne Fehler durch; 160 bestehende Warnungen bleiben.
 Der aktuelle Prüfstand steht im oben verlinkten Arbeitsplan.
+
+## Screenshot-Ergänzung vom 19. Oktober 2026
+
+20 neue Screenshots ergänzen 14 Benutzer- und Profilanleitungen. Die Aufnahmen
+stammen aus der vorhandenen Weboberfläche auf dem lokalen Docker-Stand, mit
+einem angemeldeten Mitglied, deutscher Sprache und hellem Farbschema. Die
+vorhandenen Qualifikationsbilder und die mobile Profilübersicht bleiben erhalten.
+
+| Anleitung | Neue Aufnahmen |
+| --- | --- |
+| Dashboard | Kennzahlen und Listen mit eigenen Beispieldaten. |
+| Buchungen | Eigene Liste, Erstellungsformular und Details mit Stornierungsbereich. |
+| Kalender | Aktives Abo mit Ersetzen und Widerrufen, ohne persönlichen Link. |
+| Zugänge & Ressourcen | Eigene Freigabe, Katalog und mobile Ressourcenkarte. |
+| Berechtigungsanfragen | Offener und genehmigter eigener Antrag, Rücknahmeaktion. |
+| Benachrichtigungen | Persönliche Buchungs- und Nachweismeldungen statt Betriebsalarme. |
+| Profil | Kontaktformular und Profilbildbereich ohne Foto. |
+| Anmeldesicherheit | Passwortdialog und Zwei-Faktor-Bereich vor der Schlüsselerzeugung. |
+| Sitzungen | Aktuelle und weitere fiktive Sitzung mit getrennten Aktionen. |
+| Zutrittsmedien | Aktive Karte und deaktivierter Transponder mit Gültigkeit. |
+| Benachrichtigungseinstellungen | Kanäle und Ruhezeiten. |
+| Erscheinungsbild | Mobile Theme-Auswahl und Bedienhilfen. |
+| Nachweisquellen | Verbindungswege bei noch nicht angebotenem Anbieter. |
+| MCP | Tatsächlich deaktivierte Serverfunktion. |
+
+Für gefüllte Listen wurden ausschließlich die Antworten der eigenen Datenabfragen
+im Aufnahmebrowser durch fiktive Beispieldaten ersetzt: Alex Mustermann,
+`alex@example.invalid`, Holzwerkstatt und Lasercutter. Sitzungs-IP-Adressen stammen
+aus dem Dokumentationsnetz `192.0.2.0/24`. Die Oberfläche und ihre Zustandsdarstellung
+wurden nicht nachgezeichnet. Die Bildunterschriften kennzeichnen die Beispiele;
+diese Aufnahmen belegen keine neue Backend- oder Hardwareprüfung.
+
+Im Aufnahmebrowser wurden keine Änderungen gespeichert, keine Anfragen versandt,
+keine Sitzungen beendet und keine realen Kalenderlinks oder Anmeldeschlüssel
+erzeugt. Die vorhandene Fumadocs-Bilddarstellung und die jeweiligen `bilder/`-Ordner
+werden weiterverwendet. Bilder und Texte wurden in beide vorhandenen Consumer-Mounts
+übernommen; Veröffentlichung und neue Commits sind davon getrennt.
+
+Prüfung: 50 MDX-Dateien einschließlich historischer Einstiege kompilieren;
+210 lokale Verweise und 42 Bildverweise ohne Befund. Alle Bilder der 14 geänderten
+Anleitungen laden auf der Website und im neu gebauten Docker-Webcontainer bei
+1440 und 390 Pixeln, ohne seitliches Überlaufen oder Laufzeitfehler. Der
+Docker-Produktionsbuild einschließlich Typecheck ist erfolgreich; alle vier
+Compose-Dienste sind gesund. Die vorhandenen 41 Web-Navigationstests und 26
+Website-Dokumentationstests sind erfolgreich. Die tatsächlichen Aufnahmen wurden
+zusätzlich auf sichtbare Inhalte und fehlende Zugangsdaten geprüft.
