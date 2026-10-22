@@ -1,0 +1,151 @@
+---
+title: Server auf dem Raspberry Pi installieren
+description: Mardu aus privaten GitHub-Container-Images installieren und mit Docker Compose aktualisieren.
+---
+
+Mit dem Installationspaket startest du API, Dashboard, Datenbank und HTTPS-Proxy
+auf einem Raspberry Pi. Der Pi lädt fertige Images aus der GitHub Container
+Registry (GHCR); ein Quellcode-Checkout und ein lokaler Build sind nicht nötig.
+
+## Voraussetzungen
+
+- Raspberry Pi mit einem 64-Bit-Linux-System und ausreichend Speicher für API,
+  Dashboard und TimescaleDB. Eine Kapazitätsprüfung für deine Installation bleibt
+  erforderlich.
+- Docker Engine und aktuelles Docker Compose v2 sowie `openssl` und `tar`.
+- Berechtigung, Docker mit deinem Linux-Benutzer auszuführen. Verwende für Login
+  und Compose denselben Benutzer. Bei Ausführung mit `sudo` braucht auch der
+  Root-Benutzer einen eigenen Registry-Login.
+- Eine Domain, die auf den Pi zeigt. Für die automatische öffentliche
+  Zertifikatsausstellung durch Caddy müssen Port 80 und 443 erreichbar sein.
+  Die Anleitung setzt diese HTTPS-Betriebsform voraus; eine reine LAN-IP reicht
+  dafür nicht aus.
+- Lesezugriff auf die privaten GHCR-Pakete `mardu-rpi-api` und `web` in der
+  Organisation `mardu-systems` sowie auf das Backend-Repository für den Download
+  der Release-Anhänge.
+- Für IP500 einen aus dem API-Container erreichbaren externen MQTT-Broker.
+
+## 1. Installationspaket herunterladen
+
+Öffne die GitHub-Releases von `mardu-systems/mardu-rpi-api` mit deinem berechtigten
+GitHub-Konto. Lade bei einem freigegebenen Release den Anhang
+`mardu-raspberry-pi.tar.gz` herunter und übertrage ihn auf den Pi.
+
+Entpacke das Archiv in einen eigenen, dauerhaft verwendeten Installationsordner:
+
+```bash
+mkdir -p ~/mardu
+tar -xzf mardu-raspberry-pi.tar.gz -C ~/mardu
+cd ~/mardu
+```
+
+Der Ordner enthält `compose.yaml`, `Caddyfile` und `.env.example`. Behalte den
+Ordnernamen bei: Compose leitet daraus standardmäßig die Namen der Datenvolumes
+ab. Ein anderer Projektname verwendet andere Volumes.
+
+## 2. Zugang zu privaten Images einrichten
+
+Erstelle in deinem GitHub-Konto einen Personal Access Token **classic** mit
+`read:packages`. Das Konto muss beide Pakete lesen dürfen. Falls die Organisation
+SSO verlangt, autorisiere den Token dafür. Ein Fine-grained Token ersetzt den
+klassischen Token für diesen GHCR-Login nicht.
+
+Melde dich auf dem Pi an:
+
+```bash
+docker login ghcr.io -u DEIN_GITHUB_BENUTZERNAME
+```
+
+Ersetze den Benutzernamen. Füge den Token erst in der verdeckten Passwortabfrage
+ein. Docker speichert den Zugang für diesen Linux-Benutzer in seinem konfigurierten
+Credential Store oder der Docker-Konfiguration. Trage ihn weder in `compose.yaml`
+noch in `.env` ein. Behandle die Docker-Zugangsdaten auf dem Pi vertraulich.
+
+## 3. Installation konfigurieren
+
+```bash
+umask 077
+cp .env.example .env
+chmod 600 .env
+openssl rand -hex 32
+openssl rand -hex 32
+```
+
+Öffne `.env` mit einem Texteditor. Setze `DOMAIN` auf deine Domain ohne `https://`.
+Verwende die beiden unterschiedlichen Zufallswerte für `NEXTAUTH_SECRET` und
+`POSTGRES_PASSWORD`. Lass die beiden Image-Tags auf `stable`, um freigegebene
+Updates beim nächsten Startbefehl zu übernehmen.
+
+Bewahre `.env` auf. Ändere das Datenbankpasswort einer bestehenden Installation
+nicht nur in dieser Datei: PostgreSQL übernimmt diese Variable nur bei der
+erstmaligen Initialisierung eines leeren Datenvolumes.
+
+## 4. Starten und einrichten
+
+```bash
+docker compose config --quiet
+docker compose up -d
+docker compose ps
+docker compose exec server cat /app/Private/setup-token.txt
+```
+
+Öffne `https://DEINE-DOMAIN/standalone/setup` und verwende den ausgegebenen
+Setup-Token. Trage für die Datenbank Host `db`, Port `5432`, Datenbank `mardu`,
+Benutzer `postgres` und das `POSTGRES_PASSWORD` aus `.env` ein. Falls du Datenbank
+oder Benutzer in `.env` geändert hast, verwende diese Werte.
+
+Der interne Webserver verwendet HTTP auf Port `8080`, ohne eigenes HTTPS.
+Der Zugriff im Browser erfolgt über Caddy mit HTTPS. Nach abgeschlossenem Setup
+startet die API neu. Prüfe anschließend `https://DEINE-DOMAIN/health/ready`.
+Der Container-Healthcheck verwendet absichtlich `/health/live`, damit das Setup
+auch vor der Datenbankinitialisierung erreichbar ist.
+
+Konfiguration, Dateien, private Schlüssel, Zertifikate und Datenbank liegen in
+Docker-Volumes und bleiben bei einem Containerwechsel erhalten. Der Stack
+veröffentlicht zusätzlich MQTT-Ports `1883` und `8883`; der eingebettete Broker
+muss bei Bedarf samt Authentifizierung und TLS eingerichtet werden. Der angepasste
+Node-RED-Dienst gehört nicht zu diesem Paket und benötigt für Automationen eine
+separate Bereitstellung.
+
+## 5. Neue Versionen übernehmen
+
+Sichere vor einem Update die Datenbank und die persistenten Volumes. Die API kann
+beim Start Datenbankmigrationen ausführen. Ein Rückwechsel des Image-Tags allein
+stellt einen früheren Datenbankstand nicht wieder her.
+
+Führe im gleichen Installationsordner aus:
+
+```bash
+docker compose up -d
+docker compose ps
+```
+
+Compose prüft bei jedem Aufruf die `stable`-Images für API und Dashboard und
+ersetzt Container, deren Image sich geändert hat. Vorabversionen aktualisieren
+`stable` nicht. Während des Containerwechsels kann die Anwendung kurz nicht
+erreichbar sein. Zwischen den Aufrufen sucht Compose nicht im Hintergrund nach
+Updates. Prüfe nach einem Update auch `/health/ready`.
+
+Die Compose-Datei selbst wird dadurch nicht heruntergeladen. Verlangt ein Release
+neue Dienste oder Einstellungen, übernimm die zugehörigen Installationsdateien
+aus dessen Anhang und behalte deine `.env` und den Installationsordner bei.
+`docker compose down -v` löscht die Datenvolumes; verwende es nicht für Updates.
+
+Für eine festgelegte Version setze `API_IMAGE_TAG` und `WEB_IMAGE_TAG` in `.env`
+auf die jeweils passenden Release-Tags. Solange die Tags festgelegt sind, folgt
+die Installation nicht `stable`.
+
+## Probleme beheben
+
+- `unauthorized` oder `denied`: Prüfe Paketberechtigungen, Token-Ablauf, SSO und
+  den verwendeten Linux-Benutzer. Wiederhole `docker login ghcr.io`.
+- `manifest unknown`: Für den angegebenen Tag wurde noch kein Image veröffentlicht.
+  Vor der ersten Installation müssen API und Dashboard jeweils einen erfolgreichen
+  Release mit `stable` besitzen.
+- HTTPS funktioniert nicht: Prüfe Domain, DNS und Erreichbarkeit von Port 80/443
+  sowie `docker compose logs proxy`.
+- Setup oder API startet nicht: Prüfe `docker compose logs server db`. Ein
+  erfolgreicher Liveness-Check ersetzt nach dem Setup keine Readiness-Prüfung.
+
+Die Token- und Paketregeln beschreibt die
+[GitHub-Dokumentation zur Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry).
