@@ -15,7 +15,24 @@ Diese Seite ist ein Entwurf.
 
 - [ ] TODO: Entwurf, Aktivierung und Stilllegung mit tatsächlich vorhandenen Statuswerten erklären; Bedingungen und Folgen für Zugänge, Buchungen, Sessions und Zuordnungen prüfen.
 - [ ] TODO: Ausfall/Sperrzeit anlegen und aufheben; geplante und manuell ausgelöste Wartung, Beginn/Abschluss sowie Wirkung auf den effektiven Betriebszustand beschreiben.
-- [ ] TODO: Löschen eines Entwurfs von Stilllegung und erhaltener Historie unterscheiden; aktive Bindungen, Bereiche, Wartungspläne und laufende Sitzungen als mögliche Hindernisse behandeln.
+
+### Ressource löschen
+
+Mit dem Recht zum Löschen von Ressourcen kannst du Entwürfe, aktive und außer
+Betrieb genommene Ressourcen löschen, sofern noch keine Nutzung oder Abhängigkeit vorliegt.
+
+1. Öffne die Ressource in der Ressourcenübersicht.
+2. Wähle **Löschen** im unteren Bereich des Ressourcenfensters.
+3. Prüfe den Hinweis und bestätige das Löschen.
+
+Die Ressource wird mit ihren Zugriffsregeln, Vergaben und Reader-/Sensorzuordnungen
+unwiderruflich entfernt. Geräte und Anschlüsse bleiben erhalten. Ungespeicherte
+Änderungen musst du zuvor speichern oder verwerfen.
+
+Unterressourcen, installierte Geräte, Schalterzuordnungen, Buchungs- oder
+Wartungsdaten und Nutzungshistorie verhindern das Löschen. Die Fehlermeldung
+erscheint im Ressourcenfenster. Ressourcen mit Historie kannst du unter
+**Allgemein** außer Betrieb nehmen.
 
 ## Buchbarkeit und Zutritt
 
@@ -24,6 +41,26 @@ Diese Seite ist ein Entwurf.
 - [ ] TODO: Buchungsnachweis für die vorgesehenen Zugangsbereiche einstellen; Ressource und Zugang unter [Zutritt verwalten](../administration/zutritt-verwalten.mdx) verbinden.
 
 ## Messwerte und Zuordnungen
+
+### Reader-Zuordnung lösen
+
+Voraussetzung ist das Recht zum Ändern von Zugriffen und zum Verwalten der
+Hardware dieser Ressource. Beende zuerst laufende Zugriffssitzungen.
+
+1. Öffne die Ressource und wähle **Technik**.
+2. Wähle beim Reader **Zuordnung lösen** und bestätige den Hinweis.
+
+Der Reader verschwindet aus der Liste der aktuellen Zuordnungen. Sein Anschluss
+kann danach einer anderen Ressource zugeordnet werden. Bisherige Nutzungsdaten
+und die Zuordnungshistorie bleiben erhalten. Verliert der zugehörige Zutrittspunkt
+seinen letzten benötigten Reader oder Aktor, wird dieser Punkt gleichzeitig
+deaktiviert. Andere Zutrittspunkte und die Ressourcenregel bleiben unverändert.
+Das Lösen schaltet die Hardware nicht aus.
+
+Die Bearbeitungsbereiche zeigen **Speichern** bei offenen Änderungen. Änderungen
+an Stammdaten, Zugriffsregeln und Buchbarkeit werden im unteren Bereich des
+Ressourcenfensters gespeichert. Aktionen wie das Lösen einer Zuordnung werden
+nach ihrer Bestätigung direkt ausgeführt.
 
 - [ ] TODO: Geräte-Messwert-Endpunkte zuordnen, aktivieren/deaktivieren und umziehen; vorhandene Hardwarewerte und aus Sitzungen abgeleitete Werte unterscheiden.
 - [ ] TODO: Effektiven Zustand, Beobachtungen, Betriebszeit und Nutzungswerte lesen; fehlende, alte und nicht unterstützte Messwerte behandeln.
