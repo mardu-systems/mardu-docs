@@ -1,40 +1,124 @@
 ---
 title: Geräte verwalten
-description: Geräte anlegen und provisionieren, Zutrittspunkte pflegen, Firmware verteilen.
+description: Geräte aufnehmen, Anschlüsse konfigurieren, Verbindungen prüfen und Hardware ersetzen.
 ---
 
-Diese Seite ist ein Entwurf. Die Aufgaben unten werden zu Anleitungen mit
-Rechten, Voraussetzungen, Schritten, Ergebnis und Fehlerhilfe ausgearbeitet.
+import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
+import { ImageZoom } from "fumadocs-ui/components/image-zoom";
+import screenshot1 from "./bilder/geraet-registrieren.png";
+import screenshot2 from "./bilder/geraet-anschluesse.png";
 
-## Gerät anlegen und provisionieren
+Ein **Gerät** ist der technische Controller. Seine **Anschlüsse** sind zum Beispiel Kartenleser oder Schaltausgänge. Eine **Ressource** ist der Raum oder die Maschine, die damit genutzt wird. Der Installationsort des Controllers ist keine Zutrittsfreigabe; Anschlüsse und Nutzungsregeln ordnest du an der [Ressource](../koordination/ressourcen.mdx) zu.
 
-- [ ] TODO: Benötigte Geräte- und Netzwerkrechte sowie die tatsächlich unterstützten Gerätetypen nennen; erforderliche Identität, Zertifikat beziehungsweise Manifest, Netzwerk und optionale Angaben anhand des Anlageformulars und der Validierung erklären.
-- [ ] TODO: Gerät suchen, anlegen und Details öffnen; einen bereits vorhandenen Datensatz, doppelte Identität und ungültige Anlageangaben behandeln.
-- [ ] TODO: Netzwerkaufnahme und Provisionierung unterscheiden; Start, beobachtbare Zustände, Abschlusskriterium, Abbruch beziehungsweise erneuten Versuch und fehlende Erreichbarkeit erklären. Keine manuellen HTTP-Schritte für den automatischen Schlüsselaustausch angeben.
+Öffne **Geräte** im Dashboard. Du brauchst Leserechte für Geräte sowie je nach Aufgabe das Recht zum Anlegen, Bearbeiten oder Löschen. Zum Auswählen einer Installationsressource brauchst du zusätzlich Ressourcen-Leserechte. Die Abbildungen zeigen die vorhandene Oberfläche mit fiktiven Beispieldaten. Wähle ein Bild, um es zu vergrößern.
 
-## Endpunkte und Zuordnungen
+## Gerät hinzufügen und verbinden
 
-- [ ] TODO: Gerät, signierten Geräte-Endpunkt, Zutrittspunkt und Ressource unterscheiden. Beschreiben, wo vorhandene Endpunkte angezeigt werden; nicht als frei anlegbare Endpunkte darstellen.
-- [ ] TODO: Reader, Aktor und Messwert-Endpunkt ihrem Zweck zuordnen; Voraussetzungen, aktive Zuordnung, Konflikte und Umzug einer Zuordnung erklären. Zutrittskonfiguration unter [Zutritt verwalten](./zutritt-verwalten.mdx), Messwertzuordnung unter [Ressourcen](../koordination/ressourcen.mdx) ausarbeiten.
+Für die IP500-Aufnahme muss ein registrierter Edge-Router erreichbar sein. Halte das unveränderte IP500-Zertifikat als JSON-Datei bereit. Signierte Mardu-Aufnahmedaten werden ebenfalls unterstützt. Verwende jeweils eine dieser Varianten.
 
-## Einstellungen, Status und Diagnose
+1. Wähle **Gerät hinzufügen**.
+2. Gib eine **Technische Gerätekennung** mit 4–160 Zeichen ein, zum Beispiel `controller-holzwerkstatt`.
+3. Wähle bei Bedarf eine vorhandene **Installationsressource**.
+4. Importiere unter **Geräteaufnahme** die JSON-Datei oder füge ihren Inhalt ein. Prüfe die Validierung; eine gültige Struktur bestätigt noch keine Netzwerkaufnahme.
+5. Wähle **Gerät erstellen** und öffne den Eintrag in der Geräteliste.
 
-- [ ] TODO: Namen und optionale Angaben ändern; gerätespezifische Einstellungen, Grenzen, Speichern, Übertragung zum Gerät und fehlende Bestätigung unterscheiden.
-- [ ] TODO: Status, letzte Meldung, Provisionierungszustand, Netzwerkzuordnung, Logs und Metriken erklären; fehlende oder alte Messwerte von einem gemessenen Nullwert unterscheiden.
-- [ ] TODO: Ein Beispiel für „offline“, fehlerhafte Provisionierung und nicht ausgeführte Geräteaktion mit nächstem Prüfschritt schreiben. Geräteanzeige nicht mit bestätigtem Türzustand gleichsetzen.
+<ImageZoom
+  src={screenshot1}
+  alt="Gerät registrieren mit technischer Gerätekennung, Installationsressource und Import der Aufnahmedaten."
+  rmiz={{
+    a11yNameButtonZoom: "Bild vergrößern",
+    a11yNameButtonUnzoom: "Bild schließen",
+  }}
+/>
 
-## Firmware verteilen
+**Ergebnis:** Das Gerät ist registriert und wird ins Netzwerk aufgenommen. Bei einem normalen IP500-Zertifikat steht der Typ zunächst auf **Noch nicht erkannt** und der Zustand auf **Verbinden**. Das Gerät meldet sein Modell; anschließend erstellt der Server die passenden Anschlüsse und überträgt deren Konfiguration. Der Schlüsselaustausch erfolgt automatisch.
 
-- [ ] TODO: Over-the-Air-Update (OTA) erklären; Firmware-Artefakt bereitstellen, Version und Gerätekompatibilität prüfen sowie benötigte Rechte und Netzwerkvoraussetzungen nennen.
-- [ ] TODO: Update starten, Status und Historie lesen, Update abbrechen und erneut versuchen; fehlendes Artefakt, laufendes Update und nicht erreichbares Gerät behandeln. Einen automatischen Rollback nur bei belegter Unterstützung beschreiben.
+Bei aktivierter automatischer Ressourcenanlage kann für ein erkanntes Gerät ohne Installationsressource ein Ressourcenentwurf entstehen. Er erteilt keinen Zugriff. Buchungsdisplays werden einer vorhandenen Ressource zugeordnet.
 
-## Tags anmelden und verwalten
+Ein erneuter Import derselben Aufnahmedaten legt kein zweites Gerät an. Vorhandene Anschlusszuordnungen bleiben erhalten. Konflikte bei Netzwerkidentität oder Seriennummer musst du vor einem weiteren Versuch klären.
 
-- [ ] TODO: Tag als Identifikation von Zutrittsfreigabe unterscheiden; unterstützte Tags und Leser, Smartphone-App, sichere Verbindung und benötigte Rechte nennen.
-- [ ] TODO: Anmeldung starten, QR-/App-Verbindung, Fortschritt und Abschluss mit fiktiven Daten zeigen; abgelaufene oder fehlgeschlagene Anmeldung, Erneuerung und Abbruch behandeln.
-- [ ] TODO: Tag einer Person zuordnen, Status/Gültigkeit prüfen, sperren oder widerrufen und verlorenen Tag ersetzen; bestehende Konten und Zugänge als getrennte Zuordnungen erklären.
-- [ ] TODO: DESFire-Konfiguration unter [Servereinstellungen](./server-einstellungen.mdx) verlinken. Keine Schlüssel oder produktiven QR-Token in Bildern zeigen; diese Aufgaben später als eigene Tag-Anleitung ausarbeiten.
+## Übersicht und Verbindungsstatus
 
-## Gerät außer Betrieb nehmen
+Öffne das Gerät und wähle **Übersicht**. Hier änderst du technische Kennung und Installationsort mit **Speichern**. Das Gerätemodell wird erkannt und ist nicht frei umstellbar. Das Leeren des Installationsorts entfernt diese Verknüpfung; vorhandene Anschlusszuordnungen werden dadurch nicht umgezogen.
 
-- [ ] TODO: Stilllegung und Löschung unterscheiden; aktive Hardwarezuordnungen, Messwertzuordnungen und vorhandene Zugangshistorie vorab prüfen. Löschvorschau, blockierte Löschung und erhaltene Historie erklären; Folgen für Ressourcen separat nennen.
+Unter **Verbindung und Hardware** stehen Netzwerkanbindung, letzte Verbindung, Firmwareversion und Hardwareadresse. **Online** bedeutet, dass innerhalb der letzten fünf Minuten eine Meldung eingegangen ist. Es bestätigt weder einen Türzustand noch die Bereitschaft aller Anschlüsse.
+
+<Accordions>
+  <Accordion title="Einrichtungszustände einordnen">
+    | Anzeige | Bedeutung |
+    | --- | --- |
+    | Verbinden | Das Gerätemodell ist noch nicht durch eine gültige Gerätemeldung erkannt. |
+    | Aufgenommen | Die Netzwerkaufnahme ist erfolgt; die Anschlüsse können noch Einrichtung benötigen. |
+    | Betriebsbereit | Mindestens ein Anschluss hat seine Konfiguration bestätigt und Bereitschaft gemeldet. Weitere Anschlüsse können noch fehlen. |
+    | Eingerichtet | Die Einrichtung ist aus Sicht des Backends abgeschlossen. Für eine konkrete Aktion zählt weiterhin der benötigte Anschluss. |
+    | Einrichtung fehlgeschlagen | Aufnahme oder Einrichtung konnte nicht abgeschlossen werden. Prüfe die Ursache vor einem weiteren Versuch. |
+
+    Die gesamte Provisionierung ist erst abgeschlossen, wenn alle erwarteten Anschlüsse eingerichtet sind. Ein betriebsbereiter Leser bestätigt keine Einsatzbereitschaft eines anderen Lesers oder Schaltausgangs.
+
+  </Accordion>
+</Accordions>
+
+Für IP500-Geräte stehen unter **Verbindung und Hardware** zwei Aktionen bereit:
+
+- **Erneut ins Netzwerk aufnehmen** setzt die Netzwerkverbindung zurück. Geräteidentität, Anschlusskonfiguration, Zuordnungen und Zugriffshistorie bleiben erhalten. Neue Gerätemeldungen und Konfigurationsbestätigungen sind nötig.
+- **Aufnahme abbrechen** beendet eine ausstehende oder fehlgeschlagene Aufnahme und stoppt automatische Wiederholungen. Bereits aufgenommene Geräte können so nicht abgemeldet werden. Mit einer erneuten Aufnahme kannst du fortfahren.
+
+Beende vor einer erneuten Aufnahme laufende Zugriffssitzungen und kläre ausstehende Schaltvorgänge. Eine erfolgreiche Anforderung bestätigt noch nicht, dass das Gerät wieder verbunden oder physisch vom Netzwerk getrennt ist.
+
+Die Firmwareversion ist eine Anzeige. Über die API lassen sich Firmware-Artefakte bereitstellen; ihr Upload startet kein Update. Diese Anleitung setzt keinen Update-Assistenten oder automatischen Rollback voraus.
+
+## Anschlüsse konfigurieren und zuordnen
+
+Unter **Anschlüsse** siehst du die zum erkannten Modell gehörenden Leser, Schaltausgänge und gegebenenfalls Sensoren. Sie werden aus dem Gerätemodell abgeleitet und hier nicht frei angelegt.
+
+1. Öffne den betreffenden Anschluss beziehungsweise seine Konfiguration.
+2. Stelle die angebotenen Funktionen ein: bei Lesern beispielsweise Kartenlesen und Antwortfristen, bei Aktoren Betriebsmodus und maximale Schaltdauer. Zeitfelder mit **ms** erwarten Millisekunden.
+3. Speichere die Einstellungen und prüfe die Rückmeldung.
+
+<ImageZoom
+  src={screenshot2}
+  alt="Anschlüsse eines Maschinencontrollers mit Leser, Schaltausgang und Konfigurationszuständen."
+  rmiz={{
+    a11yNameButtonZoom: "Bild vergrößern",
+    a11yNameButtonUnzoom: "Bild schließen",
+  }}
+/>
+
+| Rückmeldung                                     | Bedeutung                                                                             |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Gespeichert · Übernahme ausstehend              | Die Einstellung ist gespeichert; das Gerät hat ihre Anwendung noch nicht bestätigt.   |
+| Vom Gerät übernommen                            | Das Gerät hat die Konfiguration bestätigt.                                            |
+| Übernahme nicht bestätigt / Vom Gerät abgelehnt | Die Übernahme ist ungeklärt oder wurde abgelehnt. Prüfe Verbindung und Einstellungen. |
+
+**Vom Gerät auslesen** fragt die Gerätekonfiguration neu ab. Die zuletzt bestätigte Konfiguration ist dagegen kein frischer Lesevorgang. Das Entfernen einer Konfiguration löst keine Ressourcenzuordnung.
+
+Die Zuordnung erfolgt unter [Ressource → Technik](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen). Leser und Aktor dürfen auf verschiedenen Geräten liegen. Ein Anschluss kann höchstens eine aktive Zuordnung haben.
+
+## Probleme prüfen
+
+| Problem                                                 | Nächster Prüfschritt                                                                                                                             |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Gerät bleibt bei Verbinden                              | Edge-Router, Netzwerkaufnahme und Aufnahmedaten prüfen. Das Modell wird erst durch eine passende Gerätemeldung erkannt.                          |
+| Gerät wird offline angezeigt                            | Letzte Verbindung und Netzwerk prüfen. Ein fehlender Messwert ist kein gemessener Nullwert.                                                      |
+| Gerät ist betriebsbereit, eine Funktion geht aber nicht | Den benötigten Anschluss und seine Konfigurationsbestätigung prüfen.                                                                             |
+| Konfiguration bleibt ausstehend                         | Verbindung und Anschlusszustand prüfen; gespeicherte Einstellungen nicht als angewendet behandeln.                                               |
+| Erneute Aufnahme wird abgelehnt                         | Laufende Sitzungen, ausstehende Befehle und ungeklärte Aktorzustände prüfen. Bei ungültigen Aufnahmedaten eine gültige Datei erneut importieren. |
+| Gerät funktioniert, Zugriff wird abgelehnt              | Ressourcenstatus, Zugriffsregel, Zuordnung und Freigabe an der Ressource prüfen.                                                                 |
+
+Unter **Diagnose** stehen die für deine Rechte verfügbaren Geräte- und Zugangsmetriken. Beachte Zeitraum und Aktualität. Leere Anzeigen können durch fehlende Daten, nicht unterstützte Messwerte oder fehlende Rechte entstehen. Zugangsentscheidungen beschreiben gespeicherte Vorgänge und bestätigen keinen physischen Tür- oder Schaltzustand.
+
+Beim Bearbeiten bleiben Eingaben beim Reiterwechsel erhalten. Speichere sie vor dem Schließen oder bestätige das Verwerfen. Nach einem Speicherfehler prüfst du die Meldung; eine Fehlermeldung bestätigt keine Änderung am Gerät.
+
+## Gerät ersetzen oder löschen
+
+Bei einem Hardwarewechsel registrierst du das neue Gerät und konfigurierst seine Anschlüsse. Tausche anschließend die benötigten Zuordnungen unter [Ressource → Technik](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen) aus. Nutzungsregeln bleiben an der Ressource; der Wechsel führt die Zuordnungshistorie fort.
+
+Ein Gerät mit aktiven Anschlusszuordnungen oder Zugriffshistorie kann nicht gelöscht werden. Das Abbrechen seiner Netzwerkaufnahme ist keine Löschung.
+
+1. Öffne in der Geräteliste das Aktionsmenü des ungenutzten Geräts.
+2. Wähle **Löschen** und prüfe die Löschvorschau.
+3. Bestätige erst, wenn keine benötigte Verwendung mehr besteht.
+
+**Ergebnis:** Der Server meldet das Gerät vom Netzwerk ab und löscht es. Schlägt die Netzwerkabmeldung fehl, bleibt der Datensatz erhalten. Eine zugehörige Ressource wird nicht automatisch gelöscht.
+
+Tags und deren Zuordnung zu Personen verwaltest du unter [Benutzer und Rollen](./benutzer-rollen.mdx); ein Tag allein ist keine Nutzungsfreigabe.
