@@ -3,8 +3,8 @@ title: Sicherheit und Betrieb
 description: Anmeldeverfahren durchsetzen, Sitzungen prüfen, Änderungen nachvollziehen.
 ---
 
-Diese Seite ist ein Entwurf. Sicherheitsaufgaben brauchen belegte
-Anmeldebedingungen und eine geprüfte Wiederherstellungsmöglichkeit.
+Die lokale Kontowiederherstellung ist unter [Mardu per CLI warten](./wartungs-cli.mdx)
+beschrieben. Die übrigen Abschnitte dieser Seite sind ein Entwurf.
 
 ## Anmeldeverfahren und Kontowiederherstellung
 
@@ -12,7 +12,8 @@ Anmeldebedingungen und eine geprüfte Wiederherstellungsmöglichkeit.
 - [ ] TODO: Kennwortregeln, Kontosperre nach Fehlversuchen, Passwortänderung, passwortlose Freigabe und E-Mail-Bestätigung unter [Servereinstellungen](./server-einstellungen.mdx) verlinken.
 - [ ] TODO: Im Benutzerfenster 2FA zurücksetzen/deaktivieren, Passkey deaktivieren und angebotene passwortlose Hilfe mit Rechten, Bestätigung und sofortiger Wirkung beschreiben.
 - [ ] TODO: Wiederherstellungscodes im eigenen Profil von der administrativen API-Neuerzeugung unterscheiden; UI-Verfügbarkeit prüfen. Keine Überwachung fremder Codes versprechen.
-- [ ] TODO: Ein ausgesperrtes Administrator-Konto mit einer geprüften Wiederherstellungsmethode behandeln; Voraussetzungen und Zuständigkeit vor Änderungen der Anmeldepflichten nennen.
+
+Für ein ausgesperrtes Administrator-Konto steht die [lokale Wartungs-CLI](./wartungs-cli.mdx#admin-passwort-ohne-e-mail-zurücksetzen) zur Verfügung. Sie benötigt Host- oder Docker-Zugriff und eine laufende API, aber weder ein Mardu-Login noch eingerichteten Mailversand. Ein Passwort-Reset hebt MFA-Vorgaben, Deaktivierung und fehlende E-Mail-Bestätigung nicht auf. Prüfe die Wiederherstellungsvoraussetzungen, bevor du Anmeldepflichten änderst.
 
 ## Sitzungen und Anmeldehistorie
 

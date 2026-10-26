@@ -1,0 +1,141 @@
+---
+title: Mardu per CLI warten
+description: Admin-Passwort ohne E-Mail zurücksetzen, Konten entsperren und den Server über Docker prüfen.
+---
+
+Mit `mardu-admin` stellst du den Zugang zu einem lokalen Mardu-Konto wieder her
+und prüfst den Zustand des Servers. Die CLI (Command Line Interface) ist ein
+Werkzeug für das Terminal auf dem Server. Sie bietet ein geführtes Menü und
+Befehle für einzelne Aufgaben. Menüs, Eingabeaufforderungen und Ausgaben der CLI
+sind auf Englisch.
+
+Du brauchst dafür kein funktionierendes Mardu-Login und keinen eingerichteten
+E-Mail-Versand. Der Zugriff erfolgt mit deinen Host- beziehungsweise
+Docker-Berechtigungen.
+
+## Voraussetzungen
+
+- Du hast Zugriff auf den Server, direkt oder über SSH, und darfst dort Docker
+  Compose ausführen. Führe die Befehle im Installationsordner mit der Compose-Datei aus.
+- Der Dienst `server` läuft im normalen Betrieb und erreicht seine Datenbank.
+  Im Ersteinrichtungsmodus und bei einer nicht startenden API ist die CLI nicht verfügbar.
+- Das installierte API-Image enthält `/app/maintenance/mardu-admin`.
+  Bei älteren Images musst du zuerst eine passende Version gemäß der
+  [Installationsanleitung](../installieren/raspberry-pi.mdx#5-neue-versionen-übernehmen)
+  bereitstellen. Ein Passwort-Reset erfordert keinen erneuten Build oder Neustart.
+- Für Kontoänderungen kennst du die E-Mail-Adresse des betroffenen Kontos.
+  Passwort-Resets sind für lokal verwaltete Konten mit vorhandenem lokalem Passwort vorgesehen.
+
+Die Docker-Aufrufe funktionieren auch von einem Windows- oder macOS-Rechner,
+wenn du sie in der Shell des Linux-Servers ausführst. Ein Windows-Server ohne
+Linux-Container wird nicht unterstützt.
+
+## Menü öffnen
+
+Starte das Werkzeug im API-Container als dessen Benutzer `mardu`:
+
+```bash
+docker compose exec --user mardu server /app/maintenance/mardu-admin
+```
+
+Im Menü **Mardu maintenance** wählst du **Show account**, **Reset password**,
+**Unlock account**, **Revoke sessions**, **Check server health** oder
+**Show versions**. **Exit** schließt das Menü.
+
+Bei Kontoänderungen zeigt das Werkzeug zuerst das Zielkonto und die Wirkung der
+Aktion. Erst nach deiner Bestätigung beginnt die Änderung. Der Aufruf benötigt
+Eingabe und Ausgabe an einem interaktiven Terminal; verwende dafür nicht `-T`.
+
+## Admin-Passwort ohne E-Mail zurücksetzen
+
+Ein Reset ersetzt das bisherige Passwort und widerruft die bestehenden
+Anmeldesitzungen des Kontos. Bestehende Vorgaben zur Zwei-Faktor-Anmeldung gelten
+weiter. Ein deaktiviertes Konto wird durch den Reset nicht aktiviert und eine
+unbestätigte E-Mail-Adresse nicht bestätigt.
+
+1. Wähle im Menü **Reset password**.
+2. Gib bei **Account email address:** die E-Mail-Adresse des Admin-Kontos ein.
+3. Wähle den Passwortmodus:
+   - **Temporary: change required at next sign-in**: Der Benutzer muss nach der
+     Anmeldung ein eigenes Passwort setzen. Dies ist die Voreinstellung.
+   - **Permanent**: Das eingegebene Passwort bleibt gültig, ohne einen weiteren
+     Passwortwechsel zu verlangen.
+4. Kontrolliere ID, E-Mail-Adresse und Kontostatus in der angezeigten Tabelle.
+   Lies die Wirkung der Aktion unter **Confirm account change** und bestätige
+   **Continue?** mit `y`. Mit `n` oder Enter brichst du ohne Änderung ab.
+5. Gib das neue Passwort bei **New password:** und
+   **Confirm password:** ein. Die Eingabe wird nicht angezeigt.
+   Es gelten dieselben Passwortanforderungen wie im Dashboard.
+6. Warte auf **Action completed.** und prüfe die Ergebnistabelle.
+   Melde dich anschließend mit dem neuen Passwort am Dashboard an und führe
+   gegebenenfalls den verlangten Passwortwechsel durch.
+
+Du kannst den temporären Reset auch direkt aufrufen. Ersetze
+`admin@example.com` durch die E-Mail-Adresse des Zielkontos:
+
+```bash
+docker compose exec --user mardu server /app/maintenance/mardu-admin \
+  user reset-password --email admin@example.com
+```
+
+Für ein dauerhaftes Passwort ergänzt du `--permanent`:
+
+```bash
+docker compose exec --user mardu server /app/maintenance/mardu-admin \
+  user reset-password --email admin@example.com --permanent
+```
+
+Beide Aufrufe fragen die Bestätigung und das Passwort interaktiv ab. Übergebe
+Passwörter nicht in Befehlsargumenten. Einen Passwortparameter gibt es nicht.
+
+Wenn du dein aktuelles Passwort noch kennst und angemeldet bist, kannst du es
+auch unter [Mein Profil → Sicherheit](../ueberblick/profil-sicherheit.mdx#passwort-ändern)
+ändern.
+
+## Konto entsperren oder Anmeldesitzungen widerrufen
+
+Wähle im Menü **Unlock account**, um den Fehlversuchszähler und eine zeitliche
+Kontosperre zurückzusetzen. Die Einstellung **Active** und die Zwei-Faktor-Anmeldung
+werden dabei nicht verändert. Verwende diese Aktion, wenn nach einem Passwort-Reset
+weiterhin eine Sperre wegen fehlgeschlagener Anmeldungen besteht.
+
+Mit **Revoke sessions** beendest du die Anmeldesitzungen eines Kontos, ohne
+dessen Passwort zu ändern. Der Benutzer muss sich danach erneut anmelden.
+
+Die [Befehlsreferenz](./wartungs-cli-referenz.mdx#konten-und-anmeldesitzungen)
+zeigt die direkten Aufrufe für beide Aufgaben.
+
+## Serverzustand prüfen
+
+Wähle **Check server health** oder führe den lesenden Diagnosebefehl aus:
+
+```bash
+docker compose exec --user mardu server /app/maintenance/mardu-admin system doctor
+```
+
+Das Ergebnis zeigt den Gesamtzustand und die im Server eingerichteten
+Zustandsprüfungen. **Healthy** bedeutet, dass diese Prüfungen erfolgreich waren.
+**Degraded** oder **Unhealthy** weisen auf eine Einschränkung hin. Welche Dienste
+geprüft werden, hängt von der Serverkonfiguration ab. Der Befehl repariert keine Dienste.
+
+**Show versions** zeigt die CLI-, Server- und Wartungsprotokollversion. Das ist
+für eine Störungsmeldung hilfreich. Strukturierte Ausgaben und Rückgabewerte
+beschreibt die [Befehlsreferenz](./wartungs-cli-referenz.mdx).
+
+## Probleme beheben
+
+| Beobachtung                                                             | Nächster Schritt                                                                                                                                                                                                                        |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Das Programm wird nicht gefunden.                                       | Prüfe, ob das API-Image die CLI enthält. Folge bei Bedarf dem Update-Ablauf deiner Installation.                                                                                                                                        |
+| Der lokale Wartungszugriff ist nicht erreichbar.                        | Prüfe mit `docker compose ps`, ob `server` läuft, und lies bei einem Startfehler `docker compose logs server`. Prüfe anschließend [Aktivierung, Socket-Pfad und Dateirechte](./wartungs-cli-referenz.mdx#verbindung-und-konfiguration). |
+| Die Aktion verlangt ein interaktives Terminal.                          | Starte den Aufruf ohne `-T` in einem Terminal mit Ein- und Ausgabe. Automatisierte Kontoänderungen ohne Rückfrage werden nicht unterstützt.                                                                                             |
+| Das Konto wird nicht gefunden.                                          | Prüfe die E-Mail-Adresse. Die CLI legt kein Konto an.                                                                                                                                                                                   |
+| Die lokale Passwortwiederherstellung wird nicht unterstützt.            | Prüfe, ob das Konto von LDAP/OIDC verwaltet wird oder kein lokales Passwort besitzt. Nutze die Wiederherstellung beim zuständigen Anmeldeanbieter.                                                                                      |
+| Das Passwort wird abgelehnt oder die Wiederholung stimmt nicht überein. | Korrigiere die Eingaben entsprechend der Meldung. Bei einem Validierungsfehler bleibt das bisherige Passwort gültig.                                                                                                                    |
+| Die Anmeldung funktioniert trotz neuem Passwort nicht.                  | Prüfe Kontosperre, Aktivierung, E-Mail-Bestätigung und die weiterhin geltende Zwei-Faktor-Anmeldung. Nur die zeitliche Kontosperre lässt sich mit **Unlock account** aufheben.                                                          |
+| CLI und Server verwenden unterschiedliche Wartungsprotokolle.           | Verwende die CLI aus dem API-Container derselben Installation. Bei unbekannter Protokollversion werden Änderungen verweigert.                                                                                                           |
+| Die Verbindung wurde während einer Änderung unterbrochen.               | Prüfe zuerst den Kontostatus, bevor du den Befehl erneut ausführst. Eine bereits begonnene Änderung kann abgeschlossen worden sein.                                                                                                     |
+
+MFA-Reset, Rollenänderungen, Backups und Wiederherstellung bei gestoppter API
+gehören nicht zum Funktionsumfang dieser CLI. Host- und Docker-Zugang sind
+entsprechend zu schützen: Sie erlauben Kontowiederherstellung ohne Mardu-Login.

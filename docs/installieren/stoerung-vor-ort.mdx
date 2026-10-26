@@ -6,6 +6,13 @@ description: LED-Codes deuten, Netzwerk prüfen, Gerät neu starten und eskalier
 Diese Seite ist ein Entwurf. Gerätespezifische Anzeigen und Neustartfolgen
 werden erst nach Abgleich mit Firmware- und Hardwareunterlagen beschrieben.
 
+## Serverzugang oder Serverzustand prüfen
+
+Wenn der Zugang zum Dashboard fehlt oder du den Serverzustand prüfen möchtest,
+verwende die [Wartungs-CLI](../administration/wartungs-cli.mdx). Sie läuft im
+API-Container und benötigt Host- oder Docker-Zugriff. Bei einer nicht startenden
+API ist sie nicht verfügbar; prüfe dann die Container-Logs.
+
 ## Fehler eingrenzen
 
 - [ ] TODO: Gerät, Firmwarestand, letzte Verbindung und tatsächlichen Zustand aufnehmen; [administrative Diagnose](../administration/geraete-verwalten.mdx) verlinken.

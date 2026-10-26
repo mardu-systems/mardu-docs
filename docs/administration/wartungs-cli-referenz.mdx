@@ -1,0 +1,149 @@
+---
+title: "Wartungs-CLI: Befehle und Optionen"
+description: Aufrufsyntax, Kontoaktionen, Diagnose, JSON-Ausgaben und Rückgabewerte von mardu-admin.
+---
+
+Diese Referenz beschreibt `mardu-admin` im laufenden API-Container.
+Die [Anleitung zur Wartungs-CLI](./wartungs-cli.mdx) erklärt Voraussetzungen,
+Menü und Passwortwiederherstellung Schritt für Schritt. Die CLI verwendet
+englische Menüs, Eingabeaufforderungen und Ausgaben.
+
+## Aufruf und Hilfe
+
+Alle Beispiele werden auf dem Server im Installationsordner ausgeführt. Der
+vollständige Aufruf lautet:
+
+```text
+docker compose exec --user mardu server /app/maintenance/mardu-admin BEREICH BEFEHL [OPTIONEN]
+```
+
+Ohne Bereich und Befehl öffnet sich das Menü. Die Hilfe funktioniert ohne
+Verbindung zum Wartungslistener. Für die Hilfe zu einem einzelnen Befehl hängst
+du `--help` an diesen Befehl an:
+
+```bash
+docker compose exec --user mardu server /app/maintenance/mardu-admin --help
+docker compose exec --user mardu server /app/maintenance/mardu-admin user reset-password --help
+```
+
+`mardu-admin` ist die CLI für Kontowiederherstellung und Serverdiagnose. Die
+separate Geräte- und Signatur-CLI `mardu-management` hat andere Befehle.
+
+## Konten und Anmeldesitzungen
+
+Die folgende Tabelle zeigt den Teil des Aufrufs hinter
+`/app/maintenance/mardu-admin`. Ersetze `admin@example.com` durch die
+E-Mail-Adresse des Zielkontos.
+
+| Befehl                                                      | Wirkung                                                                                                                                                                                 |
+| ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `user show --email admin@example.com`                       | Zeigt ID, E-Mail-Adresse, Benutzername, Aktivierung, E-Mail-Bestätigung, zeitliche Kontosperre, MFA-Status, Passwortwechselpflicht und Unterstützung lokaler Passwortwiederherstellung. |
+| `user reset-password --email admin@example.com`             | Setzt ein temporäres Passwort, verlangt einen Wechsel beim nächsten Login und widerruft bestehende Anmeldesitzungen.                                                                    |
+| `user reset-password --email admin@example.com --permanent` | Setzt das eingegebene Passwort dauerhaft und widerruft bestehende Anmeldesitzungen.                                                                                                     |
+| `user unlock --email admin@example.com`                     | Setzt Fehlversuchszähler und zeitliche Kontosperre zurück.                                                                                                                              |
+| `session revoke --email admin@example.com`                  | Widerruft die Anmeldesitzungen des Kontos, ohne dessen Passwort zu ändern.                                                                                                              |
+
+`--email` ist für diese Befehle erforderlich. Änderungen verlangen ein
+interaktives Terminal und die Bestätigung des angezeigten Zielkontos. Die beiden
+Reset-Varianten fragen das neue Passwort zweimal verdeckt ab. Es gibt keinen
+Parameter zur Passwortübergabe und keinen Modus für Änderungen ohne Bestätigung.
+
+Beispiel zum Aufheben einer zeitlichen Kontosperre:
+
+```bash
+docker compose exec --user mardu server /app/maintenance/mardu-admin \
+  user unlock --email admin@example.com
+```
+
+Beispiel zum Widerrufen aller Anmeldesitzungen:
+
+```bash
+docker compose exec --user mardu server /app/maintenance/mardu-admin \
+  session revoke --email admin@example.com
+```
+
+Aktivierung, E-Mail-Bestätigung und MFA-Vorgaben werden durch diese Aktionen nicht
+geändert. Extern verwaltete Konten und Konten ohne lokales Passwort unterstützen
+keinen lokalen Passwort-Reset.
+
+## Diagnose und JSON-Ausgabe
+
+| Befehl           | Ergebnis                                                                    |
+| ---------------- | --------------------------------------------------------------------------- |
+| `system doctor`  | Gesamtzustand und Ergebnisse der im Server registrierten Zustandsprüfungen. |
+| `system version` | CLI-Version, Serverversion und Version des Wartungsprotokolls.              |
+
+Beide Befehle benötigen einen erreichbaren Wartungslistener. `--json` ist bei
+`user show`, `system doctor` und `system version` verfügbar. Diese lesenden
+Befehle benötigen kein interaktives Terminal. Mit `-T` schaltest du die
+Terminalzuweisung durch Docker Compose aus:
+
+```bash
+docker compose exec -T --user mardu server /app/maintenance/mardu-admin system doctor --json
+```
+
+Die Ergebnisse lesender Befehle enthalten mit `--json` keine Panels, Tabellen,
+Farben oder Statusanimationen und können als JSON eingelesen werden. Fehler
+werden weiterhin als Meldung ausgegeben; beachte zusätzlich den Rückgabewert.
+
+Die Diagnose-JSON-Ausgabe enthält `status` und `checks`: den Gesamtzustand sowie
+Prüfnamen mit den Zuständen `Healthy`, `Degraded` oder `Unhealthy`.
+Die Versionsausgabe enthält `cliVersion` und `server` mit `version` und
+`protocolVersion`. Das Feld `hasLocalPassword` der Kontoausgabe entspricht der
+Tabellenzeile **Local password recovery**; es gibt an, ob der lokale Wartungs-Reset
+unterstützt wird.
+Passwort-Hashes, Tokens und MFA-Geheimnisse werden nicht ausgegeben.
+
+Ein erfolgreich ausgeführter Diagnosebefehl kann einen eingeschränkten
+Serverzustand melden. Beachte deshalb bei automatisierten Prüfungen auch den
+Rückgabewert.
+
+## Rückgabewerte
+
+| Wert  | Bedeutung                                                                                                                               |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `0`   | Befehl erfolgreich; bei `system doctor` sind die eingerichteten Zustandsprüfungen `Healthy`. Auch das Beenden des Menüs liefert `0`.    |
+| `1`   | Aktion fehlgeschlagen, Kontoänderung ohne interaktives Terminal aufgerufen oder Diagnose meldet `Degraded` beziehungsweise `Unhealthy`. |
+| `2`   | Ungültiger Aufruf oder Menüstart ohne interaktives Terminal.                                                                            |
+| `69`  | Lokaler Wartungszugriff nicht erreichbar.                                                                                               |
+| `130` | Bestätigung abgelehnt oder Ausführung abgebrochen. Nach bereits gesendeter Anfrage den Kontostatus prüfen.                              |
+
+## Verbindung und Konfiguration
+
+Der Wartungszugriff verwendet einen Unix-Socket: eine lokale Verbindung über
+einen Dateipfad innerhalb des Containers. Es wird kein zusätzlicher Netzwerkport
+veröffentlicht. Standardpfad im API-Container:
+
+```text
+/app/Private/Maintenance/control.sock
+```
+
+| Einstellung der API            | Standard                                                         | Wirkung                                                                                                                                  |
+| ------------------------------ | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `LocalMaintenance__Enabled`    | `true`                                                           | Aktiviert den Wartungslistener unter Linux und macOS im Normalbetrieb. `false` deaktiviert ihn. Änderungen benötigen einen API-Neustart. |
+| `LocalMaintenance__SocketPath` | `Private/Maintenance/control.sock` unter dem Server-Content-Root | Optionaler absoluter Alternativpfad. API und CLI müssen denselben Pfad verwenden. Änderungen benötigen einen API-Neustart.               |
+
+Im Docker-Betrieb sind keine Änderungen an diesen Einstellungen nötig.
+Einen abweichenden Pfad kannst du für einen CLI-Aufruf ausdrücklich übergeben,
+beispielsweise beim Prüfen der Version:
+
+```bash
+docker compose exec --user mardu \
+  -e LocalMaintenance__SocketPath=/app/Private/Maintenance/control.sock \
+  server /app/maintenance/mardu-admin system version
+```
+
+Das Beispiel verwendet den Standardpfad. Ersetze ihn nur durch den absoluten
+Pfad, auf dem der laufende Server seinen Wartungslistener bereitstellt. Die
+Umgebungsvariable im Aufruf verschiebt keinen Socket und ändert keine API-Einstellung.
+
+Das Socket-Verzeichnis ist auf den Serverbenutzer beschränkt (`0700`), der Socket
+selbst auf Lesen und Schreiben durch diesen Benutzer (`0600`). Verwende bei
+abweichenden Pfaden ein eigenes Verzeichnis, dessen Rechte beim Start angepasst
+werden dürfen. Hebe diese Beschränkungen nicht auf, um Zugriffsfehler zu umgehen;
+führe die CLI als `mardu` aus.
+
+Änderungen werden mit dem Zielkonto und der lokalen Betreiberidentität
+`local-maintenance` protokolliert. Diese Identität bezeichnet den Zugriff über
+das Wartungswerkzeug, nicht eine Anmeldung eines Mardu-Benutzers. Passwörter,
+Hashes und Reset-Tokens werden nicht als Audit-Werte gespeichert.
