@@ -156,6 +156,71 @@ Du brauchst Leserechte für die Gruppe und die angezeigten Zuordnungen. Zum Änd
 
 **Ergebnis:** Die Gruppendaten und ausgewählten Zuordnungen werden gespeichert. Wird eine Person aus der Gruppe entfernt, entfallen die Rollen aus dieser Gruppe. Direkte Rollen und Rollen aus anderen Gruppen gelten weiterhin.
 
+### Zugangs-Tags prüfen und benennen
+
+Öffne ein Benutzerkonto unter **„Personen“ → „Benutzer“** und wähle **„Tags“**.
+Jeder Tag zeigt Name, gespeicherten Status, kopierbare **Tag-ID**, Erstellungs-
+und Änderungsdatum sowie seine Gültigkeitsgrenzen. **„Erstellt am“** bezeichnet
+die Anlage des Tag-Datensatzes, keinen separaten Zeitpunkt der Zuweisung.
+Fehlende Zeitpunkte erscheinen als **„Unbekannt“**. Ein aktiver Status allein
+bestätigt keine Zutrittsberechtigung.
+
+Der Bereich **„Support: technische Daten“** ist zunächst eingeklappt. Öffne ihn
+für Fehlersuche oder Rückfragen an den Support. Er zeigt DESFire-Anwendungs-ID
+(AID), UID-Hash, Schlüsselplatz und die Versionen von Anwendungsschlüssel und
+Dateilayout mit kurzen Erklärungen. Die Angaben stammen aus der Einrichtung;
+es findet keine aktuelle Prüfung der physischen Karte statt. Verwende die
+**Tag-ID**, um einen gespeicherten Tag eindeutig zu benennen.
+
+Zum Zuweisen und Umbenennen brauchst du das Recht **„Tags bearbeiten“**
+(`Permissions.Tags.Update`).
+
+1. Beim **„Zugangs-Tag zuweisen“** kannst du vor dem Start einen Namen eingeben.
+   Er ist optional und darf nach dem Entfernen äußerer Leerzeichen höchstens
+   100 Zeichen enthalten.
+2. Zum späteren Ändern wähle **„Umbenennen“**, ändere **„Name“** und bestätige
+   im Dialog mit **„Speichern“**. Eine leere Eingabe entfernt den Namen.
+3. Prüfe den gespeicherten Namen in der Tag-Karte. Ohne Namen erscheint
+   **„Unbenannter Zugangs-Tag“**.
+
+**Ergebnis:** Die Bezeichnung ist unmittelbar gespeichert. **„Abbrechen“** im
+Benutzerformular macht diese Änderung nicht rückgängig. Umbenennen beschreibt
+die physische Karte nicht erneut und verändert weder Status noch Gültigkeit.
+Bei einem Fehler bleibt die Eingabe im Dialog erhalten; prüfe die Meldung und
+versuche es erneut. Wird ein Tag zwischenzeitlich gelöscht, lade die Benutzeransicht neu.
+
+#### Verlorenen Tag sperren
+
+1. Wähle an der betreffenden Tag-Karte **„Als verloren melden“**.
+2. Prüfe im Bestätigungsfenster Namen und Tag-ID und bestätige **„Dauerhaft sperren“**.
+3. Prüfe **„Verloren · gesperrt“** und **„Verlust gemeldet am“** in der Tag-Karte.
+
+**Ergebnis:** Der Server speichert den Zeitpunkt der ersten Verlustmeldung und
+sperrt den Tag. Die Sperre ist sofort gespeichert; **„Abbrechen“** im Benutzerformular
+macht sie nicht rückgängig. Der Tag bleibt dem Benutzer zugeordnet; Kennung, Name und bisherige
+Einrichtung werden nicht gelöscht. Eine wiederholte Meldung ändert den ersten
+Verlustzeitpunkt nicht. Zum Melden brauchst du **„Tags bearbeiten“**
+(`Permissions.Tags.Update`).
+
+Neue vom Server geprüfte Zutrittsanfragen mit diesem Tag werden abgewiesen.
+Laufende Nutzungen werden dadurch nicht beendet, und die physische Karte wird
+nicht neu beschrieben. Ein als verloren gemeldeter Tag kann nicht wieder
+aktiviert werden; richte bei Bedarf einen Ersatz-Tag ein.
+
+Scheitert die Anfrage, bleibt die Bestätigung geöffnet. Prüfe nach einem
+Netzwerkfehler den gespeicherten Stand. Bei einer zwischenzeitlichen Änderung
+lade die Benutzeransicht neu und versuche es erneut. Bei erneutem Aufruf eines
+bereits gemeldeten Tags bleibt der erste Verlustzeitpunkt erhalten.
+
+#### Tag-Datensatz löschen
+
+Wähle **„Tag löschen“**, wenn du den gespeicherten Tag-Datensatz löschen möchtest.
+Prüfe vor dem Bestätigen die Löschvorschau. Dafür brauchst du das Recht
+**„Tags löschen“** (`Permissions.Tags.Delete`).
+
+Zum Dokumentieren eines Verlusts verwende **„Als verloren melden“**. Diese Aktion
+sperrt den Tag und erhält seinen Datensatz.
+
 ### Zugangsentscheidungen und Sitzungen prüfen
 
 1. Öffne die Benutzerdetails und wähle **„Metriken“**.

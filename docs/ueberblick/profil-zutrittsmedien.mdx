@@ -10,6 +10,16 @@ zugeordneten NFC-Karten und Transponder.
 
 Suche nach Name oder Kennung und prüfe Status sowie Gültigkeitszeitraum.
 
+Jedes Medium zeigt seine **Tag-ID**, **Erstellt am** und **Zuletzt geändert am**.
+Mit **„Tag-ID kopieren“** übernimmst du die vollständige Kennung für Rückfragen.
+Das Erstellungsdatum bezeichnet die Anlage des Tag-Datensatzes; es ist kein
+separater Zeitpunkt der Benutzerzuweisung. Das Änderungsdatum kann bei der
+Anlage identisch sein. Nicht verfügbare Zeitpunkte erscheinen als **„Unbekannt“**.
+
+Ohne Namen erscheint **„Unbenannter Zugangs-Tag“**. Fehlen beide Gültigkeitsgrenzen,
+steht dort **„Keine Gültigkeitsbegrenzung“**. Namen können in der Benutzerverwaltung
+geändert werden; dort werden auch die technischen Details angezeigt.
+
 | Status | Bedeutung |
 | --- | --- |
 | Einrichtung ausstehend | Einrichtung noch nicht abgeschlossen. |
@@ -30,3 +40,9 @@ Fiktive Medien und Kennungen.
 Prüfe Suche und Server; wiederhole fehlgeschlagene Abfragen.
 Melde einen Verlust sofort an deinen Standort und nenne die Bezeichnung.
 Eine Verlustsperre oder Ersatzbestellung ist in dieser Ansicht nicht möglich.
+
+Nach der Verlustmeldung in der Benutzerverwaltung zeigt das Medium
+**„Verloren · gesperrt“** und **„Verlust gemeldet am“** mit dem gespeicherten Zeitpunkt.
+Die Karte bleibt sichtbar. Neue vom Server geprüfte Zutrittsanfragen werden
+abgewiesen; laufende Nutzungen werden dadurch nicht beendet. Ein als verloren
+gemeldeter Tag kann nicht wieder aktiviert werden.
