@@ -6,10 +6,11 @@ description: Geräte aufnehmen, Anschlüsse konfigurieren, Verbindungen prüfen 
 import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 import { ImageZoom } from "fumadocs-ui/components/image-zoom";
 import { Step, Steps } from "fumadocs-ui/components/steps";
-import screenshot1 from "./bilder/geraet-registrieren.png";
 import screenshot2 from "./bilder/geraet-anschluesse.png";
 
 Unter **Geräte** im Dashboard verwaltest du Controller und ihre Anschlüsse, etwa Kartenleser und Schaltausgänge. Welchen Raum oder welche Maschine ein Anschluss steuert, legst du an der [Ressource unter Technik](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen) fest.
+
+Die Aufnahme eines Geräts legt keine Ressource an. Lege benötigte Ressourcen unter **Ressourcen** an und ordne dort die Anschlüsse zu.
 
 ## Gerät hinzufügen und verbinden
 
@@ -25,26 +26,11 @@ Du brauchst:
 
     Öffne **Geräte → Gerät hinzufügen**. Gib eine **Technische Gerätekennung** mit 4–160 Zeichen ein, zum Beispiel `controller-holzwerkstatt`.
 
-    Wähle bei Bedarf eine **Installationsressource**. Dafür brauchst du zusätzlich Ressourcen-Leserechte. Sie beschreibt den Installationsort des Controllers; die Zuordnung seiner Anschlüsse erfolgt später an der Ressource.
-
   </Step>
   <Step>
     ### Aufnahmedaten importieren und speichern
 
     Importiere unter **Geräteaufnahme** die JSON-Datei oder füge ihren Inhalt ein. Behebe angezeigte Validierungsfehler und wähle **Gerät erstellen**.
-
-    <figure className="my-6 max-w-xl">
-      <ImageZoom
-        src={screenshot1}
-        unoptimized
-        alt="Registrierungsformular mit Gerätekennung, optionaler Installationsressource und Import der Aufnahmedaten."
-        rmiz={{
-          a11yNameButtonZoom: "Bild vergrößern",
-          a11yNameButtonUnzoom: "Bild schließen",
-        }}
-      />
-      <figcaption>Geräteaufnahme mit fiktiven Beispieldaten.</figcaption>
-    </figure>
 
     **Ergebnis:** Das Gerät erscheint in der Liste. Die Netzwerkaufnahme läuft anschließend; eine gültige Datei allein bestätigt noch keine Verbindung.
 
@@ -68,19 +54,11 @@ Du brauchst:
     Konflikt bei Netzwerkidentität oder Seriennummer, gleiche die Datei mit dem
     vorhandenen Gerät ab, bevor du erneut importierst.
   </Accordion>
-  <Accordion title="Automatisch angelegte Ressourcen">
-    Bei aktivierter automatischer Ressourcenanlage kann für ein erkanntes Gerät
-    ohne Installationsressource ein Ressourcenentwurf entstehen. Richte dessen
-    [Nutzung und
-    Zugriff](../koordination/ressourcen.mdx#nutzung-und-zugriff-nutzung-erlauben)
-    ein, bevor du die Ressource verwendest. Buchungsdisplays werden einer
-    vorhandenen Ressource zugeordnet.
-  </Accordion>
 </Accordions>
 
 ## Übersicht und Verbindungsstatus
 
-Öffne das Gerät und wähle **Übersicht**. Mit Geräte-Änderungsrechten bearbeitest du **Technische Gerätekennung** und **Installationsressource** und wählst **Speichern**. Das Gerätemodell wird automatisch erkannt. Entfernst du die Installationsressource, bleiben vorhandene Anschlusszuordnungen erhalten.
+Öffne das Gerät und wähle **Übersicht**. Mit Geräte-Änderungsrechten bearbeitest du **Technische Gerätekennung** und wählst **Speichern**. Das Gerätemodell wird automatisch erkannt. Ressourcen werden über die Anschlusszuordnungen unter **Ressource → Technik** zugeordnet.
 
 Unter **Verbindung und Hardware** findest du Netzwerkanbindung, letzte Verbindung, Firmwareversion und Hardwareadresse. **Online** bedeutet, dass innerhalb der letzten fünf Minuten eine Meldung eingegangen ist. Prüfe die Bereitschaft der benötigten Anschlüsse zusätzlich unter **Anschlüsse**; die Online-Anzeige bestätigt keinen physischen Tür- oder Schaltzustand.
 
@@ -206,14 +184,14 @@ Beende vor dem Austausch laufende Zugriffssitzungen und kläre ausstehende Befeh
 
 **Ergebnis:** Die Ressource verwendet die neuen Anschlüsse. Nutzungsregeln bleiben an der Ressource; die Zuordnungshistorie bleibt erhalten.
 
-Das alte Gerät bleibt bei vorhandener Zugriffshistorie als Datensatz erhalten. Die Geräteansicht bietet keine eigene Aktion zum Stilllegen oder Archivieren an. **Aufnahme abbrechen** beendet nur eine noch ausstehende Aufnahme und meldet kein bereits aufgenommenes Gerät ab.
+Das alte Gerät bleibt nach dem Austausch zunächst als Datensatz erhalten. Die Geräteansicht bietet keine eigene Aktion zum Stilllegen oder Archivieren an. **Aufnahme abbrechen** beendet nur eine noch ausstehende Aufnahme und meldet kein bereits aufgenommenes Gerät ab.
 
 ### Ungenutztes Gerät löschen
 
-Du brauchst Geräte-Lese- und Löschrechte. Aktive Anschlusszuordnungen und vorhandene Zugriffshistorie verhindern die Löschung. Eine zugehörige Ressource bleibt erhalten.
+Du brauchst Geräte-Lese- und Löschrechte. Aktive Anschlusszuordnungen, laufende Zugriffssitzungen und ungeklärte Vorgänge können die Löschung verhindern. Abgeschlossene Historie und zugehörige Ressourcen bleiben nach der Löschung erhalten.
 
 1. Öffne in der Geräteliste das Aktionsmenü des ungenutzten Geräts und wähle **Löschen**.
-2. Prüfe die Löschvorschau. Löse noch benötigte Zuordnungen erst nach dem oben beschriebenen Austausch; bei vorhandener Zugriffshistorie bleibt der Datensatz erhalten.
+2. Prüfe die Löschvorschau. Löse noch benötigte Zuordnungen erst nach dem oben beschriebenen Austausch. Beende offene Sitzungen und kläre ausstehende Befehle.
 3. Bestätige **Löschen**, wenn keine Verwendung die Löschung verhindert.
 
 **Ergebnis:** Der Server meldet das Gerät vom Netzwerk ab und löscht den Datensatz. Schlägt die Netzwerkabmeldung fehl, bleibt der Datensatz erhalten. Öffne in diesem Fall die Geräteliste erneut und prüfe die Fehlermeldung, bevor du die Löschung wiederholst.
