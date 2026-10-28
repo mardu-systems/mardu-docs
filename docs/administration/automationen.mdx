@@ -1,6 +1,6 @@
 ---
 title: Automationen
-description: Node-RED-Anschlüsse veröffentlichen, Ressourcen zuordnen und außer Betrieb nehmen.
+description: Node-RED-Anschlüsse veröffentlichen, Ressourcen zuordnen und mit einem bestätigten Deploy entfernen.
 ---
 
 Node-RED kann eigene Schalter und Messwerte als benannte **Anschlüsse** in Mardu veröffentlichen. Ein Anschluss gehört zur vorhandenen Mardu-Verbindung und wird einer Ressource zugeordnet. Ein gewöhnlicher Ein/Aus-Schalter ist keine Maschinenfreigabe.
@@ -11,7 +11,7 @@ Unter **Einstellungen → Integrationen → Automationen** gibt es einen gemeins
 
 Node-RED kann alle unterstützten Ressourcen lesen und registrierte Aktionen ausführen. Einzelne Ressourcen-, Aktions- oder Datenfreigaben musst du nicht einrichten. Eine Änderung an einem Flow kann deshalb auch andere Ressourcen steuern oder laufende Sitzungen beenden. Anschlusszuordnungen und Prüfungen für eine Maschinenfreigabe gelten weiterhin.
 
-Zusätzliche Zugriffsprüfungen richtest du unter **Flow-Einstellungen** im Editor ein. Wähle den Flow, seine Ressourcen und die Antwortfrist. Diese Auswahl legt fest, wo eine Freigabe auf den Flow warten muss. Das Deaktivieren von Automationen entfernt gespeicherte Flow-Anforderungen und Anschlusszuordnungen nicht.
+Zusätzliche Zugriffsprüfungen richtest du unter **Flow-Einstellungen** im Editor ein. Wähle den Flow, seine Ressourcen und die Antwortfrist. Diese Auswahl legt fest, wo eine Freigabe auf den Flow warten muss. Die vier Ressourcenkataloge laden unabhängig. Ein Ladefehler wird angezeigt und macht gespeicherte Referenzen nicht zu gelöschten Ressourcen. Du kannst eine Regel erst speichern, wenn die ausgewählten Ressourcen geprüft wurden. Fehlende Referenzen ausdrücklich entfernen oder ersetzen; die gesamte Anforderung lässt sich auch während eines Ausfalls entfernen. Das Deaktivieren von Automationen entfernt gespeicherte Flow-Anforderungen und Anschlusszuordnungen nicht.
 
 ## Voraussetzungen
 
@@ -20,10 +20,10 @@ Node-RED und das Automationsmodul müssen eingerichtet und erreichbar sein. Verw
 ## Einen Schalter veröffentlichen
 
 1. Im Node-RED-Editor einen **Schaltaktor** anlegen und unter **Mardu-Anschluss** einen Anschluss konfigurieren.
-2. **Name in Mardu**, vorhandene **Mardu-Verbindung** und einen eindeutigen **Anschlussschlüssel** eingeben. Der Name kann später geändert werden. Der Schlüssel bleibt nach dem Anlegen unveränderlich; für einen anderen Anschluss einen neuen Config-Node verwenden.
+2. **Name in Mardu**, vorhandene **Mardu-Verbindung** und einen eindeutigen **Anschlussschlüssel** eingeben. Der Name kann später geändert werden. Bis zur ersten Veröffentlichung kannst du den Schlüssel korrigieren. Danach bleibt er unveränderlich; für einen anderen Anschluss einen neuen Config-Node verwenden.
 3. Als **Anschlussart** einen **Schaltausgang** und unter **Funktionen** die Funktion **Ein/Aus** wählen.
 4. Den Ausgang mit dem Geräteprotokoll verbinden. Nur die bestätigte Geräteantwort zum Eingang des Schaltaktors zurückführen. Die Übertragung eines Befehls bestätigt noch keine Ausführung. Die Node-Hilfe beschreibt das Nachrichtenformat.
-5. **Deploy** ausführen. Ein gespeicherter Anschluss ohne aktiven Aktor- oder Beobachtungsnode wird nicht veröffentlicht.
+5. **Deploy** ausführen. Erst ein gestarteter Aktor- oder passender Beobachtungsnode veröffentlicht den verwendeten Anschluss. Ein gespeicherter Anschluss allein genügt nicht.
 6. In Mardu die Ressource öffnen und unter **Technik → Schalter** den **Zugeordneten Anschluss** wählen und speichern.
 
 **Beschriftung im Flow** ändert nur den einzelnen Node. **Name in Mardu** ändert den Namen in der Mardu-Auswahl. Belegte Anschlüsse stehen nicht für eine weitere aktive Zuordnung zur Verfügung.
@@ -69,18 +69,60 @@ Geräte- und Node-RED-Anschlüsse stehen gemeinsam unter **Technik**. Die Verwen
 3. Liegt beim Schalter keine aktuelle Aus-Bestätigung vor, weist der Dialog darauf hin, dass die Hardware weiterhin eingeschaltet sein kann. **Zuordnung lösen** trennt nur Mardu von diesem Anschluss und sendet keinen Abschaltbefehl. Du kannst die Zuordnung ausdrücklich trotzdem lösen, etwa wenn die Hardware ausgefallen ist.
 4. Verliert ein Zugang seinen letzten benötigten Leser oder Freigabeaktor, wird dieser Zugang mit der Bestätigung im selben Vorgang deaktiviert. Andere Zugänge, Ressource, Berechtigungen und Historie bleiben erhalten. Nach neuer Zuordnung wird der Zugang nicht automatisch wieder aktiviert.
 
-Das Entfernen des Nodes in Node-RED ist davon getrennt. Es löst die Zuordnung in Mardu nicht automatisch.
+Diese Schritte lösen eine Zuordnung, während der Node bestehen bleibt. Zum Entfernen des Anschlusses in Node-RED genügt stattdessen der folgende bestätigte Deploy.
+
+## Einen Anschluss in Node-RED entfernen
+
+1. Laufende Sitzungen beenden und ausstehende Schaltaufträge abschließen lassen.
+2. Den Anschluss-Config-Node oder seinen letzten veröffentlichenden Node beziehungsweise
+   Schaltausgang entfernen und **Deploy** wählen. Solange ein weiterer Node denselben Anschluss
+   veröffentlicht, bleibt er bestehen.
+3. Die Vorschau prüfen. Sie nennt entfernte Anschlüsse, gelöste Zuordnungen und Zugangspunkte,
+   die ohne benötigten Leser oder Freigabeaktor deaktiviert werden. Solange Sitzungen oder
+   Aufträge offen sind, bleibt der Deploy blockiert.
+4. Fehlt beim direkt zugeordneten Schalter eine aktuelle Aus-Bestätigung, ausdrücklich bestätigen, dass Hardware eingeschaltet
+   bleiben kann. Das Entfernen sendet keinen Abschaltbefehl. Die angezeigte Deaktivierung
+   unvollständiger Zugangspunkte ebenfalls ausdrücklich bestätigen.
+5. **Deploy bestätigen** wählen. Erst nachdem Mardu den gespeicherten Flow geprüft hat, werden
+   die bisherigen Zuordnungen inaktiv. Ressource, Berechtigungen, Beobachtungen und Historie
+   bleiben erhalten. Ein weiterer Stilllegen- oder Wiederherstellen-Schritt ist nicht nötig.
+
+Bei einer bekannten Ablehnung bleiben die Zuordnungen bestehen. Bei verlorener Antwort zeigt
+Mardu die ausstehende Prüfung. Bis zum Ergebnis keinen weiteren Deploy starten.
+**Status erneut prüfen** fragt denselben Vorgang ab und schaltet keine Hardware erneut.
+
+Wird der Anschluss später mit derselben Mardu-Verbindung und demselben Schlüssel wieder
+veröffentlicht, erhält er dieselbe ID. Frühere Zuordnungen und deaktivierte Zugangspunkte
+werden nicht automatisch aktiviert. Ordne den Anschluss für die neue Verwendung erneut zu.
+
+## Einen Anschluss bearbeiten
+
+**Name in Mardu** kannst du auch bei bestehender Zuordnung ändern. Art, Funktionen und
+Geräteabschaltung sind bei aktiver Zuordnung gesperrt. Löse zuerst die Zuordnung in Mardu,
+wenn diese Eigenschaften geändert werden müssen. Vor dem Deploy prüft Mardu die Auswirkungen
+erneut; inzwischen geänderte Zuordnungen oder Flows erfordern eine neue Vorschau.
 
 ## Wenn ein Node oder die Verbindung ausfällt
 
-Das Entfernen eines Nodes löst keine Ressourcenzuordnung in Mardu. Nach dem Deploy wird der Anschluss zurückgezogen; bei einem Ausfall gilt er standardmäßig nach 45 Sekunden ohne Lebenszeichen als **Nicht erreichbar**. Die Ressource zeigt die gespeicherte Zuordnung weiterhin. Stelle den Node mit demselben Anschluss wieder her oder löse die Zuordnung mit ausdrücklicher Bestätigung, falls eine Aus-Rückmeldung nicht mehr möglich ist. Die Node-RED-Dialoge zeigen vorhandene Zuordnungen und, im eingebetteten Editor, einen Link zur Ressource.
+Deaktivierte Nodes, deaktivierte Flows und Verbindungsabbrüche lösen keine Zuordnung.
+Bei einem Ausfall gilt der Anschluss standardmäßig nach 45 Sekunden ohne Lebenszeichen
+als **Nicht erreichbar**; die Ressource zeigt die gespeicherte Zuordnung weiterhin.
+Aktiviere denselben Node wieder oder stelle die Verbindung her. Falls die Hardware nicht
+mehr erreichbar ist, lässt sich die Zuordnung mit der beschriebenen ausdrücklichen
+Bestätigung lösen. Die Node-RED-Dialoge zeigen vorhandene Zuordnungen und im eingebetteten
+Editor einen Link zur Ressource.
+
+Das erfolgreiche Löschen einer Ressource entfernt deren eigene technische Zuordnungen nach
+der vorhandenen Löschvorschau. Die Anschlüsse und Node-RED-Nodes bleiben bestehen und können
+für eine andere Ressource verwendet werden. Laufende Vorgänge und die weiteren Löschsperren
+der Ressource müssen vorher behoben sein.
 
 ## Wenn das Verbinden fehlschlägt
 
 **Verbindung reparieren** erneuert den Mardu-Zugang für die bestehende Instanz. Gespeicherte Flows bleiben erhalten. Prüfe anschließend **Verbindung prüfen**. Ein einzelner fehlerhafter Anschluss wird im Node-RED-Editor am betroffenen Node gemeldet und trennt die übrige Verbindung nicht.
 
-Anschlussschlüssel enthalten nur Kleinbuchstaben, Ziffern, Punkte und Bindestriche und beginnen mit einem Kleinbuchstaben. Verwende zum Beispiel `holz.q1`; `holz.Q1` ist ungültig. Der Anzeigename darf davon unabhängig Großbuchstaben enthalten. Ein ungültiger und daher nicht veröffentlichter Schlüssel lässt sich im Anschlussdialog korrigieren. Für einen gültigen gespeicherten Anschluss bleibt der Schlüssel unveränderlich, damit seine Identität erhalten bleibt.
+Anschlussschlüssel enthalten nur Kleinbuchstaben, Ziffern, Punkte und Bindestriche und beginnen mit einem Kleinbuchstaben. Verwende zum Beispiel `holz.q1`; `holz.Q1` ist ungültig. Der Anzeigename darf davon unabhängig Großbuchstaben enthalten. Ein noch nicht veröffentlichter Schlüssel lässt sich im Anschlussdialog korrigieren. Nach der ersten Veröffentlichung bleibt der Schlüssel unveränderlich, damit seine Identität erhalten bleibt. Ein Fehler beim Laden des Anschlussstatus gilt nicht als Nachweis, dass der Anschluss noch nicht veröffentlicht wurde.
 
 ## Gemeinsamer Versionswechsel
 
-Der Anschlussvertrag gehört zu Node-Paket 1.0.0. Backend, Web und Node-RED müssen gemeinsam umgestellt werden. Die Datenbank übernimmt vorhandene gespeicherte Daten. Eigene Flows müssen den neuen Vertrag verwenden; es gibt keine Legacy-Aliase oder Flow-Konverter. Vorhandene Geräte-Endpunkt-Nodes werden durch den Node **Anschluss lesen** mit Ressourcentyp `resource-endpoint` ersetzt.
+Der Anschlussvertrag gehört zu Node-Paket 1.0.0. Backend, Web und das verwaltete Node-RED-Image müssen gemeinsam umgestellt werden. Der bestätigte Deploy benötigt dessen Mardu-Editor-Anpassungen; eine externe ungepatchte Node-RED-Installation bietet diesen Ablauf nicht. Die Datenbank übernimmt vorhandene gespeicherte Daten. Eigene Flows müssen den neuen Vertrag verwenden; es gibt keine Legacy-Aliase oder Flow-Konverter. Vorhandene Geräte-Endpunkt-Nodes werden durch den Node **Anschluss lesen** mit Ressourcentyp `resource-endpoint` ersetzt.
