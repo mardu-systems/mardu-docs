@@ -116,22 +116,22 @@ stammen aus der vorhandenen Weboberfläche auf dem lokalen Docker-Stand, mit
 einem angemeldeten Mitglied, deutscher Sprache und hellem Farbschema. Die
 vorhandenen Qualifikationsbilder und die mobile Profilübersicht bleiben erhalten.
 
-| Anleitung | Neue Aufnahmen |
-| --- | --- |
-| Dashboard | Kennzahlen und Listen mit eigenen Beispieldaten. |
-| Buchungen | Eigene Liste, Erstellungsformular und Details mit Stornierungsbereich. |
-| Kalender | Aktives Abo mit Ersetzen und Widerrufen, ohne persönlichen Link. |
-| Zugänge & Ressourcen | Eigene Freigabe, Katalog und mobile Ressourcenkarte. |
-| Berechtigungsanfragen | Offener und genehmigter eigener Antrag, Rücknahmeaktion. |
-| Benachrichtigungen | Persönliche Buchungs- und Nachweismeldungen statt Betriebsalarme. |
-| Profil | Kontaktformular und Profilbildbereich ohne Foto. |
-| Anmeldesicherheit | Passwortdialog und Zwei-Faktor-Bereich vor der Schlüsselerzeugung. |
-| Sitzungen | Aktuelle und weitere fiktive Sitzung mit getrennten Aktionen. |
-| Zutrittsmedien | Aktive Karte und deaktivierter Transponder mit Gültigkeit. |
-| Benachrichtigungseinstellungen | Kanäle und Ruhezeiten. |
-| Erscheinungsbild | Mobile Theme-Auswahl und Bedienhilfen. |
-| Nachweisquellen | Verbindungswege bei noch nicht angebotenem Anbieter. |
-| MCP | Tatsächlich deaktivierte Serverfunktion. |
+| Anleitung                      | Neue Aufnahmen                                                         |
+| ------------------------------ | ---------------------------------------------------------------------- |
+| Dashboard                      | Kennzahlen und Listen mit eigenen Beispieldaten.                       |
+| Buchungen                      | Eigene Liste, Erstellungsformular und Details mit Stornierungsbereich. |
+| Kalender                       | Aktives Abo mit Ersetzen und Widerrufen, ohne persönlichen Link.       |
+| Zugänge & Ressourcen           | Eigene Freigabe, Katalog und mobile Ressourcenkarte.                   |
+| Berechtigungsanfragen          | Offener und genehmigter eigener Antrag, Rücknahmeaktion.               |
+| Benachrichtigungen             | Persönliche Buchungs- und Nachweismeldungen statt Betriebsalarme.      |
+| Profil                         | Kontaktformular und Profilbildbereich ohne Foto.                       |
+| Anmeldesicherheit              | Passwortdialog und Zwei-Faktor-Bereich vor der Schlüsselerzeugung.     |
+| Sitzungen                      | Aktuelle und weitere fiktive Sitzung mit getrennten Aktionen.          |
+| Zutrittsmedien                 | Aktive Karte und deaktivierter Transponder mit Gültigkeit.             |
+| Benachrichtigungseinstellungen | Kanäle und Ruhezeiten.                                                 |
+| Erscheinungsbild               | Mobile Theme-Auswahl und Bedienhilfen.                                 |
+| Nachweisquellen                | Verbindungswege bei noch nicht angebotenem Anbieter.                   |
+| MCP                            | Tatsächlich deaktivierte Serverfunktion.                               |
 
 Für gefüllte Listen wurden ausschließlich die Antworten der eigenen Datenabfragen
 im Aufnahmebrowser durch fiktive Beispieldaten ersetzt: Alex Mustermann,

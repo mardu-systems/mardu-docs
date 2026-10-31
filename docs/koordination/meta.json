@@ -1,8 +1,4 @@
 {
   "title": "Koordination",
-  "pages": [
-    "buchungen-verwalten",
-    "ressourcen",
-    "bewertungen"
-  ]
+  "pages": ["buchungen-verwalten", "ressourcen", "bewertungen"]
 }

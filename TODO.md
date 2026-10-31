@@ -325,7 +325,7 @@ Formular geprüft, ohne eine Bearbeitungsentscheidung anderer Personen zu simuli
 - [x] 48 MDX-Seiten, 189 lokale Link-/Bildziele, 23 Bilder und die Navigation
       geprüft; keine Befunde. 26 Doku-Tests und die gesamte Website-Suite mit 115
       Tests erfolgreich; Typecheck und Lint der ergänzten Testdatei erfolgreich.
-Externe Anmelde-/Nachweisanbieter, echte Passkey-Geräte, zugestellte E-Mails/SMS/Push
-und Hardware sind nicht live abgenommen. Diese Grenzen werden nicht als bestandene
-Ende-zu-Ende-Abläufe gezählt. Es wurden keine API-/DTO-Verträge oder Dependencies
-verändert und keine Änderungen veröffentlicht.
+      Externe Anmelde-/Nachweisanbieter, echte Passkey-Geräte, zugestellte E-Mails/SMS/Push
+      und Hardware sind nicht live abgenommen. Diese Grenzen werden nicht als bestandene
+      Ende-zu-Ende-Abläufe gezählt. Es wurden keine API-/DTO-Verträge oder Dependencies
+      verändert und keine Änderungen veröffentlicht.

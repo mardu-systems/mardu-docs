@@ -1,9 +1,4 @@
 {
   "title": "Installieren",
-  "pages": [
-    "raspberry-pi",
-    "inbetriebnahme",
-    "abnahme-uebergabe",
-    "stoerung-vor-ort"
-  ]
+  "pages": ["raspberry-pi", "inbetriebnahme", "abnahme-uebergabe", "stoerung-vor-ort"]
 }

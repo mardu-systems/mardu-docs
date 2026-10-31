@@ -3,12 +3,12 @@ title: Ressourcen verwalten
 description: Räume und Maschinen strukturieren, Zugriff und Technik zuordnen sowie Buchbarkeit und Wartung verwalten.
 ---
 
-import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
-import { ImageZoom } from "fumadocs-ui/components/image-zoom";
-import screenshot1 from "./bilder/ressource-allgemein.png";
-import screenshot2 from "./bilder/ressource-zugriff.png";
-import screenshot3 from "./bilder/ressource-technik.png";
-import screenshot4 from "./bilder/ressource-wartung.png";
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import screenshot1 from './bilder/ressource-allgemein.png';
+import screenshot2 from './bilder/ressource-zugriff.png';
+import screenshot3 from './bilder/ressource-technik.png';
+import screenshot4 from './bilder/ressource-wartung.png';
 
 Eine **Ressource** ist ein Raum, eine Maschine oder ein anderes physisches Nutzungsziel. Sie besitzt einen Namen und kann unter einer anderen Ressource liegen, etwa **Werkstatt → Holzwerkstatt → Tischkreissäge**. Geräte stellen technische Anschlüsse bereit; Nutzungsregeln und Buchbarkeit gehören zur Ressource.
 
@@ -17,10 +17,10 @@ Eine **Ressource** ist ein Raum, eine Maschine oder ein anderes physisches Nutzu
 Zum Anzeigen brauchst du Ressourcen-Leserechte. Anlegen, Bearbeiten und Löschen sind getrennte Rechte. Zugriffsregeln, Leser-/Aktorzuordnungen und Freigaben benötigen zusätzlich die jeweiligen Zugriffsrechte und Verwaltungsrechte für diese Ressource. Buchbarkeit verwendet eigene Buchungsressourcen-Rechte. Ein Verwaltungsrecht erlaubt noch keine Nutzung; Rechte auf eine Ressource gelten nicht automatisch für ihre Unterressourcen.
 
 <Callout type="info" title="Änderungen speichern">
-  Speichern gilt für den jeweiligen Bearbeitungsbereich, nicht gemeinsam für
-  alle Reiter. Reiterwechsel erhalten offene Eingaben; beim Schließen musst du
-  sie gegebenenfalls verwerfen. Ein Versionskonflikt wird nicht automatisch
-  überschrieben: Prüfe den aktuellen Stand und übernimm deine Änderungen erneut.
+  Speichern gilt für den jeweiligen Bearbeitungsbereich, nicht gemeinsam für alle Reiter.
+  Reiterwechsel erhalten offene Eingaben; beim Schließen musst du sie gegebenenfalls verwerfen. Ein
+  Versionskonflikt wird nicht automatisch überschrieben: Prüfe den aktuellen Stand und übernimm
+  deine Änderungen erneut.
 </Callout>
 
 ## Allgemein: anlegen und strukturieren
@@ -36,8 +36,8 @@ Der Name hat 1–160 Zeichen und muss unter derselben übergeordneten Ressource 
   src={screenshot1}
   alt="Allgemeine Einstellungen der Tischkreissäge mit Name, Typ und übergeordneter Holzwerkstatt."
   rmiz={{
-    a11yNameButtonZoom: "Bild vergrößern",
-    a11yNameButtonUnzoom: "Bild schließen",
+    a11yNameButtonZoom: 'Bild vergrößern',
+    a11yNameButtonUnzoom: 'Bild schließen',
   }}
 />
 
@@ -86,8 +86,8 @@ Eine Ressource hat eine gemeinsame Zugriffsregel für alle ihre Zutrittspunkte. 
   src={screenshot2}
   alt="Nutzung und Zugriff der Tischkreissäge mit Berechtigungsnachweis und Kompetenzanforderung."
   rmiz={{
-    a11yNameButtonZoom: "Bild vergrößern",
-    a11yNameButtonUnzoom: "Bild schließen",
+    a11yNameButtonZoom: 'Bild vergrößern',
+    a11yNameButtonUnzoom: 'Bild schließen',
   }}
 />
 
@@ -109,8 +109,8 @@ Nimm das [Gerät](../administration/geraete-verwalten.mdx) zuerst auf und konfig
   src={screenshot3}
   alt="Technik der Tischkreissäge mit zugeordnetem Leser und Maschinenfreischaltung."
   rmiz={{
-    a11yNameButtonZoom: "Bild vergrößern",
-    a11yNameButtonUnzoom: "Bild schließen",
+    a11yNameButtonZoom: 'Bild vergrößern',
+    a11yNameButtonUnzoom: 'Bild schließen',
   }}
 />
 
@@ -119,10 +119,9 @@ Ein Zutrittspunkt fasst die technischen Anschlüsse für einen Zugang zusammen. 
 **Ersetzen** zieht eine Zuordnung auf einen kompatiblen Anschluss um; die Historie bleibt erhalten. **Zuordnung lösen** gibt den Anschluss nach Bestätigung frei. Beende vorher laufende Sitzungen und kläre ausstehende Befehle. Verliert ein Zutrittspunkt seinen letzten erforderlichen Leser oder Aktor, wird er gleichzeitig deaktiviert. Andere Punkte bleiben unverändert.
 
 <Callout type="warn" title="Zuordnung lösen schaltet keine Hardware aus">
-  Beim Lösen wird kein Abschaltbefehl gesendet. Für einen direkten Schalter ohne
-  aktuelle Aus-Bestätigung ist eine ausdrückliche Bestätigung erforderlich;
-  aktive Sitzungen und ausstehende Aufträge verhindern das Lösen weiterhin. Ein
-  Austausch erfordert eine aktuelle Aus-Bestätigung.
+  Beim Lösen wird kein Abschaltbefehl gesendet. Für einen direkten Schalter ohne aktuelle
+  Aus-Bestätigung ist eine ausdrückliche Bestätigung erforderlich; aktive Sitzungen und ausstehende
+  Aufträge verhindern das Lösen weiterhin. Ein Austausch erfordert eine aktuelle Aus-Bestätigung.
 </Callout>
 
 Unter **Schalter** kannst du einen kompatiblen externen Ein/Aus-Anschluss zuordnen und mit den nötigen Bedienrechten schalten. **Angeforderter Zustand**, **Gemeldeter Zustand** und **Ausführung** sind getrennte Angaben. Unbekannt bedeutet nicht ausgeschaltet. Die Einrichtung externer Anschlüsse steht unter [Automationen](../administration/automationen.mdx).
@@ -153,8 +152,8 @@ Für einen geplanten Ausfall öffnest du **Ausfälle und Wartung → Sperre anle
   src={screenshot4}
   alt="Ausfälle und Wartung mit einem Wartungsplan für die Tischkreissäge und einer fälligen Prüfung."
   rmiz={{
-    a11yNameButtonZoom: "Bild vergrößern",
-    a11yNameButtonUnzoom: "Bild schließen",
+    a11yNameButtonZoom: 'Bild vergrößern',
+    a11yNameButtonUnzoom: 'Bild schließen',
   }}
 />
 

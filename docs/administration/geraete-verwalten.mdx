@@ -3,10 +3,10 @@ title: Geräte verwalten
 description: Geräte aufnehmen, Anschlüsse konfigurieren, Verbindungen prüfen und Hardware ersetzen.
 ---
 
-import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
-import { ImageZoom } from "fumadocs-ui/components/image-zoom";
-import { Step, Steps } from "fumadocs-ui/components/steps";
-import screenshot2 from "./bilder/geraet-anschluesse.png";
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import screenshot2 from './bilder/geraet-anschluesse.png';
 
 Unter **Geräte** im Dashboard verwaltest du Controller und ihre Anschlüsse, etwa Kartenleser und Schaltausgänge. Welchen Raum oder welche Maschine ein Anschluss steuert, legst du an der [Ressource unter Technik](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen) fest.
 
@@ -49,10 +49,9 @@ Du brauchst:
 
 <Accordions>
   <Accordion title="Vorhandenes Gerät erneut importieren">
-    Ein erneuter Import derselben Aufnahmedaten legt kein zweites Gerät an.
-    Vorhandene Anschlusszuordnungen bleiben erhalten. Meldet der Import einen
-    Konflikt bei Netzwerkidentität oder Seriennummer, gleiche die Datei mit dem
-    vorhandenen Gerät ab, bevor du erneut importierst.
+    Ein erneuter Import derselben Aufnahmedaten legt kein zweites Gerät an. Vorhandene
+    Anschlusszuordnungen bleiben erhalten. Meldet der Import einen Konflikt bei Netzwerkidentität
+    oder Seriennummer, gleiche die Datei mit dem vorhandenen Gerät ab, bevor du erneut importierst.
   </Accordion>
 </Accordions>
 
@@ -98,13 +97,11 @@ Du brauchst Geräte-Lese- und Änderungsrechte. Die verfügbaren Leser, Schaltau
     unoptimized
     alt="Anschlusskarten für Leser und Aktor mit eigenen Einstellungen, Speichern-Schaltflächen und Konfigurationsbestätigungen."
     rmiz={{
-      a11yNameButtonZoom: "Bild vergrößern",
-      a11yNameButtonUnzoom: "Bild schließen",
+      a11yNameButtonZoom: 'Bild vergrößern',
+      a11yNameButtonUnzoom: 'Bild schließen',
     }}
   />
-  <figcaption>
-    Leser und Aktor eines Maschinencontrollers mit fiktiven Beispieldaten.
-  </figcaption>
+  <figcaption>Leser und Aktor eines Maschinencontrollers mit fiktiven Beispieldaten.</figcaption>
 </figure>
 
 | Rückmeldung                        | Bedeutung                                                                                                      |
@@ -119,9 +116,8 @@ Du brauchst Geräte-Lese- und Änderungsrechte. Die verfügbaren Leser, Schaltau
 Ordne die Anschlüsse anschließend unter [Ressource → Technik](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen) zu. Dort brauchst du die in der Ressourcenanleitung genannten Zugriffs- und Hardwareverwaltungsrechte. Leser und Aktor können auf verschiedenen Geräten liegen. Ein Anschluss kann höchstens eine aktive Zuordnung haben.
 
 <Callout type="info" title="Konfiguration und Zuordnung getrennt ändern">
-  **Konfiguration löschen** entfernt die Anschlusskonfiguration. Zum Freigeben
-  eines Anschlusses für eine andere Ressource verwendest du **Zuordnung lösen**
-  an der bisherigen Ressource.
+  **Konfiguration löschen** entfernt die Anschlusskonfiguration. Zum Freigeben eines Anschlusses für
+  eine andere Ressource verwendest du **Zuordnung lösen** an der bisherigen Ressource.
 </Callout>
 
 ## Probleme prüfen
