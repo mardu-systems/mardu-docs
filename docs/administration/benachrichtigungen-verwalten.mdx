@@ -1,0 +1,144 @@
+---
+title: Benachrichtigungen einrichten und prüfen
+description: Zustellkanäle vorbereiten, E-Mail-Versand testen und fehlende oder verzögerte Mitteilungen untersuchen.
+---
+
+Mardu verschickt persönliche Mitteilungen und Betriebsmeldungen über die für das
+jeweilige Ereignis erlaubten Kanäle. Als Administration stellst du die Anbindungen
+bereit und prüfst Zustellprobleme. Jede Person verwaltet ihre
+[Kanäle und Ruhezeiten im Profil](../ueberblick/profil-benachrichtigungen.mdx)
+und liest den [eigenen Posteingang](../benutzer/benachrichtigungen.mdx).
+
+## Voraussetzungen und Rechte
+
+Für die SMTP-Einstellungen benötigst du **Einstellungen anzeigen**, zum Speichern
+und für eine Test-E-Mail zusätzlich **Einstellungen bearbeiten**.
+SMTP ist das Protokoll, mit dem Mardu ausgehende E-Mails an einen Mailserver übergibt.
+Halte die vom Mailanbieter vorgegebenen Server- und Zugangsdaten bereit.
+
+Der Systemstatus benötigt **Dashboard anzeigen**; einzelne Datenquellen können
+weitere Rechte verlangen. Profil-Lese- und Änderungsrechte gelten für den
+persönlichen Posteingang und die eigenen Einstellungen. Diese Rechte geben keinen
+Zugriff auf fremde Posteingänge.
+
+## Zustellkanäle vorbereiten
+
+| Kanal    | Voraussetzung                                                                                                                                                                                                                                                                     |
+| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| In-App   | Mitteilungen erscheinen im persönlichen Posteingang. Eine externe Versand-Anbindung ist dafür nicht erforderlich.                                                                                                                                                                 |
+| E-Mail   | SMTP-Host, Port, Absenderadresse, Benutzername und Passwort müssen für die Benachrichtigungen hinterlegt sein. Das Empfängerkonto benötigt eine bestätigte E-Mail-Adresse.                                                                                                        |
+| Web-Push | Die Serverkonfiguration benötigt ein passendes öffentliches und privates VAPID-Schlüsselpaar. VAPID identifiziert den Absender gegenüber dem Push-Dienst. Hinzu kommen ein unterstützter Browser, eine Erlaubnis für Benachrichtigungen und eine registrierte Browser-Verbindung. |
+| SMS      | Ein konfigurierter Versanddienst und eine bestätigte Telefonnummer sind erforderlich. Der Testanbieter **Dummy** versendet keine echte SMS.                                                                                                                                       |
+
+Web-Push-Schlüssel und der SMS-Versanddienst werden durch die technische
+Administration in der Serverkonfiguration eingerichtet. Dafür gibt es hier kein
+Dashboard-Formular. Die Kanalwahl im Profil registriert auch keine neue
+Web-Push-Verbindung; ohne vorhandene Registrierung bleibt dieser Kanal unbenutzbar.
+Ein als verfügbar angezeigter Versanddienst bestätigt seine Konfiguration,
+keine erfolgreiche Zustellung.
+
+## E-Mail einrichten und testen
+
+1. Öffne **Administration → Systemeinstellungen → E-Mail & SMTP**.
+2. Wähle eine **Provider-Vorlage** oder trage **SMTP-Host** und **Port** nach
+   Vorgabe des Anbieters ein. Mardu verwendet STARTTLS, also eine auf TLS
+   umgestellte SMTP-Verbindung. Ein anderer TLS-Modus und OAuth sind im Formular
+   nicht auswählbar. Das SMTP-Zertifikat muss für den angegebenen Host gelten
+   und vom Mardu-Server als vertrauenswürdig erkannt werden.
+3. Trage **Absenderadresse**, bei Bedarf **Anzeigename** sowie **Benutzername**
+   und **Passwort ersetzen** ein. Ein leeres Passwortfeld behält ein bereits
+   gespeichertes Passwort bei; es löscht es nicht.
+4. Wähle **Speichern**. Der Mailversand übernimmt die Konfiguration ohne Neustart.
+5. Trage unter **Versand testen** eine **Empfängeradresse** ein, deren Postfach
+   du prüfen kannst. Wähle **Test-E-Mail senden**. Ungespeicherte Änderungen müssen
+   vorher gespeichert werden.
+6. Prüfe das Testergebnis und den Eingang im Zielpostfach einschließlich Spamordner.
+
+**Versand erfolgreich** bestätigt die Übergabe an den Mailserver. Erst die
+eingegangene Nachricht belegt den Empfang im Zielpostfach. Die Test-E-Mail prüft
+die gespeicherte SMTP-Konfiguration; sie prüft weder persönliche Ereigniseinstellungen
+noch die Empfangsberechtigung für eine Betriebsmeldung.
+
+Mardu benötigt auch für Test-E-Mails eine Absenderadresse, einen Benutzernamen
+und ein Passwort und meldet sich damit beim SMTP-Server an. Ein SMTP-Relay ohne
+Anmeldung wird in diesem Ablauf nicht unterstützt. Die Formularbeschreibung
+bezeichnet das SMTP-Konto derzeit als optional; für den Versand sind diese
+Angaben dennoch erforderlich.
+
+## Eine Benachrichtigung bis zum Empfang prüfen
+
+1. Prüfe beim vorgesehenen Empfängerkonto, ob der Kanal verfügbar und die
+   Kontaktadresse bestätigt beziehungsweise die Browser-Verbindung registriert ist.
+2. Lass die Person das gewünschte Ereignis unter
+   [Benachrichtigungen im Profil](../ueberblick/profil-benachrichtigungen.mdx#kanäle-und-ereignisse-auswählen)
+   freigeben und speichern.
+3. Löse in einer Testumgebung eine passende Aktion aus, zum Beispiel eine
+   Buchung für das Testkonto. Verwende keine Passwortänderung nur zum Testen
+   des Mailversands.
+4. Prüfe den persönlichen Posteingang und den gewählten externen Kanal getrennt.
+   Beachte Ruhezeiten und eine gegebenenfalls gewählte E-Mail-Zusammenfassung.
+
+Die sichtbaren Ereignisse richten sich nach dem Konto und seinen aktuellen
+Rechten beziehungsweise Zuständigkeiten. Eine Kanalwahl erteilt keine zusätzlichen
+Empfangsrechte. Ein fehlender oder archivierter Posteingangseintrag beweist auch
+keinen fehlgeschlagenen E-Mail-Versand.
+
+Die SMTP-Testmail wird direkt verschickt. Benachrichtigungen werden dagegen von
+Hintergrundaufträgen versendet, die fällige Zustellungen minütlich prüfen.
+Der Posteingangseintrag kann deshalb bereits sichtbar sein, während die E-Mail
+noch auf den nächsten Versanddurchlauf wartet.
+
+## Pflichtkanäle und Ruhezeiten verstehen
+
+Pflichtkanäle sind pro Ereignis vorgegeben und können im Profil nicht abgeschaltet
+werden. Beispielsweise verwendet die Meldung über eine Passwortänderung E-Mail
+als Pflichtkanal. Sie umgeht Ruhezeiten und Stummschaltungen und wird nicht zu
+einer täglichen Zusammenfassung zusammengefasst.
+
+Auch ein Pflichtkanal braucht eine verfügbare Anbindung und eine bestätigte
+Empfängeradresse. Die Pflicht hebt diese Voraussetzungen nicht auf und ist keine
+Zustellgarantie.
+
+Bei anderen Ereignissen können persönliche Ruhezeiten die Zustellung verschieben.
+In-App-Inhalte bleiben dabei im Posteingang sofort sichtbar; die Ruhezeit betrifft
+deren Echtzeithinweis. E-Mail-Zusammenfassungen sammeln dafür unterstützte Ereignisse.
+Welche Ausnahmen gelten, zeigt die Ereignisanzeige im Profil.
+
+## Fehlende oder verzögerte Zustellung untersuchen
+
+1. Notiere Zeitpunkt mit Zeitzone, Kanal, Ereignis und betroffene Funktion.
+   Falls die Mitteilung vorhanden ist, findest du in der Verwaltung unter
+   **Technische Details** ihre Ereignis- und Mitteilungskennung.
+2. Prüfe im [Posteingang](../benutzer/benachrichtigungen.mdx) Reiter und Filter.
+   Prüfe danach Empfangsrechte, bestätigte Kontaktdaten, Kanalfreigabe,
+   Ruhezeiten und Zusammenfassungen.
+3. Prüfe bei E-Mail die gespeicherte SMTP-Konfiguration mit einer Testnachricht.
+   Vergleiche deren Ergebnis mit dem Eingang im Postfach.
+4. Öffne **Betrieb → Systemstatus** und prüfe die verfügbaren
+   [Benachrichtigungsmetriken](../benutzer/uebersicht-monitoring.mdx#benachrichtigungen)
+   für den betroffenen Zeitraum. Übergebe bei Bedarf Zeitpunkt und Kennungen an
+   die technische Administration, damit sie die Serverlogs prüfen kann.
+
+| Beobachtung                          | Bedeutung und Abhilfe                                                                                                                                                                     |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Kanal nicht verfügbar                | Prüfe Serveranbindung und bestätigte Kontaktdaten. Eine persönliche Freigabe ersetzt diese Voraussetzungen nicht.                                                                         |
+| Test-E-Mail schlägt fehl             | Prüfe Host, Port, Erreichbarkeit, STARTTLS und Zugangsdaten anhand der angezeigten Fehlermeldung.                                                                                         |
+| Geplante oder ausstehende Zustellung | Prüfe Ruhezeiten, Zusammenfassungszeit und die Verarbeitung der Hintergrundaufträge.                                                                                                      |
+| Vorübergehender Versandfehler        | Der Versanddienst wird automatisch erneut angesprochen, solange der Versuch wiederholbar ist und die Wiederholungsgrenze nicht erreicht wurde.                                            |
+| Dauerhafter Fehler                   | Die technische Administration muss die Ursache beim Versanddienst oder in der Serverkonfiguration beheben. Ein erneuter Versand einzelner Mitteilungen wird im Dashboard nicht angeboten. |
+| Web-Push bleibt aus                  | Prüfe Browser-Erlaubnis und Registrierung. Ungültig gewordene Push-Verbindungen können vom Server entfernt werden und benötigen eine neue Registrierung.                                  |
+
+Teile keine Tokens, Passwörter oder Nachrichteninhalte mit personenbezogenen Daten
+als Diagnosebeispiel. Die sichtbaren Support- und Feedbackeinträge sind noch keine
+verfügbare Ticketfunktion.
+
+## Zustellung abschalten
+
+Für das eigene Konto lassen sich erlaubte optionale Kanäle und Ereignisse im
+Profil deaktivieren. Pflichtkanäle bleiben aktiv. Archivieren entfernt eine
+Mitteilung nur aus dem aktiven Posteingang und stoppt keinen bereits geplanten Versand.
+
+Eine globale Abschaltung aller Benachrichtigungen oder einzelner Pflichtkanäle
+bietet das Dashboard nicht. Änderungen an externen Versanddiensten erfolgen
+durch die technische Administration. Sie können auch Sicherheitsmeldungen und
+andere E-Mails wie Einladungen oder Kontowiederherstellung beeinträchtigen.

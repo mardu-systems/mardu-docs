@@ -1,0 +1,110 @@
+---
+title: MCP für Agenten freigeben
+description: MCP aktivieren, Agentenzugänge begrenzen, eine Verbindung prüfen und den Zugriff abschalten.
+---
+
+Mit dem **Model Context Protocol (MCP)** kann ein kompatibler Agent Daten aus
+Mardu lesen und freigegebene Aktionen ausführen. Hier legst du die Serverrichtlinie
+fest. Den persönlichen Zugang erstellt die jeweilige Person unter
+[MCP-Verbindungen im Profil](../ueberblick/profil-mcp.mdx); die
+[Client-Anbindung](../entwickeln/mcp-anbindung.mdx#mcp-client-verbinden) richtet sich an die Entwicklung.
+
+## Voraussetzungen und Rechte
+
+Du benötigst **Einstellungen anzeigen**, zum Speichern zusätzlich
+**Einstellungen bearbeiten**. Der Menüeintrag **Integrationen** benötigt außerdem
+**Integrationen anzeigen**. Für den Verbindungstest brauchst du einen vom Client
+erreichbaren Server und ein Konto mit den Rechten für die geplante Aktion.
+
+Öffne **Administration → Integrationen → MCP & Agents**. Prüfe den geladenen
+Stand und die Konfigurationsquelle. Gesperrte Felder können durch das Deployment,
+etwa eine Umgebungsvariable, vorgegeben sein. Diese Vorgaben muss die technische
+Administration an der angegebenen Quelle ändern.
+
+## MCP mit persönlichem Lesezugang einrichten
+
+1. Aktiviere **MCP-Endpunkt aktivieren**.
+2. Aktiviere **Persönliche MCP-Verbindungen erlauben**.
+3. Aktiviere **Nur Agent-Token zulassen**, wenn Clients ausschließlich persönliche
+   MCP-Tokens verwenden sollen. Bestehende Clients mit einem normalen
+   Benutzer-Zugangstoken werden dann abgewiesen.
+4. Lasse **Schreibende Tools erlauben** und **Destruktive Tools erlauben** für
+   einen Lesezugang ausgeschaltet.
+5. Prüfe die Grenzwerte und wähle **Speichern**.
+6. Erstelle mit dem Testkonto eine [eigene MCP-Verbindung](../ueberblick/profil-mcp.mdx#verbindung-erstellen).
+   Wähle nur die benötigte Leseberechtigung und richte den Token im Client ein.
+7. Führe eine erlaubte lesende Aktion aus, beispielsweise das Auflisten der eigenen
+   Benachrichtigungen. Verwende für `notifications_list` zunächst `limit: 1`,
+   damit der Aufruf auch bei einer kleinen maximalen Seitengröße gültig ist.
+   Prüfe, ob der Client die Antwort erhält; auch eine leere Liste ist ein
+   erfolgreiches Ergebnis.
+
+Nach erfolgreichem Speichern gilt die Richtlinie ohne Serverneustart.
+Eine gespeicherte Richtlinie bestätigt noch keine funktionierende Client-Verbindung.
+**Verwerfen** setzt ungespeicherte Änderungen auf den geladenen Stand zurück.
+
+## Grenzwerte wählen
+
+Die geladenen Werte gelten für deine Installation. Die folgenden Bereiche sind
+Eingabegrenzen, keine Empfehlung für jeden Standort.
+
+| Feld                         | Bedeutung                                                                                                                                                                                |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Maximale Seitengröße         | 1–100 Einträge je paginierter Tool-Antwort. Der Client muss größere Ergebnismengen seitenweise abrufen.                                                                                  |
+| Verbindungen pro Benutzer    | 1–25 gleichzeitig aktive persönliche Verbindungen. Eine kleinere Grenze widerruft bestehende Verbindungen nicht.                                                                         |
+| Maximale Gültigkeit in Tagen | 1–365 Tage für neu erstellte Verbindungen. Ohne kürzere persönliche Angabe wird dieser Wert verwendet. Bestehende Ablaufdaten bleiben erhalten; **Token erneuern** verlängert sie nicht. |
+| MCP-Route                    | Serverpfad für den Client, üblicherweise `/mcp`. Im Formular nur lesbar; die erreichbare Serveradresse kommt davor.                                                                      |
+
+## Schreib- oder Löschzugriff erlauben
+
+**Schreibende Tools erlauben** gibt auch Aktionen frei, die Daten erstellen oder
+ändern. **Destruktive Tools erlauben** ermöglicht das endgültige Löschen von Geräten
+und setzt den Schreibzugriff voraus. Kläre diese Auswirkungen, bevor du sie freigibst.
+
+1. Aktiviere die benötigte Tool-Art und wähle **Speichern**.
+2. Lass die Person für die geplante Aktion eine Verbindung mit den passenden
+   Berechtigungen erstellen. Eine bestehende Verbindung erhält keine zusätzlichen Rechte.
+3. Lade im Client die Werkzeugliste neu. Prüfe die freigegebene Aktion mit dafür
+   vorgesehenen Testdaten.
+
+Ein Tool ist eine vom Agenten aufrufbare Funktion. Die Serverfreigabe allein
+berechtigt niemanden zur Ausführung: Bei persönlichen Verbindungen müssen die
+delegierten Rechte, die aktuellen Kontorechte und die Serverrichtlinie die Aktion
+erlauben. Objektbezogene Einschränkungen gelten weiterhin.
+
+## Zugriff einschränken oder abschalten
+
+1. Öffne **MCP & Agents** und wähle die passende Einschränkung:
+   - Schalte **Destruktive Tools erlauben** aus, um das Löschen von Geräten über MCP zu sperren.
+   - Schalte **Schreibende Tools erlauben** aus, um schreibende und destruktive Tools zu sperren.
+   - Schalte **Persönliche MCP-Verbindungen erlauben** aus, um persönliche Tokens
+     und deren Verwaltung im Profil zu sperren. Andere zugelassene Benutzer-Tokens
+     können den MCP-Endpunkt weiterhin nutzen.
+   - Schalte **MCP-Endpunkt aktivieren** aus, um MCP-Anfragen insgesamt abzuweisen.
+2. Wähle **Speichern**. Die geänderte Richtlinie wird bei folgenden Anfragen geprüft.
+3. Prüfe im Client, dass die betreffende Aktion oder Verbindung abgewiesen wird.
+
+Das Abschalten widerruft persönliche Tokens nicht. Bei erneuter Freigabe können
+noch gültige Tokens wieder verwendet werden. Für einen dauerhaften Entzug muss
+die Person die [Verbindung widerrufen](../ueberblick/profil-mcp.mdx#verbindung-widerrufen).
+Soll ein Zugang vor dem Abschalten widerrufen werden, erledige diesen Schritt
+zuerst im Profil. Eine Verwaltung fremder Agententokens bietet diese Seite nicht.
+
+## Probleme beheben
+
+Bleibt **MCP-Einstellungen werden geladen…** dauerhaft ohne Fehlermeldung stehen,
+ist die Richtlinie noch nicht geladen. Lass die technische Administration die
+Browserkonsole und die Netzwerkanfragen prüfen. Die Ladeanzeige ist keine
+Bestätigung, dass MCP deaktiviert ist oder eine Änderung gespeichert wurde.
+
+| Beobachtung                                | Nächster Schritt                                                                                                                                                               |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Nur Lesezugriff oder ein gesperrtes Feld   | Prüfe Bearbeitungsrechte und die angezeigte Konfigurationsquelle.                                                                                                              |
+| Speichern abgelehnt                        | Beachte Feldfehler, Zahlenbereiche und Schalterabhängigkeiten. Bei einem Speicherfehler bleibt der Entwurf erhalten; prüfe nach erneutem Laden, welcher Stand gespeichert ist. |
+| MCP ist im Profil deaktiviert              | Endpunkt und persönliche Verbindungen müssen beide aktiviert sein.                                                                                                             |
+| Client-Verbindung wird abgewiesen          | Prüfe Adresse, Route, Tokenstatus und die Vorgabe **Nur Agent-Token zulassen**.                                                                                                |
+| Verbindung funktioniert, Aktion aber nicht | Prüfe delegierte und aktuelle Kontorechte sowie die freigegebene Tool-Art. Lade anschließend die Werkzeugliste neu.                                                            |
+| Verbindung lässt sich nicht erstellen      | Prüfe die maximale Gültigkeit und die Zahl aktiver Verbindungen. Widerrufe nicht mehr benötigte Zugänge im eigenen Profil.                                                     |
+
+Transportfehler und Tool-Fehler sind unter
+[MCP-Client verbinden](../entwickeln/mcp-anbindung.mdx#fehler-beim-mcp-zugriff) erläutert.

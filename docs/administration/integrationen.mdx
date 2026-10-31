@@ -6,6 +6,9 @@ description: Externe Anbindungen einrichten und betreiben – MQTT, Verzeichniss
 Diese Seite ist ein Entwurf. Jede Anbindung braucht eine geprüfte Anleitung zu
 Voraussetzungen, Rechten, Einrichtung, Verbindungstest, Betrieb und Abschalten.
 Der tatsächliche Menüpfad kann unter Servereinstellungen oder Integrationen liegen.
+Die Anleitungen für [MCP](./mcp-verwalten.mdx) und
+[Benachrichtigungen einschließlich SMTP-Test](./benachrichtigungen-verwalten.mdx)
+sind separat beschrieben.
 
 ## MQTT
 
@@ -31,7 +34,11 @@ Der tatsächliche Menüpfad kann unter Servereinstellungen oder Integrationen li
 
 ## E-Mail
 
-- [ ] TODO: SMTP, Absender, Verschlüsselung, Zugangsdaten und Testempfänger konfigurieren; erfolgreich gespeicherte Konfiguration von einer zugestellten Testnachricht unterscheiden.
+SMTP-Einrichtung, Absender, Zugangsdaten und Versandtest sind unter
+[E-Mail einrichten und testen](./benachrichtigungen-verwalten.mdx#e-mail-einrichten-und-testen)
+beschrieben. Die Anbindung gilt auch für System-E-Mails; persönliche
+Ereigniseinstellungen regeln nur die jeweils angebotenen Benachrichtigungen.
+
 - [ ] TODO: Einladung, E-Mail-Bestätigung, Zurücksetzen und Benachrichtigung als Versandfälle erklären; Vorlagenänderung nur bei vorhandener Bedienmöglichkeit beschreiben. Fehler und deaktivierten Versand behandeln.
 
 ## Open Badges und externe Anbieter
@@ -47,5 +54,9 @@ Der tatsächliche Menüpfad kann unter Servereinstellungen oder Integrationen li
 
 ## MCP
 
-- [ ] TODO: Model Context Protocol (MCP) erklären; Serverrichtlinie, persönliche Verbindungen, Schreib-/Löschwerkzeuge, maximale Laufzeit und Rechtebegrenzung dokumentieren.
-- [ ] TODO: Abschalten, gesperrte Deployment-Felder und Fehlerfälle beschreiben; [persönliche MCP-Verbindungen](../ueberblick/profil-mcp.mdx) und [Clientkonfiguration](../entwickeln/mcp-anbindung.mdx) verlinken.
+Unter [MCP für Agenten freigeben](./mcp-verwalten.mdx) aktivierst du den Endpunkt,
+begrenzt Tool-Arten und Laufzeiten und sperrst den Zugriff bei Bedarf wieder.
+Persönliche Tokens erstellt und widerruft jede Person unter
+[MCP-Verbindungen im Profil](../ueberblick/profil-mcp.mdx).
+Die [Clientkonfiguration](../entwickeln/mcp-anbindung.mdx#mcp-client-verbinden)
+beschreibt Transport, Verbindungstest und Fehler für die Entwicklung.
