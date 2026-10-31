@@ -1,0 +1,270 @@
+---
+title: Zugangs-Tags verwalten
+description: Tags per Smartphone-App zuweisen, bei Verlust sperren und durch eine neue Karte ersetzen.
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import appStoreBadge from './bilder/mardu-connect-app-store-de.svg';
+import googlePlayBadge from './bilder/mardu-connect-google-play-de.svg';
+
+Ein Zugangs-Tag ist eine NFC-Karte oder ein Transponder zur Identifikation an
+Tür- und Maschinenlesern. NFC ermöglicht die kontaktlose Verbindung zum Smartphone
+oder Leser. Ob eine Person eine Ressource nutzen darf, bestimmen ihre
+[Freigaben und Zugangsregeln](./zutritt-verwalten.mdx#zugänge-freigeben-und-entziehen).
+
+Öffne **Personen → Benutzer → Benutzerkonto → Tags**.
+Bestätigte Tag-Aktionen werden direkt gespeichert. Ein zusätzliches **Speichern**
+im Benutzerformular ist nicht nötig; **Abbrechen** dort macht sie nicht rückgängig.
+
+## Voraussetzungen und Rechte
+
+Für die Anmeldung brauchst du:
+
+- Ein [vorhandenes Benutzerkonto](./benutzer-rollen.mdx).
+- Ein NFC-fähiges iPhone oder Android-Smartphone mit **Mardu Connect** von **Mardu GmbH**.
+- Eine noch nicht registrierte Karte für das **DESFire-EV2-Profil**.
+  Lass dir eine passende Karte bereitstellen.
+- Eine vom Smartphone erreichbare Serveradresse. Die App übernimmt sie aus dem QR-Code.
+
+<div className="not-prose my-4 flex flex-wrap items-center gap-6 p-3">
+  <a
+    href="https://apps.apple.com/de/app/mardu-connect/id6771269028"
+    aria-label="Mardu Connect im App Store laden"
+  >
+    <img
+      src={appStoreBadge.src}
+      alt="Laden im App Store"
+      width={120}
+      height={40}
+      className="h-10 w-auto rounded-none"
+    />
+  </a>
+  <a
+    href="https://play.google.com/store/apps/details?id=de.mardu.connect&hl=de"
+    aria-label="Mardu Connect bei Google Play laden"
+  >
+    <img
+      src={googlePlayBadge.src}
+      alt="Jetzt bei Google Play"
+      width={135}
+      height={40}
+      className="h-10 w-auto rounded-none"
+    />
+  </a>
+</div>
+
+| Aufgabe | Benötigte Rechte |
+| --- | --- |
+| Konto und Tags ansehen | Benutzer anzeigen |
+| Tag zuweisen, umbenennen oder sperren | Benutzer anzeigen und Tags bearbeiten |
+| Tag-Datensatz löschen | Benutzer anzeigen und Tags löschen |
+
+Für die Live-Fortschrittsanzeige bei einem anderen Benutzerkonto benötigt dein
+Dashboard-Konto zusätzlich die Rolle **Admin**. Ohne sie kann der Assistent
+weiter warten, obwohl Connect die Anmeldung bereits abgeschlossen hat.
+
+## Tag anmelden und zuweisen
+
+Im Beispiel erhält **Lina Berger** die Karte **Werkstattkarte Lina**.
+Der QR-Code gilt **fünf Minuten ab Start der Anmeldung**. Gib ihn nur an die
+Person weiter, die die Karte einrichtet. Die Anmeldung erfolgt mit Mardu Connect,
+nicht mit einem Tür- oder Maschinenleser.
+
+<Steps>
+  <Step>
+    ### Benutzer auswählen
+
+    Öffne das Konto **Lina Berger** und wähle **Tags → Zugangs-Tag zuweisen**.
+    Prüfe den Namen im Dialogtitel.
+
+  </Step>
+  <Step>
+    ### Anmeldung starten
+
+    Gib optional einen **Namen** mit höchstens 100 Zeichen ein, etwa
+    **Werkstattkarte Lina**. Wähle **Weiter**.
+
+  </Step>
+  <Step>
+    ### Karte mit der App einrichten
+
+    Öffne **Mardu Connect → QR-Code scannen** und erlaube den Kamerazugriff.
+    Scanne den Code aus dem Dashboard. Alternativ öffnest du den App-Link
+    über die Systemkamera.
+
+    Wähle auf **Zugangs-Tag beschreiben** die Aktion **Schreiben starten**.
+    Halte das Smartphone ruhig an die Karte und lass die App geöffnet, bis
+    **Abgeschlossen** erscheint. Bei **Synchronisierung ausstehend** folge der
+    [Fehlerhilfe](#serverabschluss-erneut-synchronisieren).
+
+  </Step>
+  <Step>
+    ### Zuordnung prüfen
+
+    Wähle im Dashboard bei **Zuweisung abgeschlossen** die Aktion **Abschließen**.
+    Prüfe am Konto Name, **Tag-ID**, Status **Aktiv** und Gültigkeit.
+    Bleibt der Assistent stehen, obwohl Connect **Abgeschlossen** zeigt,
+    prüfe die [Dashboard-Rückmeldung](#assistent-wartet-trotz-geöffnetem-app-link).
+
+  </Step>
+</Steps>
+
+Die Karte ist Lina Berger zugeordnet und hat **Keine Gültigkeitsbegrenzung**.
+Die fünf Minuten begrenzen nur die Anmeldung. Teste die Karte anschließend am
+vorgesehenen Leser. Bei abgelehntem Zugang folge der
+[Fehlerhilfe](#tag-ist-aktiv-zugang-wird-abgelehnt).
+
+## Tag prüfen und benennen
+
+Die Tag-Karte zeigt **Tag-ID**, Status und Gültigkeit. **Aktiv** allein bedeutet
+nicht, dass der Tag innerhalb seiner Gültigkeit liegt. Mit **Tag-ID kopieren**
+kannst du die Karte bei Rückfragen eindeutig benennen.
+
+Wähle **Umbenennen**, ändere **Name** und bestätige mit **Speichern**.
+Der Name darf höchstens 100 Zeichen enthalten; eine leere Eingabe entfernt ihn.
+Status, Gültigkeit und physische Karte bleiben unverändert.
+
+<span id="zeitangaben-und-technische-daten-nachschlagen" />
+
+Unter **Support: technische Daten** findest du gespeicherte Chipdaten.
+Diese Angaben ersetzen keine Prüfung der Karte am Leser.
+
+## Verlorenen Tag sperren
+
+<Callout type="warn" title="Die Verlustsperre ist dauerhaft">
+  Ein als verloren gemeldeter Tag kann nicht wieder aktiviert werden.
+  Laufende Nutzungen enden durch die Sperre nicht; kläre sie bei Bedarf
+  [separat](./zutritt-verwalten.mdx#protokolle-sitzungen-und-hardwarezustand).
+</Callout>
+
+1. Öffne am Benutzerkonto **Tags** und suche die verlorene Karte.
+   Vergleiche bei ähnlichen Namen die **Tag-ID**.
+2. Wähle **Als verloren melden**. Prüfe Name und Tag-ID im Bestätigungsfenster
+   und wähle **Dauerhaft sperren**.
+3. Prüfe **Verloren · gesperrt** und **Verlust gemeldet am**.
+
+Neue vom Server geprüfte Zutrittsanfragen mit diesem Tag werden abgewiesen.
+Der Datensatz mit dem ersten Verlustzeitpunkt bleibt erhalten. Die physische
+Karte bleibt unverändert; der Sperrstatus bestätigt keinen Zustand eines
+Offline-Lesers.
+
+## Ersatz-Tag ausgeben
+
+Die neue Anmeldung sperrt die bisherige Karte nicht automatisch.
+Verwende eine **andere, noch nicht registrierte Karte**.
+
+1. [Sperre die verlorene Karte](#verlorenen-tag-sperren).
+2. Starte am selben Konto **Zugangs-Tag zuweisen** und folge dem
+   [Anmeldeablauf](#tag-anmelden-und-zuweisen), etwa mit dem Namen **Ersatzkarte Lina**.
+3. Prüfe beide Einträge: Der alte Tag bleibt **Verloren · gesperrt**;
+   der neue hat eine andere **Tag-ID** und den Status **Aktiv**.
+4. Prüfe Gültigkeit und Zugang am vorgesehenen Leser. Personenbezogene Freigaben
+   bleiben am Konto; direkt an die alte Tag-ID vergebene Freigaben werden nicht übertragen.
+
+Eine eigene Aktion **Ersetzen** oder das Übertragen eines Tags auf ein anderes
+Konto bietet die Oberfläche nicht an.
+
+## Tag-Datensatz löschen
+
+Für eine verlorene Karte verwende die [Verlustsperre](#verlorenen-tag-sperren),
+damit der Verlustnachweis erhalten bleibt. **Tag löschen** entfernt den Datensatz
+und setzt die physische Karte nicht zurück.
+
+1. Wähle **Tag löschen**.
+2. Prüfe die Vorschau der Löschfolgen und bestätige die Löschung.
+3. Prüfe nach erneutem Öffnen des Kontos, dass der Eintrag fehlt.
+   Bei zwischenzeitlichen Änderungen musst du die Löschvorschau neu laden.
+
+## Probleme beheben
+
+### QR-Code wird nicht geladen
+
+Prüfe Fehlermeldung und Rechte. Kann der Server keine App-Adresse bereitstellen,
+lass die Serveradresse durch die technische Administration prüfen.
+
+### App öffnet sich nicht
+
+Scanne den QR-Code direkt mit **Mardu Connect → QR-Code scannen**, falls die
+Systemkamera den App-Link nicht öffnet. Erlaube den Kamerazugriff; auf dem iPhone
+kann bei einer lokalen Serveradresse auch **Lokales Netzwerk** erforderlich sein.
+
+### Assistent wartet trotz geöffnetem App-Link
+
+Prüfe zuerst Connect: Bei einem Verbindungsfehler muss das Smartphone die
+Serveradresse aus dem QR-Code erreichen können. Bei **Synchronisierung ausstehend**
+verwende die [Wiederholung in der App](#serverabschluss-erneut-synchronisieren).
+
+Zeigt Connect **Abgeschlossen**, prüfe die Live-Verbindung des Dashboards und
+die **Admin**-Rolle deines Dashboard-Kontos. Öffne das Benutzerkonto bei Bedarf
+neu. Starte dafür keine zweite Kartenanmeldung.
+
+### Serverabschluss erneut synchronisieren
+
+Bei **Synchronisierung ausstehend** ist die Karte bereits beschrieben und geprüft;
+die Serverbestätigung fehlt. **Beschreibe sie nicht erneut und starte keine neue Anmeldung.**
+
+1. Lass Connect geöffnet und stelle die Serververbindung wieder her.
+2. Tippe auf **Erneut synchronisieren**. Die App wiederholt nur den Serverabschluss.
+3. Warte auf **Abgeschlossen** und prüfe die Zuordnung im Dashboard.
+
+Die App kann den ausstehenden Abschluss nach dem Beenden nicht wieder aufnehmen
+und synchronisiert nicht im Hintergrund. Wird die Wiederholung dauerhaft
+abgewiesen, lass die technische Administration den Serverstand anhand der
+**Zuweisungs-ID** prüfen: Der Tag kann trotz fehlender Antwort bereits registriert sein.
+
+Verwende **Vorgang beenden → Abschluss verwerfen** erst nach dieser Klärung.
+Die Aktion verwirft den ausstehenden Abschluss in der App, setzt aber weder die
+Karte zurück noch macht sie eine Serverregistrierung rückgängig.
+
+### Abgelaufene oder unterbrochene Anmeldung
+
+Hat Connect die Karte bereits beschrieben und geprüft, verwende zuerst
+[Erneut synchronisieren](#serverabschluss-erneut-synchronisieren).
+Für eine noch nicht abgeschlossene Karteneinrichtung gilt:
+
+1. Bei **Tag konnte nicht beschrieben werden** wähle **Erneut versuchen**,
+   solange die Anmeldedaten gültig sind. Lass teilweise beschriebene Karten
+   vor einem neuen Versuch auf Wiederverwendbarkeit prüfen.
+2. Bei abgelaufenem QR-Code notiere die **Zuweisungs-ID** unter
+   **QR-Daten manuell anzeigen**. Lass die Anmeldung durch die technische
+   Administration per Programmierschnittstelle (API) erneuern oder stornieren.
+   Das Dashboard bietet dafür keine Schaltfläche. Beim Erneuern werden die alten Anmeldedaten ungültig.
+3. Für eine neue Anmeldung schließe den Assistenten mit **Abbrechen** und starte
+   **Zugangs-Tag zuweisen** erneut. Beende auch den alten Connect-Ablauf,
+   bevor du den neuen QR-Code scannst, und lass den alten Servervorgang stornieren.
+
+**Abbrechen im Dashboard storniert die Anmeldung nicht.** Unvollständige Vorgänge
+können das Löschen beteiligter Benutzerkonten blockieren.
+Unter **QR-Daten manuell anzeigen** findest du auch Server-URL und Zuweisungs-Token.
+Teile die Zugangsdaten nur mit der Person, die die Karte einrichtet.
+
+### Karte ist bereits registriert
+
+Eine registrierte Chip-Kennung lässt sich nicht erneut anmelden, auch nicht
+bei derselben Person oder nach einer Verlustsperre. Prüfe die Zuordnung und
+verwende für einen Ersatz eine andere Karte.
+
+### Falsches Benutzerkonto gewählt
+
+Lass eine offene Anmeldung vor dem App-Abschluss per API stornieren und starte
+am richtigen Konto neu. Ist sie bereits abgeschlossen, kläre die Korrektur
+mit der technischen Administration; ein Umhängen im Dashboard ist nicht vorgesehen.
+
+### Umbenennen oder Verlustmeldung schlägt fehl
+
+Prüfe **Tags bearbeiten** und öffne das Konto erneut, falls der Tag inzwischen
+geändert oder gelöscht wurde. Nach einem Netzwerkfehler prüfe vor der Wiederholung
+den gespeicherten Stand. Eine erneute Verlustmeldung behält den ersten Verlustzeitpunkt.
+
+### Tag ist aktiv, Zugang wird abgelehnt
+
+Prüfe Gültigkeit, Konto, Freigaben und
+[Ressourcenregeln](../koordination/ressourcen.mdx#nutzung-und-zugriff-nutzung-erlauben).
+Der [Zugangsverlauf](./benutzer-rollen.mdx#zugangsentscheidungen-und-sitzungen-prüfen)
+zeigt die gespeicherte Entscheidung.
+
+## Prüfstand und Grenzen
+
+Die Anleitung ist mit Dashboard, Backend und **Mardu Connect** abgeglichen;
+der Durchlauf mit physischer Karte und Leser muss an eurer Installation geprüft werden.
+Technische Verträge stehen unter **Entwickeln → API → Tags**.
