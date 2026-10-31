@@ -1,17 +1,78 @@
 ---
 title: Automationen und KI-Anbindung
-description: Ereignisse für Automationen nutzen, Editor-Zugang und MCP-Verbindungen für Entwickler.
+description: MCP-Clients mit persönlichen Tokens verbinden und lesend prüfen; ergänzende Aufgaben für Node-RED und Ereignisse.
 ---
 
-Diese Seite ist ein Entwurf. MCP-Client und Node-RED-Flow erhalten getrennte
-Anleitungen; sie verwenden unterschiedliche Zugänge und Betriebsbedingungen.
+MCP-Clients verwenden persönliche Agentenzugänge. Node-RED verwendet einen
+eigenen Editor- und Laufzeitzugang. Die MCP-Anbindung ist hier beschrieben;
+die Abschnitte zu Node-RED und Echtzeit enthalten noch offene Schreibaufträge.
 
 ## MCP-Client verbinden
 
-- [ ] TODO: Server-MCP-Richtlinie und tatsächlich angebotenen Transport/Endpunkt prüfen; vorhandene Anleitung für [persönliche MCP-Verbindungen](../ueberblick/profil-mcp.mdx) verwenden.
-- [ ] TODO: Einmal angezeigten Token außerhalb des Repositories speichern, Client konfigurieren und lesendes Werkzeug mit fiktiven Daten prüfen.
-- [ ] TODO: Delegierte Rechte, aktuelle Benutzerrechte und Serverrichtlinie als gemeinsame Grenze erklären; Toolauswahl, Schreib-/Löschfreigabe und eigene/fremde Daten beachten.
-- [ ] TODO: Ablauf, Rotation und Widerruf einer eigenen Verbindung erklären; deaktivierte Richtlinie, ungültiges Token und Rate-Limit behandeln. Keine separate administrative Antragsfreigabe voraussetzen.
+Mardu bietet MCP über **Streamable HTTP** an. Du benötigst einen kompatiblen
+Client, eine erreichbare HTTPS-Adresse des Mardu-Servers und eine von der
+Administration [freigegebene MCP-Richtlinie](../administration/mcp-verwalten.mdx).
+Die Tokenverwaltung benötigt Profil-Lese- und Änderungsrechte.
+
+1. Erstelle im Profil eine [persönliche MCP-Verbindung](../ueberblick/profil-mcp.mdx#verbindung-erstellen).
+   Wähle für den folgenden Test nur **Eigene Benachrichtigungen ansehen**.
+2. Kopiere **MCP-Route** und **Bearer-Token** aus der einmaligen Zugangsanzeige.
+   Speichere den Token außerhalb des Repositories und gib ihn nicht in Logs aus.
+3. Wähle im Client den Transport **Streamable HTTP**. Verwende die erreichbare
+   Serveradresse mit der angezeigten Route, beispielsweise
+   `https://mardu.example.invalid/mcp`. Ersetze die Beispieladresse und
+   gegebenenfalls `/mcp` durch die Werte deiner Installation.
+4. Hinterlege den Token im Authentifizierungsfeld des Clients. Verlangt der Client
+   einen HTTP-Header, verwende `Authorization: Bearer <dein-token>`.
+5. Initialisiere die Verbindung und lade die Werkzeuge mit `tools/list`.
+6. Rufe `notifications_list` mit `limit: 1` auf. Das Tool liest nur den
+   Posteingang des Tokeninhabers; eine leere Liste ist eine gültige Antwort.
+
+Falls der Client Tool-Aufrufe als JSON annimmt, lautet der Inhalt für `tools/call`:
+
+```json
+{
+  "name": "notifications_list",
+  "arguments": {
+    "limit": 1
+  }
+}
+```
+
+Das Beispiel zeigt die Parameter eines MCP-Aufrufs, keinen eigenständigen
+HTTP-Request. Der Client übernimmt Initialisierung und Protokollnachrichten.
+`notifications_list` benötigt `Permissions.Profile.View`. Die Seitengröße muss
+zwischen 1 und dem Serverlimit liegen; mit `afterCursor` kann der Client eine
+weitere Seite anfordern.
+
+### Rechte und Tokenwechsel
+
+Bei persönlichen Verbindungen begrenzen die delegierten Rechte, die aktuellen
+Rechte des Kontos und die Serverrichtlinie jeden Tool-Aufruf gemeinsam.
+Eine sichtbare Werkzeugbeschreibung ist keine Zusage, dass der Aufruf mit diesem
+Token erlaubt ist. Schreibende oder destruktive Tools benötigen zusätzlich die
+entsprechende Serverfreigabe.
+
+Zum [Erneuern oder Widerrufen](../ueberblick/profil-mcp.mdx#zugang-ersetzen-oder-widerrufen)
+verwendest du das eigene Profil. Ersetze nach einer Erneuerung den Token im Client;
+der alte ist sofort ungültig. Das Ablaufdatum bleibt bestehen. Nach Ablauf oder
+Widerruf erstellst du eine neue Verbindung. Eine gesonderte Antragsfreigabe ist
+für diesen Ablauf nicht erforderlich.
+
+### Fehler beim MCP-Zugriff
+
+| Antwort oder Fehler         | Prüfen                                                                                                                                                                                         |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| HTTP 401                    | Token fehlt, ist ungültig, abgelaufen oder widerrufen. Prüfe auch, ob persönliche Verbindungen noch freigegeben sind.                                                                          |
+| HTTP 403                    | Der Endpunkt kann deaktiviert sein oder ausschließlich Agent-Tokens verlangen. Prüfe die Serverrichtlinie. Fehlende Tool-Rechte können auch als Fehler innerhalb einer MCP-Antwort erscheinen. |
+| HTTP 404                    | Prüfe Serveradresse, Proxy und konfigurierte MCP-Route.                                                                                                                                        |
+| HTTP 429                    | Der Zugriff ist begrenzt. Reduziere parallele Aufrufe und warte vor dem nächsten Versuch; beachte einen gegebenenfalls gelieferten `Retry-After`-Header.                                       |
+| `tool_disabled`             | Die aktuelle Serverrichtlinie sperrt diese Tool-Art. Lade die Werkzeugliste neu.                                                                                                               |
+| `validation_error`          | Prüfe die Tool-Parameter, etwa Seitengröße und Pflichtangaben.                                                                                                                                 |
+| `not_found` oder `conflict` | Lies den betroffenen Datensatz erneut und prüfe den aktuellen Zustand, bevor du eine Änderung wiederholst.                                                                                     |
+
+Ein Fehler kann als HTTP-Status oder als MCP-Tool-Fehler auftreten. Prüfe beide
+Ebenen im Client; protokolliere dabei keine Zugangsdaten.
 
 ## Node-RED und Ereignisse
 
