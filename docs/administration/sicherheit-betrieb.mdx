@@ -3,10 +3,8 @@ title: Sicherheit und Betrieb
 description: Anmelderegeln prüfen, Kontowiederherstellung vorbereiten und Betriebsstörungen eingrenzen.
 ---
 
-Diese Anleitung hilft dir, Anmelderegeln zu prüfen und bei Störungen die passende
-Diagnose zu finden. Für Servereinstellungen brauchst du Leserechte für
-Einstellungen, zum Ändern zusätzlich Bearbeitungsrechte. Konten, Rollen,
-Audit-Ereignisse und Messwerte haben eigene Rechte.
+Servereinstellungen benötigen Lese- und gegebenenfalls Bearbeitungsrechte;
+Konten, Rollen, Audit-Ereignisse und Messwerte haben eigene Rechte.
 
 ## Anmeldeverfahren und Kontowiederherstellung
 
@@ -15,8 +13,7 @@ Kennwortanforderungen, Kontosperren, E-Mail-Bestätigung, erlaubte Anmeldeverfah
 und Vorgaben für Administratoren. Eine Vorgabe richtet das verlangte Verfahren
 nicht am Konto ein.
 
-Prüfe vor einer Änderung, welche Konten betroffen sind und wie sie sich danach
-anmelden können:
+Prüfe vor einer Änderung die Folgen für betroffene Konten:
 
 | Einstellung                          | Wirkung und Voraussetzung                                                                                                                                                            |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -47,15 +44,16 @@ beschreibt Passwort-Reset, kontobezogene 2FA-Vorgaben und das Deaktivieren einze
 Passkeys. Eigene Wiederherstellungscodes verwaltest du unter
 [Anmeldesicherheit](../ueberblick/profil-sicherheit.mdx).
 
-Für ein ausgesperrtes Administrator-Konto steht die [lokale Wartungs-CLI](./wartungs-cli.mdx#admin-passwort-ohne-e-mail-zurücksetzen) zur Verfügung. Sie benötigt Host- oder Docker-Zugriff und eine laufende API, aber weder ein Mardu-Login noch eingerichteten Mailversand. Ein Passwort-Reset hebt MFA-Vorgaben, Deaktivierung und fehlende E-Mail-Bestätigung nicht auf. Prüfe die Wiederherstellungsvoraussetzungen, bevor du Anmeldepflichten änderst.
+Bei einem ausgesperrten Administrator-Konto hilft die [lokale Wartungs-CLI](./wartungs-cli.mdx#admin-passwort-ohne-e-mail-zurücksetzen).
+Sie benötigt Host- oder Docker-Zugriff und eine laufende API, kein Mardu-Login
+oder Mailversand. Der Reset hebt MFA-Vorgaben, Deaktivierung und fehlende
+E-Mail-Bestätigung nicht auf.
 
 ## Sitzungen und Anmeldehistorie
 
 Unter [Eigene Sitzungen](../ueberblick/profil-sitzungen.mdx) prüfst und widerrufst
 du deine Anmeldesitzungen. IP-Adresse, Browser und Geräteangaben helfen beim
 Zuordnen; sie belegen allein keine Identität oder Anwesenheit.
-
-Unterscheide bei einem Verdachtsfall die gewünschte Wirkung:
 
 | Aufgabe                                                | Passender Ablauf                                                                                                                  |
 | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -84,10 +82,8 @@ Zutrittsrechte.
 4. Prüfe getrennt die [Zutrittszuweisungen](./zutritt-verwalten.mdx) und die
    Anmeldebedingungen des Kontos.
 
-Beispiel: Nach dem Ende einer Geräteverwaltung entfernst du die entsprechende
-Verwaltungsrolle. Ob die Person einen Raum weiter nutzen darf, entscheidest du
-anhand ihrer Zutrittszuweisungen. Lege Zuständigkeit und Wiederholung dieser
-Prüfung für eure Organisation fest.
+Entferne etwa nach dem Ende einer Geräteverwaltung die Verwaltungsrolle und
+prüfe unabhängig davon die Raumnutzung. Lege fest, wer diese Prüfung wiederholt.
 
 ## Audit und Störungen
 
@@ -96,11 +92,11 @@ Bei fehlenden oder verspäteten Mitteilungen hilft die Anleitung
 Den Zugriff von Agenten kannst du über die [MCP-Serverrichtlinie](./mcp-verwalten.mdx#zugriff-einschränken-oder-abschalten)
 einschränken oder abschalten.
 
-Öffne für gespeicherte Verwaltungsänderungen **Server → Audit-Ereignisse**.
-Dafür brauchst du Audit-Leserechte; ein Export erfordert zusätzlich Exportrechte.
-Audit-Ereignisse, Anmeldehistorie und Zutrittsentscheidungen sind verschiedene
-Quellen. Ein fehlender Eintrag in einer Quelle belegt nicht, dass keine Aktion
-stattgefunden hat.
+Gespeicherte Verwaltungsänderungen findest du unter **Server → Audit-Ereignisse**
+mit Audit-Leserechten; Export benötigt zusätzliche Rechte.
+[Nachweise und Datenschutz](./nachweise-datenschutz.mdx) erklärt die Suche und
+die getrennten Quellen für Anmeldung und Zutritt. Ein fehlender Eintrag belegt
+nicht, dass keine Aktion stattfand.
 
 ### Eine Störung eingrenzen
 
@@ -135,12 +131,11 @@ Inhalte aus mitgegebenen Auszügen.
 
 ### Zertifikatsablauf prüfen
 
-Öffne **Server → Server-Zertifikate**. Prüfe Name, Aussteller, Gültigkeit und den
-angezeigten Status. Die Übersicht markiert auch noch nicht gültige und bereits
-abgelaufene Zertifikate. Ein gespeichertes Zertifikat ist noch kein Nachweis,
-dass der betroffene Dienst es verwendet. Kläre deshalb vor einem Ersetzen oder
-Löschen, welcher Dienst auf das Zertifikat verweist; die Dashboard-Liste enthält
-keine vollständige Zuordnung aller aktiven TLS-Verbindungen.
+Prüfe unter **Server → Server-Zertifikate** Name, Aussteller, Gültigkeit und Status.
+Die Übersicht markiert noch nicht gültige und abgelaufene Zertifikate, zeigt aber
+keine vollständige Zuordnung aktiver TLS-Verbindungen. Kläre vor Ersetzen oder
+Löschen den verwendenden Dienst nach
+[HTTPS-Zertifikatswechsel vorbereiten und prüfen](./zertifikate-https.mdx).
 
 ## Sicherung, Wiederherstellung und Update
 
@@ -149,7 +144,6 @@ erstellt ebenfalls keine Sicherungen. Verwende den für eure konkrete Installati
 geprüften Betriebsablauf; diese Anleitung beschreibt weder eine vollständige
 Sicherung und Wiederherstellung noch ein Release-Update.
 
-Eine Kontowiederherstellung per CLI stellt keine Datenbank und keine Dateien
-wieder her. Ebenso belegt ein erfolgreicher Neustart allein nicht, dass
-Anmeldung, Zutritt, Buchungen, Geräte und Integrationen nach einer
-Wiederherstellung oder einem Update funktionieren.
+Kontowiederherstellung per CLI stellt keine Datenbank oder Dateien wieder her.
+Prüfe nach Wiederherstellung oder Update Anmeldung, Zutritt, Buchungen, Geräte
+und Integrationen; ein Neustart allein belegt deren Funktion nicht.

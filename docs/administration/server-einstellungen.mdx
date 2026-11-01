@@ -3,9 +3,26 @@ title: Servereinstellungen
 description: Serverwerte ändern, gesperrte Felder erkennen und die Wirksamkeit gespeicherter Änderungen prüfen.
 ---
 
-Unter **Server** verwaltest du die Vorgaben deiner Installation. Diese Anleitung
-beschreibt die gemeinsamen Formulare sowie globale Einstellungen,
-Anmelderichtlinien, Zertifikate, Metriken und Fehlerberichte.
+## Einstellungen suchen
+
+Wähle **Einstellungen durchsuchen** oberhalb des Inhalts. Die Suche umfasst
+Server- und Integrationseinstellungen, für die du die benötigten Rechte hast.
+Sie ist auch auf Mobilgeräten verfügbar. Außerhalb von Eingabefeldern oder anderen
+Dialogen kannst du sie mit **Strg + K** beziehungsweise **⌘ + K** öffnen.
+
+Gib mindestens zwei Zeichen ein, etwa `SMTP`, `TLS` oder `passwordless`. Treffer
+nennen den Abschnitt und seinen Bereichspfad. Wähle einen Treffer oder verwende
+Pfeiltasten und **Enter**, um die Einstellung zu öffnen. Ein Treffer kann in den
+anderen Einstellungsbereich führen. **Escape** schließt den Suchdialog.
+
+Titel, Beschreibungen und hinterlegte Synonyme sind durchsuchbar. Die Suche liest
+keine gespeicherten Einstellungswerte oder Zugangsdaten aus und speichert keinen
+Suchverlauf. Sie führt keine Änderungen aus. Ungespeicherte Änderungen musst du
+vor einem Seitenwechsel verwerfen oder mit **Weiter bearbeiten** behalten.
+
+Bei **Suche konnte nicht geladen werden** wähle **Erneut versuchen**. Ohne Treffer
+versuche einen anderen Begriff oder verwende die normale Bereichsnavigation.
+Die Suche findet zunächst Seiten und Abschnitte, nicht jedes einzelne Formularfeld.
 
 ## Einstellungen lesen und speichern
 
@@ -14,14 +31,12 @@ Für globale Einstellungen, Auth Policy, Zertifikate, E-Mail, Tags, LDAP und OID
 **Monitoring & Metriken** und **Fehlerberichte** werden erst mit `Settings.Update`
 angeboten. Die Menüs für LDAP und OIDC setzen zusätzlich `Integrations.View`
 voraus; die OIDC-Oberfläche verlangt zum Bearbeiten auch `Integrations.Update`.
-Die Einstellungs-APIs prüfen weiterhin die genannten Settings-Rechte.
-Für **Audit-Ereignisse** gilt `AuditTrail.View`.
-Ein sichtbarer Speichern-Knopf ersetzt kein Änderungsrecht.
+Die Einstellungs-APIs prüfen die Settings-Rechte. Für **Audit-Ereignisse** gilt
+`AuditTrail.View`.
 
-1. Öffne **Administration → Systemeinstellungen** und wähle den Einstellungsbereich. Die Suche in der
-   Einstellungsnavigation findet Bereiche und Themen wie Zertifikate oder Metriken.
-2. Warte, bis die gespeicherten Werte geladen sind. Lies Feldhinweise und bei Bedarf
-   die zusätzlichen Erklärungen am Informationssymbol.
+1. Öffne **Administration → Systemeinstellungen** und wähle oder suche den Bereich.
+2. Warte auf die gespeicherten Werte und lies die Feldhinweise. Weitere Erklärungen
+   stehen am Informationssymbol.
 3. Ändere die benötigten Werte. Zahlenfelder nennen Einheit und Grenzen.
    Leere ein Feld nur, wenn seine Beschreibung diese Möglichkeit vorsieht.
 4. Wähle **Speichern**. Bei markierten Fehlern korrigierst du die betroffenen
@@ -36,17 +51,14 @@ steht **Erneut versuchen** zur Verfügung.
 
 ### Gesperrte Werte und Neustartbedarf
 
-**Durch Umgebungsvariable gesperrt** bedeutet, dass der Wert vom Deployment
-vorgegeben wird. Das kann auch eine eingelesene `.env`-Datei sein. Das Feld ist im
-Dashboard nicht änderbar; die zuständige Person muss die Vorgabe im Deployment
-anpassen. **Nur lesbar** bezeichnet dagegen einen angezeigten Wert ohne
-Bearbeitungsfunktion, etwa die Installationskennung.
+**Durch Umgebungsvariable gesperrt** kennzeichnet Deployment-Vorgaben, auch aus
+einer eingelesenen `.env`-Datei. Die zuständige Person muss sie im Deployment ändern.
+**Nur lesbar** kennzeichnet Werte ohne Bearbeitungsfunktion, etwa die Installationskennung.
 
-Der Statusbereich zeigt die Konfigurationsquelle, **Aktiv** oder **Inaktiv** und
-den Anwendungsmodus. **Gespeicherte Konfiguration** beschreibt die Herkunft der
-Werte. **Hot Reload** bedeutet, dass der Bereich Änderungen ohne Serverneustart
-übernehmen kann. Einzelne Felder können trotzdem einen eigenen Neustarthinweis
-tragen. Beachte deshalb auch **Wird erst nach Neustart vollständig wirksam** und
+Der Statusbereich zeigt Konfigurationsquelle, **Aktiv** oder **Inaktiv** und
+Anwendungsmodus; **Gespeicherte Konfiguration** nennt die Herkunft der Werte.
+**Hot Reload** erlaubt Änderungen ohne Serverneustart. Beachte trotzdem
+feldbezogene Hinweise wie **Wird erst nach Neustart vollständig wirksam** und
 die Meldung nach dem Speichern.
 
 Speichern führt keinen vollständigen Serverneustart aus. Plane ihn bei
@@ -190,10 +202,9 @@ Ein Alarm kann bei Erreichen einer der beiden Alarmgrenzen entstehen. Zur
 Erholung müssen beide Erholungsgrenzen erreicht sein. Jeder Erholungswert muss
 höher als der zugehörige Alarmwert sein. Beispiel: 1.073.741.824 Bytes sind 1 GiB.
 
-Die Anzeige von Messwerten ist unter [Systemstatus](../benutzer/uebersicht-monitoring.mdx)
-beschrieben. Die [Benachrichtigungs-Anleitung](./benachrichtigungen-verwalten.mdx)
-erklärt Zustellkanäle, SMTP-Test und fehlende Mitteilungen. Die Metriken dazu
-findest du unter
+Messwerte erklärt [Systemstatus](../benutzer/uebersicht-monitoring.mdx),
+Zustellkanäle und SMTP-Test die [Benachrichtigungs-Anleitung](./benachrichtigungen-verwalten.mdx).
+Zustellmetriken stehen unter
 [Systemstatus → Benachrichtigungen](../benutzer/uebersicht-monitoring.mdx#benachrichtigungen).
 
 ### Fehlerberichte freigeben oder abschalten
@@ -210,12 +221,10 @@ Freigabe nicht für einen Versand. **Umgebung**, **Release**, die anonyme
 Installationskennung, **Datenschutzhinweis** und **Letzte Entscheidung (UTC)**
 sind ebenfalls nur lesbar.
 
-Die Fehlererfassung kann Serverfehler und Fehler im Dashboard betreffen; beide
-benötigen eine konfigurierte Anbindung. Erfasste Daten können bereinigte
-Fehlermeldungen, Stacktraces sowie Angaben zu Softwareversion und Umgebung
-enthalten. Die Implementierung entfernt Benutzer-/Anfragekontexte und filtert
-unter anderem erkennbare Zugangsdaten und direkte Kennungen. Optional kommen
-Performance-Daten hinzu.
+Server und Dashboard benötigen jeweils eine Anbindung. Berichte können bereinigte
+Fehlermeldungen, Stacktraces, Softwareversion und Umgebung sowie optional
+Performance-Daten enthalten. Benutzer-/Anfragekontexte werden entfernt;
+erkennbare Zugangsdaten und direkte Kennungen werden gefiltert.
 
 Wähle **Speichern** und bestätige den angezeigten Dialog. Beim Ausschalten werden
 auch Performance-Daten abgeschaltet und lokal vorgemerkte Serverereignisse
@@ -240,8 +249,6 @@ dass bereits ausgegebene Tags nicht mehr zum konfigurierten Leseprofil passen.
 Prüfe die Folgen vor dem Bestätigen. Schlüsselmaterial und Schlüsselversionen
 lassen sich in diesem Formular nicht bearbeiten. Den Ausgabeablauf beschreibt
 [Tags verwalten](./tags-verwalten.mdx).
-
-Weitere Aufgaben haben eigene Anleitungen:
 
 - **Server → E-Mail & SMTP**: [E-Mail einrichten und testen](./benachrichtigungen-verwalten.mdx#e-mail-einrichten-und-testen).
 - **Server → LDAP**, **OIDC** und **IP500-Netzwerk**: [Integrationen](./integrationen.mdx).

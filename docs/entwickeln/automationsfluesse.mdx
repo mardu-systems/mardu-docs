@@ -3,11 +3,8 @@ title: Einen Node-RED-Flow entwickeln und prüfen
 description: Eine vorhandene Mardu-Ressource lesen, Nachrichten auswerten und einen Flow kontrolliert deployen.
 ---
 
-Diese Anleitung erstellt einen lesenden Flow: Ein Knopfdruck lädt den Zustand
-einer vorhandenen Ressource und zeigt ihn in der Debug-Seitenleiste von
-Node-RED. Danach kannst du Änderungen derselben Ressource beobachten. Das
-Beispiel verwendet die fiktive Ressource **Testarbeitsplatz**; es sendet keine
-Gerätebefehle und benötigt keine zusätzliche Protokollverbindung.
+Die fiktive Ressource **Testarbeitsplatz** dient als Beispiel; der lesende Flow braucht
+keine zusätzliche Protokollverbindung und sendet keine Gerätebefehle.
 
 ## Voraussetzungen und Zugriff
 
@@ -23,13 +20,11 @@ Du solltest Nodes verbinden und die Node-RED-Eigenschaften `msg.payload` und
 `msg.topic` kennen. Verwende in allen Mardu-Nodes die bereits eingerichtete
 **Mardu-Verbindung**. Kopiere keine Zugangsdaten in Nachrichten oder exportierte Flows.
 
-Editorzugang und Laufzeitzugriff sind getrennt: Die angemeldete Person erhält
-eine Editor-Sitzung. Die aktive Mardu-Laufzeit verwendet ihre eigene Verbindung
-und kann alle unterstützten Ressourcen lesen sowie registrierte Aktionen
-ausführen. Eine Ressourcenauswahl im Node begrenzt nur diesen Node; sie ist keine
-Zugriffsfreigabe für den ganzen Flow. Auch die Ressourcenauswahl unter
-**Flow-Einstellungen** legt eine zusätzliche Zugangsprüfung fest und beschränkt
-nicht den sonstigen Laufzeitzugriff.
+Die Editor-Sitzung ist persönlich. Die Mardu-Laufzeit verwendet ihre eigene
+Verbindung und kann alle unterstützten Ressourcen lesen sowie registrierte
+Aktionen ausführen. Eine Ressourcenauswahl begrenzt nur den jeweiligen Node.
+Die Auswahl unter **Flow-Einstellungen** legt eine zusätzliche Zugangsprüfung
+fest, beschränkt aber nicht den übrigen Laufzeitzugriff.
 
 ## Den lesenden Flow anlegen
 
@@ -50,12 +45,9 @@ Die Ressourcenreferenz besteht aus Typ und ID. **Ressource** (`managed-resource`
 bezeichnet das verwaltete Objekt, **Gerät** (`device`) die Hardware,
 **Anschluss** (`resource-endpoint`) einen Anschluss und **Zutrittspunkt**
 (`access-point`) einen Zugang. Verwende die ID des gewählten Typs.
-Zum Lesen wird kein neuer Anschluss veröffentlicht und keine Hardwarezuordnung
-angelegt.
 
-Bei fest gewählter Ressource reicht jede Eingangsnachricht des Inject-Nodes.
-Für einen späteren dynamischen Flow kann **Zustand lesen** Typ und ID stattdessen
-aus `msg.payload` übernehmen, wenn keine passende Vorgabe gesetzt ist:
+Bei fest gewählter Ressource reicht jede Inject-Nachricht. Ohne passende Vorgabe
+kann **Zustand lesen** Typ und ID aus `msg.payload` übernehmen:
 
 ```json
 {
@@ -98,10 +90,8 @@ anderen noch nicht übernommenen Änderungen im Editor.
    die Werte einschließlich Datentyp und gegebenenfalls Einheit.
 
 **Zustand lesen** und **Schema lesen** ersetzen `msg.payload` durch ihre Antwort;
-die übrige Nachricht bleibt erhalten. Bei **Testarbeitsplatz** findest du im
-Zustand unter anderem `values.resourceType` und `values.lifecycleStatus`.
-Leite aus einem aktiven Lebenszyklus keine elektrische oder mechanische
-Rückmeldung ab.
+die übrige Nachricht bleibt erhalten. Bei **Testarbeitsplatz** findest du unter
+anderem `values.resourceType` und `values.lifecycleStatus`.
 
 Bleibt das Deploy-Ergebnis unklar, starte keinen zweiten Deploy.
 **Status erneut prüfen** fragt den vorhandenen Vorgang ab. Bei einer gemeldeten
@@ -111,18 +101,15 @@ Flows laufen weiter.
 
 ## Änderungen und Verbindungsstatus beobachten
 
-Ergänze für dieselbe Ressource **Zustands-Änderung** aus **Mardu Erweitert** mit
-einem eigenen Debug-Ausgang. Dieser Node benötigt keinen Eingang. Er liest den
-Zustand beim Start, nach MQTT-Hinweisen und alle 30 Sekunden über REST. Er gibt
-den ersten erfolgreichen Snapshot und danach eine andere, nicht leere
-`version` aus. Unveränderte Versionen erzeugen keine weitere Ausgabe. Das ist
-keine vollständige Ereignishistorie; mehrere Änderungen können zwischen zwei
-Abrufen liegen.
+Verbinde **Zustands-Änderung** aus **Mardu Erweitert** für dieselbe Ressource mit
+Debug. Der Node braucht keinen Eingang. Er liest beim Start, nach MQTT-Hinweisen
+und alle 30 Sekunden über REST. Er gibt den ersten erfolgreichen Snapshot und
+danach Snapshots mit geänderter, nicht leerer `version` aus. Zwischen Abrufen können
+mehrere Änderungen liegen; die Ausgabe ist keine vollständige Ereignishistorie.
 
-Nach dem Deploy erwartest du einen ersten Snapshot mit derselben
-Ressourcenreferenz. Zum Nachprüfen kannst du jederzeit den manuellen Lesepfad
-verwenden. Ein fehlgeschlagener automatischer Abruf erscheint als Warnung am
-Node und wird beim nächsten Abruf erneut versucht; ohne gültige Version gibt
+Prüfe nach dem Deploy die Ressourcenreferenz im ersten Snapshot, bei Bedarf mit
+dem manuellen Lesepfad. Fehlgeschlagene Abrufe erscheinen als Warnung am Node
+und werden beim nächsten Abruf erneut versucht. Ohne gültige Version gibt
 **Zustands-Änderung** keinen Snapshot aus.
 
 Verbinde außerdem **Verbindungs-Status** aus **Mardu Erweitert** mit Debug.
@@ -134,9 +121,8 @@ bestätigt weder einen neuen Gerätewert noch die Ausführung eines Befehls.
 
 ## Weitere Nachrichtenwege passend wählen
 
-Die Hilfe des jeweiligen Nodes im Editor beschreibt dessen vollständigen
-Eingang, Ausgang und Konfiguration. Für Erweiterungen gelten unterschiedliche
-Nachrichtenverträge:
+Die Node-Hilfe im Editor beschreibt Eingang, Ausgang und Konfiguration. Wähle
+für Erweiterungen den passenden Nachrichtenweg:
 
 | Aufgabe                          | Verfügbare Nodes und Vertrag                                                                                                                                                                                                                                                                            |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -162,9 +148,9 @@ Für eine Beobachtung ist etwa `{"payload":{"powerWatts":120}}` eine
 Leistungsmeldung in Watt. Weitere unterstützte Felder sind `state`, `health`,
 `usageCount` und `operatingDurationSeconds`. Pro Nachricht genau ein zur
 Anschlussfunktion passendes Feld senden. Eine Schaltantwort mit `succeeded` und
-`reportedState` gehört dagegen zum **Schaltaktor**. Sie darf erst nach einer
-Gerätebestätigung entstehen. Weder ein gesendeter MQTT-Befehl noch eine
-Aktionsannahme bestätigt einen physischen Zustand.
+`reportedState` gehört zum **Schaltaktor** und darf erst nach einer
+Gerätebestätigung entstehen. Ein gesendeter MQTT-Befehl oder eine Aktionsannahme
+genügt dafür nicht.
 
 ## Wenn die Prüfung fehlschlägt
 

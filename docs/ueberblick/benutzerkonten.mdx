@@ -5,13 +5,12 @@ description: Wie Benutzerkonten entstehen und sich Dashboard-Rechte, Ressourcenf
 
 Ein Benutzerkonto steht für eine Person in Mardu. Es ordnet ihr Anmeldung, Berechtigungen, Nachweise, Buchungen und Zutrittsereignisse zu.
 
-Diese Erklärung richtet sich an Personen, die Mardu nutzen oder Benutzerkonten verwalten. Die Schritte zum Anlegen und Bearbeiten stehen unter [Benutzer und Rollen](../administration/benutzer-rollen.mdx).
+Konten anlegen und bearbeiten: [Benutzer und Rollen](../administration/benutzer-rollen.mdx).
 
 ## Was kann ein Benutzer tun?
 
-Welche Funktionen die Person nutzen darf, hängt von ihren zugewiesenen Rechten ab. Dazu können die Pflege des eigenen Profils, Ressourcenbuchungen, Zugangsbeantragungen oder Verwaltungsaufgaben gehören. Ein angelegtes Konto erhält nicht automatisch Zugriff auf alle Funktionen oder Ressourcen.
-
-Dabei werden drei Fragen getrennt geprüft:
+Ein Konto erhält nicht automatisch Zugriff auf alle Funktionen oder Ressourcen.
+Mardu prüft drei Fragen getrennt:
 
 | Frage                                                              | Was dafür zählt                                                                                                |
 | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
@@ -23,7 +22,7 @@ Ein aktives Konto kann deshalb trotzdem eine Anmeldebedingung noch nicht erfüll
 
 ## Wie entsteht ein Konto?
 
-Es gibt mehrere Wege. Welche davon verfügbar sind, hängt von der Einrichtung des Systems ab.
+Je nach Einrichtung stehen folgende Wege zur Verfügung:
 
 | Weg                                    | Ablauf                                                                                                                                              |
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -33,7 +32,10 @@ Es gibt mehrere Wege. Welche davon verfügbar sind, hängt von der Einrichtung d
 | Verzeichnissynchronisierung            | Eine eingerichtete LDAP-Anbindung übernimmt Personen aus einem externen Benutzerverzeichnis.                                                        |
 | Anmeldung über einen externen Anbieter | Bei einer eingerichteten OpenID-Connect-Anbindung (OIDC) kann die erste Anmeldung ein Konto anlegen, wenn die automatische Kontoanlage erlaubt ist. |
 
-Ein lokales Konto verwaltet Mardu selbst. Auch bei externer Anmeldung gibt es ein Konto in Mardu, dem Rollen, Buchungen und Nachweise zugeordnet sind. Der Anbieter kann bestimmte Angaben verwalten. Solche Felder sind in Mardu gekennzeichnet und schreibgeschützt; Änderungen erfolgen beim Anbieter. Die externe Anmeldung allein erteilt keine Ressourcenfreigabe.
+Mardu verwaltet lokale Konten selbst. Auch bei externer Anmeldung gibt es ein
+Mardu-Konto für Rollen, Buchungen und Nachweise. Vom Anbieter verwaltete Angaben
+sind gekennzeichnet und schreibgeschützt; Änderungen erfolgen beim Anbieter.
+Die externe Anmeldung allein erteilt keine Ressourcenfreigabe.
 
 ## Welche Zuordnungen gehören zum Konto?
 
@@ -55,7 +57,9 @@ Deine Zuordnungen prüfst du unter [Zugänge & Ressourcen](../benutzer/zutritt.m
 
 ## Was bewirkt eine Deaktivierung?
 
-Eine Deaktivierung sperrt neue Anmeldungen und erhält das Konto mit seinen Zuordnungen. Sie ist keine Löschung und beendet bestehende Zugriffe nicht sofort. Vor einer Reaktivierung sollten die erhaltenen Rollen, Gruppen und Zutrittszuweisungen geprüft werden.
+Eine Deaktivierung sperrt neue Anmeldungen. Konto und Zuordnungen bleiben erhalten;
+bestehende Zugriffe enden nicht sofort. Prüfe vor einer Reaktivierung die erhaltenen
+Rollen, Gruppen und Zutrittszuweisungen.
 
 Die konkreten Schritte und Einschränkungen stehen unter [Konten deaktivieren und reaktivieren](../administration/benutzer-rollen.mdx#konten-deaktivieren-und-reaktivieren).
 
@@ -68,9 +72,9 @@ Die konkreten Schritte und Einschränkungen stehen unter [Konten deaktivieren un
 
 ## Zuständigkeiten und persönliche Nutzung
 
-Objektbezogene Verwaltungszuordnungen können die Zuständigkeit für bestimmte
-Bereiche begrenzen. Eine persönliche Ressourcenfreigabe oder Einweisung genügt
-allein nicht zum Verwalten dieses Bereichs oder zum Empfang seiner Betriebsalarme.
+Objektbezogene Verwaltungszuordnungen können die Zuständigkeit begrenzen.
+Eine persönliche Ressourcenfreigabe oder Einweisung genügt weder zur Verwaltung
+des Bereichs noch zum Empfang seiner Betriebsalarme.
 
 Die Benutzeransicht zeigt auch bei Verwaltungsrechten nur eigene Daten.
 Den Einstieg erklärt [Erste Schritte](../benutzer/erste-schritte.mdx), persönliche

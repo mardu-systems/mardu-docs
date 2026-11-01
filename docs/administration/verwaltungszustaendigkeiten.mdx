@@ -3,11 +3,9 @@ title: Verwaltungszuständigkeiten vergeben und entziehen
 description: Verwaltungsrechte für einzelne Ressourcen oder den gesamten Zugriffsbereich an Benutzer, Gruppen und Rollen vergeben, prüfen und widerrufen.
 ---
 
-Unter **Administration → Zuständigkeiten** legst du fest, wer Zugriffsregeln,
-Freigaben, Hardwarezuordnungen oder Zugriffsaktivität verwalten darf. Eine
-Zuständigkeit gilt für eine bestimmte Ressource oder für den gesamten Zugriffsbereich.
+Öffne **Administration → Zuständigkeiten**.
 
-Diese Rechte erlauben noch keine Nutzung einer Ressource. Auch die Aufgaben
+Verwaltungsrechte erlauben noch keine Nutzung einer Ressource. Auch die Aufgaben
 **Kompetenz bestätigen** und **Aufsicht führen** sind getrennte Zuordnungen. Die
 [Ressourcenanleitung](../koordination/ressourcen.mdx) erklärt Zugriffsregeln,
 Nutzungsbedingungen und verantwortliche Personen. Benutzerkonten und
@@ -16,9 +14,8 @@ verwaltest du in der Benutzerverwaltung.
 
 ## Rechte und Geltungsbereich
 
-Du brauchst globale Zugriffsrechte und eine Verwaltungszuständigkeit am gewählten
-Ziel. Die globalen Rechte öffnen die jeweilige Funktion; die Zuständigkeit
-begrenzt, für welche Ressourcen du sie verwenden darfst.
+Globale Rechte öffnen die Funktion; deine Verwaltungszuständigkeit begrenzt
+die Ressourcen, für die du sie verwenden darfst.
 
 | Aufgabe                                            | Globale Rechte                                                       | Zusätzlich am Ziel erforderlich                                               |
 | -------------------------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
@@ -28,25 +25,20 @@ begrenzt, für welche Ressourcen du sie verwenden darfst.
 | Konkretes Verwaltungsrecht prüfen                  | Zugriffe ansehen und prüfen                                          | `ManagePolicy` am geprüften Ziel                                              |
 | Alle aktiven Zuständigkeiten eines Benutzers laden | Zugriffe ansehen; der Diagnoseeinstieg benötigt auch Zugriffe prüfen | `ManagePolicy` für den gesamten Zugriffsbereich                               |
 
-Für die Auswahl brauchst du außerdem Leserechte für die jeweiligen Benutzer,
-Benutzergruppen oder Rollen und bei einem Ressourcenziel für Ressourcen. Eine
-leere Zuständigkeitsliste beweist nicht, dass niemand Rechte besitzt: Angezeigt
-werden nur Zuweisungen, die du selbst verwalten darfst.
+Für die Auswahl brauchst du Leserechte für Benutzer, Benutzergruppen oder Rollen
+und gegebenenfalls Ressourcen. Die Liste zeigt nur Zuweisungen, die du selbst
+verwalten darfst; eine leere Liste schließt weitere Rechte nicht aus.
 
 ### Einzelne Ressource oder gesamter Bereich?
 
-- **Ressource:** Das Profil gilt nur für die ausgewählte Ressource. Eine
-  Zuständigkeit für die Holzwerkstatt gilt nicht automatisch für eine darunter
-  angelegte Tischkreissäge. Weise die benötigten Rechte für diese Ressource
-  gesondert zu.
+- **Ressource:** Das Profil gilt nur dort. Eine Zuständigkeit für die Holzwerkstatt
+  gilt nicht für eine darunter angelegte Tischkreissäge; weise deren Rechte gesondert zu.
 - **Gesamte Domain:** Das Profil gilt für alle Ressourcen im Zugriffsbereich.
-  Die Übersicht nennt dieses Ziel **Gesamter Bereich**. Prüfe vor dem Speichern,
-  ob dieser Umfang beabsichtigt ist.
+  Die Übersicht nennt dieses Ziel **Gesamter Bereich**.
 
-Du kannst nur Rechte weitergeben, die du am betreffenden Ziel selbst besitzt.
-Auch mit `ManagePolicy` darfst du beispielsweise keine Hardwareverwaltung
-weitergeben, wenn dir das entsprechende Recht fehlt. Ein sichtbares Profil im
-Dialog bedeutet deshalb noch nicht, dass du es vergeben darfst.
+Du brauchst am Ziel `ManagePolicy` und jede Aktion, die du weitergeben möchtest,
+beispielsweise Hardwareverwaltung. Ein sichtbares Profil allein bedeutet nicht,
+dass du es vergeben darfst.
 
 ## Zuständigkeit einrichten
 
@@ -58,10 +50,9 @@ Dialog bedeutet deshalb noch nicht, dass du es vergeben darfst.
    - **User-Gruppe:** Wähle die vorhandene Benutzergruppe. Die Zuständigkeit
      gilt für deren Mitglieder.
    - **Benutzer:** Wähle eine einzelne Person für eine direkte Zuweisung.
-3. Wähle **Weiter**. Wähle unter **Wo? (Ziel)** entweder **Ressource** und die
-   betreffende Ressource oder **Gesamte Domain**.
-4. Wähle **Weiter**. Wähle unter **Was? (Profil)** das benötigte Profil und prüfe
-   die darunter aufgeführten Aktionen.
+3. Wähle **Weiter** und unter **Wo? (Ziel)** die **Ressource** oder **Gesamte Domain**.
+   Prüfe bei der bereichsweiten Auswahl, ob dieser Umfang beabsichtigt ist.
+4. Wähle **Weiter** und unter **Was? (Profil)** das Profil. Prüfe dessen Aktionen.
 5. Wähle **Weiter**. Prüfe unter **Auswirkung & Vorschau** Empfänger, Ziel und
    Profil. Ergänze bei Bedarf **Gültig ab** und **Gültig bis**. Ohne Beginn gilt
    die Zuständigkeit sofort, ohne Ende ist sie unbefristet. Das Ende darf nicht
@@ -71,10 +62,9 @@ Dialog bedeutet deshalb noch nicht, dass du es vergeben darfst.
    Holzwerkstatt bis Monatsende“. Es sind höchstens 512 Zeichen möglich.
 7. Wähle **Zuständigkeit aktivieren**.
 
-**Ergebnis:** Der Dialog schließt sich und die Übersicht lädt neu. Prüfe
-Empfänger und Ressource, **Rechteprofil**, **Gültigkeit** und **Status**. Ein
-zukünftiger Beginn erscheint als **Geplant**; erst während der Gültigkeit ist die
-Zuständigkeit **Aktiv**. Nach dem Ende erscheint sie als **Abgelaufen**.
+Prüfe in der neu geladenen Übersicht Empfänger, Ziel, **Rechteprofil** und
+**Gültigkeit**. Der **Status** ist vor dem Beginn **Geplant**, während der
+Gültigkeit **Aktiv** und nach dem Ende **Abgelaufen**.
 
 ### Welches Profil passt?
 
@@ -91,10 +81,8 @@ Auswahl von Verwaltungsaktionen; sie sind keine globalen Rollen.
 | **Scope administrator**         | Zugriffstopologie und Zugriffszuordnungen ansehen; Zugriffsregeln und Zuständigkeiten verwalten. Weitergeben lassen sich nur zusätzlich selbst vorhandene Aktionen. |
 | **Access domain administrator** | Alle Verwaltungsaktionen des Zugriffsbereichs, einschließlich Hardwarebedienung. Der Umfang bleibt auf das gewählte Ziel begrenzt.                                  |
 
-Beispiel: **Access domain administrator** mit Ziel **Ressource → Tischkreissäge**
-gibt die enthaltenen Rechte nur für diese Maschine. Erst das Ziel **Gesamte
-Domain** macht die Zuweisung bereichsweit. Die für konkrete Aktionen benötigten
-globalen Berechtigungen werden durch das Profil nicht hinzugefügt.
+Beispiel: **Access domain administrator** für **Ressource → Tischkreissäge** gilt
+nur für diese Maschine. Das Profil fügt keine globalen Berechtigungen hinzu.
 
 ## Zuständigkeit entziehen
 
@@ -120,33 +108,29 @@ prüfe jeden Eintrag: Einzelne Zuweisungen können bereits entzogen sein.
 Wähle in der Übersicht **Rechte diagnostizieren**. Wähle den **Benutzer**;
 ohne Auswahl wird dein eigenes Konto verwendet.
 
-- Mit **Effektive Rechte laden** siehst du die aktiven Zuständigkeiten und
-  bereichsweiten Aktionen. Diese Gesamtauskunft benötigt eine bereichsweite
-  Zuständigkeit zum Verwalten der Zugriffsregeln.
-- Für eine einzelne Frage wählst du unter **Konkretes Recht prüfen** die
-  **Aktion** und den **Zieltyp**. Bei **Verwaltete Ressource** wählst du zusätzlich
-  die Ressource. Wähle anschließend **Konkretes Recht prüfen**. Dafür genügt die
-  Zuständigkeit zum Verwalten der Zugriffsregeln am gewählten Ziel.
+- **Effektive Rechte laden** zeigt aktive Zuständigkeiten und bereichsweite
+  Aktionen. Du brauchst dafür `ManagePolicy` im gesamten Zugriffsbereich.
+- Unter **Konkretes Recht prüfen** wählst du **Aktion**, **Zieltyp** und bei
+  **Verwaltete Ressource** die Ressource. Bestätige mit **Konkretes Recht prüfen**.
+  Dafür genügt `ManagePolicy` am gewählten Ziel.
 
 Die Aktionsnamen erscheinen technisch, etwa `ManagePolicy` für das Verwalten der
 Zugriffsregeln und Zuständigkeiten, `ManageAccess` für die Verwaltung von
 Zugriffsvergaben oder `ViewLogs` für das Lesen von Zugriffsprotokollen.
 
-**Zugriff erlaubt** bedeutet hier, dass eine aktive Verwaltungszuständigkeit die
-geprüfte Aktion am Ziel erlaubt. Die Prüfung umfasst weder die globalen
-Berechtigungen der untersuchten Person noch ihre Voraussetzungen zur
-Ressourcennutzung. **Zugriff verweigert** bedeutet, dass keine passende aktive
-Verwaltungszuständigkeit gefunden wurde.
+**Zugriff erlaubt** bestätigt eine passende aktive Verwaltungszuständigkeit am
+Ziel; **Zugriff verweigert** bedeutet, dass keine gefunden wurde. Globale Rechte
+und Voraussetzungen zur Ressourcennutzung werden nicht geprüft.
 
 ## Wenn etwas nicht klappt
 
-| Beobachtung                                          | Nächster Schritt                                                                                                                                                                                 |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Menüpunkt oder Aktion fehlt                          | Prüfe die globalen Zugriffsrechte und deine Verwaltungszuständigkeit am Ziel. Zum Entziehen müssen alle Aktionen der angezeigten Zuweisung entziehbar sein.                                      |
-| Empfänger oder Ressource fehlt in der Auswahl        | Prüfe die Leserechte für diesen Eintragstyp und ob der Eintrag noch existiert.                                                                                                                   |
-| Profil lässt sich nicht vergeben                     | Prüfe, ob du `ManagePolicy` und jede enthaltene Aktion am Ziel besitzt. Wähle gegebenenfalls ein kleineres Profil oder lasse die Zuweisung von einer entsprechend berechtigten Person vornehmen. |
-| Eine Zuweisung besteht bereits                       | Suche auch nach geplanten Zuweisungen für denselben Empfänger und dasselbe Ziel. Bereits eine vorhandene Aktion kann die Anlage des gesamten Profils verhindern.                                 |
-| Aktivieren ist nicht verfügbar                       | Prüfe Pflichtbegründung, Profil und Zeitraum. Das Ende darf nicht vor dem Beginn liegen.                                                                                                         |
-| Ziel oder Zuweisung wird als nicht gefunden gemeldet | Lade die Übersicht neu und prüfe deine Rechte. Nicht verwaltbare Ziele werden ebenfalls als nicht gefunden behandelt.                                                                            |
-| Die Person kann nach dem Entzug weiter verwalten     | Prüfe weitere direkte, Gruppen-, Rollen- und bereichsweite Zuweisungen. Ein Entzug ist keine Sperre gegen andere aktive Zuständigkeiten.                                                         |
-| Die Gesamtdiagnose lädt nicht                        | Prüfe deine bereichsweite Zuständigkeit zum Verwalten der Zugriffsregeln. Bei Zuständigkeit nur für eine Ressource nutze die Einzelprüfung für dieses Ziel.                                      |
+| Beobachtung                           | Nächster Schritt                                                                                                               |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Menüpunkt oder Aktion fehlt           | Prüfe die [Rechte am Ziel](#rechte-und-geltungsbereich). Zum Entziehen musst du jede Aktion der Zuweisung entziehen dürfen.    |
+| Empfänger oder Ressource fehlt        | Prüfe Leserechte und ob der Eintrag noch existiert.                                                                            |
+| Profil lässt sich nicht vergeben      | Wähle ein Profil, dessen Aktionen du am Ziel besitzt, oder beauftrage eine entsprechend berechtigte Person.                    |
+| Eine Zuweisung besteht bereits        | Suche auch geplante Zuweisungen desselben Empfängers am Ziel. Bereits eine vorhandene Aktion kann das ganze Profil blockieren. |
+| Aktivieren ist nicht verfügbar        | Prüfe Pflichtbegründung, Profil und Zeitraum.                                                                                  |
+| Ziel oder Zuweisung nicht gefunden    | Lade neu und prüfe deine Rechte. Auch nicht verwaltbare Ziele werden als nicht gefunden behandelt.                             |
+| Verwaltung nach Entzug weiter möglich | Prüfe weitere direkte, Gruppen-, Rollen- und bereichsweite Zuweisungen.                                                        |
+| Gesamtdiagnose lädt nicht             | Bei Zuständigkeit nur für eine Ressource nutze die Einzelprüfung für dieses Ziel.                                              |

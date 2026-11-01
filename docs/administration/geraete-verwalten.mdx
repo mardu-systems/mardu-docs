@@ -5,12 +5,9 @@ description: Geräte aufnehmen, Anschlüsse konfigurieren, Verbindungen prüfen 
 
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
-Unter **Geräte** im Dashboard nimmst du Controller ins Netzwerk auf und
-konfigurierst ihre Anschlüsse, etwa Kartenleser und Schaltausgänge. Ein
-**Aktor** ist ein Anschluss, der eine Aktion ausführt, zum Beispiel eine
-Tür entriegelt oder eine Maschine schaltet. Welchen Raum oder welche Maschine ein Anschluss steuert, legst du an der [Ressource unter Technik](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen) fest.
-
-Die Aufnahme eines Geräts legt keine Ressource an. Lege benötigte Ressourcen unter **Ressourcen** an und ordne dort die Anschlüsse zu.
+Ein Controller stellt Anschlüsse für Kartenleser und **Aktoren** bereit, die
+Türen entriegeln oder Maschinen schalten. Lege Räume und Maschinen gesondert unter
+**Ressourcen** an und ordne ihre Anschlüsse an der [Ressource unter Technik](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen) zu.
 
 ## Gerät hinzufügen und verbinden
 
@@ -19,13 +16,10 @@ Für die Aufnahme in ein IP500-Netzwerk brauchst du außerdem:
 
 - Einen erreichbaren, registrierten **Edge-Router** für die Netzwerkaufnahme.
   Er vermittelt zwischen dem IP500-Netzwerk und dem Server.
-- Das unveränderte **IP500-Zertifikat** oder signierte Mardu-Aufnahmedaten.
-  Diese Daten enthalten die Angaben zur Aufnahme des Geräts. Sie werden als
-  **JSON-Datei**, einer Textdatei mit strukturierten Daten, importiert.
+- Das unveränderte **IP500-Zertifikat** oder signierte Mardu-Aufnahmedaten
+  als **JSON-Datei**, eine Textdatei mit strukturierten Aufnahmedaten.
 
-Lass dir Routerzugang und Aufnahmedaten von der betreuenden Administration
-bereitstellen. Prüfe die Einrichtung anschließend mit dem Controller, Edge-Router
-und den angeschlossenen Lesern oder Aktoren an deiner Installation.
+Lass dir Routerzugang und Aufnahmedaten von der betreuenden Administration bereitstellen.
 
 <Steps>
   <Step>
@@ -64,7 +58,7 @@ verwende dafür [Erneut ins Netzwerk aufnehmen](#gerät-erneut-aufnehmen).
 
 ## Übersicht und Verbindungsstatus
 
-Öffne das Gerät und wähle **Übersicht**. Mit Geräte-Änderungsrechten bearbeitest du **Technische Gerätekennung** und wählst **Speichern**. Das Gerätemodell wird automatisch erkannt. Ressourcen werden über die Anschlusszuordnungen unter **Ressource → Technik** zugeordnet.
+Unter **Übersicht** bearbeitest du mit Geräte-Änderungsrechten die **Technische Gerätekennung** und wählst **Speichern**. Das Gerätemodell wird automatisch erkannt.
 
 Unter **Verbindung und Hardware** findest du Netzwerkanbindung, letzte Verbindung, Firmwareversion und Hardwareadresse. **Online** bedeutet, dass innerhalb der letzten fünf Minuten eine Meldung eingegangen ist. Prüfe die Bereitschaft der benötigten Anschlüsse zusätzlich unter **Anschlüsse**; die Online-Anzeige bestätigt keinen physischen Tür- oder Schaltzustand.
 
@@ -81,31 +75,26 @@ Unter **Verbindung und Hardware** findest du Netzwerkanbindung, letzte Verbindun
 
 ### Erneut ins Netzwerk aufnehmen oder Aufnahme abbrechen
 
-Beide Aktionen liegen unter **Übersicht → Verbindung und Hardware** und
-benötigen Geräte-Lese- und Änderungsrechte.
+Beide Aktionen findest du unter **Übersicht → Verbindung und Hardware**.
+Du brauchst Geräte-Lese- und Änderungsrechte.
 
 #### Gerät erneut aufnehmen
 
 Beende vorher laufende Zugriffssitzungen und kläre ausstehende Schaltvorgänge.
 
-1. Wähle **Erneut ins Netzwerk aufnehmen**.
-2. Prüfe anschließend die letzte Verbindung und unter **Anschlüsse** die
-   Konfigurationsbestätigung jedes benötigten Anschlusses.
-
-**Ergebnis:** Die Netzwerkaufnahme wurde neu gestartet. Geräteidentität,
-Anschlusskonfiguration, Zuordnungen und Zugriffshistorie bleiben erhalten.
-Das Gerät muss sich neu melden und seine Konfiguration bestätigen.
+1. Wähle **Erneut ins Netzwerk aufnehmen**. Geräteidentität, Anschlusskonfiguration,
+   Zuordnungen und Zugriffshistorie bleiben erhalten.
+2. Warte auf eine neue Gerätemeldung. Prüfe die letzte Verbindung und unter
+   **Anschlüsse** die Konfigurationsbestätigung jedes benötigten Anschlusses.
 
 #### Ausstehende Aufnahme abbrechen
 
 Verwende diese Aktion für eine ausstehende oder fehlgeschlagene Aufnahme.
 Für bereits aufgenommene Geräte steht sie nicht zur Verfügung.
 
-1. Wähle **Aufnahme abbrechen**.
-2. Prüfe danach den Aufnahmezustand unter **Verbindung und Hardware**.
-
-**Ergebnis:** Automatische Wiederholungen sind gestoppt. Du kannst die Aufnahme
-später mit **Erneut ins Netzwerk aufnehmen** fortsetzen.
+Wähle **Aufnahme abbrechen** und prüfe den Aufnahmezustand unter
+**Verbindung und Hardware**. Die Aktion stoppt automatische Wiederholungen;
+mit **Erneut ins Netzwerk aufnehmen** kannst du später fortsetzen.
 
 Bei einer Fehlermeldung öffne die Geräteübersicht erneut. Die automatischen
 Wiederholungen können bereits gestoppt sein, obwohl die Netzwerkabmeldung
@@ -134,7 +123,7 @@ keine Anschlusskonfiguration.
 
 Leser und Aktoren verwenden teilweise unterschiedliche Beschriftungen für denselben Auftragszustand.
 
-**Ergebnis prüfen:** Jeder benötigte Anschluss zeigt **Vom Gerät bestätigt** und einen passenden gemeldeten Hardwarezustand. Unter **Details und Verwaltung** fragt **Vom Gerät auslesen** die Gerätekonfiguration neu ab; **Serverstand aktualisieren** ruft die bereits gespeicherten Angaben ab. Prüfe die physische Funktion anschließend am vorgesehenen Leser oder Aktor.
+**Vom Gerät bestätigt** und ein passender gemeldeter Hardwarezustand müssen für jeden benötigten Anschluss vorliegen. **Details und Verwaltung → Vom Gerät auslesen** fragt die Gerätekonfiguration neu ab, **Serverstand aktualisieren** nur gespeicherte Angaben. Teste anschließend die physische Funktion mit Controller, Edge-Router und den vorgesehenen Lesern oder Aktoren.
 
 Ordne die Anschlüsse anschließend unter [Ressource → Technik](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen) zu. Dort brauchst du die in der Ressourcenanleitung genannten Zugriffs- und Hardwareverwaltungsrechte. Leser und Aktor können auf verschiedenen Geräten liegen. Ein Anschluss kann höchstens eine aktive Zuordnung haben.
 
@@ -155,7 +144,7 @@ Beende vor dem Austausch laufende Zugriffssitzungen und kläre ausstehende Befeh
 
 **Ergebnis:** Die Ressource verwendet die neuen Anschlüsse. Nutzungsregeln bleiben an der Ressource; die Zuordnungshistorie bleibt erhalten.
 
-Das alte Gerät bleibt nach dem Austausch zunächst als Datensatz erhalten. Die Geräteansicht bietet keine eigene Aktion zum Stilllegen oder Archivieren an. **Aufnahme abbrechen** beendet nur eine noch ausstehende Aufnahme und meldet kein bereits aufgenommenes Gerät ab.
+Das alte Gerät bleibt als Datensatz erhalten, bis du es löschst. **Aufnahme abbrechen** meldet kein bereits aufgenommenes Gerät ab.
 
 ### Ungenutztes Gerät löschen
 
@@ -166,7 +155,7 @@ Ressourcen bleiben erhalten. Soll eine Ressource weiter betrieben werden,
 [ersetze zuerst ihre Hardwarezuordnung](#hardware-ersetzen).
 
 1. Öffne in der Geräteliste das Aktionsmenü des ungenutzten Geräts und wähle **Löschen**.
-2. Prüfe die Löschvorschau. Löse noch benötigte Zuordnungen erst nach dem oben beschriebenen Austausch. Beende offene Sitzungen und kläre ausstehende Befehle.
+2. Prüfe die Löschvorschau und behebe angezeigte Verwendungen. Löse noch benötigte Zuordnungen erst nach dem Austausch.
 3. Bestätige **Löschen**, wenn keine Verwendung die Löschung verhindert.
 
 Hat sich die Verwendung zwischen Vorschau und Bestätigung geändert, lade die
@@ -201,8 +190,6 @@ und Zugangsmetriken. Prüfe Zeitraum und Aktualität. Eine leere Anzeige kann du
 
 ## Probleme prüfen
 
-Wähle das passende Fehlerbild. Beginne mit der genannten Anzeige, bevor du Einstellungen änderst oder die Aufnahme erneut startest.
-
 ### Gerät bleibt bei Verbinden oder die Einrichtung schlägt fehl
 
 1. Öffne **Übersicht → Verbindung und Hardware** und lies die Meldung zur Aufnahme.
@@ -215,9 +202,9 @@ Wähle das passende Fehlerbild. Beginne mit der genannten Anzeige, bevor du Eins
 
 1. Öffne **Übersicht → Verbindung und Hardware** und lies den Zeitpunkt der letzten Verbindung. Liegt er mindestens fünf Minuten zurück, gilt das Gerät als offline.
 
-2. Prüfe Stromversorgung und Netzwerkverbindung von Gerät und Edge-Router. Öffne die Geräteübersicht nach Wiederherstellung erneut.
+2. Prüfe Stromversorgung und Netzwerkverbindung von Gerät und Edge-Router.
 
-3. Prüfe, ob ein neuer Verbindungszeitpunkt erscheint. Bleibt er unverändert, wurde noch keine neue Gerätemeldung empfangen.
+3. Öffne nach der Wiederherstellung die Geräteübersicht erneut. Ein neuer Verbindungszeitpunkt bestätigt eine neue Gerätemeldung.
 
 ### Anschluss funktioniert nicht oder Konfiguration bleibt ausstehend
 

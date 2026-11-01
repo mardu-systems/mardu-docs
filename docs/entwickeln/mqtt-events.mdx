@@ -3,23 +3,19 @@ title: MQTT-Ereignisse beziehen
 description: Freigegebene System- und Geräteinformationen über den eingebetteten MQTT-Broker lesen.
 ---
 
-Über den eingebetteten Informationsbroker kannst du Systemzustände,
-Gerätezustände und Geräteereignisse in einem eigenen MQTT-Client lesen.
-Externe Clients dürfen dort ausschließlich abonnieren. Auch ein MQTT-Konto
-mit der Rolle `Admin` erhält keine Veröffentlichungsrechte.
+Der Informationsbroker erlaubt externen Clients ausschließlich Abonnements,
+auch mit der MQTT-Rolle `Admin`.
 
-Dieser Lesezugang ist vom MQTT-Gerätemanagement und von der internen
-Automation-Kommunikation getrennt. Die folgenden Topics sind kein
-Schreibvertrag für Gerätebefehle. Für die Einrichtung des Brokers und der
-Lesekonten siehe [Administration → Integrationen](../administration/integrationen.mdx#mqtt).
+Dieser Zugang ist vom Gerätemanagement und der internen Automation-Kommunikation
+getrennt. Broker und Lesekonten richtet die
+[Administration unter Integrationen](../administration/integrationen.mdx#mqtt) ein.
 
 ## Verbindung und Zugriffsregeln
 
 Lass dir vor dem Verbinden diese Angaben für deine Installation geben:
 
-- **Brokeradresse und Port:** Verwende den erreichbaren MQTT-Listener, nicht die
-  HTTP-API-Adresse oder die Dashboard-Projektadresse. Der Standardport ohne TLS
-  ist `1883`; für TLS ist `8883` empfohlen. Maßgeblich ist der eingestellte Port.
+- **Brokeradresse und Port:** Verwende den MQTT-Listener. Standard ohne TLS ist
+  `1883`, für TLS ist `8883` empfohlen; maßgeblich ist der eingestellte Port.
 - **TLS und Zertifikatsvertrauen:** Bei aktiviertem TLS bietet der Broker TLS 1.2
   und 1.3 an. Nutze den zum Zertifikat passenden Hostnamen und vertraue der
   ausstellenden Zertifizierungsstelle. Die Option für selbstsignierte
@@ -28,9 +24,9 @@ Lass dir vor dem Verbinden diese Angaben für deine Installation geben:
   Eine Dashboard-Anmeldung oder ein HTTP-Bearer-Token ersetzt diese Zugangsdaten
   nicht. Verwende eine eigene Client-ID; eine vorgegebene Bindung des Kontos an
   eine Client-ID muss eingehalten werden. `internal-service` ist reserviert.
-- **Erlaubte Topicfilter:** Lass dir die freigegebenen Topics sowie eventuelle
-  QoS- und Retained-Einschränkungen nennen. Eine erfolgreiche Anmeldung allein
-  gewährt einem eingeschränkten Konto noch kein Abonnement.
+- **Erlaubte Topicfilter:** Kläre die freigegebenen Topics sowie QoS- und
+  Retained-Einschränkungen. Eingeschränkte Konten brauchen zusätzlich zur
+  Anmeldung passende Abonnementrechte.
 
 Die MQTT-Rolle `ReaderRestricted` benötigt aktive `subscribe`-ACLs mit `allow`.
 Eine ACL ist eine Zugriffsregel für ein Topic oder einen Topicfilter. Ein
@@ -38,10 +34,9 @@ Abonnement muss vollständig in einen erlaubten Filter passen; eine überlappend
 aktive `deny`-Regel hat Vorrang. `ReaderAll` und `Admin` dürfen den Informationsbaum
 `v1/info/#` lesen. Das ist unabhängig von Dashboard-Rollen und HTTP-Berechtigungen.
 
-Anonymer Zugriff funktioniert nur, wenn er am Broker aktiviert ist. Ohne
-Benutzername und Passwort gelten dann die konfigurierten anonymen Filter;
-der Vorgabefilter ist `v1/info/public/#`. Das Wort `public` im Topic allein
-schaltet den Zugriff nicht frei.
+Anonymer Zugriff muss am Broker aktiviert sein. Ohne Zugangsdaten gelten dann
+die anonymen Filter, standardmäßig `v1/info/public/#`. Der Topicname `public`
+allein gewährt keinen Zugriff.
 
 ### Ein begrenztes Abonnement prüfen
 
@@ -72,19 +67,17 @@ Eine beispielhafte Nachricht mit fiktiven Werten:
 ```
 
 `applicationVersion` und `environment` beschreiben die Serverinstanz,
-`healthStatus` deren gemeldeten Gesundheitszustand. `timestampUtc` ist der
-Zeitpunkt der Momentaufnahme. Prüfe ihn, bevor du den Wert als aktuell anzeigst:
-Eine Retained-Nachricht ist der zuletzt gespeicherte Wert, kein Nachweis einer
-ununterbrochenen Verbindung.
+`healthStatus` ihren gemeldeten Gesundheitszustand. Prüfe `timestampUtc`, bevor
+du die Momentaufnahme als aktuell anzeigst: Retained liefert den zuletzt
+gespeicherten Wert, keinen Nachweis einer ununterbrochenen Verbindung.
 
 ## Topics und Payloads
 
 Der Topic-Katalog unter **Administration → Integrationen → Embedded MQTT** enthält
-Templates, Payloadtypen, Beispiele und Hinweise. Er ist auch über
+Templates, Payloadtypen und Beispiele. Er ist auch über
 `GET /api/v1/integrations/mqtt/topics` mit HTTP-Authentifizierung und dem Recht
-**Integrationen anzeigen** abrufbar. Der Katalog beschreibt angebotene Topics;
-er bestätigt weder deine MQTT-ACL noch, dass zu jedem Template bereits eine
-Nachricht vorliegt.
+**Integrationen anzeigen** abrufbar. Prüfe die MQTT-ACL gesondert; ein angebotenes
+Topic muss noch keine Nachricht enthalten.
 
 Die folgenden QoS- und Retained-Angaben beschreiben die Veröffentlichung durch
 Mardu. Das beim Abonnieren gewährte QoS kann durch die ACL niedriger ausfallen.
@@ -120,24 +113,22 @@ Kleinschreibung. Leere Ebenen und Nullzeichen sind ungültig. Für Abonnements g
   der gesamte angefragte Filter von den Leserechten abgedeckt wird. Ein globales
   `#` ist kein erlaubtes Informationsabonnement; nutze den freigegebenen Teilbaum.
 
-Private Automation-Topics gehören zur eingerichteten Adapterverbindung und sind
-kein allgemeiner Erweiterungspunkt dieses Informationszugangs. Verwende für
-eigene Flows die Anleitung [Eigene Automationsflüsse entwickeln](./automationsfluesse.mdx).
+Private Automation-Topics gehören zur Adapterverbindung, nicht zu diesem
+Informationszugang. Eigene Flows beschreibt die Anleitung
+[Eigene Automationsflüsse entwickeln](./automationsfluesse.mdx).
 
 ### Zustände und Ereignisse verarbeiten
 
-Die hier beschriebenen Payloads sind UTF-8-kodiertes JSON. Verwende den zum Topic
-gehörenden Payloadtyp aus dem Katalog: Systemtelemetrie und Geräteereignisse
-haben unterschiedliche Felder. Zeitpunkte mit `Utc` verwenden UTC;
+Payloads sind UTF-8-kodiertes JSON. Verwende den Payloadtyp des Topics aus dem
+Katalog. Zeitpunkte mit `Utc` verwenden UTC;
 `uptimeSeconds` ist die Serverlaufzeit in Sekunden.
 
 Für Geräteereignisse abonnierst du nach Freigabe beispielsweise
 `v1/info/devices/5f1c1f34-0af2-4e8a-8a80-9b8bda4639e1/events`.
 Eine Ereignisnachricht enthält `deviceId`, `category`, `severity`, `eventType`,
 `message` und `timestampUtc`. `source`, `correlationId` und `metadata` können
-`null` sein. Der reguläre
-Ereignisstrom spiegelt neue Einträge im Geräteprotokoll; ein stilles Topic
-bedeutet daher nicht zwangsläufig einen Fehler.
+`null` sein. Der reguläre Ereignisstrom liefert neue Geräteprotokolleinträge;
+ohne neues Ereignis kann das Topic still bleiben.
 
 Retained-Zustände sind Momentaufnahmen, keine Ereignishistorie. Geräteereignisse
 werden ohne Retain veröffentlicht; erwarte nach einer Wiederverbindung keinen
@@ -150,10 +141,9 @@ mit leeren Retained-Payloads. Behandle eine leere Payload daher nicht als
 beschädigtes JSON. Verarbeite wiederholt eintreffende Zustände ohne zusätzliche
 Aktion und löse aus einer QoS-1-Nachricht keine ungeschützte einmalige Aktion aus.
 
-Ein Laufzeitzustand ist aus den vorhandenen Sitzungen und Einstellungen
-abgeleitet. Er bestätigt keinen physischen Relais- oder Sensorzustand. Auch ein
-OTA-Ereignis oder eine gespeicherte Entscheidung ersetzt keine Bestätigung der
-Geräteausführung.
+Laufzeitzustände leiten sich aus Sitzungen und Einstellungen ab und bestätigen
+keinen physischen Relais- oder Sensorzustand. OTA-Ereignisse und gespeicherte
+Entscheidungen ersetzen ebenfalls keine Gerätebestätigung.
 
 ## Wenn keine Nachricht ankommt
 
@@ -166,7 +156,5 @@ Geräteausführung.
 | Abonnement angenommen, keine Nachricht       | Zeitpunkt der nächsten Veröffentlichung, Unterdrückung von Retained-Werten und vorhandene Daten prüfen. Ereignistopics liefern ohne neues Ereignis keine Nachricht.                                                    |
 | Verbindung nach Verwaltungsänderung getrennt | Mit den gültigen Zugangsdaten erneut verbinden und die freigegebenen Topics erneut abonnieren.                                                                                                                         |
 
-Veröffentliche keine Testnachricht zur Verbindungsprüfung: Der Broker weist
-externe Veröffentlichungen unabhängig von Topic, Retain und MQTT-Rolle zurück.
-Gib bei einer Fehlermeldung Topic und Zeitpunkt weiter, aber keine Passwörter
-oder vollständigen Payloads mit personenbezogenen Sitzungsdaten.
+Gib bei der Fehlersuche Topic und Zeitpunkt weiter, aber keine Passwörter oder
+Payloads mit personenbezogenen Sitzungsdaten. Prüfe die Verbindung nur lesend.

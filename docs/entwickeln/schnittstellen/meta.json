@@ -1,0 +1,6 @@
+{
+  "title": "API und Integrationen",
+  "pagesIndex": "../api-integration",
+  "defaultOpen": false,
+  "pages": ["../http-api", "../mqtt-events", "../mcp-anbindung", "../automationsfluesse"]
+}

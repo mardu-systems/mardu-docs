@@ -3,10 +3,9 @@ title: Nachweise und Datenschutz
 description: Verwaltungsänderungen suchen und exportieren, Datenquellen unterscheiden und Löschfolgen prüfen.
 ---
 
-Im **Audit-Trail** kannst du gespeicherte Verwaltungsänderungen nachvollziehen
-und gefiltert exportieren. Anmeldeereignisse, Zutrittsentscheidungen und
-persönliche Kompetenzvergaben sind eigene Datenquellen. Ein Auditexport ist
-deshalb keine vollständige Auskunft über eine Person.
+Der **Audit-Trail** erfasst Verwaltungsänderungen. Anmeldeereignisse,
+Zutrittsentscheidungen und persönliche Kompetenzvergaben sind eigene Datenquellen;
+ein Auditexport ist keine vollständige Personenauskunft.
 
 ## Audit suchen und exportieren
 
@@ -32,14 +31,12 @@ Suchst du Änderungen an einem bestimmten Konto, verwende den Objekttyp
 **Benutzer** zusammen mit dessen **Objekt-ID**. Beide Filter zusammen liefern nur
 Änderungen, bei denen dieselbe Person Ausführende und betroffenes Konto ist.
 
-Die Zeitpunkte in Tabelle und Details werden in UTC angezeigt. Manuell gewählte
-Kalendertage werden dagegen in der lokalen Zeitzone deines Browsers als
-Tagesbeginn beziehungsweise Tagesende ausgewertet und als UTC übertragen.
-Berücksichtige diese Unterscheidung beim Abgleich mit anderen Protokollen.
+Tabelle und Details zeigen UTC. Manuell gewählte Kalendertage gelten vom
+Tagesbeginn bis Tagesende in der Browser-Zeitzone und werden als UTC übertragen.
+Berücksichtige das beim Abgleich mit anderen Protokollen.
 
-Suche, Filter und geöffnetes Ereignis stehen auch in der Seitenadresse. Behandle
-solche Links entsprechend ihrem Inhalt: Sie können Benutzer-IDs oder IP-Adressen
-enthalten. Wer den Link öffnet, braucht weiterhin die passenden Leserechte.
+Die Seitenadresse enthält Suche, Filter und geöffnetes Ereignis, gegebenenfalls
+auch Benutzer-IDs oder IP-Adressen. Zum Öffnen sind weiterhin Leserechte nötig.
 
 ### Details lesen
 
@@ -55,9 +52,8 @@ kannst du einen konkreten Datensatz benennen. **Zusammengehöriger Vorgang** zei
 bis zu 50 Ereignisse mit derselben Korrelations-ID; für umfangreichere Vorgänge
 suche diese ID in der Hauptliste.
 
-**Betroffenes Objekt öffnen** wird nur für unterstützte Verknüpfungen angeboten.
-Die Historie kann auch erhalten bleiben, wenn das Konto oder Objekt bereits
-gelöscht wurde. Ein fehlender Link entfernt den historischen Eintrag nicht.
+**Betroffenes Objekt öffnen** erscheint nur für unterstützte Verknüpfungen.
+Historische Einträge können auch nach dem Löschen des Kontos oder Objekts bestehen bleiben.
 
 ### Gefilterte Daten exportieren
 
@@ -99,8 +95,6 @@ Türöffnung oder Geräteausführung.
 
 ## Datenarten und Aufbewahrung
 
-Die Daten haben unterschiedliche Zwecke und Löschwege:
-
 | Datenart                             | Bedeutung und Grenze                                                                                                                                     |
 | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Kontodaten, Rollen und Gruppen       | Aktuelle Zuordnungen in der [Benutzerverwaltung](./benutzer-rollen.mdx#benutzer-verwalten). Eine Deaktivierung erhält das Konto.                         |
@@ -119,22 +113,17 @@ Die Servervorgaben sind 30 und 365 Tage. Maßgeblich sind die gespeicherten Wert
 deiner Installation. Eine längere Frist stellt bereits entfernte Daten nicht
 wieder her.
 
-Diese Einstellungen sind keine allgemeine Aufbewahrungsrichtlinie für Konten,
-Anmeldehistorie, Audit, Zutrittsdaten, Buchungen, Vergaben oder Benachrichtigungen.
-Aus ihnen lässt sich kein Löschzeitpunkt für diese anderen Daten ableiten.
+Diese Fristen gelten ausschließlich für technische Messwerte, nicht für die
+anderen Datenarten.
 
 ## Auskunft, Berichtigung und Löschung
 
-Mardu bietet in den hier beschriebenen Ansichten keinen gemeinsamen Vorgang,
-der alle personenbezogenen Daten als Auskunft zusammenstellt oder vollständig
-löscht. Kläre mit den in deiner Organisation zuständigen Personen, welche Daten
-benötigt werden und wer die Anfrage bearbeitet.
+Es gibt hier keinen gemeinsamen Vorgang für vollständige Personenauskunft oder
+Löschung. Kläre Zuständigkeit und Umfang der Anfrage in deiner Organisation.
 
-Für die Zusammenstellung prüfst du zuerst das Konto und seine Zuordnungen in der
-Benutzerverwaltung. Suche Audit-Ereignisse getrennt nach ausführender Person und
-betroffenem Konto. Prüfe je nach Anfrage zusätzlich Zutrittsdaten, Buchungen,
-Kompetenzvergaben und Benachrichtigungen in den jeweiligen Bereichen. Ein
-Auditexport allein deckt diese Quellen nicht ab.
+Prüfe Konto und Zuordnungen in der Benutzerverwaltung. Suche Audit-Ereignisse
+getrennt nach ausführender Person und betroffenem Konto. Ergänze je nach Anfrage
+Zutrittsdaten, Buchungen, Kompetenzvergaben und Benachrichtigungen.
 
 Die Anmeldeereignisse eines Kontos sind über die paginierte API
 `GET /api/v1/users/{id}/login-history` mit `Permissions.Users.View` abrufbar.
@@ -150,9 +139,8 @@ Vor einer [Kontolöschung](./benutzer-rollen.mdx#benutzer-löschen) zeigt Mardu 
 Vorschau der betroffenen Daten und Hindernisse. Die Löschung ist nicht
 rückgängig zu machen. Offene Vorgänge oder Zuständigkeiten können sie verhindern.
 Abgeschlossene Buchungs- und Zutrittshistorie sowie Anmeldeereignisse bleiben
-erhalten. Auch der Audit-Trail wird durch eine Kontolöschung nicht pauschal
-entfernt. Prüfe deshalb die Vorschau; eine erfolgreiche Kontolöschung ist keine
-Bestätigung, dass sämtliche Daten über die Person entfernt wurden.
+erhalten; auch der Audit-Trail wird nicht pauschal entfernt. Prüfe die Vorschau:
+Eine Kontolöschung entfernt nicht sämtliche Daten über die Person.
 
 Die technischen Bedienmöglichkeiten legen keine gesetzlichen Fristen,
 Rechtsgrundlagen oder vollständigen Datenschutzverfahren fest. Diese Vorgaben
@@ -169,7 +157,6 @@ Das [Zurückziehen einer Veröffentlichung](./badges-verwalten.mdx#eine-veröffe
 beendet den Abruf über ihren öffentlichen Link. Es ruft bereits heruntergeladene
 Kopien nicht zurück und löscht weder Definition noch Vergaben.
 
-Vergib Audit-Lese- und Exportrechte nach dem benötigten Aufgabenbereich.
-Zutrittsprotokolle haben eigene Rechte und objektbezogene Zugriffsgrenzen.
-Die Bezeichnung „Administration“ in dieser Dokumentation weist diese Rechte
-nicht automatisch zu.
+Vergib Audit-Lese- und Exportrechte nach Aufgabenbereich. Zutrittsprotokolle
+haben eigene Rechte und objektbezogene Zugriffsgrenzen. Der Doku-Bereich „Administration“
+erteilt keine Rechte.

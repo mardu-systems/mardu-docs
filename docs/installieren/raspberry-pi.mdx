@@ -3,9 +3,8 @@ title: Server auf dem Raspberry Pi installieren
 description: Mardu aus privaten GitHub-Container-Images installieren und mit Docker Compose aktualisieren.
 ---
 
-Mit dem Installationspaket startest du API, Dashboard, Datenbank und HTTPS-Proxy
-auf einem Raspberry Pi. Der Pi lädt fertige Images aus der GitHub Container
-Registry (GHCR); ein Quellcode-Checkout und ein lokaler Build sind nicht nötig.
+Das Paket startet API, Dashboard, Datenbank und HTTPS-Proxy auf dem Pi mit fertigen
+Images aus der GitHub Container Registry (GHCR). Ein lokaler Build ist nicht nötig.
 
 ## Voraussetzungen
 
@@ -28,9 +27,8 @@ Registry (GHCR); ein Quellcode-Checkout und ein lokaler Build sind nicht nötig.
 
 ## 1. Installationspaket herunterladen
 
-Öffne die GitHub-Releases von `mardu-systems/mardu-rpi-api` mit deinem berechtigten
-GitHub-Konto. Lade bei einem freigegebenen Release den Anhang
-`mardu-raspberry-pi.tar.gz` herunter und übertrage ihn auf den Pi.
+Lade `mardu-raspberry-pi.tar.gz` aus einem freigegebenen GitHub-Release von
+`mardu-systems/mardu-rpi-api` und übertrage das Paket auf den Pi.
 
 Entpacke das Archiv in einen eigenen, dauerhaft verwendeten Installationsordner:
 
@@ -57,10 +55,9 @@ Melde dich auf dem Pi an:
 docker login ghcr.io -u DEIN_GITHUB_BENUTZERNAME
 ```
 
-Ersetze den Benutzernamen. Füge den Token erst in der verdeckten Passwortabfrage
-ein. Docker speichert den Zugang für diesen Linux-Benutzer in seinem konfigurierten
-Credential Store oder der Docker-Konfiguration. Trage ihn weder in `compose.yaml`
-noch in `.env` ein. Behandle die Docker-Zugangsdaten auf dem Pi vertraulich.
+Ersetze den Benutzernamen und gib den Token in der verdeckten Passwortabfrage ein.
+Docker speichert ihn für diesen Linux-Benutzer. Schütze diesen Zugang; der Token
+gehört weder in `compose.yaml` noch in `.env`.
 
 ## 3. Installation konfigurieren
 
@@ -99,12 +96,10 @@ docker compose exec server cat /app/Private/setup-token.txt
 Der Token autorisiert die Ersteinrichtung; er ist kein Anmeldepasswort. Gib ihn
 nicht weiter. Nach erfolgreichem Setup wird die Token-Datei gelöscht.
 
-**Bekannte Einschränkung des Erstsetups:** Die hier geprüfte
-Production-Compose-Konfiguration verwendet intern HTTP-Port `8080`, der
-Einrichtungsassistent des gleichen Quellstands übermittelt jedoch fest Port
-`5001`. Die serverseitige Validierung lehnt diese Abweichung ab. Mit dieser
-Kombination ist die Ersteinrichtung nicht abschließbar. Prüfe für dein Release,
-ob dieser Konflikt behoben ist; ein gesund angezeigter Container belegt das nicht.
+**Bekannte Einschränkung des Erstsetups:** Im geprüften Quellstand verwendet
+Production-Compose intern Port `8080`, der Assistent übermittelt `5001`. Die
+Validierung lehnt den Konflikt ab und verhindert den Setup-Abschluss. Prüfe vorab,
+ob dein Release ihn behebt; gesunde Container allein bestätigen das nicht.
 
 Der Einrichtungsablauf für eine Version ohne diesen Konflikt:
 
@@ -137,11 +132,9 @@ angelegten Konto unter `https://DEINE-DOMAIN/standalone/auth` an. Prüfe außerd
 `https://DEINE-DOMAIN/health/ready`: Während der Ersteinrichtung antwortet dieser
 Endpunkt mit HTTP `503`; erst danach dient er als Bereitschaftsprüfung.
 
-Die API verwendet intern HTTP-Port `8080`, das Dashboard Port `3000` und die
-Datenbank Port `5432`. Diese Ports werden vom Installationspaket nicht am Pi
-veröffentlicht. Der Browser greift über Caddy mit HTTPS auf Port `443` zu. Der
-Container-Healthcheck verwendet `/health/live`, damit das Setup auch vor der
-Datenbankinitialisierung erreichbar ist.
+Intern verwenden API, Dashboard und Datenbank die Ports `8080`, `3000` und
+`5432`; der Browser greift über Caddy auf HTTPS-Port `443` zu. Der
+Container-Healthcheck nutzt `/health/live`, auch vor der Datenbankinitialisierung.
 
 Konfiguration, Dateien, private Schlüssel, Zertifikate und Datenbank liegen in
 Docker-Volumes und bleiben bei einem Containerwechsel erhalten. Der Stack
@@ -164,11 +157,9 @@ docker compose up -d
 docker compose ps
 ```
 
-Compose prüft bei jedem Aufruf die `stable`-Images für API und Dashboard und
-ersetzt Container, deren Image sich geändert hat. Vorabversionen aktualisieren
-`stable` nicht. Während des Containerwechsels kann die Anwendung kurz nicht
-erreichbar sein. Zwischen den Aufrufen sucht Compose nicht im Hintergrund nach
-Updates. Prüfe nach einem Update auch `/health/ready`.
+Der Befehl prüft die `stable`-Images und ersetzt geänderte Container; dabei kann
+die Anwendung kurz ausfallen. Vorabversionen aktualisieren `stable` nicht. Updates
+laufen nur bei diesem Aufruf, nicht im Hintergrund. Prüfe danach `/health/ready`.
 
 Die Compose-Datei selbst wird dadurch nicht heruntergeladen. Verlangt ein Release
 neue Dienste oder Einstellungen, übernimm die zugehörigen Installationsdateien

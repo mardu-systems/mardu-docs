@@ -3,99 +3,78 @@ title: Integrationen
 description: Die passende Anbindung für Anmeldung, MQTT, Nachweise, E-Mail, Automationen und Agenten finden.
 ---
 
-Diese Übersicht hilft dir, die passende Anbindung und ihren Einstellungsbereich zu finden.
-Im Dashboard liegen sie unter **Administration → Integrationen** oder
-**Administration → Systemeinstellungen**. Eine Verbindung für die Anmeldung hat einen
-anderen Zweck als eine Nachweisquelle: Wer sein Badge-Konto verbindet, meldet sich damit
-nicht bei Mardu an und erhält dadurch keine Zugriffsrechte.
+Die Anbindungen liegen unter **Administration → Integrationen** oder
+**Administration → Systemeinstellungen**.
 
-Zum Anzeigen und Ändern brauchst du die jeweiligen Berechtigungen. Für die unten
-beschriebenen Bereiche MQTT, LDAP und OIDC werden sowohl Rechte für **Integrationen**
-als auch für **Einstellungen** verwendet. Ein sichtbarer Menüpunkt allein bedeutet
-nicht, dass du die Einstellungen laden oder speichern darfst. Wird ein Wert durch die
-Serverumgebung vorgegeben und als gesperrt angezeigt, muss ihn der Serverbetrieb ändern.
+MQTT, LDAP und OIDC verwenden Rechte für **Integrationen** und **Einstellungen**;
+die jeweilige Anleitung nennt die benötigten Rechte. Durch die Serverumgebung
+gesperrte Werte muss der Serverbetrieb ändern.
+
+## Eine Integration finden
+
+Wähle **Einstellungen durchsuchen** oberhalb des Inhalts und gib mindestens zwei
+Zeichen ein, zum Beispiel `MQTT`, `TLS`, `LDAP` oder `SMTP`. Die Treffer enthalten
+auch zugelassene Servereinstellungen; der Bereichspfad zeigt den Zielbereich.
+Mit Pfeiltasten und **Enter** oder durch Auswahl öffnest du den Abschnitt.
+
+Die [Einstellungssuche](./server-einstellungen.mdx#einstellungen-suchen) erklärt
+Suchumfang, Tastaturbedienung und den Umgang mit ungespeicherten Änderungen.
+Die Suche nach eigenen Kontoeinstellungen liegt getrennt unter
+[Profil](../ueberblick/profil.mdx#einstellungen-im-profil-finden).
 
 ## MQTT
 
 Unter **Administration → Integrationen → Embedded MQTT** verwaltest du den
-**eingebetteten Informationsbroker**: Listener, Port, TLS-Zertifikat, Brokerstatus,
-MQTT-Benutzer und ihre Zugriffsregeln. Der Topic-Katalog beschreibt die angebotenen
-Informationen. Externe Clients dürfen diese Informationen abonnieren, aber keine
-Nachrichten am Broker veröffentlichen. Das gilt auch für MQTT-Administratorkonten.
+**eingebetteten Informationsbroker**: Listener, TLS, Status, Benutzer und
+Zugriffsregeln. Externe Clients dürfen Informationen abonnieren, aber auch als
+MQTT-Administratorkonto keine Nachrichten veröffentlichen.
+
+[MQTT-Zugänge verwalten](./mqtt-broker.mdx) erklärt Einrichtung, Rechte und ACLs
+(Regeln für erlaubte Topics). Geänderte Broker-Einstellungen starten den Broker
+nach dem Speichern neu. Auch **Broker neu starten** und Passwort-, Benutzer- oder
+ACL-Änderungen trennen Clients; sie müssen sich neu verbinden und abonnieren.
 Die Nachrichtenformate stehen unter
 [Entwickeln → MQTT für Entwickler](../entwickeln/mqtt-events.mdx).
 
-Broker-Einstellungen benötigen **Einstellungen anzeigen/bearbeiten**; Status,
-Topic-Katalog und Benutzerverwaltung benötigen die passenden Rechte für
-**Integrationen**. Das Erstellen und Löschen von Benutzern erfordert dort jeweils
-**Anlegen** beziehungsweise **Löschen**.
-
-Für ein eingeschränktes Lesekonto legst du nach dem Benutzer die erlaubten
-Zugriffsbereiche als **ACL** an. Eine ACL ist eine Regel, welche Topics das Konto
-abonnieren darf. Ein solches Konto erhält ohne passende Freigabe keinen Lesezugriff.
-Passwort-, Benutzer- und ACL-Änderungen trennen bestehende Verbindungen; Clients müssen
-sich anschließend erneut verbinden und abonnieren. Geänderte Broker-Einstellungen
-starten den Broker nach dem Speichern automatisch neu. Auch **Broker neu starten**
-unterbricht verbundene Clients.
-
-Die ausgehende MQTT-Verbindung für das IP500-Netzwerk ist davon getrennt und liegt
-unter [Netzwerk und Gateways](#netzwerk-und-gateways).
+Die ausgehende MQTT-Verbindung für das IP500-Netzwerk liegt getrennt unter
+[Netzwerk und Gateways](#netzwerk-und-gateways).
 
 ## LDAP
 
-**LDAP** ist ein Verzeichnisdienst, aus dem Mardu Benutzerinformationen und
-Gruppenzuordnungen abgleichen kann. Öffne
-**Administration → Systemeinstellungen → LDAP**. Dort werden Verbindung und
-Lesekonto, Suchbereiche, Attributzuordnung, Rollenregeln und Synchronisierung
-konfiguriert. Die frühere Adresse unter Integrationen führt auf diese Seite weiter.
+**LDAP** gleicht Benutzerinformationen und Gruppenzuordnungen mit einem
+Verzeichnisdienst ab. Unter **Administration → Systemeinstellungen → LDAP**
+richtest du Verbindung, Suchbereiche, Attributzuordnung, Rollenregeln und
+Synchronisierung ein. Die frühere Adresse unter Integrationen leitet dorthin weiter.
 
-Halte vor der Einrichtung die Verbindungsdaten, das Zertifikatsvertrauen, die
-Suchbasis und die vom Verzeichnis verwendeten Attribute bereit. Mit
-**Verbindung testen** prüfst du den aktuellen Entwurf, ohne ihn zu speichern.
-Führe beim Aktivieren und nach einer Verbindungsänderung einen aktuellen Test aus
-und prüfe dessen Ergebnis vor dem Speichern. Die Oberfläche prüft bei diesem
-Schritt die Aktualität des Tests; ein durchgeführter Test allein bestätigt keinen
-Erfolg. Den vollständigen Ablauf erklärt [LDAP-Verzeichnis anbinden](./ldap-verzeichnis.mdx).
-
-Prüfe vor einem Abgleich insbesondere **Wenn Benutzer nicht mehr im LDAP vorhanden sind**:
-Die Auswahl kann Konten deaktivieren oder dauerhaft löschen. **Vorschau erstellen**
-zeigt die erwarteten Änderungen für den Entwurf. **Jetzt synchronisieren** verwendet
-hingegen den gespeicherten Stand und verlangt dafür eine aktuelle Vorschau ohne
-ungespeicherte Änderungen. Ein gestarteter Hintergrundauftrag ist noch kein
-abgeschlossener Abgleich; kontrolliere **Letzte Sync-Läufe anzeigen**.
+Folge [LDAP-Verzeichnis anbinden](./ldap-verzeichnis.mdx) für Verbindungstest,
+Vorschau und Synchronisierung. Prüfe besonders **Wenn Benutzer nicht mehr im LDAP
+vorhanden sind**: Die Auswahl kann Konten deaktivieren oder dauerhaft löschen.
+Ein gestarteter Hintergrundauftrag bestätigt noch keinen abgeschlossenen Abgleich;
+kontrolliere **Letzte Sync-Läufe anzeigen**.
 
 ## Anmeldung über OpenID Connect
 
-**OpenID Connect (OIDC)** ermöglicht die Anmeldung bei Mardu über einen externen
-Identitätsanbieter. Öffne **Administration → Systemeinstellungen → OIDC**.
-Die frühere OIDC-Adresse unter Integrationen leitet dorthin weiter.
+**OpenID Connect (OIDC)** ermöglicht die Mardu-Anmeldung über einen externen
+Identitätsanbieter. Öffne **Administration → Systemeinstellungen → OIDC**;
+die frühere Adresse unter Integrationen leitet dorthin weiter.
 
-Die Einrichtung umfasst den Anbieter, seine Issuer-Adresse, Client-Daten,
-**Redirect-URI**, Tokenprüfung sowie die Regeln für Benutzeranlage, Kontoverknüpfung
-und Rollen. Diese Regeln entscheiden, wie Mardu die externe Identität einem lokalen
-Konto zuordnet. Übernimm die Redirect-URI exakt in die Registrierung beim Anbieter.
-Eine Badge-Anbieterregistrierung ersetzt diese Einrichtung nicht.
-
-**Verbindung testen** prüft die technischen Endpunkte. Mit **Test-Anmeldung starten**
-prüfst du zusätzlich den Browser-Anmeldeablauf; dieser isolierte Test speichert keine
-Konfiguration und verändert keine lokalen Benutzer. Die **Claim-Vorschau** hilft,
-Identitäts- und Rollenzuordnungen vorab zu prüfen. Aktivierte Anbieter mit geänderter
-Verbindung benötigen vor dem Speichern einen aktuellen erfolgreichen Verbindungstest.
-Prüfe danach auch die angezeigte Übernahme in die Laufzeit.
+[OpenID Connect einrichten](./oidc-anmeldung.mdx) führt durch Anbieterregistrierung,
+**Redirect-URI**, Kontozuordnung, Rollenregeln und Tests. Eine Registrierung als
+Badge-Anbieter ersetzt diese Einrichtung nicht. Eine persönliche Nachweisquelle
+ermöglicht keine Mardu-Anmeldung und erteilt keine Zugriffsrechte. Prüfe neben den technischen
+Endpunkten auch die Browser-Anmeldung und nach dem Speichern die angezeigte
+Übernahme in die Laufzeit.
 
 ## Netzwerk und Gateways
 
-Unter **Administration → Systemeinstellungen → IP500-Netzwerk** konfigurierst du den
-**ausgehenden MQTT-Client** für die IP500-Netzwerkintegration. Dazu gehören
-Brokeradresse, Port, Client-ID, Zugangsdaten und TLS. Dafür brauchst du
-**Einstellungen anzeigen/bearbeiten**. Einrichtung und Grenzen des Refresh-Felds
-stehen unter [IP500-Netzwerk anbinden](./ip500-netzwerk.mdx).
-Diese Verbindung ist nicht der eingebettete Informationsbroker.
+Unter **Administration → Systemeinstellungen → IP500-Netzwerk** richtest du den
+**ausgehenden MQTT-Client** ein. Du benötigst **Einstellungen anzeigen/bearbeiten**.
+Verbindungsdaten, TLS und Grenzen des Refresh-Felds erklärt
+[IP500-Netzwerk anbinden](./ip500-netzwerk.mdx).
 
-Das Speichern dieser Verbindungsdaten nimmt kein neues Gerät auf und ordnet einem
-Gerät keine Ressource zu. Für die Geräteaufnahme und Zuordnung nutze
-[Geräte verwalten](./geraete-verwalten.mdx). Eine vorhandene Brokerverbindung allein
-bestätigt weder die Erreichbarkeit eines Gateways noch die Funktion eines angeschlossenen Geräts.
+Die Verbindung nimmt kein Gerät auf und ordnet keine Ressource zu; dafür nutze
+[Geräte verwalten](./geraete-verwalten.mdx). Eine Brokerverbindung bestätigt noch
+keine Gateway-Erreichbarkeit oder Gerätefunktion.
 
 ## E-Mail
 
@@ -118,17 +97,13 @@ Unter **Administration → Integrationen → Open Badges** findest du mehrere ge
 | **Anerkennungsregeln** | Akzeptierte Aussteller und die Zuordnung externer Badge-Klassen zu lokalen Kompetenzcodes verwalten.                                                     |
 | **Vergaberegeln**      | Regeln für die externe Ausstellung nach abgeschlossener Tag-Einrichtung verwalten.                                                                       |
 
-Die externen Bereiche benötigen **Integrationen anzeigen**, Änderungen in der Regel
-**Integrationen bearbeiten**. Neue Konto-Anbieter benötigen **Integrationen anlegen**.
-Beim Konto-Anbieter wird nach dem ersten Speichern eine Rückleitungs-URL angezeigt,
-die exakt beim Anbieter registriert werden muss. Die Anmeldung zur Nachweisquelle
-erfolgt später durch die jeweilige Person, wie unter
-[Nachweisquellen im Profil](../ueberblick/profil-nachweisquellen.mdx) beschrieben.
+Einrichtung, Rechte und Rückleitungs-URL erklärt
+[Nachweissysteme anbinden](./nachweissysteme-anbinden.mdx). Die persönliche
+Anmeldung beschreibt [Nachweisquellen im Profil](../ueberblick/profil-nachweisquellen.mdx).
 
-Die serverweite Synchronisation und die Konto-Anbieter verwenden unterschiedliche
-Zugänge. Eine serverweite Freigabe zur Kontoverknüpfung aktiviert keine OIDC-Anmeldung.
-Import und technische Prüfung ersetzen auch keine Anerkennungsentscheidung und
-gewähren keinen Zutritt. Für die Bewertung nutze
+Serverweite Synchronisation und Konto-Anbieter verwenden unterschiedliche Zugänge.
+Import und technische Prüfung ersetzen keine Anerkennungsentscheidung und gewähren
+keinen Zutritt. Für die Bewertung nutze
 [Koordination → Bewertungen](../koordination/bewertungen.mdx).
 
 [Badges verwalten](./badges-verwalten.mdx) behandelt Definitionen, lokale Vergaben und
@@ -139,10 +114,9 @@ keinen Schlüssel.
 
 ## Automationen
 
-Unter **Administration → Integrationen → Automationen** aktivierst du die
-Automatisierungen und richtest die gemeinsame Verbindung zu Node-RED ein.
-Verbindungseinrichtung, Editorrechte, Anschlüsse, Ressourcenzuordnung und
-Freigabeprüfungen sind unter [Automationen](./automationen.mdx) beschrieben.
+[Automationen](./automationen.mdx) beschreibt unter
+**Administration → Integrationen → Automationen** die Aktivierung,
+Node-RED-Verbindung, Editorrechte und Anschlusszuordnung.
 
 Die eingerichtete Node-RED-Verbindung kann alle unterstützten Ressourcen lesen und
 registrierte Aktionen ausführen. Eine Anschlusszuordnung begrenzt diesen

@@ -3,18 +3,17 @@ title: Zugangsanträge entscheiden
 description: Offene Anträge für Ressourcen prüfen, befristeten Zugriff genehmigen oder mit Begründung ablehnen.
 ---
 
-Unter **Zutritt → Zugriffsanträge** bearbeitest du offene Anträge für Ressourcen
-in deinem Zuständigkeitsbereich. Eine Genehmigung erstellt eine Freigabe für die
+Öffne **Zutritt → Zugriffsanträge**. Eine Genehmigung erstellt eine Freigabe für die
 anfragende Person; eine Ablehnung erstellt keine Freigabe.
 
-Wie Personen einen Antrag stellen und ihre Rückmeldung lesen, beschreibt
+Antragstellung und Rückmeldung beschreibt
 [Meine Berechtigungsanfragen → Benutzer](../benutzer/berechtigungsanfragen.mdx).
 
 ## Rechte und Zuständigkeit
 
-Zum Anzeigen brauchst du das globale Leserecht für Zugänge. Zusätzlich siehst du
-nur Anträge für Ressourcen, deren Zugriffsvergaben du ansehen darfst oder für die
-du als verantwortliche Person zum **Kompetenz bestätigen** eingetragen bist.
+Mit dem globalen Leserecht für Zugänge siehst du Anträge für Ressourcen, deren
+Zugriffsvergaben du ansehen darfst oder für die du zum **Kompetenz bestätigen**
+verantwortlich bist.
 
 Zum Genehmigen oder Ablehnen brauchst du das globale Änderungsrecht für Zugänge
 und eine dieser Zuständigkeiten:
@@ -23,30 +22,27 @@ und eine dieser Zuständigkeiten:
 - Du bist für diese Ressource als verantwortliche Person zum **Kompetenz bestätigen**
   eingetragen.
 
-Ein Verwaltungsrecht kann für eine einzelne Ressource oder den gesamten
-Zugriffsbereich gelten. Ein Recht auf eine übergeordnete Ressource gilt nicht
-automatisch für ihre Unterressourcen. Globale Rechte allein ersetzen die
-Objektzuständigkeit nicht. Die Einrichtung der Ressourcenregel und der
-verantwortlichen Personen steht unter
+Verwaltungsrechte können für eine Ressource oder den gesamten Zugriffsbereich
+gelten. Ein Recht auf eine einzelne Ressource gilt nicht automatisch für ihre
+Unterressourcen; globale Rechte ersetzen keine Objektzuständigkeit. Ressourcenregel
+und verantwortliche Personen richtest du ein unter
 [Ressourcen einrichten](./ressourcen.mdx#nutzung-und-zugriff-nutzung-erlauben).
 
 ## Antrag prüfen
 
 1. Öffne **Zutritt → Zugriffsanträge**. Die Ansicht zeigt nur offene Anträge;
    nutze **Zurück** und **Weiter**, wenn es mehrere Seiten gibt.
-2. Prüfe auf der Karte die Ressource, die anfragende Person, das Anfragedatum
-   und eine vorhandene Nachricht. Die Freigabe geht bei Genehmigung an genau
-   diese Person, nicht an eine Gruppe oder ein einzelnes Zutrittsmedium.
+2. Prüfe Ressource, Person, Anfragedatum und Nachricht auf der Karte. Die
+   Freigabe gilt dieser Person, keiner Gruppe und keinem einzelnen Zutrittsmedium.
 3. Prüfe vor der Entscheidung, welche Zugriffsbedingungen für die Ressource
    gelten und ob die nötigen Nachweise vorliegen. Die Ressourcenregel findest
    du mit den entsprechenden Leserechten unter **Ressourcenübersicht → Nutzung
    & Zugriff**. Kompetenzprüfungen und Kompetenznachweise sind ein eigener
    Vorgang unter [Bewertungen](./bewertungen.mdx).
 
-Die Antragskarte zeigt keine persönliche Kompetenzprüfung. Auch **Genehmigen**
-prüft oder erteilt keinen Kompetenznachweis. Kläre fehlende Informationen vor der
-Entscheidung. Eine Freigabe ersetzt keine erforderliche Buchung, Kompetenz,
-Aufsicht oder Betriebsfreigabe der Ressource.
+Die Karte zeigt keine persönliche Kompetenzprüfung; **Genehmigen** prüft oder
+erteilt keinen Kompetenznachweis. Kläre fehlende Informationen vorher. Freigaben
+ersetzen keine erforderliche Buchung, Kompetenz, Aufsicht oder Betriebsfreigabe.
 
 ## Genehmigen oder ablehnen
 
@@ -59,13 +55,11 @@ Aufsicht oder Betriebsfreigabe der Ressource.
    Das Ende muss nach dem Beginn liegen.
 3. Ergänze bei Bedarf eine **Entscheidungsnotiz (optional)** mit höchstens
    1024 Zeichen. Sie ist für die anfragende Person als Rückmeldung sichtbar.
-4. Prüfe den Zeitraum erneut und bestätige den geprüften Antrag mit **Genehmigen**.
+4. Prüfe den Zeitraum und bestätige mit **Genehmigen**.
 
-Mardu speichert die Entscheidung und erstellt gemeinsam damit eine direkte
-Freigabe für diese Person und diese Ressource. Sie gilt ab dem Beginn bis zum
-angegebenen Ende; der Endzeitpunkt selbst ist ausgeschlossen. Die Freigabe hat
-keine zusätzliche wöchentliche Zeiteinschränkung. Die übrigen Zugriffsbedingungen
-gelten weiterhin, auch wenn die Freigabe bereits zeitlich gültig ist.
+Mardu speichert Entscheidung und direkte Freigabe für Person und Ressource gemeinsam.
+Die Freigabe gilt ab Beginn bis ausschließlich zum Endzeitpunkt, ohne wöchentliche
+Zeiteinschränkung. Alle übrigen Zugriffsbedingungen gelten weiter.
 
 ### Antrag ablehnen
 
@@ -77,10 +71,9 @@ gelten weiterhin, auch wenn die Freigabe bereits zeitlich gültig ist.
 Eine Ablehnung beendet diesen Antrag ohne neue Freigabe. Bereits vorhandene
 Freigaben werden dadurch nicht entzogen.
 
-Nach erfolgreichem Speichern erscheint die Bestätigung und der Antrag verschwindet
-aus der Liste offener Anträge. Die anfragende Person sieht Entscheidung,
-Bearbeitungsdatum und Rückmeldung unter **Meine Berechtigungsanfragen**. Eine
-genehmigte Freigabe kann sie unter **Meine Freigaben** prüfen; siehe
+Nach dem Speichern erscheint die Bestätigung und der Antrag verschwindet aus der
+Liste. Die Person sieht Entscheidung, Bearbeitungsdatum und Rückmeldung unter
+**Meine Berechtigungsanfragen**, genehmigte Freigaben unter **Meine Freigaben**; siehe
 [Zugänge & Ressourcen → Benutzer](../benutzer/zutritt.mdx#eigene-freigaben-prüfen).
 
 ## Wenn die Entscheidung nicht gespeichert wird
@@ -93,8 +86,8 @@ genehmigte Freigabe kann sie unter **Meine Freigaben** prüfen; siehe
 - **Gültigkeitsende liegt nicht nach dem Beginn:** Korrigiere Datum und Uhrzeit,
   bevor du genehmigst.
 - **Antrag wurde inzwischen geändert, entschieden oder zurückgezogen:** Schließe
-  den Dialog und wähle **Neu laden**. Prüfe den aktuellen Stand vor einem weiteren
-  Versuch. Eine veraltete Entscheidung überschreibt keine neuere Entscheidung.
-- **Laden oder Speichern schlägt fehl:** Lies die Fehlermeldung und lade den Stand
-  erneut. Bei einem Ladefehler steht **Erneut versuchen** zur Verfügung. Leite aus
-  einem fehlgeschlagenen Speichern keine erteilte Freigabe ab.
+  den Dialog, wähle **Neu laden** und prüfe den Stand vor einem neuen Versuch.
+  Veraltete Entscheidungen überschreiben keine neueren.
+- **Laden oder Speichern schlägt fehl:** Lies die Fehlermeldung und lade erneut,
+  bei Ladefehlern mit **Erneut versuchen**. Fehlgeschlagenes Speichern bestätigt
+  keine erteilte Freigabe.

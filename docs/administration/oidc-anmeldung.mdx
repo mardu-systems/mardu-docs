@@ -3,10 +3,9 @@ title: Anmeldung über OpenID Connect einrichten
 description: Einen externen Identitätsanbieter verbinden, Kontozuordnung und Rollen prüfen und die Anmeldung aktivieren.
 ---
 
-Mit **OpenID Connect (OIDC)** melden sich Personen über einen externen
-Identitätsanbieter bei Mardu an. Mardu ordnet die bestätigte externe Identität
-einem lokalen Benutzerkonto zu. Dieses Konto unterliegt weiterhin den lokalen
-Anmelde- und Berechtigungsregeln.
+Bei **OpenID Connect (OIDC)** wird die vom externen Anbieter bestätigte Identität
+einem lokalen Mardu-Konto zugeordnet. Dessen Anmelde- und Berechtigungsregeln
+gelten weiter.
 
 Öffne **Administration → Systemeinstellungen → OIDC**. Die frühere Adresse
 unter **Integrationen → OIDC** leitet dorthin weiter. Diese Einrichtung ist
@@ -21,7 +20,6 @@ erteilt keine Kompetenz oder Ressourcenfreigabe.
   (`Integrations.Update`). Die Settings-API verlangt zusätzlich
   **Einstellungen anzeigen** (`Settings.View`) beziehungsweise für Speichern,
   Validierung und Tests **Einstellungen bearbeiten** (`Settings.Update`).
-  Ein sichtbarer Menüpunkt bestätigt diese API-Rechte nicht.
 - Zum Vorschlagen vorhandener Rollen brauchst du **Rollen anzeigen** (`Roles.View`).
 - Du kannst beim Identitätsanbieter einen Client registrieren und kennst dessen
   Issuer, Client-ID, Client-Authentifizierung und gegebenenfalls Client-Secret.
@@ -41,8 +39,8 @@ CA-Zertifikate nutze die vorhandene
    enthält nur Kleinbuchstaben, Zahlen und Bindestriche. Nach dem ersten
    Speichern ist sie im Formular nicht mehr änderbar.
 2. Wähle bei Bedarf eine **Provider-Vorlage** oder **Benutzerdefiniert**.
-   Eine Vorlage liefert Startwerte; sie registriert keinen Client und aktiviert
-   den Provider nicht. Prüfe die Werte gegen deine Anbieterregistrierung.
+   Prüfe die Startwerte gegen deine Anbieterregistrierung. Eine Vorlage
+   registriert keinen Client und aktiviert den Provider nicht.
 3. Trage im Schritt **Verbindung** unter **Endpunkte und Client** den exakten
    **Issuer** aus dem Discovery-Dokument, die **Client-ID** und die passende
    **Client-Authentifizierung** ein. Angeboten werden **Kein Secret (Public Client)**,
@@ -51,12 +49,11 @@ CA-Zertifikate nutze die vorhandene
    Ein gespeichertes Secret wird nicht angezeigt; **Secret ersetzen** ändert es
    erst beim Speichern.
 4. Vereinbare mit dem Serverbetrieb die öffentliche HTTPS-Callback-Adresse
-   des Mardu-Backends. Trage sie als **Redirect-URI** ein und registriere genau
-   diese Adresse beim Anbieter. Das Feld ist nicht automatisch vorbelegt;
-   sein Pfad wird vom Backend als OIDC-Callback verarbeitet. Verwende keine
-   Zugangsdaten, Suchparameter oder Fragmentkennung in dieser Adresse.
+   des Mardu-Backends. Trage sie in das zunächst leere Feld **Redirect-URI** ein
+   und registriere sie exakt beim Anbieter. Ihr Pfad dient als OIDC-Callback;
+   Zugangsdaten, Suchparameter und Fragmentkennung sind nicht erlaubt.
 
-Für die verschiedenen Rückleitungen gelten unterschiedliche Ziele:
+Richte die Rückleitungen getrennt ein:
 
 | Rückleitung                                | Einrichtung                                                                                                                                                                                                                                                                                                     |
 | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -76,9 +73,8 @@ gelesen. Die **Scopes** enthalten mindestens `openid`; der neue Entwurf enthält
 außerdem `profile` und `email`. Zusätzliche Autorisierungsparameter ersetzen
 keine OIDC-Pflichtparameter.
 
-Mardu verwendet den Authorization-Code-Ablauf mit **PKCE**, einer Prüfung, die
-den Code an den gestarteten Anmeldevorgang bindet. Dafür gibt es keinen zusätzlichen
-Schalter im Formular.
+Mardu verwendet automatisch den Authorization-Code-Ablauf mit **PKCE**. Die
+Prüfung bindet den Code an den gestarteten Anmeldevorgang.
 
 ## Tokenprüfung, Kontozuordnung und Rollen festlegen
 
@@ -92,10 +88,9 @@ Schalter im Formular.
 2. Entscheide im Schritt **Identität**, ob **Benutzer automatisch anlegen**
    erlaubt sein soll, und prüfe **Kontoverknüpfung** anhand der folgenden Regeln.
 3. Öffne **Claims anpassen**, wenn der Anbieter andere Claim-Namen liefert.
-   Claims sind Angaben im geprüften Token. Der **Subject-Claim** ist standardmäßig
-   `sub`, E-Mail `email`, Rollen `roles` und Gruppen `groups`.
-   Benötigte Angaben müssen im ID-Token enthalten sein; Mardu lädt dafür kein
-   zusätzliches Benutzerprofil vom UserInfo-Endpunkt.
+   Claims sind Tokenangaben. Standardnamen sind **Subject-Claim** `sub`, E-Mail
+   `email`, Rollen `roles` und Gruppen `groups`. Benötigte Angaben müssen im
+   ID-Token stehen; Mardu fragt dafür nicht den UserInfo-Endpunkt ab.
 4. Lege im Schritt **Zugriff** nur die benötigten **Rollen-Zuordnungen** und
    **Gruppen-Zuordnungen** zu bereits vorhandenen lokalen Rollen an. Externe
    Rollen oder Gruppen werden durch ihren Namen allein nicht zu lokalen Rechten.
@@ -104,10 +99,8 @@ Schalter im Formular.
 
 ### Welche lokale Identität verwendet wird
 
-Eine bereits gespeicherte Kombination aus **Issuer und Subject** führt wieder
-zum zugehörigen lokalen Konto. Die E-Mail-Adresse ist dafür kein Ersatz.
-
-Bei einer noch unbekannten Kombination gelten zusätzliche Bedingungen:
+Eine gespeicherte Kombination aus **Issuer und Subject** führt zum verknüpften
+lokalen Konto. Für unbekannte Kombinationen gilt:
 
 - **Benutzer automatisch anlegen** muss eingeschaltet und die globale
   **Selbstregistrierung** darf nicht **Deaktiviert** sein. Das gilt auch für
@@ -150,10 +143,9 @@ Anbietertokens an der API. Für die Dashboard-Anmeldung brauchst du keine
 ## Entwurf testen und aktivieren
 
 1. Öffne den Schritt **Prüfen** und wähle **Verbindung testen**. Kontrolliere
-   die einzelnen Ergebnisse für Discovery, Issuer, Endpunkte, TLS und
-   Signaturschlüssel. Behebe Fehler, bevor du fortfährst. Dieser Test meldet
-   keinen Benutzer an und beweist noch nicht, dass Client-Secret und
-   Anbieterregistrierung einen Tokenaustausch erlauben.
+   die Ergebnisse für Discovery, Issuer, Endpunkte, TLS und Signaturschlüssel.
+   Behebe Fehler, bevor du fortfährst. Der Test prüft weder eine Benutzeranmeldung
+   noch den Tokenaustausch mit Client-Secret und Anbieterregistrierung.
 2. Wähle **Test-Anmeldung starten** und melde dich im neuen Fenster mit einem
    vorgesehenen Testkonto beim Anbieter an. Falls das Fenster blockiert wurde,
    nutze **Anmeldefenster erneut öffnen**. Prüfe anschließend
@@ -165,21 +157,20 @@ Anbietertokens an der API. Für die Dashboard-Anmeldung brauchst du keine
    lokale Rollen, besonders administrative Zuordnungen.
 4. Aktiviere **Provider aktivieren**, wenn Verbindung und Zuordnungsregeln passen.
    Wähle **Konfiguration prüfen** und anschließend **Änderungen speichern**.
-   Lies und bestätige gegebenenfalls die angezeigten Risiken. Alle Provider
-   werden gemeinsam gespeichert. Für eine Aktivierung oder geänderte Verbindung
-   eines aktiven Providers ist ein aktueller erfolgreicher Verbindungstest
-   erforderlich; nach weiteren Änderungen oder Ablauf musst du ihn wiederholen.
+   Bestätige gegebenenfalls die angezeigten Risiken. Alle Provider werden
+   gemeinsam gespeichert. Aktivierung und Verbindungsänderungen aktiver Provider
+   benötigen einen aktuellen erfolgreichen Verbindungstest; nach weiteren
+   Änderungen oder Ablauf wiederholst du ihn.
 5. Kontrolliere im Status **Gespeicherter Stand ist aktiv** und
    **Zuletzt angewendet**. Die Übernahme erfolgt ohne Serverneustart.
    Prüfe danach in einem getrennten Browserfenster die reguläre Anmeldung über
    **Mit … anmelden**, einschließlich Kontofreigabe und erwarteter Rechte.
    Beende deine bisherige Administrationssitzung erst danach.
 
-Verbindungstest, Test-Anmeldung und Claim-Vorschau speichern den Entwurf nicht
-und verändern keine lokalen Benutzer oder Rollen. Die Vorschau bildet nicht
-alle Anmeldebedingungen ab: Globale Registrierung, Freigabe, Kontosperren und
-MFA können die reguläre Anmeldung zusätzlich verhindern. Auch eine erfolgreiche
-Test-Anmeldung ersetzt deshalb die abschließende reguläre Anmeldung nicht.
+Verbindungstest, Test-Anmeldung und Claim-Vorschau speichern nichts und ändern
+keine lokalen Benutzer oder Rollen. Globale Registrierung, Freigabe, Kontosperren
+und MFA können die reguläre Anmeldung zusätzlich verhindern. Prüfe sie deshalb
+auch nach erfolgreicher Test-Anmeldung.
 
 ## Ändern oder abschalten
 

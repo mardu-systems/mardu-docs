@@ -3,15 +3,9 @@ title: Mardu per CLI warten
 description: Admin-Passwort ohne E-Mail zurücksetzen, Konten entsperren und den Server über Docker prüfen.
 ---
 
-Mit `mardu-admin` stellst du den Zugang zu einem lokalen Mardu-Konto wieder her
-und prüfst den Zustand des Servers. Die CLI (Command Line Interface) ist ein
-Werkzeug für das Terminal auf dem Server. Sie bietet ein geführtes Menü und
-Befehle für einzelne Aufgaben. Menüs, Eingabeaufforderungen und Ausgaben der CLI
-sind auf Englisch.
-
-Du brauchst dafür kein funktionierendes Mardu-Login und keinen eingerichteten
-E-Mail-Versand. Der Zugriff erfolgt mit deinen Host- beziehungsweise
-Docker-Berechtigungen.
+`mardu-admin` ist eine CLI (Command Line Interface) mit Menü und einzelnen
+Befehlen im Serverterminal. Menüs, Eingabeaufforderungen und Ausgaben sind auf Englisch. Du brauchst Host- beziehungsweise Docker-Berechtigungen,
+kein Mardu-Login oder eingerichteten E-Mail-Versand.
 
 ## Voraussetzungen
 
@@ -26,9 +20,8 @@ Docker-Berechtigungen.
 - Für Kontoänderungen kennst du die E-Mail-Adresse des betroffenen Kontos.
   Passwort-Resets sind für lokal verwaltete Konten mit vorhandenem lokalem Passwort vorgesehen.
 
-Die Docker-Aufrufe funktionieren auch von einem Windows- oder macOS-Rechner,
-wenn du sie in der Shell des Linux-Servers ausführst. Ein Windows-Server ohne
-Linux-Container wird nicht unterstützt.
+Führe die Docker-Aufrufe auch bei Zugriff von Windows oder macOS in der Shell des
+Linux-Servers aus. Ein Windows-Server ohne Linux-Container wird nicht unterstützt.
 
 ## Menü öffnen
 
@@ -42,9 +35,8 @@ Im Menü **Mardu maintenance** wählst du **Show account**, **Reset password**,
 **Unlock account**, **Revoke sessions**, **Check server health** oder
 **Show versions**. **Exit** schließt das Menü.
 
-Bei Kontoänderungen zeigt das Werkzeug zuerst das Zielkonto und die Wirkung der
-Aktion. Erst nach deiner Bestätigung beginnt die Änderung. Der Aufruf benötigt
-Eingabe und Ausgabe an einem interaktiven Terminal; verwende dafür nicht `-T`.
+Kontoänderungen zeigen zuerst Zielkonto und Wirkung und verlangen deine
+Bestätigung. Verwende ein interaktives Terminal mit Ein- und Ausgabe, ohne `-T`.
 
 ## Admin-Passwort ohne E-Mail zurücksetzen
 
@@ -72,8 +64,7 @@ unbestätigte E-Mail-Adresse nicht bestätigt.
    Melde dich anschließend mit dem neuen Passwort am Dashboard an und führe
    gegebenenfalls den verlangten Passwortwechsel durch.
 
-Du kannst den temporären Reset auch direkt aufrufen. Ersetze
-`admin@example.com` durch die E-Mail-Adresse des Zielkontos:
+Direkter temporärer Reset; ersetze `admin@example.com` durch die E-Mail-Adresse des Zielkontos:
 
 ```bash
 docker compose exec --user mardu server /app/maintenance/mardu-admin \
@@ -87,8 +78,8 @@ docker compose exec --user mardu server /app/maintenance/mardu-admin \
   user reset-password --email admin@example.com --permanent
 ```
 
-Beide Aufrufe fragen die Bestätigung und das Passwort interaktiv ab. Übergebe
-Passwörter nicht in Befehlsargumenten. Einen Passwortparameter gibt es nicht.
+Beide Aufrufe fragen Bestätigung und Passwort interaktiv ab; einen
+Passwortparameter gibt es nicht.
 
 Wenn du dein aktuelles Passwort noch kennst und angemeldet bist, kannst du es
 auch über [Sicherheit im Kontomenü](../ueberblick/profil-sicherheit.mdx#passwort-ändern)
@@ -115,10 +106,9 @@ Wähle **Check server health** oder führe den lesenden Diagnosebefehl aus:
 docker compose exec --user mardu server /app/maintenance/mardu-admin system doctor
 ```
 
-Das Ergebnis zeigt den Gesamtzustand und die im Server eingerichteten
-Zustandsprüfungen. **Healthy** bedeutet, dass diese Prüfungen erfolgreich waren.
-**Degraded** oder **Unhealthy** weisen auf eine Einschränkung hin. Welche Dienste
-geprüft werden, hängt von der Serverkonfiguration ab. Der Befehl repariert keine Dienste.
+Das Ergebnis zeigt Gesamtzustand und konfigurierte Zustandsprüfungen:
+**Healthy** bedeutet erfolgreich, **Degraded** oder **Unhealthy** eingeschränkt.
+Der Befehl repariert keine Dienste.
 
 **Show versions** zeigt die CLI-, Server- und Wartungsprotokollversion. Das ist
 für eine Störungsmeldung hilfreich. Strukturierte Ausgaben und Rückgabewerte

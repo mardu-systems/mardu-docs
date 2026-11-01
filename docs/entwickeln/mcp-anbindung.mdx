@@ -3,10 +3,7 @@ title: MCP-Client anbinden
 description: Einen MCP-Client mit einem persönlichen Token verbinden, einen Leseaufruf prüfen und Fehler behandeln.
 ---
 
-MCP-Clients verwenden persönliche Agentenzugänge. Diese Anleitung verbindet
-einen Client mit dem Server und prüft den Zugriff mit einem Leseaufruf. Der
-beschriebene Endpunkt bietet Mardu-Daten und Aktionen an; er dient nicht zum
-Durchsuchen der Dokumentation.
+Der MCP-Endpunkt bietet Mardu-Daten und Aktionen an, keine Dokumentationssuche.
 
 ## MCP-Client verbinden
 
@@ -40,11 +37,9 @@ Falls der Client Tool-Aufrufe als JSON annimmt, lautet der Inhalt für `tools/ca
 }
 ```
 
-Das Beispiel zeigt die Parameter eines MCP-Aufrufs, keinen eigenständigen
-HTTP-Request. Der Client übernimmt Initialisierung und Protokollnachrichten.
-Der Transport ist zustandslos: Der Client muss den Bearer-Token bei jeder
-HTTP-Anfrage mitsenden. Eine erfolgreiche Initialisierung ersetzt diese
-Authentifizierung nicht.
+Das Beispiel enthält die MCP-Aufrufparameter. Der Client übernimmt die
+Protokollnachrichten und muss beim zustandslosen Transport den Bearer-Token mit
+jeder HTTP-Anfrage senden, auch nach erfolgreicher Initialisierung.
 
 `notifications_list` benötigt `Permissions.Profile.View`. Die Seitengröße muss
 zwischen 1 und dem Serverlimit liegen; mit `afterCursor` kann der Client eine
@@ -54,18 +49,16 @@ weitere Seite anfordern.
 
 Bei persönlichen Verbindungen begrenzen die delegierten Rechte, die aktuellen
 Rechte des Kontos und die Serverrichtlinie jeden Tool-Aufruf gemeinsam.
-Eine sichtbare Werkzeugbeschreibung ist keine Zusage, dass der Aufruf mit diesem
-Token erlaubt ist. Schreibende oder destruktive Tools benötigen zusätzlich die
-entsprechende Serverfreigabe. Lade die Werkzeugliste nach einer Änderung der
-Richtlinie oder der Rechte neu. Die Serveranweisungen verlangen für schreibende
-Aufrufe eine klare Nutzerabsicht und für destruktive Aktionen eine ausdrückliche
-Bestätigung. Beachte zusätzlich die Bestätigungsparameter des jeweiligen Tools.
+Auch sichtbare Tools können für deinen Token gesperrt sein. Schreibende oder
+destruktive Tools benötigen die entsprechende Serverfreigabe. Lade die
+Werkzeugliste nach Rechte- oder Richtlinienänderungen neu. Die Serveranweisungen
+verlangen für schreibende Aufrufe eine klare Nutzerabsicht, für destruktive
+Aktionen eine ausdrückliche Bestätigung. Beachte die Bestätigungsparameter des Tools.
 
 Zum [Erneuern oder Widerrufen](../ueberblick/profil-mcp.mdx#zugang-ersetzen-oder-widerrufen)
 verwendest du das eigene Profil. Ersetze nach einer Erneuerung den Token im Client;
 der alte ist sofort ungültig. Das Ablaufdatum bleibt bestehen. Nach Ablauf oder
-Widerruf erstellst du eine neue Verbindung. Eine gesonderte Antragsfreigabe ist
-für diesen Ablauf nicht erforderlich.
+Widerruf erstellst du eine neue Verbindung, ohne gesonderte Antragsfreigabe.
 
 ### Fehler beim MCP-Zugriff
 
@@ -79,19 +72,17 @@ für diesen Ablauf nicht erforderlich.
 | `validation_error`          | Prüfe die Tool-Parameter, etwa Seitengröße und Pflichtangaben.                                                                                                                                 |
 | `not_found` oder `conflict` | Lies den betroffenen Datensatz erneut und prüfe den aktuellen Zustand, bevor du eine Änderung wiederholst.                                                                                     |
 
-Ein Fehler kann als HTTP-Status oder als MCP-Tool-Fehler auftreten. Prüfe beide
-Ebenen im Client; protokolliere dabei keine Zugangsdaten.
+Prüfe HTTP-Status und MCP-Tool-Fehler im Client; protokolliere keine Zugangsdaten.
 
 ## Node-RED und Ereignisse
 
-Die [Administration richtet Automationen ein](../administration/automationen.mdx)
-und gibt den Editor sowie die verwendeten Anschlüsse frei. MCP-Token und
-Editorzugang erfüllen unterschiedliche Aufgaben. Ein lesendes Beispiel mit
-Deploy- und Ergebnisprüfung findest du unter
+Für Node-RED brauchst du einen eigenen Editorzugang und die durch die
+[Administration eingerichtete Automation](../administration/automationen.mdx).
+Beginne mit dem lesenden Beispiel unter
 [Eigene Automationsflüsse entwickeln](./automationsfluesse.mdx).
 
 ## Echtzeit und Aufgabenverteilung
 
-Die Rollen- und Bereichsnamen der Dokumentation legen keine Systemrechte fest.
-Für die hier beschriebene MCP-Anbindung gelten die Serverrichtlinie und die
-persönlichen Rechte. Ein vollständiger SignalR-Leitfaden ist hier nicht enthalten.
+Einzelne Abläufe verwenden SignalR-Hubs mit eigener Zugangs- und Gruppenprüfung.
+Die [Integrationsübersicht](./api-integration.mdx#referenz-und-integrationsweg)
+ordnet diese Echtzeitmeldungen den übrigen Zugängen zu.

@@ -3,18 +3,16 @@ title: Nachweissysteme anbinden
 description: Konto-Anbieter für persönliche Nachweisquellen bereitstellen und die serverweite OpenBadges-Synchronisation prüfen.
 ---
 
-Unter **Administration → Integrationen → Open Badges** gibt es zwei getrennte
-Verbindungswege. Wähle zuerst das gewünschte Ergebnis:
+Wähle unter **Administration → Integrationen → Open Badges** den Verbindungsweg:
 
 | Ziel                                                                                                                              | Bereich             |
 | --------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
 | Personen melden sich bei einem Anbieter an und rufen ihre Open-Badges-3-Nachweise ab.                                             | **Konto-Anbieter**  |
 | Mardu importiert Nachweise über persönliche API-Zugänge oder stellt beim externen Anbieter nach einer Tag-Einrichtung Badges aus. | **Synchronisation** |
 
-Beide Wege benötigen eine zum Anbieter passende Registrierung. Die Auswahl
-**Benutzerdefinierter Anbieter** bestätigt keine Kompatibilität mit beliebigen
-Open-Badges-Systemen. Eine Nachweisquelle richtet auch keine Anmeldung bei Mardu
-über diesen Anbieter ein.
+Beide Wege brauchen eine passende Anbieterregistrierung.
+**Benutzerdefinierter Anbieter** garantiert keine Kompatibilität mit beliebigen
+Open-Badges-Systemen. Eine Nachweisquelle erlaubt keine Anmeldung bei Mardu.
 
 ## Voraussetzungen und Rechte
 
@@ -30,9 +28,9 @@ Anbieters müssen absolute HTTPS-Adressen ohne Zugangsdaten, Query oder Fragment
 
 ## Einen Konto-Anbieter bereitstellen
 
-Dieser Weg verwendet eine OAuth-Anmeldung mit **Authorization Code und PKCE S256**.
-Die Person stimmt beim Anbieter dem Lesen ihres Profils und ihrer Nachweise zu.
-Die serverweite **Kontoverknüpfung erlauben** muss dafür nicht eingeschaltet werden.
+Die OAuth-Anmeldung verwendet **Authorization Code und PKCE S256**. Die Person
+stimmt dem Lesen ihres Profils und ihrer Nachweise zu. Die serverweite Option
+**Kontoverknüpfung erlauben** ist dafür nicht nötig.
 
 1. Registriere Mardu beim Anbieter für diesen Anmeldeablauf. Kläre, welche
    Authentifizierung am Token-Endpunkt die Registrierung verlangt.
@@ -57,13 +55,12 @@ Die serverweite **Kontoverknüpfung erlauben** muss dafür nicht eingeschaltet w
    **Für Benutzer auswählbar** ein und speichere erneut.
 7. Prüfe mit einem persönlichen Testkonto Anmeldung und Abruf gemäß
    [Persönliche Nachweisquellen](../ueberblick/profil-nachweisquellen.mdx).
-   Die Administrationsseite hat keinen eigenen Verbindungstest. Ein gespeicherter
-   Eintrag allein bestätigt weder die Anmeldung noch einen erfolgreichen Import.
+   Erst dieser Test prüft Anmeldung und Abruf; die Administrationsseite bietet
+   keinen Verbindungstest.
 
-Ein gespeichertes **Client-Secret** wird nicht angezeigt. Lasse das Feld leer, um
-es beizubehalten; ein neuer Wert ersetzt es. Das Leeren des Eingabefelds löscht
-kein gespeichertes Secret. Ein Wechsel auf **Öffentlicher Client ohne Secret**
-entfernt das Secret beim Speichern und muss zur Registrierung beim Anbieter passen.
+Ein gespeichertes **Client-Secret** wird nicht angezeigt. Ein leeres Feld behält
+es bei, ein neuer Wert ersetzt es. Der Wechsel auf **Öffentlicher Client ohne Secret**
+löscht es beim Speichern und muss zur Anbieterregistrierung passen.
 
 Nach jeder gespeicherten Konfigurationsänderung müssen bereits verbundene Personen
 ihre Verbindung durch erneutes Anmelden bestätigen. Laufende Anmeldungen können
@@ -73,18 +70,16 @@ getrennt werden; bereits importierte Nachweise bleiben erhalten.
 
 ## Serverweite Synchronisation vorbereiten
 
-**Synchronisation** verwendet einen anderen Anbieterzugang als **Konto-Anbieter**.
-Die Verbindung arbeitet mit den vom Adapter erwarteten Anbieter-APIs. Ein
-erfolgreicher Zugangstest belegt keine allgemeine Open-Badges-3-Kompatibilität und
-keine Berechtigung für jede angebotene Aktion.
+**Synchronisation** nutzt einen eigenen Anbieterzugang und die vom Adapter
+erwarteten APIs. Ein erfolgreicher Zugangstest bestätigt weder allgemeine
+Open-Badges-3-Kompatibilität noch Rechte für jede Aktion.
 
-**Die erstmalige Aktivierung ist derzeit über diese Seite blockiert:** Die
-Oberfläche verlangt einen erfolgreichen Test vor dem Aktivieren, der Server lehnt
-den Test einer deaktiviert gespeicherten Integration jedoch ab. Du kannst die
-Verbindungsdaten vorbereiten und speichern; für die Aktivierung muss dieser
-Produktfehler behoben werden. Wiederhole bei dieser Meldung nicht erfolglos die
-Anbieterdaten. Der folgende Prüf- und Importablauf gilt für eine bereits aktive
-Anbindung.
+**Die erstmalige Aktivierung ist derzeit auf dieser Seite blockiert:** Die
+Oberfläche verlangt vorher einen erfolgreichen Test; der Server lehnt Tests
+deaktiviert gespeicherter Integrationen ab. Du kannst Verbindungsdaten speichern,
+aber erst nach Behebung dieses Produktfehlers aktivieren. Ändere deswegen nicht
+die Anbieterdaten. Der folgende Prüf- und Importablauf gilt für bereits aktive
+Anbindungen.
 
 ### Zugang und Richtungen festlegen
 
@@ -97,19 +92,17 @@ Authentifizierungsart, verändert aber keine gespeicherten Zugangsdaten.
 | **Direct Token**             | **OpenBadges API-Basis-URL**, **Service Token** und unter **Erweiterte Authentifizierung** das passende **Authorization-Schema** (`Bearer` oder `Token`).                                                                  |
 | **OAuth Client Credentials** | **OpenBadges API-Basis-URL**, **OAuth Token-Endpunkt**, **Client ID**, **Client Secret**; bei Bedarf **OAuth Scopes**, durch Leerzeichen getrennt. Das ist ein technischer Serverzugang ohne persönliche Browseranmeldung. |
 
-Bei Service Token, Client ID und Client Secret wählst du ausdrücklich
-**behalten**, **ersetzen** oder **löschen**. Vorhandene Werte werden nicht im Klartext
-angezeigt. Zum Ersetzen wähle die entsprechende Aktion und gib den neuen Wert ein.
-Die Löschaktionen für **Client ID** und **Client Secret** werden derzeit im
-OAuth-Modus vom Server abgewiesen, auch bei deaktivierter Integration. Deaktivieren
-ist keine Löschung gespeicherter Zugangsdaten.
+Wähle für Service Token, Client ID und Client Secret **behalten**, **ersetzen**
+oder **löschen**. Vorhandene Werte werden nicht angezeigt; zum Ersetzen gibst du
+den neuen Wert ein. Der Server weist das Löschen von **Client ID** und
+**Client Secret** im OAuth-Modus derzeit auch bei deaktivierter Integration ab.
+Deaktivieren löscht keine Zugangsdaten.
 
 Wähle die benötigten Betriebsoptionen:
 
 - **Nachweise importieren:** Liest die Konten der Personen, die ihren persönlichen
-  API-Zugang verbunden haben. Vor jedem Abruf wird geprüft, ob der Zugang zur
-  gespeicherten Benutzerreferenz gehört. Ein gemeinsamer Service-Token ersetzt
-  diese persönlichen Zugänge nicht.
+  API-Zugang verbunden haben. Vor jedem Abruf prüft Mardu, ob er zur gespeicherten
+  Benutzerreferenz gehört. Ein Service-Token ersetzt persönliche Zugänge nicht.
 - **Kontoverknüpfung erlauben:** Erlaubt den **Persönlichen API-Zugang** im Profil.
   Das schaltet den Import nicht automatisch ein. Die Einrichtung für die Person
   steht unter [Persönliche Nachweisquellen](../ueberblick/profil-nachweisquellen.mdx#persönlichen-zugang-verwenden).
@@ -126,9 +119,9 @@ einen Anwendungsneustart. Stimme diesen mit dem Serverbetrieb ab.
 
 ### Eine bereits aktive Anbindung prüfen und importieren
 
-1. Prüfe, ob der Entwurf dem gespeicherten Stand entspricht. **Validieren** arbeitet
-   mit den gespeicherten Verbindungsdaten und ist bei ungespeicherten Änderungen
-   gesperrt. Änderungen der Verbindungsdaten einer aktiven Anbindung unterliegen
+1. Prüfe den gespeicherten Stand. **Validieren** ist bei ungespeicherten
+   Änderungen gesperrt und prüft nur gespeicherte Verbindungsdaten. Änderungen
+   aktiver Verbindungen unterliegen
    derselben Aktivierungsgrenze wie eine Neueinrichtung.
 2. Wähle **Validieren**. Lies die Diagnose einschließlich Fehlerkategorie und
    gegebenenfalls HTTP-Status. Die Prüfung testet Anmeldung und Erreichbarkeit
@@ -141,11 +134,10 @@ einen Anwendungsneustart. Stimme diesen mit dem Serverbetrieb ab.
    Konten. Die Zahl verarbeiteter Nachweise umfasst auch aktualisierte Einträge;
    sie ist keine Zahl ausschließlich neuer Nachweise.
 
-Ein Lauf ohne importierte Nachweise kann trotz erreichbarem Anbieter vorkommen,
-etwa wenn keine persönlichen Zugänge verbunden oder prüfbar sind. Prüfe die
-betroffenen Profilverbindungen statt den gemeinsamen Token als Ersatz einzutragen.
-Der Abruf über **Konto-Anbieter** bleibt ein eigener persönlicher Vorgang und wird
-nicht durch diesen serverweiten Lauf ausgelöst.
+Bleibt der Import leer, prüfe die persönlichen Profilverbindungen: Ohne
+verbundene und prüfbare Zugänge werden keine Nachweise gelesen. Der Abruf über
+**Konto-Anbieter** bleibt ein persönlicher Vorgang und wird durch diesen Lauf nicht
+ausgelöst.
 
 Vor dem Abschalten beachte: Speichern mit ausgeschalteter Integration setzt auch
 Import, Ausstellung und Kontoverknüpfung zurück. Für eine spätere Aktivierung
@@ -166,10 +158,10 @@ Signatur, keinen vertrauenswürdigen Aussteller und keinen gültigen Nachweissta
 Dieser Import erzeugt nicht automatisch die Kompetenzvorschläge der serverweiten
 Synchronisation.
 
-Die Anerkennungsentscheidung gehört zu
+Über die Anerkennung entscheidest du unter
 [Koordination → Bewertungen](../koordination/bewertungen.mdx#externe-nachweise-anerkennen).
-Keiner der beiden Importwege gewährt allein Zutritt. Definitionen und lokale
-Vergaben bearbeitest du unter [Badges verwalten](./badges-verwalten.mdx).
+Kein Importweg gewährt allein Zutritt. Definitionen und lokale Vergaben stehen
+unter [Badges verwalten](./badges-verwalten.mdx).
 Die eigene signierte Ausstellung unter **Mardu-Aussteller** ist eine weitere,
 getrennte Konfiguration und benötigt Einstellungsrechte.
 

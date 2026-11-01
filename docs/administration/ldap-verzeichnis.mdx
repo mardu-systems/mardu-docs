@@ -3,9 +3,8 @@ title: LDAP-Verzeichnis anbinden
 description: LDAP-Verbindung, Benutzer- und Rollenzuordnung einrichten, den Abgleich prüfen und die Folgen für die Anmeldung verstehen.
 ---
 
-Mit LDAP kann Mardu Personen aus einem Verzeichnis übernehmen und Gruppen auf
-lokale Rollen abbilden. Eine LDAP-Identität wird dabei einem lokalen Mardu-Konto
-zugeordnet. Dieses Konto enthält die lokalen Rechte und Einstellungen.
+Eine LDAP-Identität wird mit einem lokalen Mardu-Konto verknüpft. Dort liegen
+Rechte und Einstellungen; LDAP-Gruppen können lokalen Rollen zugeordnet werden.
 
 Öffne **Administration → Systemeinstellungen → LDAP**. Die frühere LDAP-Adresse
 unter **Integrationen** leitet hierher weiter.
@@ -20,21 +19,19 @@ Ein **DN** ist der vollständige Name eines Eintrags im Verzeichnis, beispielswe
 Der Menüpunkt benötigt **Integrationen anzeigen** (`Integrations.View`). Zum Laden
 der Konfiguration und des Verlaufs brauchst du zusätzlich **Einstellungen anzeigen**
 (`Settings.View`). Speichern, Verbindungstest, Vorschau und manueller Abgleich
-benötigen **Einstellungen bearbeiten** (`Settings.Update`). Ein sichtbarer Knopf
-ersetzt dieses Recht nicht.
+benötigen **Einstellungen bearbeiten** (`Settings.Update`).
 
 Für die Auswahl lokaler Rollen brauchst du außerdem **Rollen anzeigen**
 (`Roles.View`). Die CA-Zertifikatsliste verwendet `Settings.View`.
 
-Durch die Serverumgebung gesperrte Werte kannst du im Dashboard nicht dauerhaft
-ändern. Lass die Vorgabe durch den Serverbetrieb anpassen. Das gilt auch für ein
-gesperrtes Bind-Passwort.
+Durch die Serverumgebung gesperrte Werte, auch das Bind-Passwort, muss der
+Serverbetrieb ändern.
 
 ## Verbindung und Suchbereich einrichten
 
 1. Wähle unter **Verzeichnistyp** eine passende Vorlage oder **Benutzerdefiniert**.
-   Vorlagen setzen unter anderem Filter, Attribute, Kennung und Transport. Prüfe
-   diese Werte gegen dein Verzeichnis, bevor du weitere Anpassungen vornimmst.
+   Prüfe die vorbelegten Filter, Attribute, Kennung und Transport gegen dein
+   Verzeichnis.
 2. Trage **Server** ohne Protokollpräfix und den **Port** ein. Wähle unter
    **Transport** das vom Verzeichnis vorgesehene Verfahren: **LDAPS**,
    **StartTLS** oder **LDAP ohne TLS**. Mit ausgefüllter **Bind DN** verlangt Mardu
@@ -57,9 +54,9 @@ gesperrtes Bind-Passwort.
    verwendet jeweils die Verzeichnis-Basis.
 6. Prüfe den **Benutzerfilter**. Der Platzhalter `{0}` wird bei der Anmeldung durch
    die eingegebene Kennung ersetzt; beim Vollabgleich wird daraus `*`. Der Filter
-   bestimmt damit auch den Umfang der zu übernehmenden Personen. Ein Filter wie
-   `(&(objectClass=inetOrgPerson)(uid={0}))` ist nur passend, wenn dein Verzeichnis
-   diese Objektklasse und dieses Attribut verwendet.
+   bestimmt auch die zu übernehmenden Personen. Verwende etwa
+   `(&(objectClass=inetOrgPerson)(uid={0}))` nur, wenn Objektklasse und Attribut
+   zu deinem Verzeichnis passen.
 
 ## Benutzer und Rollen zuordnen
 
@@ -68,9 +65,9 @@ Attribute für **Benutzername**, **Anzeigename**, **Vorname**, **Nachname**,
 **E-Mail** und **Gruppen**.
 
 Unter **Stabile ID-Attribute** steht ein Attribut pro Zeile. Die erste vorhandene
-Kennung dient als **Subject**, also als externe Kennung der Person. Verwende eine
-Kennung, die bei Namensänderungen erhalten bleibt. Änderungen an dieser Zuordnung
-können beeinflussen, ob Mardu einen Eintrag einem bestehenden Konto zuordnet.
+Kennung dient als **Subject**, der externen Kennung der Person. Sie soll bei
+Namensänderungen erhalten bleiben. Eine geänderte Zuordnung kann die Verknüpfung
+mit bestehenden Konten verändern.
 
 Der **Linking-Modus** bestimmt die zusätzliche automatische Kontoverknüpfung:
 
@@ -108,11 +105,11 @@ Auch ein zu enger Suchbereich oder Filter kann Personen aus dem Ergebnis entfern
 | **Deaktivieren**                                                | Ein aktives Konto wird deaktiviert und seine Tokens werden widerrufen.                                               |
 | **Dauerhaft löschen**                                           | Das lokale Konto wird gelöscht und seine Tokens werden widerrufen. Beim Speichern ist eine Bestätigung erforderlich. |
 
-Diese Behandlung betrifft LDAP-Konten. Übersprungen werden nur Konten, denen die
-Rolle **Admin direkt** zugewiesen ist. Eine über Benutzergruppen erhaltene
-Admin-Rolle schützt das Konto bei diesem Abgleich nicht. Prüfe solche Konten in
-der Vorschau gesondert, bevor du **Deaktivieren** oder **Dauerhaft löschen** verwendest.
-Diese Behandlung ist von einem Rollenentzug durch Gruppenregeln zu unterscheiden.
+Diese Behandlung betrifft LDAP-Konten und ist unabhängig vom Rollenentzug durch
+Gruppenregeln. Übersprungen werden nur Konten, denen die Rolle **Admin direkt**
+zugewiesen ist; eine über Benutzergruppen erhaltene Admin-Rolle schützt nicht.
+Prüfe diese Konten in der
+Vorschau, bevor du **Deaktivieren** oder **Dauerhaft löschen** verwendest.
 
 Stelle das **Sync-Intervall (Minuten)** zwischen 1 und 59 ein. Der regelmäßige
 Abgleich wird mit der aktivierten Konfiguration eingerichtet. **Beim Dienststart
@@ -130,33 +127,30 @@ kann daher spätere Abgleiche mit den gewählten Folgen auslösen, auch ohne
    Formular einen aktuellen Test an.
 2. Wähle **Vorschau erstellen**. Die Vorschau nutzt ebenfalls den Entwurf und zeigt
    voraussichtliche **Neue Benutzer**, **Änderungen** und **Entfernte Benutzer**.
-   „Entfernte Benutzer“ sind Kandidaten, die im Suchergebnis fehlen; die gewählte
-   Behandlung entscheidet über die Folge. Prüfe unerwartete Zahlen vor dem
-   Speichern. Die Vorschau ist keine Zusage für das Ergebnis eines späteren Laufs.
+   „Entfernte Benutzer“ fehlen im Suchergebnis; die gewählte Behandlung bestimmt
+   die Folge. Kläre unerwartete Zahlen vor dem Speichern. Ein späterer Lauf kann
+   von der Vorschau abweichen.
 3. Wähle **Änderungen speichern** und prüfe Validierungsfehler, Risikodialog und
-   Erfolgsmeldung. Kontrolliere den gespeicherten Stand und den Laufzeitstatus.
+   Erfolgsmeldung. Kontrolliere gespeicherten Stand und Laufzeitstatus.
    **Verwerfen** setzt deine Eingaben auf den zuletzt geladenen Stand zurück.
 4. Erstelle nach dem Speichern eine aktuelle Vorschau für diesen Stand. Für den
    manuellen Abgleich müssen LDAP aktiviert, alle Änderungen gespeichert und die
    Vorschau aktuell sein. Wähle dann **Jetzt synchronisieren**. Bei Kandidaten für
    die Behandlung fehlender Benutzer erscheint eine weitere Bestätigung.
 5. Öffne **Letzte Sync-Läufe anzeigen** und wähle **Aktualisieren**. Ein gestarteter
-   Job bestätigt nur den Auftrag. Prüfe den abgeschlossenen Lauf, seine Meldung
-   sowie die Zahlen für verarbeitete, entfernte und fehlgeschlagene Benutzer.
-   Kontrolliere anschließend betroffene Konten und Rollen.
+   Job bestätigt nur den Auftrag. Prüfe den abgeschlossenen Lauf und betroffene
+   Konten und Rollen. Auch `Succeeded` kann fehlgeschlagene Benutzer ausweisen;
+   kontrolliere Meldung sowie verarbeitete, entfernte und fehlgeschlagene Benutzer.
 
-Der Abgleich übernimmt Benutzerangaben und Rollen in Mardu. Er ändert nicht die
-Passwörter im Verzeichnis. Auch ein Lauf mit dem Status `Succeeded` kann einzelne
-fehlgeschlagene Benutzer ausweisen; prüfe deshalb immer die Fehleranzahl.
+Der Abgleich übernimmt Benutzerangaben und Rollen; Verzeichnispasswörter ändert
+er nicht.
 
 ## Anmeldung nach der Einrichtung prüfen
 
-Prüfe mit einem dafür vorgesehenen Konto die Anmeldung über die normale Eingabe
-von Benutzerkennung und Passwort. Bei einer LDAP-Prüfung sucht Mardu die Person im
-konfigurierten Suchbereich und prüft deren Passwort am Verzeichnis. Eine
-erfolgreiche Prüfung kann das zugeordnete lokale Konto und seine Rollen
-aktualisieren. Der Verbindungstest mit dem Lesekonto prüft diesen persönlichen
-Anmeldeablauf nicht.
+Melde dich mit einem Testkonto über Benutzerkennung und Passwort an. Mardu sucht
+die Person im konfigurierten Bereich und prüft ihr Passwort am Verzeichnis. Dabei
+können lokales Konto und Rollen aktualisiert werden. Der Verbindungstest mit dem
+Lesekonto prüft diesen persönlichen Anmeldeablauf nicht.
 
 Neu über LDAP angelegte Konten erhalten dabei kein lokales Passwort. Ein bereits
 vorhandenes lokales Passwort wird durch die LDAP-Zuordnung jedoch nicht entfernt;

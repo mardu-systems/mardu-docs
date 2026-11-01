@@ -3,25 +3,18 @@ title: API und Integrationen
 description: Eine Schnittstelle wählen, ihren Zugriff eingrenzen und mit der passenden Referenz beginnen.
 ---
 
-Mardu bietet unterschiedliche Zugänge für eigene Anwendungen, Agenten und
-Automationen. Wähle zuerst, welche Daten deine Integration lesen oder welche
-Aktion sie ausführen soll. Daraus ergeben sich die Schnittstelle, die verwendete
-Identität und die benötigten Rechte.
-
 ## Referenz und Integrationsweg
 
 | Ziel                                                                   | Zugang und Identität                                                                                                                                                   | Einstieg                                                        |
 | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | Eine eigene Anwendung liest Daten oder führt Aktionen aus.             | HTTP-API mit dem vom Server akzeptierten Bearer-Zugang des Kontos; der konkrete Endpunkt bestimmt Rechte und Datenumfang.                                              | [HTTP-API nutzen](./http-api.mdx)                               |
-| Ein Agent verwendet die angebotenen Werkzeuge.                         | MCP über Streamable HTTP mit persönlichem Agentenzugang; delegierte Rechte, aktuelle Kontorechte und Serverrichtlinie begrenzen den Zugriff gemeinsam.                 | [MCP-Client anbinden](./mcp-anbindung.mdx)                      |
+| Ein Agent verwendet die angebotenen Werkzeuge.                         | MCP über Streamable HTTP mit persönlichem Agentenzugang.                                                                                                               | [MCP-Client anbinden](./mcp-anbindung.mdx)                      |
 | Ein Client empfängt laufend Informationsmeldungen.                     | Eingebetteter MQTT-Informationsbroker mit eigenem Brokerkonto und Topic-Regeln (ACLs). Externe Clients dürfen dort abonnieren, aber keine Nachrichten veröffentlichen. | [MQTT-Ereignisse beziehen](./mqtt-events.mdx)                   |
 | Ein Flow verbindet Geräteprotokolle mit Mardu-Ressourcen und Aktionen. | Node-RED mit provisionierter Mardu-Verbindung. Editorzugang und Laufzeitverbindung sind getrennte Zugänge.                                                             | [Node-RED-Flow entwickeln und prüfen](./automationsfluesse.mdx) |
 
-Die MQTT-Benutzerverwaltung des Informationsbrokers ist kein allgemeiner
-Gerätebefehlskanal. Die ausgehende Verbindung zum IP500-Netzwerk und MQTT-Verbindungen
-innerhalb von Node-RED-Flows sind davon getrennt. Für unterstützte
-Automation-Ereignisse kann MQTT Benachrichtigungen liefern; Entscheidungen und
-Aktionsaufrufe erfolgen über die Automation-HTTP-Verträge.
+IP500- und Node-RED-MQTT-Verbindungen sind vom Informationsbroker getrennt.
+Bei Automationen liefert MQTT unterstützte Ereignisse; Entscheidungen und
+Aktionsaufrufe laufen über die Automation-HTTP-Verträge.
 
 SignalR-Hubs ergänzen einzelne Abläufe um Echtzeitmeldungen, etwa bei Tags.
 Verwende sie nur mit dem Vertrag des jeweiligen Ablaufs: Hubzugang und
@@ -29,13 +22,10 @@ Gruppenzugehörigkeit werden gesondert geprüft.
 
 ### Die HTTP-Referenz verwenden
 
-Öffne in der Dokumentation deiner **Softwareinstallation** den Bereich
-**Entwickeln** und dort **API** unter **Referenz** in der Seitenleiste. Diese
-Referenz wird aus dem Backend-OpenAPI-Vertrag erzeugt; die öffentliche Website
-bietet diese erzeugte Referenz nicht an. Wenn Swagger am Server aktiviert ist,
-findest du außerdem `/redoc` und den OpenAPI-Vertrag unter
-`/swagger/v1/swagger.json` an der API-Serveradresse. Wähle die passende Operation
-und prüfe vor dem Aufruf:
+Öffne in der Dokumentation deiner **Softwareinstallation** **Entwickeln →
+Referenz → API**. Die aus OpenAPI erzeugte Referenz ist auf der öffentlichen
+Website nicht verfügbar. Bei aktiviertem Swagger findest du außerdem `/redoc`
+und `/swagger/v1/swagger.json` an der API-Serveradresse. Prüfe für die Operation:
 
 1. HTTP-Methode, Pfad und API-Version sowie Pfad- und Abfrageparameter.
 2. Authentifizierung und benötigte Rechte; unterscheide persönliche Aktionen von
@@ -45,48 +35,37 @@ und prüfe vor dem Aufruf:
 4. Operationsspezifische Regeln, etwa Seitennavigation, Versionsprüfung oder
    zusätzliche Header. Übertrage diese Regeln nicht ungeprüft auf andere Endpunkte.
 
-Verwende die Adresse des Mardu-Backends. Eine Dashboard-Projektroute ist keine
-API-Basisadresse. Die [HTTP-Anleitung](./http-api.mdx) beschreibt Anmeldung,
-Beispielaufrufe und Fehlerbehandlung. Die Referenz bleibt die Quelle für einzelne
-Felder und Operationen.
+Verwende die Backend-Adresse statt einer Dashboard-Projektroute. Anmeldung,
+Beispielaufrufe und Fehlerbehandlung beschreibt die [HTTP-Anleitung](./http-api.mdx).
 
 ### Den Berechtigungsumfang festlegen
 
-Eine erfolgreiche Anmeldung erlaubt nicht jede Aktion. Bei gewöhnlichen
-HTTP-Geschäftsendpunkten prüft Mardu Aktionsrechte wie Anzeigen, Anlegen oder
-Bearbeiten. Hinzu kommen je nach Aufgabe Eigentum und Rechte auf die betroffene
-Ressource. Beispielsweise liefert die persönliche Buchungsliste die Buchungen
-des angemeldeten Kontos; die Verwaltungsbuchungsliste benötigt eigene
-Buchungsverwaltungsrechte. Das Recht zum Bearbeiten von Ressourcen ersetzt auch
-nicht die Objektberechtigung zum Verwalten ihrer Hardware.
+HTTP-Geschäftsendpunkte prüfen Aktionsrechte wie Anzeigen, Anlegen oder
+Bearbeiten und je nach Aufgabe Eigentum oder Ressourcenrechte. Die persönliche
+Buchungsliste liefert etwa die Buchungen des angemeldeten Kontos; die
+Verwaltungsliste benötigt Buchungsverwaltungsrechte. Zum Verwalten der Hardware
+ist zusätzlich die Objektberechtigung für die Ressource nötig.
 
-MQTT-Konten, persönliche MCP-Tokens und die Automation-Laufzeitverbindung haben
-jeweils eigene Zugriffsregeln. Ein Zugang lässt sich deshalb nicht beliebig für
-eine andere Schnittstelle einsetzen. Insbesondere begrenzt die Ressourcenauswahl
-einer Node-RED-Flow-Freigabe nur, wo Mardu diese Freigabe vor einem Zugang verlangt.
+Die Zugangstypen und ihre Regeln sind nicht austauschbar. Bei MCP gelten die
+delegierten Rechte, die aktuellen Kontorechte und die Serverrichtlinie gemeinsam.
+Die Ressourcenauswahl einer Node-RED-Flow-Freigabe legt nur fest, wo Mardu diese
+Freigabe vor einem Zugang verlangt.
 Die eingerichtete Node-RED-Laufzeit kann alle unterstützten Ressourcen lesen und
 registrierte Aktionen ausführen. Beachte diesen Umfang vor Änderungen an Flows.
 
 ## Test und Betrieb
 
-1. Lege eine kleine Aufgabe und ihr erwartetes Ergebnis fest, zum Beispiel eigene
-   Buchungen lesen oder eine Informationsmeldung empfangen. Verwende fiktive
-   Daten in einer Testinstallation und kläre die erforderlichen Rechte.
-2. Richte den Zugang über die verlinkte Anleitung ein. Für MCP bietet sie einen
-   ersten lesenden Tool-Aufruf; für MQTT wählst du ein ausdrücklich erlaubtes
-   Topic. Für Node-RED verwendest du die eingerichtete Mardu-Verbindung und die
-   dort beschriebenen Simulationsbeispiele.
-3. Prüfe die Antwort und ihren Umfang: Stimmen Identität, Datenauswahl und
-   erwarteter Zustand? Eine leere Liste kann ein gültiges Ergebnis sein. Prüfe
-   fehlende Daten anhand von Filtern und Berechtigungen.
-4. Ergänze eine Änderung erst, wenn du deren Wirkung und Rücknahme kennst. Lies
-   den aktuellen Stand vor der Änderung und prüfe danach das Ergebnis. Bei
-   Geräteaktionen bedeutet ein angenommener Auftrag noch keine bestätigte
-   Ausführung; prüfe die Rückmeldung des Geräts.
+1. Lege eine kleine Leseaufgabe mit erwartetem Ergebnis fest. Verwende fiktive
+   Daten in einer Testinstallation und kläre die Rechte.
+2. Richte den Zugang nach der passenden Anleitung ein: lesender MCP-Aufruf,
+   freigegebenes MQTT-Topic oder eingerichtete Mardu-Verbindung in Node-RED.
+3. Prüfe Identität, Datenauswahl und Zustand. Eine leere Liste kann gültig sein;
+   kontrolliere Filter und Rechte, wenn Daten fehlen.
+4. Kläre vor Änderungen Wirkung und Rücknahme. Lies den aktuellen Stand und
+   prüfe danach das Ergebnis. Bei Geräteaktionen prüfst du die Geräterückmeldung:
+   Die Auftragsannahme bestätigt noch keine Ausführung.
 
-Speichere Zugangsdaten außerhalb des Repositories und protokolliere weder Tokens
-noch Passwörter. Plane Erneuerung, Ablauf und Widerruf nach dem verwendeten
-Zugangstyp. Ein HTTP-Fehler, ein MCP-Tool-Fehler und ein abgelehntes MQTT-Abonnement
-werden unterschiedlich behandelt; die jeweilige Anleitung beschreibt die
-passenden Prüfungen. Wiederhole eine Änderung nach einem Verbindungsabbruch erst,
-wenn der aktuelle Zustand geklärt ist.
+Speichere Zugangsdaten außerhalb des Repositories und der Logs. Plane Erneuerung,
+Ablauf und Widerruf nach Zugangstyp; nutze die Fehlerhilfe der jeweiligen Anleitung.
+Wiederhole eine Änderung nach einem Verbindungsabbruch erst, wenn der aktuelle
+Zustand geklärt ist.

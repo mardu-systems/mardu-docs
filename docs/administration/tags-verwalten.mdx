@@ -12,9 +12,9 @@ Ein Zugangs-Tag identifiziert eine Person am Tür- oder Maschinenleser.
 Ob sie eine Ressource nutzen darf, bestimmen ihre
 [Freigaben und Zugangsregeln](../koordination/ressourcen.mdx#nutzung-und-zugriff-nutzung-erlauben).
 
-Öffne **Personen → Benutzer → Benutzerkonto → Tags**.
-Bestätigte Tag-Aktionen werden direkt gespeichert. Ein zusätzliches **Speichern**
-im Benutzerformular ist nicht nötig; **Abbrechen** dort macht sie nicht rückgängig.
+Öffne **Personen → Benutzer → Benutzerkonto → Tags**. Bestätigte Tag-Aktionen
+werden sofort gespeichert; **Speichern** oder **Abbrechen** im Benutzerformular
+ändern daran nichts.
 
 ## Voraussetzungen und Rechte
 
@@ -67,8 +67,8 @@ weiter warten, obwohl Connect die Anmeldung bereits abgeschlossen hat.
 
 Im Beispiel erhält **Lina Berger** die Karte **Werkstattkarte Lina**.
 Der QR-Code gilt **fünf Minuten ab Start der Anmeldung**. Gib ihn nur an die
-Person weiter, die die Karte einrichtet. Die Anmeldung erfolgt mit Mardu Connect,
-nicht mit einem Tür- oder Maschinenleser.
+Person weiter, die die Karte mit Mardu Connect einrichtet; Tür- oder Maschinenleser
+übernehmen die Anmeldung nicht.
 
 <Steps>
   <Step>
@@ -116,9 +116,8 @@ vorgesehenen Leser. Bei abgelehntem Zugang folge der
 
 ## Tag prüfen und benennen
 
-Die Tag-Karte zeigt **Tag-ID**, Status und Gültigkeit. **Aktiv** allein bedeutet
-nicht, dass der Tag innerhalb seiner Gültigkeit liegt. Mit **Tag-ID kopieren**
-kannst du die Karte bei Rückfragen eindeutig benennen.
+Prüfe auf der Tag-Karte neben dem Status die Gültigkeit: **Aktiv** allein bestätigt
+sie nicht. Für Rückfragen verwende **Tag-ID kopieren**.
 
 Wähle **Umbenennen**, ändere **Name** und bestätige mit **Speichern**.
 Der Name darf höchstens 100 Zeichen enthalten; eine leere Eingabe entfernt ihn.
@@ -161,19 +160,15 @@ Verwende eine **andere, noch nicht registrierte Karte**.
 4. Prüfe Gültigkeit und Zugang am vorgesehenen Leser. Personenbezogene Freigaben
    bleiben am Konto; direkt an die alte Tag-ID vergebene Freigaben werden nicht übertragen.
 
-Eine eigene Aktion **Ersetzen** oder das Übertragen eines Tags auf ein anderes
-Konto bietet die Oberfläche nicht an.
-
 ## Tag-Datensatz löschen
 
 Für eine verlorene Karte verwende die [Verlustsperre](#verlorenen-tag-sperren),
 damit der Verlustnachweis erhalten bleibt. **Tag löschen** entfernt den Datensatz
 und setzt die physische Karte nicht zurück.
 
-1. Wähle **Tag löschen**.
-2. Prüfe die Vorschau der Löschfolgen und bestätige die Löschung.
-3. Prüfe nach erneutem Öffnen des Kontos, dass der Eintrag fehlt.
-   Bei zwischenzeitlichen Änderungen musst du die Löschvorschau neu laden.
+1. Wähle **Tag löschen**, prüfe die Löschfolgen und bestätige.
+   Bei zwischenzeitlichen Änderungen musst du die Vorschau neu laden.
+2. Öffne das Konto erneut und prüfe, dass der Eintrag fehlt.
 
 ## Probleme beheben
 
@@ -190,27 +185,26 @@ kann bei einer lokalen Serveradresse auch **Lokales Netzwerk** erforderlich sein
 
 ### Assistent wartet trotz geöffnetem App-Link
 
-Prüfe zuerst Connect: Bei einem Verbindungsfehler muss das Smartphone die
-Serveradresse aus dem QR-Code erreichen können. Bei **Synchronisierung ausstehend**
-verwende die [Wiederholung in der App](#serverabschluss-erneut-synchronisieren).
+Prüfe den Status in Connect:
 
-Zeigt Connect **Abgeschlossen**, prüfe die Live-Verbindung des Dashboards und
-die **Admin**-Rolle deines Dashboard-Kontos. Öffne das Benutzerkonto bei Bedarf
-neu. Starte dafür keine zweite Kartenanmeldung.
+- Verbindungsfehler: Stelle die Erreichbarkeit der Serveradresse aus dem QR-Code her.
+- **Synchronisierung ausstehend**: Verwende die [Wiederholung in der App](#serverabschluss-erneut-synchronisieren).
+- **Abgeschlossen**: Prüfe die Live-Verbindung des Dashboards und die **Admin**-Rolle
+  deines Dashboard-Kontos. Öffne das Benutzerkonto neu, statt eine zweite Anmeldung zu starten.
 
 ### Serverabschluss erneut synchronisieren
 
-Bei **Synchronisierung ausstehend** ist die Karte bereits beschrieben und geprüft;
-die Serverbestätigung fehlt. **Beschreibe sie nicht erneut und starte keine neue Anmeldung.**
+Bei **Synchronisierung ausstehend** fehlt nur die Serverbestätigung.
+**Beschreibe die bereits geprüfte Karte nicht erneut und starte keine neue Anmeldung.**
 
 1. Lass Connect geöffnet und stelle die Serververbindung wieder her.
 2. Tippe auf **Erneut synchronisieren**. Die App wiederholt nur den Serverabschluss.
 3. Warte auf **Abgeschlossen** und prüfe die Zuordnung im Dashboard.
 
-Die App kann den ausstehenden Abschluss nach dem Beenden nicht wieder aufnehmen
-und synchronisiert nicht im Hintergrund. Wird die Wiederholung dauerhaft
-abgewiesen, lass die technische Administration den Serverstand anhand der
-**Zuweisungs-ID** prüfen: Der Tag kann trotz fehlender Antwort bereits registriert sein.
+Die App synchronisiert nicht im Hintergrund und kann den ausstehenden Abschluss
+nach dem Beenden nicht wieder aufnehmen. Wird die Wiederholung dauerhaft
+abgewiesen, lass die technische Administration den Serverstand
+anhand der **Zuweisungs-ID** prüfen: Der Tag kann bereits registriert sein.
 
 Verwende **Vorgang beenden → Abschluss verwerfen** erst nach dieser Klärung.
 Die Aktion verwirft den ausstehenden Abschluss in der App, setzt aber weder die
@@ -237,8 +231,8 @@ Für eine noch nicht abgeschlossene Karteneinrichtung gilt:
    **Zugangs-Tag zuweisen** erneut. Beende auch den alten Connect-Ablauf,
    bevor du den neuen QR-Code scannst, und lass den alten Servervorgang stornieren.
 
-Unter **QR-Daten manuell anzeigen** findest du auch Server-URL und Zuweisungs-Token.
-Teile die Zugangsdaten nur mit der Person, die die Karte einrichtet.
+Unter **QR-Daten manuell anzeigen** stehen auch Server-URL und Zuweisungs-Token.
+Gib auch diese Daten nur an die Person weiter, die die Karte einrichtet.
 
 ### Karte ist bereits registriert
 
@@ -267,6 +261,5 @@ zeigt die gespeicherte Entscheidung.
 
 ## Prüfstand und Grenzen
 
-Die Anleitung ist mit Dashboard, Backend und **Mardu Connect** abgeglichen;
-der Durchlauf mit physischer Karte und Leser muss an eurer Installation geprüft werden.
+Prüfe den Durchlauf mit physischer Karte und Leser an eurer Installation.
 Technische Verträge stehen unter **Entwickeln → API → Tags**.
