@@ -1,15 +1,35 @@
 # Mardu-Dokumentation: Navigation und Einstieg
 
-Stand: 1. November 2026, nach kritischer Revision. **Strukturvorschlag zur Besprechung**, keine freigegebene
-Navigation. Alle sechs Bereiche bleiben erhalten. Vorhandene Anleitungen und URLs
-werden weiterverwendet. Für die neue Navigation ist diese Fassung der aktuelle
-Vorschlag; die Bestandsbefunde und offenen Sachprüfungen in `TODO.md` bleiben
-erhalten. Eine Produktabnahme folgt daraus nicht.
+Stand: 1. November 2026. Die revidierte Struktur wurde vom Nutzer für die erste
+Umsetzung freigegeben. **Der erste nutzbare Navigationsstand ist lokal umgesetzt.**
+Die sechs Bereiche bleiben erhalten; noch fehlende Anleitungen werden weiterhin
+als Aufgabenbedarf geführt und erscheinen nicht als leere Navigationseinträge.
+Bestandsbefunde und offene Sachprüfungen in `TODO.md` bleiben erhalten.
 
-Der [ausgeschriebene Überblick](../drafts/2026-11-01-mardu-verstehen.md) gehört zu
-diesem Vorschlag. Die [kritische Prüfung](./2026-11-01-dokumentationsstruktur-review.md)
-hält die Schwächen der ersten Fassung und ihre Korrekturen fest. Diese Dateien
-liegen außerhalb der veröffentlichten Inhalte.
+Der [Überblick](../docs/ueberblick/index.mdx) ist als Produktseite umgesetzt.
+Die [kritische Prüfung](./2026-11-01-dokumentationsstruktur-review.md) begründet
+die Änderung gegenüber der ersten Fassung. Der [ursprüngliche Entwurf](../drafts/2026-11-01-mardu-verstehen.md)
+bleibt als Planungsbeleg erhalten. Der Prozess für weitere Überarbeitungen und
+neue Anleitungen steht in der [Arbeitsweise](../ARBEITSWEISE.md).
+
+## Umgesetzter erster Stand
+
+- Alle sechs Bereiche haben einen nutzbaren Start und einen ausdrücklichen
+  Metadatenbaum. Der Zielbaum weiter unten enthält zusätzlich noch geplante Seiten.
+- Ressourcen-Einrichtung und Betriebsmetriken gehören zur Administration;
+  Koordination verlinkt konkrete Ressourcenaufgaben mit benanntem Bereichswechsel.
+- Der Profilzweig verwendet die bestehenden URLs und eine aufklappbare native
+  Fumadocs-Gruppe. Gute Bestandsanleitungen bleiben erhalten.
+- Unfertige Seiten bleiben über ihre bisherigen Adressen erreichbar, werden im
+  Software-Consumer aber weder über Sidebar, Suche noch LLM-Index angeboten.
+- Brauchbare Teile aus Sammelseiten bleiben als begrenzte Anleitungen erhalten.
+  Unter der bisherigen Zutritts-URL sind jetzt die ausgearbeiteten Zugangsmetriken
+  dokumentiert; vollständige Anleitungen zur Zugangsverwaltung bleiben offen.
+- Ausgelagerte Schreibaufträge stehen im [internen Backlog](./offene-dokumentationsaufgaben.md).
+  Das Auslagern bedeutet keine Erledigung. Der neue Überblick verwendet SVGs aus
+  den Mermaid-Quellen und den vorhandenen Bildbetrachter.
+- Die 14 ergänzenden Seitenzuschnitte sind weiterhin geplant. Website-Consumer,
+  vollständige Funktionsabnahme und Tests mit neuen Lesern bleiben gesonderte Schritte.
 
 ## Leitentscheidung
 
@@ -303,7 +323,7 @@ Titel können sich ändern, URLs und verwendete Anker bleiben erhalten.
 | Seite / Quelle                                                                                               | Vier Inhaltspunkte                                                                                                | Vorgehen                                                                                    |
 | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | [Dokumentation](../docs/index.mdx)<br>`/docs`                                                                | Bereich wählen; neue Leser zum Überblick; Nutzung und Verwaltung unterscheiden; Grenzen des Dokumentationsstands. | Kürzen, kein zweiter Überblick.                                                             |
-| [Mardu verstehen](../docs/ueberblick/index.mdx)<br>`/docs/ueberblick`                                        | Ressourcen und Personen; optionale Funktionen; Systembestandteile im Diagramm; nächste eigene Aufgabe.            | Ausgeschriebener Entwurf liegt separat vor.                                                 |
+| [Mardu verstehen](../docs/ueberblick/index.mdx)<br>`/docs/ueberblick`                                        | Ressourcen und Personen; optionale Funktionen; Systembestandteile im Diagramm; nächste eigene Aufgabe.            | Mit SVGs aus Mermaid und vorhandenem Bildbetrachter umgesetzt.                              |
 | [Personen, Rollen und Freigaben](../docs/ueberblick/benutzerkonten.mdx)<br>`/docs/ueberblick/benutzerkonten` | Konto und Anmeldung; Rollen und Gruppen; Ressourcenfreigaben und Nachweise; Herkunft und Sperrung von Zugängen.   | Bestehende Erklärung erhalten.                                                              |
 | [Begriffe](../docs/ueberblick/grundlagen-begriffe.mdx)<br>`/docs/ueberblick/grundlagen-begriffe`             | Ressourcen und Anschlüsse; Konto/Rolle/Gruppe/Freigabe; Kompetenz/Definition/Vergabe; Sitzungen und Zustände.     | Als Nachschlageseite fokussieren.                                                           |
 | [Neuerungen](../docs/ueberblick/neuerungen.mdx)<br>`/docs/ueberblick/neuerungen`                             | Eindeutiger Softwarestand; Verhaltensänderungen; nötige Umstellungen; aktualisierte Anleitungen.                  | Erst belegte Release-Inhalte veröffentlichen, bisheriger Schreibauftrag ist keine Historie. |
@@ -421,7 +441,7 @@ duplizieren. Eine Versionsnavigation braucht ein belegtes Release-Modell.
 
 ## Überblick und Grafiken
 
-Der [Entwurf](../drafts/2026-11-01-mardu-verstehen.md) erklärt Ressourcen und
+Der [umgesetzte Überblick](../docs/ueberblick/index.mdx) erklärt Ressourcen und
 Personen, zeigt einen Raum ohne Hardware neben einer angebundenen Maschine,
 unterscheidet Freigabe/Buchung/Nachweis/Identifikation und ordnet die Bestandteile
 des Systems ein. Zwei Mermaid-Diagramme zeigen Beziehungen und Systemgrenzen.
@@ -458,9 +478,9 @@ Ausstellervertrauen und Widerrufsstatus.
    Überblick bekommt keine zusätzliche Profil-Sidebar. Querverweise nennen den
    Zielbereich; heutige URL-basierte Bereichserkennung erhält nicht automatisch
    den vorherigen Lesekontext.
-7. **Grafiken darstellen:** Im untersuchten Software-Consumer ist keine Mermaid-
-   Komponente registriert. Vor Veröffentlichung in beiden Consumern die Darstellung
-   ergänzen oder aus Mermaid erzeugte SVGs verwenden. Ein Codeblock allein genügt nicht.
+7. **Grafiken darstellen:** Die Umsetzung nutzt aus Mermaid erzeugte SVGs mit
+   expliziten Abmessungen und den vorhandenen Bildbetrachter. Eine zusätzliche
+   Mermaid-Laufzeit ist dafür nicht nötig. Die Website-Darstellung bleibt zu prüfen.
 8. **Erst fertige Seiten zeigen:** Neue Vertiefungen erst mit nutzbarem Inhalt
    eintragen. Schreibaufträge aus Bereichsstarts ins interne Backlog verschieben;
    unfertige Anleitungen nicht durch die Umgruppierung als fertig markieren.
@@ -471,10 +491,9 @@ wird verdichtet; die Backend- und Sicherheitsregeln im Root bleiben bestehen.
 
 ## Reihenfolge und Prüfung
 
-- **Jetzt:** Kritisch revidierter Strukturvorschlag, Aufgabenmatrix und dokumentierte Befunde.
-- **Danach:** Nutzbaren ersten Stand umsetzen: Überblick, Bereichsstarts und
-  vorhandene Anleitungen einordnen, beschriftete Querverweise setzen. Geplante
-  Seiten erst nach Ausarbeitung sichtbar machen; alte Anker erhalten.
+- **Erledigt:** Erste Navigationsumsetzung, Überblick, Aufgabenmatrix und Prozess.
+- **Weiterhin:** Geplante Seiten erst nach Ausarbeitung sichtbar machen; alte Anker
+  erhalten und die Website sowie die Auffindbarkeit mit neuen Lesern prüfen.
 - **Für diesen ersten Stand:** Ausgearbeitete Bestandsanleitungen wiederverwenden.
   Eine Seite, die überwiegend aus Schreibaufträgen besteht, erhält erst nach
   Ausarbeitung einen neuen sichtbaren Eintrag. Falls eine vorhandene Anleitung
@@ -504,7 +523,7 @@ Navigation; Reihenfolge und aktive Seite; keine leeren Gruppen oder doppelten
 Starts; Tastatur und mobile Sidebar; Diagramme in Hell/Dunkel; keine Planungsdateien
 im Produkt-Suchindex.
 
-Offen sind die Strukturabstimmung, die Website-Prüfung und Tests mit Lesern.
+Offen sind die Website-Prüfung und Tests mit neuen Lesern.
 Codelektüre für das Modell ersetzt keine neue Hardware-, Protokoll- oder
 Zustellabnahme. Frühere offene Prüfungen bleiben bestehen.
 
@@ -515,12 +534,12 @@ Zustellabnahme. Frühere offene Prüfungen bleiben bestehen.
   Diese Anzahl ist eine Arbeitsannahme und kein Vollständigkeitsmaß.
 - Die relativen Dateilinks und die Formatierung der geänderten Markdown-Dateien
   wurden geprüft; es wurden keine Produkt-URLs oder API-Verträge geändert.
-- Beide Diagramme wurden mit Mermaid 11.12.0 gerendert und als SVG zum Entwurf
-  abgelegt. Die separate Vorschau wurde bei 1200 und 390 Pixel Breite geprüft.
-  Die Diagramme sind mobil innerhalb ihres Bereichs verschiebbar. Dies ist keine
-  Prüfung der noch ausstehenden Mermaid-Integration in den Produkt-Consumern.
+- Die aus Mermaid erzeugten SVGs sind mit expliziten Abmessungen in die Produktseite
+  integriert. Desktop (1440 Pixel), Mobilgerät (390 Pixel), dunkles Theme und das
+  Öffnen/Schließen im vorhandenen Bildbetrachter sind im Software-Consumer geprüft.
+  Der Website-Consumer wurde nicht ausgeführt.
 - Die frühere unabhängige Prüfung auf offene Umsetzungsfragen war keine Prüfung
   der Aufgabenabdeckung. Die kritische Revision benennt ihre Lücken und gleicht
   ausgewählte Produktbereiche im Code ab. Daraus folgt keine Funktionsabnahme.
-- Website, Nutzer-Suchtests, die Live-Umsetzung und die praktische Abnahme der
-  zusätzlich erfassten Aufgaben stehen weiterhin aus.
+- Website, Nutzer-Suchtests und die praktische Abnahme der zusätzlich erfassten
+  Aufgaben stehen weiterhin aus. Die lokale erste Navigationsumsetzung ist erfolgt.

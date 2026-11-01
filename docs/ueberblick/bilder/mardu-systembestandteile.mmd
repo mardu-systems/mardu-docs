@@ -1,0 +1,8 @@
+flowchart LR
+    accTitle: Die Bestandteile einer Mardu-Installation
+    accDescr: Webportal und Connect-App nutzen den Server. Geräte und Automationen tauschen Befehle, Ereignisse und Rückmeldungen aus. Externe Dienste sind optional.
+    W["Webportal"] -->|Bedienung| S["Mardu-Server"]
+    C["Mardu Connect"] -->|Tag einrichten| S
+    D["Geräte"] <-->|Befehle und Rückmeldungen| S
+    A["Automationen"] <-->|Ereignisse und Aktionen| S
+    E["Externe Dienste"] -.->|je nach Anbindung| S

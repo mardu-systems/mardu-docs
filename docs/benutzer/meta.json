@@ -2,14 +2,17 @@
   "title": "Benutzer",
   "pages": [
     "erste-schritte",
-    "dashboard",
+    "---Eigene Aufgaben---",
     "zutritt",
-    "berechtigungsanfragen",
     "buchungen",
-    "kalender",
+    "berechtigungsanfragen",
     "kompetenzen",
+    "../ueberblick/profil-zutrittsmedien",
     "benachrichtigungen",
+    "dashboard",
     "geraete-status",
-    "uebersicht-monitoring"
+    "kalender",
+    "profil",
+    "../ueberblick/fehlersuche"
   ]
 }

@@ -5,6 +5,9 @@ Produktdokumentation. Consumer verlinken hierher. Die Entwicklungs- und
 Sicherheitsregeln des jeweiligen Projekts gelten zusätzlich. Wende nur Regeln an,
 die für die betroffene Dokumentation relevant sind.
 
+Für die Überarbeitung bestehender Funktionen und neue Anleitungen verwende die
+[Arbeitsweise mit Änderungsbrief und Prüfschritten](ARBEITSWEISE.md).
+
 ## Erst verstehen, dann ändern
 
 - Lies vorhandene Seiten, Navigation, Consumer-Konfiguration und die betroffene

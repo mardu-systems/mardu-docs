@@ -1,40 +1,11 @@
 ---
-title: Zutritt verwalten
-description: Zugänge gewähren, Katalog pflegen und Anträge entscheiden.
+title: Zugangsmetriken lesen
+description: Gespeicherte Zugangsentscheidungen, aktive Sitzungen und den Zeitbezug der Metriken einordnen.
 ---
 
-Diese Seite ist teilweise ausgearbeitet. Die offenen Aufgaben müssen gegen das
-aktuelle Ressourcen- und Zutrittsmodell geprüft werden.
-
-## Ressourcen, Bereiche und Zutrittspunkte
-
-- [ ] TODO: Ressource, Zugangsbereich (Scope), Zutrittspunkt und Geräte-Endpunkt anhand eines Raum- und Maschinenbeispiels erklären; [Ressourcen einrichten](../koordination/ressourcen.mdx) verlinken.
-- [ ] TODO: Bereich für eine Ressource erstellen, Bedingungen und Zugangsart konfigurieren; Freigabe, Buchung, Kompetenzanforderung, Aufsicht und Zeitbedingungen nur nach tatsächlich angebotener Auswahl dokumentieren.
-- [ ] TODO: Zutrittspunkt anlegen und Reader/Aktor zuordnen; wirksame Konfiguration, fehlende Endpunkte, doppelte aktive Zuordnung und Umzug behandeln.
-
-## Verwaltungsrechte und Verantwortlichkeiten
-
-- [ ] TODO: Allgemeine Berechtigungen von Zuweisungen für eine Ressource oder einen Zugangsbereich unterscheiden; Lesen, Freigaben, Anträge, Hardware, Protokolle, Sitzungen und Delegation erklären.
-- [ ] TODO: Verwaltungsrechte an Person, Benutzergruppe oder Rolle zuweisen und widerrufen; delegierbare Rechte, Geltungsbereich und Grenzen für untergeordnete Ressourcen belegen.
-- [ ] TODO: Zuständigkeit für Kompetenzfreigabe und physische Aufsicht von Verwaltungsrechten unterscheiden; typische Ursache für unsichtbare Einträge erklären.
-
-## Zugänge freigeben und entziehen
-
-- [ ] TODO: Freigabe anlegen, Gültigkeit und Empfänger auswählen, ändern, widerrufen beziehungsweise löschen; unterstützte Empfängertypen und Folgen für vorhandene Zugriffe prüfen.
-- [ ] TODO: Konflikte durch veraltete Änderungsstände behandeln; eine gespeicherte Freigabe von einer erfolgreich erfüllten Zutrittsbedingung unterscheiden.
-
-## Katalog und Anträge
-
-- [ ] TODO: Katalogsichtbarkeit und anforderbaren Zugang einstellen; Unterschied zwischen Katalogangebot, eigener Berechtigung und genehmigtem Antrag erklären.
-- [ ] TODO: Antrag öffnen, Voraussetzungen und Nachweise prüfen, genehmigen oder mit Begründung ablehnen; Verantwortlichkeiten, erzeugte Freigabe und konkurrierende Entscheidungen erklären.
-- [ ] TODO: Rückfragen, Vertretung, Fristen und Statuswerte nur beschreiben, soweit vorhandene UI und API sie unterstützen; organisatorische Absprachen separat nennen.
-
-## Protokolle, Sitzungen und Hardwarezustand
-
-- [ ] TODO: Zutrittsentscheidungen filtern, Details lesen und Ablehnungsgründe erklären; Export nur bei belegtem Endpunkt und UI beschreiben.
-- [ ] TODO: Aktive Sitzungen, Sitzungsübernahmen und Verlauf lesen; Beenden mit Rechten, Begründung und Bestätigung erklären.
-- [ ] TODO: Gespeichertes Sitzungsende und Zustellung des Gerätebefehls unterscheiden; ausstehende/fehlgeschlagene Bestätigung und Wiederholung anhand vorhandener Zustellzustände behandeln.
-- [ ] TODO: Offline-Gerät, fehlender Nachweis, unpassender Zeitraum, Wartung und fehlende Freigabe als getrennte Prüfpfade erklären; physische Türmeldungen nur bei vorhandener Hardwareunterstützung nennen.
+Diese Anleitung erklärt die Metriken in Benutzer-, Geräte- und
+Zutrittspunktdetails. Für die Einrichtung von Nutzungsbedingungen und technischen
+Anschlüssen siehe [Ressourcen einrichten](../koordination/ressourcen.mdx).
 
 ## Zugangsmetriken
 
@@ -57,9 +28,21 @@ als Zugangsentscheidungen. Die Grafik lässt sich als Balken oder Linien anzeige
 
 Es werden nur Bereiche berücksichtigt, deren Protokolle beziehungsweise Sitzungen du ansehen darfst. Die Zahlen beschreiben gespeicherte Entscheidungen; sie bestätigen keine physische Geräteaktion. Bereits gelöschte Protokolle können nicht nachträglich gezählt werden.
 
-- [ ] TODO: Die Metrikbeschreibung mit Benutzer-, Geräte- und Zutrittspunktansicht abgleichen; UTC-Zeitraum, fünf neueste Einträge, Rechte, gelöschte Historie und verfügbare Diagrammarten ohne widersprüchliche Doppelbeschreibung erklären.
+<span id="ressourcen-bereiche-und-zutrittspunkte" />
+<span id="verwaltungsrechte-und-verantwortlichkeiten" />
+<span id="zugänge-freigeben-und-entziehen" />
+<span id="katalog-und-anträge" />
+<span id="protokolle-sitzungen-und-hardwarezustand" />
+
+## Nutzungsbedingungen und Verwaltung
+
+Die [Ressourcenanleitung](../koordination/ressourcen.mdx#nutzung-und-zugriff-nutzung-erlauben)
+beschreibt die vorhandene Einrichtung. Vollständige Anleitungen zum Vergeben von
+Verwaltungszuständigkeiten, zum Entscheiden über Zugangsanträge und zur Verwaltung
+von Zutrittssitzungen sind hier noch nicht ausgearbeitet. Aus den angezeigten
+Metriken folgt keine Berechtigung zum Verwalten dieser Vorgänge.
 
 ## Eigene Zugänge
 
-Die Sicht der Person und das Stellen eines eigenen Antrags werden unter
-[Zutritt für Benutzer](../benutzer/zutritt.mdx) beschrieben.
+Die eigene Sicht und das Stellen eines Antrags beschreibt
+[Zugänge und Ressourcen → Benutzer](../benutzer/zutritt.mdx).

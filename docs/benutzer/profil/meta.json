@@ -1,0 +1,13 @@
+{
+  "title": "Profil und Einstellungen",
+  "pagesIndex": "../../ueberblick/profil",
+  "defaultOpen": false,
+  "pages": [
+    "../../ueberblick/profil-sicherheit",
+    "../../ueberblick/profil-sitzungen",
+    "../../ueberblick/profil-benachrichtigungen",
+    "../../ueberblick/profil-erscheinungsbild",
+    "../../ueberblick/profil-nachweisquellen",
+    "../../ueberblick/profil-mcp"
+  ]
+}

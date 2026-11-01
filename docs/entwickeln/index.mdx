@@ -1,21 +1,35 @@
 ---
 title: Entwickeln
-description: API-Referenz und Integrationen – HTTP, MQTT und MCP für Entwickler und Integratoren.
+description: Eine Softwareintegration planen, MCP anbinden und HTTP-API-Verträge nachschlagen.
 ---
 
-Hier findest du die Wege zur Integration mit Mardu und die automatisch
-erzeugte API-Referenz. Serverrichtlinien und Anbindungen werden unter
-[Administration](../administration/index.mdx) eingerichtet.
+Dieser Bereich richtet sich an Personen, die eigene Software mit Mardu verbinden.
+Der [Überblick](../ueberblick/index.mdx) erklärt zuerst das Modell aus Personen,
+Ressourcen und optionalen technischen Funktionen.
 
-## In diesem Bereich
+<span id="in-diesem-bereich" />
 
-- [API und Integrationen](./api-integration.mdx): Referenz lesen und Integrationsweg wählen.
-- [HTTP-API nutzen](./http-api.mdx): Identität, Rechte, Beispiele und Fehler.
-- [MQTT-Ereignisse beziehen](./mqtt-events.mdx): Topics, Payloads, Versionen und ACLs.
-- [Automationen und KI-Anbindung](./mcp-anbindung.mdx): MCP-Client, Node-RED und Echtzeit.
-- API-Referenz: Aus dem aktuellen OpenAPI-Vertrag erzeugte Endpunkte unter **API** in der Seitenleiste.
+## Eine Schnittstelle wählen
 
-## Offene Dokumentationsaufgaben
+| Ziel                                                      | Einstieg                                                                                                  |
+| --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Einen Agenten oder MCP-Client verbinden                   | [MCP-Client anbinden](./mcp-anbindung.mdx)                                                                |
+| HTTP-Endpunkte, Parameter und Antwortmodelle nachschlagen | **API** unter **Referenz** in der Seitenleiste öffnen. Die Referenz wird aus dem Backend-Vertrag erzeugt. |
+| Den MCP-Zugriff für die Installation freigeben            | [MCP für Agenten freigeben → Administration](../administration/mcp-verwalten.mdx)                         |
+| Die Automation-Runtime und den Editor vorbereiten         | [Automationen → Administration](../administration/automationen.mdx)                                       |
 
-- [ ] TODO: Referenznavigation gegen tatsächlich geladene OpenAPI-Gruppen prüfen; stabile Endpunktlinks beim Ausarbeiten verwenden.
-- [ ] TODO: Technische Anleitungen nach der Administrator-Runde ergänzen; benötigte Rechte und organisatorische Freigabe getrennt benennen.
+## Mit begrenztem Zugriff beginnen
+
+Für eine persönliche MCP-Anbindung erstellst du einen eigenen Zugang. Die
+[MCP-Anleitung](./mcp-anbindung.mdx) zeigt einen Leseaufruf und erklärt Tokenwechsel
+und Fehler. Serverfreigabe, Tokenumfang und die aktuellen Rechte des Kontos
+begrenzen den nutzbaren Zugriff gemeinsam.
+
+<span id="offene-dokumentationsaufgaben" />
+
+## Umfang der Anleitungen
+
+Ausführliche Einstiege für HTTP-Clients, MQTT-Clients und eigene Automationsflüsse
+sind noch nicht ausgearbeitet. Für Beiträge am Mardu-Quellcode gelten die
+Entwicklungsanweisungen des jeweiligen Software-Repositories. Dieser Bereich ist
+keine vollständige Anleitung zum Entwickeln des Servers oder Dashboards selbst.

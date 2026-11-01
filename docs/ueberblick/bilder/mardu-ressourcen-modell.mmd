@@ -1,0 +1,11 @@
+flowchart TD
+    accTitle: Personen, Buchungen und Ressourcen
+    accDescr: Personen erstellen Buchungen und erhalten Freigaben für Ressourcen. Technik kann optional zugeordnet werden.
+    P["Personen"] -->|erstellen| B["Buchungen"]
+    P -->|erhalten| F["Freigaben"]
+    B -->|betreffen| R["Ressourcen"]
+    F -->|gelten für| R
+    R -.->|optional| Z["Zutrittspunkte"]
+    R -.->|optional| M["Messwerte und Schalten"]
+    Z -->|nutzen Anschlüsse aus| T["Geräten oder Automationen"]
+    M -->|nutzen Anschlüsse aus| T

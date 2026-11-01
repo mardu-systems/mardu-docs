@@ -1,19 +1,23 @@
 {
   "title": "Administration",
   "pages": [
+    "---Personen und Berechtigungen---",
     "benutzer-rollen",
-    "badges-verwalten",
-    "zutritt-verwalten",
-    "geraete-verwalten",
+    "---Ressourcen und Zutritt---",
+    "../koordination/ressourcen",
     "tags-verwalten",
+    "---Kompetenzen und Nachweise---",
+    "badges-verwalten",
+    "---Geräte und Automationen---",
+    "geraete-verwalten",
     "automationen",
-    "integrationen",
+    "---Externe Anbindungen---",
     "mcp-verwalten",
+    "---Betrieb---",
     "benachrichtigungen-verwalten",
-    "server-einstellungen",
-    "sicherheit-betrieb",
+    "../benutzer/uebersicht-monitoring",
+    "zutritt-verwalten",
     "wartungs-cli",
-    "wartungs-cli-referenz",
-    "nachweise-datenschutz"
+    "wartungs-cli-referenz"
   ]
 }

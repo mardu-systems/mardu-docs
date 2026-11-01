@@ -1,8 +1,9 @@
 # Mardu verstehen
 
 > Inhaltsentwurf vom 1. November 2026 für `/docs/ueberblick`.
-> Noch nicht veröffentlicht. Bei Übernahme wird diese Überschrift zum Seitentitel
-> im Frontmatter; die Entwurfsnotiz entfällt.
+> Historischer Entwurf für die erste Umsetzung. Die aktuelle Fassung steht unter
+> [Mardu verstehen](../docs/ueberblick/index.mdx). Diese Entwurfsnotiz gehört nicht
+> zur Produktseite.
 > Gerenderte Diagramme: [Ressourcenmodell](./bilder/mardu-ressourcen-modell.svg) und
 > [Systembestandteile](./bilder/mardu-systembestandteile.svg). Quelle sind die Mermaid-Blöcke unten.
 

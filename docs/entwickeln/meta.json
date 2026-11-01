@@ -1,4 +1,4 @@
 {
   "title": "Entwickeln",
-  "pages": ["api-integration", "http-api", "mqtt-events", "mcp-anbindung", "API"]
+  "pages": ["---Schnittstellen---", "mcp-anbindung", "---Referenz---", "API"]
 }

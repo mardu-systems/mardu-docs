@@ -8,10 +8,11 @@ Die [Dokumentationsregeln](AGENTS.md) gelten auch für begleitende Dokumentation
 im Software-Repository. [TODO.md](TODO.md) enthält Bestandsbewertung,
 Prioritäten und den Arbeitsplan. Der
 [Strukturvorschlag vom 1. November 2026](planning/2026-11-01-dokumentationsstruktur.md)
-plant die Sidebars aller sechs Bereiche und verlinkt den neuen Überblick-Entwurf.
+beschreibt den Zielbaum aller sechs Bereiche. Der erste nutzbare Stand der
+Navigation und der neue Überblick sind im Software-Consumer umgesetzt.
 Die [kritische Revision](planning/2026-11-01-dokumentationsstruktur-review.md)
-begründet die korrigierte Aufgabenabdeckung. Der Vorschlag ist noch keine
-freigegebene Navigation; die offenen Sachprüfungen bleiben bestehen.
+begründet die korrigierte Aufgabenabdeckung. Weiterführende, noch nicht
+ausgearbeitete Anleitungen bleiben geplant; die offenen Sachprüfungen bestehen weiter.
 [BENUTZER-REVIEW.md](BENUTZER-REVIEW.md) hält den
 Vergleich mit acht Dokumentationen und die Übernahme für Mardu fest. Der Auftrag vom 19. Oktober 2026 ergänzt die
 Anleitungen zur Benutzeransicht des Webportals; die frühere Bestandsbewertung
@@ -33,6 +34,7 @@ muss vor einer Änderung separat geprüft werden.
 ```text
 AGENTS.md                 # Dokumentationsregeln, keine Produktseite
 README.md                 # Ablage und Pflege
+ARBEITSWEISE.md            # Prozess für bestehende Funktionen und neue Anleitungen
 TODO.md                   # Bestandsbewertung und Arbeitsplan, keine Produktseite
 docs/
   index.mdx               # Wegweiser
@@ -53,11 +55,15 @@ Release-Versionierung wird erst nach Prüfung der Consumer eingeführt.
 
 Der Bestand umfasst zum 1. November 2026 insgesamt 54 aktuelle MDX-Seiten und
 die zwei historischen Einstiege, zusätzlich zur generierten API-Referenz des Consumers.
+Der kuratierte Seitenbaum enthält davon 41 unterschiedliche handgeschriebene
+Seiten einschließlich Wegweiser und Bereichsstarts. Das ist eine Navigationsauswahl,
+keine vollständige Abnahme aller Produktfunktionen.
 Die Benutzeranleitungen decken Einstieg,
 Dashboard, Ressourcen und Freigaben, Berechtigungsanfragen, Buchungen,
 Kalender, Qualifikationen, Posteingang und die persönlichen Profilbereiche ab.
 Bestehende Profil-URLs unter `ueberblick/` bleiben erhalten. Im Software-Consumer
-gehören sie zum Fokus **Benutzer** und bleiben aus **Überblick** erreichbar.
+gehören sie zum Fokus **Benutzer** und stehen dort unter persönlichen Aufgaben
+beziehungsweise im Zweig **Profil und Einstellungen**.
 Die vorhandene Anleitung zu Systemmetriken gehört zum Verwaltungsfokus;
 das persönliche Dashboard hat eine eigene Anleitung.
 
@@ -67,16 +73,19 @@ aus OpenAPI; generierte API-Seiten werden hier nicht von Hand gepflegt.
 
 ## Seite erstellen oder ändern
 
-1. Vorhandene Seiten und die [Regeln](AGENTS.md) lesen; Zielgruppe und
-   Hauptzweck festlegen.
-2. Die Seite im passenden Bereich unter `docs/` mit `title` und
-   `description` im Frontmatter pflegen. Kein zusätzliches H1 im Inhalt.
-3. Neue Seite in der passenden `meta.json` und gegebenenfalls in der
-   Rollen-/Slugliste des Consumers aufnehmen. Bestehende URLs erhalten.
-4. Verhalten mit UI und Backend prüfen; vorhandene Begriffe, Verträge und
-   Anleitungen wiederverwenden. Unfertige Inhalte als Entwurf kennzeichnen.
-5. Links, Anker, Bilder, MDX und die gerenderte Consumer-Seite prüfen.
-   Den Arbeitsplan erst nach Abnahme aktualisieren.
+Die [Arbeitsweise](ARBEITSWEISE.md) beschreibt zwei Wege: vorhandene Funktionen
+und Dokumentation überarbeiten oder eine neue Anleitung anlegen. Beide beginnen
+mit Aufgabe, Ergebnis und Quellen und enden mit passenden Prüfungen.
+
+Neue Entwürfe liegen außerhalb von `docs/`. `meta.json` listet nur nutzbare
+Inhalte; reine Schreibaufträge bleiben außerhalb der Navigation. Bestehende,
+ausgeblendete Seiten behalten ihre URLs. Im Software-Consumer berücksichtigt die
+Veröffentlichungsliste auch Suche und LLM-Index. Relative Metadateneinträge und
+`pagesIndex` ermöglichen andere Navigationsorte ohne neue Inhaltskopien.
+
+Aus brauchbaren Anleitungen entfernte Schreibaufträge stehen unter
+[offene Dokumentationsaufgaben](planning/offene-dokumentationsaufgaben.md).
+Das Verschieben bedeutet keine Erledigung der Aufgabe.
 
 ## Consumer-Stände
 

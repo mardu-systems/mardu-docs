@@ -1,20 +1,35 @@
 ---
 title: Installieren
-description: Geräte vor Ort montieren, einbinden, prüfen und übergeben.
+description: Einen Mardu-Server auf dem Raspberry Pi installieren und den Übergang zur Verwaltung finden.
 ---
 
-Dieser Bereich behandelt Serverinstallation und Geräte vor Ort. Die benötigten Administrator-Aufgaben
-zur Anlage und Zuordnung stehen unter [Geräte verwalten](../administration/geraete-verwalten.mdx).
+Beginne mit dem Serveraufbau, wenn du eine neue Installation einrichtest. Bei
+einem bereits laufenden Server kannst du direkt zur Geräteaufnahme im Dashboard
+wechseln.
 
-## In diesem Bereich
+<span id="in-diesem-bereich" />
 
-- [Server auf dem Raspberry Pi installieren](./raspberry-pi.mdx): Private Container-Images beziehen, HTTPS einrichten und Versionen aktualisieren.
-- [Geräte in Betrieb nehmen](./inbetriebnahme.mdx): Voraussetzungen, Montage, Netzwerk und Softwareaufnahme.
-- [Abnahme und Übergabe](./abnahme-uebergabe.mdx): Tests, Ergebnisprotokoll und Übergabe.
-- [Störung vor Ort](./stoerung-vor-ort.mdx): Anzeigen, Verbindung und geprüfter Wiederanlauf.
+## Server aufbauen
 
-## Offene Dokumentationsaufgaben
+[Server auf dem Raspberry Pi installieren](./raspberry-pi.mdx) beschreibt
+Voraussetzungen, Installationspaket, Konfiguration, Start und Erstzugang. Prüfe
+vorher die dort genannten Voraussetzungen und Zugänge zu den Images.
 
-- [ ] TODO: Unterstützte Hardware-/Firmwarestände und Quellen für Anschluss/Anzeigen sammeln; fehlende Hardwarebelege ausdrücklich nennen.
-- [ ] TODO: Zuständigkeit, Testzugang und erforderliche Werkzeuge nach Gerät/Betriebsform beschreiben; Standorte und Ansprechpartner als auszufüllende Organisationsangaben kennzeichnen.
-- [ ] TODO: Serverinstallation, Produktionsbetrieb und Sicherung/Wiederherstellung ergänzend aus [Sicherheit und Betrieb](../administration/sicherheit-betrieb.mdx) erschließen; Gerätemontage von Serverbetrieb trennen.
+## Einen vorhandenen Server verwenden
+
+Die [Geräteverwaltung in Administration](../administration/geraete-verwalten.mdx)
+beschreibt die Aufnahme im Dashboard und die Zuordnung technischer Anschlüsse.
+Die [Ressourceneinrichtung](../koordination/ressourcen.mdx) verbindet diese
+Anschlüsse mit dem jeweiligen Raum, Werkzeug oder der Maschine.
+
+## Zum Betrieb übergehen
+
+- [Administration](../administration/index.mdx): Konten, Ressourcen und technische Funktionen einrichten.
+- [Übersicht und Systemstatus](../benutzer/uebersicht-monitoring.mdx): gemeldete Zustände und fehlende Messwerte einordnen.
+- [Mardu per CLI warten](../administration/wartungs-cli.mdx): lokale Diagnose und Kontowiederherstellung.
+
+<span id="offene-dokumentationsaufgaben" />
+
+Gerätespezifische Montage, physische Abnahme und eine vollständige
+Übergabecheckliste sind noch nicht ausgearbeitet. Die Softwareaufnahme ersetzt
+keine Anschluss- und Funktionsprüfung vor Ort.
