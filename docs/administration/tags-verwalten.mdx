@@ -7,9 +7,8 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 import appStoreBadge from './bilder/mardu-connect-app-store-de.svg';
 import googlePlayBadge from './bilder/mardu-connect-google-play-de.svg';
 
-Ein Zugangs-Tag ist eine NFC-Karte oder ein Transponder zur Identifikation an
-Tür- und Maschinenlesern. NFC ermöglicht die kontaktlose Verbindung zum Smartphone
-oder Leser. Ob eine Person eine Ressource nutzen darf, bestimmen ihre
+Ein Zugangs-Tag identifiziert eine Person am Tür- oder Maschinenleser.
+Ob sie eine Ressource nutzen darf, bestimmen ihre
 [Freigaben und Zugangsregeln](./zutritt-verwalten.mdx#zugänge-freigeben-und-entziehen).
 
 Öffne **Personen → Benutzer → Benutzerkonto → Tags**.
@@ -53,11 +52,11 @@ Für die Anmeldung brauchst du:
   </a>
 </div>
 
-| Aufgabe | Benötigte Rechte |
-| --- | --- |
-| Konto und Tags ansehen | Benutzer anzeigen |
+| Aufgabe                               | Benötigte Rechte                      |
+| ------------------------------------- | ------------------------------------- |
+| Konto und Tags ansehen                | Benutzer anzeigen                     |
 | Tag zuweisen, umbenennen oder sperren | Benutzer anzeigen und Tags bearbeiten |
-| Tag-Datensatz löschen | Benutzer anzeigen und Tags löschen |
+| Tag-Datensatz löschen                 | Benutzer anzeigen und Tags löschen    |
 
 Für die Live-Fortschrittsanzeige bei einem anderen Benutzerkonto benötigt dein
 Dashboard-Konto zusätzlich die Rolle **Admin**. Ohne sie kann der Assistent
@@ -81,7 +80,7 @@ nicht mit einem Tür- oder Maschinenleser.
   <Step>
     ### Anmeldung starten
 
-    Gib optional einen **Namen** mit höchstens 100 Zeichen ein, etwa
+    Gib unter **Name** optional höchstens 100 Zeichen ein, etwa
     **Werkstattkarte Lina**. Wähle **Weiter**.
 
   </Step>
@@ -92,7 +91,7 @@ nicht mit einem Tür- oder Maschinenleser.
     Scanne den Code aus dem Dashboard. Alternativ öffnest du den App-Link
     über die Systemkamera.
 
-    Wähle auf **Zugangs-Tag beschreiben** die Aktion **Schreiben starten**.
+    Tippe auf **Schreiben starten**.
     Halte das Smartphone ruhig an die Karte und lass die App geöffnet, bis
     **Abgeschlossen** erscheint. Bei **Synchronisierung ausstehend** folge der
     [Fehlerhilfe](#serverabschluss-erneut-synchronisieren).
@@ -132,8 +131,8 @@ Diese Angaben ersetzen keine Prüfung der Karte am Leser.
 ## Verlorenen Tag sperren
 
 <Callout type="warn" title="Die Verlustsperre ist dauerhaft">
-  Ein als verloren gemeldeter Tag kann nicht wieder aktiviert werden.
-  Laufende Nutzungen enden durch die Sperre nicht; kläre sie bei Bedarf
+  Ein als verloren gemeldeter Tag kann nicht wieder aktiviert werden. Laufende Nutzungen enden durch
+  die Sperre nicht; kläre sie bei Bedarf
   [separat](./zutritt-verwalten.mdx#protokolle-sitzungen-und-hardwarezustand).
 </Callout>
 
@@ -220,6 +219,10 @@ Karte zurück noch macht sie eine Serverregistrierung rückgängig.
 
 Hat Connect die Karte bereits beschrieben und geprüft, verwende zuerst
 [Erneut synchronisieren](#serverabschluss-erneut-synchronisieren).
+
+**Abbrechen im Dashboard storniert die Anmeldung nicht.** Unvollständige Vorgänge
+können das Löschen beteiligter Benutzerkonten blockieren.
+
 Für eine noch nicht abgeschlossene Karteneinrichtung gilt:
 
 1. Bei **Tag konnte nicht beschrieben werden** wähle **Erneut versuchen**,
@@ -233,8 +236,6 @@ Für eine noch nicht abgeschlossene Karteneinrichtung gilt:
    **Zugangs-Tag zuweisen** erneut. Beende auch den alten Connect-Ablauf,
    bevor du den neuen QR-Code scannst, und lass den alten Servervorgang stornieren.
 
-**Abbrechen im Dashboard storniert die Anmeldung nicht.** Unvollständige Vorgänge
-können das Löschen beteiligter Benutzerkonten blockieren.
 Unter **QR-Daten manuell anzeigen** findest du auch Server-URL und Zuweisungs-Token.
 Teile die Zugangsdaten nur mit der Person, die die Karte einrichtet.
 

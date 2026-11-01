@@ -6,7 +6,13 @@ eingehängt. Inhalte und Bilder werden hier gepflegt.
 
 Die [Dokumentationsregeln](AGENTS.md) gelten auch für begleitende Dokumentation
 im Software-Repository. [TODO.md](TODO.md) enthält Bestandsbewertung,
-Prioritäten und den Arbeitsplan. [BENUTZER-REVIEW.md](BENUTZER-REVIEW.md) hält den
+Prioritäten und den Arbeitsplan. Der
+[Strukturvorschlag vom 1. November 2026](planning/2026-11-01-dokumentationsstruktur.md)
+plant die Sidebars aller sechs Bereiche und verlinkt den neuen Überblick-Entwurf.
+Die [kritische Revision](planning/2026-11-01-dokumentationsstruktur-review.md)
+begründet die korrigierte Aufgabenabdeckung. Der Vorschlag ist noch keine
+freigegebene Navigation; die offenen Sachprüfungen bleiben bestehen.
+[BENUTZER-REVIEW.md](BENUTZER-REVIEW.md) hält den
 Vergleich mit acht Dokumentationen und die Übernahme für Mardu fest. Der Auftrag vom 19. Oktober 2026 ergänzt die
 Anleitungen zur Benutzeransicht des Webportals; die frühere Bestandsbewertung
 und offene Aufgaben anderer Zielgruppen bleiben dort nachvollziehbar.
@@ -45,7 +51,8 @@ und verweisen auf die Dokumentationsübersicht. Sie bezeichnen keinen freigegebe
 Softwarestand und stehen nicht in der aktuellen Navigation. Eine spätere
 Release-Versionierung wird erst nach Prüfung der Consumer eingeführt.
 
-Der Bestand umfasst 48 aktuelle MDX-Seiten und die zwei historischen Einstiege.
+Der Bestand umfasst zum 1. November 2026 insgesamt 54 aktuelle MDX-Seiten und
+die zwei historischen Einstiege, zusätzlich zur generierten API-Referenz des Consumers.
 Die Benutzeranleitungen decken Einstieg,
 Dashboard, Ressourcen und Freigaben, Berechtigungsanfragen, Buchungen,
 Kalender, Qualifikationen, Posteingang und die persönlichen Profilbereiche ab.

@@ -7,7 +7,15 @@ Node-RED kann eigene Schalter und Messwerte als benannte **Anschlüsse** in Mard
 
 ## Automatisierungen aktivieren
 
-Unter **Einstellungen → Integrationen → Automationen** gibt es einen gemeinsamen Schalter für Automatisierungen, Node-RED-Anbindung und den Editor. Bereits deployte Flows laufen weiter; der Schalter schaltet keine Geräte aus. **Node-RED einrichten** stellt die Verbindung her; **Verbindung reparieren** erneuert ihre Zugangsdaten. Die Anzeige **Mit Mardu verbunden** bestätigt eine erfolgreiche Anfrage der laufenden Node-RED-Verbindung.
+Unter **Einstellungen → Integrationen → Automationen** aktiviert der Schalter **Automatisierungen aktivieren** auch die Einrichtung und Verbindung von Node-RED. Dafür benötigst du die Berechtigungen **Einstellungen bearbeiten** und **Automation-Editor bearbeiten**; die Node-RED-Laufzeit muss auf dem Server laufen und erreichbar sein.
+
+1. **Automatisierungen aktivieren** einschalten. Mardu richtet die Verbindung ein und repariert bei Bedarf eine vorhandene, unbestätigte Verbindung.
+2. Den Ladebildschirm abwarten. Mardu prüft anschließend Verbindung und Editorbereitschaft.
+3. Sobald **Mit Mardu verbunden** erscheint und der Editor bereit ist, **Node-RED öffnen** wählen. Dafür benötigst du die Berechtigung **Automation-Editor anzeigen**.
+
+Bei einem Fehler wird der Ladebildschirm durch die Fehlermeldung ersetzt. **Erneut versuchen** setzt die Einrichtung fort, wenn die Verbindung oder der Editor noch nicht bereit ist. Die Aktivierung kann bereits gespeichert sein, obwohl die Verbindung fehlgeschlagen ist; Mardu setzt sie nicht automatisch zurück. **Node-RED einrichten** startet denselben Ablauf, **Verbindung reparieren** erneuert die Zugangsdaten. Die Anzeige **Mit Mardu verbunden** bestätigt eine erfolgreiche Anfrage der laufenden Node-RED-Verbindung.
+
+Zum Deaktivieren genügt die Berechtigung **Einstellungen bearbeiten**. Bereits deployte Flows laufen weiter; der Schalter schaltet keine Geräte aus.
 
 Node-RED kann alle unterstützten Ressourcen lesen und registrierte Aktionen ausführen. Einzelne Ressourcen-, Aktions- oder Datenfreigaben musst du nicht einrichten. Eine Änderung an einem Flow kann deshalb auch andere Ressourcen steuern oder laufende Sitzungen beenden. Anschlusszuordnungen und Prüfungen für eine Maschinenfreigabe gelten weiterhin.
 
