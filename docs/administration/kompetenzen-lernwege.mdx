@@ -1,0 +1,176 @@
+---
+title: Fähigkeiten, Kataloge und Lernwege einrichten
+description: Fähigkeiten definieren, eigene oder importierte Kataloge verwenden und Lernwege mit Mindestanzahl und Abschluss-Badge einrichten.
+---
+
+Eine **Fähigkeit** beschreibt, was eine Person können soll. Ein **Bereich** ordnet
+solche Definitionen, ein **Katalog** enthält zusammengehörige Fähigkeiten und Bereiche.
+Ein **Lernweg** enthält dagegen Badges und legt fest, wie viele davon für seinen
+Abschluss benötigt werden. Keine dieser Definitionen bestätigt bereits die Fähigkeit
+einer Person oder gewährt Ressourcenzugriff.
+
+Für die Erwerbskriterien und Fähigkeitsvoraussetzungen eines einzelnen Badges nutze
+[Badges verwalten](./badges-verwalten.mdx#voraussetzungen-und-kriterien).
+Persönliche Nachweise, Prüfungsentscheidungen und die Anerkennung externer Credentials
+beschreibt [Koordination → Bewertungen](../koordination/bewertungen.mdx).
+
+## Voraussetzungen und Rechte
+
+Du brauchst das Recht zum Anzeigen von **Kompetenzen**. Weitere Aktionen benötigen:
+
+| Aufgabe                                                                                                      | Zusätzliches Recht für Kompetenzen |
+| ------------------------------------------------------------------------------------------------------------ | ---------------------------------- |
+| Definition, Katalog oder Lernweg anlegen; importieren; lokale Kopie erstellen; Person einem Lernweg zuordnen | Anlegen                            |
+| Lokale Definitionen, Kataloge und Lernwege bearbeiten; importierte Definition einordnen; Teilnahme abbrechen | Bearbeiten                         |
+| Lernwegabschluss bestätigen                                                                                  | Genehmigen                         |
+
+Für die Personenauswahl brauchst du außerdem Leserechte für Benutzer.
+Ein Lernweg benötigt vorhandene aktive Badge-Definitionen. Ein optionales
+Abschluss-Badge muss aktiv und lokal erstellt sein.
+
+## Eine eigene Fähigkeit oder einen Bereich definieren
+
+1. Öffne **Kompetenzen → Einstellungen → Fähigkeiten und Kataloge verwalten**.
+2. Wähle **Kompetenz anlegen**. Stelle unter **Art** **Fähigkeit** oder **Bereich** ein.
+   Eine Fähigkeit kann für persönliche Nachweise und Badge-Voraussetzungen verwendet
+   werden; ein Bereich dient der Gliederung.
+3. Wähle einen aktiven eigenen **Kompetenzkatalog** oder **Ohne Katalog**.
+4. Gib **Name** und einen noch nicht verwendeten **Code** an. Beschreibe unter
+   **Was soll die Person können?** ein beobachtbares Ergebnis, zum Beispiel:
+   „Die Person richtet den Arbeitsplatz ein und führt den Sicherheitscheck durch.“
+   Eine zusätzliche **Beschreibung** ist optional.
+5. Prüfe **Aktiv** und speichere. Suche die Definition anschließend in
+   **Fähigkeiten & Bereiche** und öffne sie zur Kontrolle.
+
+Art und Katalogzuordnung legst du beim Anlegen fest. Für eine Definition in einem
+anderen Katalog erstelle eine lokale Kopie. Zum Ändern einer eigenen Definition
+öffnest du sie und wählst **Bearbeiten**. Änderungen erstellen einen neuen
+Inhaltsstand; frühere Inhalte bleiben unter **Weitere Angaben** erhalten.
+Eine Inhaltsänderung ist keine neue persönliche Nachweisentscheidung.
+
+### Zusammenhänge beschreiben
+
+Öffne bei der Definition **Weitere Angaben → Beziehungen bearbeiten**. Wähle eine
+**Beziehung**, danach über **Kompetenz zuordnen** das Ziel und speichere. Beispielsweise
+kann eine Fähigkeit **Ist Teil von** einem Bereich sein. Die gespeicherten Beziehungen
+erscheinen unter **Zusammenhänge**.
+
+Auch **Geht voraus** beschreibt nur einen Zusammenhang. Beziehungen übertragen
+keine Nachweise und setzen keine automatische Erwerbsreihenfolge oder Zugriffsrechte.
+Selbstverweise, doppelte Beziehungen und Kreise aus Teil-/Unterordnungen werden abgewiesen.
+
+## Einen eigenen Katalog anlegen
+
+1. Öffne **Kompetenzen → Einstellungen → Kataloge & Import → Katalog erstellen**.
+2. Gib **Name**, **Code**, **Sprache** und **Version** an. Beschreibung und
+   Herausgeber sind optional. Wähle einen dauerhaften Code: Er lässt sich nach dem
+   Anlegen nicht umbenennen.
+3. Prüfe **Aktiv** und speichere.
+4. Ordne neue Fähigkeiten oder Bereiche diesem Katalog beim Anlegen zu.
+   Unter **Fähigkeiten und Kataloge verwalten** kannst du nach dem Katalog filtern
+   und mit **Katalog öffnen** seine Einträge prüfen.
+
+Ein neuer Katalog ist zunächst leer. Bei einem eigenen Katalog steht **Katalog bearbeiten**
+zur Verfügung. Ein inaktiver Katalog kann nicht als Ziel für neue Definitionen oder
+lokale Kopien verwendet werden.
+
+## Einen externen Katalog übernehmen
+
+Der Katalogimport übernimmt Definitionen aus einem CASE-Paket, einem Austauschformat
+für Kompetenzkataloge. Er importiert keine persönlichen Nachweise und erkennt keine
+Credentials an.
+
+1. Öffne **Kompetenzen → Einstellungen → Kataloge & Import → Katalog importieren**.
+2. Wähle unter **JSON-Datei auswählen (max. 2 MB)** eine `.json`- oder `.jsonld`-Datei
+   aus oder füge den Inhalt unter **CASE-Paket (JSON-LD)** ein.
+3. Prüfe die **Importvorschau** mit Name, Herausgeber, Version, Anzahl und Quelladresse.
+   Bestätige mit **Importieren**. Die Vorschau ersetzt nicht die Prüfung durch den Server.
+4. Lies das Ergebnis **Katalog importiert**. Es nennt übernommene Beziehungen und
+   solche, die nur im Original erhalten bleiben.
+5. Öffne die importierten Einträge über die Fähigkeitsverwaltung. Sie sind zunächst
+   **Noch nicht eingeordnet**. Wähle unter **Weitere Angaben** nach Prüfung des Inhalts
+   **Als Fähigkeit einordnen** oder **Als Bereich einordnen**.
+
+Diese Einordnung ist einmalig; sie verändert das gespeicherte externe Original nicht.
+Importierte Inhalte bleiben schreibgeschützt. Eine bereits importierte Quelladresse
+wird nicht erneut angelegt oder durch einen weiteren Import aktualisiert.
+
+### Eine eigene Variante erstellen
+
+Für eigene Inhalte öffnest du die Quelldefinition und wählst unter **Weitere Angaben**
+**Lokale Kopie erstellen**. Gib einen neuen Code und einen Namen an und wähle bei
+Bedarf einen aktiven eigenen Katalog. Speichere und öffne die neue Definition zum Bearbeiten.
+
+Die Kopie erhält eine eigene Identität und behält einen Verweis auf die Quelle.
+Persönliche Nachweise und Berechtigungen werden nicht übernommen. Auch ein Nachweis
+für die ursprüngliche Fähigkeit gilt dadurch nicht automatisch für die Kopie.
+Für Badge-Varianten und alternative Mindestanforderungen nutze
+[Badges verwalten → Voraussetzungen und Kriterien](./badges-verwalten.mdx#voraussetzungen-und-kriterien)
+und [Lokale Kopie erstellen](./badges-verwalten.mdx#eine-lokale-kopie-erstellen).
+
+## Einen Lernweg erstellen
+
+1. Öffne **Kompetenzen → Lernwege → Lernweg erstellen**.
+2. Gib unter **Übersicht** **Name** und **Beschreibung** an. Prüfe den Schalter **Aktiv**.
+3. Öffne **Enthaltene Badges → Badges auswählen** und wähle 1 bis 100 aktive Badges.
+   Jedes Badge darf einmal enthalten sein. Verschiebe die Einträge bei Bedarf mit
+   den Pfeilen nach oben oder unten.
+4. Stelle **Erforderliche Anzahl Badges** ein. Bei drei enthaltenen Badges und dem
+   Wert zwei reichen beliebige zwei davon. Für alle drei setzt du den Wert auf drei.
+5. Wähle unter **Abschluss-Badge · optional** bei Bedarf ein aktives eigenes Badge.
+   Es darf nicht zugleich unter den enthaltenen Badges stehen. Lege es vorher über
+   die [Badgeverwaltung](./badges-verwalten.mdx#ein-badge-erstellen) an, falls es fehlt.
+6. Speichere und öffne den Lernweg erneut. Kontrolliere enthaltene Badges,
+   Mindestanzahl und Abschluss-Badge.
+
+Die Reihenfolge dient der Orientierung. Sie sperrt spätere Badges nicht und verlangt
+keinen Erwerb in dieser Reihenfolge. Ein Lernweg ersetzt auch nicht die
+Fähigkeitsvoraussetzungen der einzelnen Badges.
+
+Zum Ändern öffnest du den Lernweg und wählst **Bearbeiten**. Änderungen gelten für
+neue Teilnahmen; bestehende Teilnahmen behalten ihren gespeicherten Anforderungsstand.
+Deaktivieren verhindert neue Zuordnungen und beendet keine vorhandene Teilnahme.
+
+## Teilnahme und Abschluss prüfen
+
+1. Öffne beim Lernweg **Teilnahmen → Person zuordnen**, wähle die Person unter
+   **Benutzer** und speichere. Die Teilnahme übernimmt die aktuelle Lernwegversion mit
+   Badges, Mindestanzahl und gegebenenfalls der Version des Abschluss-Badges für diese Teilnahme.
+2. Prüfe **Aktuell gültige Badges** und den Status. Es zählen gültige lokale
+   Badge-Vergaben der enthaltenen Badges. Fähigkeiten oder importierte persönliche
+   Credentials zählen hier nicht automatisch als Badge-Vergabe.
+3. Ist die Mindestanzahl erreicht, erscheint **Abschluss möglich**. Öffne die Teilnahme,
+   prüfe Person und Anforderungen und ergänze bei Bedarf eine **Notiz zur Entscheidung**.
+4. Wähle mit dem Genehmigungsrecht **Abschluss bestätigen**. Die Aktion wird direkt
+   ausgeführt. Prüfe anschließend den Status **Abgeschlossen**.
+
+Der Abschluss erfolgt erst durch diese Bestätigung. Ist ein Abschluss-Badge hinterlegt,
+wird dabei dessen für die Teilnahme gespeicherte Inhaltsversion lokal vergeben;
+das Badge muss weiterhin aktiv sein. Eine bereits gültige Vergabe desselben Badges
+wird nicht dupliziert. Der Abschluss erzeugt keine Ressourcenzugriffsrechte und
+kein signiertes Credential.
+
+Der Abschlussstatus bleibt historisch erhalten, auch wenn einzelne Vergaben später
+ablaufen oder widerrufen werden. Die Fortschrittszahl zeigt dagegen die jetzt gültigen
+Vergaben. Eine offene Teilnahme kannst du mit **Teilnahme abbrechen** und Bestätigung
+beenden. Bereits vergebene Badges und der Teilnahmeverlauf bleiben erhalten.
+
+## Wenn etwas nicht klappt
+
+- **Definition fehlt:** Prüfe Suche und Katalogfilter und aktiviere bei Bedarf
+  **Inaktive anzeigen**. Importierte Einträge können noch nicht eingeordnet sein.
+- **Bearbeiten fehlt:** Prüfe deine Rechte und die Herkunft. Externe Inhalte bleiben
+  schreibgeschützt; erstelle für Änderungen eine lokale Kopie.
+- **Code schon vergeben:** Verwende für eine neue Fähigkeit oder Kopie einen anderen
+  Code. Der Code eines vorhandenen Katalogs lässt sich nicht ändern.
+- **Import wird abgelehnt:** Prüfe Format und Fehlermeldung. Bei bereits vorhandener
+  Quelladresse öffne den bestehenden Katalog. Eine persönliche Credential-Datei
+  gehört zum [Profilimport](../ueberblick/profil-nachweisquellen.mdx).
+- **Lernweg lässt sich nicht speichern:** Wähle aktive Badges, eine Mindestanzahl
+  zwischen eins und der Anzahl enthaltener Badges und ein separates lokales Abschluss-Badge.
+- **Zuordnung oder Abschluss wird abgelehnt:** Prüfe, ob der Lernweg für eine neue
+  Zuordnung aktiv ist, bereits eine offene Teilnahme besteht oder die Teilnahme
+  schon abgeschlossen beziehungsweise abgebrochen wurde. Für den Abschluss müssen
+  genügend Vergaben jetzt gültig und ein hinterlegtes Abschluss-Badge aktiv sein.
+- **Stand zwischenzeitlich geändert:** Notiere ungespeicherte Eingaben, lade den
+  betroffenen Eintrag neu und prüfe den aktuellen Stand vor dem erneuten Speichern.

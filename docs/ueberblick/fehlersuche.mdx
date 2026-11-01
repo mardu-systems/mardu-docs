@@ -3,45 +3,84 @@ title: Fehlerhilfe für das Mitgliederportal
 description: Anmeldung, fehlende Rechte, Buchungskonflikte, Nachweise und Ladefehler anhand des sichtbaren Problems prüfen.
 ---
 
-Prüfe zuerst Server, Konto und die angezeigte Meldung.
+Prüfe zuerst den gewählten Server, das angemeldete Konto und die angezeigte
+Meldung. Wähle dann den passenden Abschnitt. Persönliche Einstellungen erreichst
+du im Kontomenü über **Kontoeinstellungen**.
 
 ## Anmeldung
 
-| Problem                                  | Abhilfe                                                                                        |
-| ---------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Zugangsdaten abgelehnt                   | Kennung und Server prüfen; angebotene Passwortwiederherstellung oder externen Anbieter nutzen. |
-| Konto deaktiviert oder Freigabe offen    | Administration kontaktieren.                                                                   |
-| E-Mail unbestätigt                       | Bestätigungslink öffnen; bei Ablauf einen neuen anfordern.                                     |
-| Zu viele Versuche                        | Angezeigte Wartezeit beachten.                                                                 |
-| Authenticator-Code ungültig              | Kontoeintrag und Gerätezeit prüfen; angebotenen Wiederherstellungsweg nutzen.                  |
-| Passkey nicht verfügbar                  | Browser und Authenticator prüfen oder anderen Anmeldeweg verwenden.                            |
-| Sicherheits- oder Profilangaben verlangt | Den angezeigten Ablauf abschließen.                                                            |
+| Problem                                                    | Nächster Schritt                                                                                                                                                                              |
+| ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Server nicht erreichbar                                    | Netzwerkverbindung und Serveradresse prüfen. Bleibt die Verbindung aus, den Standort nach dem Serverbetrieb fragen.                                                                           |
+| Benutzername, E-Mail oder Passwort ungültig                | Kennung und gewählten Server prüfen. Für ein vergessenes lokales Passwort **Passwort vergessen?** verwenden; für ein extern verwaltetes Konto den dafür eingerichteten Anmeldeweg nutzen.     |
+| Konto inaktiv oder Freigabe offen                          | Freigabemeldung abwarten oder die Administration nach dem Kontostatus fragen. Ein Passwortwechsel aktiviert das Konto nicht.                                                                  |
+| E-Mail unbestätigt                                         | Bestätigungslink öffnen; bei ungültigem oder abgelaufenem Link **Neuen Link anfordern** wählen.                                                                                               |
+| Zu viele Versuche oder Konto vorübergehend gesperrt        | Vor dem nächsten Versuch warten; eine angezeigte Wartezeit beachten. Bei anhaltender Sperre die Administration kontaktieren.                                                                  |
+| Authenticator-Code ungültig                                | Kontoeintrag und Gerätezeit prüfen. Falls angeboten und vorhanden, **Stattdessen Recovery-Code verwenden** wählen; bei Verlust aller Faktoren den Wiederherstellungsweg des Standorts klären. |
+| Passkey nicht verfügbar                                    | Unterstützten Browser und den zum Konto gehörenden Passkey prüfen. Einen anderen eingerichteten und angebotenen Anmeldeweg verwenden.                                                         |
+| Anmeldung abgelaufen oder bereits verwendet                | Den betroffenen Anmeldevorgang neu starten. Das gilt etwa für eine abgelaufene SSO- oder Passkey-Anmeldung.                                                                                   |
+| Passwortänderung oder Zwei-Faktor-Einrichtung erforderlich | Den dafür angezeigten Ablauf abschließen.                                                                                                                                                     |
+| Sitzung abgelaufen                                         | Erneut am angezeigten Server anmelden. Ungespeicherte Änderungen können verloren sein.                                                                                                        |
+
+**Profil vervollständigen** ist dagegen ein freiwilliger Hinweis zum Ausfüllstand,
+keine zusätzliche Anmeldebedingung. Siehe [Eigenes Profil](./profil.mdx#profil-vervollständigen).
 
 Siehe [Anmeldesicherheit](./profil-sicherheit.mdx).
 
 ## Fehlender Zugriff
 
-Prüfe Konto, Rechte und [Nutzungsbedingungen](../benutzer/zutritt.mdx): Zeitraum,
-Freigabe, Einweisung und Medium. **Zur Verwaltung** erscheint nur mit passenden
-Verwaltungsrechten. Bei verweigerter Nutzung notiere Ressource, Zeitpunkt und Meldung.
+Unterscheide den Zugriff auf eine Portalansicht von der Nutzung einer Ressource:
+
+- **Berechtigungen konnten nicht geladen werden:** Wiederhole die Abfrage mit
+  **Erneut versuchen**. Diese Meldung bestätigt nicht, dass dir Rechte fehlen.
+- **Ansicht oder Aktion nicht erlaubt:** Prüfe Konto und Server; fehlende Rechte
+  klärst du mit der Verwaltung. **Zur Verwaltung** erscheint nur mit passenden
+  Verwaltungsrechten.
+- **Ressource oder Freigabe fehlt:** Prüfe Suche und weitere Ergebnisseiten unter
+  [Zugänge & Ressourcen](../benutzer/zutritt.mdx). Katalogeintrag und eigene
+  Freigabe werden getrennt angezeigt.
+- **Nutzung verweigert:** Prüfe Freigabezeitraum und Wochenzeiten, erforderliche
+  Buchung, Einweisung, Aufsicht sowie Status und Gültigkeit des verwendeten Mediums.
+  **Innerhalb der Freigabezeiten** bestätigt nur die zeitliche Bedingung.
+
+**Verfügbar** im Ressourcenkatalog beschreibt den Betriebsstatus der Ressource.
+Es bestätigt weder deinen persönlichen Zugang noch eine offene Tür oder eine
+freigeschaltete Maschine. Bleibt die Nutzung trotz passender Angaben verweigert,
+notiere Ressource, Zeitpunkt und Meldung für den Standort.
 
 ## Buchung und Kalender
 
-| Problem                                    | Abhilfe                                                             |
-| ------------------------------------------ | ------------------------------------------------------------------- |
-| Zeitraum nicht verfügbar                   | Belegung, Kapazität, Öffnungszeiten und Sperren prüfen.             |
-| Speichern nach positiver Prüfung abgelehnt | Verfügbarkeit erneut prüfen; die Belegung kann sich geändert haben. |
-| Änderung oder Stornierung fehlt            | Status, Rechte und Umfang von Termin, Serie oder Ressourcen prüfen. |
-| Kalender zeigt alte Termine                | Dateiimport oder Abo unterscheiden; Abrufintervall prüfen.          |
-| Abo nicht erreichbar                       | Serveradresse, Zeitraum und aktiven Link prüfen.                    |
+| Problem                                    | Abhilfe                                                                   |
+| ------------------------------------------ | ------------------------------------------------------------------------- |
+| Zeitraum nicht verfügbar                   | Belegung, Kapazität, **Buchbare Zeiten und Regeln** sowie Sperren prüfen. |
+| Speichern nach positiver Prüfung abgelehnt | Verfügbarkeit erneut prüfen; die Belegung kann sich geändert haben.       |
+| Änderung oder Stornierung fehlt            | Status, Rechte und Umfang von Termin, Serie oder Ressourcen prüfen.       |
+| Kalender zeigt alte Termine                | Dateiimport oder Abo unterscheiden; Abrufintervall prüfen.                |
+| Abo nicht erreichbar                       | Serveradresse, Zeitraum und aktiven Link prüfen.                          |
+
+Prüfe beim Kalenderabo auch, ob der Link ersetzt oder widerrufen wurde. Nach einem
+Linkwechsel brauchen alle Abos den neuen Link. Entzogene Buchungs-Leserechte oder
+ein gesperrtes Konto können Abrufe ebenfalls verhindern; ein neuer Link behebt
+diese Ursachen nicht.
 
 Siehe [Meine Buchungen](../benutzer/buchungen.mdx) und [Kalender](../benutzer/kalender.mdx).
 
 ## Nachweise und Zutrittsmedien
 
-Prüfe Status und Gültigkeitszeitraum. Bei falschen oder fehlenden Nachweisen
-kontaktiere die ausstellende Stelle; bei Importproblemen prüfe
-[Nachweisquellen](./profil-nachweisquellen.mdx).
+Öffne [Meine Qualifikationen](../benutzer/kompetenzen.mdx) und unterscheide die
+drei Bereiche:
+
+| Problem                                              | Prüfen und weiter vorgehen                                                                                                                                                                                               |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Einweisung fehlt oder ist derzeit nicht gültig       | Unter **Einweisungen & Kompetenzen** Status, **Aktuelle Gültigkeit**, Beginn und Ende prüfen. Eine fehlende oder falsche Anerkennung mit dem Standort klären.                                                            |
+| Lokaler Nachweis fehlt oder ist widerrufen           | Unter **Lokale Nachweise** auch weitere Seiten prüfen; Korrekturen mit der zuständigen ausstellenden Stelle klären.                                                                                                      |
+| Importierter Nachweis ist geprüft, aber Zugang fehlt | Unter **Importierte & signierte Nachweise** Prüfstatus und **Gültig bis** getrennt lesen. **Prüfung bestanden** ersetzt keine lokale Kompetenzanerkennung oder Ressourcenfreigabe.                                       |
+| Anbieter verbunden, aber Nachweise fehlen            | Unter **Kontoeinstellungen → Nachweisquellen & Verbindungen** im Tab **Anbieter** **Nachweise abrufen** wählen und Importergebnis sowie Fehlerdetails prüfen. Die Anmeldung beim Anbieter allein importiert noch nichts. |
+
+Wiederhole bei einem Ladefehler nur die betroffene Abfrage; die drei
+Qualifikationsbereiche laden getrennt. Bei Anbieter- oder Importfehlern folge
+[Nachweisquellen](./profil-nachweisquellen.mdx): Ein persönlicher API-Zugang ist
+ein anderer Verbindungsweg als der Tab **Anbieter**.
 
 Suche vermisste Karten unter [Meine Zutrittsmedien](./profil-zutrittsmedien.mdx).
 Melde einen Verlust sofort dem Standort; im Profil gibt es keine Verlustsperre.
@@ -50,14 +89,25 @@ Melde einen Verlust sofort dem Standort; im Profil gibt es keine Verlustsperre.
 
 Prüfe Reiter und Filter im [Posteingang](../benutzer/benachrichtigungen.mdx).
 Betriebsmeldungen benötigen aktuelle Rechte oder Zuständigkeiten.
-Bei fehlender E-Mail, SMS oder Push-Mitteilung prüfe Kanalwahl und Serveranbindung.
-Sicherheitsmeldungen können Ruhezeiten umgehen.
+Bei fehlender E-Mail, SMS oder Push-Mitteilung prüfe die
+[Benachrichtigungseinstellungen](./profil-benachrichtigungen.mdx): Kanalwahl,
+Ereignisauswahl, Serververfügbarkeit und Ruhezeiten. E-Mail und SMS benötigen eine
+bestätigte Adresse beziehungsweise Telefonnummer. Web Push benötigt zusätzlich
+Browsererlaubnis und ein registriertes Browser-Abo; der Kanalschalter legt keines an.
+
+Eine In-App-Mitteilung bestätigt keinen externen Empfang. Ruhezeiten halten den
+Posteingang nicht zurück; Sicherheits- und Pflichtmeldungen können Ruhezeiten umgehen.
 
 ## Ladefehler und ungespeicherte Änderungen
 
-Wiederhole die Abfrage im betroffenen Bereich. Bei Speicherfehlern bleiben Eingaben
-zur Korrektur erhalten. Das Laden eines neueren Stands kann sie verwerfen; lies die
-Bestätigung. Eine Fehlermeldung bedeutet nicht, dass die Liste leer ist.
+Wiederhole die Abfrage im betroffenen Bereich über die angebotene Aktion
+**Erneut versuchen** oder **Erneut laden**. Eine Fehlermeldung bedeutet nicht,
+dass die Liste leer ist.
+
+Bei Speicherfehlern in Profil- und Buchungsformularen bleiben Eingaben zur Korrektur
+erhalten. Korrigiere markierte Angaben; prüfe bei einem Konflikt den aktuellen
+Stand und bei Buchungen zusätzlich erneut die Verfügbarkeit. Das Laden eines
+neueren Stands kann Eingaben verwerfen; lies die Bestätigung vor dem Neuladen.
 
 Speichere vor einem Wechsel: Zurück/Vorwärts lässt sich nicht in jedem Browser
 abfangen; Sitzungsablauf oder Rechteverlust können die Bearbeitung beenden.
@@ -67,4 +117,5 @@ Verworfene Entwürfe lassen sich nicht wiederherstellen.
 
 Nenne Bereich, Ressource oder Vorgang, Zeitpunkt mit Zeitzone, Meldung und bisherige
 Schritte. Teile keine Passwörter, Einmalcodes, Tokens oder Kalenderlinks.
+Bei unbekannten Anmeldungen prüfe [deine Sitzungen](./profil-sitzungen.mdx).
 Für Hardware- und Serverdiagnose ist die [Administration](../administration/index.mdx) zuständig.

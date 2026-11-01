@@ -1,35 +1,67 @@
 ---
 title: Entwickeln
-description: Eine Softwareintegration planen, MCP anbinden und HTTP-API-Verträge nachschlagen.
+description: HTTP, MCP, MQTT oder Node-RED für eine Integration wählen und den benötigten Zugang klären.
 ---
 
 Dieser Bereich richtet sich an Personen, die eigene Software mit Mardu verbinden.
 Der [Überblick](../ueberblick/index.mdx) erklärt zuerst das Modell aus Personen,
-Ressourcen und optionalen technischen Funktionen.
+Ressourcen und optionalen technischen Funktionen. Beginne mit einer konkreten
+Aufgabe: Welche Daten soll deine Integration lesen, welche Aktion soll sie
+ausführen und für wen?
 
 <span id="in-diesem-bereich" />
 
 ## Eine Schnittstelle wählen
 
-| Ziel                                                      | Einstieg                                                                                                  |
-| --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Einen Agenten oder MCP-Client verbinden                   | [MCP-Client anbinden](./mcp-anbindung.mdx)                                                                |
-| HTTP-Endpunkte, Parameter und Antwortmodelle nachschlagen | **API** unter **Referenz** in der Seitenleiste öffnen. Die Referenz wird aus dem Backend-Vertrag erzeugt. |
-| Den MCP-Zugriff für die Installation freigeben            | [MCP für Agenten freigeben → Administration](../administration/mcp-verwalten.mdx)                         |
-| Die Automation-Runtime und den Editor vorbereiten         | [Automationen → Administration](../administration/automationen.mdx)                                       |
+| Ziel                                                       | Einstieg                                                                                                                                                      |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Zugänge und ihren Berechtigungsumfang vergleichen          | [API und Integrationen](./api-integration.mdx)                                                                                                                |
+| Eine Anwendung anmelden, Daten lesen und Änderungen prüfen | [HTTP-API nutzen](./http-api.mdx)                                                                                                                             |
+| Einen Agenten oder MCP-Client verbinden                    | [MCP-Client anbinden](./mcp-anbindung.mdx)                                                                                                                    |
+| System- und Geräteinformationen abonnieren                 | [MQTT-Ereignisse beziehen](./mqtt-events.mdx)                                                                                                                 |
+| Einen Node-RED-Flow erstellen und prüfen                   | [Einen Node-RED-Flow entwickeln und prüfen](./automationsfluesse.mdx)                                                                                         |
+| HTTP-Endpunkte, Parameter und Antwortmodelle nachschlagen  | In der Dokumentation der eigenen **Softwareinstallation** **API** unter **Referenz** öffnen. Die öffentliche Website bietet diese erzeugte Referenz nicht an. |
+
+Der MQTT-Informationsbroker ist für externe Clients ein Lesezugang; er nimmt
+keine Gerätebefehle entgegen. Der hier beschriebene MCP-Zugang bietet
+Mardu-Daten und Aktionen an; er dient nicht zur Dokumentationssuche.
 
 ## Mit begrenztem Zugriff beginnen
 
-Für eine persönliche MCP-Anbindung erstellst du einen eigenen Zugang. Die
-[MCP-Anleitung](./mcp-anbindung.mdx) zeigt einen Leseaufruf und erklärt Tokenwechsel
-und Fehler. Serverfreigabe, Tokenumfang und die aktuellen Rechte des Kontos
-begrenzen den nutzbaren Zugriff gemeinsam.
+Kläre vor dem ersten Aufruf mit den für Installation und betroffene Ressourcen
+Verantwortlichen, welche Daten und Aktionen die Integration verwenden darf.
+Diese Absprache ersetzt keine technischen Rechte. Die Bezeichnung **Entwickeln**
+ist ein Dokumentationsbereich und gewährt keine Systemberechtigung.
+
+Die Zugänge verwenden unterschiedliche Identitäten: HTTP-Aufrufe verwenden den
+Bearer-Zugang eines Kontos; persönliche MCP-Verbindungen einen Agentenzugang des
+Kontoinhabers. Bei MCP begrenzen die delegierten Rechte, die aktuellen
+Kontorechte und die Serverrichtlinie jeden Aufruf. MQTT verwendet eigene
+Brokerkonten und Topic-Regeln. Bei Node-RED sind die persönliche Editor-Sitzung und die eingerichtete
+Laufzeitverbindung getrennt. Die Laufzeit kann alle unterstützten Ressourcen
+lesen und registrierte Aktionen ausführen; eine Ressourcenauswahl im Flow
+beschränkt diesen Zugriff nicht.
+
+Wenn die nötige Einrichtung fehlt, führen diese Anleitungen in den Bereich
+**Administration**:
+
+- [MCP für Agenten freigeben](../administration/mcp-verwalten.mdx):
+  Serverrichtlinie und erlaubte Tool-Arten festlegen.
+- [Integrationen](../administration/integrationen.mdx#mqtt):
+  MQTT-Broker und Lesekonten einrichten.
+- [Automationen](../administration/automationen.mdx):
+  Node-RED-Laufzeit, Mardu-Verbindung und Editorzugang vorbereiten.
+
+Beginne danach mit dem lesenden Beispiel der passenden Anleitung und prüfe,
+welche Identität und welche Daten die Antwort zeigt. Ergänze Änderungen erst,
+wenn Wirkung, benötigte Rechte und Rücknahme geklärt sind.
 
 <span id="offene-dokumentationsaufgaben" />
 
 ## Umfang der Anleitungen
 
-Ausführliche Einstiege für HTTP-Clients, MQTT-Clients und eigene Automationsflüsse
-sind noch nicht ausgearbeitet. Für Beiträge am Mardu-Quellcode gelten die
-Entwicklungsanweisungen des jeweiligen Software-Repositories. Dieser Bereich ist
-keine vollständige Anleitung zum Entwickeln des Servers oder Dashboards selbst.
+Die Anleitungen führen durch vorhandene Integrationswege. Einzelne HTTP-Verträge
+bleiben in der erzeugten API-Referenz, Node-Verträge in der Hilfe des jeweiligen
+Node-RED-Nodes. Für Beiträge am Mardu-Quellcode gelten die Entwicklungsanweisungen
+des jeweiligen Software-Repositories. Dieser Bereich ist keine vollständige
+Anleitung zum Entwickeln des Servers oder Dashboards selbst.

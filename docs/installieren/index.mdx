@@ -1,6 +1,6 @@
 ---
 title: Installieren
-description: Einen Mardu-Server auf dem Raspberry Pi installieren und den Übergang zur Verwaltung finden.
+description: Server vorbereiten, Geräte aufnehmen, die Funktion vor Ort prüfen und den Betrieb übergeben.
 ---
 
 Beginne mit dem Serveraufbau, wenn du eine neue Installation einrichtest. Bei
@@ -13,23 +13,38 @@ wechseln.
 
 [Server auf dem Raspberry Pi installieren](./raspberry-pi.mdx) beschreibt
 Voraussetzungen, Installationspaket, Konfiguration, Start und Erstzugang. Prüfe
-vorher die dort genannten Voraussetzungen und Zugänge zu den Images.
+vorher die dort genannten Voraussetzungen, Zugänge zu den Images und die
+[bekannte Einschränkung beim Erstsetup](./raspberry-pi.mdx#4-starten-und-einrichten).
 
 ## Einen vorhandenen Server verwenden
 
-Die [Geräteverwaltung in Administration](../administration/geraete-verwalten.mdx)
-beschreibt die Aufnahme im Dashboard und die Zuordnung technischer Anschlüsse.
-Die [Ressourceneinrichtung](../koordination/ressourcen.mdx) verbindet diese
-Anschlüsse mit dem jeweiligen Raum, Werkzeug oder der Maschine.
+[Geräte in Betrieb nehmen](./inbetriebnahme.mdx) führt von einem angeschlossenen
+Controller zur Aufnahme im Dashboard, bestätigten Anschlüssen und ihrer
+Zuordnung zu einer Ressource. Ein eingerichteter Server und ein erreichbarer
+Edge-Router im IP500-Netzwerk werden vorausgesetzt. Die Anleitung verlinkt die
+Details der [Geräteverwaltung → Administration](../administration/geraete-verwalten.mdx)
+und der [Ressourceneinrichtung → Koordination](../koordination/ressourcen.mdx).
+
+## Ergebnisse prüfen und übergeben
+
+[Abnahme und Übergabe](./abnahme-uebergabe.mdx) führt durch die Funktionsprüfung
+je Zutrittspunkt: Vergleiche gespeicherte Konfiguration, Geräterückmeldungen und
+die beobachtete Wirkung vor Ort. Halte erlaubte und verweigerte Testfälle,
+Ergebnisse und offene Mängel fest und vereinbare die Übergabe an den Betrieb.
 
 ## Zum Betrieb übergehen
 
-- [Administration](../administration/index.mdx): Konten, Ressourcen und technische Funktionen einrichten.
+Bei Problemen führt [Störung vor Ort](./stoerung-vor-ort.mdx) durch die Prüfung
+von Server, Geräteverbindung, Anschluss und Zugangsbedingungen. Die Anleitung
+nennt auch die Angaben für eine Weitergabe an die zuständige Stelle.
+
+- [Administration](../administration/index.mdx): Konten, Rollen und technische Funktionen verwalten.
+- [Sicherheit und Betrieb → Administration](../administration/sicherheit-betrieb.mdx): Betrieb, Sicherung, Wiederherstellung und Updates vorbereiten.
 - [Übersicht und Systemstatus](../benutzer/uebersicht-monitoring.mdx): gemeldete Zustände und fehlende Messwerte einordnen.
 - [Mardu per CLI warten](../administration/wartungs-cli.mdx): lokale Diagnose und Kontowiederherstellung.
 
 <span id="offene-dokumentationsaufgaben" />
 
-Gerätespezifische Montage, physische Abnahme und eine vollständige
-Übergabecheckliste sind noch nicht ausgearbeitet. Die Softwareaufnahme ersetzt
-keine Anschluss- und Funktionsprüfung vor Ort.
+Für Montage, Verdrahtung, zulässige Stromversorgung und die Eignung des Hardware-
+und Firmwarestands brauchst du die Unterlagen des jeweiligen Geräts. Die
+Softwareaufnahme ersetzt keine Anschluss- und Funktionsprüfung vor Ort.

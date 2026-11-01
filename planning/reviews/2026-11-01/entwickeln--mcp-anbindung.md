@@ -1,0 +1,22 @@
+# P41 – MCP-Client anbinden
+
+- Seite: `docs/entwickeln/mcp-anbindung.mdx`; Heimatbereich Entwickeln.
+- Leserfrage: Wie verbinde ich einen MCP-Client mit meinem Mardu-Konto und prüfe einen erlaubten Leseaufruf? Vorausgesetzt sind ein kompatibler Client, eine erreichbare Serveradresse und freigegebene persönliche Verbindungen.
+- Änderungsbrief / Plan: Vorhandenen, bereits praktisch geprüften Ablauf gegen Transportregistrierung, Initialisierung, Tool-Katalog, delegierte Rechte, Freigaben und Tokenlebenszyklus lesen. Gute Schritte erhalten; zustandslosen Transport und erforderliche Nutzerabsicht präzisieren. Anschließend eigene Dateien auf Format, Verweise und unveränderte Anker prüfen. Keine Runtime-, Token- oder Richtlinienänderungen.
+
+- Entscheidung: **verbessert**. Initialisierung benannt, zustandslosen Transport und Bearer-Token je Anfrage erklärt, Nutzerabsicht/Bestätigung ergänzt und Abschalten des Endpunkts als weitere 401-Ursache genannt. Produkt-MCP von Dokumentationssuche abgegrenzt. Bestehende Schritte, JSON-Beispiel, Lesetest, Rechte, Fehlerhilfe, Tokenwechsel und alle fünf Abschnittsanker bleiben erhalten.
+
+## Befunde und Quellen
+
+- Transport und Katalog: `api/Service/Mcp/MarduMcpExtensions.cs:26` (Serveranweisungen), `:79` (Serverinformationen), `:88` (Streamable HTTP mit `HttpServerSessionMode.Stateless`), `:92` (Autorisierung/Filter) und `:99` (registrierte Produkttools). `service.Test/Framework/Mcp/MarduMcpExtensionsTests.cs:143` enthält vorhandene Initialize-/List-Anfragen; nur gelesen, nicht erneut ausgeführt. Kein bestimmtes externes Clientprodukt oder feste Protokollversion versprochen.
+- Bearer-Token und Lebenszyklus: `Authorization/McpAgentAuthenticationHandler.cs:27` liest den Authorization-Header; `Application/McpAgentConnectionService.cs:164` prüft Endpunkt/persönliche Freigabe, Tokenhash, Laufzeit, Widerruf und aktives Konto. `:127` erneuert den Token ohne neues Ablaufdatum; `:149` widerruft die Verbindung. Persönliche Zugänge sind opake Tokens mit gespeicherten delegierten `AllowedPermissions`, keine hier vorausgesetzten OAuth-Scopes oder OAuth-Weiterleitungen (`Boundary/Dto/McpAgentConnectionDtos.cs:32`, `Application/McpPermissionCatalog.cs:9`). Pfade in diesem Absatz beziehen sich auf `api/Service/Mcp/`.
+- Freigaben: `api/Service/Mcp/McpToolPolicyFilter.cs:15` filtert die Liste, `:27` prüft Aufrufe gegen aktuelle Schalter, `:47` verlangt beide Freigaben für destruktive Tools. `Authorization/McpPermissionAuthorizationHandler.cs:32` prüft Delegation und aktuelle Kontorechte. Serveranweisungen ersetzen keine Toolspezifika, etwa `Tools/DeviceDestructiveMcpTools.cs:54` mit expliziter Bestätigung, Gerätename und Vorschau-Token.
+- Lesetest unverändert bestätigt: `api/Service/Mcp/Tools/NotificationMcpTools.cs:18` ist read-only, benötigt `Permissions.Profile.View`, begrenzt die Seitengröße und verwendet die Benutzer-ID aus dem HTTP-Kontext. UI-Bezeichnung in `web/locales/de/settings.json:2341`. Profil- und Adminanleitung als kanonische Quellen wiederverwendet. Die angrenzenden Node-RED-/SignalR-Lücken bleiben unter `planning/offene-dokumentationsaufgaben.md` offen; keine unbewiesenen Schritte ergänzt.
+
+## Prüfung und Übergabe
+
+- Eigene Prüfung: statische Code-/Vertragslektüre und Abgleich mit Nachbarseiten. Das vorhandene Laufzeitprotokoll `web/docs/mcp-notifications-runtime-verification-2026-10-31.md` ist als früherer Nachweis gelesen; keine neue Laufzeitabnahme behauptet.
+- Keine Browser-/Client-/Hardware-/Providerprüfung, keine echten Aufrufe, Tokens oder Richtlinien verändert, keine Tests/Builds gestartet. Consumer-Darstellung übernimmt die Koordination; Software und Website wurden hier nicht gerendert.
+- Prettier (`--ignore-path /dev/null --check`) für beide eigenen Dateien und `git diff --check` bestanden. Lokale Verweisprüfung bestätigt vier relative MDX-Ziele einschließlich Fragmenten, Frontmatter, kein zusätzliches H1 und fünf unveränderte Überschriften. Navigationseintrag in `docs/entwickeln/meta.json:3` und Consumer-Zuordnung in `web/lib/docs-roles.tsx:176` statisch bestätigt. Keine Bilder oder neuen Links eingeführt.
+- Keine API-/DTO-Dokumentation geändert, da kein Softwarevertrag geändert wurde. Kein neuer Seitenbedarf oder Folgefehler entdeckt. Wiederverwendet: bestehende Tabelle, Liste, Codeblock und Profil-/Administrationsverweise.
+- Geänderte Dateien: `docs/entwickeln/mcp-anbindung.mdx` und dieser Bericht.

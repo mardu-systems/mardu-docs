@@ -1,30 +1,93 @@
 ---
 title: Sicherheit und Betrieb
-description: Anmeldeverfahren durchsetzen, Sitzungen prüfen, Änderungen nachvollziehen.
+description: Anmelderegeln prüfen, Kontowiederherstellung vorbereiten und Betriebsstörungen eingrenzen.
 ---
 
-Die lokale Kontowiederherstellung ist unter [Mardu per CLI warten](./wartungs-cli.mdx)
-beschrieben. Die übrigen Abschnitte dieser Seite sind ein Entwurf.
+Diese Anleitung hilft dir, Anmelderegeln zu prüfen und bei Störungen die passende
+Diagnose zu finden. Für Servereinstellungen brauchst du Leserechte für
+Einstellungen, zum Ändern zusätzlich Bearbeitungsrechte. Konten, Rollen,
+Audit-Ereignisse und Messwerte haben eigene Rechte.
 
 ## Anmeldeverfahren und Kontowiederherstellung
 
-- [ ] TODO: Administratorpflichten für Passkeys und Zwei-Faktor-Authentifizierung von der kontobezogenen 2FA-Vorgabe unterscheiden; tatsächliche Prüfung bei Anmeldung und Folgen einer Änderung erklären.
-- [ ] TODO: Kennwortregeln, Kontosperre nach Fehlversuchen, Passwortänderung, passwortlose Freigabe und E-Mail-Bestätigung unter [Servereinstellungen](./server-einstellungen.mdx) verlinken.
-- [ ] TODO: Im Benutzerfenster 2FA zurücksetzen/deaktivieren, Passkey deaktivieren und angebotene passwortlose Hilfe mit Rechten, Bestätigung und sofortiger Wirkung beschreiben.
-- [ ] TODO: Wiederherstellungscodes im eigenen Profil von der administrativen API-Neuerzeugung unterscheiden; UI-Verfügbarkeit prüfen. Keine Überwachung fremder Codes versprechen.
+Öffne in den **Server**-Einstellungen **Auth Policy**. Dort stehen unter anderem
+Kennwortanforderungen, Kontosperren, E-Mail-Bestätigung, erlaubte Anmeldeverfahren
+und Vorgaben für Administratoren. Eine Vorgabe richtet das verlangte Verfahren
+nicht am Konto ein.
+
+Prüfe vor einer Änderung, welche Konten betroffen sind und wie sie sich danach
+anmelden können:
+
+| Einstellung                          | Wirkung und Voraussetzung                                                                                                                                                            |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Zwei-Faktor für Admins erzwingen** | Eine Passwortanmeldung eines Administrators ohne eingerichtete Zwei-Faktor-Authentifizierung wird abgewiesen. Richte den zweiten Faktor vor dem Einschalten im jeweiligen Konto ein. |
+| **Passkeys erlauben**                | Ausgeschaltet werden Passkey-Anmeldung und -Registrierung abgewiesen. Prüfe vorher, ob die betroffenen Personen ein anderes verfügbares Anmeldeverfahren haben.                      |
+| **Passkeys für Admins erzwingen**    | Verhindert das Deaktivieren des letzten aktiven Administrator-Passkeys. Die Einstellung allein beschränkt die Passwortanmeldung derzeit nicht auf Passkeys.                          |
+| **Recovery-Codes ausgeben**          | Erlaubt die Ausgabe und Verwendung von Wiederherstellungscodes für die Zwei-Faktor-Anmeldung. Ausgeschaltet stehen diese Codes nicht als zweiter Faktor zur Verfügung.               |
+
+1. Lass die betroffenen Personen ihr Verfahren unter
+   [Anmeldesicherheit](../ueberblick/profil-sicherheit.mdx) einrichten und prüfen.
+2. Ändere die benötigte Vorgabe und wähle **Speichern**. Durch die Bereitstellung
+   gesperrte Felder lassen sich hier nicht ändern. Änderungen an Token-Laufzeiten
+   benötigen einen Serverneustart.
+3. Prüfe eine neue Anmeldung in einem getrennten Browserfenster, bevor du deine
+   vorhandene Sitzung beendest. Eine weiterhin offene Sitzung belegt nicht, dass
+   eine neue Anmeldung mit den geänderten Regeln funktioniert.
+
+Bei einer Anmeldung über **OpenID Connect (OIDC)** muss der externe Anbieter für
+Administratoren einen von Mardu akzeptierten Nachweis der Mehrfaktoranmeldung
+liefern. Eine lokale 2FA-Einrichtung ersetzt diesen Nachweis beim Anbieter nicht.
+
+Ein passwortloser Anmeldelink ersetzt keine erforderliche Mehrfaktoranmeldung.
+Ist 2FA eingerichtet oder vorgeschrieben, ist der Link kein Ausweg aus einer
+fehlenden zweiten Bestätigung.
+
+Die [Hilfe bei Anmeldeproblemen](./benutzer-rollen.mdx#bei-anmeldeproblemen-helfen)
+beschreibt Passwort-Reset, kontobezogene 2FA-Vorgaben und das Deaktivieren einzelner
+Passkeys. Eigene Wiederherstellungscodes verwaltest du unter
+[Anmeldesicherheit](../ueberblick/profil-sicherheit.mdx).
 
 Für ein ausgesperrtes Administrator-Konto steht die [lokale Wartungs-CLI](./wartungs-cli.mdx#admin-passwort-ohne-e-mail-zurücksetzen) zur Verfügung. Sie benötigt Host- oder Docker-Zugriff und eine laufende API, aber weder ein Mardu-Login noch eingerichteten Mailversand. Ein Passwort-Reset hebt MFA-Vorgaben, Deaktivierung und fehlende E-Mail-Bestätigung nicht auf. Prüfe die Wiederherstellungsvoraussetzungen, bevor du Anmeldepflichten änderst.
 
 ## Sitzungen und Anmeldehistorie
 
-- [ ] TODO: Anmeldehistorie eines Benutzers lesen und Verdachtsfälle prüfen; Zeitraum, IP-/Geräteangaben und Grenzen ihrer Aussagekraft erklären.
-- [ ] TODO: [Eigene Sitzungen](../ueberblick/profil-sitzungen.mdx) verlinken; Verfügbarkeit einer administrativen Verwaltung fremder Sitzungen gesondert prüfen.
-- [ ] TODO: Deaktivierung, Tokenwiderruf und Zugangsentzug unterscheiden; Laufzeit bestehender Zugriffe belegen. Zutrittssitzungen unter [Zutritt verwalten](./zutritt-verwalten.mdx), Editorsitzungen unter [Automationen](./automationen.mdx) beschreiben.
+Unter [Eigene Sitzungen](../ueberblick/profil-sitzungen.mdx) prüfst und widerrufst
+du deine Anmeldesitzungen. IP-Adresse, Browser und Geräteangaben helfen beim
+Zuordnen; sie belegen allein keine Identität oder Anwesenheit.
+
+Unterscheide bei einem Verdachtsfall die gewünschte Wirkung:
+
+| Aufgabe                                                | Passender Ablauf                                                                                                                  |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| Eine eigene unbekannte Anmeldung beenden               | [Eigene Sitzung widerrufen](../ueberblick/profil-sitzungen.mdx#einzelne-oder-andere-sitzungen-widerrufen).                        |
+| Neue Anmeldungen eines Kontos verhindern               | [Konto deaktivieren](./benutzer-rollen.mdx#konten-deaktivieren-und-reaktivieren). Das beendet bestehende Zugriffe nicht sofort.   |
+| Anmeldesitzungen eines ausgesperrten Kontos widerrufen | Mit Host- oder Docker-Zugriff [die Wartungs-CLI verwenden](./wartungs-cli.mdx#konto-entsperren-oder-anmeldesitzungen-widerrufen). |
+| Einen verlorenen Zutritts-Tag sperren                  | [Verlorenen Tag sperren](./tags-verwalten.mdx#verlorenen-tag-sperren); eine Abmeldung im Dashboard sperrt keinen Tag.             |
+
+Der Server prüft beim Erneuern einer Anmeldung erneut Kontostatus und
+Anmeldeanforderungen. Eine geänderte Anmelderichtlinie ist deshalb kein Ersatz
+für den ausdrücklichen Sitzungswiderruf. Laufende Zutrittsnutzungen und
+[Node-RED-Editorsitzungen](./automationen.mdx) sind eigene Vorgänge.
 
 ## Rechte und administrative Zugriffe prüfen
 
-- [ ] TODO: Direkte Rollen, Gruppenrollen, objektbezogene Zutrittsrechte und Anmeldevorgaben gemeinsam prüfen; Änderungen mit minimal benötigten Rechten und deren Folgen dokumentieren.
-- [ ] TODO: Regelmäßige Rechteprüfung als organisatorischen Ablauf mit einem Beispiel beschreiben; vorhandene Schutzregeln für Administratorrollen und eigenes Konto nennen.
+Prüfe bei einem Zuständigkeitswechsel sowohl Verwaltungsrechte als auch
+Zutrittszuweisungen. Anmelden zu dürfen erteilt selbst keine Verwaltungs- oder
+Zutrittsrechte.
+
+1. Öffne unter **Personen → Benutzer** das Konto und dann **Berechtigungen**.
+2. Prüfe unter **Effektive Berechtigungen**, aus welchen direkten Rollen und
+   Benutzergruppen die benötigten Rechte stammen. Das Entfernen einer Zuweisung
+   genügt nicht, wenn eine andere Zuweisung dasselbe Recht gewährt.
+3. Ändere nur die nicht mehr benötigten Zuweisungen nach
+   [Rollen und Gruppen zuweisen](./benutzer-rollen.mdx#rollen-und-gruppen-zuweisen).
+4. Prüfe getrennt die [Zutrittszuweisungen](./zutritt-verwalten.mdx) und die
+   Anmeldebedingungen des Kontos.
+
+Beispiel: Nach dem Ende einer Geräteverwaltung entfernst du die entsprechende
+Verwaltungsrolle. Ob die Person einen Raum weiter nutzen darf, entscheidest du
+anhand ihrer Zutrittszuweisungen. Lege Zuständigkeit und Wiederholung dieser
+Prüfung für eure Organisation fest.
 
 ## Audit und Störungen
 
@@ -33,13 +96,60 @@ Bei fehlenden oder verspäteten Mitteilungen hilft die Anleitung
 Den Zugriff von Agenten kannst du über die [MCP-Serverrichtlinie](./mcp-verwalten.mdx#zugriff-einschränken-oder-abschalten)
 einschränken oder abschalten.
 
-- [ ] TODO: Relevante Änderungen und Anmeldeereignisse suchen; Filter und Detailansicht erklären. Export und Datenaufbewahrung unter [Nachweise und Datenschutz](./nachweise-datenschutz.mdx) ausarbeiten.
-- [ ] TODO: Systemstatus, Logs und Benachrichtigungen für Ausfall von Datenbank, MQTT, Netzwerk und Node-RED nutzen; fehlende Rechte, abgelaufene Anmeldung und unerreichbare Dienste unterscheiden.
-- [ ] TODO: Eine Störungsmeldung mit Zeit inklusive Zeitzone, betroffener Funktion/Identität, Meldung und reproduzierbaren Schritten beschreiben; Zugangsdaten und personenbezogene Inhalte aus Beispielen entfernen.
+Öffne für gespeicherte Verwaltungsänderungen **Server → Audit-Ereignisse**.
+Dafür brauchst du Audit-Leserechte; ein Export erfordert zusätzlich Exportrechte.
+Audit-Ereignisse, Anmeldehistorie und Zutrittsentscheidungen sind verschiedene
+Quellen. Ein fehlender Eintrag in einer Quelle belegt nicht, dass keine Aktion
+stattgefunden hat.
+
+### Eine Störung eingrenzen
+
+1. Notiere die betroffene Funktion, den Zeitpunkt mit Zeitzone und die genaue
+   Fehlermeldung. Prüfe, ob nur ein Konto oder mehrere Personen betroffen sind.
+2. Prüfe bei einer abgewiesenen Aktion Anmeldung und Rechte. Eine fehlende
+   Berechtigung verlangt eine andere Abhilfe als ein nicht erreichbarer Dienst.
+3. Öffne **Betrieb → Systemstatus** und lies die betroffene Datenquelle nach
+   [Übersicht und Systemstatus](../benutzer/uebersicht-monitoring.mdx).
+   Fehlende Messwerte bedeuten nicht null Fehler; eine ältere Anzeige ist keine
+   aktuelle Zustandsprüfung.
+4. Ist das Dashboard nicht nutzbar, kann eine Person mit Host- oder Docker-Zugriff
+   [den Serverzustand per CLI prüfen](./wartungs-cli.mdx#serverzustand-prüfen).
+
+Für eine technische Erreichbarkeitsprüfung haben die Endpunkte unterschiedliche
+Aussagekraft:
+
+| Prüfung                   | Aussage                                                                                                                     |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| API: `/health/live`       | Der API-Prozess antwortet. Abhängige Dienste werden dabei nicht geprüft.                                                    |
+| API: `/health/ready`      | Prüft die als Bereitschaftsprüfung registrierten Komponenten.                                                               |
+| API: `/health`            | Führt alle registrierten Zustandsprüfungen aus; liefert bei einem eingeschränkten oder fehlerhaften Gesamtzustand HTTP 503. |
+| Dashboard: `/api/healthz` | Der Dashboard-Dienst antwortet. Das belegt keine funktionierende API oder Datenbank.                                        |
+
+Welche Dienste geprüft werden, hängt von der Serverkonfiguration ab. Auch ein
+erfolgreicher Gesamtstatus ersetzt keine Prüfung des betroffenen Ablaufs.
+
+Gib bei einer Störungsmeldung zusätzlich Server-/CLI-Version, betroffene
+Komponente und reproduzierbare Schritte an. Entferne Passwörter, Tokens,
+Wiederherstellungscodes, private Schlüssel und nicht benötigte personenbezogene
+Inhalte aus mitgegebenen Auszügen.
+
+### Zertifikatsablauf prüfen
+
+Öffne **Server → Server-Zertifikate**. Prüfe Name, Aussteller, Gültigkeit und den
+angezeigten Status. Die Übersicht markiert auch noch nicht gültige und bereits
+abgelaufene Zertifikate. Ein gespeichertes Zertifikat ist noch kein Nachweis,
+dass der betroffene Dienst es verwendet. Kläre deshalb vor einem Ersetzen oder
+Löschen, welcher Dienst auf das Zertifikat verweist; die Dashboard-Liste enthält
+keine vollständige Zuordnung aller aktiven TLS-Verbindungen.
 
 ## Sicherung, Wiederherstellung und Update
 
-- [ ] TODO: Die noch nicht freigegebene Dashboard-Backupfunktion nennen; einen externen Ablauf für eine konkrete unterstützte Betriebsform prüfen und dokumentieren.
-- [ ] TODO: Sicherungsumfang für Datenbank, Dateien, Konfiguration, private Schlüssel und Sitzungsschlüssel prüfen; Konsistenz, geschützte Ablage und Wiederherstellungstest erklären. Intervalle als organisatorische Entscheidung kennzeichnen.
-- [ ] TODO: Release-Update mit Versionsprüfung, Sicherung, Wartungsfenster, Migrationen, Neustart und Funktionsprüfung beschreiben. Rückkehr zu einem älteren Stand nur nach Prüfung von Daten-/Schema-Kompatibilität angeben.
-- [ ] TODO: Nach Wiederherstellung Anmeldung, Rollen, Ressourcen/Zugänge, Geräte, Buchungen, Ausstellung und Integrationen prüfen; technische Bereitstellungsdetails in eine ergänzende Betriebsanleitung verlinken.
+**Datenbank-Backup** ist im Dashboard noch nicht freigegeben. Die Wartungs-CLI
+erstellt ebenfalls keine Sicherungen. Verwende den für eure konkrete Installation
+geprüften Betriebsablauf; diese Anleitung beschreibt weder eine vollständige
+Sicherung und Wiederherstellung noch ein Release-Update.
+
+Eine Kontowiederherstellung per CLI stellt keine Datenbank und keine Dateien
+wieder her. Ebenso belegt ein erfolgreicher Neustart allein nicht, dass
+Anmeldung, Zutritt, Buchungen, Geräte und Integrationen nach einer
+Wiederherstellung oder einem Update funktionieren.

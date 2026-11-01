@@ -3,32 +3,72 @@ title: Persönliche Nachweisquellen
 description: Eigene Anbieter-Verbindungen und Nachweisimporte verwalten, ohne sie mit Ressourcenfreigaben gleichzusetzen.
 ---
 
-Unter **Nachweisquellen & Verbindungen** im Profil verwaltest du Anbieterzugänge
-und Importe. Deine Nachweise liest du unter [Meine Qualifikationen](../benutzer/kompetenzen.mdx).
-Der Standort legt verfügbare Anbieter fest; Änderungen benötigen Profil-Änderungsrechte.
+Öffne im Kontomenü **Kontoeinstellungen** und wähle **Nachweisquellen & Verbindungen**.
+Hier verwaltest du eigene Anbieterzugänge und Importe. Deine Nachweise liest du
+unter [Meine Qualifikationen im Benutzerbereich](../benutzer/kompetenzen.mdx).
+
+Zum Ansehen brauchst du Profil-Leserechte, zum Verbinden, Trennen und Abrufen von
+Nachweisen Profil-Änderungsrechte. Die Administration legt die verfügbaren
+Anbieter fest und muss die Nutzung persönlicher API-Zugänge gesondert erlauben.
 
 ## Einen angebotenen Anbieter verbinden
 
-1. Wähle den Anbieter und starte die Verbindung.
-2. Bestätige beim Anbieter die Autorisierung.
-3. Prüfe nach der Rückkehr den Verbindungsstatus.
-4. Starte den Import und prüfe Ergebnis und mögliche Fehler einzelner Einträge.
+1. Öffne den Tab **Anbieter** und wähle beim gewünschten Anbieter
+   **Beim Anbieter anmelden**. Du wirst zum Anbieter weitergeleitet.
+2. Melde dich dort mit deinem eigenen Konto an und erlaube Mardu, dein
+   Anbieterprofil und deine Nachweise zu lesen.
+3. Prüfe nach der Rückkehr die Meldung **Verbindung hergestellt** und den Status
+   **Verbunden**. Die Anmeldung allein ruft noch keine Nachweise ab.
+4. Wähle **Nachweise abrufen**. Prüfe anschließend das Importergebnis und
+   **Zuletzt abgerufen**. Die Zahl nennt verarbeitete Einträge; identische
+   Nachweise werden nicht doppelt gespeichert.
+5. Falls einzelne Nachweise nicht übernommen wurden, öffne die Fehlerdetails.
+   Erfolgreich übernommene Nachweise bleiben gespeichert. Prüfe sie unter
+   **Meine Qualifikationen**.
 
-![Persönliche Nachweisquellen mit angebotener Verbindungsverwaltung](bilder/profil-nachweisquellen.png)
-
-Beispiel ohne eingerichteten Anbieter oder persönliche Zugangsdaten.
+Mit **Erneut anmelden** bestätigst du eine bestehende Verbindung erneut, etwa
+wenn der Zugang abgelaufen ist oder die Anbieterkonfiguration geändert wurde.
+Möchtest du ein anderes Konto desselben Anbieters verbinden, trenne zuvor die
+bestehende Verbindung.
 
 ## Persönlichen Zugang verwenden
 
-Falls angeboten, gib Benutzerreferenz und Anbieter-Token ein und bestätige die
-Verknüpfung. Ein leeres Tokenfeld behält einen gespeicherten Zugang nur dann bei,
-wenn die Oberfläche dies ausdrücklich angibt. Teile den Token nicht weiter.
+Im Tab **Persönlicher API-Zugang** hinterlegst du einen bereits vorhandenen
+persönlichen Token. Dieser Weg leitet dich nicht zur Anmeldung beim Anbieter weiter.
+
+1. Gib unter **Benutzerreferenz beim Anbieter** deine Benutzer-ID oder deinen
+   Profil-Slug beim Anbieter ein. Verwende keine Mardu-ID und keine Profil-URL.
+2. Gib deinen **Persönlichen API-Token** ein. Verwende keinen gemeinsamen
+   Service-Token und teile deinen Token nicht weiter.
+3. Wähle **Prüfen und verbinden**. Mardu prüft, ob Token und Benutzerreferenz zum
+   selben Anbieterkonto gehören. Bei Erfolg erscheint
+   **Persönlicher Zugang geprüft und gespeichert**.
+
+Gespeicherte Tokens werden nicht angezeigt. Um den Zugang erneut zu prüfen, lasse
+das Tokenfeld leer, wenn dort der Hinweis zum Beibehalten steht, und wähle
+**Prüfen und verbinden**. Ein neu eingegebener Token ersetzt den gespeicherten.
+
+Diese Verknüpfung aktiviert weder den Import noch eine Anmeldung bei Mardu über
+den Anbieter. Importe über diesen persönlichen Zugang richtet die Administration ein;
+die Aktion **Nachweise abrufen** im Tab **Anbieter** gehört zur dortigen Verbindung.
 
 ## Trennen und Fehler behandeln
 
-**Trennen** beendet nach Bestätigung weitere Importe über die Verbindung.
-Bereits importierte Nachweise werden dadurch nicht pauschal gelöscht oder widerrufen.
+**Verbindung trennen** entfernt nach Bestätigung die gewählte Verbindung und ihre
+gespeicherten Zugangstokens. Bereits importierte Nachweise und erteilte Kompetenzen
+bleiben erhalten. Beim Anbieter kannst du zusätzlich deine Zustimmung widerrufen.
+Auch eine deaktivierte Anbieter-Verbindung kannst du noch trennen.
 
-Wiederhole Ladefehler. Nach einem Verknüpfungsfehler bleiben bearbeitete Eingaben
-bis zum Verwerfen erhalten. Ein Import gewährt keine automatische Einweisung oder
-Ressourcenfreigabe; fehlende Anerkennungen klärst du mit dem Standort.
+- **Keine Anbieter verfügbar:** Die Administration muss einen Anbieter freigeben.
+- **Anbieter deaktiviert:** Anmelden und Abrufen sind für diesen Anbieter gesperrt.
+- **Anmeldung nicht abgeschlossen oder Verbindung geändert:** Lade bei einer
+  geänderten Verbindung die Seite neu und starte die Anmeldung beim Anbieter erneut.
+  Bleibt der Fehler bestehen, wende dich an die Administration.
+- **Persönlicher Zugang lässt sich nicht speichern:** Prüfe Benutzerreferenz und
+  Token sowie die Freigabe dieser Verbindungsart. Bei einem Fehler bleiben deine
+  bearbeiteten Eingaben bis zum Verwerfen erhalten.
+
+Wiederhole Ladefehler mit **Erneut versuchen**. Gib wiederholte Fehler einzelner
+Nachweise an den Anbieter oder deine Administration weiter.
+Ein Import gewährt keine automatische Einweisung oder Ressourcenfreigabe;
+fehlende Anerkennungen klärst du mit dem Standort.

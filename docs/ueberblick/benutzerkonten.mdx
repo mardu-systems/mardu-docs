@@ -1,6 +1,6 @@
 ---
 title: Benutzerkonten, Rollen und Zugänge
-description: Wie Benutzerkonten entstehen und wie Rollen, Gruppen, Badges und Tags ihre Nutzung bestimmen.
+description: Wie Benutzerkonten entstehen und sich Dashboard-Rechte, Ressourcenfreigaben, Buchungen und Nachweise unterscheiden.
 ---
 
 Ein Benutzerkonto steht für eine Person in Mardu. Es ordnet ihr Anmeldung, Berechtigungen, Nachweise, Buchungen und Zutrittsereignisse zu.
@@ -33,21 +33,25 @@ Es gibt mehrere Wege. Welche davon verfügbar sind, hängt von der Einrichtung d
 | Verzeichnissynchronisierung            | Eine eingerichtete LDAP-Anbindung übernimmt Personen aus einem externen Benutzerverzeichnis.                                                        |
 | Anmeldung über einen externen Anbieter | Bei einer eingerichteten OpenID-Connect-Anbindung (OIDC) kann die erste Anmeldung ein Konto anlegen, wenn die automatische Kontoanlage erlaubt ist. |
 
-Ein lokales Konto verwaltet Mardu selbst. Bei externen Konten kann der Anbieter bestimmte Angaben verwalten. Solche Felder sind in Mardu gekennzeichnet und schreibgeschützt; Änderungen erfolgen beim Anbieter.
+Ein lokales Konto verwaltet Mardu selbst. Auch bei externer Anmeldung gibt es ein Konto in Mardu, dem Rollen, Buchungen und Nachweise zugeordnet sind. Der Anbieter kann bestimmte Angaben verwalten. Solche Felder sind in Mardu gekennzeichnet und schreibgeschützt; Änderungen erfolgen beim Anbieter. Die externe Anmeldung allein erteilt keine Ressourcenfreigabe.
 
 ## Welche Zuordnungen gehören zum Konto?
 
-| Zuordnung              | Zweck                                                                                                                                                   |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Rollen                 | Weisen Berechtigungen für Funktionen und Aktionen in Mardu zu. Eine direkte Rolle ist dem einzelnen Konto zugewiesen.                                   |
-| Benutzergruppen        | Ordnen mehrere Personen einer Gruppe zu. Die Rollen der Gruppe gelten für alle Mitglieder.                                                              |
-| Fähigkeiten und Badges | Halten Fähigkeiten und Nachweise fest, zum Beispiel eine Maschineneinweisung. Gültige, anerkannte Nachweise können Voraussetzung für einen Zugang sein. |
-| Zugänge                | Erlauben die Nutzung bestimmter Ressourcen unter den dafür festgelegten Bedingungen.                                                                    |
-| Tags                   | Identifizieren die Person am Zutrittspunkt, etwa über einen RFID-Tag. Die Tag-Zuweisung allein gewährt keinen Zugang.                                   |
+| Zuordnung                        | Zweck                                                                                                                                                                  |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Rollen                           | Weisen Berechtigungen für Funktionen und Aktionen in Mardu zu. Eine direkte Rolle ist dem einzelnen Konto zugewiesen.                                                  |
+| Benutzergruppen                  | Ordnen mehrere Personen einer Gruppe zu. Die Rollen der Gruppe gelten für alle Mitglieder.                                                                             |
+| Einweisungen und Kompetenzen     | Bestätigen eine für die Person anerkannte Fähigkeit, zum Beispiel eine Maschineneinweisung. Die Anerkennung muss aktuell gültig sein, wenn die Ressource sie verlangt. |
+| Badges und importierte Nachweise | Dokumentieren Leistungen oder Qualifikationen. Ein Badge oder ein importierter Nachweis ist für sich noch keine lokale Kompetenzanerkennung.                           |
+| Ressourcenfreigaben              | Ordnen einer Person, einer Benutzergruppe oder einem Tag die Nutzung einer Ressource im festgelegten Zeitraum zu. Weitere Bedingungen der Ressource gelten weiterhin.  |
+| Buchungen                        | Reservieren einen Zeitraum. Ob eine bestätigte Buchung auch als Nachweis für den Zugriff zählt, hängt von ihrer Zuordnung und der Zugriffsregel der Ressource ab.      |
+| Tags                             | Identifizieren die Person am Zutrittspunkt, etwa über einen RFID-Tag. Die Tag-Zuweisung allein gewährt keinen Zugang.                                                  |
 
 Die Person kann dieselbe Rolle direkt und über mehrere Gruppen erhalten. Entfernst du nur eine dieser Zuweisungen, kann die Rolle über die übrigen Zuweisungen weiterhin gelten. In der Administration zeigt **„Effektive Berechtigungen“** die gespeicherten Rechte mit ihren Quellen.
 
-Benutzergruppen und Zutrittspunktgruppen haben unterschiedliche Aufgaben: Eine Benutzergruppe ordnet Personen und Rollen zu; eine Zutrittspunktgruppe bezeichnet Zutrittsziele.
+Eine Ressource kann eine Freigabe, eine Buchung, eines von beiden oder beides verlangen. Eine zusätzlich geforderte Einweisung oder Aufsicht muss ebenfalls erfüllt sein. So kann eine Person die Buchungsfunktion verwenden dürfen, ohne die gebuchte Maschine schon nutzen zu dürfen.
+
+Deine Zuordnungen prüfst du unter [Zugänge & Ressourcen](../benutzer/zutritt.mdx), [Meine Buchungen](../benutzer/buchungen.mdx) und [Meine Qualifikationen](../benutzer/kompetenzen.mdx).
 
 ## Was bewirkt eine Deaktivierung?
 

@@ -1,0 +1,1503 @@
+{
+  "date": "2026-11-01",
+  "source": "Lokale uncommittete Revision auf Docs 611fe8d, Dashboard ec456bd4, Root 6f2dda9f",
+  "httpProduction": {
+    "pages": 69,
+    "failedPages": [],
+    "links": 996,
+    "extraTargets": 1,
+    "brokenLinks": [],
+    "oldAnchors": 383,
+    "missingOldAnchors": [],
+    "images": 42,
+    "brokenImages": [],
+    "missingAlt": []
+  },
+  "markdownProduction": {
+    "bytes": 6900199,
+    "contracts": 554,
+    "references": 5432,
+    "brokenReferences": [],
+    "jsonErrors": [],
+    "authoredLinks": 0,
+    "indexEntries": 623,
+    "uniquePublishedPages": 621,
+    "unresolvedWidgets": 0
+  },
+  "browserProduction": {
+    "rows": [
+      {
+        "url": "/docs/administration/automationen",
+        "width": 1440,
+        "status": 200,
+        "title": "Automationen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/badges-verwalten",
+        "width": 1440,
+        "status": 200,
+        "title": "Badges verwalten",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/benachrichtigungen-verwalten",
+        "width": 1440,
+        "status": 200,
+        "title": "Benachrichtigungen einrichten und prüfen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/benutzer-rollen",
+        "width": 1440,
+        "status": 200,
+        "title": "Benutzer und Rollen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/freigaben-verwalten",
+        "width": 1440,
+        "status": 200,
+        "title": "Ressourcenfreigaben verwalten",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/geraete-verwalten",
+        "width": 1440,
+        "status": 200,
+        "title": "Geräte verwalten",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration",
+        "width": 1440,
+        "status": 200,
+        "title": "Administration",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/integrationen",
+        "width": 1440,
+        "status": 200,
+        "title": "Integrationen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/ip500-netzwerk",
+        "width": 1440,
+        "status": 200,
+        "title": "IP500-Netzwerk anbinden",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/kompetenzen-lernwege",
+        "width": 1440,
+        "status": 200,
+        "title": "Fähigkeiten, Kataloge und Lernwege einrichten",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/ldap-verzeichnis",
+        "width": 1440,
+        "status": 200,
+        "title": "LDAP-Verzeichnis anbinden",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/mcp-verwalten",
+        "width": 1440,
+        "status": 200,
+        "title": "MCP für Agenten freigeben",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/mqtt-broker",
+        "width": 1440,
+        "status": 200,
+        "title": "MQTT-Zugänge verwalten",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/nachweise-datenschutz",
+        "width": 1440,
+        "status": 200,
+        "title": "Nachweise und Datenschutz",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/nachweissysteme-anbinden",
+        "width": 1440,
+        "status": 200,
+        "title": "Nachweissysteme anbinden",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/oidc-anmeldung",
+        "width": 1440,
+        "status": 200,
+        "title": "Anmeldung über OpenID Connect einrichten",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/rollen-gruppen",
+        "width": 1440,
+        "status": 200,
+        "title": "Rollen und Gruppen verwalten",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/server-einstellungen",
+        "width": 1440,
+        "status": 200,
+        "title": "Servereinstellungen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/sicherheit-betrieb",
+        "width": 1440,
+        "status": 200,
+        "title": "Sicherheit und Betrieb",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/tags-verwalten",
+        "width": 1440,
+        "status": 200,
+        "title": "Zugangs-Tags verwalten",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/verwaltungszustaendigkeiten",
+        "width": 1440,
+        "status": 200,
+        "title": "Verwaltungszuständigkeiten vergeben und entziehen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/wartungs-cli-referenz",
+        "width": 1440,
+        "status": 200,
+        "title": "Wartungs-CLI: Befehle und Optionen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/wartungs-cli",
+        "width": 1440,
+        "status": 200,
+        "title": "Mardu per CLI warten",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/zertifikate-https",
+        "width": 1440,
+        "status": 200,
+        "title": "HTTPS-Zertifikatswechsel vorbereiten und prüfen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/zutritt-verwalten",
+        "width": 1440,
+        "status": 200,
+        "title": "Zugangsmetriken lesen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/benachrichtigungen",
+        "width": 1440,
+        "status": 200,
+        "title": "Benachrichtigungen lesen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/berechtigungsanfragen",
+        "width": 1440,
+        "status": 200,
+        "title": "Meine Berechtigungsanfragen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/buchungen",
+        "width": 1440,
+        "status": 200,
+        "title": "Meine Buchungen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/dashboard",
+        "width": 1440,
+        "status": 200,
+        "title": "Persönliches Dashboard",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/erste-schritte",
+        "width": 1440,
+        "status": 200,
+        "title": "Erste Schritte",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/geraete-status",
+        "width": 1440,
+        "status": 200,
+        "title": "Ressourcenzustand und Störungen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer",
+        "width": 1440,
+        "status": 200,
+        "title": "Benutzeransicht",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/kalender",
+        "width": 1440,
+        "status": 200,
+        "title": "Kalender exportieren und abonnieren",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/kompetenzen",
+        "width": 1440,
+        "status": 200,
+        "title": "Meine Qualifikationen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/uebersicht-monitoring",
+        "width": 1440,
+        "status": 200,
+        "title": "Übersicht und Systemstatus",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/zutritt",
+        "width": 1440,
+        "status": 200,
+        "title": "Zugänge & Ressourcen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/entwickeln/api-integration",
+        "width": 1440,
+        "status": 200,
+        "title": "API und Integrationen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/entwickeln/automationsfluesse",
+        "width": 1440,
+        "status": 200,
+        "title": "Einen Node-RED-Flow entwickeln und prüfen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/entwickeln/http-api",
+        "width": 1440,
+        "status": 200,
+        "title": "HTTP-API nutzen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/entwickeln",
+        "width": 1440,
+        "status": 200,
+        "title": "Entwickeln",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/entwickeln/mcp-anbindung",
+        "width": 1440,
+        "status": 200,
+        "title": "MCP-Client anbinden",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/entwickeln/mqtt-events",
+        "width": 1440,
+        "status": 200,
+        "title": "MQTT-Ereignisse beziehen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs",
+        "width": 1440,
+        "status": 200,
+        "title": "Mardu Dokumentation",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/installieren/abnahme-uebergabe",
+        "width": 1440,
+        "status": 200,
+        "title": "Abnahme und Übergabe",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/installieren/inbetriebnahme",
+        "width": 1440,
+        "status": 200,
+        "title": "Geräte in Betrieb nehmen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/installieren",
+        "width": 1440,
+        "status": 200,
+        "title": "Installieren",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/installieren/raspberry-pi",
+        "width": 1440,
+        "status": 200,
+        "title": "Server auf dem Raspberry Pi installieren",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/installieren/stoerung-vor-ort",
+        "width": 1440,
+        "status": 200,
+        "title": "Störung vor Ort",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/koordination/bewertungen",
+        "width": 1440,
+        "status": 200,
+        "title": "Bewertungen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/koordination/buchungen-verwalten",
+        "width": 1440,
+        "status": 200,
+        "title": "Buchungen verwalten",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/koordination",
+        "width": 1440,
+        "status": 200,
+        "title": "Koordination",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/koordination/ressourcen",
+        "width": 1440,
+        "status": 200,
+        "title": "Ressourcen einrichten",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/koordination/vergaben-lernwegteilnahmen",
+        "width": 1440,
+        "status": 200,
+        "title": "Lernwegteilnahmen begleiten",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/koordination/zugangsantraege-entscheiden",
+        "width": 1440,
+        "status": 200,
+        "title": "Zugangsanträge entscheiden",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/benutzerkonten",
+        "width": 1440,
+        "status": 200,
+        "title": "Benutzerkonten, Rollen und Zugänge",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/fehlersuche",
+        "width": 1440,
+        "status": 200,
+        "title": "Fehlerhilfe für das Mitgliederportal",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/grundlagen-begriffe",
+        "width": 1440,
+        "status": 200,
+        "title": "Grundlagen und Begriffe",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick",
+        "width": 1440,
+        "status": 200,
+        "title": "Mardu verstehen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/neuerungen",
+        "width": 1440,
+        "status": 200,
+        "title": "Neuerungen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil-benachrichtigungen",
+        "width": 1440,
+        "status": 200,
+        "title": "Benachrichtigungseinstellungen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil-erscheinungsbild",
+        "width": 1440,
+        "status": 200,
+        "title": "Erscheinungsbild und Anzeigeformate",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil-mcp",
+        "width": 1440,
+        "status": 200,
+        "title": "Eigene MCP-Verbindungen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil-nachweisquellen",
+        "width": 1440,
+        "status": 200,
+        "title": "Persönliche Nachweisquellen",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil-sicherheit",
+        "width": 1440,
+        "status": 200,
+        "title": "E-Mail und Anmeldesicherheit",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil-sitzungen",
+        "width": 1440,
+        "status": 200,
+        "title": "Eigene Sitzungen verwalten",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil-zutrittsmedien",
+        "width": 1440,
+        "status": 200,
+        "title": "Meine Zutrittsmedien",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil",
+        "width": 1440,
+        "status": 200,
+        "title": "Eigenes Profil",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/v1",
+        "width": 1440,
+        "status": 200,
+        "title": "Übersicht v1",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/v2",
+        "width": 1440,
+        "status": 200,
+        "title": "Übersicht v2",
+        "lang": "de",
+        "documentWidth": 1440,
+        "viewport": 1440,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/automationen",
+        "width": 390,
+        "status": 200,
+        "title": "Automationen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/badges-verwalten",
+        "width": 390,
+        "status": 200,
+        "title": "Badges verwalten",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/benachrichtigungen-verwalten",
+        "width": 390,
+        "status": 200,
+        "title": "Benachrichtigungen einrichten und prüfen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/benutzer-rollen",
+        "width": 390,
+        "status": 200,
+        "title": "Benutzer und Rollen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/freigaben-verwalten",
+        "width": 390,
+        "status": 200,
+        "title": "Ressourcenfreigaben verwalten",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/geraete-verwalten",
+        "width": 390,
+        "status": 200,
+        "title": "Geräte verwalten",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration",
+        "width": 390,
+        "status": 200,
+        "title": "Administration",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/integrationen",
+        "width": 390,
+        "status": 200,
+        "title": "Integrationen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/ip500-netzwerk",
+        "width": 390,
+        "status": 200,
+        "title": "IP500-Netzwerk anbinden",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/kompetenzen-lernwege",
+        "width": 390,
+        "status": 200,
+        "title": "Fähigkeiten, Kataloge und Lernwege einrichten",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/ldap-verzeichnis",
+        "width": 390,
+        "status": 200,
+        "title": "LDAP-Verzeichnis anbinden",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/mcp-verwalten",
+        "width": 390,
+        "status": 200,
+        "title": "MCP für Agenten freigeben",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/mqtt-broker",
+        "width": 390,
+        "status": 200,
+        "title": "MQTT-Zugänge verwalten",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/nachweise-datenschutz",
+        "width": 390,
+        "status": 200,
+        "title": "Nachweise und Datenschutz",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/nachweissysteme-anbinden",
+        "width": 390,
+        "status": 200,
+        "title": "Nachweissysteme anbinden",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/oidc-anmeldung",
+        "width": 390,
+        "status": 200,
+        "title": "Anmeldung über OpenID Connect einrichten",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/rollen-gruppen",
+        "width": 390,
+        "status": 200,
+        "title": "Rollen und Gruppen verwalten",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/server-einstellungen",
+        "width": 390,
+        "status": 200,
+        "title": "Servereinstellungen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/sicherheit-betrieb",
+        "width": 390,
+        "status": 200,
+        "title": "Sicherheit und Betrieb",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/tags-verwalten",
+        "width": 390,
+        "status": 200,
+        "title": "Zugangs-Tags verwalten",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/verwaltungszustaendigkeiten",
+        "width": 390,
+        "status": 200,
+        "title": "Verwaltungszuständigkeiten vergeben und entziehen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/wartungs-cli-referenz",
+        "width": 390,
+        "status": 200,
+        "title": "Wartungs-CLI: Befehle und Optionen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/wartungs-cli",
+        "width": 390,
+        "status": 200,
+        "title": "Mardu per CLI warten",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/zertifikate-https",
+        "width": 390,
+        "status": 200,
+        "title": "HTTPS-Zertifikatswechsel vorbereiten und prüfen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/administration/zutritt-verwalten",
+        "width": 390,
+        "status": 200,
+        "title": "Zugangsmetriken lesen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/benachrichtigungen",
+        "width": 390,
+        "status": 200,
+        "title": "Benachrichtigungen lesen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/berechtigungsanfragen",
+        "width": 390,
+        "status": 200,
+        "title": "Meine Berechtigungsanfragen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/buchungen",
+        "width": 390,
+        "status": 200,
+        "title": "Meine Buchungen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/dashboard",
+        "width": 390,
+        "status": 200,
+        "title": "Persönliches Dashboard",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/erste-schritte",
+        "width": 390,
+        "status": 200,
+        "title": "Erste Schritte",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/geraete-status",
+        "width": 390,
+        "status": 200,
+        "title": "Ressourcenzustand und Störungen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer",
+        "width": 390,
+        "status": 200,
+        "title": "Benutzeransicht",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/kalender",
+        "width": 390,
+        "status": 200,
+        "title": "Kalender exportieren und abonnieren",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/kompetenzen",
+        "width": 390,
+        "status": 200,
+        "title": "Meine Qualifikationen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/uebersicht-monitoring",
+        "width": 390,
+        "status": 200,
+        "title": "Übersicht und Systemstatus",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/benutzer/zutritt",
+        "width": 390,
+        "status": 200,
+        "title": "Zugänge & Ressourcen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/entwickeln/api-integration",
+        "width": 390,
+        "status": 200,
+        "title": "API und Integrationen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/entwickeln/automationsfluesse",
+        "width": 390,
+        "status": 200,
+        "title": "Einen Node-RED-Flow entwickeln und prüfen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/entwickeln/http-api",
+        "width": 390,
+        "status": 200,
+        "title": "HTTP-API nutzen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/entwickeln",
+        "width": 390,
+        "status": 200,
+        "title": "Entwickeln",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/entwickeln/mcp-anbindung",
+        "width": 390,
+        "status": 200,
+        "title": "MCP-Client anbinden",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/entwickeln/mqtt-events",
+        "width": 390,
+        "status": 200,
+        "title": "MQTT-Ereignisse beziehen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs",
+        "width": 390,
+        "status": 200,
+        "title": "Mardu Dokumentation",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/installieren/abnahme-uebergabe",
+        "width": 390,
+        "status": 200,
+        "title": "Abnahme und Übergabe",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/installieren/inbetriebnahme",
+        "width": 390,
+        "status": 200,
+        "title": "Geräte in Betrieb nehmen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/installieren",
+        "width": 390,
+        "status": 200,
+        "title": "Installieren",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/installieren/raspberry-pi",
+        "width": 390,
+        "status": 200,
+        "title": "Server auf dem Raspberry Pi installieren",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/installieren/stoerung-vor-ort",
+        "width": 390,
+        "status": 200,
+        "title": "Störung vor Ort",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/koordination/bewertungen",
+        "width": 390,
+        "status": 200,
+        "title": "Bewertungen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/koordination/buchungen-verwalten",
+        "width": 390,
+        "status": 200,
+        "title": "Buchungen verwalten",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/koordination",
+        "width": 390,
+        "status": 200,
+        "title": "Koordination",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/koordination/ressourcen",
+        "width": 390,
+        "status": 200,
+        "title": "Ressourcen einrichten",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/koordination/vergaben-lernwegteilnahmen",
+        "width": 390,
+        "status": 200,
+        "title": "Lernwegteilnahmen begleiten",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/koordination/zugangsantraege-entscheiden",
+        "width": 390,
+        "status": 200,
+        "title": "Zugangsanträge entscheiden",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/benutzerkonten",
+        "width": 390,
+        "status": 200,
+        "title": "Benutzerkonten, Rollen und Zugänge",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/fehlersuche",
+        "width": 390,
+        "status": 200,
+        "title": "Fehlerhilfe für das Mitgliederportal",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/grundlagen-begriffe",
+        "width": 390,
+        "status": 200,
+        "title": "Grundlagen und Begriffe",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick",
+        "width": 390,
+        "status": 200,
+        "title": "Mardu verstehen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/neuerungen",
+        "width": 390,
+        "status": 200,
+        "title": "Neuerungen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil-benachrichtigungen",
+        "width": 390,
+        "status": 200,
+        "title": "Benachrichtigungseinstellungen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil-erscheinungsbild",
+        "width": 390,
+        "status": 200,
+        "title": "Erscheinungsbild und Anzeigeformate",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil-mcp",
+        "width": 390,
+        "status": 200,
+        "title": "Eigene MCP-Verbindungen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil-nachweisquellen",
+        "width": 390,
+        "status": 200,
+        "title": "Persönliche Nachweisquellen",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil-sicherheit",
+        "width": 390,
+        "status": 200,
+        "title": "E-Mail und Anmeldesicherheit",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil-sitzungen",
+        "width": 390,
+        "status": 200,
+        "title": "Eigene Sitzungen verwalten",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil-zutrittsmedien",
+        "width": 390,
+        "status": 200,
+        "title": "Meine Zutrittsmedien",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/ueberblick/profil",
+        "width": 390,
+        "status": 200,
+        "title": "Eigenes Profil",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/v1",
+        "width": 390,
+        "status": 200,
+        "title": "Übersicht v1",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      },
+      {
+        "url": "/docs/v2",
+        "width": 390,
+        "status": 200,
+        "title": "Übersicht v2",
+        "lang": "de",
+        "documentWidth": 390,
+        "viewport": 390,
+        "brokenImages": []
+      }
+    ],
+    "errors": []
+  },
+  "areaNavigationAndSearch": {
+    "visited": [
+      {
+        "area": "Benutzer",
+        "title": "Benutzeransicht",
+        "sidebarLinks": 14
+      },
+      {
+        "area": "Koordination",
+        "title": "Koordination",
+        "sidebarLinks": 8
+      },
+      {
+        "area": "Administration",
+        "title": "Administration",
+        "sidebarLinks": 28
+      },
+      {
+        "area": "Installieren",
+        "title": "Installieren",
+        "sidebarLinks": 6
+      },
+      {
+        "area": "Entwickeln",
+        "title": "Entwickeln",
+        "sidebarLinks": 7
+      }
+    ],
+    "keyboardSearch": true,
+    "pageErrors": []
+  },
+  "searchFilters": {
+    "apiOptions": 19,
+    "apiHasLDAP": true,
+    "userHasMCP": true,
+    "url": "http://localhost:3400/docs/ueberblick/profil-mcp"
+  },
+  "copyMarkdown": {
+    "copied": true,
+    "length": 13172,
+    "relativeMDX": false
+  },
+  "imageKeyboard": {
+    "keyboardZoom": true,
+    "viewerImages": 2,
+    "escapeClosed": true
+  },
+  "checks": {
+    "dashboardTests": {
+      "files": 8,
+      "passed": 79
+    },
+    "build": {
+      "exitCode": 0,
+      "typeScript": "bestanden",
+      "cssOptimizerWarnings": 2
+    },
+    "scopedESLint": {
+      "exitCode": 0
+    },
+    "website": {
+      "testReport": "consumer-website.md",
+      "testsPassed": 145,
+      "currentDocsInMemoryTestsPassed": 45,
+      "typeScriptFiles": 523,
+      "contentGitlinkChanged": false,
+      "browserOrBuild": false
+    },
+    "reactDoctor": {
+      "exitCode": 0,
+      "files": 1171,
+      "warnings": 476,
+      "blockingErrors": 0
+    },
+    "format": {
+      "files": 167,
+      "exitCode": 0
+    },
+    "diffCheck": {
+      "root": 0,
+      "web": 0,
+      "docs": 0,
+      "websites": 0
+    }
+  },
+  "limits": [
+    "Keine aktuelle geeignete authentifizierte E2E-Sitzung verfügbar",
+    "Keine Hardware-/Firmware-, externe Anbieter- oder Empfangsabnahme",
+    "Lokaler Standalone-Lauf mit Assets und contracts wie im Dockerfile; kein Docker-Build",
+    "Website-Content nicht aktualisiert oder veröffentlicht"
+  ]
+}

@@ -1,32 +1,175 @@
 ---
 title: Nachweise und Datenschutz
-description: Audit-Ereignisse, Aufbewahrung und Betroffenenrechte für Prüfer und Beauftragte.
+description: Verwaltungsänderungen suchen und exportieren, Datenquellen unterscheiden und Löschfolgen prüfen.
 ---
 
-Diese Seite ist ein Entwurf. Sie beschreibt später vorhandene Daten und
-Verwaltungswege. Organisatorische und rechtliche Vorgaben werden als solche
-gekennzeichnet; die Software legt nicht automatisch jede Aufbewahrungsfrist fest.
+Im **Audit-Trail** kannst du gespeicherte Verwaltungsänderungen nachvollziehen
+und gefiltert exportieren. Anmeldeereignisse, Zutrittsentscheidungen und
+persönliche Kompetenzvergaben sind eigene Datenquellen. Ein Auditexport ist
+deshalb keine vollständige Auskunft über eine Person.
 
 ## Audit suchen und exportieren
 
-- [ ] TODO: Audit-Leserecht und zusätzliches Exportrecht nennen; Suche, Benutzer-, Ereignis-, Entitäts- und Zeitraumfilter anhand der tatsächlichen UI erklären.
-- [ ] TODO: Ereignisdetails mit Vorher-/Nachher-Werten lesen; Verwaltungsänderungen, Anmeldehistorie und Zutrittsprotokolle als unterschiedliche Quellen behandeln.
-- [ ] TODO: Gefilterten Export als CSV beziehungsweise Excel erstellen; Zeitraum/Zeitzone, Umfang, mögliche Grenzen, leere Ergebnisse und Zugriff auf die Datei erklären.
-- [ ] TODO: Nachweisgrenzen nennen: gespeicherte Entscheidung bestätigt keine physische Türaktion; fehlender Auditdatensatz ist kein Beweis, dass eine Aktion nicht stattfand.
+Zum Lesen benötigst du `Permissions.AuditTrail.View`, für den Export zusätzlich
+`Permissions.AuditTrail.Export`. Diese Rechte gewähren nicht automatisch Zugriff
+auf die betroffenen Benutzer, Geräte oder Zutrittsprotokolle. Für die
+Benutzerauswahl im Filter benötigst du zusätzlich `Permissions.Users.View`.
+
+### Ereignisse eingrenzen
+
+1. Öffne in den Servereinstellungen **Audit-Ereignisse**. Die Seite heißt
+   **Audit-Trail** und zeigt zunächst die letzten 24 Stunden, neueste Ereignisse zuerst.
+2. Wähle unter **Zeitraum** die letzten **24 Stunden**, **7 Tage** oder **30 Tage**
+   oder setze **Von** und **Bis**.
+3. Grenze den Objekttyp und die Aktion ein, etwa **Benutzer** und **Aktualisiert**.
+   Die Suche berücksichtigt unter anderem Benutzernamen, Aktionen, Objekttypen und Objekt-IDs.
+4. Öffne bei Bedarf **Weitere Filter**. Dort kannst du einen **Benutzer** auswählen
+   oder **Objekt-ID**, **Korrelations-ID** und **Client-IP** eingeben.
+5. Öffne eine Ergebniszeile, um das **Audit-Ereignis** zu lesen.
+
+Der Benutzerfilter bezieht sich auf die Person, die eine Aktion **ausgeführt** hat.
+Suchst du Änderungen an einem bestimmten Konto, verwende den Objekttyp
+**Benutzer** zusammen mit dessen **Objekt-ID**. Beide Filter zusammen liefern nur
+Änderungen, bei denen dieselbe Person Ausführende und betroffenes Konto ist.
+
+Die Zeitpunkte in Tabelle und Details werden in UTC angezeigt. Manuell gewählte
+Kalendertage werden dagegen in der lokalen Zeitzone deines Browsers als
+Tagesbeginn beziehungsweise Tagesende ausgewertet und als UTC übertragen.
+Berücksichtige diese Unterscheidung beim Abgleich mit anderen Protokollen.
+
+Suche, Filter und geöffnetes Ereignis stehen auch in der Seitenadresse. Behandle
+solche Links entsprechend ihrem Inhalt: Sie können Benutzer-IDs oder IP-Adressen
+enthalten. Wer den Link öffnet, braucht weiterhin die passenden Leserechte.
+
+### Details lesen
+
+Prüfe **Zeitpunkt**, ausführende Person, Aktion und betroffenes Objekt. Unter
+**Änderungen** stehen aufgezeichnete Feldwerte als **Vorher** und **Nachher**.
+**Maskiert** bedeutet, dass der Wert nicht offengelegt wird; **Gekürzt** kennzeichnet
+unvollständige Werte. Ein Ereignis ohne einzelne Feldänderungen liefert keinen
+Vorher-/Nachher-Vergleich.
+
+**Technischer Kontext** enthält unter anderem Ereignis-ID, Benutzer-ID,
+Client-IP und Korrelations-ID, soweit vorhanden. Mit **Ereignis-ID kopieren**
+kannst du einen konkreten Datensatz benennen. **Zusammengehöriger Vorgang** zeigt
+bis zu 50 Ereignisse mit derselben Korrelations-ID; für umfangreichere Vorgänge
+suche diese ID in der Hauptliste.
+
+**Betroffenes Objekt öffnen** wird nur für unterstützte Verknüpfungen angeboten.
+Die Historie kann auch erhalten bleiben, wenn das Konto oder Objekt bereits
+gelöscht wurde. Ein fehlender Link entfernt den historischen Eintrag nicht.
+
+### Gefilterte Daten exportieren
+
+1. Prüfe Suche, Filter, Zeitraum und die angezeigte Trefferzahl.
+2. Wähle **CSV exportieren**. Der Browser lädt eine Datei mit dem Namen
+   `audit-trail-YYYY-MM-DD.csv` herunter.
+3. Prüfe die Datei und gib nur den für deine Aufgabe benötigten Umfang weiter.
+
+Der Export übernimmt die aktuellen Suchfilter und die Sortierung, unabhängig von
+der gerade sichtbaren Tabellenseite. Er enthält **höchstens 10.000 Ereignisse**.
+Bei mehr Treffern teile die Abfrage in kleinere Zeiträume auf und prüfe mögliche
+Überschneidungen anhand der Ereignis-ID. Der Export enthält UTC-Zeitpunkte,
+Identifikatoren, Aktion, Objekt, Client-IP, Korrelations-ID und eine
+Zusammenfassung der aufgezeichneten Änderungen. Auch exportierte Werte können
+maskiert oder gekürzt sein.
+
+Die Oberfläche bietet CSV an. Über die API ist zusätzlich Excel verfügbar:
+`GET /api/v1/audit-trail/export` mit `format=excel` oder `format=xlsx` und denselben
+Filtern. Details zu Parametern und Antworten stehen in der API-Referenz unter
+**Audit Trail**. Für beide Formate gilt dieselbe Grenze von 10.000 Ereignissen.
+
+Die heruntergeladene Datei liegt außerhalb der Zugriffsprüfung von Mardu. Lege
+fest, wer sie erhält, wo sie abgelegt und wann sie entfernt wird.
+
+### Wenn Ergebnisse fehlen
+
+| Beobachtung                              | Nächster Schritt                                                                                                 |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Keine passenden Audit-Ereignisse**     | Zeitraum, Suche und kombinierte Filter prüfen. Die Suche durchsucht keine vollständigen Vorher-/Nachher-Inhalte. |
+| **Keine Berechtigung für Audit-Daten**   | Audit-Leserecht prüfen lassen.                                                                                   |
+| **CSV exportieren** fehlt                | Zusätzliches Audit-Exportrecht prüfen lassen.                                                                    |
+| **Details möglicherweise unvollständig** | Details erneut öffnen; angezeigte Werte nicht als vollständig behandeln.                                         |
+| Laden oder Export schlägt fehl           | Anmeldung, Verbindung und Rechte prüfen; bei weiterem Fehler Zeitpunkt und Meldung für den Betrieb festhalten.   |
+
+Ein fehlender Auditdatensatz beweist nicht, dass eine Aktion nicht stattfand.
+Nicht jede technische Aktualisierung erzeugt einen Audit-Eintrag. Eine gespeicherte
+Zutrittsentscheidung oder Verwaltungsänderung bestätigt außerdem keine physische
+Türöffnung oder Geräteausführung.
 
 ## Datenarten und Aufbewahrung
 
-- [ ] TODO: Kontodaten, Anmeldehistorie, Audit, Zutrittsentscheidungen/-sitzungen, Buchungen, Kompetenznachweise, Benachrichtigungen und technische Messwerte erfassen.
-- [ ] TODO: Tatsächlich konfigurierte Aufbewahrung und Löschprozesse pro Datenart mit Quelle, Einheit und Grenzen dokumentieren; nicht konfigurierte oder unklare Datenarten ausdrücklich nennen.
-- [ ] TODO: Kontodeaktivierung, Kontolöschung, widerrufene Vergabe und historische Protokolle unterscheiden; Löschvorschau und erhaltene Daten prüfen.
+Die Daten haben unterschiedliche Zwecke und Löschwege:
+
+| Datenart                             | Bedeutung und Grenze                                                                                                                                     |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Kontodaten, Rollen und Gruppen       | Aktuelle Zuordnungen in der [Benutzerverwaltung](./benutzer-rollen.mdx#benutzer-verwalten). Eine Deaktivierung erhält das Konto.                         |
+| Audit-Trail                          | Gespeicherte Änderungen mit ausführender Person und betroffenem Objekt. Die Auditansicht bietet keine Löschaktion oder Aufbewahrungseinstellung.         |
+| Anmeldehistorie                      | Eigene Ereignisquelle für Anmeldeversuche. Die Benutzerverwaltung zeigt die letzte erfolgreiche Anmeldung; das ist keine vollständige Ereignisliste.     |
+| Zutrittsentscheidungen und Sitzungen | Entscheidungen und Nutzungsverlauf unter [Zutritt verwalten](./zutritt-verwalten.mdx). Abgeschlossene Historie kann nach Kontolöschung erhalten bleiben. |
+| Buchungen                            | Reservierungen und ihr Verlauf; abgeschlossene Buchungshistorie kann nach Kontolöschung erhalten bleiben.                                                |
+| Kompetenzvergaben                    | Persönliche Vergaben und Gültigkeiten, beschrieben unter [Badges verwalten](./badges-verwalten.mdx). Sie sind keine Auditnachweise.                      |
+| Benachrichtigungen                   | Mitteilungen und Zustellinformationen. Lesen, Stummschalten oder Kanalwahl sind keine allgemeine Datenlöschung.                                          |
+| Technische Messwerte                 | Eigene Aufbewahrung für Rohdaten und Stundenaggregate; diese Fristen gelten nicht für Audit- oder Zutrittshistorie.                                      |
+
+Für technische Messwerte findest du in den Servereinstellungen **Rohdaten (Tage)**
+und **Stundenaggregate (Tage)**. Die zulässigen Bereiche sind 1–365 beziehungsweise
+1–3650 Tage; die Aggregatfrist muss mindestens der Rohdatenfrist entsprechen.
+Die Servervorgaben sind 30 und 365 Tage. Maßgeblich sind die gespeicherten Werte
+deiner Installation. Eine längere Frist stellt bereits entfernte Daten nicht
+wieder her.
+
+Diese Einstellungen sind keine allgemeine Aufbewahrungsrichtlinie für Konten,
+Anmeldehistorie, Audit, Zutrittsdaten, Buchungen, Vergaben oder Benachrichtigungen.
+Aus ihnen lässt sich kein Löschzeitpunkt für diese anderen Daten ableiten.
 
 ## Auskunft, Berichtigung und Löschung
 
-- [ ] TODO: Vorhandene Datenansichten und Exportwege für eine Person zusammensuchen; Umfang, Identitätsprüfung und Verantwortliche als organisatorischen Ablauf beschreiben.
-- [ ] TODO: Berichtigung lokaler Daten und anbieterverwalteter LDAP-/OIDC-Angaben unterscheiden; Zuständigkeit und Einschränkungen nennen.
-- [ ] TODO: Verfügbarkeit eines vollständigen Auskunfts-/Löschvorgangs prüfen; fehlende Sammelfunktion als Grenze dokumentieren. Gesetzliche Fristen und organisationsabhängige Vorgaben separat prüfen.
+Mardu bietet in den hier beschriebenen Ansichten keinen gemeinsamen Vorgang,
+der alle personenbezogenen Daten als Auskunft zusammenstellt oder vollständig
+löscht. Kläre mit den in deiner Organisation zuständigen Personen, welche Daten
+benötigt werden und wer die Anfrage bearbeitet.
+
+Für die Zusammenstellung prüfst du zuerst das Konto und seine Zuordnungen in der
+Benutzerverwaltung. Suche Audit-Ereignisse getrennt nach ausführender Person und
+betroffenem Konto. Prüfe je nach Anfrage zusätzlich Zutrittsdaten, Buchungen,
+Kompetenzvergaben und Benachrichtigungen in den jeweiligen Bereichen. Ein
+Auditexport allein deckt diese Quellen nicht ab.
+
+Die Anmeldeereignisse eines Kontos sind über die paginierte API
+`GET /api/v1/users/{id}/login-history` mit `Permissions.Users.View` abrufbar.
+Parameter und Antwortmodell stehen in der API-Referenz unter **Users**. Dieser
+Abruf liefert Anmeldeereignisse, kein fertiges Auskunftsdokument.
+
+Lokale Kontodaten kannst du im Rahmen deiner Rechte
+[berichtigen](./benutzer-rollen.mdx#benutzerdaten-ändern). Felder, die von LDAP
+oder OpenID Connect (OIDC) verwaltet werden, sind entsprechend gekennzeichnet;
+Änderungen an anbieterverwalteten Angaben gehören in das zuständige Quellsystem.
+
+Vor einer [Kontolöschung](./benutzer-rollen.mdx#benutzer-löschen) zeigt Mardu eine
+Vorschau der betroffenen Daten und Hindernisse. Die Löschung ist nicht
+rückgängig zu machen. Offene Vorgänge oder Zuständigkeiten können sie verhindern.
+Abgeschlossene Buchungs- und Zutrittshistorie sowie Anmeldeereignisse bleiben
+erhalten. Auch der Audit-Trail wird durch eine Kontolöschung nicht pauschal
+entfernt. Prüfe deshalb die Vorschau; eine erfolgreiche Kontolöschung ist keine
+Bestätigung, dass sämtliche Daten über die Person entfernt wurden.
+
+Die technischen Bedienmöglichkeiten legen keine gesetzlichen Fristen,
+Rechtsgrundlagen oder vollständigen Datenschutzverfahren fest. Diese Vorgaben
+muss deine Organisation gesondert klären.
 
 ## Öffentlich geteilte Inhalte und Zugriffsgrenzen
 
-- [ ] TODO: Veröffentlichte Kompetenz-/Badge-Definitionen von persönlichen Nachweisen unterscheiden; mögliche Autorenangaben, Vorschau, Zurückziehen und bereits heruntergeladene Kopien erklären.
-- [ ] TODO: Leserechte, Exportrechte und objektbezogene Zutrittsrechte begrenzen; organisatorische Trennung von Betrieb und Prüfung als mögliches Rollenmodell erläutern.
+Eine ausdrücklich veröffentlichte Kompetenz- oder Badge-Definition ist als
+unveränderliche Momentaufnahme ohne Anmeldung abrufbar. Persönliche Vergaben
+werden dabei nicht hinzugefügt. Prüfe vor der Veröffentlichung dennoch den
+vollständigen Inhalt einschließlich Freitext, Metadaten und Links.
+
+Das [Zurückziehen einer Veröffentlichung](./badges-verwalten.mdx#eine-veröffentlichung-zurückziehen)
+beendet den Abruf über ihren öffentlichen Link. Es ruft bereits heruntergeladene
+Kopien nicht zurück und löscht weder Definition noch Vergaben.
+
+Vergib Audit-Lese- und Exportrechte nach dem benötigten Aufgabenbereich.
+Zutrittsprotokolle haben eigene Rechte und objektbezogene Zugriffsgrenzen.
+Die Bezeichnung „Administration“ in dieser Dokumentation weist diese Rechte
+nicht automatisch zu.

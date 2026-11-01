@@ -1,0 +1,146 @@
+[
+  {
+    "id": "N01",
+    "path": "koordination/verfuegbarkeit-wartung.mdx",
+    "title": "Verfügbarkeit und Wartung koordinieren",
+    "reason": "Ressourcen-/Buchungsabläufe, Quellen P25/P42",
+    "status": "Nichtanlage; bestehende Anleitung genügt",
+    "agent": "/root/page_n01",
+    "report": "planning/reviews/2026-11-01/koordination--verfuegbarkeit-wartung.md"
+  },
+  {
+    "id": "N02",
+    "path": "koordination/zugangsantraege-entscheiden.mdx",
+    "title": "Zugangsanträge entscheiden",
+    "reason": "Access-Anträge, Quellen P05/P30",
+    "status": "Neue Anleitung; Dokuprüfung abgeschlossen",
+    "agent": "/root/page_n02",
+    "report": "planning/reviews/2026-11-01/koordination--zugangsantraege-entscheiden.md"
+  },
+  {
+    "id": "N03",
+    "path": "koordination/vergaben-lernwegteilnahmen.mdx",
+    "title": "Vergaben und Lernwegteilnahmen begleiten",
+    "reason": "Kompetenzabläufe, Quellen P21/P43",
+    "status": "Neue Anleitung; Dokuprüfung abgeschlossen",
+    "agent": "/root/page_n03",
+    "report": "planning/reviews/2026-11-01/koordination--vergaben-lernwegteilnahmen.md"
+  },
+  {
+    "id": "N04",
+    "path": "administration/rollen-gruppen.mdx",
+    "title": "Rollen und Gruppen verwalten",
+    "reason": "Quellen P18/P44",
+    "status": "Neue Anleitung; Dokuprüfung abgeschlossen",
+    "agent": "/root/page_n04",
+    "report": "planning/reviews/2026-11-01/administration--rollen-gruppen.md"
+  },
+  {
+    "id": "N05",
+    "path": "administration/verwaltungszustaendigkeiten.mdx",
+    "title": "Verwaltungszuständigkeiten vergeben",
+    "reason": "Quellen P25/P30",
+    "status": "Neue Anleitung; Dokuprüfung abgeschlossen",
+    "agent": "/root/page_n05",
+    "report": "planning/reviews/2026-11-01/administration--verwaltungszustaendigkeiten.md"
+  },
+  {
+    "id": "N06",
+    "path": "administration/kompetenzen-lernwege.mdx",
+    "title": "Kompetenzen und Lernwege einrichten",
+    "reason": "Quellen P21/P43",
+    "status": "Neue Anleitung; Dokuprüfung abgeschlossen",
+    "agent": "/root/page_n06",
+    "report": "planning/reviews/2026-11-01/administration--kompetenzen-lernwege.md"
+  },
+  {
+    "id": "N07",
+    "path": "administration/nachweissysteme-anbinden.mdx",
+    "title": "Nachweissysteme anbinden",
+    "reason": "Quellen P14/P21/P26",
+    "status": "Neue Anleitung; Dokuprüfung abgeschlossen",
+    "agent": "/root/page_n07",
+    "report": "planning/reviews/2026-11-01/administration--nachweissysteme-anbinden.md"
+  },
+  {
+    "id": "N08",
+    "path": "administration/ldap-verzeichnis.mdx",
+    "title": "LDAP-Verzeichnis anbinden",
+    "reason": "Quelle P26",
+    "status": "Neue Anleitung; Dokuprüfung abgeschlossen",
+    "agent": "/root/page_n08",
+    "report": "planning/reviews/2026-11-01/administration--ldap-verzeichnis.md"
+  },
+  {
+    "id": "N09",
+    "path": "administration/oidc-anmeldung.mdx",
+    "title": "Anmeldung über OpenID Connect",
+    "reason": "Quelle P26",
+    "status": "Neue Anleitung; Dokuprüfung abgeschlossen",
+    "agent": "/root/page_n09",
+    "report": "planning/reviews/2026-11-01/administration--oidc-anmeldung.md"
+  },
+  {
+    "id": "N10",
+    "path": "administration/mqtt-broker.mdx",
+    "title": "MQTT-Zugänge verwalten",
+    "reason": "Quellen P26/P40",
+    "status": "Neue Anleitung; Dokuprüfung abgeschlossen",
+    "agent": "/root/page_n10",
+    "report": "planning/reviews/2026-11-01/administration--mqtt-broker.md"
+  },
+  {
+    "id": "N11",
+    "path": "administration/ip500-netzwerk.mdx",
+    "title": "IP500-Netzwerk anbinden",
+    "reason": "Quellen P20/P26/P35",
+    "status": "Neue Anleitung; Dokuprüfung abgeschlossen",
+    "agent": "/root/page_n11",
+    "report": "planning/reviews/2026-11-01/administration--ip500-netzwerk.md"
+  },
+  {
+    "id": "N12",
+    "path": "administration/anmeldung-kontoschutz.mdx",
+    "title": "Anmeldung und Kontoschutz einstellen",
+    "reason": "Quellen P11/P18/P27/P28; Doppelung vermeiden",
+    "status": "Nichtanlage; bestehende Anleitung genügt",
+    "agent": "/root/page_n12",
+    "report": "planning/reviews/2026-11-01/administration--anmeldung-kontoschutz.md"
+  },
+  {
+    "id": "N13",
+    "path": "administration/zertifikate-https.mdx",
+    "title": "Zertifikate und HTTPS verwalten",
+    "reason": "Quellen P27/P28/P34; Doppelung vermeiden",
+    "status": "Neue Anleitung; Dokuprüfung abgeschlossen",
+    "agent": "/root/page_n13",
+    "report": "planning/reviews/2026-11-01/administration--zertifikate-https.md"
+  },
+  {
+    "id": "N14",
+    "path": "entwickeln/automationsfluesse.mdx",
+    "title": "Eigene Automationsflüsse entwickeln",
+    "reason": "Quellen P22/P38",
+    "status": "Neue Anleitung; Dokuprüfung abgeschlossen",
+    "agent": "/root/page_n14",
+    "report": "planning/reviews/2026-11-01/entwickeln--automationsfluesse.md"
+  },
+  {
+    "id": "N15",
+    "path": "administration/zugangsbereiche-zutrittspunkte.mdx",
+    "title": "Zugangsbereiche und Zutrittspunkte einrichten",
+    "reason": "Vorhandene P30 ist Metrik-Anleitung; tatsächliche aktuelle UI prüfen",
+    "status": "Nichtanlage; bestehende Anleitung genügt",
+    "agent": "/root/page_n15",
+    "report": "planning/reviews/2026-11-01/administration--zugangsbereiche-zutrittspunkte.md"
+  },
+  {
+    "id": "N16",
+    "path": "administration/freigaben-verwalten.mdx",
+    "title": "Ressourcenfreigaben verwalten",
+    "reason": "Vorhandene Anleitungen decken persönliche Anzeige ab; Quellen P03/P30",
+    "status": "Neue Anleitung; Dokuprüfung abgeschlossen",
+    "agent": "/root/page_n16",
+    "report": "planning/reviews/2026-11-01/administration--freigaben-verwalten.md"
+  }
+]

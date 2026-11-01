@@ -1,26 +1,281 @@
 ---
 title: HTTP-API nutzen
-description: Basis-URL, Authentifizierung, Beispielaufrufe, Raten und Fehlercodes.
+description: Am Server anmelden, Daten mit Bearer-Token lesen und einen Ressourcenentwurf mit Versionsprüfung ändern.
 ---
 
-Diese Seite ist ein Entwurf. Beispiele werden aus dem aktuellen OpenAPI-Vertrag
-und den verwendenden Services erstellt und mit fiktiven Daten geprüft.
+Diese Anleitung führt vom API-Server zu einem angemeldeten Leseaufruf und einem
+Ressourcenentwurf. Du brauchst eine eingerichtete Testinstallation, ein aktives
+Konto und für die Shell-Beispiele `curl` und `jq`. Die Änderung legt eine Ressource
+an; führe sie nur in einer dafür vorgesehenen Testinstallation aus.
+
+Verwende die Adresse des **API-Servers**, nicht die Dashboard-Adresse mit einem
+Projektpfad. Im lokalen Compose-Standard ist die API unter `http://localhost:5001`
+erreichbar, das Dashboard unter Port `3000`. Bei einer entfernten Installation
+verwendest du die vom Betrieb bereitgestellte HTTPS-Adresse einschließlich eines
+gegebenenfalls konfigurierten Präfixes. Zugangsdaten gehören über TLS übertragen.
+
+```bash
+# Lokale Testinstallation; für entfernte Server durch deren HTTPS-Adresse ersetzen.
+API_BASE='http://localhost:5001'
+```
+
+Die folgenden Pfade verwenden API-Version `v1`. Die
+[Integrationsübersicht](./api-integration.mdx) hilft bei der Schnittstellenwahl;
+die vollständigen Modelle und Antworten findest du in der API-Referenz deiner
+Softwareinstallation. In deren Software-Dokumentation steht sie unter **API**
+im Bereich **Entwickeln**. Wenn Swagger am Server aktiviert ist, stehen außerdem
+`/redoc` und der OpenAPI-Vertrag unter `/swagger/v1/swagger.json` an der
+API-Serveradresse bereit.
 
 ## Authentifizierung und Rechte
 
-- [ ] TODO: API-Basisadresse von Dashboard-Projektroute unterscheiden; Version und konkrete Authentifizierungsendpunkte belegen.
-- [ ] TODO: Token beziehen, Bearer-Header verwenden, Erneuerung und Widerruf erklären; Tokenlaufzeit, 2FA-/Passkey-/Bestätigungsbedingungen berücksichtigen.
-- [ ] TODO: Allgemeine Aktionsrechte und objektbezogene Ressourcen-/Zugangsrechte unterscheiden; eigene Daten und administrative Listen getrennt behandeln.
+### Den angebotenen Anmeldeweg bestimmen
+
+Rufe zunächst die öffentlichen
+Anmeldefähigkeiten (`GET /api/v1/system/auth/capabilities`) ab:
+
+```bash
+curl --silent --show-error --fail-with-body \
+  "$API_BASE/api/v1/system/auth/capabilities"
+```
+
+Die Antwort nennt unter anderem `localLoginEnabled`, `passkeysEnabled`,
+`passwordlessEnabled` und `ssoProviders`. Bei OIDC zeigen `runtimeActive` und
+`restartRequired`, ob ein Anbieter im laufenden Server verfügbar ist; eine
+gespeicherte Konfiguration allein belegt das nicht. Verwende den für das Konto
+vorgesehenen Weg:
+
+- **Kennung und Passwort:**
+  `POST /api/v1/tokens/authenticate`
+  erhält `identifier` (E-Mail-Adresse oder Benutzername) und `password` im
+  JSON-Body. Das folgende Beispiel ist ein Request für ein fiktives Testkonto;
+  es legt dieses Konto nicht an.
+
+  ```json
+  {
+    "identifier": "http-demo@example.invalid",
+    "password": "Nur-fuer-die-Testinstallation-01!"
+  }
+  ```
+
+  Sende den Body mit `Content-Type: application/json`. Bei `200` erhältst du eine
+  `TokenResponse`. Bei `202` erhältst du **noch kein Token**, sondern
+  `challengeId`, `expiresAt` und `allowedMethods`. Schließe die Challenge über
+  `POST /api/v1/tokens/challenges/complete`
+  mit `challengeId`, einer angebotenen `method` (`Totp` oder `RecoveryCode`) und
+  `code` ab. Die Challenge gilt fünf Minuten und ist einmalig verwendbar.
+  Ein gesperrtes oder deaktiviertes Konto, eine ausstehende erforderliche
+  E-Mail-Bestätigung oder eine erforderliche 2FA-Einrichtung können die Ausgabe
+  von Token verhindern. Werte bei `401` den zurückgegebenen `code` aus.
+
+- **Passkey:**
+  Authentifizierungsoptionen (`POST /api/v1/passkeys/authentication/options`)
+  starten eine WebAuthn-Anmeldung;
+  Verifikation (`POST /api/v1/passkeys/authentication/verify`) prüft die
+  Browserantwort und liefert Mardu-Token. Ein Passwort-Request ersetzt diese
+  Browserinteraktion nicht.
+- **OIDC:** Der
+  Broker-Start (`GET /api/v1/auth/oidc/start`) leitet den Browser
+  zum Anbieter. Der Client übergibt Anbieter-ID, das konfigurierte `project`, eine
+  freigegebene `returnUrl`, `state` und eine S256-PKCE-Challenge. Nach der Rückkehr
+  prüft der Client `state` und tauscht den einmaligen Übergabecode zusammen mit
+  dem zugehörigen `codeVerifier` am
+  Broker-Austausch (`POST /api/v1/auth/oidc/exchange`) gegen
+  Mardu-Token. Projekt und Rücksprungadresse müssen zur Serverkonfiguration
+  passen; sie werden nicht aus einer beliebigen Dashboard-URL abgeleitet.
+
+Für die folgenden Aufrufe verwendest du `access_token` aus einer erfolgreichen
+`TokenResponse`. Bewahre auch das ausgegebene `refresh_token` geschützt auf.
+`expires_in` und `refresh_expires_in` geben die jeweilige Laufzeit in **Sekunden**
+an; verwende diese Werte statt einer fest angenommenen Tokenlaufzeit. Das
+Dashboard-Sitzungscookie ist kein Bearer-Zugang für diese Beispiele.
+
+### Einen ersten Leseaufruf senden
+
+Übernimm `access_token` in die lokale Shell-Variable `ACCESS_TOKEN`, ohne den Wert
+in Skripte, Versionsverwaltung oder Protokolle zu schreiben. Zum verdeckten
+Einlesen in Bash oder Zsh:
+
+```bash
+read -r -s ACCESS_TOKEN
+curl --silent --show-error --fail-with-body \
+  --header "Authorization: Bearer $ACCESS_TOKEN" \
+  "$API_BASE/api/v1/profile"
+```
+
+`GET /api/v1/profile` benötigt
+`Permissions.Profile.View` und liefert bei `200` das eigene `UserDto`, darunter
+`id`. Diese Benutzer-ID wird für Refresh benötigt. Es handelt sich um das Profil
+des angemeldeten Kontos, nicht um eine administrative Benutzerliste.
+Die eigenen Berechtigungen kannst du über
+`GET /api/v1/profile/authorization` mit demselben Recht lesen.
+
+Ein gültiges Token ersetzt keine Aktionsberechtigung. Für die nachfolgenden
+Ressourcenaufrufe braucht das Konto `Permissions.ManagedResources.View`, zum
+Anlegen zusätzlich `.Create`, zum Ändern `.Update`. Andere Endpunkte prüfen
+darüber hinaus Eigentum oder Rechte an einer bestimmten Ressource: Für einen
+Schaltauftrag gilt beispielsweise zusätzlich `OperateHardware` oder
+`ManageHardware` auf dieser Ressource. Eine Verwaltungsberechtigung ist keine
+persönliche Zutrittsfreigabe.
+
+### Erneuern und widerrufen
+
+`POST /api/v1/tokens/refresh` erwartet einen
+JSON-Body mit `userId` aus dem eigenen Profil und `refreshToken` aus der letzten
+Tokenantwort. Bei `200` ersetzt du **beide** gespeicherten Token durch die neuen
+Werte. Erneuere eine Sitzung nur einmal gleichzeitig: Der verwendete
+Refresh-Token wird widerrufen, parallele oder spätere Wiederholungen können `401`
+mit `InvalidOrExpiredRefreshToken` liefern. Bei fehlgeschlagenem Refresh ist
+gegebenenfalls eine neue Anmeldung nötig; auch geänderte Kontobedingungen und
+MFA-Anforderungen werden geprüft.
+
+`PUT /api/v1/tokens/revoke` benötigt einen
+Bearer-Zugang und `Permissions.Profile.Update`. Der JSON-Body mit `refreshToken`
+widerruft diese Sitzung; `{}` widerruft alle Refresh-Token des aktuellen Kontos.
+Erfolg liefert `204` ohne Antwortbody. Mit der widerrufenen Sitzung verbundene
+API-Aufrufe können anschließend `401` liefern. Token und Faktorcodes gehören in
+den vorgesehenen Body beziehungsweise Bearer-Header, nicht in URLs.
 
 ## Beispielaufrufe und Verträge
 
-- [ ] TODO: Lesende Liste/Details sowie einen Anlege-/Änderungsablauf mit gültigem Request, Response und prüfbarem Ergebnis ausführen.
-- [ ] TODO: Pflicht/optional, Null/Leer, Defaults, Validierung und Einheiten im passenden Beispiel erklären; OpenAPI-Seiten verlinken und generierte Schemas nicht manuell pflegen.
-- [ ] TODO: Pagination, Filter, Statuswerte und Versions-/Konfliktprüfung mit belegten Endpunkten zeigen; eine Änderung nach veraltetem Stand behandeln.
-- [ ] TODO: Asynchrone Aktion und bestätigte Geräteausführung unterscheiden; erforderliche Statusabfrage oder Echtzeitereignisse erklären.
+### Eine Liste begrenzt lesen
+
+Die Ressourcenliste (`GET /api/v1/managed-resources`) unterstützt
+`PageNumber` ab `1` und `PageSize` von `1` bis `100`; Standard ist Seite `1` mit
+`25` Einträgen. Dieses Beispiel liest bis zu zehn Entwürfe (`LifecycleStatus=0`):
+
+```bash
+curl --silent --show-error --fail-with-body --get \
+  --header "Authorization: Bearer $ACCESS_TOKEN" \
+  --data-urlencode 'PageNumber=1' \
+  --data-urlencode 'PageSize=10' \
+  --data-urlencode 'LifecycleStatus=0' \
+  --data-urlencode 'OrderBy=Name' \
+  "$API_BASE/api/v1/managed-resources"
+```
+
+`data` enthält die Einträge; `currentPage`, `totalPages`, `totalCount`, `pageSize`,
+`hasPreviousPage` und `hasNextPage` beschreiben die Seitenauswahl. Erhöhe
+`PageNumber`, solange `hasNextPage` wahr ist. Das ist kein unveränderlicher
+Snapshot: Gleichzeitige Änderungen können die Einträge zwischen Abrufen
+verschieben. `Keyword` durchsucht geeignete Textfelder; `ParentResourceId`,
+`ResourceType` und `LifecycleStatus` schränken die Ressourcenliste ein.
+Unbekannte Sortierfelder und ungültige Seitengrößen liefern `400`.
+Diese Parameter gelten für diesen paginierten Vertrag, nicht für jede Liste.
+
+### Einen Ressourcenentwurf anlegen und ändern
+
+1. Lege in der Testinstallation einen Entwurf mit einem dort noch nicht
+   verwendeten Namen an. `resourceType: 9` bedeutet **Other**.
+
+   ```bash
+   curl --silent --show-error --fail-with-body \
+     --request POST \
+     --header "Authorization: Bearer $ACCESS_TOKEN" \
+     --header 'Content-Type: application/json' \
+     --data '{"name":"HTTP-Demo-Ressource","description":"Test der HTTP-Anbindung","resourceType":9}' \
+     "$API_BASE/api/v1/managed-resources"
+   ```
+
+   Anlegen (`POST /api/v1/managed-resources`) liefert `201`,
+   den `Location`-Header und die angelegte Ressource mit `id`, `version` und
+   `lifecycleStatus: 0` (**Draft**). Ein Entwurf ist noch nicht buchbar oder
+   betreibbar. Dieser Aufruf konfiguriert weder Hardware noch eine Zutrittsfreigabe.
+
+2. Übernimm die zurückgegebene `id` als `RESOURCE_ID` und lies den gespeicherten
+   Stand. Diesen Aufruf nutzt du auch nach späteren Änderungen zum Prüfen.
+
+   ```bash
+   RESOURCE_ID='00000000-0000-0000-0000-000000000001' # Durch die erhaltene ID ersetzen.
+   curl --silent --show-error --fail-with-body \
+     --header "Authorization: Bearer $ACCESS_TOKEN" \
+     "$API_BASE/api/v1/managed-resources/$RESOURCE_ID"
+   ```
+
+3. Erzeuge aus der letzten
+   Detailantwort (`GET /api/v1/managed-resources/{resourceId}`) den
+   Änderungsbody. Der folgende Aufruf liest diese Antwort und übernimmt die
+   aktuelle `version`, den Elternknoten, Typ und Namen. Er ersetzt nur die
+   Beschreibung und sendet die editierbaren Felder mit
+   `PUT /api/v1/managed-resources/{resourceId}`:
+
+   ```bash
+   CURRENT_RESOURCE=$(curl --silent --show-error --fail-with-body \
+     --header "Authorization: Bearer $ACCESS_TOKEN" \
+     "$API_BASE/api/v1/managed-resources/$RESOURCE_ID") && \
+   printf '%s' "$CURRENT_RESOURCE" | \
+     jq '{parentResourceId, name, resourceType, occupiedMachinePolicy, version,
+          description: "HTTP-Änderung geprüft"}' | \
+     curl --silent --show-error --fail-with-body \
+       --request PUT \
+       --header "Authorization: Bearer $ACCESS_TOKEN" \
+       --header 'Content-Type: application/json' \
+       --data-binary @- \
+       "$API_BASE/api/v1/managed-resources/$RESOURCE_ID"
+   ```
+
+   Erfolg liefert `200` mit dem gespeicherten Stand und erhöhter `version`.
+   Prüfe die Beschreibung mit dem Leseaufruf aus Schritt 2.
+
+Für diesen Vertrag gilt: `name` ist erforderlich, maximal 160 Zeichen lang und
+wird getrimmt. Namen müssen unter demselben Elternknoten unabhängig von Groß- und
+Kleinschreibung eindeutig sein. `description` ist optional, maximal 2048 Zeichen
+lang; leerer oder nur aus Leerraum bestehender Text wird zu `null`.
+`parentResourceId` fehlt beim Anlegen für eine Wurzelressource. Beim Ändern setzt
+`null` oder Weglassen dieses Feldes die Ressource an die Wurzel. Eine weggelassene
+Beschreibung wird beim Ändern ebenfalls geleert; nur `occupiedMachinePolicy`
+bleibt beim Weglassen unverändert. Ein `PUT` ist hier deshalb kein beliebiges
+Teilupdate. Die vollständigen Feld- und Enumwerte stehen in der Referenz.
+
+### Einen veralteten Änderungsstand behandeln
+
+Wenn nach dem Lesen ein anderer Request dieselbe Ressource ändert, passt die
+mitgesendete `version` nicht mehr. Der Server weist die Änderung mit `409` ab.
+Lies die Ressource erneut, vergleiche deine beabsichtigte Änderung mit dem neuen
+Stand und sende erst danach den zusammengeführten Body mit dessen `version`.
+Ein `409` kann auch einen doppelten Namen oder eine unzulässige Hierarchie
+bedeuten; eine automatische Wiederholung löst diese Konflikte nicht.
+Andere Verträge verwenden stattdessen `ETag`/`If-Match`, etwa persönliche
+Dashboards. Übertrage die Versionslogik nicht ungeprüft auf andere Endpunkte.
 
 ## Fehler und Betrieb
 
-- [ ] TODO: Tatsächliche ProblemDetails-/Validierungsantworten und passende 400/401/403/404/409/429/503-Fälle dokumentieren; nicht jeden Status jedem Endpunkt zuschreiben.
-- [ ] TODO: Ratenbegrenzung, Retry und zulässige Abrufweise aus vorhandenen Policies belegen; keine allgemeine feste Rate erfinden.
-- [ ] TODO: Kompatibilität, Zugangsdatenwechsel und sichere Protokollierung anhand des verwendeten Zugangstyps erklären; API-Schlüssel nicht voraussetzen, wenn JWT verwendet wird.
+Prüfe zuerst den HTTP-Status. Geschäftsfehler werden überwiegend als
+`application/problem+json` mit `status`, `title`, `detail` und `instance`
+ausgegeben. Authentifizierungsfehler können zusätzlich `code` enthalten.
+Validierungsfehler können `errors` als feldbezogenes Objekt **oder** als Liste
+liefern. Eine abgelaufene oder widerrufene Sitzung kann stattdessen JSON mit
+`error` und `message` liefern. Ein Client muss deshalb auch ohne ein bestimmtes
+Fehlerfeld sinnvoll auf den Status reagieren.
+
+| Antwort | Bedeutung im beschriebenen Ablauf                                                     | Nächster Schritt                                                                                  |
+| ------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `400`   | Ungültiger JSON-Body, Feldwert, Filter oder Sortierausdruck.                          | Validierungsangaben auswerten und Request korrigieren.                                            |
+| `401`   | Bearer fehlt/ist ungültig, Sitzung ist beendet oder Anmeldung/Refresh wird abgelehnt. | Anmeldecode auswerten; gültig erneuern oder neu anmelden. Keine endlose Refresh-Schleife starten. |
+| `403`   | Die angemeldete Identität hat nicht die nötige Berechtigung.                          | Endpunktrecht und gegebenenfalls Objektzuweisung prüfen lassen.                                   |
+| `404`   | Die angefragte Ressource oder ein angegebener Elternknoten wurde nicht gefunden.      | ID und Sichtbarkeit des Zielobjekts prüfen.                                                       |
+| `409`   | Ressourcenstand veraltet, Name belegt oder fachlicher Konflikt.                       | Aktuellen Stand lesen und Konflikt vor erneutem Schreiben auflösen.                               |
+| `429`   | Die Rate eines begrenzten Endpunkts wurde überschritten.                              | Falls vorhanden `Retry-After` abwarten; Wiederholungen begrenzen.                                 |
+| `503`   | Beispielsweise ist der gewählte OIDC-Anbieter zur Laufzeit nicht verfügbar.           | Verfügbarkeit mit dem Betrieb klären; keine andere Anmeldeart voraussetzen.                       |
+
+Die Rate ist endpunktspezifisch. Passwortanmeldung und Refresh teilen im aktuellen
+Server ein Limit von zehn Requests je Minute und IP-Adresse; Challenge-Abschluss
+hat ein eigenes Limit von zwanzig. Daraus folgt kein allgemeines Limit für die
+Ressourcenliste. Abrufe begrenzen, Zeitüberschreitungen vorsehen und nach einem
+Verbindungsabbruch vor dem Wiederholen eines Schreibaufrufs dessen Ergebnis
+prüfen: Ein verlorener Response beweist nicht, dass die Änderung unterblieben ist.
+
+Auch `202` bedeutet nicht bei jeder Operation dasselbe: Bei der Anmeldung ist
+eine MFA-Fortsetzung nötig. Ein
+Schaltauftrag (`POST /api/v1/managed-resources/{resourceId}/switch/state`) wird dagegen
+asynchron angenommen. Dort sind angeforderter Zustand und bestätigter
+Gerätezustand getrennt; prüfe sie über den
+Schaltstatus (`GET /api/v1/managed-resources/{resourceId}/switch`). Wiederholungen
+dieses Auftrags behalten ihren `Idempotency-Key`. Das Ressourcenentwurfsbeispiel
+oben endet hingegen mit einer gespeicherten Datenänderung.
+
+Protokolliere für die Diagnose Methode, Pfad, HTTP-Status und einen vorhandenen
+Fehlercode, aber keine Passwörter, Bearer-/Refresh-Token oder MFA-Codes. Bei einem
+Serverwechsel oder Update prüfst du den zu dieser Installation gehörenden
+OpenAPI-Vertrag erneut; ein gleichbleibendes `/v1` allein ersetzt diesen Abgleich
+nicht.

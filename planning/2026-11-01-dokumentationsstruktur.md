@@ -1,5 +1,11 @@
 # Mardu-Dokumentation: Navigation und Einstieg
 
+**Fortschreibung:** Dieser Zielplan dokumentiert den Ausgangspunkt vor der
+[vollständigen Seitenrevision](2026-11-01-seitenrevision.md). Inzwischen wurden
+alle 56 Bestandsseiten einzeln geprüft und 13 fehlende Aufgabenanleitungen
+ausgearbeitet. Drei vorgeschlagene Zusatzseiten sind durch vorhandene Anleitungen
+abgedeckt. Aktueller Prüfstatus und Publikationsumfang stehen in der Seitenrevision.
+
 Stand: 1. November 2026. Die revidierte Struktur wurde vom Nutzer für die erste
 Umsetzung freigegeben. **Der erste nutzbare Navigationsstand ist lokal umgesetzt.**
 Die sechs Bereiche bleiben erhalten; noch fehlende Anleitungen werden weiterhin
@@ -28,7 +34,7 @@ neue Anleitungen steht in der [Arbeitsweise](../ARBEITSWEISE.md).
 - Ausgelagerte Schreibaufträge stehen im [internen Backlog](./offene-dokumentationsaufgaben.md).
   Das Auslagern bedeutet keine Erledigung. Der neue Überblick verwendet SVGs aus
   den Mermaid-Quellen und den vorhandenen Bildbetrachter.
-- Die 14 ergänzenden Seitenzuschnitte sind weiterhin geplant. Website-Consumer,
+- Die 14 ursprünglichen Zusatzseitenzuschnitte werden durch die verlinkte Seitenrevision fortgeschrieben. Website-Consumer,
   vollständige Funktionsabnahme und Tests mit neuen Lesern bleiben gesonderte Schritte.
 
 ## Leitentscheidung

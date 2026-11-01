@@ -13,27 +13,53 @@ erklärt das gemeinsame Modell aus Personen und Ressourcen.
 
 <span id="empfohlene-reihenfolge" />
 
+## Erste Schritte
+
+Bei einer neuen Installation beginne mit
+[Server auf dem Raspberry Pi installieren → Installieren](../installieren/raspberry-pi.mdx).
+Dort stehen Ersteinrichtung, Erstzugang und die bekannten Voraussetzungen.
+Für einen eingerichteten Server brauchst du dessen Dashboard-Adresse und dein
+eigenes Konto; melde dich mit dem dafür eingerichteten Verfahren an.
+
+1. Prüfe unter [Personen und Berechtigungen](#personen-und-berechtigungen) den
+   Kontostatus, die zugewiesenen Rollen und die benötigten Verwaltungszuständigkeiten.
+2. Prüfe unter [Betrieb](#betrieb) den Systemstatus und, wenn E-Mails benötigt
+   werden, den Versand mit einer Test-E-Mail. Bereite einen Weg zur
+   Kontowiederherstellung vor, bevor du Anmeldevorgaben änderst.
+3. Richte die benötigten Ressourcen ein. Ergänze Freigaben, Kompetenzen, Geräte
+   und Anbindungen nach dem jeweiligen Einsatzzweck.
+
 ## Personen und Berechtigungen
 
-[Benutzer und Rollen](./benutzer-rollen.mdx) beschreibt Kontenanlage, Kontenstatus
-sowie die Zuweisung vorhandener Rollen und Gruppen. Für den Unterschied zwischen
-Anmeldung, Funktionsrecht und Ressourcennutzung siehe
-[Personen, Rollen und Freigaben](../ueberblick/benutzerkonten.mdx).
+- [Benutzer und Rollen](./benutzer-rollen.mdx): Konten einladen, freigeben und bearbeiten sowie vorhandene Rollen und Gruppen zuweisen.
+- [Rollen und Gruppen verwalten](./rollen-gruppen.mdx): Rollenrechte festlegen, Benutzergruppen anlegen und die Folgen geänderter Zuweisungen prüfen.
+- [Verwaltungszuständigkeiten vergeben und entziehen](./verwaltungszustaendigkeiten.mdx): festlegen, wer Zugriffsregeln, Freigaben oder Hardwarezuordnungen verwalten darf.
+
+Anmeldung, Verwaltungsrecht und Ressourcennutzung sind unterschiedliche
+Voraussetzungen. Den Zusammenhang erklärt
+[Benutzerkonten, Rollen und Zugänge → Überblick](../ueberblick/benutzerkonten.mdx).
 
 ## Ressourcen und Zutritt
 
 - [Ressourcen einrichten](../koordination/ressourcen.mdx): Struktur, Nutzungsbedingungen, technische Anschlüsse und Buchbarkeit.
+- [Ressourcenfreigaben verwalten](./freigaben-verwalten.mdx): Nutzung für Personen oder Benutzergruppen freigeben, zeitlich begrenzen und entziehen.
 - [Zugangs-Tags verwalten](./tags-verwalten.mdx): Karten mit Mardu Connect zuweisen, bei Verlust sperren und ersetzen.
 
-Für eine geplante Unterbrechung nutze den Einstieg
-[Koordination](../koordination/index.mdx). Die Einrichtung einer Ressource und die
-Organisation ihrer laufenden Nutzung können dieselbe Person betreffen.
+Die Ressourcenanleitung gehört zur Administration und beschreibt auch
+Zugriffsregeln, Zutrittspunkte und Wartung. Für laufende Entscheidungen über
+Anträge, Buchungen oder Verfügbarkeit nutze
+[Koordination](../koordination/index.mdx). Beide Aufgaben können dieselbe Person
+betreffen.
 
 ## Kompetenzen und Nachweise
 
-[Badges verwalten](./badges-verwalten.mdx) beschreibt Definitionen,
-Inhaltsversionen, Voraussetzungen und Aktivstatus. Ein Badge zu definieren ist
-ein anderer Vorgang als ein persönlicher Erwerb oder eine Ressourcenfreigabe.
+- [Fähigkeiten, Kataloge und Lernwege einrichten](./kompetenzen-lernwege.mdx): festlegen, was erworben werden kann und welche Badges zu einem Lernweg gehören.
+- [Badges verwalten](./badges-verwalten.mdx): Definitionen und Versionen pflegen, lokal vergeben, importieren oder veröffentlichen.
+- [Nachweissysteme anbinden](./nachweissysteme-anbinden.mdx): persönliche Nachweisquellen bereitstellen oder die serverweite Synchronisation einrichten und prüfen.
+
+Definition, persönlicher Erwerb und Ressourcenfreigabe sind getrennte Vorgänge.
+Bewertungen und laufende Lernwegteilnahmen gehören zur
+[Koordination](../koordination/index.mdx#qualifikationen-einordnen).
 
 <span id="weitere-verwaltungsaufgaben" />
 
@@ -44,23 +70,37 @@ ein anderer Vorgang als ein persönlicher Erwerb oder eine Ressourcenfreigabe.
 
 ## Anbindungen
 
-[MCP für Agenten freigeben](./mcp-verwalten.mdx) führt von der Serverrichtlinie
-zum persönlichen Lesezugang und erklärt Einschränkung und Abschaltung. Den Token
-verwaltet die Person unter [Eigene MCP-Verbindungen](../ueberblick/profil-mcp.mdx).
+Wähle zuerst die benötigte Verbindung. [Integrationen](./integrationen.mdx)
+erklärt die Unterschiede zwischen Anmeldung, Nachweisquellen, Informationsbroker
+und Gerätekommunikation.
+
+- Personen aus einem Verzeichnis übernehmen: [LDAP-Verzeichnis anbinden](./ldap-verzeichnis.mdx).
+- Anmeldung bei einem externen Identitätsanbieter ermöglichen: [OpenID Connect einrichten](./oidc-anmeldung.mdx).
+- System- und Geräteinformationen für externe Clients bereitstellen: [MQTT-Zugänge verwalten](./mqtt-broker.mdx).
+- Die ausgehende Geräteverbindung konfigurieren: [IP500-Netzwerk anbinden](./ip500-netzwerk.mdx).
+- Agentenzugriff erlauben und begrenzen: [MCP für Agenten freigeben](./mcp-verwalten.mdx). Persönliche Tokens verwaltet jede Person im eigenen Profil.
 
 ## Betrieb
 
-- [Benachrichtigungen einrichten und prüfen](./benachrichtigungen-verwalten.mdx): Zustellkanäle vorbereiten und ein Ereignis bis zum Empfang verfolgen.
-- [Übersicht und Systemstatus](../benutzer/uebersicht-monitoring.mdx): Zeiträume, Messwerte, fehlende Daten und Zustellmetriken einordnen.
+Beginne bei einer Störung mit [Sicherheit und Betrieb](./sicherheit-betrieb.mdx).
+Die Anleitung führt durch Anmeldeprobleme, Wiederherstellung und die Eingrenzung
+betroffener Dienste. Für geplante Änderungen und Prüfungen nutze:
+
+- [Servereinstellungen](./server-einstellungen.mdx): globale Vorgaben, Registrierung und Anmelderichtlinie ändern; gesperrte Felder und Neustartbedarf erkennen.
+- [HTTPS-Zertifikatswechsel vorbereiten und prüfen](./zertifikate-https.mdx): die zuständige HTTPS-Komponente bestimmen und die verwendete Verbindung kontrollieren.
+- [Benachrichtigungen einrichten und prüfen](./benachrichtigungen-verwalten.mdx): E-Mail-Versand testen und eine Mitteilung bis zum Empfang verfolgen.
+- [Übersicht und Systemstatus](../benutzer/uebersicht-monitoring.mdx): Betriebsdashboards, Messwerte, Datenlücken und Zustellmetriken einordnen. Auch diese Anleitung gehört zur Administration.
 - [Zugangsmetriken lesen](./zutritt-verwalten.mdx#zugangsmetriken): gespeicherte Entscheidungen und aktive Zutrittssitzungen unterscheiden.
-- [Mardu per CLI warten](./wartungs-cli.mdx): Kontowiederherstellung und Serverdiagnose mit lokalem Wartungszugang.
-- [Wartungs-CLI: Befehle und Optionen](./wartungs-cli-referenz.mdx): Aufrufe, Parameter und Rückgabewerte nachschlagen.
+- [Nachweise und Datenschutz](./nachweise-datenschutz.mdx): Verwaltungsänderungen suchen und exportieren sowie Datenquellen und Löschfolgen prüfen.
+
+Wenn du lokalen Wartungszugang zum Server hast, hilft
+[Mardu per CLI warten](./wartungs-cli.mdx) bei Kontowiederherstellung und Diagnose.
+Die zugehörige [Befehlsreferenz](./wartungs-cli-referenz.mdx) nennt Aufrufe,
+Optionen und Rückgabewerte.
 
 <span id="offene-dokumentationsaufgaben" />
+<span id="umfang-der-anleitungen" />
 
-## Umfang der Anleitungen
-
-Vollständige Anleitungen zur Rollenpflege, zu delegierten Verwaltungsrechten und
-zu weiteren Server- und Anbietereinstellungen fehlen noch. Die vorhandenen
-Anleitungen nennen ihre jeweiligen Prüfgrenzen. Eine gespeicherte Einstellung
-oder ein gesendeter Befehl bestätigt allein keine physische Ausführung.
+Eine gespeicherte Einstellung, Freigabe oder ein gesendeter Befehl bestätigt
+allein keine physische Ausführung. Prüfe das Ergebnis nach der jeweiligen
+Anleitung an der betroffenen Verbindung oder Ressource.

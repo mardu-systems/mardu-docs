@@ -4,7 +4,9 @@ description: Einen MCP-Client mit einem persönlichen Token verbinden, einen Les
 ---
 
 MCP-Clients verwenden persönliche Agentenzugänge. Diese Anleitung verbindet
-einen Client mit dem Server und prüft den Zugriff mit einem Leseaufruf.
+einen Client mit dem Server und prüft den Zugriff mit einem Leseaufruf. Der
+beschriebene Endpunkt bietet Mardu-Daten und Aktionen an; er dient nicht zum
+Durchsuchen der Dokumentation.
 
 ## MCP-Client verbinden
 
@@ -23,7 +25,7 @@ Die Tokenverwaltung benötigt Profil-Lese- und Änderungsrechte.
    gegebenenfalls `/mcp` durch die Werte deiner Installation.
 4. Hinterlege den Token im Authentifizierungsfeld des Clients. Verlangt der Client
    einen HTTP-Header, verwende `Authorization: Bearer <dein-token>`.
-5. Initialisiere die Verbindung und lade die Werkzeuge mit `tools/list`.
+5. Initialisiere die Verbindung mit `initialize` und lade die Werkzeuge mit `tools/list`.
 6. Rufe `notifications_list` mit `limit: 1` auf. Das Tool liest nur den
    Posteingang des Tokeninhabers; eine leere Liste ist eine gültige Antwort.
 
@@ -40,6 +42,10 @@ Falls der Client Tool-Aufrufe als JSON annimmt, lautet der Inhalt für `tools/ca
 
 Das Beispiel zeigt die Parameter eines MCP-Aufrufs, keinen eigenständigen
 HTTP-Request. Der Client übernimmt Initialisierung und Protokollnachrichten.
+Der Transport ist zustandslos: Der Client muss den Bearer-Token bei jeder
+HTTP-Anfrage mitsenden. Eine erfolgreiche Initialisierung ersetzt diese
+Authentifizierung nicht.
+
 `notifications_list` benötigt `Permissions.Profile.View`. Die Seitengröße muss
 zwischen 1 und dem Serverlimit liegen; mit `afterCursor` kann der Client eine
 weitere Seite anfordern.
@@ -50,7 +56,10 @@ Bei persönlichen Verbindungen begrenzen die delegierten Rechte, die aktuellen
 Rechte des Kontos und die Serverrichtlinie jeden Tool-Aufruf gemeinsam.
 Eine sichtbare Werkzeugbeschreibung ist keine Zusage, dass der Aufruf mit diesem
 Token erlaubt ist. Schreibende oder destruktive Tools benötigen zusätzlich die
-entsprechende Serverfreigabe.
+entsprechende Serverfreigabe. Lade die Werkzeugliste nach einer Änderung der
+Richtlinie oder der Rechte neu. Die Serveranweisungen verlangen für schreibende
+Aufrufe eine klare Nutzerabsicht und für destruktive Aktionen eine ausdrückliche
+Bestätigung. Beachte zusätzlich die Bestätigungsparameter des jeweiligen Tools.
 
 Zum [Erneuern oder Widerrufen](../ueberblick/profil-mcp.mdx#zugang-ersetzen-oder-widerrufen)
 verwendest du das eigene Profil. Ersetze nach einer Erneuerung den Token im Client;
@@ -62,7 +71,7 @@ für diesen Ablauf nicht erforderlich.
 
 | Antwort oder Fehler         | Prüfen                                                                                                                                                                                         |
 | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| HTTP 401                    | Token fehlt, ist ungültig, abgelaufen oder widerrufen. Prüfe auch, ob persönliche Verbindungen noch freigegeben sind.                                                                          |
+| HTTP 401                    | Token fehlt, ist ungültig, abgelaufen oder widerrufen. Prüfe auch, ob MCP und persönliche Verbindungen noch freigegeben sind.                                                                  |
 | HTTP 403                    | Der Endpunkt kann deaktiviert sein oder ausschließlich Agent-Tokens verlangen. Prüfe die Serverrichtlinie. Fehlende Tool-Rechte können auch als Fehler innerhalb einer MCP-Antwort erscheinen. |
 | HTTP 404                    | Prüfe Serveradresse, Proxy und konfigurierte MCP-Route.                                                                                                                                        |
 | HTTP 429                    | Der Zugriff ist begrenzt. Reduziere parallele Aufrufe und warte vor dem nächsten Versuch; beachte einen gegebenenfalls gelieferten `Retry-After`-Header.                                       |
@@ -77,8 +86,9 @@ Ebenen im Client; protokolliere dabei keine Zugangsdaten.
 
 Die [Administration richtet Automationen ein](../administration/automationen.mdx)
 und gibt den Editor sowie die verwendeten Anschlüsse frei. MCP-Token und
-Editorzugang erfüllen unterschiedliche Aufgaben. Ein eigener Leitfaden für die
-Entwicklung von Automationsflüssen ist noch nicht ausgearbeitet.
+Editorzugang erfüllen unterschiedliche Aufgaben. Ein lesendes Beispiel mit
+Deploy- und Ergebnisprüfung findest du unter
+[Eigene Automationsflüsse entwickeln](./automationsfluesse.mdx).
 
 ## Echtzeit und Aufgabenverteilung
 

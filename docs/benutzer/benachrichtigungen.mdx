@@ -3,7 +3,7 @@ title: Benachrichtigungen lesen
 description: Persönliche Mitteilungen finden, als gelesen markieren, archivieren und wiederherstellen.
 ---
 
-Die Glocke öffnet deinen Posteingang; ihre Zahl zählt ungelesene Mitteilungen.
+Die Glocke öffnet deinen Posteingang; ihre Zahl zählt ungelesene, nicht archivierte Mitteilungen.
 Ein Mondsymbol an der Glocke zeigt aktive Ruhezeiten an. Der Hinweis erscheint
 auch beim Zeigen auf die Glocke oder beim Fokussieren mit der Tastatur.
 Zum Lesen brauchst du Profil-Leserechte, für Änderungen Profil-Änderungsrechte.
@@ -14,7 +14,10 @@ Zum Lesen brauchst du Profil-Leserechte, für Änderungen Profil-Änderungsrecht
 2. Wähle **Eingang**, **Ungelesen** oder **Archiv**.
 3. Suche nach einer Meldung. Öffne **Filter**, um Priorität und Kategorie
    auszuwählen. Die Zahl am Schalter zeigt, wie viele dieser Filter aktiv sind.
-4. Öffne einen Eintrag für Details. **Weitere laden** erweitert die Liste.
+4. Öffne einen Eintrag für Details. **Weitere Mitteilungen laden** erweitert die Liste.
+
+Das Öffnen ändert den Lesestatus nicht. Wenn **Bereich öffnen** angeboten wird,
+führt der Schalter zum passenden Bereich, etwa zu deinen Buchungen.
 
 ![Posteingang mit Buchungsbestätigung, Passwortänderung und Systemwarnung](bilder/posteingang.png)
 
@@ -22,10 +25,15 @@ Beispiel mit fiktiven Meldungen. Betriebsmeldungen hängen von deinen Rechten ab
 
 ## Lesen, archivieren und rückgängig machen
 
-Die Aktionen am Eintrag ändern den Lesestatus oder archivieren die Mitteilung.
-Im Archiv kannst du sie zurückholen. Unter **Aktionen** kannst du alle als gelesen
-markieren oder gelesene Mitteilungen archivieren. **Rückgängig** nimmt eine angebotene
-Archivierung zurück. Die zugehörige Buchung oder Freigabe bleibt unverändert.
+Wähle am Eintrag **Als gelesen markieren** oder **Als ungelesen markieren**.
+**Archivieren** verschiebt die Mitteilung ins **Archiv**. Dort bringt
+**Wiederherstellen** sie mit unverändertem Lesestatus zurück in den Eingang.
+Nach dem Archivieren eines einzelnen Eintrags bietet die Erfolgsmeldung
+**Rückgängig** an. Die zugehörige Buchung oder Freigabe bleibt unverändert.
+
+Unter **Aktionen** stehen **Alle als gelesen markieren** und **Gelesene archivieren**.
+Diese Sammelaktionen können auch Einträge außerhalb der aktuellen Suche oder Filter
+und noch nicht geladene Einträge ändern. Sie sind im Archiv deaktiviert.
 
 Während eine Änderung gespeichert wird, sind weitere Lese- und Archivaktionen
 deaktiviert. Du kannst den Posteingang weiterhin durchsuchen und Meldungen öffnen.
@@ -35,13 +43,18 @@ aufklappen, um Ereignis- und Mitteilungskennung nachzusehen.
 
 ## Welche Meldungen du bekommst
 
-Du erhältst persönliche Buchungs-, Nachweis- und Sicherheitsmeldungen.
+Persönliche Meldungen betreffen zum Beispiel Buchungen, Nachweise und Kontosicherheit.
 Betriebsmeldungen benötigen passende Rechte oder Zuständigkeiten. Entfallen diese,
 können auch frühere Meldungen aus der Ansicht verschwinden.
 
-Die [Benachrichtigungseinstellungen](../ueberblick/profil-benachrichtigungen.mdx)
-regeln Kanäle und Ruhezeiten. Sie erweitern nicht deine Empfangsrechte;
-Pflichtmeldungen lassen sich nicht abschalten.
+Der Posteingang zeigt Mitteilungen im Kanal **In-App**. Ein Eintrag oder sein
+Lesestatus bestätigt keine Zustellung per E-Mail, SMS oder Web-Push.
+Ruhezeiten halten In-App-Mitteilungen nicht zurück.
+
+Die [Benachrichtigungseinstellungen unter Kontoeinstellungen](../ueberblick/profil-benachrichtigungen.mdx)
+regeln Kanäle und Ruhezeiten. Auch die Auswahl für In-App beeinflusst, welche
+Mitteilungen im Posteingang erscheinen. Die Einstellungen erweitern nicht deine
+Empfangsrechte; Pflichtmeldungen lassen sich nicht abschalten.
 
 ## Keine Einträge oder ein Fehler?
 

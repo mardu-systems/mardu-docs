@@ -1,0 +1,111 @@
+---
+title: IP500-Netzwerk anbinden
+description: Die ausgehende MQTT-Verbindung zum IP500-Netzwerk im Dashboard einrichten, ändern und prüfen.
+---
+
+Unter **Administration → Systemeinstellungen → IP500-Netzwerk** richtest du die
+ausgehende MQTT-Verbindung des Mardu-Servers zum Broker deines IP500-Netzwerks ein.
+Der Broker vermittelt die Nachrichten zwischen Server und Netzwerkanbindung.
+Diese Einstellungen betreffen eine andere Verbindung als den eingebetteten
+Informationsbroker unter **Integrationen → Embedded MQTT**.
+
+Die Seite richtet weder einen Edge-Router ein noch nimmt sie einen Controller
+auf. Für die anschließende Geräteaufnahme nutze
+[Geräte verwalten](./geraete-verwalten.mdx#gerät-hinzufügen-und-verbinden), für die
+Prüfung der gesamten Einrichtung
+[Installieren → Geräte in Betrieb nehmen](../installieren/inbetriebnahme.mdx).
+
+## Vorbereiten
+
+Du brauchst **Einstellungen anzeigen**, zum Speichern zusätzlich
+**Einstellungen bearbeiten**. Halte die vom betreuenden IP500-Betrieb vorgegebenen
+Brokerdaten bereit:
+
+- Hostname oder IP-Adresse und Port, die vom Mardu-Server aus erreichbar sind.
+- Eine für diese Serverinstanz vorgesehene MQTT-Client-ID.
+- Benutzername und Passwort, falls der Broker eine Anmeldung verlangt.
+- Vorgaben für TLS und Zertifikatsvertrauen.
+
+Änderungen starten den ausgehenden MQTT-Client automatisch neu. Während der
+Wiederverbindung ist die Kommunikation über diese Verbindung unterbrochen.
+Stimme Änderungen an einer genutzten Installation deshalb mit dem Betrieb ab.
+
+## Verbindung einrichten oder ändern
+
+1. Öffne **Administration → Systemeinstellungen → IP500-Netzwerk**. Prüfe zuerst,
+   welche Werte bereits hinterlegt sind. Als **Durch Umgebungsvariable gesperrt**
+   markierte Felder werden durch die Serverbereitstellung vorgegeben und lassen
+   sich hier nicht ändern. Gib die Änderung an den Serverbetrieb weiter.
+2. Trage unter **Broker-Verbindung** den **Broker-Host**, **Broker-Port** und die
+   **Client-ID** ein. Der Host ist ein Name oder eine IP-Adresse; den Port gibst du
+   im eigenen Feld an. Er muss zwischen 1 und 65.535 liegen.
+3. Trage bei erforderlicher Anmeldung **Broker-Benutzername** und das zugehörige
+   Passwort unter **Broker-Passwort ersetzen** ein. Bei aktivierter Verbindung
+   müssen Benutzername und Passwort gemeinsam vorhanden sein. Lässt du das
+   Passwortfeld leer, bleibt das gespeicherte Passwort erhalten; ein leer
+   angezeigtes Feld bedeutet deshalb nicht, dass kein Passwort hinterlegt ist.
+4. Stelle unter **TLS** die mit dem Broker vereinbarten Werte für **TLS verwenden**
+   und **Zertifikat validieren** ein. Für eine Verbindung mit Zertifikatsprüfung
+   muss der Server dem Brokerzertifikat vertrauen. Ohne Zertifikatsprüfung werden
+   auch nicht vertrauenswürdige Zertifikate zugelassen.
+5. Kontrolliere nach dem Umschalten von TLS den Port erneut: Steht dort 1883 oder
+   8883, wechselt die Oberfläche automatisch zum jeweils anderen Standardport.
+   Andere eingetragene Ports bleiben bestehen. Entscheidend ist der vom Broker
+   angebotene Port.
+6. Lass unter **Subscription Refresh → Refresh-Cron** den vorhandenen Wert stehen,
+   sofern keine abgestimmte Änderung nötig ist. Das Feld darf nicht leer sein.
+   Es ist kein Verbindungstest; die aktuelle Laufzeit stellt die benötigten
+   Nachrichtenabonnements beim Verbindungsaufbau wieder her und überspringt die
+   periodische erneute Anmeldung. Eine Änderung dieses Felds repariert daher
+   keine ausbleibenden Gerätemeldungen.
+7. Schalte **IP500-Netzwerk aktivieren** ein und wähle **Speichern**. Broker-Host
+   und Client-ID müssen ausgefüllt sein. Korrigiere angezeigte Fehler, bevor du
+   erneut speicherst.
+
+Das Passwort wird nicht wieder ausgelesen. Die Seite bietet keine Aktion, um ein
+gespeichertes Brokerpasswort zu löschen, und keine Zertifikatsauswahl. Kläre eine
+Änderung des benötigten Clientzertifikats mit dem Serverbetrieb.
+
+## Ergebnis prüfen
+
+Die Speichermeldung bestätigt die Übernahme der Einstellungen. Der Server startet
+den MQTT-Client mit den neuen Werten ohne vollständigen Serverneustart neu und
+versucht bei Verbindungsfehlern erneut, den Broker zu erreichen. Die Meldung
+bestätigt weder eine erfolgreiche Brokeranmeldung noch einen erreichbaren
+Edge-Router.
+
+1. Öffne die Seite erneut und prüfe die gespeicherten Verbindungswerte. Das
+   Passwortfeld bleibt auch bei hinterlegtem Passwort leer.
+2. Lass den Serverbetrieb im Serverprotokoll prüfen, ob der IP500-MQTT-Client
+   verbunden ist und die Nachrichtenabonnements angenommen wurden. Die
+   Einstellungsseite bietet keinen eigenen Verbindungstest und keine
+   Verbindungsdiagnose.
+3. Prüfe bei bereits aufgenommenen Geräten unter **Geräte → Übersicht → Verbindung
+   und Hardware** die letzte Verbindung. Fahre bei einer neuen Installation mit
+   [Gerät hinzufügen und verbinden](./geraete-verwalten.mdx#gerät-hinzufügen-und-verbinden)
+   fort. Prüfe anschließend die benötigten Anschlüsse nach der Geräteanleitung.
+
+Eine Brokerverbindung bestätigt noch keine Geräteaufnahme, Anschlussbestätigung
+oder physische Funktion.
+
+## Wenn etwas nicht klappt
+
+| Beobachtung                                                            | Nächster Schritt                                                                                                                                                                                                                       |
+| ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Die Einstellungen lassen sich nicht laden oder speichern.              | Prüfe Anmeldung und die Rechte **Einstellungen anzeigen/bearbeiten**. Beachte zusätzlich die angezeigte Fehlermeldung.                                                                                                                 |
+| Ein Feld ist gesperrt.                                                 | Lass die entsprechende Vorgabe in der Serverumgebung durch den Serverbetrieb ändern.                                                                                                                                                   |
+| Das Speichern wird wegen fehlender oder ungültiger Angaben abgewiesen. | Prüfe Broker-Host, Client-ID und Port. Bei aktivierter Verbindung müssen Zugangsdaten zusammenpassen und **Refresh-Cron** ausgefüllt sein.                                                                                             |
+| Nach dem Speichern kommen keine Gerätemeldungen an.                    | Lass Erreichbarkeit vom Server zum Broker, Port, TLS-Vertrauen, Brokerzugang und die Freigabe der Nachrichtenabonnements prüfen. Ein erneutes Speichern oder Ändern von **Refresh-Cron** ist kein Nachweis einer behobenen Verbindung. |
+| Der Broker ist verbunden, ein Gerät bleibt aber bei **Verbinden**.     | Folge [Geräte verwalten → Probleme prüfen](./geraete-verwalten.mdx#probleme-prüfen); prüfe dabei auch den vorgesehenen Edge-Router.                                                                                                    |
+
+Notiere für die Störungseingrenzung Zeitpunkt, betroffene Geräte und die genaue
+Fehlermeldung. Entferne Zugangsdaten aus weitergegebenen Auszügen. Weitere Schritte
+stehen unter [Sicherheit und Betrieb → Eine Störung eingrenzen](./sicherheit-betrieb.mdx#eine-störung-eingrenzen).
+
+## Verbindung abschalten
+
+Schalte **IP500-Netzwerk aktivieren** aus und wähle **Speichern**. Lass die übrigen
+gültigen Werte bestehen. Der ausgehende MQTT-Client wird gestoppt; die Kommunikation
+über diese Verbindung steht dann nicht zur Verfügung. Das löscht keine Geräte,
+Anschlusszuordnungen oder Ressourcen. Prüfe die Folgen für eure Installation,
+bevor du die Verbindung im laufenden Betrieb abschaltest.

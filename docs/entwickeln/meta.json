@@ -1,4 +1,13 @@
 {
   "title": "Entwickeln",
-  "pages": ["---Schnittstellen---", "mcp-anbindung", "---Referenz---", "API"]
+  "pages": [
+    "---Schnittstellen verwenden---",
+    "api-integration",
+    "http-api",
+    "mqtt-events",
+    "mcp-anbindung",
+    "automationsfluesse",
+    "---Referenz---",
+    "API"
+  ]
 }

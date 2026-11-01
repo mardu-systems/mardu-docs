@@ -3,31 +3,50 @@ title: Ressourcenzustand und Störungen
 description: Angezeigte Zustände einordnen und eine verweigerte oder fehlerhafte Nutzung melden.
 ---
 
-Prüfe bei Nutzungsproblemen zuerst [Freigaben und Voraussetzungen](./zutritt.mdx)
-sowie deine [Buchung](./buchungen.mdx).
+Unter **Zugänge & Ressourcen**, auf dem Handy **Ressourcen**, zeigt
+**Ressourcen entdecken** den Betriebsstatus der sichtbaren Ressourcen.
+Öffne **Details**, um die Angaben und Hinweise zu einer Ressource einzeln zu lesen.
+Für den Katalog benötigst du Katalog-Leserechte.
 
 ## Anzeigen einordnen
 
-| Beobachtung                         | Bedeutung                                                               |
-| ----------------------------------- | ----------------------------------------------------------------------- |
-| Ressource im Katalog sichtbar       | Du darfst das Angebot sehen; weitere Nutzungsbedingungen können gelten. |
-| Freigabe innerhalb ihrer Zeiten     | Die zeitliche Bedingung ist erfüllt.                                    |
-| Buchung bestätigt                   | Die Reservierung ist bestätigt.                                         |
-| Gerät offline oder Meldung veraltet | Der aktuelle physische Zustand ist nicht bestätigt.                     |
-| Abfrage fehlgeschlagen              | Der aktuelle Zustand ist unbekannt.                                     |
+| Beobachtung                      | Bedeutung                                                                                                           |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Ressource im Katalog sichtbar    | Du darfst das Angebot sehen; weitere Nutzungsbedingungen können gelten.                                             |
+| **Verfügbar**                    | Aktivstatus und eingetragene Sperrzeiten erlauben derzeit den Betrieb. Das bestätigt keinen freien Buchungsplatz.   |
+| **Nicht verfügbar**              | Die Ressource oder ein übergeordneter Bereich ist nicht aktiv, oder eine wirksame Sperrzeit verhindert den Betrieb. |
+| **Innerhalb der Freigabezeiten** | Die zeitliche Bedingung deiner Freigabe ist erfüllt.                                                                |
+| Buchung **Bestätigt**            | Die Reservierung ist bestätigt; weitere Zutrittsbedingungen können gelten.                                          |
+| Abfrage fehlgeschlagen           | Der aktuelle Stand ist nicht bestätigt. Auch noch sichtbare ältere Angaben sind keine neue Prüfung.                 |
 
+Die Hinweise auf der Ressourcenkarte können beispielsweise einen deaktivierten
+Bereich oder gesperrten Betrieb nennen. **Benötigter Zugang** und
+**Erforderliche Einweisungen** beschreiben die Bedingungen der Ressource.
+Eigene Freigaben und Buchungen prüfst du wie unter
+[Freigaben und Voraussetzungen](./zutritt.mdx) und [Meine Buchungen](./buchungen.mdx)
+beschrieben.
+
+Der Katalogstatus enthält keine Live-Prüfung, ob das zugehörige Gerät online ist.
 Eine Portal-Anzeige bestätigt keine geöffnete Tür oder freigeschaltete Maschine.
 Dafür sind Rückmeldungen der Hardware erforderlich.
 
 ## Eine Störung eingrenzen
 
 1. Prüfe Konto und Projekt.
-2. Prüfe Zeitraum, Freigaben und erforderliche Einweisungen.
-3. Lade fehlgeschlagene Bereiche erneut.
-4. Melde die Störung an die zuständige Stelle deines Standorts.
+2. Prüfe die Hinweise zur Ressource, Zeitraum, Freigaben, erforderliche
+   Einweisungen und gegebenenfalls deine Buchung.
+3. Wähle **Neu laden**, um die Katalogangaben erneut abzufragen. Bei einem
+   Ladefehler wähle **Erneut versuchen**. Eine fehlgeschlagene Abfrage belegt
+   weder eine Sperre noch die Verfügbarkeit der Ressource.
+4. Bleibt das Problem bestehen, melde die Störung über den an deinem Standort
+   vereinbarten Kontaktweg an die zuständige Stelle.
 
 Nenne Ressource, Zeitpunkt mit Zeitzone, sichtbare Meldung und deine Beobachtung
 am Gerät. Teile keine Zugangsdaten oder persönlichen Kalenderlinks.
 
-Diagnose und Updates gehören zur [Geräteverwaltung](../administration/geraete-verwalten.mdx),
+**Zugriff anfragen** beantragt eine Freigabe; die Aktion meldet keine technische
+Störung. Sie wird nur bei passenden Rechten und Bedingungen angeboten. Siehe
+[Berechtigungsanfragen](./berechtigungsanfragen.mdx).
+
+Diagnose und Updates gehören zur [Geräteverwaltung in der Administration](../administration/geraete-verwalten.mdx),
 Betriebsmetriken zu [Übersicht und Systemstatus](./uebersicht-monitoring.mdx).

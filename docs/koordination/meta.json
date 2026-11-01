@@ -1,8 +1,13 @@
 {
   "title": "Koordination",
   "pages": [
-    "---Ressourcen im Alltag---",
+    "---Buchungen und Ressourcen---",
+    "buchungen-verwalten",
     "[Verfügbarkeit und Wartung → Administration](/docs/koordination/ressourcen#ausfälle-und-wartung-betrieb-unterbrechen)",
-    "[Buchbarkeit ändern → Administration](/docs/koordination/ressourcen#buchbarkeit-reservierungen-ermöglichen)"
+    "[Buchbarkeit ändern → Administration](/docs/koordination/ressourcen#buchbarkeit-reservierungen-ermöglichen)",
+    "---Zugang und Qualifikationen---",
+    "zugangsantraege-entscheiden",
+    "bewertungen",
+    "vergaben-lernwegteilnahmen"
   ]
 }

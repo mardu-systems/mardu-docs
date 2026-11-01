@@ -24,6 +24,7 @@ Melde dich am Dashboard an. Du brauchst die Leseberechtigung für Benutzer sowie
 | Profildaten ändern, Registrierungen freigeben oder Konten deaktivieren | Benutzer bearbeiten                                               |
 | Direkte Rollen zuweisen                                                | Benutzerrollen ansehen und bearbeiten; Rollen ansehen             |
 | Gruppenmitgliedschaften ändern                                         | Benutzergruppen ansehen; Gruppenmitglieder ansehen und bearbeiten |
+| 2FA-Vorgabe ändern, 2FA oder einen Passkey deaktivieren                | Benutzer bearbeiten                                               |
 | Zugangsmetriken ansehen                                                | Zugänge ansehen                                                   |
 | Benutzer löschen                                                       | Benutzer löschen                                                  |
 
@@ -191,7 +192,7 @@ direkte Zuweisung weiterhin gelten.
 
 Gruppenrollen gelten für alle Mitglieder, auch für später hinzugefügte Personen. Prüfe deshalb vor einer Änderung, wen sie betrifft.
 
-Du brauchst Leserechte für die Gruppe und die angezeigten Zuordnungen. Zum Ändern von Mitgliedern oder Rollen brauchst du die jeweiligen Bearbeitungsrechte. Für Name und Beschreibung prüft das System die Berechtigung zum Anlegen von Benutzergruppen.
+Du brauchst Leserechte für die Gruppe und die angezeigten Zuordnungen sowie für die verfügbaren Rollen. Zum Ändern von Mitgliedern oder Rollen brauchst du die jeweiligen Bearbeitungsrechte. Für Name und Beschreibung brauchst du die Rechte zum Anlegen **und** Bearbeiten von Benutzergruppen.
 
 1. Öffne **Personen → Benutzergruppen** und klicke auf die Gruppe.
 2. Ändere in **Übersicht** den Namen oder die Beschreibung.
@@ -248,9 +249,67 @@ Zugängen.](./bilder/benutzer-metriken-dashboard.png)
 
 **Ergebnis:** Du kannst die gespeicherten Zugangsentscheidungen der Person nachvollziehen. Diese Anzeige prüft keine zukünftige Zutrittsberechtigung.
 
+### Bei Anmeldeproblemen helfen
+
+Öffne das Konto unter **Personen → Benutzer** und wähle **Sicherheit**.
+Prüfe den Kontostatus und die E-Mail-Bestätigung, bevor du Anmeldeverfahren änderst.
+
+#### Passwort zurücksetzen lassen
+
+Der Link wird an die gespeicherte E-Mail-Adresse gesendet. Diese muss bestätigt
+sein. Bei einem externen Konto ändert der lokale Link kein Passwort beim
+Anbieter; beachte den Hinweis zum Kontoanbieter im Benutzerfenster.
+Setzt die Person ihr Passwort zurück, können ihre bisherigen Anmeldesitzungen
+nicht mehr erneuert werden.
+
+1. Prüfe die angezeigte Zieladresse.
+2. Wähle **Link zum Zurücksetzen senden**.
+3. Die Person öffnet den Link und legt selbst ein neues Passwort fest.
+
+Eine Erfolgsmeldung bestätigt nicht den Empfang der E-Mail. Das Anfordern des
+Links ändert das Passwort noch nicht.
+
+#### Zwei-Faktor-Authentifizierung verwalten
+
+Die Anzeige unterscheidet eingerichtete 2FA und die Vorgabe
+**Zwei-Faktor-Authentifizierung erzwingen**. Diese Vorgabe richtet selbst keine
+2FA ein. Prüfe vor dem Einschalten, ob die Person 2FA bereits eingerichtet hat;
+ohne eingerichtete 2FA wird ihre Passwortanmeldung abgewiesen.
+
+- Um die Vorgabe zu ändern, schalte **Zwei-Faktor-Authentifizierung erzwingen**
+  ein oder aus und wähle **Speichern** unten im Benutzerfenster.
+- Um eingerichtete 2FA zu entfernen, wähle **2FA deaktivieren** und bestätige im
+  Dialog mit **2FA deaktivieren**. Diese Aktion wird sofort gespeichert und
+  entfernt die bisherige Authenticator-Einrichtung. Bestehende Sitzungen bleiben
+  bestehen.
+
+Das Deaktivieren von 2FA entfernt die Vorgabe nicht. Eine weiterhin gesetzte
+Vorgabe kann die nächste Passwortanmeldung blockieren. Verlangt die
+Serverrichtlinie 2FA für Administratoren, wird das Deaktivieren bei diesen
+Konten abgelehnt.
+
+Die Einrichtung im eigenen Konto ist unter
+[Zwei-Faktor-Anmeldung einrichten](../ueberblick/profil-sicherheit.mdx#zwei-faktor-anmeldung-einrichten)
+beschrieben.
+
+#### Einen Passkey deaktivieren
+
+Ein deaktivierter Passkey kann nicht mehr für neue Anmeldungen verwendet werden.
+Neue Passkeys registriert die Person selbst nach einer Anmeldung. Verlangt die
+Serverrichtlinie Passkeys für Administratoren, muss mindestens ein aktiver
+Passkey am Konto verbleiben.
+
+1. Suche unter **Passkeys** den betroffenen Eintrag.
+2. Wähle **Deaktivieren** und bestätige im Dialog mit **Bestätigen**.
+
+**Ergebnis:** Der Eintrag wird als **Deaktiviert** angezeigt. Die Änderung ist
+sofort gespeichert. Der Anmeldezähler hilft bei der Prüfung: Ein Wert über null
+belegt eine Nutzung. Ein Zählerstand von null sagt nicht aus, ob der Passkey
+verwendet wurde, da manche Authenticatoren nicht zählen.
+
 ### Konten deaktivieren und reaktivieren
 
-Eine Deaktivierung sperrt neue Anmeldungen. Bestehende Zugriffe enden nicht sofort. Rollen, Gruppen und Zutrittszuweisungen bleiben erhalten. **Administrator-Konten können nicht deaktiviert werden.** Für offene Registrierungen gilt der [Freigabeablauf](#einladung-abschlie%C3%9Fen-und-konto-freigeben).
+Eine Deaktivierung sperrt neue Anmeldungen. Bestehende Zugriffe enden nicht sofort. Rollen, Gruppen und Zutrittszuweisungen bleiben erhalten. **Administrator-Konten können nicht deaktiviert werden.** Für dein eigenes Konto bietet die Oberfläche keine Statusänderung an. Für offene Registrierungen gilt der [Freigabeablauf](#einladung-abschlie%C3%9Fen-und-konto-freigeben).
 
 1. Öffne in den Benutzerdetails **Sicherheit → Gefahrenbereich**.
 2. Wähle **Benutzer deaktivieren**.
@@ -269,6 +328,12 @@ Zum Reaktivieren prüfst du zuerst die erhaltenen Rollen, Gruppen und Zutrittszu
 
 Die Löschung kann nicht rückgängig gemacht werden. Soll das Konto erhalten bleiben, [deaktiviere es](#konten-deaktivieren-und-reaktivieren). Für Administrator-Konten und dein eigenes Konto bietet die Oberfläche keine Löschaktion an.
 
+Offene Vorgänge, etwa bestätigte Buchungen, laufende Zugangssitzungen oder
+ausstehende Zugangsanträge, können die Löschung verhindern. Bearbeite die in der
+Vorschau genannten Hindernisse zuerst. Abgeschlossene Buchungs- und
+Zutrittshistorie sowie Anmeldeereignisse bleiben erhalten; die Kontolöschung
+entfernt nicht sämtliche bisherigen Ereignisse.
+
 1. Öffne in den Benutzerdetails **Sicherheit → Gefahrenbereich → Benutzer löschen**.
 2. Prüfe das angezeigte Konto und die Vorschau der Löschfolgen. Die betroffenen Einträge hängen von den Zuordnungen des Kontos ab.
 3. Bestätige mit **Löschen**.
@@ -282,15 +347,17 @@ Die Löschung kann nicht rückgängig gemacht werden. Soll das Konto erhalten bl
 
 ## Wenn etwas nicht klappt
 
-| Problem                                             | Nächster Schritt                                                                                                         |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Eine Aktion fehlt                                   | Lass deine Berechtigungen für diese Aktion prüfen.                                                                       |
-| Eine Angabe ist bereits vergeben                    | Suche nach dem vorhandenen Konto.                                                                                        |
-| Die Einladung fehlt                                 | Prüfe Spam-Ordner, gespeicherte Adresse und E-Mail-Versand. Eine Erfolgsmeldung bestätigt keine Zustellung.              |
-| Die Anmeldung klappt nicht                          | Prüfe Kontostatus, E-Mail-Bestätigung, 2FA und eine noch offene Freigabe.                                                |
-| Eine entfernte Rolle gilt weiterhin                 | Prüfe unter **Effektive Berechtigungen**, ob eine andere Gruppe oder direkte Zuweisung dieselbe Rolle gewährt.           |
-| Änderungen an Rollen oder Gruppen fehlen            | Prüfe, ob du nach **Anwenden** auch **Speichern** unten in den Benutzerdetails gewählt hast.                             |
-| Die Berechtigungsübersicht oder die Metriken fehlen | Lass die zusätzlichen Leserechte für die [Berechtigungsübersicht](#rollen-und-gruppen-zuweisen) oder für Zugänge prüfen. |
+| Problem                                                   | Nächster Schritt                                                                                                         |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Eine Aktion fehlt                                         | Lass deine Berechtigungen für diese Aktion prüfen.                                                                       |
+| Eine Angabe ist bereits vergeben                          | Suche nach dem vorhandenen Konto.                                                                                        |
+| Die Einladung fehlt                                       | Prüfe Spam-Ordner, gespeicherte Adresse und E-Mail-Versand. Eine Erfolgsmeldung bestätigt keine Zustellung.              |
+| Die Anmeldung klappt nicht                                | Prüfe Kontostatus, E-Mail-Bestätigung, 2FA und eine noch offene Freigabe.                                                |
+| 2FA oder der letzte Passkey lässt sich nicht deaktivieren | Prüfe, ob die Serverrichtlinie dieses Verfahren für Administratoren verlangt.                                            |
+| Die Löschung wird verhindert                              | Bearbeite die in der Löschvorschau genannten offenen Vorgänge oder Zuständigkeiten und lade die Vorschau danach neu.     |
+| Eine entfernte Rolle gilt weiterhin                       | Prüfe unter **Effektive Berechtigungen**, ob eine andere Gruppe oder direkte Zuweisung dieselbe Rolle gewährt.           |
+| Änderungen an Rollen oder Gruppen fehlen                  | Prüfe, ob du nach **Anwenden** auch **Speichern** unten in den Benutzerdetails gewählt hast.                             |
+| Die Berechtigungsübersicht oder die Metriken fehlen       | Lass die zusätzlichen Leserechte für die [Berechtigungsübersicht](#rollen-und-gruppen-zuweisen) oder für Zugänge prüfen. |
 
 Bei Eingabefehlern bleiben die Angaben erhalten. Korrigiere die markierten Felder entsprechend der Meldung und speichere erneut.
 
@@ -301,12 +368,12 @@ Bei Eingabefehlern bleiben die Angaben erhalten. Korrigiere die markierten Felde
 
 ## Prüfstand und Grenzen
 
-Die beschriebenen Abläufe sind mit Dashboard und Backend abgeglichen. Die
-Bilder verwenden fiktive Daten. Für diese Überarbeitung wurden die
-Dokumentationsseiten geprüft; ein vollständiger Durchlauf der Verwaltungsaktionen
-mit einer angemeldeten Sitzung wurde nicht erneut ausgeführt.
+Die beschriebenen Abläufe sind anhand des Dashboard- und Backend-Codes
+abgeglichen. Die Bilder verwenden fiktive Daten. Ein vollständiger Durchlauf der
+Verwaltungsaktionen mit einer angemeldeten Sitzung und die E-Mail-Zustellung
+wurden für diese Überarbeitung nicht erneut geprüft.
 
 Die Anleitung beschreibt noch nicht die vollständige Rollenverwaltung,
-das Anlegen und Löschen von Gruppen, alle Sicherheitsaktionen oder das
+das Anlegen und Löschen von Gruppen, den passwortlosen Zugang oder das
 Zusammenführen von Konten. Die entsprechende Funktion kann im Produkt
 bereits vorhanden sein. Ihre Bedienung ist hier noch nicht dokumentiert.

@@ -76,7 +76,7 @@ Angaben dennoch erforderlich.
    Buchung für das Testkonto. Verwende keine Passwortänderung nur zum Testen
    des Mailversands.
 4. Prüfe den persönlichen Posteingang und den gewählten externen Kanal getrennt.
-   Beachte Ruhezeiten und eine gegebenenfalls gewählte E-Mail-Zusammenfassung.
+   Beachte Ruhezeiten und eine gegebenenfalls hinterlegte E-Mail-Zusammenfassung.
 
 Die sichtbaren Ereignisse richten sich nach dem Konto und seinen aktuellen
 Rechten beziehungsweise Zuständigkeiten. Eine Kanalwahl erteilt keine zusätzlichen
@@ -102,7 +102,9 @@ Zustellgarantie.
 Bei anderen Ereignissen können persönliche Ruhezeiten die Zustellung verschieben.
 In-App-Inhalte bleiben dabei im Posteingang sofort sichtbar; die Ruhezeit betrifft
 deren Echtzeithinweis. E-Mail-Zusammenfassungen sammeln dafür unterstützte Ereignisse.
-Welche Ausnahmen gelten, zeigt die Ereignisanzeige im Profil.
+Modus und Versandzeit einer Zusammenfassung lassen sich im Profilformular nicht
+einstellen; bereits hinterlegte Werte bleiben beim Speichern erhalten.
+Welche Ausnahmen für Ruhezeiten gelten, zeigt die Ereignisanzeige im Profil.
 
 ## Fehlende oder verzögerte Zustellung untersuchen
 
@@ -118,6 +120,11 @@ Welche Ausnahmen gelten, zeigt die Ereignisanzeige im Profil.
    [Benachrichtigungsmetriken](../benutzer/uebersicht-monitoring.mdx#benachrichtigungen)
    für den betroffenen Zeitraum. Übergebe bei Bedarf Zeitpunkt und Kennungen an
    die technische Administration, damit sie die Serverlogs prüfen kann.
+
+Einzelne Zustellstatus und Versandversuche zeigt das Dashboard nicht an. Die
+folgenden Zustände helfen bei der gemeinsamen Diagnose mit der technischen
+Administration. Ein angelegter Versandauftrag oder ein erfolgreicher
+Versandversuch bestätigt noch keinen Empfang am Ziel.
 
 | Beobachtung                          | Bedeutung und Abhilfe                                                                                                                                                                     |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -3,9 +3,7 @@ title: Geräte verwalten
 description: Geräte aufnehmen, Anschlüsse konfigurieren, Verbindungen prüfen und Hardware ersetzen.
 ---
 
-import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
-import screenshot2 from './bilder/geraet-anschluesse.png';
 
 Unter **Geräte** im Dashboard nimmst du Controller ins Netzwerk auf und
 konfigurierst ihre Anschlüsse, etwa Kartenleser und Schaltausgänge. Ein
@@ -26,9 +24,8 @@ Für die Aufnahme in ein IP500-Netzwerk brauchst du außerdem:
   **JSON-Datei**, einer Textdatei mit strukturierten Daten, importiert.
 
 Lass dir Routerzugang und Aufnahmedaten von der betreuenden Administration
-bereitstellen. Eine technische Prüfung mit physischem Controller, Edge-Router
-und angeschlossenen Lesern oder Aktoren wurde für diese Überarbeitung nicht
-neu durchgeführt.
+bereitstellen. Prüfe die Einrichtung anschließend mit dem Controller, Edge-Router
+und den angeschlossenen Lesern oder Aktoren an deiner Installation.
 
 <Steps>
   <Step>
@@ -62,6 +59,8 @@ neu durchgeführt.
 Ein erneuter Import derselben Aufnahmedaten legt kein zweites Gerät an. Vorhandene
 Anschlusszuordnungen bleiben erhalten. Meldet der Import einen Konflikt bei Netzwerkidentität
 oder Seriennummer, gleiche die Datei mit dem vorhandenen Gerät ab, bevor du erneut importierst.
+Ein bereits aufgenommenes Gerät wird durch den Import nicht neu aufgenommen;
+verwende dafür [Erneut ins Netzwerk aufnehmen](#gerät-erneut-aufnehmen).
 
 ## Übersicht und Verbindungsstatus
 
@@ -74,6 +73,7 @@ Unter **Verbindung und Hardware** findest du Netzwerkanbindung, letzte Verbindun
 | Anzeige                    | Bedeutung und nächster Schritt                                                                                                          |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | Verbinden                  | Das Modell wurde noch nicht durch eine gültige Gerätemeldung erkannt. Bleibt die Anzeige bestehen, öffne die Fehlerhilfe unten.         |
+| Schlüsselaustausch         | Die Netzwerkaufnahme läuft. Der Schlüsselaustausch erfolgt automatisch; gib keinen eigenen öffentlichen Schlüssel ein.                  |
 | Aufgenommen                | Die Netzwerkaufnahme ist erfolgt. Öffne **Anschlüsse**, um die Einrichtung zu prüfen.                                                   |
 | Betriebsbereit             | Mindestens ein Anschluss hat seine Konfiguration bestätigt und Bereitschaft gemeldet. Prüfe jeden Anschluss, den du verwenden möchtest. |
 | Eingerichtet               | Alle erwarteten Anschlüsse sind eingerichtet. Prüfe vor der Verwendung weiterhin deren aktuellen Zustand.                               |
@@ -118,34 +118,28 @@ Du brauchst Geräte-Lese- und Änderungsrechte. Die verfügbaren Leser, Schaltau
 1. Öffne das Gerät und wechsle zu **Anschlüsse**. Suche die Anschlusskarte des benötigten Lesers oder Aktors anhand seiner
    Bezeichnung und **Node-ID**. Die Node-ID ist die Kennung des Anschlusses
    innerhalb dieses Geräts.
-2. Ändere die Einstellungen in dieser Karte. Bei Lesern stehen beispielsweise **Karten lesen** und **Antwortfristen** zur Verfügung; bei Aktoren **Betriebsart** und **Maximale Laufzeit (ms)**. Zeitfelder mit **ms** erwarten Millisekunden.
-3. Wähle **Speichern** in derselben Anschlusskarte. Prüfe anschließend die Rückmeldung unter **Konfiguration**. Mit **Neu laden** aktualisierst du die gespeicherte Rückmeldung.
+2. Ändere die Einstellungen in dieser Karte. Bei Lesern schaltest du **Karten lesen** ein oder aus. Unter **Details und Verwaltung → Wartezeiten beim Kartenlesen** stellst du **Erste Antwortfrist (ms)** und **Maximale Wartezeit (ms)** ein. Bei Aktoren stehen **Betriebsart** und **Maximale Laufzeit (ms)** zur Verfügung. Zeitfelder mit **ms** erwarten Millisekunden; beachte die angezeigten Wertebereiche.
+3. Wähle **An Gerät senden** in derselben Anschlusskarte. Prüfe anschließend die Rückmeldung unter **Letzter Auftragsstatus**. Zum erneuten Abrufen der gespeicherten Rückmeldung öffnest du **Details und Verwaltung → Serverstand aktualisieren**.
 
-<figure className="my-6 max-w-xl">
-  <ImageZoom
-    src={screenshot2}
-    unoptimized
-    alt="Anschlusskarten für Leser und Aktor mit eigenen Einstellungen, Speichern-Schaltflächen und Konfigurationsbestätigungen."
-    rmiz={{
-      a11yNameButtonZoom: 'Bild vergrößern',
-      a11yNameButtonUnzoom: 'Bild schließen',
-    }}
-  />
-  <figcaption>Leser und Aktor eines Maschinencontrollers mit fiktiven Beispieldaten.</figcaption>
-</figure>
+**Noch nicht gesendet** kennzeichnet Änderungen im Formular. Mit **Änderungen verwerfen**
+kehrst du zum geladenen Stand zurück. Das **Speichern** in der Geräteübersicht sendet
+keine Anschlusskonfiguration.
 
-| Rückmeldung                        | Bedeutung                                                                                                      |
-| ---------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| Gespeichert · Übernahme ausstehend | Die Einstellung ist gespeichert. Warte auf die Bestätigung des Geräts und wähle **Neu laden**.                 |
-| Vom Gerät übernommen               | Das Gerät hat die Konfiguration bestätigt.                                                                     |
-| Übernahme nicht bestätigt          | Es liegt keine bestätigte Übernahme vor. Prüfe die letzte Verbindung und lade die Anschlusskarte neu.          |
-| Vom Gerät abgelehnt                | Prüfe die angezeigte Fehlermeldung und die Einstellungen des Anschlusses. Korrigiere sie und speichere erneut. |
+| Rückmeldung                                                          | Bedeutung                                                                                                                            |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Auftrag angenommen · Bestätigung ausstehend / Bestätigung ausstehend | Der Server hat den Auftrag angenommen. Warte auf die Bestätigung des Geräts und aktualisiere den Serverstand.                        |
+| Vom Gerät bestätigt                                                  | Das Gerät hat die Konfiguration bestätigt.                                                                                           |
+| Übernahme nicht bestätigt / Keine Gerätebestätigung                  | Es liegt keine bestätigte Übernahme vor. Das bedeutet keine Ablehnung. Prüfe die letzte Verbindung und aktualisiere den Serverstand. |
+| Vom Gerät abgelehnt                                                  | Prüfe die angezeigte Fehlermeldung und die Einstellungen des Anschlusses. Korrigiere sie und wähle erneut **An Gerät senden**.       |
 
-**Ergebnis prüfen:** Jeder benötigte Anschluss zeigt **Vom Gerät übernommen** und einen passenden Hardwarezustand. **Vom Gerät auslesen** fragt die Gerätekonfiguration neu ab; **Neu laden** aktualisiert die gespeicherten Angaben.
+Leser und Aktoren verwenden teilweise unterschiedliche Beschriftungen für denselben Auftragszustand.
+
+**Ergebnis prüfen:** Jeder benötigte Anschluss zeigt **Vom Gerät bestätigt** und einen passenden gemeldeten Hardwarezustand. Unter **Details und Verwaltung** fragt **Vom Gerät auslesen** die Gerätekonfiguration neu ab; **Serverstand aktualisieren** ruft die bereits gespeicherten Angaben ab. Prüfe die physische Funktion anschließend am vorgesehenen Leser oder Aktor.
 
 Ordne die Anschlüsse anschließend unter [Ressource → Technik](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen) zu. Dort brauchst du die in der Ressourcenanleitung genannten Zugriffs- und Hardwareverwaltungsrechte. Leser und Aktor können auf verschiedenen Geräten liegen. Ein Anschluss kann höchstens eine aktive Zuordnung haben.
 
-**Konfiguration löschen** entfernt die Anschlusskonfiguration. Um einen
+**Details und Verwaltung → Konfiguration löschen** entfernt die gespeicherte Sollkonfiguration
+und sendet den Löschauftrag an das Gerät. Prüfe auch dafür die Gerätebestätigung. Um einen
 Anschluss für eine andere Ressource freizugeben, wähle **Zuordnung lösen**
 an der bisherigen Ressource.
 
@@ -175,15 +169,35 @@ Ressourcen bleiben erhalten. Soll eine Ressource weiter betrieben werden,
 2. Prüfe die Löschvorschau. Löse noch benötigte Zuordnungen erst nach dem oben beschriebenen Austausch. Beende offene Sitzungen und kläre ausstehende Befehle.
 3. Bestätige **Löschen**, wenn keine Verwendung die Löschung verhindert.
 
+Hat sich die Verwendung zwischen Vorschau und Bestätigung geändert, lade die
+Löschvorschau erneut und prüfe die aktuellen Folgen.
+
 **Ergebnis:** Der Server meldet das Gerät vom Netzwerk ab und löscht den Datensatz. Schlägt die Netzwerkabmeldung fehl, bleibt der Datensatz erhalten. Öffne in diesem Fall die Geräteliste erneut und prüfe die Fehlermeldung, bevor du die Löschung wiederholst.
 
 Zum [Anmelden, Sperren und Ersetzen von Zugangs-Tags](./tags-verwalten.mdx)
 öffne **Personen → Benutzer**, wähle das Konto und dann **Tags**. Für die
 Anmeldung brauchst du die Smartphone-App; ein Geräte-Leser übernimmt sie nicht.
 
+## Firmware und Update-Verlauf prüfen
+
+Die gemeldete Firmwareversion steht unter **Übersicht → Verbindung und Hardware**.
+Für gespeicherte Firmware-Updates über das Netzwerk (OTA) brauchst du Geräte-Leserechte.
+
+1. Öffne **Geräte → Historie**. Ohne Filter siehst du die gespeicherten Update-Vorgänge aller Geräte.
+2. Trage bei Bedarf die **Ursprüngliche Geräte-ID** ein und wähle **Anwenden**.
+3. Prüfe **Zielversion**, **Status** und **Gestartet**. Öffne **Details**, um das
+   letzte Ergebnis und den Zeitpunkt **Zuletzt aktualisiert** zu lesen.
+
+Die Historie bleibt auch nach dem Löschen eines Geräts über seine ursprüngliche ID
+auffindbar. Eine leere Liste bedeutet, dass für den gewählten Filter keine Vorgänge vorliegen.
+Vergleiche einen abgeschlossenen Update-Vorgang mit der anschließend gemeldeten Firmwareversion.
+Die aktuelle Geräteansicht bietet keine Aktion zum Starten oder Abbrechen eines Firmware-Updates.
+
 ## Diagnose lesen
 
-Unter **Diagnose** findest du die für deine Rechte verfügbaren Geräte- und Zugangsmetriken. Prüfe Zeitraum und Aktualität. Eine leere Anzeige kann durch fehlende Daten, nicht unterstützte Messwerte oder fehlende Rechte entstehen. Zugangsmetriken zeigen gespeicherte Entscheidungen; sie bestätigen keinen physischen Tür- oder Schaltzustand.
+Für **Diagnose** brauchst du zusätzlich Dashboard-Leserechte und die Leserechte für
+die jeweilige Datenquelle. Dort findest du die für deine Rechte verfügbaren Geräte-
+und Zugangsmetriken. Prüfe Zeitraum und Aktualität. Eine leere Anzeige kann durch fehlende Daten, nicht unterstützte Messwerte oder fehlende Rechte entstehen. Zugangsmetriken zeigen gespeicherte Entscheidungen; sie bestätigen keinen physischen Tür- oder Schaltzustand.
 
 ## Probleme prüfen
 
@@ -209,9 +223,9 @@ Wähle das passende Fehlerbild. Beginne mit der genannten Anzeige, bevor du Eins
 
 1. Prüfe unter **Übersicht → Verbindung und Hardware**, ob eine aktuelle Verbindung vorliegt.
 
-2. Öffne **Anschlüsse**, suche den betroffenen Anschluss und wähle **Neu laden**. Prüfe Hardwarezustand und Rückmeldung unter **Konfiguration** für genau diesen Anschluss.
+2. Öffne **Anschlüsse**, suche den betroffenen Anschluss und wähle **Details und Verwaltung → Serverstand aktualisieren**. Prüfe den gemeldeten Hardwarezustand und die Rückmeldung unter **Letzter Auftragsstatus** für genau diesen Anschluss.
 
-3. Bei **Vom Gerät abgelehnt** korrigiere die Einstellungen anhand der Fehlermeldung und speichere erneut. Bleibt die Bestätigung aus, verwende den Anschluss noch nicht für den Betrieb und gib die Meldung mit Gerätekennung und Node-ID an die betreuende Administration weiter.
+3. Bei **Vom Gerät abgelehnt** korrigiere die Einstellungen anhand der Fehlermeldung und wähle erneut **An Gerät senden**. Bleibt die Bestätigung aus, verwende den Anschluss noch nicht für den Betrieb und gib die Meldung mit Gerätekennung und Node-ID an die betreuende Administration weiter.
 
 ### Erneute Aufnahme wird abgelehnt
 

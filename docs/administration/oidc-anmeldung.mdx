@@ -1,0 +1,216 @@
+---
+title: Anmeldung über OpenID Connect einrichten
+description: Einen externen Identitätsanbieter verbinden, Kontozuordnung und Rollen prüfen und die Anmeldung aktivieren.
+---
+
+Mit **OpenID Connect (OIDC)** melden sich Personen über einen externen
+Identitätsanbieter bei Mardu an. Mardu ordnet die bestätigte externe Identität
+einem lokalen Benutzerkonto zu. Dieses Konto unterliegt weiterhin den lokalen
+Anmelde- und Berechtigungsregeln.
+
+Öffne **Administration → Systemeinstellungen → OIDC**. Die frühere Adresse
+unter **Integrationen → OIDC** leitet dorthin weiter. Diese Einrichtung ist
+unabhängig von [persönlichen Nachweisquellen](../ueberblick/profil-nachweisquellen.mdx):
+Eine Verbindung zum Abrufen von Badges erlaubt keine Anmeldung bei Mardu und
+erteilt keine Kompetenz oder Ressourcenfreigabe.
+
+## Voraussetzungen
+
+- Für Navigation und Ansicht brauchst du **Integrationen anzeigen**
+  (`Integrations.View`), zum Bearbeiten **Integrationen bearbeiten**
+  (`Integrations.Update`). Die Settings-API verlangt zusätzlich
+  **Einstellungen anzeigen** (`Settings.View`) beziehungsweise für Speichern,
+  Validierung und Tests **Einstellungen bearbeiten** (`Settings.Update`).
+  Ein sichtbarer Menüpunkt bestätigt diese API-Rechte nicht.
+- Zum Vorschlagen vorhandener Rollen brauchst du **Rollen anzeigen** (`Roles.View`).
+- Du kannst beim Identitätsanbieter einen Client registrieren und kennst dessen
+  Issuer, Client-ID, Client-Authentifizierung und gegebenenfalls Client-Secret.
+  Browser und Mardu-Server müssen die jeweils benötigten Anbieterendpunkte erreichen.
+- Der Serverbetrieb hat öffentliche HTTPS-Adressen und die erlaubten
+  Dashboard-Rückleitungen eingerichtet. Halte während der Einrichtung einen
+  geprüften anderen Anmeldeweg für die Administration bereit.
+
+Durch die Umgebung gesperrte Felder muss der Serverbetrieb ändern. Für
+CA-Zertifikate nutze die vorhandene
+[Zertifikatsverwaltung](./server-einstellungen.mdx#zertifikate).
+
+## Provider und Rückleitungen vorbereiten
+
+1. Wähle **Provider hinzufügen**. Gib einen **Anzeigenamen** für die Anmeldung
+   und eine **Provider-ID** ein. Die ID beginnt mit einem Kleinbuchstaben und
+   enthält nur Kleinbuchstaben, Zahlen und Bindestriche. Nach dem ersten
+   Speichern ist sie im Formular nicht mehr änderbar.
+2. Wähle bei Bedarf eine **Provider-Vorlage** oder **Benutzerdefiniert**.
+   Eine Vorlage liefert Startwerte; sie registriert keinen Client und aktiviert
+   den Provider nicht. Prüfe die Werte gegen deine Anbieterregistrierung.
+3. Trage im Schritt **Verbindung** unter **Endpunkte und Client** den exakten
+   **Issuer** aus dem Discovery-Dokument, die **Client-ID** und die passende
+   **Client-Authentifizierung** ein. Angeboten werden **Kein Secret (Public Client)**,
+   **Client-Secret im Request-Body** und **Client-Secret per HTTP Basic**.
+   Bei einem Verfahren mit Secret wähle **Secret setzen** und hinterlege es.
+   Ein gespeichertes Secret wird nicht angezeigt; **Secret ersetzen** ändert es
+   erst beim Speichern.
+4. Vereinbare mit dem Serverbetrieb die öffentliche HTTPS-Callback-Adresse
+   des Mardu-Backends. Trage sie als **Redirect-URI** ein und registriere genau
+   diese Adresse beim Anbieter. Das Feld ist nicht automatisch vorbelegt;
+   sein Pfad wird vom Backend als OIDC-Callback verarbeitet. Verwende keine
+   Zugangsdaten, Suchparameter oder Fragmentkennung in dieser Adresse.
+
+Für die verschiedenen Rückleitungen gelten unterschiedliche Ziele:
+
+| Rückleitung                                | Einrichtung                                                                                                                                                                                                                                                                                                     |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Reguläre Anbieteranmeldung → Mardu-Backend | Die im Feld **Redirect-URI** eingetragene vollständige HTTPS-Adresse muss beim Anbieter erlaubt und zum Backend geroutet sein.                                                                                                                                                                                  |
+| Isolierte Test-Anmeldung → Mardu-Backend   | Registriere zusätzlich die öffentliche Backend-Adresse mit dem Pfad `/api/v1/settings/oidc/test-login/callback`, einschließlich eines gegebenenfalls verwendeten Backend-Basispfads.                                                                                                                            |
+| Mardu-Backend → Dashboard                  | Der Serverbetrieb muss in `AuthBroker:AllowedReturnUrls` sowohl `<Dashboard-HTTPS-Origin>/api/internal/auth/oidc/callback` als auch die vollständige OIDC-Einstellungsadresse `/<projekt>/dashboard/admin/server/oidc` an dieser Origin erlauben. Die Projekt-ID des Brokers muss zum Dashboard-Projekt passen. |
+
+Die interne Dashboard-Callback-Adresse gehört nicht als Ersatz für die
+**Redirect-URI** in die Anbieterregistrierung. Bei einem vorgeschalteten Proxy
+müssen die öffentlich sichtbare Adresse und HTTPS beim Backend korrekt ankommen.
+
+Unter **Endpunkte und Parameter anpassen** kannst du bei Bedarf **Authority**
+oder **Discovery-Adresse** abweichend setzen. Ohne eigene Discovery-Adresse
+verwendet Mardu `/.well-known/openid-configuration` unter Authority beziehungsweise
+Issuer. Autorisierungs-, Token- und Signaturschlüssel-Endpunkte werden daraus
+gelesen. Die **Scopes** enthalten mindestens `openid`; der neue Entwurf enthält
+außerdem `profile` und `email`. Zusätzliche Autorisierungsparameter ersetzen
+keine OIDC-Pflichtparameter.
+
+Mardu verwendet den Authorization-Code-Ablauf mit **PKCE**, einer Prüfung, die
+den Code an den gestarteten Anmeldevorgang bindet. Dafür gibt es keinen zusätzlichen
+Schalter im Formular.
+
+## Tokenprüfung, Kontozuordnung und Rollen festlegen
+
+1. Prüfe im Schritt **Sicherheit** die **Zertifikatsprüfung** und lasse
+   **HTTPS für Discovery erzwingen** eingeschaltet. Verwende den
+   **System-Zertifikatsspeicher** oder wähle bei **Nur ausgewählte verwaltete CAs**
+   die benötigten Zertifizierungsstellen. **Zertifikatsfehler ignorieren (unsicher)**
+   hebt die Zertifikatsprüfung auf; eine solche Diagnoseeinstellung verlangt eine
+   ausdrückliche Risikobestätigung. Begrenze **Erlaubte Signaturalgorithmen** nur
+   auf Verfahren, die der Anbieter tatsächlich liefert.
+2. Entscheide im Schritt **Identität**, ob **Benutzer automatisch anlegen**
+   erlaubt sein soll, und prüfe **Kontoverknüpfung** anhand der folgenden Regeln.
+3. Öffne **Claims anpassen**, wenn der Anbieter andere Claim-Namen liefert.
+   Claims sind Angaben im geprüften Token. Der **Subject-Claim** ist standardmäßig
+   `sub`, E-Mail `email`, Rollen `roles` und Gruppen `groups`.
+   Benötigte Angaben müssen im ID-Token enthalten sein; Mardu lädt dafür kein
+   zusätzliches Benutzerprofil vom UserInfo-Endpunkt.
+4. Lege im Schritt **Zugriff** nur die benötigten **Rollen-Zuordnungen** und
+   **Gruppen-Zuordnungen** zu bereits vorhandenen lokalen Rollen an. Externe
+   Rollen oder Gruppen werden durch ihren Namen allein nicht zu lokalen Rechten.
+   Die [Benutzerverwaltung](./benutzer-rollen.mdx#rollen-und-gruppen-zuweisen)
+   erklärt lokale Rollen und Gruppen.
+
+### Welche lokale Identität verwendet wird
+
+Eine bereits gespeicherte Kombination aus **Issuer und Subject** führt wieder
+zum zugehörigen lokalen Konto. Die E-Mail-Adresse ist dafür kein Ersatz.
+
+Bei einer noch unbekannten Kombination gelten zusätzliche Bedingungen:
+
+- **Benutzer automatisch anlegen** muss eingeschaltet und die globale
+  **Selbstregistrierung** darf nicht **Deaktiviert** sein. Das gilt auch für
+  die erstmalige automatische Verknüpfung mit einem vorhandenen Konto.
+- Mit **Nur eindeutiges Subject** wird ein gleichlautendes bestehendes
+  E-Mail-Konto nicht automatisch verknüpft; die Anmeldung wird in diesem Fall
+  abgelehnt. Mit **Subject oder bestätigte E-Mail** ist diese Verknüpfung
+  erlaubt, wenn der Anbieter `email_verified=true` liefert. Prüfe vor der
+  Freigabe, ob der Anbieter die E-Mail-Inhaberschaft zuverlässig bestätigt.
+- **Bestätigter E-Mail des Providers vertrauen** übernimmt bei einer Neuanlage
+  diese Bestätigung als lokale E-Mail-Bestätigung. Diese Einstellung und die
+  Auswahl der Kontoverknüpfung haben unterschiedliche Wirkungen.
+- **SSO-Konten freigeben lassen** hält neu angelegte Konten bis zur Freigabe
+  inaktiv. Auch **Bestätigtes Konto verlangen** bleibt wirksam. Prüfe diese
+  Vorgaben unter [Registrierung und Anmelderichtlinie](./server-einstellungen.mdx#registrierung-und-anmelderichtlinie),
+  bevor du neue Personen zur Anmeldung aufforderst.
+
+### Welche Rollen und MFA-Nachweise gelten
+
+Bei jeder regulären Anmeldung werden passende lokale Rollen aus den
+konfigurierten Zuordnungen ergänzt. Unter **Erweiterte Autorisierung → Verwaltete Rollen**
+legst du fest, welche lokalen Rollen Mardu wieder entfernen darf, wenn sie nicht
+mehr aus den aktuellen Claims hervorgehen. Andere bestehende Rollen bleiben
+erhalten. Plane die Entfernung einer Zuordnungsregel deshalb zusammen mit ihrer
+Rollenverwaltung.
+
+Für die lokale Rolle **Admin** verlangt Mardu einen akzeptierten Nachweis der
+Mehrfaktor-Authentifizierung (MFA) vom Anbieter. Auch kontobezogene MFA-Pflichten
+gelten bei OIDC. Trage unter **Erweiterte Autorisierung** die vom Anbieter
+tatsächlich gelieferten **Erlaubten AMR-Werte für Admin-Rechte** oder
+**Erlaubten ACR-Werte für Admin-Rechte** ein. Mindestens ein gelieferter Wert
+muss exakt zu einer dieser Listen passen. Ein beliebiger vorhandener Claim oder
+lokal eingerichtete Zwei-Faktor-Authentifizierung ersetzt diesen Anbieternachweis
+nicht. Leere Listen erlauben keine Anmeldung eines Administrators über OIDC.
+
+**API-Tokens konfigurieren** ist eine zusätzliche Freigabe für direkte
+Anbietertokens an der API. Für die Dashboard-Anmeldung brauchst du keine
+**API-Audiences** und kein **Bearer-Scheme** einzutragen.
+
+## Entwurf testen und aktivieren
+
+1. Öffne den Schritt **Prüfen** und wähle **Verbindung testen**. Kontrolliere
+   die einzelnen Ergebnisse für Discovery, Issuer, Endpunkte, TLS und
+   Signaturschlüssel. Behebe Fehler, bevor du fortfährst. Dieser Test meldet
+   keinen Benutzer an und beweist noch nicht, dass Client-Secret und
+   Anbieterregistrierung einen Tokenaustausch erlauben.
+2. Wähle **Test-Anmeldung starten** und melde dich im neuen Fenster mit einem
+   vorgesehenen Testkonto beim Anbieter an. Falls das Fenster blockiert wurde,
+   nutze **Anmeldefenster erneut öffnen**. Prüfe anschließend
+   **Authentifizierung beim Provider**, **Code gegen Token tauschen** und
+   **Token validieren** sowie die angezeigte Zuordnung.
+3. Nutze unter **Claim-Vorschau** die Aktion **Claims der Test-Anmeldung auswerten**.
+   Alternativ kannst du ein JSON-Objekt als **Beispiel-Claims** eingeben und
+   **Claims auswerten** wählen. Kontrolliere Zielkonto, fehlende Claims und
+   lokale Rollen, besonders administrative Zuordnungen.
+4. Aktiviere **Provider aktivieren**, wenn Verbindung und Zuordnungsregeln passen.
+   Wähle **Konfiguration prüfen** und anschließend **Änderungen speichern**.
+   Lies und bestätige gegebenenfalls die angezeigten Risiken. Alle Provider
+   werden gemeinsam gespeichert. Für eine Aktivierung oder geänderte Verbindung
+   eines aktiven Providers ist ein aktueller erfolgreicher Verbindungstest
+   erforderlich; nach weiteren Änderungen oder Ablauf musst du ihn wiederholen.
+5. Kontrolliere im Status **Gespeicherter Stand ist aktiv** und
+   **Zuletzt angewendet**. Die Übernahme erfolgt ohne Serverneustart.
+   Prüfe danach in einem getrennten Browserfenster die reguläre Anmeldung über
+   **Mit … anmelden**, einschließlich Kontofreigabe und erwarteter Rechte.
+   Beende deine bisherige Administrationssitzung erst danach.
+
+Verbindungstest, Test-Anmeldung und Claim-Vorschau speichern den Entwurf nicht
+und verändern keine lokalen Benutzer oder Rollen. Die Vorschau bildet nicht
+alle Anmeldebedingungen ab: Globale Registrierung, Freigabe, Kontosperren und
+MFA können die reguläre Anmeldung zusätzlich verhindern. Auch eine erfolgreiche
+Test-Anmeldung ersetzt deshalb die abschließende reguläre Anmeldung nicht.
+
+## Ändern oder abschalten
+
+Prüfe vor dem Abschalten, welche Personen ausschließlich diesen Anmeldeweg
+verwenden und wie sie sich danach anmelden können. Schalte **Provider aktivieren**
+aus und speichere. **Provider entfernen** entfernt den Eintrag zunächst aus dem
+Entwurf; erst **Änderungen speichern** übernimmt die Entfernung.
+
+Danach stehen neue Anmeldungen über diesen Provider nicht mehr zur Verfügung;
+ein gegebenenfalls eingerichteter direkter API-Bearer-Zugang wird ebenfalls
+entfernt. Lokale Benutzerkonten, gespeicherte Identitätsverknüpfungen und
+bereits zugewiesene Rollen werden dadurch nicht gelöscht. Das Abschalten ist
+kein ausdrücklicher Sitzungswiderruf. Für laufende Anmeldesitzungen nutze die
+unter [Sicherheit und Betrieb](./sicherheit-betrieb.mdx#sitzungen-und-anmeldehistorie)
+beschriebenen Widerrufswege.
+
+## Wenn etwas nicht klappt
+
+- **Seite sichtbar, Laden oder Aktion abgewiesen:** Prüfe sowohl Integrations-
+  als auch Settings-Rechte. Fehlende Rollenvorschläge benötigen `Roles.View`.
+- **Discovery oder TLS fehlgeschlagen:** Prüfe Issuer, Discovery-Adresse,
+  Erreichbarkeit vom Server und Zertifikatsvertrauen anhand der Diagnose.
+- **Rückleitung abgelehnt:** Prüfe die getrennten Callback-Adressen beim
+  Anbieter und die erlaubten Dashboard-Rückleitungen beim Serverbetrieb.
+  Vergleiche Schema, Host, Port, Basispfad und Projektadresse exakt.
+- **Tokenaustausch fehlgeschlagen:** Prüfe Client-ID, Secret und die beim Anbieter
+  zugelassene Client-Authentifizierung. Ein erfolgreicher Discovery-Test genügt nicht.
+- **Test erfolgreich, reguläre Anmeldung abgelehnt:** Prüfe Kontoverknüpfung,
+  Registrierung, E-Mail-Bestätigung, Freigabe und den verlangten MFA-Nachweis.
+- **Entwurf veraltet oder Versionskennung fehlt:** Lade den Serverstand neu,
+  gleiche Änderungen ab und wiederhole nötige Tests. Überschreibe nicht
+  ungeprüft zwischenzeitliche Änderungen anderer Personen.
+- **Anwendung fehlgeschlagen:** Verlasse dich nicht auf den Entwurf; prüfe den
+  neu geladenen Server- und Laufzeitstand mit dem Serverbetrieb.

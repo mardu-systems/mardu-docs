@@ -1,20 +1,181 @@
 ---
 title: Abnahme und Übergabe
-description: Funktionsprüfung je Zutrittspunkt, Abnahmeprotokoll, Mängel und Übergabe an die Administration.
+description: Konfiguration und Gerätefunktion je Zutrittspunkt prüfen, Ergebnisse festhalten und den Betrieb übergeben.
 ---
 
-Diese Seite ist ein Entwurf. Die Abnahme verbindet die
-Administrator-Konfiguration mit einem beobachteten Hardwareergebnis.
+Prüfe vor der Übergabe jeden vorgesehenen Zutrittspunkt: Stimmen Ressource,
+Leser und gegebenenfalls Schaltausgang zusammen, wird erlaubter Zugriff
+ausgeführt und unerlaubter Zugriff verweigert? Halte die gespeicherten Angaben,
+Geräterückmeldungen und deine Beobachtung vor Ort getrennt fest.
+
+Diese Anleitung beschreibt die Funktionsprüfung mit Mardu. Sie ersetzt keine
+gerätespezifischen Montage- oder Sicherheitsprüfungen und weist keine
+Normkonformität nach. Maßgeblich für Anschluss, zulässigen Betrieb und Prüfungen
+an der Anlage sind die zugehörigen Geräteunterlagen und die dafür zuständigen
+Personen.
+
+## Prüfung vorbereiten
+
+1. Vereinbare mit der betreuenden Administration, welche Ressourcen und
+   Zutrittspunkte geprüft werden und wer die Anlage währenddessen bedienen darf.
+   Lege für jeden Fall das erwartete Ergebnis fest, bevor du ihn ausführst.
+2. Halte Server-/Dashboardstand, Gerätemodell, gemeldete Firmwareversion,
+   technische Gerätekennung sowie Leser- und Aktorzuordnung fest. Die
+   [Geräteübersicht](../administration/geraete-verwalten.mdx#übersicht-und-verbindungsstatus)
+   zeigt Verbindung und Hardware; die Zuordnung steht an der
+   [Ressource unter Technik](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen).
+   Notiere bei Anschlüssen auch die Node-ID, damit gleich benannte Leser nicht
+   verwechselt werden.
+3. Bereite ein Testkonto mit den erforderlichen Nachweisen und einen ihm
+   [zugewiesenen Zugangs-Tag](../administration/tags-verwalten.mdx) vor. Plane
+   zusätzlich einen Fall, der an einer bestimmten Bedingung scheitern soll,
+   etwa an einer fehlenden Zugriffsvergabe. Verwende Testkonten und Tags so,
+   dass produktive Berechtigungen nicht unbeabsichtigt verändert werden.
+4. Prüfe deine Verwaltungsrechte. Für Geräteanzeigen brauchst du
+   Geräte-Leserechte; für Anschlusskonfigurationen zusätzlich Änderungsrechte.
+   Für Ressourcen und deren Zugriffstopologie sowie Protokolle und Sitzungen
+   gelten eigene Rechte. Lass fehlende Rechte vor der Prüfung klären; eine
+   ausgeblendete oder leere Ansicht ist kein erfolgreicher Test. Die Rechte
+   zur Einrichtung beschreibt [Ressourcen einrichten](../koordination/ressourcen.mdx).
+5. Kläre den Ausgangszustand vor Ort, laufende Sitzungen und ausstehende Befehle.
+   Vereinbare, wie die Anlage nach jedem Test wieder in den vorgesehenen Zustand
+   gebracht wird. Prüfe Ausfälle und Wiederanlauf nur nach einem für diese
+   Hardware freigegebenen Ablauf.
+
+Verwaltungsrechte erlauben nicht automatisch die Nutzung der Ressource.
+Für einen positiven Test muss das Testkonto selbst die aktive Zugriffsregel
+erfüllen.
 
 ## Funktionsprüfung
 
-- [ ] TODO: Ausgangskonfiguration, Hardware-/Firmwarestand, Testperson, Tag und erwartetes Ergebnis je Testfall festlegen.
-- [ ] TODO: Provisionierung, Endpunkte und Zuordnungen prüfen; gewährten und verweigerten Zugang mit beobachteter Geräteaktion und Protokoll abgleichen.
-- [ ] TODO: Buchungs-/Kompetenzbedingung, Aufsicht, Sitzungsende, offline Gerät und Wiederanlauf nur für unterstützte Varianten testen.
-- [ ] TODO: Testdaten und produktive Installation unterscheiden; Ergebnisse aus UI-Fixtures nicht als Hardwareabnahme verwenden.
+### Konfiguration und Rückmeldungen abgleichen
+
+1. Öffne **Geräte → Gerät → Übersicht → Verbindung und Hardware**. Prüfe Modell,
+   Firmwareversion, Einrichtungszustand und Zeitpunkt der letzten Verbindung.
+   **Online** bedeutet nur, dass innerhalb der letzten fünf Minuten eine Meldung
+   eingegangen ist. **Betriebsbereit** kann bereits angezeigt werden, wenn nur
+   ein Anschluss bereit ist; prüfe jeden benötigten Anschluss einzeln.
+2. Öffne **Anschlüsse** und gleiche die Einstellungen des Lesers und des
+   benötigten Aktors mit dem Prüfplan ab. Falls Änderungen nötig sind, folge
+   [Anschlüsse konfigurieren](../administration/geraete-verwalten.mdx#anschlüsse-konfigurieren-und-zuordnen).
+   Prüfe nach **An Gerät senden** die Anzeige **Letzter Auftragsstatus** für genau
+   diesen Anschluss. Verwende **Details und Verwaltung → Serverstand
+   aktualisieren**, um gespeicherte Rückmeldungen neu zu laden. **Vom Gerät
+   auslesen** fordert dagegen eine neue Meldung der Gerätekonfiguration an.
+3. Öffne **Ressourcen → Ressource → Technik** und prüfe den zugeordneten Leser
+   und Schaltausgang. Bei Anschlüssen auf unterschiedlichen Geräten prüfst du
+   beide Geräte. Gleiche unter **Nutzung & Zugriff** den Berechtigungsnachweis,
+   erforderliche Kompetenzen und weitere eingerichtete Bedingungen ab.
+
+| Beobachtung                                                                     | Was sie belegt                                                                                                           |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Gespeicherte Ressource, Zugriffsregel oder Anschlusszuordnung                   | Der Server hat diese Einrichtung gespeichert; eine Geräteaktion ist damit nicht nachgewiesen.                            |
+| **Auftrag angenommen · Bestätigung ausstehend** oder **Bestätigung ausstehend** | Der Server hat den Konfigurationsauftrag angenommen; die Übernahme am Gerät ist noch offen.                              |
+| **Vom Gerät bestätigt**                                                         | Das Gerät hat die Konfiguration bestätigt. Prüfe zusätzlich den **Gemeldeten Hardwarezustand** und die Funktion vor Ort. |
+| **Übernahme nicht bestätigt** oder **Keine Gerätebestätigung**                  | Es liegt keine Bestätigung vor. Das ist weder eine bestätigte Übernahme noch eine Ablehnung.                             |
+| **Vom Gerät abgelehnt**                                                         | Das Gerät hat den Auftrag abgelehnt; prüfe Meldung und Einstellungen vor einem neuen Versuch.                            |
+| Beobachtete Reaktion an Tür, Maschine oder anderem Nutzungsziel                 | Die im Protokoll beschriebene physische Funktion wurde unter den festgehaltenen Testbedingungen beobachtet.              |
+
+Eine ältere Bestätigung oder Meldung ist kein Nachweis für einen späteren
+Prüfschritt. Notiere, welche Rückmeldung zu welchem Auftrag und Zeitpunkt gehört.
+
+### Erlaubten und verweigerten Zugriff testen
+
+Führe die folgenden Schritte für jeden Zutrittspunkt aus. Ein erfolgreicher Test
+an einem Leser bestätigt nicht die übrigen Leser derselben Ressource.
+
+1. Verwende den vorbereiteten Tag am vorgesehenen Leser. Beobachte die
+   Rückmeldung am Gerät und die Wirkung an der zugeordneten Anlage. Prüfe zum
+   Beispiel die vorgesehene Türfreigabe oder Maschinenfreigabe entsprechend den
+   Geräteunterlagen.
+2. Öffne **Betrieb → Zutrittsaktivität → Protokolle**. Grenze die Anzeige nach
+   Ressource und Testzeitpunkt ein; nutze bei Bedarf Person, Gerät oder
+   Anschluss als weitere Filter. Öffne den Eintrag und vergleiche
+   **Entscheidung**, Ereignis und gespeicherte Nachweise mit dem Soll-Ergebnis.
+   Eine Entscheidung **Erlaubt** ersetzt die beobachtete Geräteaktion nicht.
+3. Bei einer Maschinennutzung prüfe zusätzlich unter **Sitzungen** den Verlauf
+   und beende die Testnutzung auf dem für die Installation vorgesehenen Weg.
+   Kontrolliere danach Sitzungsende und physische Freigabe getrennt. Ein
+   Impulszugang, etwa eine Türentriegelung, erzeugt keine Maschinensitzung.
+4. Führe den vorbereiteten Negativtest aus. Prüfe sowohl die Ablehnung mit dem
+   erwarteten Grund als auch, dass keine neue Freigabe an der Anlage erfolgt.
+   Halte den vorherigen Zustand fest, damit eine bereits bestehende Freigabe
+   nicht als Ergebnis dieses Tests gilt.
+5. Notiere Abweichungen sofort. Wird keine Entscheidung angezeigt, prüfe
+   Filter, Zeitraum, Rechte und Verbindung. Werte einen fehlenden Eintrag
+   nicht als nachgewiesene Ablehnung.
+
+Bei einer administrativen Aktion **Sitzung beenden** werden Backend-Sitzung und
+Gerätebefehl getrennt verarbeitet. Prüfe im Sitzungsverlauf **Zustellung des
+Gerätebefehls**: Eine beendete Sitzung kann einen noch ausstehenden oder
+fehlgeschlagenen Endbefehl haben. **Der Endbefehl wurde bestätigt** bezeichnet die
+Bestätigung des Zielanschlusses. Bei einem Aktor wird die Rückmeldung am Leser
+getrennt übertragen. Kontrolliere die Anlage vor Ort auch nach dieser Bestätigung.
+
+### Weitere eingerichtete Bedingungen prüfen
+
+Ergänze nur die Fälle, die an dieser Ressource verwendet werden. Lege jeweils
+fest, welche einzelne Bedingung erfüllt ist oder fehlt, und wiederhole den
+Abgleich von Entscheidung, Gerätemeldung und physischer Beobachtung.
+
+| Einrichtung                                | Zusätzlicher Testumfang                                                                                                                                                                                            |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Buchung als Berechtigungsnachweis          | Zugriff mit einer gültigen bestätigten Buchung für das richtige Zugriffsziel und ohne diesen Nachweis prüfen; bei „Zugriffsvergabe und Buchung“ beide Nachweise berücksichtigen.                                   |
+| Erforderliche Kompetenz                    | Einen gültigen Nachweis und einen Fall ohne den erforderlichen Nachweis prüfen. Andere Bedingungen müssen für diesen Vergleich gleich bleiben.                                                                     |
+| Aufsicht                                   | Den eingerichteten Ablauf mit der vorgesehenen zweiten Person sowie fehlende oder unzulässige Bestätigung prüfen.                                                                                                  |
+| Übernahme einer belegten Maschine          | Nur bei eingerichteter Übernahmeregel prüfen; Besitzerwechsel und Sitzungsverlauf mit dem beobachteten Anlagenzustand vergleichen.                                                                                 |
+| Verbindungsunterbrechung oder Wiederanlauf | Nur nach abgestimmtem Ablauf testen. Unterbrechung, Gerätezustand und offene Sitzungen/Befehle erfassen; nach Rückkehr neue Verbindung, Anschlussbestätigungen und die erlaubten/verweigerten Fälle erneut prüfen. |
+
+Leite aus der Online-Anzeige oder einer Backend-Sitzung kein allgemeines
+Offline- oder Wiederanlaufverhalten ab. Welche physische Reaktion während einer
+Unterbrechung zulässig und zu erwarten ist, muss für die konkrete Hardware
+festgelegt und geprüft werden.
 
 ## Protokoll und Übergabe
 
-- [ ] TODO: Protokollvorlage mit Identitäten, Versionen, Prüfschritten, Soll/Ist-Ergebnis, Zeitpunkt und offenen Mängeln erstellen; organisatorische Unterschrift und Frist optional kennzeichnen.
-- [ ] TODO: Zuständigkeiten, Verwaltungsrechte, Dokumentation, Sicherung/Wiederherstellung und bekannte Einschränkungen übergeben; Geheimnisse über den vorgesehenen getrennten Weg behandeln.
-- [ ] TODO: Rückbau von Testkonten/Tags/Freigaben und Nachprüfung vereinbaren; [Betrieb](../administration/sicherheit-betrieb.mdx) und [Störung vor Ort](./stoerung-vor-ort.mdx) verlinken.
+### Ergebnisse festhalten
+
+Führe das Prüfprotokoll in eurer vereinbarten Ablage. Die folgende Vorlage wird
+manuell ausgefüllt; sie ist kein automatisch erzeugter Mardu-Bericht.
+
+| Angabe                      | Einzutragender Inhalt                                                                                                                  |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Installation und Prüfstand  | Standort, Server/Dashboard-Version, Datum und Zeitzone, prüfende und übernehmende Person                                               |
+| Ressource und Zutrittspunkt | Name/Pfad und Kennungen, zugeordnete Geräte, technische Gerätekennung, Node-IDs, Modell und Firmwarestand                              |
+| Ausgangskonfiguration       | Zugriffsregel und benötigte Nachweise, Anschlusskonfiguration, Ausgangszustand, offene Sitzungen und Befehle                           |
+| Testfall                    | Testkonto und Tag-Kennung, Voraussetzung, Handlung und vorher festgelegtes Soll-Ergebnis                                               |
+| Ist-Ergebnis                | Zeitpunkt, gespeicherte Entscheidung und Protokoll-/Sitzungsbezug, Auftragsstatus, Gerätemeldung sowie getrennte physische Beobachtung |
+| Bewertung                   | Bestanden, Abweichung oder nicht geprüft; bei Abweichungen Mangel, Betriebsbeschränkung, Zuständigkeit und Termin für die Nachprüfung  |
+
+Nicht ausgeführte Prüfungen bleiben **nicht geprüft**. Ein Screenshot aus einer
+Testoberfläche oder ein automatisierter Softwaretest belegt keine Prüfung der
+installierten Hardware. Unterschriften oder Freigaben ergänzt ihr nach eurem
+organisatorischen Verfahren; sie ersetzen keine fehlenden Prüfergebnisse.
+
+### Betrieb übergeben
+
+1. Gehe die Ergebnisse mit der übernehmenden Person durch. Benenne offene
+   Bestätigungen, Mängel und nicht geprüfte Varianten. Vereinbare ausdrücklich,
+   welche Nutzung bis zur Nachprüfung möglich ist und wer darüber entscheidet.
+2. Übergib die Zuordnung von Standort, Ressourcen, Zutrittspunkten, Geräten und
+   Ansprechpartnern sowie die passenden Geräte- und Montageunterlagen.
+   Zeige die Anleitungen für [Geräte](../administration/geraete-verwalten.mdx),
+   [Ressourcen](../koordination/ressourcen.mdx) und
+   [Zugangs-Tags](../administration/tags-verwalten.mdx).
+3. Prüfe mit der Administration die benötigten
+   [Rollen und Verwaltungsrechte](../administration/benutzer-rollen.mdx).
+   Übergib Serverzugang, betreuende Stelle und die relevanten
+   [Server-Einstellungen](../administration/server-einstellungen.mdx).
+   Zugangsdaten, private Schlüssel und Wiederherstellungscodes gehören in den
+   dafür vorgesehenen getrennten Übergabeweg, nicht in das Prüfprotokoll.
+4. Vereinbare den Betriebsablauf für Sicherung, Wiederherstellung und Störungen.
+   Das Dashboard bietet derzeit kein freigegebenes Datenbank-Backup;
+   verwende einen für die Installation geprüften Ablauf. Beachte
+   [Sicherheit und Betrieb](../administration/sicherheit-betrieb.mdx#sicherung-wiederherstellung-und-update)
+   und die Hinweise zur [Störung vor Ort](./stoerung-vor-ort.mdx).
+5. Beende Testnutzungen und prüfe offene Gerätebefehle sowie den Zustand der
+   Anlage. Entferne nicht mehr benötigte Testvergaben und Verwaltungsrechte;
+   behandle Testkonten und Tags nach dem vereinbarten Rückbauplan.
+   Halte verbleibende Testzugänge ausdrücklich fest. Vereinbare für behobene
+   Mängel und spätere Änderungen an Firmware, Zuordnung oder Regeln eine
+   passende Nachprüfung.

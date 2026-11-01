@@ -1,0 +1,562 @@
+[
+  {
+    "id": "P01",
+    "wave": 1,
+    "path": "benutzer/erste-schritte.mdx",
+    "title": "Erste Schritte",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p01",
+    "report": "planning/reviews/2026-11-01/benutzer--erste-schritte.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P02",
+    "wave": 1,
+    "path": "benutzer/dashboard.mdx",
+    "title": "Persönliches Dashboard",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p02",
+    "report": "planning/reviews/2026-11-01/benutzer--dashboard.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P03",
+    "wave": 1,
+    "path": "benutzer/zutritt.mdx",
+    "title": "Zugänge & Ressourcen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p03",
+    "report": "planning/reviews/2026-11-01/benutzer--zutritt.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P04",
+    "wave": 1,
+    "path": "benutzer/buchungen.mdx",
+    "title": "Meine Buchungen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p04",
+    "report": "planning/reviews/2026-11-01/benutzer--buchungen.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P05",
+    "wave": 1,
+    "path": "benutzer/berechtigungsanfragen.mdx",
+    "title": "Meine Berechtigungsanfragen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p05",
+    "report": "planning/reviews/2026-11-01/benutzer--berechtigungsanfragen.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P06",
+    "wave": 1,
+    "path": "benutzer/kalender.mdx",
+    "title": "Kalender exportieren und abonnieren",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p06",
+    "report": "planning/reviews/2026-11-01/benutzer--kalender.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P07",
+    "wave": 1,
+    "path": "benutzer/kompetenzen.mdx",
+    "title": "Meine Qualifikationen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p07",
+    "report": "planning/reviews/2026-11-01/benutzer--kompetenzen.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P08",
+    "wave": 1,
+    "path": "benutzer/benachrichtigungen.mdx",
+    "title": "Benachrichtigungen lesen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p08",
+    "report": "planning/reviews/2026-11-01/benutzer--benachrichtigungen.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P09",
+    "wave": 1,
+    "path": "benutzer/geraete-status.mdx",
+    "title": "Ressourcenzustand und Störungen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p09",
+    "report": "planning/reviews/2026-11-01/benutzer--geraete-status.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P10",
+    "wave": 2,
+    "path": "ueberblick/profil.mdx",
+    "title": "Eigenes Profil",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p10",
+    "report": "planning/reviews/2026-11-01/ueberblick--profil.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P11",
+    "wave": 2,
+    "path": "ueberblick/profil-sicherheit.mdx",
+    "title": "E-Mail und Anmeldesicherheit",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p11",
+    "report": "planning/reviews/2026-11-01/ueberblick--profil-sicherheit.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P12",
+    "wave": 2,
+    "path": "ueberblick/profil-sitzungen.mdx",
+    "title": "Eigene Sitzungen verwalten",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p12",
+    "report": "planning/reviews/2026-11-01/ueberblick--profil-sitzungen.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P13",
+    "wave": 2,
+    "path": "ueberblick/profil-zutrittsmedien.mdx",
+    "title": "Meine Zutrittsmedien",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p13",
+    "report": "planning/reviews/2026-11-01/ueberblick--profil-zutrittsmedien.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P14",
+    "wave": 2,
+    "path": "ueberblick/profil-nachweisquellen.mdx",
+    "title": "Persönliche Nachweisquellen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p14",
+    "report": "planning/reviews/2026-11-01/ueberblick--profil-nachweisquellen.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P15",
+    "wave": 2,
+    "path": "ueberblick/profil-benachrichtigungen.mdx",
+    "title": "Benachrichtigungseinstellungen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p15",
+    "report": "planning/reviews/2026-11-01/ueberblick--profil-benachrichtigungen.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P16",
+    "wave": 2,
+    "path": "ueberblick/profil-erscheinungsbild.mdx",
+    "title": "Erscheinungsbild und Anzeigeformate",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p16",
+    "report": "planning/reviews/2026-11-01/ueberblick--profil-erscheinungsbild.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P17",
+    "wave": 2,
+    "path": "ueberblick/profil-mcp.mdx",
+    "title": "Eigene MCP-Verbindungen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p17",
+    "report": "planning/reviews/2026-11-01/ueberblick--profil-mcp.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P18",
+    "wave": 3,
+    "path": "administration/benutzer-rollen.mdx",
+    "title": "Benutzer und Rollen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p18",
+    "report": "planning/reviews/2026-11-01/administration--benutzer-rollen.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P19",
+    "wave": 3,
+    "path": "administration/tags-verwalten.mdx",
+    "title": "Zugangs-Tags verwalten",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p19",
+    "report": "planning/reviews/2026-11-01/administration--tags-verwalten.md",
+    "result": "unverändert gut"
+  },
+  {
+    "id": "P20",
+    "wave": 3,
+    "path": "administration/geraete-verwalten.mdx",
+    "title": "Geräte verwalten",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p20",
+    "report": "planning/reviews/2026-11-01/administration--geraete-verwalten.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P21",
+    "wave": 3,
+    "path": "administration/badges-verwalten.mdx",
+    "title": "Badges verwalten",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p21",
+    "report": "planning/reviews/2026-11-01/administration--badges-verwalten.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P22",
+    "wave": 3,
+    "path": "administration/automationen.mdx",
+    "title": "Automationen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p22",
+    "report": "planning/reviews/2026-11-01/administration--automationen.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P23",
+    "wave": 3,
+    "path": "administration/mcp-verwalten.mdx",
+    "title": "MCP für Agenten freigeben",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p23",
+    "report": "planning/reviews/2026-11-01/administration--mcp-verwalten.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P24",
+    "wave": 3,
+    "path": "administration/benachrichtigungen-verwalten.mdx",
+    "title": "Benachrichtigungen einrichten und prüfen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p24",
+    "report": "planning/reviews/2026-11-01/administration--benachrichtigungen-verwalten.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P25",
+    "wave": 3,
+    "path": "koordination/ressourcen.mdx",
+    "title": "Ressourcen einrichten",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p25",
+    "report": "planning/reviews/2026-11-01/koordination--ressourcen.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P26",
+    "wave": 4,
+    "path": "administration/integrationen.mdx",
+    "title": "Integrationen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p26",
+    "report": "planning/reviews/2026-11-01/administration--integrationen.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P27",
+    "wave": 4,
+    "path": "administration/server-einstellungen.mdx",
+    "title": "Servereinstellungen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p27",
+    "report": "planning/reviews/2026-11-01/administration--server-einstellungen.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P28",
+    "wave": 4,
+    "path": "administration/sicherheit-betrieb.mdx",
+    "title": "Sicherheit und Betrieb",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p28",
+    "report": "planning/reviews/2026-11-01/administration--sicherheit-betrieb.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P29",
+    "wave": 4,
+    "path": "administration/nachweise-datenschutz.mdx",
+    "title": "Nachweise und Datenschutz",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p29",
+    "report": "planning/reviews/2026-11-01/administration--nachweise-datenschutz.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P30",
+    "wave": 4,
+    "path": "administration/zutritt-verwalten.mdx",
+    "title": "Zugangsmetriken lesen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p30",
+    "report": "planning/reviews/2026-11-01/administration--zutritt-verwalten.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P31",
+    "wave": 4,
+    "path": "administration/wartungs-cli.mdx",
+    "title": "Mardu per CLI warten",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p31",
+    "report": "planning/reviews/2026-11-01/administration--wartungs-cli.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P32",
+    "wave": 4,
+    "path": "administration/wartungs-cli-referenz.mdx",
+    "title": "Wartungs-CLI: Befehle und Optionen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p32",
+    "report": "planning/reviews/2026-11-01/administration--wartungs-cli-referenz.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P33",
+    "wave": 4,
+    "path": "benutzer/uebersicht-monitoring.mdx",
+    "title": "Übersicht und Systemstatus",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p33",
+    "report": "planning/reviews/2026-11-01/benutzer--uebersicht-monitoring.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P34",
+    "wave": 5,
+    "path": "installieren/raspberry-pi.mdx",
+    "title": "Server auf dem Raspberry Pi installieren",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p34",
+    "report": "planning/reviews/2026-11-01/installieren--raspberry-pi.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P35",
+    "wave": 5,
+    "path": "installieren/inbetriebnahme.mdx",
+    "title": "Geräte in Betrieb nehmen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p35",
+    "report": "planning/reviews/2026-11-01/installieren--inbetriebnahme.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P36",
+    "wave": 5,
+    "path": "installieren/abnahme-uebergabe.mdx",
+    "title": "Abnahme und Übergabe",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p36",
+    "report": "planning/reviews/2026-11-01/installieren--abnahme-uebergabe.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P37",
+    "wave": 5,
+    "path": "installieren/stoerung-vor-ort.mdx",
+    "title": "Störung vor Ort",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p37",
+    "report": "planning/reviews/2026-11-01/installieren--stoerung-vor-ort.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P38",
+    "wave": 5,
+    "path": "entwickeln/api-integration.mdx",
+    "title": "API und Integrationen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p38",
+    "report": "planning/reviews/2026-11-01/entwickeln--api-integration.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P39",
+    "wave": 5,
+    "path": "entwickeln/http-api.mdx",
+    "title": "HTTP-API nutzen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p39",
+    "report": "planning/reviews/2026-11-01/entwickeln--http-api.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P40",
+    "wave": 5,
+    "path": "entwickeln/mqtt-events.mdx",
+    "title": "MQTT-Ereignisse beziehen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p40",
+    "report": "planning/reviews/2026-11-01/entwickeln--mqtt-events.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P41",
+    "wave": 5,
+    "path": "entwickeln/mcp-anbindung.mdx",
+    "title": "MCP-Client anbinden",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p41",
+    "report": "planning/reviews/2026-11-01/entwickeln--mcp-anbindung.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P42",
+    "wave": 6,
+    "path": "koordination/buchungen-verwalten.mdx",
+    "title": "Buchungen verwalten",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p42",
+    "report": "planning/reviews/2026-11-01/koordination--buchungen-verwalten.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P43",
+    "wave": 6,
+    "path": "koordination/bewertungen.mdx",
+    "title": "Bewertungen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p43",
+    "report": "planning/reviews/2026-11-01/koordination--bewertungen.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P44",
+    "wave": 6,
+    "path": "ueberblick/benutzerkonten.mdx",
+    "title": "Benutzerkonten, Rollen und Zugänge",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p44",
+    "report": "planning/reviews/2026-11-01/ueberblick--benutzerkonten.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P45",
+    "wave": 6,
+    "path": "ueberblick/grundlagen-begriffe.mdx",
+    "title": "Grundlagen und Begriffe",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p45",
+    "report": "planning/reviews/2026-11-01/ueberblick--grundlagen-begriffe.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P46",
+    "wave": 6,
+    "path": "ueberblick/fehlersuche.mdx",
+    "title": "Fehlerhilfe für das Mitgliederportal",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p46",
+    "report": "planning/reviews/2026-11-01/ueberblick--fehlersuche.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P47",
+    "wave": 6,
+    "path": "ueberblick/neuerungen.mdx",
+    "title": "Neuerungen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p47",
+    "report": "planning/reviews/2026-11-01/ueberblick--neuerungen.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P48",
+    "wave": 6,
+    "path": "v1/index.mdx",
+    "title": "Übersicht v1",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p48",
+    "report": "planning/reviews/2026-11-01/v1--index.md",
+    "result": "unverändert gut"
+  },
+  {
+    "id": "P49",
+    "wave": 6,
+    "path": "v2/index.mdx",
+    "title": "Übersicht v2",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p49",
+    "report": "planning/reviews/2026-11-01/v2--index.md",
+    "result": "unverändert gut"
+  },
+  {
+    "id": "P50",
+    "wave": 7,
+    "path": "index.mdx",
+    "title": "Mardu Dokumentation",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p50",
+    "report": "planning/reviews/2026-11-01/index.md",
+    "result": "unverändert gut"
+  },
+  {
+    "id": "P51",
+    "wave": 7,
+    "path": "ueberblick/index.mdx",
+    "title": "Mardu verstehen",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p51",
+    "report": "planning/reviews/2026-11-01/ueberblick--index.md",
+    "result": "unverändert gut"
+  },
+  {
+    "id": "P52",
+    "wave": 7,
+    "path": "benutzer/index.mdx",
+    "title": "Benutzeransicht",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p52",
+    "report": "planning/reviews/2026-11-01/benutzer--index.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P53",
+    "wave": 7,
+    "path": "koordination/index.mdx",
+    "title": "Koordination",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p53",
+    "report": "planning/reviews/2026-11-01/koordination--index.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P54",
+    "wave": 7,
+    "path": "administration/index.mdx",
+    "title": "Administration",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p54",
+    "report": "planning/reviews/2026-11-01/administration--index.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P55",
+    "wave": 7,
+    "path": "installieren/index.mdx",
+    "title": "Installieren",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p55",
+    "report": "planning/reviews/2026-11-01/installieren--index.md",
+    "result": "verbessert"
+  },
+  {
+    "id": "P56",
+    "wave": 7,
+    "path": "entwickeln/index.mdx",
+    "title": "Entwickeln",
+    "status": "Dokuprüfung abgeschlossen",
+    "agent": "/root/page_p56",
+    "report": "planning/reviews/2026-11-01/entwickeln--index.md",
+    "result": "verbessert"
+  }
+]

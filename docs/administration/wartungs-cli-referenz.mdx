@@ -29,6 +29,13 @@ docker compose exec --user mardu server /app/maintenance/mardu-admin user reset-
 `mardu-admin` ist die CLI für Kontowiederherstellung und Serverdiagnose. Die
 separate Geräte- und Signatur-CLI `mardu-management` hat andere Befehle.
 
+| Option            | Verfügbar bei                                  | Bedeutung und Standard                                                                              |
+| ----------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `--help`          | Hauptaufruf, Bereiche und einzelne Befehle     | Zeigt die jeweilige Hilfe.                                                                          |
+| `--email <EMAIL>` | Allen `user`-Befehlen und `session revoke`     | Erforderliche E-Mail-Adresse des Zielkontos; ohne Standardwert.                                     |
+| `--permanent`     | `user reset-password`                          | Verlangt nach dem Reset keinen Passwortwechsel. Ohne diese Option ist der Reset temporär.           |
+| `--json`          | `user show`, `system doctor`, `system version` | Gibt erfolgreiche Ergebnisse als JSON aus. Ohne diese Option verwendet die CLI Tabellen und Panels. |
+
 ## Konten und Anmeldesitzungen
 
 Die folgende Tabelle zeigt den Teil des Aufrufs hinter
@@ -43,7 +50,8 @@ E-Mail-Adresse des Zielkontos.
 | `user unlock --email admin@example.com`                     | Setzt Fehlversuchszähler und zeitliche Kontosperre zurück.                                                                                                                              |
 | `session revoke --email admin@example.com`                  | Widerruft die Anmeldesitzungen des Kontos, ohne dessen Passwort zu ändern.                                                                                                              |
 
-`--email` ist für diese Befehle erforderlich. Änderungen verlangen ein
+`--email` muss eine gültige, nicht leere E-Mail-Adresse enthalten. Äußere
+Leerzeichen werden bei der Prüfung und Kontosuche entfernt. Änderungen verlangen ein
 interaktives Terminal und die Bestätigung des angezeigten Zielkontos. Die beiden
 Reset-Varianten fragen das neue Passwort zweimal verdeckt ab. Es gibt keinen
 Parameter zur Passwortübergabe und keinen Modus für Änderungen ohne Bestätigung.
@@ -84,19 +92,32 @@ docker compose exec -T --user mardu server /app/maintenance/mardu-admin system d
 
 Die Ergebnisse lesender Befehle enthalten mit `--json` keine Panels, Tabellen,
 Farben oder Statusanimationen und können als JSON eingelesen werden. Fehler
-werden weiterhin als Meldung ausgegeben; beachte zusätzlich den Rückgabewert.
+werden auch mit `--json` als Textmeldung in einem Fehlerpanel ausgegeben, nicht
+als JSON-Fehlerobjekt. Prüfe vor dem Einlesen deshalb den Rückgabewert.
 
 Die Diagnose-JSON-Ausgabe enthält `status` und `checks`: den Gesamtzustand sowie
 Prüfnamen mit den Zuständen `Healthy`, `Degraded` oder `Unhealthy`.
 Die Versionsausgabe enthält `cliVersion` und `server` mit `version` und
-`protocolVersion`. Das Feld `hasLocalPassword` der Kontoausgabe entspricht der
-Tabellenzeile **Local password recovery**; es gibt an, ob der lokale Wartungs-Reset
-unterstützt wird.
+`protocolVersion` (derzeit `1`). `user show --json` enthält folgende Felder:
+
+| Feld                 | Typ                | Bedeutung                                                                                           |
+| -------------------- | ------------------ | --------------------------------------------------------------------------------------------------- |
+| `userId`             | String             | ID des Kontos.                                                                                      |
+| `email`              | String oder `null` | E-Mail-Adresse des Kontos.                                                                          |
+| `userName`           | String oder `null` | Benutzername.                                                                                       |
+| `isActive`           | Boolean            | Das Konto ist aktiviert.                                                                            |
+| `emailConfirmed`     | Boolean            | Die E-Mail-Adresse ist bestätigt.                                                                   |
+| `isLockedOut`        | Boolean            | Eine zeitliche Kontosperre gilt.                                                                    |
+| `mustChangePassword` | Boolean            | Nach der nächsten Passwortanmeldung ist ein Passwortwechsel erforderlich.                           |
+| `twoFactorEnabled`   | Boolean            | Die Zwei-Faktor-Anmeldung ist aktiviert.                                                            |
+| `hasLocalPassword`   | Boolean            | Ein lokaler Wartungs-Reset wird unterstützt; entspricht **Local password recovery** in der Tabelle. |
+
 Passwort-Hashes, Tokens und MFA-Geheimnisse werden nicht ausgegeben.
 
 Ein erfolgreich ausgeführter Diagnosebefehl kann einen eingeschränkten
 Serverzustand melden. Beachte deshalb bei automatisierten Prüfungen auch den
-Rückgabewert.
+Rückgabewert. Bei `Degraded` oder `Unhealthy` liefert `system doctor --json`
+weiterhin die Diagnose als JSON, aber den Rückgabewert `1`.
 
 ## Rückgabewerte
 
@@ -107,6 +128,11 @@ Rückgabewert.
 | `2`   | Ungültiger Aufruf oder Menüstart ohne interaktives Terminal.                                                                            |
 | `69`  | Lokaler Wartungszugriff nicht erreichbar.                                                                                               |
 | `130` | Bestätigung abgelehnt oder Ausführung abgebrochen. Nach bereits gesendeter Anfrage den Kontostatus prüfen.                              |
+
+`1` umfasst auch ein nicht gefundenes Konto, abgelehnte Passwörter,
+abweichende Wartungsprotokolle sowie ungültige oder leere Serverantworten.
+Der Client wartet pro Anfrage höchstens 30 Sekunden. Auch das Überschreiten
+dieser Wartezeit wird als Abbruch mit `130` gemeldet.
 
 ## Verbindung und Konfiguration
 

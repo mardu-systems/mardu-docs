@@ -1,0 +1,10 @@
+# Local OS metadata
+.DS_Store
+.AppleDouble
+._*
+Thumbs.db
+
+# Local browser sessions and generated verification output
+/.playwright-cli/
+/.playwright-mcp/
+/output/

@@ -4,28 +4,33 @@ description: Zugriff auf anforderbare Ressourcen beantragen, Entscheidungen lese
 ---
 
 Unter **Zugänge & Ressourcen → Meine Berechtigungsanfragen** stehen deine eigenen
-Anträge. Stellen und Zurückziehen benötigen zusätzlich die Anfragerechte.
+Anträge. Dafür benötigst du Leserechte für den Zugriffskatalog. Stellen und
+Zurückziehen benötigen zusätzlich die Anfragerechte für den Zugriffskatalog.
 
 ## Zugriff anfragen
 
 1. Suche die Ressource im [Katalog](./zutritt.mdx) und lies die Voraussetzungen.
-2. Wähle **Zugriff anfragen** und gib deine Begründung ein.
-3. Sende den Antrag und prüfe seinen Status.
+2. Wähle **Zugriff anfragen**. Unter **Begründung (optional)** kannst du deine
+   Anfrage erläutern; bis zu 1024 Zeichen sind möglich.
+3. Wähle **Antrag senden**. Der Antrag erscheint unter **Meine Berechtigungsanfragen**
+   mit dem Status **Offen**.
 
-Ein offener Antrag kann weitere Anfragen verhindern. Der Antrag selbst erteilt
-noch keinen Zugang.
+Ein offener Antrag verhindert eine weitere Anfrage für dieselbe Ressource.
+Der Antrag selbst erteilt noch keinen Zugang. Wird **Zugriff anfragen** nicht
+angeboten, prüfe die im Katalog angezeigten Gründe und deine Anfragerechte.
 
 ## Bearbeitungsstatus verfolgen
 
-Nutze Statusfilter und Seitennavigation. Ohne Filter bleiben auch abgeschlossene
-Anfragen mit ihrer Rückmeldung sichtbar.
+Nutze den Statusfilter und die Seitennavigation. **Alle Status** zeigt auch
+abgeschlossene Anfragen. Bei jedem Antrag stehen das Anfragedatum und, falls
+vorhanden, deine Nachricht, das Bearbeitungsdatum und die Rückmeldung.
 
-| Status        | Bedeutung                                                          |
-| ------------- | ------------------------------------------------------------------ |
-| Offen         | Wartet auf Bearbeitung; Rücknahme möglich, soweit angeboten.       |
-| Genehmigt     | Prüfe die erteilte [Freigabe und ihre Bedingungen](./zutritt.mdx). |
-| Abgelehnt     | Keine Freigabe aus diesem Antrag; lies die Rückmeldung.            |
-| Zurückgezogen | Zurückgenommen, bleibt im Verlauf sichtbar.                        |
+| Status        | Bedeutung                                                                             |
+| ------------- | ------------------------------------------------------------------------------------- |
+| Offen         | Wartet auf Bearbeitung; du kannst den Antrag zurückziehen.                            |
+| Genehmigt     | Eine Freigabe wurde erstellt. Prüfe ihre [Gültigkeit und Bedingungen](./zutritt.mdx). |
+| Abgelehnt     | Keine Freigabe aus diesem Antrag; lies die Rückmeldung.                               |
+| Zurückgezogen | Zurückgenommen, bleibt im Verlauf sichtbar.                                           |
 
 ![Eigene offene und genehmigte Berechtigungsanfrage mit Nachricht und Rückmeldung](bilder/berechtigungsanfragen.png)
 
@@ -38,6 +43,10 @@ Abgeschlossene Anträge lassen sich so nicht ändern. Bestehende Freigaben bleib
 
 ## Fehler und ungespeicherter Text
 
-Bei einem Sendefehler bleibt die Begründung erhalten. Korrigiere den Fehler und
-versuche erneut. Beim Schließen kannst du weiterarbeiten oder verwerfen.
-Wurde der Antrag inzwischen bearbeitet, lade seinen Status vor einem weiteren Versuch neu.
+Bei einem Sendefehler bleibt die Begründung im geöffneten Dialog erhalten. Lies
+die Fehlermeldung und versuche erneut. Schließt du den Dialog mit eingegebener
+Begründung, kannst du **Weiter bearbeiten** oder **Änderungen verwerfen** wählen.
+Verworfener Text wird nicht als Entwurf gespeichert.
+
+Haben sich die Anfrage oder ihre Voraussetzungen inzwischen geändert, lade den
+aktuellen Stand und prüfe den Bearbeitungsstatus vor einem weiteren Versuch.

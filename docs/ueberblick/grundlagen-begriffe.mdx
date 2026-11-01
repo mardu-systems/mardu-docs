@@ -10,21 +10,33 @@ keine einzelne davon bestätigt automatisch die physische Nutzung.
 
 ## System und Begriffe
 
-| Begriff              | Bedeutung                                                                                                                                                        |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Server / Projekt     | Der ausgewählte Mardu-Server und sein Datenkontext. In einer festen Installation ist der Zielserver vorgegeben; im Mehrprojektbetrieb kann die Auswahl wechseln. |
-| Benutzerkonto        | Die Identität einer Person mit Anmeldung, Profil und Zuordnungen.                                                                                                |
-| Ressource            | Ein verwaltetes Nutzungsziel, zum Beispiel Raum, Bereich oder Maschine. Ressourcen können in einer Hierarchie stehen.                                            |
-| Zugangsbereich       | Ein Zielbereich, für den Zugangsregeln und Freigaben ausgewertet werden.                                                                                         |
-| Zutrittspunkt        | Ein konkretes Zutrittsziel mit zugeordneten technischen Ein- oder Ausgängen.                                                                                     |
-| Geräte-Endpunkt      | Ein technisch adressierbarer Teil eines Geräts; eine Zuordnung verbindet ihn mit einer Aufgabe oder einem Ziel.                                                  |
-| Freigabe             | Eine Zuordnung für eine Person, Gruppe oder ein Medium mit Zeitraum und gegebenenfalls Nutzungszeiten.                                                           |
-| Katalogangebot       | Eine für dich sichtbare Ressource mit ihren Bedingungen und angebotenen Anfrageaktionen.                                                                         |
-| Berechtigungsanfrage | Eine Bitte um Freigabe. Erst die Entscheidung und die resultierende Zuordnung bestimmen das weitere Ergebnis.                                                    |
-| Buchung              | Eine Reservierung von Ressource, Zeitraum und Anzahl; eine offene Genehmigung ist noch keine bestätigte Buchung.                                                 |
-| Zutrittsmedium / Tag | Eine Karte oder ein Transponder zur Identifikation. Medienstatus, Zeitraum und Ressourcenrechte werden getrennt geprüft.                                         |
-| Provisionierung      | Technische Einrichtung eines Geräts oder Mediums. Sie ersetzt keine persönliche Berechtigungsvergabe.                                                            |
-| Automation           | Ein eingerichteter Ablauf, der auf Ereignisse reagiert oder erlaubte Aktionen ausführt. Seine Verwaltung gehört nicht zur persönlichen Benutzeransicht.          |
+| Begriff                                | Bedeutung                                                                                                                                                         |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Server / Projekt                       | Der ausgewählte Mardu-Server und sein Datenkontext. In einer festen Installation ist der Zielserver vorgegeben; im Mehrprojektbetrieb kann die Auswahl wechseln.  |
+| Benutzerkonto                          | Die Identität einer Person mit Anmeldung, Profil und Zuordnungen.                                                                                                 |
+| Ressource                              | Ein verwaltetes Nutzungsziel, zum Beispiel Raum, Bereich oder Maschine. Ressourcen können in einer Hierarchie stehen.                                             |
+| Gerät                                  | Ein technischer Controller, der Anschlüsse wie Kartenleser oder Schaltausgänge bereitstellt. Er ist von der Ressource zu unterscheiden, die darüber genutzt wird. |
+| Zugangsbereich / Scope                 | Die gemeinsame Zugriffsregel einer Ressource mit ihren Nachweisen und Bedingungen. Alle Zutrittspunkte der Ressource verwenden diese Regel.                       |
+| Zutrittspunkt                          | Ein Zugang zu einer Ressource, etwa eine Tür oder die Bedienfreigabe einer Maschine. Er fasst die dafür zugeordneten Leser und gegebenenfalls Aktoren zusammen.   |
+| Geräte-Endpunkt / Anschluss (Endpoint) | Eine einzelne Leser-, Aktor- oder Sensorfunktion eines Geräts oder einer Automation; eine Zuordnung verbindet sie mit ihrer Verwendung an einer Ressource.        |
+| Freigabe / Zugriffsvergabe             | Eine Zuordnung zur Nutzung einer Ressource für eine Person, Benutzergruppe oder ein Medium mit Zeitraum und gegebenenfalls Nutzungszeiten.                        |
+| Katalogangebot                         | Eine für dich sichtbare Ressource mit ihren Bedingungen und angebotenen Anfrageaktionen.                                                                          |
+| Berechtigungsanfrage                   | Eine Bitte um Freigabe. Erst die Entscheidung und die resultierende Zuordnung bestimmen das weitere Ergebnis.                                                     |
+| Buchung                                | Eine Reservierung von Ressource, Zeitraum und Anzahl; eine offene Genehmigung ist noch keine bestätigte Buchung.                                                  |
+| Zutrittsmedium / Tag                   | Eine Karte oder ein Transponder zur Identifikation. Medienstatus, Zeitraum und Ressourcenrechte werden getrennt geprüft.                                          |
+| Provisionierung                        | Technische Einrichtung eines Geräts oder Mediums. Sie ersetzt keine persönliche Berechtigungsvergabe.                                                             |
+| Automation                             | Ein eingerichteter Ablauf, der auf Ereignisse reagiert oder erlaubte Aktionen ausführt. Seine Verwaltung gehört nicht zur persönlichen Benutzeransicht.           |
+
+Beispiel: **Holzwerkstatt** ist eine Raumressource. Ihre Eingangstür ist ein
+Zutrittspunkt; der Kartenleser und der Türöffner sind einzelne Anschlüsse eines
+oder mehrerer Geräte. Hat der Raum mehrere Eingänge, verwenden sie dieselbe
+Zugriffsregel.
+
+Die **Tischkreissäge** kann als eigene Ressource unter der Holzwerkstatt liegen.
+Ihr Kartenleser und Freigabeaktor gehören zu ihrem Zutrittspunkt; für die Säge
+gilt ihre eigene Zugriffsregel. Eine Ressource braucht nicht zwingend ein Gerät,
+etwa wenn nur ihre Buchbarkeit verwaltet wird. Die Zuordnung erklärt
+[Ressourcen einrichten](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen).
 
 Ein offline gemeldetes Gerät, eine gesendete Aktion und ein bestätigter physischer
 Zustand sind nicht dasselbe. Meldungen und Messwerte müssen mit ihrem Zeitpunkt
@@ -32,25 +44,28 @@ und ihrer Quelle gelesen werden.
 
 ## Kompetenzen und Nachweise
 
-| Begriff                             | Bedeutung                                                                                                                             |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Fähigkeit / Kompetenz               | Die beschriebene Fähigkeit, etwa eine bestimmte Maschine bedienen zu können.                                                          |
-| Badge-Definition und Inhaltsversion | Beschreibung eines Nachweises und ein bestimmter Stand dieser Beschreibung; noch keine persönliche Vergabe.                           |
-| Vergabe                             | Die Zuordnung einer Einweisung oder eines Nachweises zu einer Person.                                                                 |
-| Signierter Nachweis / Credential    | Ein ausgestellter Nachweis, dessen Aussteller und technische Prüfung gesondert betrachtet werden können.                              |
-| Standard                            | Ein Bezugsrahmen für Kompetenz- oder Nachweisdefinitionen.                                                                            |
-| Lernweg                             | Eine angeordnete Folge von Lern- oder Nachweisanforderungen.                                                                          |
-| Bewertung                           | Eine Prüfung einer Anforderung oder Fähigkeit; sie ist von der späteren Vergabe zu unterscheiden.                                     |
-| Anerkennung                         | Die Entscheidung, wie ein fremder Nachweis im vorgesehenen Zusammenhang berücksichtigt wird. Ein Import allein ist keine Anerkennung. |
+| Begriff                              | Bedeutung                                                                                                                                                                                          |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fähigkeit / Kompetenz                | Die beschriebene Fähigkeit, etwa eine bestimmte Maschine bedienen zu können.                                                                                                                       |
+| Badge, Definition und Inhaltsversion | Ein Badge steht für einen Nachweis, etwa eine Maschineneinweisung. Die Definition beschreibt ihn; eine Inhaltsversion hält einen bestimmten Stand fest. Beides ist noch keine persönliche Vergabe. |
+| Einweisung                           | Eine für eine Person erfasste Kompetenzanerkennung, etwa für die Bedienung einer Maschine. Status und Gültigkeit bestimmen, ob sie aktuell wirksam ist.                                            |
+| Vergabe                              | Die Zuordnung einer Einweisung oder eines Nachweises zu einer Person. Eine lokale Badge-Vergabe ist weder ein signiertes Credential noch eine Ressourcenfreigabe.                                  |
+| Signierter Nachweis / Credential     | Ein ausgestellter Nachweis, dessen Aussteller und technische Prüfung gesondert betrachtet werden können.                                                                                           |
+| Verifikation                         | Die technische Prüfung eines Nachweises, etwa seiner Signatur und seines Status. Ihr Ergebnis ersetzt keine lokale Anerkennung.                                                                    |
+| Standard                             | Ein Bezugsrahmen für Kompetenz- oder Nachweisdefinitionen.                                                                                                                                         |
+| Lernweg                              | Eine angeordnete Folge von Lern- oder Nachweisanforderungen.                                                                                                                                       |
+| Bewertung                            | Eine Prüfung einer Anforderung oder Fähigkeit; sie ist von der späteren Vergabe zu unterscheiden.                                                                                                  |
+| Anerkennung                          | Die Entscheidung, wie ein fremder Nachweis im vorgesehenen Zusammenhang berücksichtigt wird. Ein Import allein ist keine Anerkennung.                                                              |
 
 [Meine Qualifikationen](../benutzer/kompetenzen.mdx) trennt persönliche
 Einweisungen, lokale Vergaben und importierte beziehungsweise signierte Nachweise.
 
 ## Konten, Rollen und Navigation
 
-Rollen weisen Rechte für Funktionen zu. Benutzergruppen ordnen Personen und
-Gruppenrollen zu. Die Herkunft einer Funktionsberechtigung ist von einer
-physischen Ressourcenfreigabe und einer objektbezogenen Verwaltungszuständigkeit
+Rollen weisen Rechte für Funktionen zu. Eine Benutzergruppe fasst Benutzerkonten
+zusammen; ihre zugewiesenen Rollen gelten für die Mitglieder. Die Herkunft einer
+Funktionsberechtigung ist von einer physischen Ressourcenfreigabe und einer
+objektbezogenen Verwaltungszuständigkeit
 zu unterscheiden. [Benutzerkonten, Rollen und Zugänge](./benutzerkonten.mdx)
 erklärt die Zusammenhänge.
 

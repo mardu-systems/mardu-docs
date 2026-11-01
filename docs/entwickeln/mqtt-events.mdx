@@ -1,20 +1,172 @@
 ---
 title: MQTT-Ereignisse beziehen
-description: Broker-Zugang, Topic-Struktur, Beispielereignisse und Zugriffsregeln.
+description: Freigegebene System- und Geräteinformationen über den eingebetteten MQTT-Broker lesen.
 ---
 
-Diese Seite ist ein Entwurf. Informationsmeldungen, Gerätebefehle,
-Telemetrie und interne Automation-Kommunikation haben unterschiedliche Verträge.
+Über den eingebetteten Informationsbroker kannst du Systemzustände,
+Gerätezustände und Geräteereignisse in einem eigenen MQTT-Client lesen.
+Externe Clients dürfen dort ausschließlich abonnieren. Auch ein MQTT-Konto
+mit der Rolle `Admin` erhält keine Veröffentlichungsrechte.
+
+Dieser Lesezugang ist vom MQTT-Gerätemanagement und von der internen
+Automation-Kommunikation getrennt. Die folgenden Topics sind kein
+Schreibvertrag für Gerätebefehle. Für die Einrichtung des Brokers und der
+Lesekonten siehe [Administration → Integrationen](../administration/integrationen.mdx#mqtt).
 
 ## Verbindung und Zugriffsregeln
 
-- [ ] TODO: Broker, Adresse/Port, TLS, Benutzer und ACLs aus der administrativen [MQTT-Einrichtung](../administration/integrationen.mdx) beziehen.
-- [ ] TODO: Begrenztes Testabonnement einrichten; erlaubte Topics, Wildcards und anonymen Informationsbereich gegen aktuelle Brokerregeln prüfen.
-- [ ] TODO: Falsches Passwort, nicht erlaubtes Topic, TLS-Fehler und offline Broker unterscheiden; Zugangsdaten nicht in Beispielausgaben zeigen.
+Lass dir vor dem Verbinden diese Angaben für deine Installation geben:
+
+- **Brokeradresse und Port:** Verwende den erreichbaren MQTT-Listener, nicht die
+  HTTP-API-Adresse oder die Dashboard-Projektadresse. Der Standardport ohne TLS
+  ist `1883`; für TLS ist `8883` empfohlen. Maßgeblich ist der eingestellte Port.
+- **TLS und Zertifikatsvertrauen:** Bei aktiviertem TLS bietet der Broker TLS 1.2
+  und 1.3 an. Nutze den zum Zertifikat passenden Hostnamen und vertraue der
+  ausstellenden Zertifizierungsstelle. Die Option für selbstsignierte
+  Serverzertifikate schaltet die Zertifikatsprüfung deines Clients nicht aus.
+- **MQTT-Benutzername und Passwort:** Verwende ein aktiviertes MQTT-Lesekonto.
+  Eine Dashboard-Anmeldung oder ein HTTP-Bearer-Token ersetzt diese Zugangsdaten
+  nicht. Verwende eine eigene Client-ID; eine vorgegebene Bindung des Kontos an
+  eine Client-ID muss eingehalten werden. `internal-service` ist reserviert.
+- **Erlaubte Topicfilter:** Lass dir die freigegebenen Topics sowie eventuelle
+  QoS- und Retained-Einschränkungen nennen. Eine erfolgreiche Anmeldung allein
+  gewährt einem eingeschränkten Konto noch kein Abonnement.
+
+Die MQTT-Rolle `ReaderRestricted` benötigt aktive `subscribe`-ACLs mit `allow`.
+Eine ACL ist eine Zugriffsregel für ein Topic oder einen Topicfilter. Ein
+Abonnement muss vollständig in einen erlaubten Filter passen; eine überlappende
+aktive `deny`-Regel hat Vorrang. `ReaderAll` und `Admin` dürfen den Informationsbaum
+`v1/info/#` lesen. Das ist unabhängig von Dashboard-Rollen und HTTP-Berechtigungen.
+
+Anonymer Zugriff funktioniert nur, wenn er am Broker aktiviert ist. Ohne
+Benutzername und Passwort gelten dann die konfigurierten anonymen Filter;
+der Vorgabefilter ist `v1/info/public/#`. Das Wort `public` im Topic allein
+schaltet den Zugriff nicht frei.
+
+### Ein begrenztes Abonnement prüfen
+
+1. Öffne deinen MQTT-Client und trage Brokeradresse, tatsächlichen Port,
+   TLS-Vertrauen, Client-ID und die bereitgestellten MQTT-Zugangsdaten ein.
+   Für einen ausdrücklich freigegebenen anonymen Zugang lässt du Benutzername
+   und Passwort leer.
+2. Verbinde den Client. Prüfe zuerst, ob die Verbindung angenommen wird.
+3. Abonniere exakt `v1/info/public/system/state` mit angefordertem QoS `1`.
+   Das Konto muss dieses Topic lesen dürfen. Dieses Abonnement benötigt keine
+   Wildcard-Freigabe.
+4. Prüfe die Bestätigung des Abonnements und die empfangene JSON-Nachricht.
+   Der Server veröffentlicht hier einen Retained-Zustand. Wenn die ACL
+   Retained-Nachrichten beim Abonnieren unterdrückt, warte auf die nächste
+   Veröffentlichung. Der Systempublisher veröffentlicht bei verfügbarem Broker
+   normalerweise alle 60 Sekunden; Fehler können eine Veröffentlichung verhindern.
+
+Eine beispielhafte Nachricht mit fiktiven Werten:
+
+```json
+{
+  "service": "server",
+  "applicationVersion": "1.0.0",
+  "environment": "Production",
+  "healthStatus": "Healthy",
+  "timestampUtc": "2026-11-01T10:15:00Z"
+}
+```
+
+`applicationVersion` und `environment` beschreiben die Serverinstanz,
+`healthStatus` deren gemeldeten Gesundheitszustand. `timestampUtc` ist der
+Zeitpunkt der Momentaufnahme. Prüfe ihn, bevor du den Wert als aktuell anzeigst:
+Eine Retained-Nachricht ist der zuletzt gespeicherte Wert, kein Nachweis einer
+ununterbrochenen Verbindung.
 
 ## Topics und Payloads
 
-- [ ] TODO: Aktuelle Topic-Kataloge und Geräteprotokollversionen verlinken; ältere IP500-/Legacy-Verträge eindeutig mit Version kennzeichnen.
-- [ ] TODO: Pro Topic Richtung, Zweck, Rechte, Payload, Einheit, QoS/Retain und beobachtbares Ergebnis nur mit Vertragsbeleg beschreiben.
-- [ ] TODO: Gültige Beispiele für Information und Telemetrie ausführen; schreibende Gerätebefehle nur mit Testhardware beziehungsweise ausdrücklich als ungeprüft erklären.
-- [ ] TODO: Nachricht, gespeicherte Entscheidung und Gerätebestätigung unterscheiden; Duplikate, Wiederverbindung und Versionskonflikt behandeln.
+Der Topic-Katalog unter **Administration → Integrationen → Embedded MQTT** enthält
+Templates, Payloadtypen, Beispiele und Hinweise. Er ist auch über
+`GET /api/v1/integrations/mqtt/topics` mit HTTP-Authentifizierung und dem Recht
+**Integrationen anzeigen** abrufbar. Der Katalog beschreibt angebotene Topics;
+er bestätigt weder deine MQTT-ACL noch, dass zu jedem Template bereits eine
+Nachricht vorliegt.
+
+Die folgenden QoS- und Retained-Angaben beschreiben die Veröffentlichung durch
+Mardu. Das beim Abonnieren gewährte QoS kann durch die ACL niedriger ausfallen.
+`RetainAllowed=false` in einer passenden ACL unterdrückt den gespeicherten
+Retained-Wert beim Abonnieren.
+
+| Topic                                     | Inhalt                                                             | QoS | Retained |
+| ----------------------------------------- | ------------------------------------------------------------------ | --- | -------- |
+| `v1/info/public/system/state`             | Version, Umgebung, Gesundheitszustand und Zeitpunkt des Servers    | 1   | Ja       |
+| `v1/info/public/system/telemetry`         | Laufzeit in Sekunden, Gesundheitszustand und einzelne Healthchecks | 0   | Nein     |
+| `v1/info/devices/{deviceId}/state`        | Gerätelebenszyklus, Provisionierung und abgeleitete Verfügbarkeit  | 1   | Ja       |
+| `v1/info/devices/{deviceId}/meta`         | Inventardaten wie Name, Typ und Firmwareversion                    | 1   | Ja       |
+| `v1/info/devices/{deviceId}/runtime`      | Aus Sitzungen und Einstellungen abgeleiteter Laufzeitzustand       | 1   | Ja       |
+| `v1/info/devices/{deviceId}/access/state` | Belegung und aktuelle anfragende Person                            | 1   | Ja       |
+| `v1/info/devices/{deviceId}/ota/state`    | Zustand einer Firmwareaktualisierung                               | 1   | Ja       |
+| `v1/info/devices/{deviceId}/events`       | Ereignisse aus dem Geräteprotokoll                                 | 1   | Nein     |
+
+Ersetze `{deviceId}` durch die Geräte-ID deiner Installation, beispielsweise
+`5f1c1f34-0af2-4e8a-8a80-9b8bda4639e1`. Übernimm das Template nicht wörtlich
+in eine ACL oder ein Abonnement. Geräteinformationen liegen außerhalb des
+anonymen Vorgabebereichs und benötigen eine entsprechende Freigabe.
+
+### Topicfilter verwenden
+
+Topics sind durch `/` in Ebenen getrennt und unterscheiden Groß- und
+Kleinschreibung. Leere Ebenen und Nullzeichen sind ungültig. Für Abonnements gilt:
+
+- `+` ersetzt genau eine vollständige Ebene, zum Beispiel
+  `v1/info/devices/+/state`.
+- `#` steht als vollständige letzte Ebene für den verbleibenden Teilbaum,
+  zum Beispiel `v1/info/devices/#`.
+- Wildcards funktionieren nur, wenn `AllowWildcardReaders` aktiviert ist und
+  der gesamte angefragte Filter von den Leserechten abgedeckt wird. Ein globales
+  `#` ist kein erlaubtes Informationsabonnement; nutze den freigegebenen Teilbaum.
+
+Private Automation-Topics gehören zur eingerichteten Adapterverbindung und sind
+kein allgemeiner Erweiterungspunkt dieses Informationszugangs. Verwende für
+eigene Flows die Anleitung [Eigene Automationsflüsse entwickeln](./automationsfluesse.mdx).
+
+### Zustände und Ereignisse verarbeiten
+
+Die hier beschriebenen Payloads sind UTF-8-kodiertes JSON. Verwende den zum Topic
+gehörenden Payloadtyp aus dem Katalog: Systemtelemetrie und Geräteereignisse
+haben unterschiedliche Felder. Zeitpunkte mit `Utc` verwenden UTC;
+`uptimeSeconds` ist die Serverlaufzeit in Sekunden.
+
+Für Geräteereignisse abonnierst du nach Freigabe beispielsweise
+`v1/info/devices/5f1c1f34-0af2-4e8a-8a80-9b8bda4639e1/events`.
+Eine Ereignisnachricht enthält `deviceId`, `category`, `severity`, `eventType`,
+`message` und `timestampUtc`. `source`, `correlationId` und `metadata` können
+`null` sein. Der reguläre
+Ereignisstrom spiegelt neue Einträge im Geräteprotokoll; ein stilles Topic
+bedeutet daher nicht zwangsläufig einen Fehler.
+
+Retained-Zustände sind Momentaufnahmen, keine Ereignishistorie. Geräteereignisse
+werden ohne Retain veröffentlicht; erwarte nach einer Wiederverbindung keinen
+vollständigen Verlauf. Richte das Abonnement erneut ein und lies benötigte
+Zustandstopics wieder ein. Benutzer-, Passwort- und ACL-Änderungen trennen
+bestehende Verbindungen und entfernen gespeicherte Abonnements.
+
+Beim Löschen eines Geräts entfernt Mardu dessen gespeicherte Zustandssnapshots
+mit leeren Retained-Payloads. Behandle eine leere Payload daher nicht als
+beschädigtes JSON. Verarbeite wiederholt eintreffende Zustände ohne zusätzliche
+Aktion und löse aus einer QoS-1-Nachricht keine ungeschützte einmalige Aktion aus.
+
+Ein Laufzeitzustand ist aus den vorhandenen Sitzungen und Einstellungen
+abgeleitet. Er bestätigt keinen physischen Relais- oder Sensorzustand. Auch ein
+OTA-Ereignis oder eine gespeicherte Entscheidung ersetzt keine Bestätigung der
+Geräteausführung.
+
+## Wenn keine Nachricht ankommt
+
+| Beobachtung                                  | Nächster Prüfschritt                                                                                                                                                                                                   |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Keine TCP-Verbindung                         | Brokeradresse, eingestellten Port, Netzwerkfreigabe und aktivierten Broker mit dem Betrieb prüfen.                                                                                                                     |
+| TLS-Verbindung scheitert                     | TLS-Modus, Hostname, Zertifikatsgültigkeit und vertrauenswürdige Zertifizierungsstelle prüfen.                                                                                                                         |
+| Anmeldung abgelehnt                          | MQTT-Benutzername, Passwort, aktiviertes Konto und gegebenenfalls gebundene Client-ID prüfen; eine eigene, nicht reservierte Client-ID verwenden. Nach mehreren Fehlversuchen kann eine vorübergehende Sperre greifen. |
+| Verbunden, Abonnement abgelehnt              | Topicfilter, `ReaderRestricted`-ACL, überlappende `deny`-Regeln und Wildcard-Freigabe prüfen. Zuerst ein konkret freigegebenes Topic abonnieren.                                                                       |
+| Abonnement angenommen, keine Nachricht       | Zeitpunkt der nächsten Veröffentlichung, Unterdrückung von Retained-Werten und vorhandene Daten prüfen. Ereignistopics liefern ohne neues Ereignis keine Nachricht.                                                    |
+| Verbindung nach Verwaltungsänderung getrennt | Mit den gültigen Zugangsdaten erneut verbinden und die freigegebenen Topics erneut abonnieren.                                                                                                                         |
+
+Veröffentliche keine Testnachricht zur Verbindungsprüfung: Der Broker weist
+externe Veröffentlichungen unabhängig von Topic, Retain und MQTT-Rolle zurück.
+Gib bei einer Fehlermeldung Topic und Zeitpunkt weiter, aber keine Passwörter
+oder vollständigen Payloads mit personenbezogenen Sitzungsdaten.

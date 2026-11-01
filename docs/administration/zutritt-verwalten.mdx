@@ -3,30 +3,65 @@ title: Zugangsmetriken lesen
 description: Gespeicherte Zugangsentscheidungen, aktive Sitzungen und den Zeitbezug der Metriken einordnen.
 ---
 
-Diese Anleitung erklärt die Metriken in Benutzer-, Geräte- und
-Zutrittspunktdetails. Für die Einrichtung von Nutzungsbedingungen und technischen
-Anschlüssen siehe [Ressourcen einrichten](../koordination/ressourcen.mdx).
+Diese Anleitung erklärt die gespeicherten Zugangsentscheidungen und die aktuell
+offenen Zutrittssitzungen in Benutzer- und Zutrittspunktdetails. Die
+[Gerätediagnose](./geraete-verwalten.mdx#diagnose-lesen) verwendet eine eigene
+Metrikansicht mit anderen Zeiträumen und Datenquellen.
+
+Du brauchst die Leseberechtigung für **Zugänge**. Zusätzlich bestimmen die
+Verwaltungsrechte für die jeweilige Ressource, ob du ihre Protokolle oder
+Sitzungen sehen darfst. Diese beiden Sichtrechte werden getrennt ausgewertet;
+die Zahlen müssen deshalb nicht dieselben Ressourcen abdecken.
+
+1. Öffne die Benutzerdetails und wähle **Metriken**.
+2. Vergleiche die Kennzahlen mit **Zugangsverlauf** und **Letzte Zugänge**.
+3. Lade bei Bedarf die Werte über die Schaltfläche **Zugangsmetriken aktualisieren** neu.
+
+Die Anzeigen beziehen sich auf den geöffneten Benutzer oder Zutrittspunkt.
+Bei Benutzern hängt die Auswahl und Anordnung der Karten von deiner
+[Metrikansicht](./benutzer-rollen.mdx#metrikansicht-anpassen) ab.
 
 ## Zugangsmetriken
 
-In den Details eines Benutzers, Geräts oder Zutrittspunkts zeigt **„Metriken“**
-die gespeicherten Zugangsentscheidungen für sieben Kalendertage nach koordinierter
-Weltzeit (UTC), einschließlich heute. Der heutige Tag ist noch unvollständig;
-die Tagesgrenzen können von deiner lokalen Zeitzone abweichen.
+Die Zugangsentscheidungen umfassen sieben Kalendertage nach koordinierter
+Weltzeit (UTC), einschließlich heute: vom Tagesbeginn vor sechs Tagen bis zum
+Abrufzeitpunkt. Der heutige Tag ist noch unvollständig; die Tagesgrenzen können
+von deiner lokalen Zeitzone abweichen. Die einzelnen Zeitangaben unter
+**Letzte Zugänge** werden dagegen in der Zeitzone deines Browsers angezeigt.
 
-| Anzeige                  | Bedeutung                                                                                                   |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------- |
-| Zugangsentscheidungen    | Alle gespeicherten erlaubten und abgelehnten Entscheidungen im Zeitraum.                                    |
-| Anteil erlaubter Zugänge | Erlaubte Entscheidungen geteilt durch alle Entscheidungen. Ohne Entscheidungen steht hier **„–“**.          |
-| Abgelehnt                | Anzahl abgelehnter Entscheidungen im Zeitraum.                                                              |
-| Aktuell aktive Sitzungen | Offene Zutrittssitzungen, unabhängig vom Startdatum. Dies sind keine Anmeldesitzungen am Dashboard.         |
-| Zugangsverlauf           | Entscheidungen pro UTC-Kalendertag.                                                                         |
-| Letzte Zugänge           | Bis zu fünf neueste Entscheidungen im Zeitraum; die Kennzahlen sind nicht auf diese fünf Einträge begrenzt. |
+| Anzeige                                     | Bedeutung                                                                                                      |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Zugangsentscheidungen / Zugangsereignisse   | Alle gespeicherten erlaubten und abgelehnten Entscheidungen im Zeitraum.                                       |
+| Anteil erlaubter Zugänge / Erfolgsquote     | Erlaubte Entscheidungen geteilt durch alle Entscheidungen, in Prozent. Ohne Entscheidungen steht hier **„–“**. |
+| Abgelehnt                                   | Anzahl abgelehnter Entscheidungen im Zeitraum.                                                                 |
+| Aktuell aktive Sitzungen / Aktive Sitzungen | Offene Zutrittssitzungen, unabhängig vom Startdatum. Dies sind keine Anmeldesitzungen am Dashboard.            |
+| Zugangsverlauf                              | Entscheidungen pro UTC-Kalendertag.                                                                            |
+| Letzte Zugänge                              | Bis zu fünf neueste Entscheidungen im Zeitraum; die Kennzahlen sind nicht auf diese fünf Einträge begrenzt.    |
 
-Ausstehende Entscheidungen sowie Sitzungsenden und Sitzungswechsel zählen nicht
-als Zugangsentscheidungen. Die Grafik lässt sich als Balken oder Linien anzeigen.
+Die Anzahlen zählen Entscheidungen und offene Sitzungsabschnitte, keine
+eindeutigen Personen oder Nutzungsstunden. Ausstehende Entscheidungen sowie
+Sitzungsenden und Sitzungswechsel zählen nicht als Zugangsentscheidungen.
+
+Am Zutrittspunkt und in der Standardanzeige eines Benutzers erscheint der
+Zugangsverlauf als Liniengrafik. In der anpassbaren Benutzeransicht kannst du
+Balken, Linien oder Fläche wählen.
 
 Es werden nur Bereiche berücksichtigt, deren Protokolle beziehungsweise Sitzungen du ansehen darfst. Die Zahlen beschreiben gespeicherte Entscheidungen; sie bestätigen keine physische Geräteaktion. Bereits gelöschte Protokolle können nicht nachträglich gezählt werden.
+
+## Leere Werte und Ladefehler einordnen
+
+Ohne sichtbare Entscheidungen sind die Entscheidungszahlen null und der Anteil erlaubter
+Zugänge **„–“**. In der Standardanzeige steht beim Verlauf und bei den letzten
+Zugängen **„Im ausgewählten Zeitraum liegen keine Zugangsereignisse vor.“**
+Aktive Sitzungen können trotzdem vorhanden sein, da sie nicht auf den
+Sieben-Tage-Zeitraum begrenzt sind.
+
+Ein Nullwert belegt nur, dass keine entsprechenden Datensätze innerhalb deiner
+Sichtrechte gezählt wurden. Prüfe bei unerwartet leeren Anzeigen die
+Leseberechtigung für Zugänge und die getrennten Ressourcenrechte für Protokolle
+und Sitzungen. Bei einem Ladefehler aktualisiere die Anzeige erneut.
+Bleiben neben einer Fehlermeldung noch Zahlen sichtbar, stammen diese vom letzten
+erfolgreichen Abruf.
 
 <span id="ressourcen-bereiche-und-zutrittspunkte" />
 <span id="verwaltungsrechte-und-verantwortlichkeiten" />
@@ -37,10 +72,9 @@ Es werden nur Bereiche berücksichtigt, deren Protokolle beziehungsweise Sitzung
 ## Nutzungsbedingungen und Verwaltung
 
 Die [Ressourcenanleitung](../koordination/ressourcen.mdx#nutzung-und-zugriff-nutzung-erlauben)
-beschreibt die vorhandene Einrichtung. Vollständige Anleitungen zum Vergeben von
-Verwaltungszuständigkeiten, zum Entscheiden über Zugangsanträge und zur Verwaltung
-von Zutrittssitzungen sind hier noch nicht ausgearbeitet. Aus den angezeigten
-Metriken folgt keine Berechtigung zum Verwalten dieser Vorgänge.
+beschreibt das Einrichten von Zugriffsregeln und technischen Anschlüssen.
+Aus den angezeigten Metriken folgt keine Berechtigung, Freigaben,
+Verwaltungszuständigkeiten, Zugangsanträge oder Zutrittssitzungen zu verändern.
 
 ## Eigene Zugänge
 

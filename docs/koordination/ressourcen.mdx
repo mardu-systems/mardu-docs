@@ -3,18 +3,25 @@ title: Ressourcen einrichten
 description: Räume und Maschinen strukturieren, Zugriff und Technik zuordnen sowie Buchbarkeit und Wartung verwalten.
 ---
 
-import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 import screenshot1 from './bilder/ressource-allgemein.png';
-import screenshot2 from './bilder/ressource-zugriff.png';
 import screenshot3 from './bilder/ressource-technik.png';
 import screenshot4 from './bilder/ressource-wartung.png';
 
 Eine **Ressource** ist ein Raum, eine Maschine oder ein anderes physisches Nutzungsziel. Sie besitzt einen Namen und kann unter einer anderen Ressource liegen, etwa **Werkstatt → Holzwerkstatt → Tischkreissäge**. Geräte stellen technische Anschlüsse bereit; Nutzungsregeln und Buchbarkeit gehören zur Ressource.
 
-Öffne die **Ressourcenübersicht**. Suche nach Name oder Pfad und grenze die Liste bei Bedarf nach Typ und Status ein. Öffne eine Ressource, um ihre fünf Bearbeitungsbereiche zu sehen. Die Bilder zeigen fiktive Beispieldaten und lassen sich zum Vergrößern auswählen.
+Öffne die **Ressourcenübersicht**. Suche nach Name oder Pfad und grenze die Liste bei Bedarf nach Typ und Status ein. Öffne eine Ressource, um ihre Bereiche **Allgemein**, **Nutzung & Zugriff**, **Technik**, **Buchbarkeit**, **Ausfälle und Wartung** und **Messwerte** zu sehen. Je nach Leserechten stehen einzelne Bereiche nicht zur Verfügung. Die Bilder zeigen fiktive Beispieldaten in einem früheren Layout; die beschriebenen Felder und Aufgaben bestehen weiterhin. Wähle ein Bild zum Vergrößern aus.
 
-Zum Anzeigen brauchst du Ressourcen-Leserechte. Anlegen, Bearbeiten und Löschen sind getrennte Rechte. Zugriffsregeln, Leser-/Aktorzuordnungen und Freigaben benötigen zusätzlich die jeweiligen Zugriffsrechte und Verwaltungsrechte für diese Ressource. Buchbarkeit verwendet eigene Buchungsressourcen-Rechte. Ein Verwaltungsrecht erlaubt noch keine Nutzung; Rechte auf eine Ressource gelten nicht automatisch für ihre Unterressourcen.
+Diese Anleitung gehört zur **Administration**. Zum Anzeigen brauchst du Ressourcen-Leserechte; Anlegen, Bearbeiten und Löschen sind getrennte Rechte. Buchbarkeit verwendet eigene Buchungsressourcen-Rechte. Für die Zugriffsansicht brauchst du zusätzlich Zugriffs-Leserechte. Für Änderungen gelten globale Zugriffsrechte und auf diese Ressource bezogene Verwaltungsrechte:
+
+| Aufgabe                                               | Benötigtes Verwaltungsrecht für die Ressource |
+| ----------------------------------------------------- | --------------------------------------------- |
+| Zugriffsregel und Zutrittspunkte ansehen              | Zugriffstopologie anzeigen                    |
+| Zugriffsregel ändern                                  | Zugriffsregeln verwalten                      |
+| Zugriffsvergaben oder verantwortliche Personen ändern | Zugriffsvergaben verwalten                    |
+| Leser und Freigabeaktoren zuordnen                    | Hardware verwalten                            |
+
+Zum Ändern der Zugriffsregel, Vergaben oder Leser-/Aktorzuordnungen brauchst du außerdem das globale Zugriffs-Änderungsrecht. Neue Zugriffsvergaben und zusätzliche Zutrittspunkte benötigen das globale Zugriffs-Anlegerecht; das Löschen einer Vergabe benötigt das Zugriffs-Löschrecht. Ein Verwaltungsrecht erlaubt noch keine Nutzung. Ein Recht auf eine Ressource gilt nicht automatisch für ihre Unterressourcen; eine Zuständigkeit für den gesamten Zugriffsbereich ist davon zu unterscheiden.
 
 <Callout type="info" title="Änderungen speichern">
   Speichern gilt für den jeweiligen Bearbeitungsbereich, nicht gemeinsam für alle Reiter.
@@ -27,7 +34,7 @@ Zum Anzeigen brauchst du Ressourcen-Leserechte. Anlegen, Bearbeiten und Löschen
 
 1. Wähle **Ressource anlegen** und gib **Name** und **Typ** an.
 2. Ergänze bei Bedarf **Beschreibung** und **Übergeordnete Ressource**.
-3. Wähle **Speichern**. Die Ressource wird als **Entwurf** angelegt.
+3. Bestätige mit **Ressource anlegen**. Die Ressource wird als **Entwurf** angelegt.
 4. Öffne sie erneut, um unter **Allgemein** Stammdaten und Foto zu bearbeiten.
 
 Der Name hat 1–160 Zeichen und muss unter derselben übergeordneten Ressource eindeutig sein; Groß-/Kleinschreibung erzeugt keinen zweiten Namen. Eine Beschreibung ist optional und darf höchstens 2048 Zeichen enthalten. Ohne übergeordnete Ressource liegt der Eintrag auf der obersten Ebene.
@@ -55,53 +62,50 @@ Unter **Foto** wählst du ein Bild aus, schneidest es zu und übernimmst es. Bil
 | Aktiv                  | Buchung und Nutzung sind grundsätzlich möglich; weitere Regeln und Sperren gelten weiterhin. |
 | Außer Betrieb genommen | Dauerhaft stillgelegt; eine erneute Aktivierung ist nicht vorgesehen.                        |
 
-Wähle unter **Status** die Aktion **Aktivieren**, sobald die Vorfahren aktiv sind. Für bereits aktivierte Zugriffsregeln prüft der Server außerdem, ob aktive Zutrittspunkte mit Leser und gegebenenfalls dem geforderten Aktor zugeordnet sind. Die Aktivierung richtet weder Buchbarkeit noch Zugriffsfreigaben ein und bestätigt keinen Hardwarezustand.
+Wähle unter **Allgemein** die Aktion **Aktivieren**, sobald die Vorfahren aktiv sind. Für bereits aktivierte Zugriffsregeln prüft der Server außerdem, ob aktive Zutrittspunkte mit Leser und gegebenenfalls dem geforderten Aktor zugeordnet sind. Die Aktivierung richtet weder Buchbarkeit noch Zugriffsfreigaben ein und bestätigt keinen Hardwarezustand.
 
-**Zustand zum Prüfzeitpunkt** berücksichtigt Status und wirksame Sperren einschließlich der Vorfahren. **Status aktualisieren** berechnet ihn neu. Eine fehlende Betriebssperre ersetzt keine Nutzungsberechtigung.
+Unter **Allgemein** zeigt die Übersicht getrennt **Buchbar** und **Nutzung freigegeben** oder die Gründe, die dagegen sprechen. Sie berücksichtigt die gespeicherte Einrichtung, den Status und wirksame Sperren einschließlich der Vorfahren. Fehlende Rechte oder fehlgeschlagene Prüfungen ergeben **Nicht prüfbar**. **Status aktualisieren** lädt die Prüfung neu; beachte den Prüfzeitpunkt.
 
-<Accordions>
-  <Accordion title="Außer Betrieb nehmen oder löschen">
-    **Außer Betrieb nehmen** ist dauerhaft. Verschiebe oder stilllege vorher die Unterressourcen und beende laufende Zugriffssitzungen. Schalte zugeordnete Schalter aus, warte auf eine aktuelle Aus-Bestätigung und kläre ausstehende Aufträge. Unbekannte, veraltete oder nicht erreichbare Schalterzustände verhindern die Stilllegung.
+Ein positives Ergebnis ersetzt weder die Prüfung eines konkreten Buchungszeitraums auf Belegung und Wochenzeiten noch die persönliche Zugriffsentscheidung oder die Prüfung des Gerätezustands.
 
-    Bei erfolgreicher Stilllegung werden Zugriffsregel, Zutrittspunkte, Anschlusszuordnungen und Wartungspläne deaktiviert. Vergaben und Historie bleiben erhalten. Bei einem Konflikt bleibt die Konfiguration unverändert.
+### Außer Betrieb nehmen oder löschen
 
-    **Löschen** im unteren Bereich entfernt eine ungenutzte Ressource nach Bestätigung unwiderruflich, auch wenn sie bereits aktiv oder außer Betrieb genommen ist. Ihre Zugriffsregel, Vergaben und Leser-/Sensorzuordnungen werden entfernt; Geräte und Anschlüsse bleiben erhalten.
+Die Aktion **Dauerhaft stilllegen** ist dauerhaft. Verschiebe oder stilllege vorher die Unterressourcen und beende laufende Zugriffssitzungen. Schalte zugeordnete Schalter aus, warte auf eine aktuelle Aus-Bestätigung und kläre ausstehende Aufträge. Unbekannte, veraltete oder nicht erreichbare Schalterzustände verhindern die Stilllegung.
 
-    Unterressourcen, installierte Geräte, Schalterzuordnungen, Buchungs- oder Wartungsdaten, Sperren, Zugriffshistorie und Verwendungen als Herkunft eines fremden Zutrittspunkts verhindern die Löschung. Speichere oder verwirf vorher offene Änderungen. Für Ressourcen mit Historie ist die Außerbetriebnahme vorgesehen.
+Bei erfolgreicher Stilllegung werden Zugriffsregel, Zutrittspunkte, Anschlusszuordnungen und Wartungspläne deaktiviert. Vergaben und Historie bleiben erhalten. Bei einem Konflikt bleibt die Konfiguration unverändert.
 
-  </Accordion>
-</Accordions>
+**Ressource löschen** steht unten im Gefahrenbereich von **Allgemein**. Speichere oder verwirf vorher offene Änderungen. Prüfe die Löschvorschau: Sie unterscheidet, was gelöscht, geändert oder erhalten wird und welche Abhängigkeiten die Löschung verhindern. Erst nach dieser Prüfung bestätigst du die unwiderrufliche Löschung. Hat sich der Stand geändert oder ist die Bestätigung abgelaufen, schließe den Dialog und öffne eine neue Vorschau.
+
+Eine Löschung ist auch für aktive oder außer Betrieb genommene Ressourcen möglich. Eigene Konfigurationen, Zugriffsvergaben, Anschlusszuordnungen und das Foto werden entfernt; Geräte und Anschlüsse bleiben erhalten. Abgeschlossene Buchungen, Wartungen, Ausfälle und Automationsvorgänge bleiben mit ihrem ursprünglichen Ressourcenbezug gespeichert.
+
+Unterressourcen, installierte Geräte, aktive direkte Schalterzuordnungen, offene Buchungen, Wartungen, Sperren und Zugriffs- oder Automationsvorgänge können die Löschung verhindern. Ebenso können andere Konfigurationen die Ressource noch benötigen, etwa als Buchungszugriffsziel oder Ausgangsort eines Zutrittspunkts. Maßgeblich ist die aktuelle Vorschau. Historie allein ist kein allgemeines Löschhindernis; wähle die Außerbetriebnahme, wenn die Ressource mit ihrer Konfiguration erhalten bleiben soll.
 
 ## Nutzung und Zugriff: Nutzung erlauben
 
-Eine Ressource hat eine gemeinsame Zugriffsregel für alle ihre Zutrittspunkte. Du richtest keine getrennten Handlungen für Bedienen und Warten ein.
+Eine Ressource hat eine gemeinsame Zugriffsregel für alle ihre Zutrittspunkte. Dieser ressourcenbezogene Zugangsbereich wird technisch auch **Scope** genannt; du legst ihn nicht als zweite Ressource an. Er legt fest, welche Nachweise und Bedingungen für die Ressource gelten. Du richtest keine getrennten Handlungen für Bedienen und Warten ein.
 
 1. Öffne **Nutzung & Zugriff**.
-2. Wähle den **Berechtigungsnachweis**: dauerhafte Vergabe, Buchung, Vergabe oder Buchung beziehungsweise Vergabe und Buchung.
-3. Ergänze erforderliche Kompetenzen und bei Bedarf eine Inaktivitätsgrenze. Unter **Weitere Einstellungen** stehen Katalogsichtbarkeit, Aufsicht, erforderlicher Schaltausgang und verantwortliche Personen.
+2. Wähle den **Berechtigungsnachweis**: **Zugriffsvergabe**, **Buchung**, **Zugriffsvergabe oder Buchung** beziehungsweise **Zugriffsvergabe und Buchung**.
+3. Ergänze erforderliche Kompetenzen und bei Bedarf eine Inaktivitätsgrenze. Unter **Weitere Zugriffsbedingungen und Zuständigkeiten** stehen Katalogsichtbarkeit, Aufsicht, erforderlicher Schaltausgang und verantwortliche Personen.
 4. Ordne unter **Technik** die nötige Hardware zu und aktiviere die Ressource.
-5. Aktiviere die Zugriffsregel und speichere sie. Der Server prüft den aktiven Ressourcenstatus sowie aktive Zutrittspunkte mit Leser- und erforderlicher Aktorzuordnung. Prüfe Erreichbarkeit und Konfigurationsbestätigung der Anschlüsse gesondert; das Speichern bestätigt keine physische Einsatzbereitschaft.
+5. Schalte **Zugriff aktiviert** ein und wähle **Zugriffsregel speichern**. Der Server prüft den aktiven Ressourcenstatus sowie aktive Zutrittspunkte mit Leser- und erforderlicher Aktorzuordnung. Prüfe Erreichbarkeit und Konfigurationsbestätigung der Anschlüsse gesondert; das Speichern bestätigt keine physische Einsatzbereitschaft.
 
-<ImageZoom
-  src={screenshot2}
-  alt="Nutzung und Zugriff der Tischkreissäge mit Berechtigungsnachweis und Kompetenzanforderung."
-  rmiz={{
-    a11yNameButtonZoom: 'Bild vergrößern',
-    a11yNameButtonUnzoom: 'Bild schließen',
-  }}
-/>
-
-Unter den Freigaben legst du Empfänger und Gültigkeit fest; unterstützt werden Personen, Benutzergruppen und Tags. Zeitfenster verwenden die gespeicherte Zeitzone. Eine Vergabe oder Buchung ersetzt keine Kompetenz-, Aufsichts- oder Verfügbarkeitsprüfung. **Sichtbar und beantragbar** macht die Ressource im Katalog anfragbar, erteilt aber keine Freigabe.
+Unter den Freigaben legst du Empfänger und Gültigkeit fest. Die aktuelle Neuanlage
+bietet Personen und Benutzergruppen an; vorhandene Tag-Freigaben kannst du
+bearbeiten. Den Ablauf erklärt [Ressourcenfreigaben verwalten](../administration/freigaben-verwalten.mdx).
+Zeitfenster verwenden die gespeicherte Zeitzone. Eine Vergabe oder Buchung ersetzt
+keine Kompetenz-, Aufsichts- oder Verfügbarkeitsprüfung. **Sichtbar und beantragbar**
+macht die Ressource im Katalog anfragbar, erteilt aber keine Freigabe.
 
 Bei Maschinen entscheidet die **Übernahmeregel**, ob eine belegte Maschine abgelehnt oder ihre Nutzung übernommen werden darf. Auch eine Übernahme muss die Zugriffsbedingungen erfüllen. Regel, Übernahmeregel und Freigaben werden getrennt gespeichert.
 
-Verantwortliche zum **Kompetenz bestätigen** oder **Aufsicht führen** sind keine allgemeinen Ressourcenadministratoren. Verwaltungsrechte und konkrete Zugangsentscheidungen sind davon getrennt. Wie du gespeicherte Entscheidungen einordnest, erklärt [Zugangsmetriken lesen](../administration/zutritt-verwalten.mdx#zugangsmetriken).
+Zum Ändern der verantwortlichen Personen brauchst du neben der Regelverwaltung auch das Verwaltungsrecht für Zugriffsvergaben. Verantwortliche zum **Kompetenz bestätigen** oder **Aufsicht führen** sind keine allgemeinen Ressourcenadministratoren. Verwaltungsrechte und konkrete Zugangsentscheidungen sind davon getrennt. Wie du gespeicherte Entscheidungen einordnest, erklärt [Zugangsmetriken lesen](../administration/zutritt-verwalten.mdx#zugangsmetriken).
 
 ## Technik: Anschlüsse zuordnen
 
-Nimm das [Gerät](../administration/geraete-verwalten.mdx) zuerst auf und konfiguriere die benötigten Anschlüsse. Für Leser und Zugangsaktoren brauchst du Zugriffs-Änderungsrechte sowie das Verwaltungsrecht für die Hardware dieser Ressource. Die Gerätekonfiguration benötigt zusätzlich Geräte-Lese- und Änderungsrechte.
+Nimm für native Anschlüsse das [Gerät](../administration/geraete-verwalten.mdx) zuerst auf und konfiguriere die benötigten Anschlüsse. Externe Anschlüsse veröffentlichst du stattdessen über [Automationen](../administration/automationen.mdx). Für Leser und Zugangsaktoren brauchst du Zugriffs-Änderungsrechte sowie das Verwaltungsrecht für die Hardware dieser Ressource. Die Gerätekonfiguration benötigt zusätzlich Geräte-Lese- und Änderungsrechte.
 
-1. Öffne **Technik** und wähle den passenden **Leser** und **Schaltausgang**.
+1. Öffne **Technik → Anschluss zuordnen** und wähle den passenden **Leser** und bei Bedarf **Schaltausgang**. Die Auswahl richtet sich nach den unterstützten Anschlussfunktionen.
 2. Speichere die Zuordnung. Der Server legt bei der ersten Zuordnung den Zutrittspunkt an; Leser und Aktor werden gemeinsam zugeordnet.
 3. Prüfe den Anschlusszustand. Die Zuordnung aktiviert die Zugriffsregel nicht.
 
@@ -114,7 +118,9 @@ Nimm das [Gerät](../administration/geraete-verwalten.mdx) zuerst auf und konfig
   }}
 />
 
-Ein Zutrittspunkt fasst die technischen Anschlüsse für einen Zugang zusammen. Leser und Aktor können von unterschiedlichen Geräten stammen. Bei mehreren Zutrittspunkten wählst du den Zielpunkt ausdrücklich. Alle Punkte verwenden dieselbe Ressourcenregel. Belegte Anschlüsse werden nicht stillschweigend von einer anderen Verwendung übernommen.
+Ein **Zutrittspunkt** fasst die technischen Anschlüsse für einen Zugang zusammen, zum Beispiel eine Tür zur Holzwerkstatt oder den Kartenleser mit Maschinenfreigabe an der Säge. Ein **Anschluss** (Endpoint) ist die einzelne Leser-, Aktor- oder Sensorfunktion eines Geräts oder einer Automation. Leser und Aktor können von unterschiedlichen Geräten stammen. Belegte Anschlüsse werden nicht stillschweigend von einer anderen Verwendung übernommen.
+
+Bei mehreren Zutrittspunkten wählst du den Zielpunkt ausdrücklich. Mit **Weiteren Zugangspunkt anlegen** kannst du einen weiteren Zugang derselben Ressource einrichten. Trage unter **Technischer Schlüssel** einen innerhalb der Ressource eindeutigen Wert ein und ordne die benötigten Anschlüsse zu. Eine optionale **Ausgangsressource**, etwa der Flur vor einem Raum, beschreibt den Ausgangsort dieses Zugangs; sie ist keine übergeordnete Ressource. Alle Punkte verwenden dieselbe Ressourcenregel. Prüfe nach dem Zuordnen **Zugangspunkt aktiviert**; nach dem Lösen notwendiger Hardware wird der Punkt durch eine neue Zuordnung nicht automatisch wieder aktiviert.
 
 **Ersetzen** zieht eine Zuordnung auf einen kompatiblen Anschluss um; die Historie bleibt erhalten. **Zuordnung lösen** gibt den Anschluss nach Bestätigung frei. Beende vorher laufende Sitzungen und kläre ausstehende Befehle. Verliert ein Zutrittspunkt seinen letzten erforderlichen Leser oder Aktor, wird er gleichzeitig deaktiviert. Andere Punkte bleiben unverändert.
 
@@ -124,7 +130,7 @@ Ein Zutrittspunkt fasst die technischen Anschlüsse für einen Zugang zusammen. 
   Aufträge verhindern das Lösen weiterhin. Ein Austausch erfordert eine aktuelle Aus-Bestätigung.
 </Callout>
 
-Unter **Schalter** kannst du einen kompatiblen externen Ein/Aus-Anschluss zuordnen und mit den nötigen Bedienrechten schalten. **Angeforderter Zustand**, **Gemeldeter Zustand** und **Ausführung** sind getrennte Angaben. Unbekannt bedeutet nicht ausgeschaltet. Die Einrichtung externer Anschlüsse steht unter [Automationen](../administration/automationen.mdx).
+Unter **Schalter** kannst du einen kompatiblen externen Ein/Aus-Anschluss zuordnen und schalten. Dafür brauchst du Ressourcen-Änderungsrechte sowie das Verwaltungsrecht zur Hardwarebedienung; zum Zuordnen ist stattdessen Hardwareverwaltung nötig. Ein direkter Schalter ersetzt keinen Freigabeaktor mit Zugriffsprüfung. **Angeforderter Zustand**, **Gemeldeter Zustand** und **Ausführung** sind getrennte Angaben. Unbekannt bedeutet nicht ausgeschaltet. Die Einrichtung externer Anschlüsse steht unter [Automationen](../administration/automationen.mdx).
 
 Für Messwertanschlüsse wählst du die angebotene Beobachtungsrolle, etwa Nutzungszähler, Betriebsdauer, Leistung, Zustand oder Gerätezustand. Du kannst ihre Zuordnung aktivieren, deaktivieren oder ersetzen. Beachte Einheit und Beobachtungszeitpunkt; nicht angebotene oder fehlende Werte sind keine Nullmessung. Die native Ausstattung hängt vom Gerätemodell ab.
 
@@ -138,7 +144,7 @@ Zum Einrichten brauchst du Buchungsressourcen-Leserechte sowie das Recht zum Anl
 4. Ergänze Verfügbarkeitszeiten sowie bei Bedarf Genehmigung und Check-in. Prüfe unter den erweiterten Einstellungen die gespeicherte Zeitzone.
 5. Wähle unter **Zugriff durch die Buchung** ausdrücklich die Ressourcen, für die eine bestätigte Buchung als Nachweis gelten soll, und speichere.
 
-Eine Maschinenbuchung kann so zusätzlich den benötigten Raum berücksichtigen. Die jeweiligen Ressourcenregeln müssen Buchungen als Nachweis zulassen. Die Zeitzone wird pro Buchungskonfiguration gespeichert; spätere Änderungen der Systemzeitzone werden nicht automatisch übernommen.
+Eine Maschinenbuchung kann so zusätzlich den benötigten Raum berücksichtigen. Die jeweiligen Ressourcenregeln müssen aktiviert sein und Buchungen als Nachweis zulassen. Wähle auch die gebuchte Ressource selbst als Zugriffsziel, wenn die Buchung für sie gelten soll; ihre Position in der Hierarchie erstellt keine automatische Zuordnung. Die Zeitzone wird pro Buchungskonfiguration gespeichert; spätere Änderungen der Systemzeitzone werden nicht automatisch übernommen.
 
 Die Buchbarkeit erteilt allein keinen Zugriff und hebt keine Ressourcensperre auf. Gruppenlimits, allgemeine Schließzeiten und Entscheidungen über Buchungsanfragen werden getrennt von dieser Ressourcen-Konfiguration verwaltet.
 
@@ -157,8 +163,23 @@ Für einen geplanten Ausfall öffnest du **Ausfälle und Wartung → Sperre anle
   }}
 />
 
-Für wiederkehrende Prüfungen wählst du **Wartungsplan anlegen**, gibst Name und Intervall beziehungsweise Schwellenwert ein und wählst die Einheit: Tage, Wochen, Monate, Nutzungen oder Betriebsstunden. Kalenderintervalle sind positive ganze Zahlen; nutzungsabhängige Pläne brauchen die entsprechende Datengrundlage. Speichere den Plan und lasse seine automatische Auswertung aktiviert.
+Für wiederkehrende Prüfungen wählst du **Wartungsplan anlegen**, gibst Name und Intervall beziehungsweise Schwellenwert ein und wählst die Einheit: Tage, Wochen, Monate, Nutzungen oder Betriebsstunden. Kalenderintervalle sind positive ganze Zahlen. Nutzungsabhängige Pläne verwenden zugeordnete Zähler- beziehungsweise Laufzeitwerte; ohne einen solchen Messwert wertet Mardu abgeschlossene Zugriffssitzungen beziehungsweise deren Dauer aus. Prüfe, ob diese Datengrundlage die Nutzung deiner Ressource abbildet. Speichere den Plan und lasse seine automatische Auswertung aktiviert.
 
-**Wartung fällig** bedeutet noch keine Sperre. Erst **Wartung starten** öffnet die zugehörige Sperre für Buchung und Betrieb. Nach der Arbeit wählst du **Wartung abschließen**; dadurch wird diese Sperre geschlossen und der Vorgang in der Historie erhalten. Eine Wartungssperre wird über den Wartungsvorgang abgeschlossen, nicht über **Sperre aufheben**.
+**Wartung fällig** bedeutet noch keine Sperre. Erst **Wartung starten** öffnet die zugehörige Sperre für Buchung und Betrieb. Nach der Arbeit wählst du unter **Wartungsergebnis** **Durchgeführt**, **Übersprungen** oder **Abgebrochen** und anschließend **Wartung abschließen**. Dadurch wird diese Sperre geschlossen und der Vorgang mit seinem Ergebnis in der Historie erhalten. Eine Wartungssperre wird über den Wartungsvorgang abgeschlossen, nicht über **Sperre aufheben**.
 
 Aktualisiere anschließend bei Bedarf unter **Allgemein** den Zustand. Laufende Sitzungen oder eine physische Abschaltung leitest du aus einer gespeicherten Sperre nicht ab; prüfe Sitzungen und Gerätestatus gesondert.
+
+## Messwerte prüfen
+
+Öffne **Messwerte**, um Verfügbarkeit, aktuelle Nutzung, nächste Buchung und gespeicherte Messwerte zu sehen. Dafür brauchst du Dashboard- und Ressourcen-Leserechte. Aktuelle Zugriffssitzungen benötigen zusätzlich Zugriffs-Leserechte und das Recht zum Anzeigen der Sitzungen dieser Ressource; die nächste Buchung benötigt Buchungsressourcen-Leserechte. Die Ansicht fasst keine Unterressourcen zusammen.
+
+Wähle **Zeitraum** und **Auflösung** für den Messwertverlauf. Aktuelle Nutzung und nächste Buchung zeigen weiterhin den aktuellen Stand. Die Ansicht unterscheidet Leistungswerte, kumulative Laufzeit und Nutzungszähler sowie Textmeldungen zu Zustand und Gesundheit. Zählerstände werden nicht summiert. Stundenansichten können Mittelwerte zeigen; der letzte Wert ist davon getrennt.
+
+Beachte Quellzeit, Empfangszeit sowie Hinweise auf nur teilweise verfügbare oder durch ein Antwortlimit gekürzte Daten. Fehlende Messungen bleiben Lücken; sie sind keine Nullwerte. Ein gespeicherter Wert aus einer früheren Zuordnung belegt keinen aktuellen Zustand. Die Verfügbarkeitsanzeige beschreibt Status und Sperren, keine freie Kapazität und keinen bestätigten Hardwarebetrieb.
+
+## Schalterübersicht und Historie nutzen
+
+Die Reiter **Schalter** und **Historie** stehen in der Ressourcenübersicht außerhalb der Details einer einzelnen Ressource.
+
+- **Schalter** zeigt die direkten Schalterzuordnungen der geladenen Ressourcen. Suche nach Name oder Pfad. **Alle ein** und **Alle aus** betreffen die angezeigten bedienbaren Schalter; prüfe die Auswahl vor dem Auslösen. Einzelne Aufträge können unabhängig voneinander scheitern. Einschalten setzt einen erlaubten Ressourcenbetrieb voraus. Beobachtungen und Ausführungsergebnisse bleiben getrennt zu prüfen.
+- **Historie** zeigt Wartungen und Ausfälle, auch nach dem Löschen einer Ressource oder eines Wartungsplans. Wähle eine Ressource und wechsle zwischen **Wartungen** und **Ausfälle**. Die Namensauswahl enthält bestehende Ressourcen und bereits geladene historische Einträge; unter **Weitere Filter** kannst du die ursprünglichen Kennungen verwenden. Die Detailansicht dient zum Nachlesen. Nach einer Ressourcenlöschung öffnet Mardu die Historie mit dem Bezug auf die gelöschte Ressource.

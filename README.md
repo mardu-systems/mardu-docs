@@ -4,19 +4,19 @@ Produktdokumentation für Website und Software aus einer Quelle
 (Fumadocs-MDX). Dieses Repository wird als Git-Submodule in die Consumer
 eingehängt. Inhalte und Bilder werden hier gepflegt.
 
-Die [Dokumentationsregeln](AGENTS.md) gelten auch für begleitende Dokumentation
-im Software-Repository. [TODO.md](TODO.md) enthält Bestandsbewertung,
-Prioritäten und den Arbeitsplan. Der
-[Strukturvorschlag vom 1. November 2026](planning/2026-11-01-dokumentationsstruktur.md)
-beschreibt den Zielbaum aller sechs Bereiche. Der erste nutzbare Stand der
-Navigation und der neue Überblick sind im Software-Consumer umgesetzt.
-Die [kritische Revision](planning/2026-11-01-dokumentationsstruktur-review.md)
-begründet die korrigierte Aufgabenabdeckung. Weiterführende, noch nicht
-ausgearbeitete Anleitungen bleiben geplant; die offenen Sachprüfungen bestehen weiter.
-[BENUTZER-REVIEW.md](BENUTZER-REVIEW.md) hält den
-Vergleich mit acht Dokumentationen und die Übernahme für Mardu fest. Der Auftrag vom 19. Oktober 2026 ergänzt die
-Anleitungen zur Benutzeransicht des Webportals; die frühere Bestandsbewertung
-und offene Aufgaben anderer Zielgruppen bleiben dort nachvollziehbar.
+Die [Dokumentationsregeln](AGENTS.md) und die
+[Arbeitsweise](ARBEITSWEISE.md) gelten auch für begleitende Dokumentation im
+Software-Repository. Der [Ergebnisbericht der Seitenrevision](planning/2026-11-01-seitenrevision-ergebnis.md)
+enthält den aktuellen Umfang, Einzelprüfungen und Grenzen. Die sechs Bereiche
+sind im Software-Consumer erschlossen; offene praktische Abnahmen stehen im
+[abgeglichenen Backlog](planning/offene-dokumentationsaufgaben.md).
+
+[TODO.md](TODO.md), der [ursprüngliche Strukturplan](planning/2026-11-01-dokumentationsstruktur.md)
+und seine [kritische Revision](planning/2026-11-01-dokumentationsstruktur-review.md)
+halten die vorherige Bestandsbewertung und Planung fest.
+[BENUTZER-REVIEW.md](BENUTZER-REVIEW.md) dokumentiert den Vergleich mit acht
+Dokumentationen. Diese älteren Bewertungen sind nicht der aktuelle
+Erledigungsstand der Seitenrevision.
 
 ## Mount-Punkte und Quelle
 
@@ -53,11 +53,14 @@ und verweisen auf die Dokumentationsübersicht. Sie bezeichnen keinen freigegebe
 Softwarestand und stehen nicht in der aktuellen Navigation. Eine spätere
 Release-Versionierung wird erst nach Prüfung der Consumer eingeführt.
 
-Der Bestand umfasst zum 1. November 2026 insgesamt 54 aktuelle MDX-Seiten und
-die zwei historischen Einstiege, zusätzlich zur generierten API-Referenz des Consumers.
-Der kuratierte Seitenbaum enthält davon 41 unterschiedliche handgeschriebene
-Seiten einschließlich Wegweiser und Bereichsstarts. Das ist eine Navigationsauswahl,
-keine vollständige Abnahme aller Produktfunktionen.
+Der Bestand umfasst zum 1. November 2026 nach der Seitenrevision insgesamt
+67 aktuelle MDX-Seiten und zwei historische Einstiege, zusätzlich zur generierten
+API-Referenz des Consumers. Der kuratierte Seitenbaum erschließt alle 67 aktuellen
+handgeschriebenen Seiten einschließlich Wegweiser und Bereichsstarts.
+Das belegt die Inhaltsabdeckung dieser Seiten, keine vollständige praktische
+Abnahme aller Produktfunktionen. Die
+[Seitenrevision](planning/2026-11-01-seitenrevision.md) dokumentiert einzelne
+Agentenaufträge, Quellenbelege, Änderungen und offene Prüfungen.
 Die Benutzeranleitungen decken Einstieg,
 Dashboard, Ressourcen und Freigaben, Berechtigungsanfragen, Buchungen,
 Kalender, Qualifikationen, Posteingang und die persönlichen Profilbereiche ab.

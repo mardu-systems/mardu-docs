@@ -1,0 +1,160 @@
+---
+title: Rollen und Gruppen verwalten
+description: Rollen erstellen, ihre Rechte ändern sowie Benutzergruppen anlegen und löschen und die Folgen für zugeordnete Personen prüfen.
+---
+
+Eine Rolle legt fest, welche Aktionen ihre Benutzer ausführen dürfen. Eine
+Benutzergruppe weist ihren Mitgliedern dieselben Rollen zu, auch später
+hinzugefügten Personen. Änderungen an den Rechten einer Rolle betreffen deshalb
+sowohl direkt zugeordnete Benutzer als auch Mitglieder der Gruppen mit dieser Rolle.
+
+Öffne **Administration → Rollen** für die Rollenpflege und **Personen →
+Benutzergruppen** für Gruppen. Die Kategorien im Reiter **Rechte** ordnen die
+Berechtigungen in der Anzeige; sie sind keine Benutzergruppen.
+
+Wie du eine Rolle oder Gruppe einem einzelnen Konto zuweist, steht unter
+[Rollen und Gruppen zuweisen](./benutzer-rollen.mdx#rollen-und-gruppen-zuweisen).
+Rollenrechte ersetzen keine
+[Zutrittsfreigabe → Koordination](../koordination/ressourcen.mdx#nutzung-und-zugriff-nutzung-erlauben).
+
+## Voraussetzungen und Rechte
+
+Melde dich am Dashboard an. Für die Rollenübersicht und ihre Details brauchst du
+**Rollen anzeigen** und **Rollenrechte anzeigen**. Für die Gruppendetails brauchst
+du Leserechte für Benutzergruppen, Gruppenmitglieder, Gruppenrollen und Rollen.
+Die folgenden Rechte kommen je nach Aufgabe hinzu:
+
+| Aufgabe                                            | Benötigte Rechte                                           |
+| -------------------------------------------------- | ---------------------------------------------------------- |
+| Rolle anlegen                                      | Rollen erstellen                                           |
+| Name oder Beschreibung einer Rolle ändern          | Rollen bearbeiten                                          |
+| Rechte einer Rolle ändern                          | Rollenrechte ändern                                        |
+| Rolle duplizieren, einschließlich ihrer Rechte     | Rollen erstellen und Rollenrechte ändern                   |
+| Direkte Nutzer einer Rolle prüfen                  | Benutzer anzeigen                                          |
+| Rolle löschen                                      | Rollen löschen                                             |
+| Benutzergruppe anlegen                             | Nutzergruppen erstellen                                    |
+| Name oder Beschreibung einer Benutzergruppe ändern | Nutzergruppen erstellen **und** Nutzergruppen bearbeiten   |
+| Mitglieder oder Gruppenrollen ändern               | Gruppenmitglieder bearbeiten bzw. Gruppenrollen bearbeiten |
+| Benutzergruppe löschen                             | Nutzergruppen löschen                                      |
+
+Die Rechteauswahl verwendet derzeit die Bezeichnung **Nutzergruppen**. Gemeint
+sind die **Benutzergruppen** unter **Personen**. Zum Auswählen von Mitgliedern
+brauchst du außerdem das Leserecht für Benutzer.
+
+## Rolle erstellen und Rechte festlegen
+
+**Rolle erstellen** legt die Rolle sofort unter dem Namen **Neue Rolle** an, bei
+Bedarf mit einer Nummer. Das Schließen des Fensters löscht diese Rolle nicht.
+Für den anschließenden Namen und die Rechte brauchst du auch die jeweiligen
+Bearbeitungsrechte.
+
+1. Öffne **Administration → Rollen** und wähle **Rolle erstellen**.
+2. Trage unter **Allgemein** im Feld **Name** einen eindeutigen Namen mit höchstens
+   75 Zeichen ein, etwa **Werkstattverwaltung**, und bei Bedarf eine **Beschreibung**.
+3. Öffne **Rechte**. Suche die benötigte Aktion und schalte die entsprechenden
+   Rechte ein. Klappe bei Bedarf die Kategorie auf. Bei als **Kritisch** markierten
+   Rechten bestätigst du die Einzelaktivierung mit **Aktivieren**.
+4. Prüfe die gesamte Auswahl. Beim Einschalten einiger Bearbeitungsrechte ergänzt
+   die Oberfläche zugehörige Leserechte. **Nur aktiv** zeigt die ausgewählten
+   Rechte; **Alle** zeigt wieder die vollständige Auswahl.
+5. Wähle **Speichern** unten im Rollenfenster.
+
+**Ergebnis:** Name, Beschreibung und Rechte sind gespeichert. Die neue Rolle
+ist noch keinem Benutzer und keiner Gruppe zugewiesen. Ordne sie anschließend
+über die [Benutzerdetails](./benutzer-rollen.mdx#rollen-und-gruppen-zuweisen) oder
+die [Gruppenverwaltung](./benutzer-rollen.mdx#benutzergruppen-verwalten) zu.
+
+### Eine bestehende Rolle ändern
+
+Prüfe vor einer Rechteänderung, welche Benutzer und Gruppen die Rolle verwenden.
+**Direkte Nutzer** und der Reiter **Nutzer** zeigen nur direkte Zuweisungen;
+Gruppenmitglieder sind darin nicht enthalten. Prüfe die **Zugewiesenen Rollen**
+der betroffenen Benutzergruppen zusätzlich.
+
+1. Suche die Rolle unter **Administration → Rollen** und klicke auf ihre Zeile.
+2. Ändere **Allgemein** oder **Rechte** wie bei der Anlage.
+3. Wähle **Speichern**. Beim Speichern einer geänderten Rechteauswahl muss
+   mindestens ein Recht ausgewählt bleiben.
+
+**Ergebnis:** Die geänderten Rollenrechte gelten für die direkten Benutzer und
+für Mitglieder der Gruppen mit dieser Rolle. Entfernst du ein Recht, kann es
+über eine andere Rolle weiterhin vorhanden sein. Prüfe die Herkunft unter
+[Effektive Berechtigungen](./benutzer-rollen.mdx#rollen-und-gruppen-zuweisen)
+in den Benutzerdetails.
+
+Änderungen bleiben bis **Speichern** ein Entwurf. Beim **Schließen** kannst du
+ungespeicherte Änderungen verwerfen. Schlägt das Speichern fehl, prüfe danach
+Name und Rechte erneut: Sie werden getrennt gespeichert, sodass ein Teil bereits
+übernommen sein kann.
+
+### Eine Rolle als Vorlage verwenden
+
+Öffne die Ausgangsrolle und wähle **Rolle duplizieren**. Dabei wird sofort eine
+benutzerdefinierte Rolle mit dem Namenszusatz **(Kopie)** angelegt. Sie übernimmt
+die gespeicherte Beschreibung und Rechte, keine ungespeicherten Änderungen,
+Benutzer, Gruppen oder Access-Zuständigkeiten. Ändere anschließend Name und Rechte
+und wähle **Speichern**.
+
+Als **System** gekennzeichnete Rollen kannst du als Vorlage verwenden. Ihre
+eigenen Namen, Beschreibungen und Rechte sind schreibgeschützt; sie lassen sich
+nicht löschen.
+
+## Rolle löschen
+
+Die Löschung kann nicht rückgängig gemacht werden. Solange Benutzer die Rolle
+direkt zugewiesen haben, verhindert der Server die Löschung. Gruppenrollen
+verhindern sie dagegen nicht: Beim Löschen wird die Rolle aus den Gruppen
+entfernt, und die Mitglieder verlieren die daraus erhaltenen Rechte, soweit
+keine andere Rolle dieselben Rechte gewährt.
+
+1. Öffne die Rolle und prüfe den Reiter **Nutzer** sowie die Gruppen, denen die
+   Rolle zugewiesen ist.
+2. Entferne noch vorhandene direkte Zuweisungen über die
+   [Benutzerdetails](./benutzer-rollen.mdx#rollen-und-gruppen-zuweisen).
+3. Wähle **Löschen** unten im Rollenfenster und bestätige mit **Löschen**.
+4. Prüfe in der Rollenübersicht, dass die Rolle nicht mehr aufgeführt ist.
+
+## Benutzergruppe erstellen
+
+1. Öffne **Personen → Benutzergruppen** und wähle **Benutzergruppe erstellen**.
+2. Trage im Feld **Name** einen eindeutigen Namen mit höchstens 128 Zeichen ein,
+   etwa **Werkstattteam**. Groß- und Kleinschreibung unterscheiden keine Gruppennamen.
+3. Ergänze bei Bedarf eine **Beschreibung** und wähle **Speichern**.
+4. Suche die neue Gruppe in der Liste und öffne sie.
+
+**Ergebnis:** Die Gruppe ist zunächst ohne Mitglieder und Rollen angelegt.
+Für die weiteren Schritte folge
+[Benutzergruppen verwalten](./benutzer-rollen.mdx#benutzergruppen-verwalten).
+Dort änderst du Name und Beschreibung, wählst Mitglieder und Rollen aus und
+speicherst die Zuordnungen. **Anwenden** im Auswahldialog ersetzt das abschließende
+**Speichern** im Gruppenfenster nicht.
+
+## Benutzergruppe löschen
+
+Prüfe vor der Löschung die **Mitglieder** und **Zugewiesenen Rollen**. Die
+Benutzerkonten bleiben erhalten; ihre Mitgliedschaft und die Rollen aus dieser
+Gruppe entfallen. Direkte Rollen und Rollen aus anderen Gruppen bleiben bestehen.
+Prüfe dabei auch, ob du selbst benötigte Verwaltungsrechte aus dieser Gruppe
+erhältst. Die Löschung lässt sich nicht rückgängig machen.
+
+1. Öffne **Personen → Benutzergruppen**.
+2. Wähle im Dreipunktmenü der Gruppe **Löschen**.
+3. Prüfe die Löschfolgen im Dialog **Benutzergruppe löschen** und bestätige mit
+   **Löschen**.
+
+**Ergebnis:** Die Gruppe verschwindet aus der Liste. Prüfe bei betroffenen Konten
+unter **Effektive Berechtigungen**, welche Rechte über andere Zuordnungen
+weiterhin vorhanden sind.
+
+## Wenn etwas nicht klappt
+
+| Problem                                                         | Nächster Schritt                                                                                                                                                               |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Rollen oder Gruppendetails lassen sich nicht laden              | Prüfe die Verbindung und alle benötigten Leserechte. Die Gruppendetails laden auch Mitglieder, Gruppenrollen und den Rollenkatalog.                                            |
+| Die Rolle ist schreibgeschützt                                  | Prüfe, ob sie als **System** gekennzeichnet ist oder dir die Bearbeitungsrechte fehlen. Verwende bei Bedarf **Rolle duplizieren**.                                             |
+| Ein Name wird abgelehnt                                         | Prüfe Eindeutigkeit und Länge: höchstens 75 Zeichen für Rollen, 128 für Gruppen.                                                                                               |
+| Die leere Rechteauswahl wird nicht gespeichert                  | Eine geänderte Rechteauswahl muss mindestens ein Recht enthalten. Entferne stattdessen die nicht mehr benötigte Rollenzuweisung oder lösche die Rolle nach Prüfung der Folgen. |
+| Eine Gruppe lässt sich trotz Bearbeitungsrecht nicht umbenennen | Für Name und Beschreibung verlangt der Server derzeit zusätzlich das Recht zum Erstellen von Nutzergruppen.                                                                    |
+| Eine Rolle lässt sich nicht löschen                             | Prüfe Systemkennzeichnung und direkte Nutzerzuweisungen. Lade die Rollenübersicht anschließend neu und kontrolliere das Ergebnis.                                              |
+| Entfernte Rechte sind weiterhin vorhanden                       | Prüfe direkte Rollen und andere Gruppen unter **Effektive Berechtigungen**. Dieselben Rechte können aus mehreren Rollen stammen.                                               |
+| Eine neue Rolle bleibt nach dem Verwerfen bestehen              | Anlage und Duplikat werden sofort gespeichert. Verwerfen betrifft die anschließenden Änderungen; lösche die unbenötigte Rolle nach Prüfung ihrer Zuweisungen.                  |

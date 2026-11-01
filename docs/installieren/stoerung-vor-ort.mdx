@@ -1,30 +1,129 @@
 ---
 title: Störung vor Ort
-description: LED-Codes deuten, Netzwerk prüfen, Gerät neu starten und eskalieren.
+description: Serververbindung, Geräteanschlüsse und Zugangsbedingungen prüfen und eine Störung mit nachvollziehbaren Angaben weitergeben.
 ---
 
-Diese Seite ist ein Entwurf. Gerätespezifische Anzeigen und Neustartfolgen
-werden erst nach Abgleich mit Firmware- und Hardwareunterlagen beschrieben.
+Mit diesem Ablauf grenzt du ein, ob eine Störung den Server, die Verbindung eines
+Geräts, einen Anschluss oder die Zugangsbedingungen betrifft. Halte zuerst die
+Beobachtungen fest, bevor du Einstellungen änderst.
+
+Du brauchst Geräte-Leserechte, um die Geräteansicht und gespeicherte
+Anschlussinformationen zu öffnen. Für Ressourcen und Zugangsverläufe brauchst du
+zusätzlich die jeweiligen Leserechte. Fehlt dir eine Ansicht, lass die zuständige
+Administration mitprüfen. Host- oder Docker-Zugriff ist nur für die Serverprüfung
+im Terminal erforderlich.
 
 ## Serverzugang oder Serverzustand prüfen
 
-Wenn der Zugang zum Dashboard fehlt oder du den Serverzustand prüfen möchtest,
-verwende die [Wartungs-CLI](../administration/wartungs-cli.mdx). Sie läuft im
-API-Container und benötigt Host- oder Docker-Zugriff. Bei einer nicht startenden
-API ist sie nicht verfügbar; prüfe dann die Container-Logs.
+1. Prüfe, ob du das Dashboard deiner Installation erreichst und dich anmelden
+   kannst. Halte eine angezeigte Fehlermeldung fest. Ein fehlender Dashboardzugang
+   allein belegt keinen Geräteausfall.
+2. Bei einer Raspberry-Pi-Installation prüfe die in der
+   [Installationsanleitung](./raspberry-pi.mdx#4-starten-und-einrichten) genannte
+   Adresse `/health/ready`. Sie zeigt, ob die eingerichteten Bereitschaftsprüfungen
+   erfolgreich sind. `/health/live` bestätigt nur, dass die API antwortet; dieser
+   Aufruf ist auch während der Ersteinrichtung erfolgreich. Kein Health-Ergebnis
+   bestätigt die Funktion eines Lesers oder Aktors vor Ort.
+3. Wenn der Zugang zum Dashboard fehlt oder du Einzelheiten zum Serverzustand
+   brauchst, verwende die
+   [Wartungs-CLI → Serverzustand prüfen](../administration/wartungs-cli.mdx#serverzustand-prüfen).
+   Sie läuft im API-Container und benötigt Host- oder Docker-Zugriff. Bei einer
+   nicht startenden API ist sie nicht verfügbar; prüfe dann die Container-Logs
+   nach der [Installationsanleitung](./raspberry-pi.mdx#probleme-beheben).
 
 ## Fehler eingrenzen
 
-- [ ] TODO: Gerät, Firmwarestand, letzte Verbindung und tatsächlichen Zustand aufnehmen; [administrative Diagnose](../administration/geraete-verwalten.mdx) verlinken.
-- [ ] TODO: LED-/Displaycodes pro unterstütztem Gerät mit Quelle erklären; keine gemeinsamen Blinkfolgen aus dem Backend ableiten.
-- [ ] TODO: Stromversorgung, Kabel/Funk und Gatewayverbindung prüfen; Netzwerkfehler von Provisionierungs-, Zuordnungs- und Berechtigungsfehlern unterscheiden.
+### Gerät und betroffenen Anschluss bestimmen
+
+1. Notiere den Standort, die betroffene Ressource und die beobachtete Störung mit
+   Uhrzeit und Zeitzone. Beschreibe, ob beispielsweise keine Kartenlesung erfolgt,
+   ein Zugang abgelehnt wird oder eine erwartete physische Reaktion ausbleibt.
+2. Öffne **Geräte**, wähle den passenden Eintrag und dann
+   **Übersicht → Verbindung und Hardware**. Notiere technische Gerätekennung,
+   Hardwareadresse, gemeldete Firmwareversion, Einrichtungszustand und letzte
+   Verbindung. Nicht angezeigte Werte bleiben unbekannt.
+3. Öffne **Anschlüsse** und bestimme den betroffenen Leser, Aktor oder Sensor
+   anhand von Bezeichnung und **Node-ID**. Die Node-ID identifiziert den Anschluss
+   innerhalb des Geräts. Prüfe an der zugehörigen **Ressource → Technik**, ob der
+   erwartete Anschluss zugeordnet ist. Leser und Aktor können auf verschiedenen
+   Geräten liegen; prüfe dann beide Geräte.
+
+### Verbindung, Auftrag und Hardware getrennt lesen
+
+| Beobachtung                                                                     | Einordnung und nächster Schritt                                                                                                                                                                                                                                                                                                             |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Offline** oder keine letzte Verbindung                                        | **Online** bedeutet, dass innerhalb der letzten fünf Minuten eine Gerätemeldung eingegangen ist. Prüfe die sichtbare Stromversorgung und Netzwerkverbindung von Gerät und gegebenenfalls Edge-Router nach den Unterlagen deiner Installation. Öffne die Geräteansicht danach erneut und prüfe, ob ein neuer Verbindungszeitpunkt erscheint. |
+| **Verbinden**, unerkanntes Modell oder fehlende Anschlüsse                      | Prüfe die Aufnahmemeldung unter **Verbindung und Hardware**. Folge der [Fehlerhilfe zur Geräteaufnahme](../administration/geraete-verwalten.mdx#gerät-bleibt-bei-verbinden-oder-die-einrichtung-schlägt-fehl). Eine importierte Datei allein bestätigt keine Verbindung.                                                                    |
+| **Bestätigung ausstehend** oder **Auftrag angenommen · Bestätigung ausstehend** | Der Server hat den Konfigurationsauftrag angenommen; die Gerätebestätigung fehlt. Öffne am betroffenen Anschluss **Details und Verwaltung → Serverstand aktualisieren**. Diese Aktion lädt die gespeicherten Angaben und fragt das Gerät nicht neu ab.                                                                                      |
+| **Übernahme nicht bestätigt** oder **Keine Gerätebestätigung**                  | Eine bestätigte Übernahme fehlt. Das ist keine ausdrückliche Ablehnung. Prüfe die letzte Verbindung und den gespeicherten Auftragsstatus; leite einen anhaltend ungeklärten Zustand weiter.                                                                                                                                                 |
+| **Vom Gerät abgelehnt**                                                         | Halte die Fehlermeldung fest. Lass die Einstellungen gemäß [Anschlüsse konfigurieren](../administration/geraete-verwalten.mdx#anschlüsse-konfigurieren-und-zuordnen) prüfen. Für Änderungen und **Vom Gerät auslesen** sind Geräte-Änderungsrechte erforderlich.                                                                            |
+| **Vom Gerät bestätigt**, aber die Funktion bleibt aus                           | Die Bestätigung betrifft die Konfiguration. Prüfe zusätzlich den gemeldeten Hardwarezustand des betroffenen Anschlusses und seine Zuordnung zur Ressource. Eine erfolgreiche Bestätigung belegt keinen physischen Tür- oder Schaltzustand.                                                                                                  |
+
+Der gemeldete Hardwarezustand und **Letzter Auftragsstatus** beantworten
+unterschiedliche Fragen. Ein Anschluss gilt erst dann als betriebsbereit, wenn
+seine Hardware Bereitschaft meldet und die erforderliche Konfiguration bestätigt
+ist. Ein unbekannter Zustand bestätigt weder Betriebsbereitschaft noch einen
+ausgeschalteten Aktor. LED- und Displayanzeigen sind gerätespezifisch; gleiche sie
+mit den Unterlagen für das konkrete Modell und den Firmwarestand ab.
+
+Unter **Diagnose** kannst du ergänzend die verfügbaren Geräte- und Zugangsmetriken
+prüfen. Dafür brauchst du Dashboard-Leserechte und die Rechte der jeweiligen
+Datenquelle. Beachte Zeitraum und Aktualität: Eine leere Anzeige kann durch
+fehlende Daten, nicht unterstützte Messwerte oder fehlende Rechte entstehen.
+Die [Geräteanleitung](../administration/geraete-verwalten.mdx#diagnose-lesen)
+beschreibt diesen Bereich.
+
+### Verbindung vorhanden, Zugang wird abgelehnt
+
+Prüfe die gespeicherte Zugangsentscheidung für die betroffene Person unter
+[Zugangsentscheidungen und Sitzungen](../administration/benutzer-rollen.mdx#zugangsentscheidungen-und-sitzungen-prüfen).
+Gleiche Ressource und Zeitpunkt mit deiner Beobachtung ab. Eine abgelehnte
+Entscheidung ist ein anderer Befund als eine ausbleibende Gerätebestätigung.
+
+Lass an der Ressource Status, wirksame Ausfälle oder Wartungen, Anschlusszuordnung
+und die Bedingungen unter **Nutzung & Zugriff** prüfen. Je nach Regel zählen dazu
+Freigabe, Buchung, Kompetenzen und Aufsicht. Die Schritte stehen unter
+[Ressourcen einrichten → Nutzung und Zugriff](../koordination/ressourcen.mdx#nutzung-und-zugriff-nutzung-erlauben).
+Bei einem betroffenen Tag prüft die Administration zusätzlich dessen Gültigkeit
+und Kontozuordnung nach der [Tag-Anleitung](../administration/tags-verwalten.mdx#tag-ist-aktiv-zugang-wird-abgelehnt).
 
 ## Wiederanlauf
 
-- [ ] TODO: Unterstützten Neustart mit Voraussetzungen, Folgen für Sitzungen und dokumentierter Wartebedingung beschreiben; keinen pauschalen Reset oder feste Dauer erfinden.
-- [ ] TODO: Erneute Provisionierung nur im passenden Fehlerfall und mit bestehenden Verwaltungsrechten erklären; erhaltene Identität/Zuordnungen und mögliche Sperren prüfen.
-- [ ] TODO: Zustand nach Wiederanlauf mit einem erlaubten und verweigerten Test prüfen; offene Gerätebestätigung als Einschränkung nennen.
+Prüfe nach der Behebung der eingegrenzten Ursache dieselben Angaben erneut:
+
+1. Der Zeitpunkt der letzten Verbindung muss eine neue Gerätemeldung erkennen
+   lassen, wenn zuvor die Verbindung ausgefallen war.
+2. Für jeden benötigten Anschluss müssen Konfigurationsbestätigung, gemeldeter
+   Hardwarezustand und Ressourcenzuordnung zum vorgesehenen Betrieb passen.
+3. Wenn ein Funktionstest vor Ort freigegeben und vorbereitet ist, führe ihn nach
+   dem Ablauf deiner Installation durch. Vergleiche gespeicherte
+   Zugangsentscheidung und beobachtete physische Reaktion. Erfasse erlaubte und
+   verweigerte Testfälle getrennt. Eine gespeicherte Entscheidung allein bestätigt
+   keine Türbewegung oder Maschinenabschaltung.
+
+**Erneut ins Netzwerk aufnehmen** ist eine Aufnahmeaktion und kein allgemeiner
+Reparaturschritt. Verwende sie nur bei einem geklärten Aufnahmeproblem nach der
+[Geräteanleitung](../administration/geraete-verwalten.mdx#gerät-erneut-aufnehmen).
+Dort stehen Voraussetzungen und Folgen, einschließlich laufender Sitzungen und
+ausstehender Vorgänge. Bleiben Hardwarezustand oder physische Wirkung ungeklärt,
+gib den Befund weiter, bevor du den normalen Betrieb wieder aufnimmst.
 
 ## Eskalation
 
-- [ ] TODO: Meldung mit Gerät, Firmwarestand, Zeit/Zeitzone, Netzwerk, beobachtetem Zustand und bisherigen Schritten erstellen; passende Zuständigkeit und sensible Bildinhalte beachten.
+Gib der betreuenden Administration oder dem zuständigen Installationsbetrieb
+eine nachvollziehbare Meldung mit:
+
+- Standort, Ressource, technische Gerätekennung und Hardwareadresse; bei einem
+  Anschluss zusätzlich Bezeichnung und Node-ID.
+- Gemeldeter Firmwareversion, Einrichtungszustand und Zeitpunkt der letzten
+  Verbindung; fehlende Angaben ausdrücklich als unbekannt kennzeichnen.
+- Zeitpunkt mit Zeitzone, beobachtetem Verhalten vor Ort und Umfang der Störung:
+  einzelner Anschluss, ganzes Gerät oder mehrere Geräte.
+- Genauer Fehlermeldung, letztem Auftragsstatus und gemeldetem Hardwarezustand;
+  gegebenenfalls Serverzustand und verwendeter Netzwerkverbindung.
+- Bereits durchgeführten Prüfungen oder Änderungen und ihrem Ergebnis,
+  einschließlich noch offener Gerätebestätigungen und laufender Sitzungen.
+
+Prüfe Screenshots und Logauszüge vor der Weitergabe. Entferne Zugangsdaten,
+Tokens, Schlüssel und nicht benötigte personenbezogene Daten. Teile Unterlagen
+über den mit der zuständigen Stelle vereinbarten Weg.

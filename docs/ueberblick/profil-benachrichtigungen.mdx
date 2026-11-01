@@ -3,26 +3,40 @@ title: Benachrichtigungseinstellungen
 description: Versandkanäle, Ereignisse und Ruhezeiten für das eigene Konto einstellen.
 ---
 
-Öffne im Profil **Benachrichtigungen**. Zum Lesen brauchst du Profil-Leserechte,
+Öffne im Kontomenü **Kontoeinstellungen → Benachrichtigungen**.
+Zum Lesen brauchst du Profil-Leserechte,
 zum Speichern Änderungsrechte.
 Die Einstellungen gelten für dein Konto und sind im Portal und in der Verwaltung
 gleich. Mit reinen Leserechten kannst du die Werte ansehen, aber nicht ändern.
 
 ## Kanäle und Ereignisse auswählen
 
-1. Prüfe nach dem Laden die angebotenen Kanäle und ihre Serververfügbarkeit.
-2. Suche das Ereignis und aktiviere oder deaktiviere die erlaubten Kanäle.
+1. Prüfe nach dem Laden unter **Zustellkanäle** die Serververfügbarkeit und
+   schalte die gewünschten Kanäle ein oder aus.
+2. Suche unter **Ereignisse und Zustellung** das Ereignis und aktiviere oder
+   deaktiviere die erlaubten Kanäle. Ein ausgeschalteter Zustellkanal verhindert
+   die optionale Zustellung auch bei ausgewählten Ereignissen.
 3. Wähle **Einstellungen speichern** in der angehefteten Speicherleiste.
 
-Gesperrte Auswahlen nennen den Grund. Pflichtkanäle bleiben aktiv. E-Mail und SMS
-benötigen die Serveranbindung und passende Kontaktdaten; Web-Push zusätzlich
-Browserunterstützung, Erlaubnis und Registrierung. Eine gespeicherte Auswahl
-bestätigt noch keine Zustellung.
+Gesperrte Auswahlen nennen den Grund. Pflichtkanäle bleiben auch bei ausgeschaltetem
+Zustellkanal aktiv und umgehen Ruhezeiten und Stummschaltungen.
+E-Mail und SMS benötigen eine Serveranbindung und eine bestätigte E-Mail-Adresse
+beziehungsweise Telefonnummer. Das gilt auch für Pflichtkanäle. Eine gespeicherte
+Auswahl oder ein verfügbarer Versanddienst bestätigt noch keine Zustellung.
+
+**Web Push** benötigt zusätzlich einen unterstützten Browser, dessen Erlaubnis
+für Benachrichtigungen und ein registriertes Browser-Abo. Der Kanalschalter
+registriert keinen Browser. In diesem Formular kannst du Browser-Abos weder
+anlegen noch entfernen.
 
 Öffne unter **Ereignisse und Zustellung** das Menü **Schnellauswahl**, um mehrere
 Ereignisse auf einmal einzustellen. Die Auswahl ändert nur die
 Ereigniseinstellungen. Deine Kanalwahl und Pflichtmeldungen bleiben erhalten.
 Die Auswahl wird zunächst in den Entwurf übernommen; speichere sie anschließend.
+
+Tägliche E-Mail-Zusammenfassungen lassen sich in diesem Formular nicht auswählen
+oder zeitlich einstellen. Bereits hinterlegte Zusammenfassungseinstellungen
+bleiben beim Speichern erhalten; sie gelten nur für dafür unterstützte Ereignisse.
 
 ## Ruhezeiten und Stummschaltung
 
@@ -30,18 +44,31 @@ Aktiviere Ruhezeiten und wähle **Beginn**, **Ende** und **Zeitzone**. Die Zeite
 gelten in der hier angezeigten Zeitzone. Ein Ende vor dem Beginn reicht bis zum
 nächsten Tag. Speichere die Änderungen anschließend.
 
+Ruhezeiten pausieren Töne und Einblendungen und verschieben externe Zustellungen.
+In-App-Mitteilungen bleiben sofort im Posteingang sichtbar. Ereignisse mit
+**Umgeht Ruhezeiten** sind ausgenommen.
+
 Eine unvollständige Ruhezeit ist nicht wirksam. Ergänze die fehlenden Angaben
 oder deaktiviere sie. Beim Bearbeiten einer Ruhezeit zeigt das Formular fehlende
-Angaben vor dem Speichern an. Für Stummschaltungen wählst du die
-angebotenen Bereiche. Sicherheitsereignisse können diese Einstellungen umgehen;
-die Ereignisanzeige kennzeichnet die Ausnahmen.
+Angaben vor dem Speichern an.
+
+Öffne unter **Stummschalten** die Auswahl **Bereiche wählen** und markiere die
+gewünschten Bereiche. Speichere anschließend. Die Stummschaltung unterdrückt neue
+Meldungen aus diesen Bereichen nur bei Ereignissen, die Stummschaltung unterstützen;
+vorhandene Posteingangseinträge bleiben erhalten. Entferne die Markierung und
+speichere erneut, um Meldungen wieder zuzulassen. Nicht unterstützte Ereignisse
+und Pflichtkanäle bleiben davon unberührt.
 
 ## Verwerfen, Fehler und neue Berechtigungen
 
-Suche und Seitennavigation erhalten deine Eingaben. Beim Verlassen mit Änderungen
-kannst du weiterarbeiten oder verwerfen. Ladefehler bieten Wiederholung;
-Speicherfehler lassen den Entwurf bestehen. Ein neuer geladener Stand kann ihn
-verwerfen – lies die Bestätigung.
+Suche und Seitenwechsel innerhalb der Ereignisliste erhalten deine Eingaben.
+Beim Verlassen mit Änderungen kannst du weiterarbeiten oder verwerfen.
+Ladefehler bieten Wiederholung; Speicherfehler lassen den Entwurf bestehen.
+Bei einem Speicherkonflikt lade den aktuellen Stand neu. Bestätigst du dabei das
+Verwerfen, gehen deine ungespeicherten Änderungen verloren.
+
+Speichere vor dem Neuladen oder einem Wechsel. Auch eine Änderung deiner Rechte
+kann das Formular neu laden und den Entwurf verwerfen.
 
 Welche Ereignisse du siehst, hängt von deinen Rechten und Zuständigkeiten ab.
 Die Regeln erklärt der [Posteingang](../benutzer/benachrichtigungen.mdx#welche-meldungen-du-bekommst).

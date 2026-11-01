@@ -1,23 +1,102 @@
 ---
 title: Geräte in Betrieb nehmen
-description: Vorbereitung, Montage, Anschluss und Netzwerkeinbindung durch Techniker vor Ort.
+description: Einen angeschlossenen Controller an einem bestehenden Server aufnehmen, Anschlüsse prüfen und einer Ressource zuordnen.
 ---
 
-Diese Seite ist ein Entwurf. Montage- und Firmwareangaben müssen pro
-unterstütztem Gerät durch dessen Unterlagen und eine Hardwareprüfung belegt sein.
+Diese Anleitung führt von einem angeschlossenen Controller zur geprüften
+Softwareeinrichtung im Dashboard. Sie beschreibt die Aufnahme in ein vorhandenes
+IP500-Netzwerk. Der Server und ein registrierter, erreichbarer **Edge-Router**
+müssen bereits eingerichtet sein. Der Edge-Router vermittelt zwischen dem
+IP500-Netzwerk und dem Server.
+
+Wenn du zuerst einen neuen Server brauchst, beginne mit
+[Server auf dem Raspberry Pi installieren](./raspberry-pi.mdx).
+Gerätespezifische Montage, Verdrahtung und zulässige Stromversorgung richten sich
+nach den Unterlagen des jeweiligen Geräts. Die Aufnahme im Dashboard bestätigt
+keine korrekte Montage oder physische Funktion.
 
 ## Vorbereitung und Montage
 
-- [ ] TODO: Unterstützte Hardware-/Firmwarestände, Stromversorgung, Netzwerk, Leser/Aktor und vorhandene Montageunterlagen pro Gerät nennen.
-- [ ] TODO: Ansprechpartner, Rechte, passende Testumgebung und fiktive Testidentität festlegen; vorhandene Installation von einem neuen Server unterscheiden.
-- [ ] TODO: Montage und Anschluss nur aus passenden Herstellerunterlagen beschreiben; Anschlussbilder, zulässige Varianten und beobachtbare Statusanzeigen prüfen.
+Kläre vor der Aufnahme mit der betreuenden Administration:
+
+- Welcher Controller und welche angeschlossenen Leser oder Aktoren eingerichtet
+  werden sollen. Ein Aktor führt eine Aktion aus, etwa eine Tür zu entriegeln oder
+  eine Maschine zu schalten. Halte Geräteunterlagen und den vorgesehenen
+  Hardware- und Firmwarestand bereit.
+- Welcher Server und Edge-Router zur Installation gehören und wer bei fehlender
+  Verbindung unterstützt.
+- Ob das unveränderte IP500-Zertifikat oder signierte Mardu-Aufnahmedaten als
+  JSON-Datei für genau dieses Gerät vorliegen.
+- Welche Ressource, etwa Raum oder Maschine, die Anschlüsse verwenden soll und
+  wie eine Funktionsprüfung ohne Gefährdung des laufenden Betriebs erfolgen kann.
+
+Zum Anzeigen brauchst du Geräte-Leserechte, zum Aufnehmen zusätzlich das Recht
+zum Anlegen von Geräten. Für die Anschlusskonfiguration brauchst du
+Geräte-Änderungsrechte. Die gesonderten Rechte für Ressource und Hardwarezuordnung
+stehen unter [Ressourcen einrichten → Technik](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen)
+im Bereich Administration. Der Dokumentationsbereich **Installieren** erteilt
+keine Rechte.
 
 ## Netzwerk und Softwareaufnahme
 
-- [ ] TODO: Unterstütztes IP500-/Gateway-/anderes Netzwerk einbinden und Erreichbarkeit prüfen; fehlenden Gateway und Konflikte mit vorhandenen Geräten behandeln.
-- [ ] TODO: Anlage und Provisionierung unter [Geräte verwalten](../administration/geraete-verwalten.mdx) wiederverwenden; Zertifikat/Manifest, Geräte-Endpunkte und Abschlusskriterium erklären.
-- [ ] TODO: Ressource/Zutrittspunkt und Hardwarezuordnung prüfen; Montageabschluss von erfolgreicher Zugangsprüfung unterscheiden.
+1. Öffne **Geräte → Gerät hinzufügen**. Vergib eine **Technische Gerätekennung**,
+   importiere die JSON-Datei unter **Geräteaufnahme** und wähle **Gerät erstellen**.
+   Verwende den Ablauf [Gerät hinzufügen und verbinden](../administration/geraete-verwalten.mdx#gerät-hinzufügen-und-verbinden)
+   in Administration für Eingaben, Validierung und erneuten Import.
+2. Öffne das Gerät. Prüfe unter **Übersicht → Verbindung und Hardware** die
+   letzte Verbindung und den Einrichtungszustand. Ein gespeicherter Eintrag oder
+   eine gültige Dateistruktur bestätigt noch keine Netzwerkaufnahme.
+3. Öffne **Anschlüsse**. Prüfe, ob die erwarteten Leser, Aktoren und gegebenenfalls
+   Sensoren vorhanden sind. Konfiguriere die benötigten Anschlüsse nach
+   [Anschlüsse konfigurieren und zuordnen](../administration/geraete-verwalten.mdx#anschlüsse-konfigurieren-und-zuordnen).
+   Prüfe nach **An Gerät senden** die Rückmeldung für jeden benötigten Anschluss.
+4. Ordne die bestätigten Anschlüsse an der vorgesehenen **Ressource → Technik**
+   zu. Folge [Technik: Anschlüsse zuordnen](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen).
+   Die Aufnahme eines Geräts erzeugt keine Ressource; eine Hardwarezuordnung
+   aktiviert auch keine Zugriffsregel.
+
+### Was automatisch geschieht
+
+Der Schlüsselaustausch läuft automatisch. Bei einem reinen IP500-Zertifikat wird
+das Gerätemodell erst aus der Gerätemeldung erkannt; signierte Mardu-Aufnahmedaten
+können das Modell bereits enthalten. Der Server leitet die Anschlüsse aus seinem
+Modellkatalog ab und sendet bei deren Anmeldung die Konfiguration. Du legst keine
+beliebigen zusätzlichen Anschlüsse am Gerät an. Modell und gemeldete Anzahl der
+Leser, Aktoren und Sensoren müssen zusammenpassen.
+
+Die automatische Konfiguration ersetzt die Prüfung nicht: Vergleiche die
+angebotenen Anschlüsse und Einstellungen mit der vorgesehenen Verwendung und
+warte auf die Bestätigung jedes benötigten Anschlusses. **Betriebsbereit** am
+Gerät bedeutet nur, dass mindestens ein Anschluss Bereitschaft gemeldet und seine
+Konfiguration bestätigt hat.
+
+Bleibt die Anzeige bei **Verbinden**, fehlt der Edge-Router oder kommen keine
+Anschlüsse beziehungsweise Bestätigungen an, beginne mit
+[Probleme prüfen](../administration/geraete-verwalten.mdx#probleme-prüfen).
+Starte die Aufnahme nicht allein wegen einer ausstehenden Anschlussbestätigung
+erneut.
 
 ## Abnahme
 
-- [ ] TODO: Mit dokumentierten Testfällen zu [Abnahme und Übergabe](./abnahme-uebergabe.mdx) führen; offene Hardware-/Firmwareeinschränkungen benennen.
+Prüfe vor dem Einsatz diese getrennten Ergebnisse:
+
+| Prüfung     | Erwartetes Ergebnis                                                                                                                                                     |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Verbindung  | Die Geräteübersicht zeigt eine aktuelle Gerätemeldung und das erwartete Modell.                                                                                         |
+| Einrichtung | Jeder benötigte Anschluss hat seine Konfiguration bestätigt und meldet einen passenden Hardwarezustand.                                                                 |
+| Zuordnung   | Unter **Ressource → Technik** sind die vorgesehenen Anschlüsse zugeordnet.                                                                                              |
+| Nutzung     | Zugriffsregel und erforderlicher Berechtigungsnachweis sind an der Ressource eingerichtet; die vereinbarten erlaubten und verweigerten Zugriffe werden vor Ort geprüft. |
+
+Die Einstellungen zur Nutzung erklärt
+[Nutzung & Zugriff: Nutzung erlauben](../koordination/ressourcen.mdx#nutzung-und-zugriff-nutzung-erlauben).
+Eine gespeicherte Zutrittsentscheidung bestätigt keinen physischen Tür- oder
+Schaltzustand. Beobachte deshalb bei der Funktionsprüfung auch den vorgesehenen
+Leser und Aktor.
+
+Halte für die Übergabe Gerätekennung, Firmwarestand, Anschlusszuordnung,
+Prüfzeitpunkt, beobachtete Ergebnisse und offene Mängel fest. Vergleiche die
+gemeldete Firmwareversion bei Bedarf mit dem
+[Firmware- und Update-Verlauf](../administration/geraete-verwalten.mdx#firmware-und-update-verlauf-prüfen).
+Die Geräteansicht bietet keinen Start oder Abbruch eines Firmware-Updates an.
+Eine erfolgreiche Softwareeinrichtung ersetzt keine gerätespezifische
+Anschluss- und Funktionsprüfung vor Ort.

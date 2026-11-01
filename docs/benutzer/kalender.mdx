@@ -6,11 +6,23 @@ description: Eigene Buchungen als Datei übernehmen oder über einen widerrufbar
 Ein Kalenderabo ruft deine Buchungen regelmäßig ab; eine importierte ICS-Datei
 bleibt eine einmalige Kopie. Änderungen im Kalenderprogramm ändern keine Mardu-Buchung.
 
+Für Export, Abo-Verwaltung und spätere Kalenderabrufe brauchst du Leserechte für
+Buchungen. Für das Abo brauchst du ein aktives, nicht gesperrtes Konto. Ein
+erforderlicher Passwortwechsel muss abgeschlossen sein.
+
 ## Einmalig exportieren
 
-Wähle in einer Buchung **Kalender exportieren** oder nutze die Exportaktion der
-Buchungsübersicht. Importiere die ICS-Datei in dein Kalenderprogramm.
-Serien enthalten ihre gespeicherten Termine samt Änderungs- und Stornierungsständen.
+1. Öffne eine deiner Buchungen und wähle **Kalender exportieren**.
+2. Importiere die heruntergeladene ICS-Datei in dein Kalenderprogramm.
+
+Bei Serien enthält die Datei alle gespeicherten Serientermine samt Änderungen und
+Stornierungen. Bei einer Buchung mehrerer Ressourcen enthält sie die gemeinsam
+gebuchten Ressourcen.
+
+Am Desktop kannst du in der Buchungsübersicht auch **Eigene Buchungen exportieren**
+wählen. Dieser Export umfasst 366 Tage ab heute beziehungsweise ab dem in der
+Kalenderansicht gewählten Datum. Suche, Ressourcen- und Statusfilter begrenzen ihn
+nicht.
 
 ## Persönliches Kalenderabo einrichten
 
@@ -18,21 +30,28 @@ Der persönliche Link erlaubt Kalenderabrufe ohne Anmeldung. Behandle ihn wie ei
 Passwort. Verwende eine vom Kalenderprogramm erreichbare HTTPS-Serveradresse;
 `localhost` verweist auf das abrufende Gerät.
 
-1. Öffne **Meine Buchungen → Kalender abonnieren**.
-2. Wähle **Link erstellen**, soweit deine Rechte dies erlauben.
-3. Kopiere den **Persönlichen Kalenderlink**; er wird nur einmal angezeigt.
+1. Öffne **Meine Buchungen → Kalender abonnieren**, auf dem Handy unter **Buchungen**.
+2. Wähle **Link erstellen**. Ist bereits ein Zugang aktiv, lies zuerst
+   [Link ersetzen oder Zugang widerrufen](#link-ersetzen-oder-zugang-widerrufen).
+3. Kopiere den **Persönlichen Kalenderlink**, bevor du den Dialog schließt.
+   Er wird später nicht erneut angezeigt.
 4. Füge ihn im Kalenderprogramm als Internetkalender oder Kalenderabo hinzu.
 
 ## Welche Änderungen erscheinen?
 
-Das Abo enthält 30 Tage Vergangenheit und 335 Tage Zukunft. Neue, geänderte und
-stornierte Buchungen erscheinen beim nächsten Abruf. Das Kalenderprogramm bestimmt
-das Intervall; aktualisiere dort bei Bedarf manuell.
+Das Abo enthält 30 Tage Vergangenheit und 335 Tage Zukunft, ausgehend vom aktuellen
+Tag in der Weltzeit UTC. Der Zeitraum wandert täglich mit. Abgelehnte Buchungen
+sind ausgeschlossen.
+Neue, geänderte und stornierte Buchungen werden beim nächsten Abruf übermittelt.
+Das Kalenderprogramm bestimmt Abrufintervall und Darstellung; aktualisiere dort bei
+Bedarf manuell.
 
 ## Link ersetzen oder Zugang widerrufen
 
-Mit **Neuen Link erstellen** und der Bestätigung wird der bisherige Link sofort
-ungültig. Trage den neuen Link anschließend in deinen Kalenderabos ein.
+Pro Konto gibt es einen Kalenderlink, den du in mehreren Kalenderprogrammen verwenden
+kannst. Mit **Neuen Link erstellen** und der Bestätigung wird der bisherige Link
+sofort ungültig. Ersetze ihn anschließend in allen deinen Kalenderabos. Das gilt
+auch, wenn du den bisherigen Link nicht mehr hast.
 
 **Zugang widerrufen** beendet nach Bestätigung weitere Abrufe. Bereits geladene
 Termine bleiben im Kalenderprogramm; Mardu-Buchungen werden nicht storniert.
@@ -44,5 +63,9 @@ Beispiel mit fiktivem Abo-Status, ohne persönlichen Link.
 ## Wenn der Kalender nicht aktualisiert wird
 
 Prüfe, ob du ein Abo eingerichtet oder nur eine Datei importiert hast. Prüfe dann
-Abrufintervall, Serveradresse, Zeitraum und aktiven Zugang. Teile den Link auch bei
-Rückfragen nicht weiter.
+Abrufintervall, Serveradresse, Zeitraum und aktiven Zugang. Nach dem Ersetzen eines
+Links müssen alle Abos den neuen Link verwenden. Bei entzogenen Leserechten oder
+einem gesperrten Konto funktionieren auch bestehende Abos nicht mehr.
+
+Zeigt der Dialog einen Lade- oder Änderungsfehler, wähle **Erneut versuchen** und
+prüfe den angezeigten Status. Teile den Link auch bei Rückfragen nicht weiter.

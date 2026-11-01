@@ -1,0 +1,110 @@
+---
+title: HTTPS-Zertifikatswechsel vorbereiten und prüfen
+description: Die zuständige HTTPS-Komponente bestimmen, ein direktes API-Zertifikat wechseln und die verwendete Verbindung prüfen.
+---
+
+Prüfe vor einem Zertifikatswechsel, welcher Dienst die betroffene HTTPS-Adresse
+bereitstellt. Das Zertifikat unter **Server → Server-Zertifikate** und das vom
+Browser empfangene Zertifikat können aus verschiedenen Quellen stammen.
+
+Diese Anleitung setzt eine bestehende Installation und ihre bekannten
+Dashboard- und API-Adressen voraus. Für Änderungen am HTTPS-Listener oder Proxy
+brauchst du Zugriff auf Host und Deployment. Mardu-Berechtigungen ersetzen diesen
+Zugriff nicht. Die Zertifikatsliste im Dashboard benötigt `Settings.View`, Upload,
+Ersetzen und Löschen benötigen `Settings.Update`.
+
+## 1. Zuständige Komponente bestimmen
+
+Notiere die vollständige betroffene Adresse einschließlich Hostname und Port.
+Unterscheide die im Browser geöffnete Dashboard-Adresse von einer separat
+angesprochenen API-Adresse.
+
+| Verwendung                               | Woher kommt das Zertifikat?                                                                                  | Wo erfolgt die Änderung?                                                             |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| Direkter HTTPS-Zugriff auf die API       | Der API-Webserver Kestrel lädt die konfigurierte Zertifikatsdatei.                                           | In der Listener- und Dateikonfiguration des API-Deployments.                         |
+| HTTPS im Raspberry-Pi-Installationspaket | Der vorgeschaltete Proxy Caddy nimmt HTTPS auf Port `443` an; die API verwendet intern HTTP auf Port `8080`. | Am bestehenden Proxy-Deployment.                                                     |
+| Zertifikat unter **Server-Zertifikate**  | Der Mardu-Zertifikatsspeicher stellt Material für zugeordnete Integrationen wie LDAP, OIDC oder MQTT bereit. | Im Speicher und in der jeweiligen Integration; dies ändert den HTTPS-Listener nicht. |
+
+Bei einem anderen vorgeschalteten Proxy ist dessen bestehende Konfiguration
+maßgeblich. Ein API-Neustart wechselt kein Zertifikat, das der Proxy ausliefert.
+Für das Installationspaket beschreibt
+[Raspberry Pi installieren → Installieren](../installieren/raspberry-pi.mdx)
+die vorhandene Betriebsform. Ein Upload in Mardu ersetzt weder das Proxy-Zertifikat
+noch dessen Verwaltung.
+
+## 2. Wechsel vorbereiten
+
+Prüfe vor dem Eingriff Gültigkeit, vorgesehenen Hostnamen, Zertifikatskette und
+passenden privaten Schlüssel des neuen Serverzertifikats. Kläre, welche
+Verbindungen betroffen sind. Plane bei einem API-Neustart eine Unterbrechung ein
+und halte den bisherigen funktionsfähigen Konfigurationsstand für eine
+Wiederherstellung bereit.
+
+Soll nur ein gespeichertes Integrationszertifikat ersetzt werden, folge
+[Servereinstellungen → Ersetzen oder löschen](./server-einstellungen.mdx#ersetzen-oder-löschen).
+Die Zertifikats-ID bleibt beim Ersetzen erhalten. Prüfe danach die zugeordnete
+Integration nach [Integrationen](./integrationen.mdx). Ein CA-Zertifikat, mit dem
+Mardu einen LDAP- oder OIDC-Server prüft, erteilt dem Browser kein Vertrauen in
+die Mardu-Adresse.
+
+### Direktes API-Zertifikat wechseln
+
+Diese Schritte gelten für eine API, die HTTPS selbst über Kestrel bereitstellt.
+Sie sind kein Umstellungsablauf für das Caddy-Installationspaket.
+
+1. Prüfe im bestehenden Deployment, ob `KestrelOptions__EnableHttps` aktiv ist,
+   welcher `KestrelOptions__HttpsPort` verwendet wird und wie dieser Port
+   erreichbar ist. Der voreingestellte HTTPS-Port ist `7443`; eine
+   Container-Portfreigabe ist davon getrennt.
+2. Stelle das neue Zertifikat mit privatem Schlüssel als PFX-/P12-Datei so bereit,
+   dass der API-Prozess sie lesen kann. Setze
+   `Kestrel__Certificates__Default__Path` auf diesen Dateipfad und, falls nötig,
+   `Kestrel__Certificates__Default__Password` über die Geheimnisverwaltung des
+   Deployments. In einem Container gilt der Pfad im Container. Relative Pfade
+   beziehen sich auf das Inhaltsstammverzeichnis (Content Root) der API.
+3. Übernimm die Datei- und Konfigurationsänderung im bestehenden Deployment und
+   starte die API neu. Wurden Container-Umgebungsvariablen geändert, muss auch die
+   Containerkonfiguration neu übernommen werden. Der Listener lädt das Zertifikat
+   beim Start; ein Dashboard-Upload führt diese Übernahme nicht aus.
+4. Prüfe die tatsächliche HTTPS-Verbindung nach dem folgenden Abschnitt.
+
+Das vorhandene lokale Overlay `docker-compose.https.yml` bindet ein Zertifikatsverzeichnis
+unter `/certs` schreibgeschützt ein und veröffentlicht den Containerport `7443`.
+Verwende bei dieser Betriebsform den Pfad innerhalb dieses Mounts. Die
+Zertifikats-ID aus dem Dashboard ist kein Dateipfad für Kestrel.
+
+Ist HTTPS eingeschaltet und kein Zertifikatsdateipfad konfiguriert, verwendet die
+API ein dauerhaft gespeichertes, selbstsigniertes Ersatz-Zertifikat. Das ist kein
+Nachweis für Browservertrauen oder einen passenden öffentlichen Hostnamen.
+
+## 3. Verwendete Verbindung prüfen
+
+1. Öffne die tatsächlich genutzte HTTPS-Adresse erneut und kontrolliere in den
+   Verbindungsinformationen des Browsers das ausgelieferte Zertifikat. Vergleiche
+   Fingerabdruck, Gültigkeit und Hostname mit dem vorgesehenen Zertifikat.
+2. Prüfe, ob der Browser die Zertifikatskette akzeptiert. Die Freigabe
+   **Selbstsigniertes Zertifikat zulassen** im Uploaddialog betrifft nur den
+   Mardu-Speicher. Sie installiert keine vertrauenswürdige Zertifizierungsstelle
+   auf den Endgeräten. Kläre benötigtes Clientvertrauen mit der für diese Geräte
+   zuständigen Person.
+3. Wird die API über eine eigene Adresse angesprochen, prüfe auch deren
+   Zertifikat. Ein gültiges Dashboard-Zertifikat bestätigt die getrennte
+   API-Verbindung nicht.
+4. Prüfe eine neue Anmeldung und die betroffene Funktion. Ergänzend hilft die
+   [Zustandsprüfung](./sicherheit-betrieb.mdx#eine-störung-eingrenzen).
+   Ein erreichbarer Health-Endpunkt allein bestätigt keinen funktionierenden
+   Anmelde- oder Integrationsablauf.
+
+Der Wechsel ist erst geprüft, wenn die richtige Gegenstelle das vorgesehene
+Zertifikat ausliefert, die verwendeten Clients ihm vertrauen und die benötigte
+Funktion erreichbar ist. Ein gültiger Eintrag in der Mardu-Zertifikatsliste
+bestätigt nur den gespeicherten Stand.
+
+## Wenn die Verbindung nicht funktioniert
+
+| Beobachtung                                                               | Nächste Prüfung                                                                                                                                                                       |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Der Browser zeigt weiterhin das bisherige Zertifikat.                     | Prüfe die genaue Adresse und den Port sowie die zuständige Komponente. Bei direktem Kestrel-Zugriff prüfe Dateipfad und API-Neustart; bei vorgeschaltetem Proxy dessen Konfiguration. |
+| Die API startet nach dem Wechsel nicht.                                   | Prüfe Startprotokoll, Dateipfad im laufenden Deployment, Leserechte, privates Schlüsselmaterial und Dateipasswort. Stelle bei Bedarf den zuvor geprüften Stand wieder her.            |
+| Der Browser meldet einen falschen Namen, Ablauf oder fehlendes Vertrauen. | Prüfe den aufgerufenen Hostnamen, Gültigkeitszeitraum, Gerätesystemzeit und Zertifikatskette. Ein erneuter Upload in den Mardu-Speicher behebt Clientvertrauen nicht.                 |
+| Nach dem Speicherwechsel scheitert nur LDAP, OIDC oder MQTT.              | Prüfe die Zertifikatszuordnung und Verbindung im betroffenen Integrationsbereich. Unterscheide das CA-Vertrauen einer ausgehenden Verbindung vom Serverzertifikat eines Listeners.    |

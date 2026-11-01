@@ -23,7 +23,8 @@ Registry (GHCR); ein Quellcode-Checkout und ein lokaler Build sind nicht nötig.
 - Lesezugriff auf die privaten GHCR-Pakete `mardu-rpi-api` und `web` in der
   Organisation `mardu-systems` sowie auf das Backend-Repository für den Download
   der Release-Anhänge.
-- Für IP500 einen aus dem API-Container erreichbaren externen MQTT-Broker.
+- Einen aus dem API-Container erreichbaren externen IP500-MQTT-Broker und dessen
+  Verbindungsdaten. Der Einrichtungsassistent setzt diese Verbindung voraus.
 
 ## 1. Installationspaket herunterladen
 
@@ -86,19 +87,61 @@ erstmaligen Initialisierung eines leeren Datenvolumes.
 docker compose config --quiet
 docker compose up -d
 docker compose ps
+```
+
+Warte, bis `db`, `server` und `web` als gesund (`healthy`) angezeigt werden.
+Lies danach den Setup-Token aus:
+
+```bash
 docker compose exec server cat /app/Private/setup-token.txt
 ```
 
-Öffne `https://DEINE-DOMAIN/standalone/setup` und verwende den ausgegebenen
-Setup-Token. Trage für die Datenbank Host `db`, Port `5432`, Datenbank `mardu`,
-Benutzer `postgres` und das `POSTGRES_PASSWORD` aus `.env` ein. Falls du Datenbank
-oder Benutzer in `.env` geändert hast, verwende diese Werte.
+Der Token autorisiert die Ersteinrichtung; er ist kein Anmeldepasswort. Gib ihn
+nicht weiter. Nach erfolgreichem Setup wird die Token-Datei gelöscht.
 
-Der interne Webserver verwendet HTTP auf Port `8080`, ohne eigenes HTTPS.
-Der Zugriff im Browser erfolgt über Caddy mit HTTPS. Nach abgeschlossenem Setup
-startet die API neu. Prüfe anschließend `https://DEINE-DOMAIN/health/ready`.
-Der Container-Healthcheck verwendet absichtlich `/health/live`, damit das Setup
-auch vor der Datenbankinitialisierung erreichbar ist.
+**Bekannte Einschränkung des Erstsetups:** Die hier geprüfte
+Production-Compose-Konfiguration verwendet intern HTTP-Port `8080`, der
+Einrichtungsassistent des gleichen Quellstands übermittelt jedoch fest Port
+`5001`. Die serverseitige Validierung lehnt diese Abweichung ab. Mit dieser
+Kombination ist die Ersteinrichtung nicht abschließbar. Prüfe für dein Release,
+ob dieser Konflikt behoben ist; ein gesund angezeigter Container belegt das nicht.
+
+Der Einrichtungsablauf für eine Version ohne diesen Konflikt:
+
+1. Öffne `https://DEINE-DOMAIN/standalone/setup`, trage den Token unter
+   **Setup-Token** ein und wähle **Autorisieren**. Die folgende **Systemprüfung**
+   muss erfolgreich sein.
+2. Trage unter **PostgreSQL verbinden** Host `db`, Port `5432`, Datenbank `mardu`,
+   Benutzer `postgres` und das `POSTGRES_PASSWORD` aus `.env` ein. Ersetze das
+   vorausgefüllte Passwort durch deinen erzeugten Wert. Falls du Datenbank oder
+   Benutzer in `.env` geändert hast, verwende diese Werte. Wähle **Datenbank
+   testen** und gehe nach erfolgreicher Prüfung weiter.
+3. Fülle **Projekt und Administrator einrichten** aus. Verwende unter **Origin
+   der Administrationsoberfläche** `https://DEINE-DOMAIN` ohne Pfad. Lege das erste
+   lokale Administratorkonto mit Vorname, Nachname, E-Mail-Adresse und einem
+   eigenen Passwort mit mindestens 16 Zeichen an; zusätzliche Serverrichtlinien
+   werden bei der Validierung geprüft. Die E-Mail-Adresse ist der Benutzername.
+   Bewahre das Passwort auf: Es gibt kein gemeinsames Standardkonto für diese
+   Installation.
+4. Trage unter **IP500 über MQTT verbinden** die Adresse und Zugangsdaten des
+   externen Brokers ein. `localhost` bezeichnet hier den API-Container, nicht den
+   Pi oder einen anderen Rechner. Wähle **Verbindung testen**. Wähle danach nur
+   benötigte **Optionale Integrationen** und entscheide über die angebotene
+   Fehlerberichterstattung.
+5. Wähle unter **Prüfen und anwenden** zuerst **Konfiguration validieren**. Behebe
+   gemeldete Fehler, bevor du **Setup anwenden** wählst.
+
+Beim Anwenden startet die API neu, initialisiert die Datenbank und legt den
+Administrator an. Warte auf den erfolgreichen Abschluss und melde dich mit dem
+angelegten Konto unter `https://DEINE-DOMAIN/standalone/auth` an. Prüfe außerdem
+`https://DEINE-DOMAIN/health/ready`: Während der Ersteinrichtung antwortet dieser
+Endpunkt mit HTTP `503`; erst danach dient er als Bereitschaftsprüfung.
+
+Die API verwendet intern HTTP-Port `8080`, das Dashboard Port `3000` und die
+Datenbank Port `5432`. Diese Ports werden vom Installationspaket nicht am Pi
+veröffentlicht. Der Browser greift über Caddy mit HTTPS auf Port `443` zu. Der
+Container-Healthcheck verwendet `/health/live`, damit das Setup auch vor der
+Datenbankinitialisierung erreichbar ist.
 
 Konfiguration, Dateien, private Schlüssel, Zertifikate und Datenbank liegen in
 Docker-Volumes und bleiben bei einem Containerwechsel erhalten. Der Stack
@@ -111,7 +154,8 @@ separate Bereitstellung.
 
 Sichere vor einem Update die Datenbank und die persistenten Volumes. Die API kann
 beim Start Datenbankmigrationen ausführen. Ein Rückwechsel des Image-Tags allein
-stellt einen früheren Datenbankstand nicht wieder her.
+stellt einen früheren Datenbankstand nicht wieder her. Lies vorher die Hinweise
+des Ziel-Releases zur Datenbankkompatibilität.
 
 Führe im gleichen Installationsordner aus:
 

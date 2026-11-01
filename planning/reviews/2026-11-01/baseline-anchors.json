@@ -1,0 +1,475 @@
+{
+  "benutzer/erste-schritte.mdx": [
+    "nd-page",
+    "vor-dem-start",
+    "anmelden",
+    "profil-prüfen-und-nächste-aufgabe-wählen",
+    "orientierung-und-abmelden"
+  ],
+  "benutzer/dashboard.mdx": [
+    "nd-page",
+    "anzeigen-lesen",
+    "dashboard-anpassen",
+    "änderungen-und-fehler"
+  ],
+  "benutzer/zutritt.mdx": [
+    "nd-page",
+    "eigene-freigaben-prüfen",
+    "ressource-im-katalog-finden",
+    "wenn-etwas-fehlt"
+  ],
+  "benutzer/buchungen.mdx": [
+    "nd-page",
+    "buchung-oder-freien-zeitraum-finden",
+    "neue-buchung-erstellen",
+    "status-und-details-lesen",
+    "ändern-und-stornieren",
+    "einchecken-und-auschecken",
+    "fehler-und-entwürfe"
+  ],
+  "benutzer/berechtigungsanfragen.mdx": [
+    "nd-page",
+    "zugriff-anfragen",
+    "bearbeitungsstatus-verfolgen",
+    "offenen-antrag-zurückziehen",
+    "fehler-und-ungespeicherter-text"
+  ],
+  "benutzer/kalender.mdx": [
+    "nd-page",
+    "einmalig-exportieren",
+    "persönliches-kalenderabo-einrichten",
+    "welche-änderungen-erscheinen",
+    "link-ersetzen-oder-zugang-widerrufen",
+    "wenn-der-kalender-nicht-aktualisiert-wird"
+  ],
+  "benutzer/kompetenzen.mdx": [
+    "nd-page",
+    "einweisungen--kompetenzen",
+    "lokale-nachweise",
+    "importierte--signierte-nachweise",
+    "grenzen-und-korrekturen",
+    "ansicht-am-desktop-und-handy"
+  ],
+  "benutzer/benachrichtigungen.mdx": [
+    "nd-page",
+    "mitteilung-finden-und-lesen",
+    "lesen-archivieren-und-rückgängig-machen",
+    "welche-meldungen-du-bekommst",
+    "keine-einträge-oder-ein-fehler"
+  ],
+  "benutzer/geraete-status.mdx": ["nd-page", "anzeigen-einordnen", "eine-störung-eingrenzen"],
+  "ueberblick/profil.mdx": [
+    "nd-page",
+    "kontodaten",
+    "profilbild",
+    "profil-vervollständigen",
+    "anmeldesicherheit",
+    "sitzungen",
+    "benachrichtigungen",
+    "zutrittsmedien",
+    "externe-konten",
+    "erscheinungsbild",
+    "bedienhilfen",
+    "ungespeicherte-änderungen"
+  ],
+  "ueberblick/profil-sicherheit.mdx": [
+    "nd-page",
+    "e-mail-adresse-ändern",
+    "passwort-ändern",
+    "zwei-faktor-anmeldung-einrichten",
+    "wiederherstellungscodes-sichern",
+    "passkey-hinzufügen-oder-deaktivieren"
+  ],
+  "ueberblick/profil-sitzungen.mdx": [
+    "nd-page",
+    "sitzung-erkennen",
+    "einzelne-oder-andere-sitzungen-widerrufen",
+    "unbekannte-anmeldung-oder-ladefehler"
+  ],
+  "ueberblick/profil-zutrittsmedien.mdx": [
+    "nd-page",
+    "medien-finden-und-lesen",
+    "fehlendes-oder-verlorenes-medium"
+  ],
+  "ueberblick/profil-nachweisquellen.mdx": [
+    "nd-page",
+    "einen-angebotenen-anbieter-verbinden",
+    "persönlichen-zugang-verwenden",
+    "trennen-und-fehler-behandeln"
+  ],
+  "ueberblick/profil-benachrichtigungen.mdx": [
+    "nd-page",
+    "kanäle-und-ereignisse-auswählen",
+    "ruhezeiten-und-stummschaltung",
+    "verwerfen-fehler-und-neue-berechtigungen"
+  ],
+  "ueberblick/profil-erscheinungsbild.mdx": [
+    "nd-page",
+    "hell-dunkel-oder-system",
+    "zeitzone-und-formate",
+    "bedienhilfen"
+  ],
+  "ueberblick/profil-mcp.mdx": [
+    "nd-page",
+    "verbindung-erstellen",
+    "zugang-im-client-eintragen",
+    "zugang-ersetzen-oder-widerrufen",
+    "token-erneuern",
+    "verbindung-widerrufen",
+    "deaktiviert-leer-oder-fehlerhaft"
+  ],
+  "administration/benutzer-rollen.mdx": [
+    "nd-page",
+    "was-ist-ein-benutzer",
+    "voraussetzungen",
+    "benutzer-einladen-und-anlegen",
+    "benutzer-hinzufügen",
+    "kontodaten-eingeben",
+    "anmeldeverfahren-wählen",
+    "radix-_R_2c9p9bsnp9felb_-trigger-mit-einladung",
+    "radix-_R_2c9p9bsnp9felb_-trigger-mit-passwort",
+    "radix-_R_2c9p9bsnp9felb_-content-mit-einladung",
+    "radix-_R_2c9p9bsnp9felb_-content-mit-passwort",
+    "konto-anlegen",
+    "einladung-abschließen-und-konto-freigeben",
+    "benutzer-verwalten",
+    "benutzerdaten-ändern",
+    "änderungen-speichern-oder-verwerfen",
+    "rollen-und-gruppen-zuweisen",
+    "direkte-rollen-ändern",
+    "gruppenmitgliedschaften-ändern",
+    "benutzergruppen-verwalten",
+    "zugangs-tags-prüfen-und-benennen",
+    "verlorenen-tag-sperren",
+    "tag-datensatz-löschen",
+    "zugangsentscheidungen-und-sitzungen-prüfen",
+    "metrikansicht-anpassen",
+    "konten-deaktivieren-und-reaktivieren",
+    "benutzer-löschen",
+    "wenn-etwas-nicht-klappt",
+    "offene-dokumentationsaufgaben",
+    "prüfstand-und-grenzen"
+  ],
+  "administration/tags-verwalten.mdx": [
+    "nd-page",
+    "voraussetzungen-und-rechte",
+    "tag-anmelden-und-zuweisen",
+    "benutzer-auswählen",
+    "anmeldung-starten",
+    "karte-mit-der-app-einrichten",
+    "zuordnung-prüfen",
+    "tag-prüfen-und-benennen",
+    "zeitangaben-und-technische-daten-nachschlagen",
+    "verlorenen-tag-sperren",
+    "ersatz-tag-ausgeben",
+    "tag-datensatz-löschen",
+    "probleme-beheben",
+    "qr-code-wird-nicht-geladen",
+    "app-öffnet-sich-nicht",
+    "assistent-wartet-trotz-geöffnetem-app-link",
+    "serverabschluss-erneut-synchronisieren",
+    "abgelaufene-oder-unterbrochene-anmeldung",
+    "karte-ist-bereits-registriert",
+    "falsches-benutzerkonto-gewählt",
+    "umbenennen-oder-verlustmeldung-schlägt-fehl",
+    "tag-ist-aktiv-zugang-wird-abgelehnt",
+    "prüfstand-und-grenzen"
+  ],
+  "administration/geraete-verwalten.mdx": [
+    "nd-page",
+    "gerät-hinzufügen-und-verbinden",
+    "gerät-benennen",
+    "aufnahmedaten-importieren-und-speichern",
+    "verbindung-und-anschlüsse-prüfen",
+    "vorhandenes-gerät-erneut-importieren",
+    "übersicht-und-verbindungsstatus",
+    "einrichtungszustände-lesen",
+    "erneut-ins-netzwerk-aufnehmen-oder-aufnahme-abbrechen",
+    "gerät-erneut-aufnehmen",
+    "ausstehende-aufnahme-abbrechen",
+    "anschlüsse-konfigurieren-und-zuordnen",
+    "gerät-ersetzen-oder-löschen",
+    "hardware-ersetzen",
+    "ungenutztes-gerät-löschen",
+    "diagnose-lesen",
+    "probleme-prüfen",
+    "gerät-bleibt-bei-verbinden-oder-die-einrichtung-schlägt-fehl",
+    "gerät-wird-offline-angezeigt",
+    "anschluss-funktioniert-nicht-oder-konfiguration-bleibt-ausstehend",
+    "erneute-aufnahme-wird-abgelehnt",
+    "gerät-funktioniert-zugriff-wird-abgelehnt"
+  ],
+  "administration/badges-verwalten.mdx": [
+    "nd-page",
+    "ein-badge-erstellen",
+    "ein-badge-öffnen",
+    "eigenschaften-ändern",
+    "voraussetzungen-und-kriterien",
+    "badge-aktivieren-oder-deaktivieren",
+    "frühere-versionen-ansehen",
+    "vergaben-und-lernwege",
+    "offene-dokumentationsaufgaben",
+    "umfang-dieser-anleitung"
+  ],
+  "administration/automationen.mdx": [
+    "nd-page",
+    "automatisierungen-aktivieren",
+    "voraussetzungen",
+    "einen-schalter-veröffentlichen",
+    "schalten-und-rückmeldungen-prüfen",
+    "mit-beispielen-prüfen",
+    "einen-geräteaktor-ersetzen",
+    "nativen-reader-und-node-red-maschinenaktor-kombinieren",
+    "zuordnung-lösen",
+    "einen-anschluss-in-node-red-entfernen",
+    "einen-anschluss-bearbeiten",
+    "wenn-ein-node-oder-die-verbindung-ausfällt",
+    "wenn-das-verbinden-fehlschlägt",
+    "gemeinsamer-versionswechsel"
+  ],
+  "administration/mcp-verwalten.mdx": [
+    "nd-page",
+    "voraussetzungen-und-rechte",
+    "mcp-mit-persönlichem-lesezugang-einrichten",
+    "grenzwerte-wählen",
+    "schreib--oder-löschzugriff-erlauben",
+    "zugriff-einschränken-oder-abschalten",
+    "probleme-beheben"
+  ],
+  "administration/benachrichtigungen-verwalten.mdx": [
+    "nd-page",
+    "voraussetzungen-und-rechte",
+    "zustellkanäle-vorbereiten",
+    "e-mail-einrichten-und-testen",
+    "eine-benachrichtigung-bis-zum-empfang-prüfen",
+    "pflichtkanäle-und-ruhezeiten-verstehen",
+    "fehlende-oder-verzögerte-zustellung-untersuchen",
+    "zustellung-abschalten"
+  ],
+  "koordination/ressourcen.mdx": [
+    "nd-page",
+    "allgemein-anlegen-und-strukturieren",
+    "status-und-verfügbarkeit",
+    "radix-_R_fp9bsnp9felb_",
+    "radix-_R_2fp9bsnp9felb_",
+    "nutzung-und-zugriff-nutzung-erlauben",
+    "technik-anschlüsse-zuordnen",
+    "buchbarkeit-reservierungen-ermöglichen",
+    "ausfälle-und-wartung-betrieb-unterbrechen"
+  ],
+  "administration/integrationen.mdx": [
+    "nd-page",
+    "mqtt",
+    "ldap",
+    "anmeldung-über-openid-connect",
+    "netzwerk-und-gateways",
+    "e-mail",
+    "open-badges-und-externe-anbieter",
+    "automationen",
+    "mcp"
+  ],
+  "administration/server-einstellungen.mdx": [
+    "nd-page",
+    "einstellungen-lesen-und-speichern",
+    "globale-einstellungen",
+    "registrierung-und-anmelderichtlinie",
+    "zertifikate",
+    "monitoring-und-fehlerberichte",
+    "weitere-einstellungsbereiche",
+    "sicherung-und-wiederherstellung"
+  ],
+  "administration/sicherheit-betrieb.mdx": [
+    "nd-page",
+    "anmeldeverfahren-und-kontowiederherstellung",
+    "sitzungen-und-anmeldehistorie",
+    "rechte-und-administrative-zugriffe-prüfen",
+    "audit-und-störungen",
+    "sicherung-wiederherstellung-und-update"
+  ],
+  "administration/nachweise-datenschutz.mdx": [
+    "nd-page",
+    "audit-suchen-und-exportieren",
+    "datenarten-und-aufbewahrung",
+    "auskunft-berichtigung-und-löschung",
+    "öffentlich-geteilte-inhalte-und-zugriffsgrenzen"
+  ],
+  "administration/zutritt-verwalten.mdx": [
+    "nd-page",
+    "zugangsmetriken",
+    "ressourcen-bereiche-und-zutrittspunkte",
+    "verwaltungsrechte-und-verantwortlichkeiten",
+    "zugänge-freigeben-und-entziehen",
+    "katalog-und-anträge",
+    "protokolle-sitzungen-und-hardwarezustand",
+    "nutzungsbedingungen-und-verwaltung",
+    "eigene-zugänge"
+  ],
+  "administration/wartungs-cli.mdx": [
+    "nd-page",
+    "voraussetzungen",
+    "menü-öffnen",
+    "admin-passwort-ohne-e-mail-zurücksetzen",
+    "konto-entsperren-oder-anmeldesitzungen-widerrufen",
+    "serverzustand-prüfen",
+    "probleme-beheben"
+  ],
+  "administration/wartungs-cli-referenz.mdx": [
+    "nd-page",
+    "aufruf-und-hilfe",
+    "konten-und-anmeldesitzungen",
+    "diagnose-und-json-ausgabe",
+    "rückgabewerte",
+    "verbindung-und-konfiguration"
+  ],
+  "benutzer/uebersicht-monitoring.mdx": [
+    "nd-page",
+    "zeitraum-und-diagramme",
+    "fehlende-und-begrenzte-messwerte",
+    "persönliches-dashboard",
+    "zutrittsmetriken",
+    "benachrichtigungen",
+    "offene-dokumentationsaufgaben",
+    "umfang-dieser-anleitung"
+  ],
+  "installieren/raspberry-pi.mdx": [
+    "nd-page",
+    "voraussetzungen",
+    "1-installationspaket-herunterladen",
+    "2-zugang-zu-privaten-images-einrichten",
+    "3-installation-konfigurieren",
+    "4-starten-und-einrichten",
+    "5-neue-versionen-übernehmen",
+    "probleme-beheben"
+  ],
+  "installieren/inbetriebnahme.mdx": [
+    "nd-page",
+    "vorbereitung-und-montage",
+    "netzwerk-und-softwareaufnahme",
+    "abnahme"
+  ],
+  "installieren/abnahme-uebergabe.mdx": ["nd-page", "funktionsprüfung", "protokoll-und-übergabe"],
+  "installieren/stoerung-vor-ort.mdx": [
+    "nd-page",
+    "serverzugang-oder-serverzustand-prüfen",
+    "fehler-eingrenzen",
+    "wiederanlauf",
+    "eskalation"
+  ],
+  "entwickeln/api-integration.mdx": ["nd-page", "referenz-und-integrationsweg", "test-und-betrieb"],
+  "entwickeln/http-api.mdx": [
+    "nd-page",
+    "authentifizierung-und-rechte",
+    "beispielaufrufe-und-verträge",
+    "fehler-und-betrieb"
+  ],
+  "entwickeln/mqtt-events.mdx": ["nd-page", "verbindung-und-zugriffsregeln", "topics-und-payloads"],
+  "entwickeln/mcp-anbindung.mdx": [
+    "nd-page",
+    "mcp-client-verbinden",
+    "rechte-und-tokenwechsel",
+    "fehler-beim-mcp-zugriff",
+    "node-red-und-ereignisse",
+    "echtzeit-und-aufgabenverteilung"
+  ],
+  "koordination/buchungen-verwalten.mdx": [
+    "nd-page",
+    "rechte-und-buchungsmodell",
+    "regeln-und-schließzeiten",
+    "anfragen-entscheiden",
+    "kalender-und-auslastung"
+  ],
+  "koordination/bewertungen.mdx": [
+    "nd-page",
+    "kompetenzstandards-und-anforderungen",
+    "bewertungen-durchführen",
+    "vergaben-und-gültigkeit",
+    "externe-nachweise-anerkennen"
+  ],
+  "ueberblick/benutzerkonten.mdx": [
+    "nd-page",
+    "was-kann-ein-benutzer-tun",
+    "wie-entsteht-ein-konto",
+    "welche-zuordnungen-gehören-zum-konto",
+    "was-bewirkt-eine-deaktivierung",
+    "weiterführende-anleitungen",
+    "zuständigkeiten-und-persönliche-nutzung"
+  ],
+  "ueberblick/grundlagen-begriffe.mdx": [
+    "nd-page",
+    "system-und-begriffe",
+    "kompetenzen-und-nachweise",
+    "konten-rollen-und-navigation",
+    "welche-sitzung-ist-gemeint"
+  ],
+  "ueberblick/fehlersuche.mdx": [
+    "nd-page",
+    "anmeldung",
+    "fehlender-zugriff",
+    "buchung-und-kalender",
+    "nachweise-und-zutrittsmedien",
+    "benachrichtigungen",
+    "ladefehler-und-ungespeicherte-änderungen",
+    "angaben-für-eine-rückfrage"
+  ],
+  "ueberblick/neuerungen.mdx": [
+    "nd-page",
+    "änderungen-einer-version",
+    "verhalten-nach-einem-update"
+  ],
+  "v1/index.mdx": ["nd-page"],
+  "v2/index.mdx": ["nd-page"],
+  "index.mdx": ["nd-page"],
+  "ueberblick/index.mdx": [
+    "nd-page",
+    "ressourcen-sind-der-ausgangspunkt",
+    "personen-rechte-und-nutzungsbedingungen",
+    "welche-teile-gehören-zum-system",
+    "in-diesem-bereich",
+    "wo-möchtest-du-anfangen"
+  ],
+  "benutzer/index.mdx": [
+    "nd-page",
+    "neu-hier-beginne-mit-deiner-ersten-nutzung",
+    "eine-bestimmte-aufgabe-erledigen",
+    "konto-sicherheit-und-hilfe",
+    "desktop-und-handy",
+    "benutzeransicht-und-verwaltung"
+  ],
+  "koordination/index.mdx": [
+    "nd-page",
+    "in-diesem-bereich",
+    "ressourcen-im-alltag",
+    "qualifikationen-einordnen",
+    "offene-dokumentationsaufgaben",
+    "umfang-der-anleitungen"
+  ],
+  "administration/index.mdx": [
+    "nd-page",
+    "empfohlene-reihenfolge",
+    "personen-und-berechtigungen",
+    "ressourcen-und-zutritt",
+    "kompetenzen-und-nachweise",
+    "weitere-verwaltungsaufgaben",
+    "geräte-und-automationen",
+    "anbindungen",
+    "betrieb",
+    "offene-dokumentationsaufgaben",
+    "umfang-der-anleitungen"
+  ],
+  "installieren/index.mdx": [
+    "nd-page",
+    "in-diesem-bereich",
+    "server-aufbauen",
+    "einen-vorhandenen-server-verwenden",
+    "zum-betrieb-übergehen",
+    "offene-dokumentationsaufgaben"
+  ],
+  "entwickeln/index.mdx": [
+    "nd-page",
+    "in-diesem-bereich",
+    "eine-schnittstelle-wählen",
+    "mit-begrenztem-zugriff-beginnen",
+    "offene-dokumentationsaufgaben",
+    "umfang-der-anleitungen"
+  ]
+}

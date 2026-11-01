@@ -1,0 +1,182 @@
+---
+title: Einen Node-RED-Flow entwickeln und prüfen
+description: Eine vorhandene Mardu-Ressource lesen, Nachrichten auswerten und einen Flow kontrolliert deployen.
+---
+
+Diese Anleitung erstellt einen lesenden Flow: Ein Knopfdruck lädt den Zustand
+einer vorhandenen Ressource und zeigt ihn in der Debug-Seitenleiste von
+Node-RED. Danach kannst du Änderungen derselben Ressource beobachten. Das
+Beispiel verwendet die fiktive Ressource **Testarbeitsplatz**; es sendet keine
+Gerätebefehle und benötigt keine zusätzliche Protokollverbindung.
+
+## Voraussetzungen und Zugriff
+
+Die Node-RED-Laufzeit und ihre Mardu-Verbindung müssen bereits eingerichtet
+sein. Öffne den Editor über **Administration → Integrationen → Automationen →
+Node-RED öffnen**. Einrichtung und Verbindungsreparatur beschreibt
+[Automationen im Bereich Administration](../administration/automationen.mdx#automatisierungen-aktivieren).
+Zum Öffnen brauchst du **Automation-Editor anzeigen**, zum Bearbeiten und Deployen
+zusätzlich **Automation-Editor bearbeiten**.
+
+Arbeite zunächst in einer Testinstallation mit einer vorhandenen Testressource.
+Du solltest Nodes verbinden und die Node-RED-Eigenschaften `msg.payload` und
+`msg.topic` kennen. Verwende in allen Mardu-Nodes die bereits eingerichtete
+**Mardu-Verbindung**. Kopiere keine Zugangsdaten in Nachrichten oder exportierte Flows.
+
+Editorzugang und Laufzeitzugriff sind getrennt: Die angemeldete Person erhält
+eine Editor-Sitzung. Die aktive Mardu-Laufzeit verwendet ihre eigene Verbindung
+und kann alle unterstützten Ressourcen lesen sowie registrierte Aktionen
+ausführen. Eine Ressourcenauswahl im Node begrenzt nur diesen Node; sie ist keine
+Zugriffsfreigabe für den ganzen Flow. Auch die Ressourcenauswahl unter
+**Flow-Einstellungen** legt eine zusätzliche Zugangsprüfung fest und beschränkt
+nicht den sonstigen Laufzeitzugriff.
+
+## Den lesenden Flow anlegen
+
+1. Lege im Editor einen eigenen Flow-Tab an, zum Beispiel **Testarbeitsplatz lesen**.
+2. Verbinde einen **Inject**-Node mit **Zustand lesen** und dessen Ausgang mit
+   einem **Debug**-Node. Stelle Inject auf manuelles Auslösen: kein Intervall
+   und keine automatische Auslösung nach dem Start.
+3. Wähle in **Zustand lesen** die vorhandene Mardu-Verbindung. Wähle als
+   **Ressourcentyp** **Ressource** und unter **Ressource** deinen Testarbeitsplatz.
+   Der Suchfilter durchsucht geladene Einträge; **Weitere laden** ergänzt die
+   nächste Seite. Der technische Typ dieser Auswahl heißt `managed-resource`.
+4. Stelle den Debug-Node auf die Ausgabe von `msg.payload` in der Seitenleiste.
+5. Ergänze einen **Catch**-Node für **Zustand lesen**. Verbinde ihn mit
+   **Fehler aufbereiten** und einem zweiten Debug-Node. So erhält eine
+   fehlgeschlagene Anfrage einen eigenen Ausgabepfad.
+
+Die Ressourcenreferenz besteht aus Typ und ID. **Ressource** (`managed-resource`)
+bezeichnet das verwaltete Objekt, **Gerät** (`device`) die Hardware,
+**Anschluss** (`resource-endpoint`) einen Anschluss und **Zutrittspunkt**
+(`access-point`) einen Zugang. Verwende die ID des gewählten Typs.
+Zum Lesen wird kein neuer Anschluss veröffentlicht und keine Hardwarezuordnung
+angelegt.
+
+Bei fest gewählter Ressource reicht jede Eingangsnachricht des Inject-Nodes.
+Für einen späteren dynamischen Flow kann **Zustand lesen** Typ und ID stattdessen
+aus `msg.payload` übernehmen, wenn keine passende Vorgabe gesetzt ist:
+
+```json
+{
+  "payload": {
+    "type": "managed-resource",
+    "id": "22222222-2222-4222-8222-222222222222"
+  }
+}
+```
+
+Die UUID ist fiktiv und muss durch eine vorhandene Ressourcen-ID ersetzt werden.
+Eine konfigurierte, aufgelöste ID hat Vorrang vor dem Nachrichtenwert. Für eine
+ID aus einer Nachrichteneigenschaft wählst du im ID-Feld den Typ `msg` und einen
+Pfad ohne das Präfix `msg.`, beispielsweise `payload.id`.
+
+## Deployen und das Ergebnis prüfen
+
+Ein Deploy übernimmt die Flow-Konfiguration in die gemeinsame Laufzeit. Nodes
+können dabei starten oder neu starten. Prüfe deshalb vor dem Deploy auch die
+anderen noch nicht übernommenen Änderungen im Editor.
+
+1. Kontrolliere Verbindung, Ressourcentyp, ausgewählte Ressource und Leitungen.
+   Der Testflow soll nur die beschriebenen Lese- und Debug-Nodes enthalten.
+2. Wähle **Deploy** und warte auf das Ergebnis. Wenn Mardu Auswirkungen auf
+   veröffentlichte Anschlüsse meldet, prüfe die Vorschau vor **Änderungen
+   übernehmen**. Bei diesem reinen Leseversuch sind solche Auswirkungen ein
+   Anlass, die übrigen Änderungen zu prüfen. Entfernen und Ersetzen von
+   Anschlüssen beschreibt die
+   [Administrationsanleitung](../administration/automationen.mdx#einen-anschluss-in-node-red-entfernen).
+3. Löse den Inject-Node einmal manuell aus. Im Debug-Ausgang muss eine Antwort
+   für den gewählten Ressourcentyp und dieselbe ID erscheinen.
+4. Prüfe `schemaId`, `version`, `online`, `observedAtUtc`, `receivedAtUtc` und
+   `values`. `online` ist eine vom Server abgeleitete Verfügbarkeit;
+   `observedAtUtc` kann `null` sein. Bei einer verwalteten Ressource bestätigt
+   `online` ihren aktiven Lebenszyklus, keinen physischen Gerätezustand.
+5. Lies die Feldbedeutungen mit **Schema lesen**: Verbinde einen zweiten
+   manuellen Inject-Node mit **Schema lesen** und Debug und wähle dort dieselbe
+   Verbindung und Ressource. Deploye und löse diesen Inject aus. Die Antwort
+   enthält `resource`, `schemaId` und `properties`; die Properties beschreiben
+   die Werte einschließlich Datentyp und gegebenenfalls Einheit.
+
+**Zustand lesen** und **Schema lesen** ersetzen `msg.payload` durch ihre Antwort;
+die übrige Nachricht bleibt erhalten. Bei **Testarbeitsplatz** findest du im
+Zustand unter anderem `values.resourceType` und `values.lifecycleStatus`.
+Leite aus einem aktiven Lebenszyklus keine elektrische oder mechanische
+Rückmeldung ab.
+
+Bleibt das Deploy-Ergebnis unklar, starte keinen zweiten Deploy.
+**Status erneut prüfen** fragt den vorhandenen Vorgang ab. Bei einer gemeldeten
+Ablehnung prüfst du den gespeicherten Stand und die Änderungen vor einem neuen
+Versuch. Das Schließen des Editors beendet nur deine Editor-Sitzung; deployte
+Flows laufen weiter.
+
+## Änderungen und Verbindungsstatus beobachten
+
+Ergänze für dieselbe Ressource **Zustands-Änderung** aus **Mardu Erweitert** mit
+einem eigenen Debug-Ausgang. Dieser Node benötigt keinen Eingang. Er liest den
+Zustand beim Start, nach MQTT-Hinweisen und alle 30 Sekunden über REST. Er gibt
+den ersten erfolgreichen Snapshot und danach eine andere, nicht leere
+`version` aus. Unveränderte Versionen erzeugen keine weitere Ausgabe. Das ist
+keine vollständige Ereignishistorie; mehrere Änderungen können zwischen zwei
+Abrufen liegen.
+
+Nach dem Deploy erwartest du einen ersten Snapshot mit derselben
+Ressourcenreferenz. Zum Nachprüfen kannst du jederzeit den manuellen Lesepfad
+verwenden. Ein fehlgeschlagener automatischer Abruf erscheint als Warnung am
+Node und wird beim nächsten Abruf erneut versucht; ohne gültige Version gibt
+**Zustands-Änderung** keinen Snapshot aus.
+
+Verbinde außerdem **Verbindungs-Status** aus **Mardu Erweitert** mit Debug.
+Der Node gibt beim Start und bei Änderungen `restConnected`, `mqttConfigured`,
+`mqttConnected` und `observedAtUtc` aus; `msg.mardu.kind` ist `connection-status`.
+REST-Leseabfragen funktionieren auch ohne MQTT. `mqttConnected: false` allein
+bedeutet deshalb keinen Ausfall der REST-Verbindung. Ein Verbindungsstatus
+bestätigt weder einen neuen Gerätewert noch die Ausführung eines Befehls.
+
+## Weitere Nachrichtenwege passend wählen
+
+Die Hilfe des jeweiligen Nodes im Editor beschreibt dessen vollständigen
+Eingang, Ausgang und Konfiguration. Für Erweiterungen gelten unterschiedliche
+Nachrichtenverträge:
+
+| Aufgabe                          | Verfügbare Nodes und Vertrag                                                                                                                                                                                                                                                                            |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ressourcen finden                | **Ressourcen auflisten** liefert `items` und `nextCursor`. Für die nächste Seite den Cursor unverändert als `msg.payload.cursor` senden und Verbindung sowie Filter beibehalten. `nextCursor: null` beendet die Liste. Ein Fähigkeitsfilter führt keine Aktion aus.                                     |
+| Ereignishinweise empfangen       | **Mardu-Ereignis** liefert ein vollständiges CloudEvent in `msg.payload`: Typ unter `type`, Inhalt unter `data`; ID und Typ zusätzlich unter `msg.mardu.eventId` und `msg.mardu.eventType`. Der Ereignistypfilter vergleicht exakt. Er benötigt die für die Verbindung eingerichteten MQTT-Abonnements. |
+| Einen Aktionsabschluss verfolgen | **Aktion beendet** liefert `space.mardu.automation.execution.completed.v1`. Nach `msg.payload.data.executionId` auf den eigenen Auftrag filtern. **Aktions-Status** mit ID-Pfad `payload.data.executionId` lädt den aktuellen Stand über REST nach.                                                     |
+| Eine Aktion anfordern            | **Aktion ausführen** unterstützt hier **Sitzung beenden** (`end-session`) für eine Ressource, mit deren Sitzungs-ID. Die Antwort mit `executionId`, `status`, `correlationId` und `acceptedAtUtc` bestätigt die Annahme. Sie bestätigt noch keinen Abschluss. Das gehört nicht zum lesenden Beispiel.   |
+| Eine Zugangsprüfung beantworten  | **Freigabe-Anfrage** liefert den übernommenen Checkpoint; **Freigabe entscheiden** benötigt dessen `msg.mardu.checkpointId` und dieselbe Verbindung. Eine beliebige Ereignisnachricht ersetzt diese übernommene Prüfung nicht. Die Zuordnung wird in der Administration eingerichtet.                   |
+| Einen Messwert melden            | **Beobachtung melden** nimmt genau ein unterstütztes Wertfeld entgegen und hat keinen Ausgang. Der Anschluss muss zuerst veröffentlicht und der passenden Beobachtungsrolle einer Ressource zugeordnet sein. Das ist eine Meldung an Mardu, kein Gerätebefehl.                                          |
+
+Aktionsabschlüsse können `succeeded`, `failed`, `rejected`, `timed-out`,
+`cancelled` oder `outcome-unknown` melden. Bei `outcome-unknown` fehlt eine
+Bestätigung des Ausgangs. Vor einer weiteren Aktion den Zustand abgleichen;
+eine verlorene Antwort nicht durch blindes Wiederholen ersetzen.
+
+Beispielsweise kann **Mardu-Ereignis**
+`space.mardu.device.status.changed.v1` empfangen; der Gerätestatus wird danach
+mit **Zustand lesen** nachgeladen. Eine Verbindung liefert nur ihre eingerichteten
+Ereignisse. Die öffentlichen MQTT-Informationstopics sind ein anderer Vertrag,
+siehe [MQTT-Ereignisse beziehen](./mqtt-events.mdx).
+
+Für eine Beobachtung ist etwa `{"payload":{"powerWatts":120}}` eine
+Leistungsmeldung in Watt. Weitere unterstützte Felder sind `state`, `health`,
+`usageCount` und `operatingDurationSeconds`. Pro Nachricht genau ein zur
+Anschlussfunktion passendes Feld senden. Eine Schaltantwort mit `succeeded` und
+`reportedState` gehört dagegen zum **Schaltaktor**. Sie darf erst nach einer
+Gerätebestätigung entstehen. Weder ein gesendeter MQTT-Befehl noch eine
+Aktionsannahme bestätigt einen physischen Zustand.
+
+## Wenn die Prüfung fehlschlägt
+
+| Beobachtung                                 | Nächster Schritt                                                                                                                           |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Ressource fehlt in der Auswahl              | Verbindung und Ressourcentyp prüfen; **Weitere laden** verwenden. Der Filter durchsucht nur geladene Einträge.                             |
+| Keine Ausgabe nach Inject                   | Leitungen, aktiven Debug-Node und erfolgreichen Deploy prüfen; Catch-Ausgabe und Node-Status lesen.                                        |
+| Fehler `404` beim Lesen                     | Typ und ID prüfen. Auch ein deaktiviertes Automationsmodul oder eine nicht authentifizierte Laufzeit kann den Ressourcenzugang verbergen.  |
+| **Mardu-Zugang reparieren**                 | Die vorhandene Verbindung in der Administration reparieren lassen. Keine Ersatz-Zugangsdaten in den Flow schreiben.                        |
+| Ereignisnode bleibt still                   | MQTT-Konfiguration, Verbindungsstatus, exakten Ereignistyp und ein neues passendes Ereignis prüfen. Den aktuellen Zustand über REST lesen. |
+| Wiederholtes Lesen liefert dieselbe Version | Der manuelle Lesepfad darf denselben Zustand erneut liefern. **Zustands-Änderung** unterdrückt dieselbe Version absichtlich.               |
+| Aufbereiteter Fehler hat `status: null`     | `detail` und `source` prüfen; ein lokaler Eingabefehler oder Transportfehler muss keinen HTTP-Status haben.                                |
+
+Gib bei der Fehlersuche Node, Ressourcentyp und Zeitpunkt weiter. Entferne
+personenbezogene Daten aus Debug-Ausgaben und teile keine Zugangsdaten.
