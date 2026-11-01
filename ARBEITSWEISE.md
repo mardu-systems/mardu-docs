@@ -186,6 +186,13 @@ mit den vorhandenen Formatwerkzeugen berücksichtigt werden. Erfinde keine
 Prüfskripte oder CI-Gates und behaupte keine Abnahme aufgrund eines einzelnen
 Checks.
 
+Wenn der Consumer eine Markdown-Ansicht oder Agentenausgabe anbietet, prüfe sie
+bei Änderungen an Bildern, Komponenten oder API-Referenzen mit. Bilder brauchen
+auflösbare URLs und Alttexte; Tab-Bezeichnungen, Warnungen und notwendige Schritte
+müssen erhalten bleiben. Eine API-Ausgabe muss den beschriebenen Operationsvertrag
+einschließlich seiner referenzierten Schemas enthalten. Eine erfolgreiche
+HTML-Darstellung allein belegt diese Ausgabe nicht.
+
 Eine Anleitung wird nach diesen drei getrennten Zuständen beurteilt:
 
 1. **Entwurf:** Frage und Zuschnitt sind festgehalten; Inhalt oder Belege fehlen.
