@@ -3,15 +3,13 @@ title: HTTPS-Zertifikatswechsel vorbereiten und prüfen
 description: Die zuständige HTTPS-Komponente bestimmen, ein direktes API-Zertifikat wechseln und die verwendete Verbindung prüfen.
 ---
 
-Prüfe vor einem Zertifikatswechsel, welcher Dienst die betroffene HTTPS-Adresse
-bereitstellt. Das Zertifikat unter **Server → Server-Zertifikate** und das vom
-Browser empfangene Zertifikat können aus verschiedenen Quellen stammen.
+Der Browser kann ein anderes Zertifikat empfangen als das unter
+**Server → Server-Zertifikate** gespeicherte.
 
-Diese Anleitung setzt eine bestehende Installation und ihre bekannten
-Dashboard- und API-Adressen voraus. Für Änderungen am HTTPS-Listener oder Proxy
-brauchst du Zugriff auf Host und Deployment. Mardu-Berechtigungen ersetzen diesen
-Zugriff nicht. Die Zertifikatsliste im Dashboard benötigt `Settings.View`, Upload,
-Ersetzen und Löschen benötigen `Settings.Update`.
+Du brauchst die Dashboard- und API-Adressen der bestehenden Installation sowie
+für Listener- oder Proxyänderungen Host- und Deployment-Zugriff. Im Dashboard
+benötigt die Zertifikatsliste `Settings.View`, Upload, Ersetzen und Löschen
+benötigen `Settings.Update`.
 
 ## 1. Zuständige Komponente bestimmen
 
@@ -25,20 +23,15 @@ angesprochenen API-Adresse.
 | HTTPS im Raspberry-Pi-Installationspaket | Der vorgeschaltete Proxy Caddy nimmt HTTPS auf Port `443` an; die API verwendet intern HTTP auf Port `8080`. | Am bestehenden Proxy-Deployment.                                                     |
 | Zertifikat unter **Server-Zertifikate**  | Der Mardu-Zertifikatsspeicher stellt Material für zugeordnete Integrationen wie LDAP, OIDC oder MQTT bereit. | Im Speicher und in der jeweiligen Integration; dies ändert den HTTPS-Listener nicht. |
 
-Bei einem anderen vorgeschalteten Proxy ist dessen bestehende Konfiguration
-maßgeblich. Ein API-Neustart wechselt kein Zertifikat, das der Proxy ausliefert.
-Für das Installationspaket beschreibt
-[Raspberry Pi installieren → Installieren](../installieren/raspberry-pi.mdx)
-die vorhandene Betriebsform. Ein Upload in Mardu ersetzt weder das Proxy-Zertifikat
-noch dessen Verwaltung.
+Für andere Proxys gilt deren Konfiguration; ein API-Neustart wechselt ihr
+Zertifikat nicht. Die Betriebsform des Installationspakets erklärt
+[Raspberry Pi installieren → Installieren](../installieren/raspberry-pi.mdx).
 
 ## 2. Wechsel vorbereiten
 
-Prüfe vor dem Eingriff Gültigkeit, vorgesehenen Hostnamen, Zertifikatskette und
-passenden privaten Schlüssel des neuen Serverzertifikats. Kläre, welche
-Verbindungen betroffen sind. Plane bei einem API-Neustart eine Unterbrechung ein
-und halte den bisherigen funktionsfähigen Konfigurationsstand für eine
-Wiederherstellung bereit.
+Prüfe Gültigkeit, Hostnamen, Zertifikatskette und passenden privaten Schlüssel.
+Kläre betroffene Verbindungen, plane die Unterbrechung bei einem API-Neustart und
+halte den bisherigen funktionsfähigen Konfigurationsstand zur Wiederherstellung bereit.
 
 Soll nur ein gespeichertes Integrationszertifikat ersetzt werden, folge
 [Servereinstellungen → Ersetzen oder löschen](./server-einstellungen.mdx#ersetzen-oder-löschen).
@@ -49,8 +42,8 @@ die Mardu-Adresse.
 
 ### Direktes API-Zertifikat wechseln
 
-Diese Schritte gelten für eine API, die HTTPS selbst über Kestrel bereitstellt.
-Sie sind kein Umstellungsablauf für das Caddy-Installationspaket.
+Diese Schritte gelten nur für direktes HTTPS über Kestrel, nicht für das
+Caddy-Installationspaket.
 
 1. Prüfe im bestehenden Deployment, ob `KestrelOptions__EnableHttps` aktiv ist,
    welcher `KestrelOptions__HttpsPort` verwendet wird und wie dieser Port
@@ -62,10 +55,9 @@ Sie sind kein Umstellungsablauf für das Caddy-Installationspaket.
    `Kestrel__Certificates__Default__Password` über die Geheimnisverwaltung des
    Deployments. In einem Container gilt der Pfad im Container. Relative Pfade
    beziehen sich auf das Inhaltsstammverzeichnis (Content Root) der API.
-3. Übernimm die Datei- und Konfigurationsänderung im bestehenden Deployment und
-   starte die API neu. Wurden Container-Umgebungsvariablen geändert, muss auch die
-   Containerkonfiguration neu übernommen werden. Der Listener lädt das Zertifikat
-   beim Start; ein Dashboard-Upload führt diese Übernahme nicht aus.
+3. Übernimm Datei- und Konfigurationsänderungen im Deployment und starte die API
+   neu: Der Listener lädt das Zertifikat beim Start. Geänderte Container-
+   Umgebungsvariablen erfordern auch die Übernahme der Containerkonfiguration.
 4. Prüfe die tatsächliche HTTPS-Verbindung nach dem folgenden Abschnitt.
 
 Das vorhandene lokale Overlay `docker-compose.https.yml` bindet ein Zertifikatsverzeichnis
@@ -82,11 +74,9 @@ Nachweis für Browservertrauen oder einen passenden öffentlichen Hostnamen.
 1. Öffne die tatsächlich genutzte HTTPS-Adresse erneut und kontrolliere in den
    Verbindungsinformationen des Browsers das ausgelieferte Zertifikat. Vergleiche
    Fingerabdruck, Gültigkeit und Hostname mit dem vorgesehenen Zertifikat.
-2. Prüfe, ob der Browser die Zertifikatskette akzeptiert. Die Freigabe
-   **Selbstsigniertes Zertifikat zulassen** im Uploaddialog betrifft nur den
-   Mardu-Speicher. Sie installiert keine vertrauenswürdige Zertifizierungsstelle
-   auf den Endgeräten. Kläre benötigtes Clientvertrauen mit der für diese Geräte
-   zuständigen Person.
+2. Prüfe, ob der Browser die Zertifikatskette akzeptiert.
+   **Selbstsigniertes Zertifikat zulassen** im Uploaddialog installiert kein
+   Vertrauen auf Endgeräten. Kläre dies mit der für die Geräte zuständigen Person.
 3. Wird die API über eine eigene Adresse angesprochen, prüfe auch deren
    Zertifikat. Ein gültiges Dashboard-Zertifikat bestätigt die getrennte
    API-Verbindung nicht.
@@ -94,11 +84,6 @@ Nachweis für Browservertrauen oder einen passenden öffentlichen Hostnamen.
    [Zustandsprüfung](./sicherheit-betrieb.mdx#eine-störung-eingrenzen).
    Ein erreichbarer Health-Endpunkt allein bestätigt keinen funktionierenden
    Anmelde- oder Integrationsablauf.
-
-Der Wechsel ist erst geprüft, wenn die richtige Gegenstelle das vorgesehene
-Zertifikat ausliefert, die verwendeten Clients ihm vertrauen und die benötigte
-Funktion erreichbar ist. Ein gültiger Eintrag in der Mardu-Zertifikatsliste
-bestätigt nur den gespeicherten Stand.
 
 ## Wenn die Verbindung nicht funktioniert
 

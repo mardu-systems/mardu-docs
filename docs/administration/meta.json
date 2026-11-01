@@ -18,12 +18,7 @@
     "geraete-verwalten",
     "automationen",
     "---Externe Anbindungen---",
-    "integrationen",
-    "ldap-verzeichnis",
-    "oidc-anmeldung",
-    "mqtt-broker",
-    "ip500-netzwerk",
-    "mcp-verwalten",
+    "anbindungen",
     "---Betrieb---",
     "server-einstellungen",
     "zertifikate-https",
@@ -31,7 +26,6 @@
     "../benutzer/uebersicht-monitoring",
     "sicherheit-betrieb",
     "nachweise-datenschutz",
-    "wartungs-cli",
-    "wartungs-cli-referenz"
+    "wartung"
   ]
 }

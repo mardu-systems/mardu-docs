@@ -15,9 +15,8 @@ eurer Installation und deinen Berechtigungen ab.
 
 ## Ressourcen sind der Ausgangspunkt
 
-Eine Ressource beschreibt das, was ihr organisieren oder nutzen möchtet. Sie kann
-für sich stehen oder Teil einer Struktur sein, etwa **Standort → Gebäude → Raum**.
-Eine Maschine kann dem Raum zugeordnet sein, in dem sie steht.
+Eine Ressource kann für sich stehen oder Teil einer Struktur sein, etwa
+**Standort → Gebäude → Raum**. Eine Maschine kann ihrem Raum zugeordnet sein.
 
 Nicht jede Ressource braucht dieselbe Ausstattung:
 
@@ -36,14 +35,12 @@ Nicht jede Ressource braucht dieselbe Ausstattung:
   }}
 />
 
-Das Diagramm zeigt die Zusammenhänge aus Sicht der Nutzung. Die gestrichelten
-Verbindungen sind optionale Ergänzungen. Eine Ressource kann ohne Technik
-verwaltet und gebucht werden. Bei einer technischen Anbindung ordnest du ihr die
-benötigten Anschlüsse zu; Ressource und Gerät werden dadurch nicht dasselbe.
-Eine Automation kann beispielsweise einen externen Schalter bereitstellen.
+Gestrichelte Verbindungen im Diagramm sind optional. Eine Ressource kann ohne
+Technik verwaltet und gebucht werden. Benötigte technische Anschlüsse ordnest du
+ihr zu; Ressource und Gerät bleiben unterschiedliche Objekte. Auch eine Automation
+kann einen Anschluss bereitstellen, etwa einen externen Schalter.
 
-Wie du eine Ressource aufbaust und ihre Buchbarkeit oder Technik ergänzt, steht
-unter [Ressourcen verwalten](../koordination/ressourcen.mdx).
+Einrichtung: [Ressourcen verwalten](../koordination/ressourcen.mdx).
 
 ## Personen, Rechte und Nutzungsbedingungen
 
@@ -63,9 +60,8 @@ Dabei erfüllen die Zuordnungen unterschiedliche Aufgaben:
 - Ein **Tag**, etwa eine NFC-Karte, identifiziert die Person am Leser. Seine
   Zuweisung erteilt allein keine Ressourcenfreigabe.
 
-So kann eine Maschine sowohl eine Buchung als auch eine Einweisung erfordern.
-Ein anderer Raum benötigt nur eine Reservierung. Das sind unterschiedliche
-Konfigurationen derselben Installation.
+So kann eine Maschine Buchung und Einweisung erfordern, ein Raum nur eine
+Reservierung.
 
 [Benutzerkonten, Rollen und Zugänge](./benutzerkonten.mdx)
 erklärt diese Zuordnungen genauer. Einzelne Begriffe findest du im
@@ -92,12 +88,10 @@ Messwerte. Automationen verarbeiten eingerichtete Abläufe und können externe
 Anschlüsse bereitstellen. Ein gemeldeter Zustand und ein gesendeter Befehl sind
 unterschiedliche Informationen; ein Befehl allein bestätigt keine Ausführung.
 
-Externe Dienste sind optional: Eine Installation kann beispielsweise Personen
-aus einem LDAP-Verzeichnis übernehmen oder eine Anmeldung über OpenID Connect
-anbieten. Auch persönliche Nachweisquellen können angeboten werden. Welche
-Anbieter und Prüfverfahren unterstützt werden, hängt von der jeweiligen
-Anbindung ab; ein importierter Nachweis ist noch keine Anerkennung für eine
-Ressource.
+Optional lassen sich etwa ein LDAP-Verzeichnis, eine Anmeldung über OpenID Connect
+oder persönliche Nachweisquellen anbinden. Unterstützte Anbieter und Prüfverfahren
+hängen von der Anbindung ab. Ein importierter Nachweis ist noch keine Anerkennung
+für eine Ressource.
 
 Die Einrichtung gehört zu [Anbindungen](../administration/index.mdx#anbindungen).
 Eigene Software verbindet sich über die angebotenen
@@ -116,6 +110,3 @@ dessen Freigabe und persönliche Berechtigungen den nutzbaren Umfang begrenzen.
 | Konten, Zutritt, Geräte oder den Server verwalten   | [Administration](../administration/index.mdx)              |
 | Server und Geräte vor Ort aufbauen                  | [Installieren](../installieren/index.mdx)                  |
 | Eigene Software anbinden                            | [Entwickeln](../entwickeln/index.mdx)                      |
-
-Du musst nicht alle Bereiche lesen, um Mardu zu nutzen. Wähle die Anleitung für
-deine nächste Aufgabe; die benötigten Voraussetzungen stehen dort.

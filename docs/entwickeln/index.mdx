@@ -3,11 +3,8 @@ title: Entwickeln
 description: HTTP, MCP, MQTT oder Node-RED für eine Integration wählen und den benötigten Zugang klären.
 ---
 
-Dieser Bereich richtet sich an Personen, die eigene Software mit Mardu verbinden.
-Der [Überblick](../ueberblick/index.mdx) erklärt zuerst das Modell aus Personen,
-Ressourcen und optionalen technischen Funktionen. Beginne mit einer konkreten
-Aufgabe: Welche Daten soll deine Integration lesen, welche Aktion soll sie
-ausführen und für wen?
+Der [Überblick](../ueberblick/index.mdx) erklärt das Modell aus Personen,
+Ressourcen und optionalen technischen Funktionen.
 
 <span id="in-diesem-bereich" />
 
@@ -28,19 +25,16 @@ Mardu-Daten und Aktionen an; er dient nicht zur Dokumentationssuche.
 
 ## Mit begrenztem Zugriff beginnen
 
-Kläre vor dem ersten Aufruf mit den für Installation und betroffene Ressourcen
-Verantwortlichen, welche Daten und Aktionen die Integration verwenden darf.
-Diese Absprache ersetzt keine technischen Rechte. Die Bezeichnung **Entwickeln**
-ist ein Dokumentationsbereich und gewährt keine Systemberechtigung.
+Kläre mit den Verantwortlichen für Installation und Ressourcen, welche Daten und
+Aktionen die Integration verwenden darf. Du brauchst zusätzlich die technischen
+Rechte; der Dokumentationsbereich **Entwickeln** gewährt keine Berechtigung.
 
-Die Zugänge verwenden unterschiedliche Identitäten: HTTP-Aufrufe verwenden den
-Bearer-Zugang eines Kontos; persönliche MCP-Verbindungen einen Agentenzugang des
-Kontoinhabers. Bei MCP begrenzen die delegierten Rechte, die aktuellen
-Kontorechte und die Serverrichtlinie jeden Aufruf. MQTT verwendet eigene
-Brokerkonten und Topic-Regeln. Bei Node-RED sind die persönliche Editor-Sitzung und die eingerichtete
-Laufzeitverbindung getrennt. Die Laufzeit kann alle unterstützten Ressourcen
-lesen und registrierte Aktionen ausführen; eine Ressourcenauswahl im Flow
-beschränkt diesen Zugriff nicht.
+HTTP nutzt den Bearer-Zugang eines Kontos, MCP persönliche Agentenzugänge und
+MQTT eigene Brokerkonten mit Topic-Regeln. Die
+[Integrationsübersicht](./api-integration.mdx#den-berechtigungsumfang-festlegen)
+erklärt den Rechteumfang. Bei Node-RED sind Editor-Sitzung und Laufzeitverbindung
+getrennt: Die Laufzeit kann alle unterstützten Ressourcen lesen und registrierte
+Aktionen ausführen. Eine Ressourcenauswahl im Flow beschränkt diesen Zugriff nicht.
 
 Wenn die nötige Einrichtung fehlt, führen diese Anleitungen in den Bereich
 **Administration**:
@@ -52,16 +46,13 @@ Wenn die nötige Einrichtung fehlt, führen diese Anleitungen in den Bereich
 - [Automationen](../administration/automationen.mdx):
   Node-RED-Laufzeit, Mardu-Verbindung und Editorzugang vorbereiten.
 
-Beginne danach mit dem lesenden Beispiel der passenden Anleitung und prüfe,
-welche Identität und welche Daten die Antwort zeigt. Ergänze Änderungen erst,
-wenn Wirkung, benötigte Rechte und Rücknahme geklärt sind.
+Prüfe mit dem lesenden Beispiel Identität und Datenumfang. Ergänze Änderungen
+erst, wenn Wirkung, Rechte und Rücknahme geklärt sind.
 
 <span id="offene-dokumentationsaufgaben" />
 
 ## Umfang der Anleitungen
 
-Die Anleitungen führen durch vorhandene Integrationswege. Einzelne HTTP-Verträge
-bleiben in der erzeugten API-Referenz, Node-Verträge in der Hilfe des jeweiligen
-Node-RED-Nodes. Für Beiträge am Mardu-Quellcode gelten die Entwicklungsanweisungen
-des jeweiligen Software-Repositories. Dieser Bereich ist keine vollständige
-Anleitung zum Entwickeln des Servers oder Dashboards selbst.
+HTTP-Verträge stehen in der erzeugten API-Referenz, Node-Verträge in der Hilfe des
+jeweiligen Node-RED-Nodes. Für Beiträge am Server- oder Dashboard-Quellcode gelten
+die Entwicklungsanweisungen des jeweiligen Software-Repositories.

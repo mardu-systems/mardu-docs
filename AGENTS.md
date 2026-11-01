@@ -59,6 +59,9 @@ Für die Überarbeitung bestehender Funktionen und neue Anleitungen verwende die
   Sonderfälle und technische Details ohne Nutzen für die Aufgabe. Glätte danach
   Reihenfolge, Überschriften, Übergänge und Darstellung. Kürze nicht nach Quote;
   Rechte, Voraussetzungen, Grenzen und notwendige Warnungen bleiben erhalten.
+  Wiederhole die Kurzbeschreibung nicht im ersten Absatz. Beginne mit der nötigen
+  Einordnung, Voraussetzung oder Handlung. Prüfprosa und fehlende Funktionen
+  gehören nur in die Anleitung, wenn sie die nächste Entscheidung beeinflussen.
 - Nutze Absätze zum Erklären, nummerierte Schritte für Abläufe und Tabellen für
   Vergleiche. Halte Hauptaufgaben sichtbar. Akkordeons brauchen einen konkreten
   Nutzen und dürfen keine notwendigen Schritte, Voraussetzungen oder Folgen

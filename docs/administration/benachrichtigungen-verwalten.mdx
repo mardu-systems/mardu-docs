@@ -3,9 +3,7 @@ title: Benachrichtigungen einrichten und prüfen
 description: Zustellkanäle vorbereiten, E-Mail-Versand testen und fehlende oder verzögerte Mitteilungen untersuchen.
 ---
 
-Mardu verschickt persönliche Mitteilungen und Betriebsmeldungen über die für das
-jeweilige Ereignis erlaubten Kanäle. Als Administration stellst du die Anbindungen
-bereit und prüfst Zustellprobleme. Jede Person verwaltet ihre
+Jede Person verwaltet ihre
 [Kanäle und Ruhezeiten im Profil](../ueberblick/profil-benachrichtigungen.mdx)
 und liest den [eigenen Posteingang](../benutzer/benachrichtigungen.mdx).
 
@@ -17,9 +15,8 @@ SMTP ist das Protokoll, mit dem Mardu ausgehende E-Mails an einen Mailserver üb
 Halte die vom Mailanbieter vorgegebenen Server- und Zugangsdaten bereit.
 
 Der Systemstatus benötigt **Dashboard anzeigen**; einzelne Datenquellen können
-weitere Rechte verlangen. Profil-Lese- und Änderungsrechte gelten für den
-persönlichen Posteingang und die eigenen Einstellungen. Diese Rechte geben keinen
-Zugriff auf fremde Posteingänge.
+weitere Rechte verlangen. Profilrechte gelten nur für den eigenen Posteingang
+und die eigenen Einstellungen.
 
 ## Zustellkanäle vorbereiten
 
@@ -30,12 +27,10 @@ Zugriff auf fremde Posteingänge.
 | Web-Push | Die Serverkonfiguration benötigt ein passendes öffentliches und privates VAPID-Schlüsselpaar. VAPID identifiziert den Absender gegenüber dem Push-Dienst. Hinzu kommen ein unterstützter Browser, eine Erlaubnis für Benachrichtigungen und eine registrierte Browser-Verbindung. |
 | SMS      | Ein konfigurierter Versanddienst und eine bestätigte Telefonnummer sind erforderlich. Der Testanbieter **Dummy** versendet keine echte SMS.                                                                                                                                       |
 
-Web-Push-Schlüssel und der SMS-Versanddienst werden durch die technische
-Administration in der Serverkonfiguration eingerichtet. Dafür gibt es hier kein
-Dashboard-Formular. Die Kanalwahl im Profil registriert auch keine neue
-Web-Push-Verbindung; ohne vorhandene Registrierung bleibt dieser Kanal unbenutzbar.
-Ein als verfügbar angezeigter Versanddienst bestätigt seine Konfiguration,
-keine erfolgreiche Zustellung.
+Die technische Administration richtet Web-Push-Schlüssel und SMS-Versanddienst
+in der Serverkonfiguration ein. Die Kanalwahl im Profil registriert keine
+Web-Push-Verbindung. Ein verfügbarer Versanddienst bestätigt die Konfiguration,
+keine Zustellung.
 
 ## E-Mail einrichten und testen
 
@@ -59,11 +54,9 @@ eingegangene Nachricht belegt den Empfang im Zielpostfach. Die Test-E-Mail prüf
 die gespeicherte SMTP-Konfiguration; sie prüft weder persönliche Ereigniseinstellungen
 noch die Empfangsberechtigung für eine Betriebsmeldung.
 
-Mardu benötigt auch für Test-E-Mails eine Absenderadresse, einen Benutzernamen
-und ein Passwort und meldet sich damit beim SMTP-Server an. Ein SMTP-Relay ohne
-Anmeldung wird in diesem Ablauf nicht unterstützt. Die Formularbeschreibung
-bezeichnet das SMTP-Konto derzeit als optional; für den Versand sind diese
-Angaben dennoch erforderlich.
+Absenderadresse, Benutzername und Passwort sind auch für Test-E-Mails erforderlich.
+Das gilt trotz der Formularbeschreibung, die das SMTP-Konto als optional bezeichnet.
+Ein SMTP-Relay ohne Anmeldung wird nicht unterstützt.
 
 ## Eine Benachrichtigung bis zum Empfang prüfen
 
@@ -78,15 +71,13 @@ Angaben dennoch erforderlich.
 4. Prüfe den persönlichen Posteingang und den gewählten externen Kanal getrennt.
    Beachte Ruhezeiten und eine gegebenenfalls hinterlegte E-Mail-Zusammenfassung.
 
-Die sichtbaren Ereignisse richten sich nach dem Konto und seinen aktuellen
-Rechten beziehungsweise Zuständigkeiten. Eine Kanalwahl erteilt keine zusätzlichen
-Empfangsrechte. Ein fehlender oder archivierter Posteingangseintrag beweist auch
-keinen fehlgeschlagenen E-Mail-Versand.
+Die Ereignisauswahl richtet sich nach den aktuellen Rechten und Zuständigkeiten;
+die Kanalwahl erweitert diese nicht. Fehlende oder archivierte Posteingangseinträge
+belegen keinen fehlgeschlagenen E-Mail-Versand.
 
-Die SMTP-Testmail wird direkt verschickt. Benachrichtigungen werden dagegen von
-Hintergrundaufträgen versendet, die fällige Zustellungen minütlich prüfen.
-Der Posteingangseintrag kann deshalb bereits sichtbar sein, während die E-Mail
-noch auf den nächsten Versanddurchlauf wartet.
+SMTP-Testmails werden direkt verschickt. Hintergrundaufträge prüfen fällige
+Benachrichtigungen minütlich; ein Posteingangseintrag kann daher vor der E-Mail
+sichtbar sein.
 
 ## Pflichtkanäle und Ruhezeiten verstehen
 
@@ -121,10 +112,9 @@ Welche Ausnahmen für Ruhezeiten gelten, zeigt die Ereignisanzeige im Profil.
    für den betroffenen Zeitraum. Übergebe bei Bedarf Zeitpunkt und Kennungen an
    die technische Administration, damit sie die Serverlogs prüfen kann.
 
-Einzelne Zustellstatus und Versandversuche zeigt das Dashboard nicht an. Die
-folgenden Zustände helfen bei der gemeinsamen Diagnose mit der technischen
-Administration. Ein angelegter Versandauftrag oder ein erfolgreicher
-Versandversuch bestätigt noch keinen Empfang am Ziel.
+Einzelne Zustellstatus und Versandversuche sind nur mit der technischen
+Administration prüfbar. Ein Versandauftrag oder erfolgreicher Versandversuch
+bestätigt noch keinen Empfang.
 
 | Beobachtung                          | Bedeutung und Abhilfe                                                                                                                                                                     |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -135,9 +125,8 @@ Versandversuch bestätigt noch keinen Empfang am Ziel.
 | Dauerhafter Fehler                   | Die technische Administration muss die Ursache beim Versanddienst oder in der Serverkonfiguration beheben. Ein erneuter Versand einzelner Mitteilungen wird im Dashboard nicht angeboten. |
 | Web-Push bleibt aus                  | Prüfe Browser-Erlaubnis und Registrierung. Ungültig gewordene Push-Verbindungen können vom Server entfernt werden und benötigen eine neue Registrierung.                                  |
 
-Teile keine Tokens, Passwörter oder Nachrichteninhalte mit personenbezogenen Daten
-als Diagnosebeispiel. Die sichtbaren Support- und Feedbackeinträge sind noch keine
-verfügbare Ticketfunktion.
+Teile keine Tokens, Passwörter oder personenbezogenen Nachrichteninhalte als
+Diagnosebeispiel. Die Support- und Feedbackeinträge bieten noch keine Ticketfunktion.
 
 ## Zustellung abschalten
 

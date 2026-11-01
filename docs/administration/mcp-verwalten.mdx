@@ -3,18 +3,16 @@ title: MCP für Agenten freigeben
 description: MCP aktivieren, Agentenzugänge begrenzen, eine Verbindung prüfen und den Zugriff abschalten.
 ---
 
-Über das **Model Context Protocol (MCP)** können Agenten Daten aus Mardu lesen
-und freigegebene Aktionen ausführen. Hier legst du die Serverrichtlinie fest.
-Persönliche Zugänge erstellt und widerruft jede Person im
+Persönliche Zugänge für das **Model Context Protocol (MCP)** erstellt und
+widerruft jede Person im
 [eigenen Profil](../ueberblick/profil-mcp.mdx).
 
 ## Voraussetzungen und Rechte
 
-Öffne **Administration → Integrationen → MCP & Agents**.
-Du benötigst **Einstellungen anzeigen**, zum Speichern zusätzlich
-**Einstellungen bearbeiten**. Der Menüeintrag **Integrationen** benötigt
-**Integrationen anzeigen**. Für den Verbindungstest muss der Client den Server
-erreichen können; das Testkonto braucht die Rechte für die gewählte Aktion.
+Öffne **Administration → Integrationen → MCP & Agents**. Du benötigst
+**Einstellungen anzeigen**, zum Speichern **Einstellungen bearbeiten** und für
+den Menüweg **Integrationen anzeigen**. Für den Test muss der Client den Server
+erreichen; das Testkonto braucht die Rechte für die gewählte Aktion.
 
 ## MCP mit persönlichem Lesezugang einrichten
 
@@ -29,8 +27,8 @@ erreichen können; das Testkonto braucht die Rechte für die gewählte Aktion.
 6. [Richte den Client ein und führe den Lesetest aus](../entwickeln/mcp-anbindung.mdx#mcp-client-verbinden).
    Prüfe, ob er eine erfolgreiche Antwort erhält.
 
-Die Richtlinie gilt nach dem Speichern ohne Serverneustart.
-**Verwerfen** setzt ungespeicherte Änderungen auf den geladenen Stand zurück.
+Speichern übernimmt die Richtlinie ohne Neustart; **Verwerfen** setzt den
+Entwurf auf den geladenen Stand zurück.
 
 ## Grenzwerte wählen
 

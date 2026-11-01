@@ -3,14 +3,11 @@ title: Übersicht und Systemstatus
 description: Betriebsdashboards anpassen, Systemmesswerte lesen und Zeiträume sowie Datenlücken einordnen.
 ---
 
-Diese Anleitung beschreibt Verwaltungs- und Betriebsmetriken und setzt die
-entsprechenden Leserechte voraus. Das Dashboard der persönlichen Benutzeransicht
-ist separat unter [Persönliches Dashboard](./dashboard.mdx) beschrieben.
-
 Die **Übersicht** zeigt dein ausgewähltes **Betriebsdashboard**. Unter
-**Betrieb → Systemstatus** findest du die Systemmetriken nach Bereichen, etwa
-**System**, **HTTP** und **Datenbank**. Diese Ansicht hat eine vorgegebene Anordnung.
-Eigene Betriebsdashboards speichern dagegen deine Auswahl und Anordnung von Widgets.
+**Betrieb → Systemstatus** stehen Systemmetriken in fester Anordnung, etwa
+**System**, **HTTP** und **Datenbank**. Eigene Betriebsdashboards speichern deine
+Widget-Auswahl und -Anordnung. Für eigene Buchungen und Qualifikationen nutze das
+[Persönliche Dashboard](./dashboard.mdx).
 
 ## Rechte und Datenquellen
 
@@ -23,30 +20,25 @@ Eigene Betriebsdashboards speichern dagegen deine Auswahl und Anordnung von Widg
 | Gerätedaten und Geräteereignisse in Widgets lesen             | Zusätzlich Geräte anzeigen (`Devices.View`)                              |
 | Erfassung und Aufbewahrung einsehen oder ändern               | Einstellungen anzeigen bzw. ändern (`Settings.View` / `Settings.Update`) |
 
-Die Widget-Auswahl berücksichtigt deine Datenquellenrechte. Ein fehlendes
-Gerätewidget kann daher an fehlenden Geräteleserechten liegen. **Keine Messwerte**
-in einer vorhandenen Anzeige bedeutet dagegen, dass kein passender Messwert
-vorliegt; das ist kein Berechtigungshinweis.
+Fehlende Geräteleserechte können Gerätewidgets aus der Auswahl ausblenden.
+**Keine Messwerte** in einer vorhandenen Anzeige ist dagegen kein Berechtigungshinweis.
 
 ## Systemstatus öffnen
 
 1. Öffne **Betrieb → Systemstatus**.
 2. Wähle den Bereich und anschließend **Zeitraum** und **Auflösung**.
-3. Prüfe über den Karten den Erfassungsstatus und das **Sample-Alter**. Das ist das
-   Alter des zuletzt erfassten Messpunkts. Ein aktueller Seitenaufruf allein
-   bestätigt keine aktuelle Messung.
+3. Prüfe über den Karten den Erfassungsstatus und das **Sample-Alter**, also das
+   Alter des zuletzt erfassten Messpunkts.
 4. Öffne bei Bedarf über das Vergrößern-Symbol die Detailansicht eines Widgets.
    Mit **Monitoring aktualisieren** fragst du die Daten erneut ab.
 
-Die Ansicht lädt regelmäßig neue Daten. **Einstellungen** öffnet die Erfassung,
-Aufbewahrung und Alarmgrenzen; dafür gelten die gesonderten Einstellungsrechte.
+Die Ansicht lädt regelmäßig neue Daten. Unter **Einstellungen** stehen Erfassung,
+Aufbewahrung und Alarmgrenzen; dafür gelten die Einstellungsrechte.
 
 ## Zeitraum und Diagramme
 
-Wähle den Zeitraum und die Auflösung oberhalb der Karten. Zur Auswahl stehen
-**Letzte Stunde**, **Letzte 24 Stunden**, **Letzte 7 Tage**, **Letzte 30 Tage** und
-**Letztes Jahr**. Die Zeitfenster reichen jeweils vom Abfragezeitpunkt zurück;
-„Letztes Jahr“ umfasst die letzten 365 Tage.
+**Zeitraum** bietet **Letzte Stunde**, **Letzte 24 Stunden**, **Letzte 7 Tage**,
+**Letzte 30 Tage** und **Letztes Jahr** (365 Tage), jeweils vom Abfragezeitpunkt zurück.
 
 | Auflösung   | Verhalten                                                                |
 | ----------- | ------------------------------------------------------------------------ |
@@ -59,44 +51,47 @@ Beim Wechsel auf 30 Tage oder ein Jahr wird eine gewählte Minutenauflösung auf
 **Refresh (s)** im Dashboardeditor bestimmt, wie oft die Ansicht sie neu abfragt.
 Häufigeres Aktualisieren erzeugt keine zusätzlichen Messpunkte.
 
-Linien zeigen den Verlauf, Balken Messwerte je Intervall und Ringdiagramme die
-Verteilung, beispielsweise gewährt gegenüber abgelehnt. Die Beschriftung nennt
-die Einheit. Bei Zählwerten addiert **Summe** die gelieferten Intervalle;
-**Rate** zeigt einen Wert pro Sekunde. Bei Dauerwerten zeigt ein Durchschnitt die
-mittlere Dauer; ein Maximum den höchsten gemessenen Wert. Perzentile wie p95
-beschreiben das jeweilige Messintervall und sind keine Summe über den Zeitraum.
+Linien zeigen Verläufe, Balken Messwerte je Intervall und Ringdiagramme
+Verteilungen. Beachte die angegebene Einheit: **Summe** addiert die gelieferten
+Intervalle, **Rate** zeigt einen Wert pro Sekunde. Bei Dauerwerten stehen
+Durchschnitt und Maximum für die mittlere und höchste gemessene Dauer.
+Perzentile wie p95 gelten für das jeweilige Messintervall, nicht als Summe über
+den Zeitraum. Aktive Sitzungen oder belegte Verbindungen zeigen den zuletzt
+erfassten Zustand. Ein Wechsel von Zeitraum, Bereich oder Gerät lädt die Daten neu.
 
-Die Hauptzahl kann einen Zeitraum zusammenfassen. Angaben wie aktuell aktive Sitzungen oder belegte Verbindungen beschreiben dagegen den zuletzt erfassten Zustand. Bei einem Wechsel von Zeitraum, Bereich oder Gerät werden die passenden Daten neu geladen.
+Bei **Datenbank → Transaktionen** zeigt die Hauptzahl die Zeitraumssumme oder die
+durchschnittlichen Transaktionen pro Sekunde. Die Balken summieren alle gelieferten
+Commits und Rollbacks je Zeitabschnitt; dessen Dauer steht über dem Diagramm.
+Beim Darüberfahren siehst du Beginn, Ende, Commits und Rollbacks des Abschnitts.
+Deadlocks stehen separat über dem Diagramm. Rollbacks und Deadlocks unter der
+Hauptzahl gelten für den gewählten Zeitraum.
 
-Bei **Datenbank → Transaktionen** nennt die Hauptzahl die Summe im gewählten Zeitraum oder die durchschnittlichen Transaktionen pro Sekunde. Die Balken zeigen die Summe aus Commits und Rollbacks je Zeitabschnitt; dessen Dauer steht über dem Diagramm. Beim Darüberfahren siehst du den Beginn und das Ende des Abschnitts sowie die Commits und Rollbacks. Deadlocks sind eine separate Ereigniszahl über dem Diagramm. Die Balken summieren alle gelieferten Messwerte, statt einzelne Messpunkte auszuwählen. Rollbacks und Deadlocks unter der Hauptzahl beziehen sich ebenfalls auf den gewählten Zeitraum.
-
-Diese Zahlen zählen Transaktionen der Anwendungsdatenbank, einschließlich Hintergrundabfragen und Monitoring. Sie entsprechen keiner Anzahl von Benutzeraktionen.
+Gezählt werden Transaktionen der Anwendungsdatenbank samt Hintergrundabfragen
+und Monitoring, keine Benutzeraktionen.
 
 ![Transaktionen als gemeinsame Balken aus Commits und Rollbacks je 30 Minuten, mit Zeitraum im Tooltip](bilder/datenbank-transaktionen.png)
 
 ## Fehlende und begrenzte Messwerte
 
-**Keine Messwerte** bedeutet, dass keine passende Messung verfügbar ist. Ein
-vorhandener Messpunkt mit Wert 0 ist etwas anderes als eine fehlende Messung.
-Lücken im Diagramm werden nicht als Null aufgefüllt. Eine angezeigte 0 allein
-belegt keine vollständig erfasste Historie: Prüfe auch Erfassungsstatus,
-Sample-Alter und Verlauf. Manche Hostwerte, etwa Temperatur oder Containergrenzen,
-sind auf dem jeweiligen System nicht verfügbar.
+**Keine Messwerte** bedeutet, dass keine passende Messung verfügbar ist, anders
+als ein Messpunkt mit Wert 0. Lücken werden nicht als Null aufgefüllt. Eine
+angezeigte 0 allein belegt jedoch keine vollständig erfasste Historie: Prüfe
+Erfassungsstatus, Sample-Alter und Verlauf. Manche Hostwerte, etwa Temperatur oder
+Containergrenzen, sind auf dem jeweiligen System nicht verfügbar.
 
-Ein Hinweis oberhalb der Karten nennt begrenzte Historien. Bei einem Antwortlimit
-werden die neuesten verfügbaren Messpunkte angezeigt; Summen beziehen sich auf
-diese Punkte. Die Systemhistorie liefert höchstens 2.000 Punkte pro Abfrage.
-Wähle einen kürzeren Zeitraum oder eine gröbere Auflösung, um das Limit zu vermeiden.
-Auch Aufbewahrungsgrenzen und die Anzahl der Felder, die in der gewählten Auflösung
-fehlen, werden angezeigt. Die Auswahl eines Jahres garantiert keine vollständige
-Jahreshistorie.
+Hinweise oberhalb der Karten nennen Aufbewahrungsgrenzen, fehlende Felder der
+gewählten Auflösung und Antwortlimits. Die Systemhistorie liefert höchstens
+2.000 Punkte pro Abfrage, bei Überschreitung die neuesten; Summen gelten dann nur
+für diese Punkte. Wähle einen kürzeren Zeitraum oder eine gröbere Auflösung.
+Auch die Jahresauswahl garantiert keine vollständige Historie.
 
 Standardmäßig werden Rohmessungen 30 Tage und Stundenaggregate 365 Tage
 aufbewahrt. Die tatsächlich eingestellten Fristen stehen unter **Einstellungen**
 im Systemstatus. Eine längere Aufbewahrung stellt bereits entfernte Messpunkte
 nicht wieder her. Ist die Erfassung deaktiviert, entstehen keine neuen Messpunkte.
 
-Ein Fehlerhinweis bedeutet, dass die Quelle oder Abfrage fehlgeschlagen ist. Lade erneut. Eine unveränderte ältere Anzeige ist keine neue Messung.
+Bei einem Quellen- oder Abfragefehler lade erneut. Ein Seitenaufruf oder eine
+unveränderte ältere Anzeige bestätigt keine neue Messung.
 
 <span id="persönliches-dashboard" />
 
@@ -104,10 +99,9 @@ Ein Fehlerhinweis bedeutet, dass die Quelle oder Abfrage fehlgeschlagen ist. Lad
 
 ### Auswählen und anlegen
 
-Wähle in der Kopfzeile unter **Dashboard** eine deiner gespeicherten Ansichten.
-Ein Stern kennzeichnet das Standarddashboard. **Als Standard** legt die gewählte
-Ansicht für dein Konto als Standard fest. Ohne ausdrückliche Auswahl in der
-Seitenadresse wird dieses Dashboard beim Öffnen geladen.
+Wähle unter **Dashboard** eine gespeicherte Ansicht. **Als Standard** markiert sie
+mit einem Stern; sie wird beim Öffnen geladen, sofern die Seitenadresse kein
+anderes Dashboard auswählt.
 
 1. Wähle **Neu** oder **Neues Dashboard anlegen** in der Dashboard-Auswahl.
    Ohne vorhandene Ansicht heißt die Aktion **Dashboard erstellen**.
@@ -117,8 +111,7 @@ Seitenadresse wird dieses Dashboard beim Öffnen geladen.
    Systemwidgets angelegt und im Bearbeitungsmodus geöffnet. Das erste Dashboard
    wird automatisch zum Standard.
 
-Mit **Abbrechen** schließt du den Erstellungsdialog, ohne ein Dashboard anzulegen.
-Eine separate Vorlagenauswahl gibt es dort nicht. Du kannst bis zu 20 eigene
+**Abbrechen** schließt den Dialog ohne Erstellung. Du kannst bis zu 20 eigene
 Betriebsdashboards speichern.
 
 ### Widgets und Anordnung ändern
@@ -141,7 +134,9 @@ Die Warnschwellen markieren nur die Anzeige in der angegebenen Einheit. Sie lös
 keine Alarme aus und ändern keine Ressourcenregeln. Das Entfernen eines Widgets
 entfernt keine Messungen oder Geräte. Ein Dashboard kann bis zu 40 Widgets enthalten.
 
-Neue Karten erhalten eine zur Darstellung passende Standardgröße. Breitere Diagramme haben mehr Platz als einzelne Kennzahlen; auf schmalen Bildschirmen stehen die Karten untereinander. Bereits gespeicherte eigene Größen bleiben erhalten. Über das Vergrößern-Symbol einer Karte öffnest du die Detailansicht.
+Neue Karten erhalten eine zur Darstellung passende Größe; gespeicherte eigene
+Größen bleiben erhalten. Auf schmalen Bildschirmen stehen die Karten untereinander.
+Das Vergrößern-Symbol öffnet die Detailansicht.
 
 Desktop, Tablet und Handy haben getrennte Anordnungen. Wenn du im Bearbeitungsmodus
 den Zeitraum änderst, wird dieser mit **Speichern** zum Startzeitraum des Dashboards.
@@ -149,11 +144,10 @@ Die Auflösung ist eine Auswahl für die aktuelle Anzeige.
 
 ### Vorschau, Speichern und Konflikte
 
-**Vorschau** beendet den Bearbeitungsmodus, ohne den Entwurf zu speichern oder zu
-verwerfen. Kehre über **Bearbeiten** zurück und speichere deine Änderungen.
-Beim Wechsel zu einem anderen gespeicherten Dashboard fragt die Oberfläche, ob
-du ungespeicherte Änderungen verwerfen möchtest. Beim Neuladen können diese
-Änderungen ebenfalls verloren gehen.
+**Vorschau** verlässt den Bearbeitungsmodus und behält den ungespeicherten Entwurf.
+Kehre über **Bearbeiten** zurück, um ihn zu speichern. Beim Dashboardwechsel
+erscheint eine Verwerfensabfrage; beim Neuladen können ungespeicherte Änderungen
+ebenfalls verloren gehen.
 
 Bei einem gewöhnlichen Speicherfehler bleibt der Entwurf erhalten. Prüfe auch,
 ob der Name bereits für ein anderes deiner Dashboards verwendet wird.
@@ -202,7 +196,6 @@ Serverdiagnose.
 
 ## Umfang dieser Anleitung
 
-Die Anleitung beschreibt die Bedienung von Betriebsdashboards und Systemstatus.
 Die Verfügbarkeit einzelner Host- und Gerätemesswerte hängt von der Installation
-und den angeschlossenen Geräten ab. Eigene Buchungen und Qualifikationen gehören
-zum [persönlichen Dashboard im Benutzerbereich](./dashboard.mdx).
+und den angeschlossenen Geräten ab. Für eigene Buchungen und Qualifikationen
+siehe [persönliches Dashboard im Benutzerbereich](./dashboard.mdx).

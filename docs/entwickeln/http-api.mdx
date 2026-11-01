@@ -3,10 +3,8 @@ title: HTTP-API nutzen
 description: Am Server anmelden, Daten mit Bearer-Token lesen und einen Ressourcenentwurf mit Versionsprüfung ändern.
 ---
 
-Diese Anleitung führt vom API-Server zu einem angemeldeten Leseaufruf und einem
-Ressourcenentwurf. Du brauchst eine eingerichtete Testinstallation, ein aktives
-Konto und für die Shell-Beispiele `curl` und `jq`. Die Änderung legt eine Ressource
-an; führe sie nur in einer dafür vorgesehenen Testinstallation aus.
+Für die Beispiele brauchst du eine für Ressourcenänderungen vorgesehene
+Testinstallation, ein aktives Konto sowie `curl` und `jq`.
 
 Verwende die Adresse des **API-Servers**, nicht die Dashboard-Adresse mit einem
 Projektpfad. Im lokalen Compose-Standard ist die API unter `http://localhost:5001`
@@ -19,13 +17,11 @@ gegebenenfalls konfigurierten Präfixes. Zugangsdaten gehören über TLS übertr
 API_BASE='http://localhost:5001'
 ```
 
-Die folgenden Pfade verwenden API-Version `v1`. Die
-[Integrationsübersicht](./api-integration.mdx) hilft bei der Schnittstellenwahl;
-die vollständigen Modelle und Antworten findest du in der API-Referenz deiner
-Softwareinstallation. In deren Software-Dokumentation steht sie unter **API**
-im Bereich **Entwickeln**. Wenn Swagger am Server aktiviert ist, stehen außerdem
-`/redoc` und der OpenAPI-Vertrag unter `/swagger/v1/swagger.json` an der
-API-Serveradresse bereit.
+Die Beispiele verwenden API-Version `v1`. Vollständige Modelle und Antworten
+stehen in der Software-Dokumentation unter **Entwickeln → API**, bei aktiviertem
+Swagger auch unter `/redoc` und `/swagger/v1/swagger.json` an der API-Serveradresse.
+Die [Integrationsübersicht](./api-integration.mdx) erklärt Schnittstellenwahl und
+Referenzzugang.
 
 ## Authentifizierung und Rechte
 
@@ -48,8 +44,7 @@ vorgesehenen Weg:
 - **Kennung und Passwort:**
   `POST /api/v1/tokens/authenticate`
   erhält `identifier` (E-Mail-Adresse oder Benutzername) und `password` im
-  JSON-Body. Das folgende Beispiel ist ein Request für ein fiktives Testkonto;
-  es legt dieses Konto nicht an.
+  JSON-Body. Beispiel für ein bereits angelegtes, fiktives Testkonto:
 
   ```json
   {
@@ -103,15 +98,13 @@ curl --silent --show-error --fail-with-body \
   "$API_BASE/api/v1/profile"
 ```
 
-`GET /api/v1/profile` benötigt
-`Permissions.Profile.View` und liefert bei `200` das eigene `UserDto`, darunter
-`id`. Diese Benutzer-ID wird für Refresh benötigt. Es handelt sich um das Profil
-des angemeldeten Kontos, nicht um eine administrative Benutzerliste.
-Die eigenen Berechtigungen kannst du über
-`GET /api/v1/profile/authorization` mit demselben Recht lesen.
+`GET /api/v1/profile` benötigt `Permissions.Profile.View` und liefert bei `200`
+das eigene `UserDto` mit der für Refresh benötigten `id`.
+Die eigenen Berechtigungen liest du über
+`GET /api/v1/profile/authorization` mit demselben Recht.
 
-Ein gültiges Token ersetzt keine Aktionsberechtigung. Für die nachfolgenden
-Ressourcenaufrufe braucht das Konto `Permissions.ManagedResources.View`, zum
+Für die nachfolgenden Ressourcenaufrufe braucht das Konto
+`Permissions.ManagedResources.View`, zum
 Anlegen zusätzlich `.Create`, zum Ändern `.Update`. Andere Endpunkte prüfen
 darüber hinaus Eigentum oder Rechte an einer bestimmten Ressource: Für einen
 Schaltauftrag gilt beispielsweise zusätzlich `OperateHardware` oder
@@ -161,7 +154,7 @@ Snapshot: Gleichzeitige Änderungen können die Einträge zwischen Abrufen
 verschieben. `Keyword` durchsucht geeignete Textfelder; `ParentResourceId`,
 `ResourceType` und `LifecycleStatus` schränken die Ressourcenliste ein.
 Unbekannte Sortierfelder und ungültige Seitengrößen liefern `400`.
-Diese Parameter gelten für diesen paginierten Vertrag, nicht für jede Liste.
+Prüfe bei anderen Listen deren eigenen Paginierungsvertrag.
 
 ### Einen Ressourcenentwurf anlegen und ändern
 
@@ -192,11 +185,9 @@ Diese Parameter gelten für diesen paginierten Vertrag, nicht für jede Liste.
      "$API_BASE/api/v1/managed-resources/$RESOURCE_ID"
    ```
 
-3. Erzeuge aus der letzten
-   Detailantwort (`GET /api/v1/managed-resources/{resourceId}`) den
-   Änderungsbody. Der folgende Aufruf liest diese Antwort und übernimmt die
-   aktuelle `version`, den Elternknoten, Typ und Namen. Er ersetzt nur die
-   Beschreibung und sendet die editierbaren Felder mit
+3. Lies die Detailantwort (`GET /api/v1/managed-resources/{resourceId}`) und
+   übernimm deren aktuelle `version` und editierbare Felder. Dieses Beispiel
+   ersetzt die Beschreibung und sendet den Body mit
    `PUT /api/v1/managed-resources/{resourceId}`:
 
    ```bash
@@ -229,12 +220,12 @@ Teilupdate. Die vollständigen Feld- und Enumwerte stehen in der Referenz.
 
 ### Einen veralteten Änderungsstand behandeln
 
-Wenn nach dem Lesen ein anderer Request dieselbe Ressource ändert, passt die
-mitgesendete `version` nicht mehr. Der Server weist die Änderung mit `409` ab.
+Ändert ein anderer Request die Ressource nach deinem Lesen, weist der Server
+deine veraltete `version` mit `409` ab.
 Lies die Ressource erneut, vergleiche deine beabsichtigte Änderung mit dem neuen
 Stand und sende erst danach den zusammengeführten Body mit dessen `version`.
 Ein `409` kann auch einen doppelten Namen oder eine unzulässige Hierarchie
-bedeuten; eine automatische Wiederholung löst diese Konflikte nicht.
+bedeuten. Löse den Konflikt vor einer Wiederholung.
 Andere Verträge verwenden stattdessen `ETag`/`If-Match`, etwa persönliche
 Dashboards. Übertrage die Versionslogik nicht ungeprüft auf andere Endpunkte.
 
@@ -271,8 +262,7 @@ Schaltauftrag (`POST /api/v1/managed-resources/{resourceId}/switch/state`) wird 
 asynchron angenommen. Dort sind angeforderter Zustand und bestätigter
 Gerätezustand getrennt; prüfe sie über den
 Schaltstatus (`GET /api/v1/managed-resources/{resourceId}/switch`). Wiederholungen
-dieses Auftrags behalten ihren `Idempotency-Key`. Das Ressourcenentwurfsbeispiel
-oben endet hingegen mit einer gespeicherten Datenänderung.
+dieses Auftrags behalten ihren `Idempotency-Key`.
 
 Protokolliere für die Diagnose Methode, Pfad, HTTP-Status und einen vorhandenen
 Fehlercode, aber keine Passwörter, Bearer-/Refresh-Token oder MFA-Codes. Bei einem

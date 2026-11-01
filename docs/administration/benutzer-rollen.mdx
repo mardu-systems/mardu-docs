@@ -6,9 +6,7 @@ description: Benutzer einladen, Konten freigeben und bearbeiten sowie Rollen und
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
-Du kannst Benutzerkonten einladen, freigeben, bearbeiten und entfernen sowie
-ihnen Rollen und Benutzergruppen zuweisen. Öffne dazu im Dashboard
-**Personen → Benutzer**. Benutzergruppen findest du unter **Personen → Benutzergruppen**.
+Öffne **Personen → Benutzer**. Benutzergruppen findest du unter **Personen → Benutzergruppen**.
 
 ## Was ist ein Benutzer?
 
@@ -16,7 +14,7 @@ ihnen Rollen und Benutzergruppen zuweisen. Öffne dazu im Dashboard
 
 ## Voraussetzungen
 
-Melde dich am Dashboard an. Du brauchst die Leseberechtigung für Benutzer sowie die Rechte für die jeweilige Aufgabe:
+Du brauchst die Leseberechtigung für Benutzer und folgende aufgabenbezogene Rechte:
 
 | Aufgabe                                                                | Benötigte Rechte                                                  |
 | ---------------------------------------------------------------------- | ----------------------------------------------------------------- |
@@ -32,9 +30,8 @@ Für Einladungen und andere E-Mails muss der Maildienst eingerichtet sein. Zusä
 
 ## Benutzer einladen und anlegen
 
-Im Beispiel legst du ein Konto für **Lina Berger** an. Wähle eine Einladung,
-wenn die Person ihr Passwort selbst festlegen soll. Alternativ kannst du ein
-Initialpasswort vergeben. Die Bilder verwenden fiktive Daten.
+Das Beispiel zeigt das fiktive Konto **Lina Berger**. Du kannst eine Einladung
+senden oder ein Initialpasswort vergeben.
 
 <Steps>
   <Step>
@@ -50,8 +47,7 @@ Initialpasswort vergeben. Die Bilder verwenden fiktive Daten.
     Der Benutzername braucht mindestens 6 Zeichen. Benutzername und E-Mail
     dürfen noch keinem anderen Konto zugeordnet sein.
 
-    Optional: Gib eine **Telefonnummer** ein. Auch diese darf noch keinem
-    anderen Konto zugeordnet sein.
+    Eine optionale **Telefonnummer** darf ebenfalls noch keinem anderen Konto zugeordnet sein.
 
   </Step>
   <Step>
@@ -91,8 +87,6 @@ Initialpasswort vergeben. Die Bilder verwenden fiktive Daten.
 
 ### Einladung abschließen und Konto freigeben
 
-Die Einladung ist erst abgeschlossen, wenn die Person ein Passwort gesetzt hat und du das Konto freigegeben hast.
-
 1. Die Person öffnet den Einladungslink und setzt ihr Passwort. Ihre E-Mail-Adresse ist danach bestätigt.
 2. Öffne **Personen → Benutzer**. Suche im Bereich **Registrierungen** das Konto mit **Wartet auf Freigabe**.
 3. Prüfe die Angaben und wähle **Freigeben**. Im Bestätigungsdialog ist eine Begründung optional.
@@ -111,26 +105,25 @@ Ablehnen.](./bilder/benutzer-freigabe.png)
 
 ![Benutzerliste mit Suche, Filtern und fiktiven Konten.](./bilder/benutzer-verwalten-liste.png)
 
-Standardmäßig siehst du **Benutzer, E-Mail, Kontostatus und Rollen**. Über **Ansicht** kannst du **Gruppen, Quelle, 2FA, Tags, letzte Anmeldung, Erstellungsdatum und ID** zusätzlich einblenden. Die Quelle nennt den Kontoanbieter, 2FA zeigt den Schutzstatus. Klicke auf Rollen oder Gruppen, um alle Zuordnungen zu sehen.
+Standardmäßig siehst du **Benutzer, E-Mail, Kontostatus und Rollen**. Unter **Ansicht** blendest du weitere Spalten ein, darunter **Gruppen**, **Quelle** (Kontoanbieter) und **2FA** (Schutzstatus). Ein Klick auf Rollen oder Gruppen zeigt alle Zuordnungen.
 
-**Aktiv** erlaubt die Anmeldung, sofern die Anmelderichtlinie erfüllt ist. **Deaktiviert** sperrt neue Anmeldungen. Zugewiesene Tags bestätigen keine Zutrittsberechtigung.
+Zugewiesene Tags bestätigen keine Zutrittsberechtigung. Zum Kontostatus siehe
+[Konten deaktivieren und reaktivieren](#konten-deaktivieren-und-reaktivieren).
 
 Sind nicht alle Reiter sichtbar, scrolle die Reiterleiste horizontal.
 Das gilt auch für die Details einer Benutzergruppe.
 
 ### Benutzerdaten ändern
 
-Der Benutzername wird nur angezeigt. E-Mail-Änderungen nimmt die Person nach Bestätigung im eigenen Profil vor, sofern das Konto dies unterstützt. Stammen Angaben aus einem Verzeichnisdienst über **LDAP** oder einem externen
-Anmeldedienst über **OpenID Connect (OIDC)**, können sie als vom Anbieter
-verwaltet gekennzeichnet sein. Diese Angaben änderst du beim Anbieter;
-in Mardu sind sie schreibgeschützt.
+Der Benutzername ist schreibgeschützt. Die E-Mail-Adresse ändert die Person nach
+Bestätigung im eigenen Profil, sofern das Konto dies unterstützt. Als vom Anbieter
+verwaltet gekennzeichnete Angaben aus **LDAP** oder **OpenID Connect (OIDC)**
+änderst du beim Anbieter.
 
 1. Klicke auf die Benutzerzeile und öffne **Eigenschaften**.
 2. Ändere die benötigten Angaben oder das Profilbild. Unter **Präferenzen** wählst du **Deutsch** oder **English** sowie die Zeitzone. Die Zeitvorschau hilft dir, die Zeitzone zu prüfen.
 3. Entferne optionale Angaben durch Leeren des Feldes. Bei Auswahlfeldern und dem Geburtsdatum wählst du **Leeren**.
 4. Wähle **Speichern**.
-
-**Ergebnis:** Die Änderungen sind am Konto gespeichert.
 
 #### Änderungen speichern oder verwerfen
 
@@ -160,13 +153,9 @@ Bei schmalen Benutzerfenstern stehen Bildauswahl und Vorschau untereinander.
 Benutzergruppen. Dafür brauchst du die Leserechte für Benutzerrollen,
 Benutzergruppen und Gruppenrollen.
 
-Geänderte Rollen und Gruppen erscheinen zunächst als Vorschau. **Anwenden**
-übernimmt die Auswahl in das Benutzerfenster; erst **Speichern** unten im
-Fenster speichert die Zuweisung.
-
-Klappe ein Recht auf, um seine zuweisenden Rollen und Gruppen zu sehen.
-Dasselbe Recht kann aus mehreren Zuweisungen stammen. Der Gruppenlink öffnet
-die Rollenzuweisungen dieser Gruppe.
+Klappe ein Recht auf, um die zuweisenden Rollen und Gruppen zu sehen. Der
+Gruppenlink öffnet die Rollenzuweisungen dieser Gruppe. Änderungen erscheinen
+zunächst als Vorschau; **Anwenden** allein speichert sie noch nicht.
 
 Zutrittsfreigaben und Anmeldebedingungen werden separat geprüft. Die
 Admin-Rolle kannst du nur entfernen, wenn mindestens zwei andere
@@ -179,14 +168,13 @@ Administratoren verbleiben.
 
 #### Gruppenmitgliedschaften ändern
 
-1. Wähle **Mitgliedschaften verwalten**. Im Auswahldialog siehst du die Gruppen mit ihrer Beschreibung; nutze die Suche und wähle Gruppen an oder ab.
-2. Bestätige die Auswahl mit **Anwenden**. Wähle danach **Speichern** unten in den Benutzerdetails.
+1. Wähle **Mitgliedschaften verwalten**. Suche nach der Gruppe, prüfe ihre Beschreibung und wähle sie an oder ab.
+2. Bestätige mit **Anwenden**, dann mit **Speichern** unten in den Benutzerdetails.
 
 ![Gruppenauswahl mit Suche, Beschreibungen und markierten Mitgliedschaften.](./bilder/benutzer-gruppenauswahl.png)
 
-**Ergebnis:** Die gespeicherten Rollen und Mitgliedschaften bestimmen die
-Rechte des Kontos. Eine entfernte Rolle kann über eine andere Gruppe oder eine
-direkte Zuweisung weiterhin gelten.
+Eine entfernte Rolle kann über eine andere Gruppe oder eine direkte Zuweisung
+weiterhin gelten.
 
 ### Benutzergruppen verwalten
 
@@ -199,7 +187,8 @@ Du brauchst Leserechte für die Gruppe und die angezeigten Zuordnungen sowie fü
 3. Öffne **Mitglieder** oder **Zugewiesene Rollen**, ändere die Auswahl und bestätige mit **Anwenden**.
 4. Wähle **Speichern** im Gruppenfenster.
 
-**Ergebnis:** Die Gruppendaten und ausgewählten Zuordnungen werden gespeichert. Wird eine Person aus der Gruppe entfernt, entfallen die Rollen aus dieser Gruppe. Direkte Rollen und Rollen aus anderen Gruppen gelten weiterhin.
+Entfernst du eine Person aus der Gruppe, entfallen für sie die Rollen dieser Gruppe.
+Direkte Rollen und Rollen aus anderen Gruppen gelten weiterhin.
 
 ### Zugangs-Tags prüfen und benennen
 
@@ -209,10 +198,9 @@ oder zum [Prüfen und Umbenennen eines Tags](./tags-verwalten.mdx#tag-prüfen-un
 
 #### Verlorenen Tag sperren
 
-Die Aktion **Als verloren melden → Dauerhaft sperren** verhindert neue vom
-Server geprüfte Zutrittsanfragen; laufende Nutzungen enden dadurch nicht.
-Die Sperre kann nicht rückgängig gemacht werden. Voraussetzungen, Schritte
-und Ergebnis stehen unter [Verlorenen Tag sperren](./tags-verwalten.mdx#verlorenen-tag-sperren).
+**Als verloren melden → Dauerhaft sperren** ist unwiderruflich und verhindert
+neue vom Server geprüfte Zutrittsanfragen. Laufende Nutzungen enden dadurch nicht.
+Folge [Verlorenen Tag sperren](./tags-verwalten.mdx#verlorenen-tag-sperren).
 
 #### Tag-Datensatz löschen
 
@@ -223,7 +211,7 @@ Bestätigen die [Löschfolgen](./tags-verwalten.mdx#tag-datensatz-löschen).
 ### Zugangsentscheidungen und Sitzungen prüfen
 
 1. Öffne die Benutzerdetails und wähle **Metriken**.
-2. Prüfe die Kennzahlen und den **Zugangsverlauf**. Die Karten verwenden dieselben Diagramme wie das Dashboard.
+2. Prüfe die Kennzahlen und den **Zugangsverlauf**.
 3. Vergleiche die Werte mit **Letzte Zugänge**. Bei Bedarf lade die Daten über **Zugangsmetriken aktualisieren** neu.
 
 Zeitraum, Kennzahlen und Sichtbarkeitsgrenzen sind unter
@@ -242,12 +230,16 @@ Sind alle Kennzahlen enthalten, ist **Alle Kennzahlen hinzugefügt** deaktiviert
 Für den Zugangsverlauf kannst du in den Karteneinstellungen Balken, Linien
 oder Fläche wählen.
 
-Du hast **eine eigene Metrikansicht für alle Benutzer**. Öffnest du ein anderes Konto, bleibt die Anordnung erhalten und es werden dessen Werte angezeigt. Andere Administratoren haben ihre eigene Ansicht. Ohne Dashboard-Leserecht siehst du die Standardanzeige, sofern du Zugänge lesen darfst. Wurde deine Ansicht zwischenzeitlich in einem anderen Fenster geändert, wird das Speichern abgelehnt. Verwirf deinen Entwurf und lade die Ansicht über **Zugangsmetriken aktualisieren** neu.
+Deine **Metrikansicht gilt für alle Benutzer**: Beim Kontowechsel ändern sich die
+Werte, die Anordnung bleibt. Andere Administratoren haben eigene Ansichten. Ohne
+Dashboard-Leserecht siehst du bei vorhandenem Zugänge-Leserecht die Standardanzeige.
+Bei einer zwischenzeitlichen Änderung in einem anderen Fenster wird das Speichern
+abgelehnt. Verwirf den Entwurf und wähle **Zugangsmetriken aktualisieren**.
 
 ![Benutzermetriken mit Kennzahlen, Zugangsverlauf und letzten
 Zugängen.](./bilder/benutzer-metriken-dashboard.png)
 
-**Ergebnis:** Du kannst die gespeicherten Zugangsentscheidungen der Person nachvollziehen. Diese Anzeige prüft keine zukünftige Zutrittsberechtigung.
+Die Anzeige zeigt gespeicherte Entscheidungen, keine zukünftige Zutrittsberechtigung.
 
 ### Bei Anmeldeproblemen helfen
 
@@ -271,10 +263,9 @@ Links ändert das Passwort noch nicht.
 
 #### Zwei-Faktor-Authentifizierung verwalten
 
-Die Anzeige unterscheidet eingerichtete 2FA und die Vorgabe
-**Zwei-Faktor-Authentifizierung erzwingen**. Diese Vorgabe richtet selbst keine
-2FA ein. Prüfe vor dem Einschalten, ob die Person 2FA bereits eingerichtet hat;
-ohne eingerichtete 2FA wird ihre Passwortanmeldung abgewiesen.
+**Zwei-Faktor-Authentifizierung erzwingen** verlangt 2FA, richtet sie aber nicht
+ein. Prüfe vor dem Einschalten, ob die Person 2FA eingerichtet hat; andernfalls
+wird ihre Passwortanmeldung abgewiesen.
 
 - Um die Vorgabe zu ändern, schalte **Zwei-Faktor-Authentifizierung erzwingen**
   ein oder aus und wähle **Speichern** unten im Benutzerfenster.
@@ -302,10 +293,9 @@ Passkey am Konto verbleiben.
 1. Suche unter **Passkeys** den betroffenen Eintrag.
 2. Wähle **Deaktivieren** und bestätige im Dialog mit **Bestätigen**.
 
-**Ergebnis:** Der Eintrag wird als **Deaktiviert** angezeigt. Die Änderung ist
-sofort gespeichert. Der Anmeldezähler hilft bei der Prüfung: Ein Wert über null
-belegt eine Nutzung. Ein Zählerstand von null sagt nicht aus, ob der Passkey
-verwendet wurde, da manche Authenticatoren nicht zählen.
+Der Status **Deaktiviert** ist sofort gespeichert. Ein Anmeldezähler über null
+belegt eine Nutzung; null schließt sie nicht aus, da manche Authenticatoren
+nicht zählen.
 
 ### Konten deaktivieren und reaktivieren
 
@@ -328,11 +318,9 @@ Zum Reaktivieren prüfst du zuerst die erhaltenen Rollen, Gruppen und Zutrittszu
 
 Die Löschung kann nicht rückgängig gemacht werden. Soll das Konto erhalten bleiben, [deaktiviere es](#konten-deaktivieren-und-reaktivieren). Für Administrator-Konten und dein eigenes Konto bietet die Oberfläche keine Löschaktion an.
 
-Offene Vorgänge, etwa bestätigte Buchungen, laufende Zugangssitzungen oder
-ausstehende Zugangsanträge, können die Löschung verhindern. Bearbeite die in der
-Vorschau genannten Hindernisse zuerst. Abgeschlossene Buchungs- und
-Zutrittshistorie sowie Anmeldeereignisse bleiben erhalten; die Kontolöschung
-entfernt nicht sämtliche bisherigen Ereignisse.
+Bearbeite zuerst die Hindernisse der Löschvorschau, etwa bestätigte Buchungen,
+laufende Zugangssitzungen oder ausstehende Zugangsanträge. Abgeschlossene
+Buchungs- und Zutrittshistorie sowie Anmeldeereignisse bleiben nach der Löschung erhalten.
 
 1. Öffne in den Benutzerdetails **Sicherheit → Gefahrenbereich → Benutzer löschen**.
 2. Prüfe das angezeigte Konto und die Vorschau der Löschfolgen. Die betroffenen Einträge hängen von den Zuordnungen des Kontos ab.
@@ -347,17 +335,14 @@ entfernt nicht sämtliche bisherigen Ereignisse.
 
 ## Wenn etwas nicht klappt
 
-| Problem                                                   | Nächster Schritt                                                                                                         |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Eine Aktion fehlt                                         | Lass deine Berechtigungen für diese Aktion prüfen.                                                                       |
-| Eine Angabe ist bereits vergeben                          | Suche nach dem vorhandenen Konto.                                                                                        |
-| Die Einladung fehlt                                       | Prüfe Spam-Ordner, gespeicherte Adresse und E-Mail-Versand. Eine Erfolgsmeldung bestätigt keine Zustellung.              |
-| Die Anmeldung klappt nicht                                | Prüfe Kontostatus, E-Mail-Bestätigung, 2FA und eine noch offene Freigabe.                                                |
-| 2FA oder der letzte Passkey lässt sich nicht deaktivieren | Prüfe, ob die Serverrichtlinie dieses Verfahren für Administratoren verlangt.                                            |
-| Die Löschung wird verhindert                              | Bearbeite die in der Löschvorschau genannten offenen Vorgänge oder Zuständigkeiten und lade die Vorschau danach neu.     |
-| Eine entfernte Rolle gilt weiterhin                       | Prüfe unter **Effektive Berechtigungen**, ob eine andere Gruppe oder direkte Zuweisung dieselbe Rolle gewährt.           |
-| Änderungen an Rollen oder Gruppen fehlen                  | Prüfe, ob du nach **Anwenden** auch **Speichern** unten in den Benutzerdetails gewählt hast.                             |
-| Die Berechtigungsübersicht oder die Metriken fehlen       | Lass die zusätzlichen Leserechte für die [Berechtigungsübersicht](#rollen-und-gruppen-zuweisen) oder für Zugänge prüfen. |
+| Problem                                             | Nächster Schritt                                                                                                         |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Eine Aktion fehlt                                   | Lass deine Berechtigungen für diese Aktion prüfen.                                                                       |
+| Eine Angabe ist bereits vergeben                    | Suche nach dem vorhandenen Konto.                                                                                        |
+| Die Einladung fehlt                                 | Prüfe Spam-Ordner, gespeicherte Adresse und E-Mail-Versand. Eine Erfolgsmeldung bestätigt keine Zustellung.              |
+| Die Anmeldung klappt nicht                          | Prüfe Kontostatus, E-Mail-Bestätigung, 2FA und eine noch offene Freigabe.                                                |
+| Die Löschung wird verhindert                        | Bearbeite die in der Löschvorschau genannten offenen Vorgänge oder Zuständigkeiten und lade die Vorschau danach neu.     |
+| Die Berechtigungsübersicht oder die Metriken fehlen | Lass die zusätzlichen Leserechte für die [Berechtigungsübersicht](#rollen-und-gruppen-zuweisen) oder für Zugänge prüfen. |
 
 Bei Eingabefehlern bleiben die Angaben erhalten. Korrigiere die markierten Felder entsprechend der Meldung und speichere erneut.
 
@@ -368,12 +353,5 @@ Bei Eingabefehlern bleiben die Angaben erhalten. Korrigiere die markierten Felde
 
 ## Prüfstand und Grenzen
 
-Die beschriebenen Abläufe sind anhand des Dashboard- und Backend-Codes
-abgeglichen. Die Bilder verwenden fiktive Daten. Ein vollständiger Durchlauf der
-Verwaltungsaktionen mit einer angemeldeten Sitzung und die E-Mail-Zustellung
-wurden für diese Überarbeitung nicht erneut geprüft.
-
-Die Anleitung beschreibt noch nicht die vollständige Rollenverwaltung,
-das Anlegen und Löschen von Gruppen, den passwortlosen Zugang oder das
-Zusammenführen von Konten. Die entsprechende Funktion kann im Produkt
-bereits vorhanden sein. Ihre Bedienung ist hier noch nicht dokumentiert.
+Rollenpflege sowie Gruppenanlage und -löschung beschreibt
+[Rollen und Gruppen verwalten](./rollen-gruppen.mdx).

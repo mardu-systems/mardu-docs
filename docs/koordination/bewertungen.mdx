@@ -3,42 +3,35 @@ title: Bewertungen
 description: Kompetenzprüfungen entscheiden, vorgeschlagene Nachweise prüfen und ihre Gültigkeit einordnen.
 ---
 
-Unter **Kompetenzen → Einstellungen → Erweiterte Prüfungen und Kompetenznachweise**
-öffnest du **Prüfen & vergeben**. Hier bearbeitest du Prüfungen zu Fähigkeiten und
-vorgeschlagene Kompetenznachweise. Die lokale Vergabe eines Badges ist ein eigener
-Vorgang und wird unter [Administration → Badges verwalten](../administration/badges-verwalten.mdx#vergaben-und-lernwege)
-beschrieben.
+Öffne **Kompetenzen → Einstellungen → Erweiterte Prüfungen und Kompetenznachweise →
+Prüfen & vergeben**.
+Lokale Badges vergibst du nach [Administration → Badges verwalten](../administration/badges-verwalten.mdx#vergaben-und-lernwege).
 
-Zum Lesen brauchst du das Recht zum Anzeigen von Kompetenzen, zum Starten einer
-Prüfung das Recht zum Anlegen von Kompetenzen. Entscheidungen, neue
-Kompetenznachweise und Widerrufe erfordern das Genehmigungsrecht für Kompetenzen.
-Das gilt auch für das bloße Vorschlagen eines Nachweises. Eine Bezeichnung wie
-„Koordination“ erteilt diese Rechte nicht.
+Du brauchst Kompetenzrechte: Anzeigen zum Lesen, Anlegen zum Starten einer Prüfung
+und Genehmigen für Entscheidungen, neue Nachweise einschließlich Vorschlägen und
+Widerrufe. Die Bezeichnung „Koordination“ erteilt diese Rechte nicht.
 
 ## Kompetenzstandards und Anforderungen
 
-Eine **Fähigkeit** beschreibt, was eine Person können soll. Bereiche und Kataloge
-ordnen diese Definitionen; sie bestätigen keine Fähigkeit für eine Person.
-Ein **Kompetenznachweis** hält dagegen die Entscheidung für eine konkrete Person
-fest. Eine Einweisung kann der Anlass für eine solche Entscheidung sein; ein
-importierter Badge ersetzt die Einweisung am Standort nicht automatisch.
+Eine **Fähigkeit** beschreibt, was eine Person können soll; Bereiche und Kataloge
+ordnen diese Definitionen. Ein **Kompetenznachweis** hält die Entscheidung für eine
+Person fest, etwa nach einer Einweisung. Ein importierter Badge ersetzt diese
+Einweisung nicht automatisch.
 
 Eine **Badge-Definition** beschreibt Erwerbskriterien und gegebenenfalls erforderliche
-Fähigkeiten. Die persönliche **Badge-Vergabe** bezieht sich auf eine Inhaltsversion
-dieser Definition. Ein signiertes **Credential** ist wiederum ein eigener Nachweis
-mit Aussteller, Empfänger und Prüfstatus. Diese Einträge sind nicht austauschbar.
+Fähigkeiten; die persönliche **Badge-Vergabe** bezieht sich auf ihre Inhaltsversion.
+Ein signiertes **Credential** ist ein eigener Nachweis mit Aussteller, Empfänger
+und Prüfstatus. Diese Einträge sind nicht austauschbar.
 
-Öffne unter **Kompetenzen → Einstellungen → Fähigkeiten und Kataloge verwalten**
-die betroffene Fähigkeit. Lies das Lernziel und **So wird die Fähigkeit nachgewiesen**
-mit den vorhandenen **Prüfrichtlinien**. Prüfe, ob genau diese Fähigkeit verlangt
-wird. Beziehungen zu anderen Fähigkeiten übertragen keine Nachweise oder
-Zugriffsrechte. Importierte Definitionen bleiben schreibgeschützt; eine lokale
-Kopie übernimmt keine persönlichen Nachweise.
+Öffne die Fähigkeit unter **Kompetenzen → Einstellungen → Fähigkeiten und Kataloge
+verwalten**. Gleiche Lernziel, **So wird die Fähigkeit nachgewiesen** und
+**Prüfrichtlinien** mit der Anforderung ab. Beziehungen zu anderen Fähigkeiten
+übertragen keine Nachweise oder Zugriffsrechte. Importierte Definitionen sind
+schreibgeschützt; lokale Kopien übernehmen keine persönlichen Nachweise.
 
-Ein gültiger Kompetenznachweis kann eine Voraussetzung einer Ressourcenregel
-erfüllen. Er gewährt allein keinen Zugang: Freigaben, weitere Kompetenzen, Aufsicht
-und Betriebsbedingungen können zusätzlich erforderlich sein. Die Einrichtung der
-Ressourcenbedingungen gehört zu [Ressourcen verwalten](./ressourcen.mdx).
+Ein gültiger Nachweis kann eine Ressourcenbedingung erfüllen. Zugang kann zusätzlich
+Freigaben, weitere Kompetenzen, Aufsicht und Betriebsbedingungen erfordern; siehe
+[Ressourcen verwalten](./ressourcen.mdx).
 
 ## Bewertungen durchführen
 
@@ -53,10 +46,10 @@ Ressourcenbedingungen gehört zu [Ressourcen verwalten](./ressourcen.mdx).
    und die Referenz. Mit **Nachweisdaten anzeigen** öffnest du vorhandene Details.
    **Noch keine Nachweise erfasst** ist keine Bestätigung erfüllter Anforderungen.
 
-**Alle Vorgänge** enthält auch abgeschlossene Prüfungen und bereits entschiedene
-Nachweise. Die Prüfstatus heißen **Geplant**, **In Bearbeitung**, **Bestanden**,
-**Nicht bestanden**, **Überfällig** und **Prüfstatus unbekannt**. Ein offener Vorgang
-ist weder eine Genehmigung noch eine automatische Zuweisung an dich.
+**Alle Vorgänge** enthält auch abgeschlossene Prüfungen und entschiedene Nachweise.
+Prüfstatus sind **Geplant**, **In Bearbeitung**, **Bestanden**, **Nicht bestanden**,
+**Überfällig** und **Prüfstatus unbekannt**. Offene Vorgänge sind weder genehmigt
+noch dir automatisch zugewiesen.
 
 ### Eine Prüfung starten
 
@@ -67,29 +60,25 @@ ist weder eine Genehmigung noch eine automatische Zuweisung an dich.
 3. Wähle **Starten**. Die Prüfung beginnt mit **In Bearbeitung**. Besteht bereits
    eine offene Prüfung für dieselbe Person und Richtlinie, öffne diese.
 
-Dieser Start ist keine Terminbuchung. Für **Online-Prüfung** erfasst ein Prüfer
-Punktzahl und Ergebnis; hier gibt es keinen Fragenkatalog und keinen Testlauf für
-die geprüfte Person. **Automatische Aktivität**, **Begleitete Sitzungen** und
-**Externes Credential** werden anhand ihrer eingerichteten Datenquellen ausgewertet
-und lassen sich hier nicht manuell entscheiden. Das kombinierte Verfahren wird
-nicht unterstützt. Eine Prüfung mit **Externes Credential** benötigt bereits einen
-mit dem Kompetenznachweis verknüpften Credential-Datensatz. Der Start allein stellt
-diese Verknüpfung nicht her.
+Der Start bucht keinen Termin. Bei **Online-Prüfung** erfasst ein Prüfer Punktzahl
+und Ergebnis; ein Fragenkatalog oder Testlauf für die geprüfte Person fehlt.
+**Automatische Aktivität**, **Begleitete Sitzungen** und **Externes Credential**
+werten eingerichtete Datenquellen aus und sind hier nicht manuell entscheidbar.
+Das kombinierte Verfahren wird nicht unterstützt. Für **Externes Credential** muss
+bereits ein Credential-Datensatz mit dem Kompetenznachweis verknüpft sein.
 
 ### Ein Ergebnis erfassen
 
-Kläre vor der Entscheidung, wer die Prüfung am Standort durchführen darf. Das Feld
-**Prüfer** zeigt eine erfasste Person oder einen Auswertungstyp; es reserviert den
-Vorgang nicht für diese Person. Die eigene Prüfung kannst du nicht selbst entscheiden.
-Das Ergebnis schließt die Prüfung ab und kann einen Kompetenznachweis gültig machen
-oder aussetzen. Prüfe deshalb vor der Bestätigung auch die Prüfrichtlinie und die
-dort festgelegte Auswirkung bei Nichtbestehen.
+Kläre, wer die Prüfung am Standort durchführen darf. **Prüfer** zeigt eine Person
+oder einen Auswertungstyp, reserviert den Vorgang aber nicht. Die eigene Prüfung
+darfst du nicht entscheiden. Das Ergebnis schließt die Prüfung ab und kann einen
+Nachweis gültig machen oder aussetzen. Lies vorher die Prüfrichtlinie samt
+Auswirkung bei Nichtbestehen.
 
 1. Öffne eine noch nicht abgeschlossene Prüfung mit **Bestätigung durch Aufsicht**
    oder **Online-Prüfung**. Fähigkeit und Prüfrichtlinie müssen weiterhin aktiv sein.
-2. Führe die erforderliche Prüfung durch und lies die gespeicherten Nachweise.
-   Rückfragen, zusätzliche Unterlagen und eine Vertretung klärst du außerhalb dieses
-   Formulars; es bietet dafür keinen eigenen Arbeitsablauf oder Dokument-Upload.
+2. Führe die Prüfung durch und lies die gespeicherten Nachweise. Rückfragen,
+   zusätzliche Unterlagen und Vertretung klärst du außerhalb des Formulars.
 3. Wähle unter **Entscheidung erfassen** **Bestanden** oder **Nicht bestanden**.
    Gib eine Punktzahl zwischen 0 und 100 ein, wenn sie benötigt wird. Zum Bestehen
    einer Online-Prüfung muss sie die angezeigte **Mindestpunktzahl** erreichen.
@@ -98,49 +87,43 @@ dort festgelegte Auswirkung bei Nichtbestehen.
 5. Öffne den Vorgang unter **Alle Vorgänge** erneut. Prüfe Ergebnis, Punktzahl,
    **Abgeschlossen am**, **Prüfer** und Anmerkung.
 
-**Bestanden** legt einen Kompetenznachweis an oder aktualisiert einen vorhandenen.
-Gültigkeitsdauer und nächste Prüfung richten sich nach der Prüfrichtlinie. Bei
-**Nicht bestanden** kann ein vorhandener Nachweis ausgesetzt werden; entscheidend
-ist die konfigurierte Auswirkung bei Nichtbestehen. Prüfe anschließend den
-Kompetenznachweis und seine **Aktuelle Gültigkeit**. Eine abgeschlossene Prüfung
-kann hier nicht erneut entschieden werden.
+**Bestanden** legt einen Kompetenznachweis an oder aktualisiert ihn.
+Gültigkeitsdauer, nächste Prüfung und eine mögliche Aussetzung bei **Nicht bestanden**
+richten sich nach der Prüfrichtlinie. Prüfe danach die **Aktuelle Gültigkeit** des
+Nachweises. Abgeschlossene Prüfungen lassen sich nicht erneut entscheiden.
 
 ## Vergaben und Gültigkeit
 
 ### Entscheidung und aktuelle Gültigkeit lesen
 
 Öffne einen **Kompetenznachweis**. **Genehmigt** beschreibt die Entscheidung;
-**Derzeit gültig** beziehungsweise **Derzeit nicht gültig** beschreibt seine jetzige
-Verwendbarkeit. Eine Genehmigung allein bedeutet daher nicht, dass der Nachweis
-noch gilt.
+**Derzeit gültig** oder **Derzeit nicht gültig** seine jetzige Verwendbarkeit.
 
 Prüfe **Nachweisstatus**, **Gültig ab**, **Gültig bis**, **Nächste Prüfung** und
 **Nachfrist bis**. Ein genehmigter Nachweis kann abgelaufen, ausgesetzt oder
 widerrufen sein. Bei **Erneute Prüfung erforderlich** kann er noch innerhalb einer
 Nachfrist gelten, sofern sein Ablaufdatum nicht überschritten ist.
 
-Unter **Herkunft und Verlauf** stehen Quelle, Vorschlags- und Entscheidungszeitpunkt,
-**Entschieden durch**, Widerrufszeitpunkt, Anmerkung und vorhandene Referenzen auf
-externen Nachweis, Credential oder letzte Prüfung. Diese Ansicht zeigt die
-gespeicherten Angaben, keine vollständige Liste aller früheren Änderungen.
+**Herkunft und Verlauf** zeigt Quelle, Vorschlags-, Entscheidungs- und Widerrufszeitpunkt,
+**Entschieden durch**, Anmerkung und Referenzen auf externen Nachweis, Credential
+oder letzte Prüfung. Das ist keine vollständige Änderungshistorie.
 
 ### Einen Nachweis hinzufügen oder widerrufen
 
-Mit **Nachweis hinzufügen** wählst du Person und Fähigkeit. Ohne **Sofort genehmigen**
-speicherst du mit **Vorschlagen** einen ausstehenden Vorgang. Mit **Sofort genehmigen**
-bestätigst du bereits beim Speichern die Fähigkeit; prüfe die Anforderungen deshalb
-vorher. Das optionale Ablaufdatum muss in der Zukunft liegen. Die Gültigkeit beginnt
-bei Genehmigung; ohne Ablaufdatum ist kein zeitliches Ende festgelegt.
+Unter **Nachweis hinzufügen** wählst du Person und Fähigkeit. **Vorschlagen** speichert
+einen ausstehenden Vorgang; **Sofort genehmigen** bestätigt die Fähigkeit beim
+Speichern. Prüfe dafür vorher die Anforderungen. Ein optionales Ablaufdatum muss
+in der Zukunft liegen. Die Gültigkeit beginnt bei Genehmigung, ohne Ablaufdatum
+ohne festgelegtes Ende.
 
-Zum Widerruf öffnest du einen genehmigten Nachweis, wählst **Widerrufen**, ergänzt
-bei Bedarf eine Anmerkung und bestätigst die Aktion unten im Formular. Ab diesem
-Zeitpunkt gilt dieser Nachweis nicht mehr für Zugriffsprüfungen. Der Datensatz bleibt
-erhalten. Die neue Anmerkung ersetzt die bisherige; ein lokaler Widerruf widerruft
-kein beim externen Anbieter ausgestelltes Credential.
+Öffne zum Widerruf einen genehmigten Nachweis, wähle **Widerrufen**, ergänze bei
+Bedarf eine Anmerkung und bestätige unten im Formular. Der Nachweis gilt sofort
+nicht mehr für Zugriffsprüfungen; der Datensatz bleibt erhalten. Die neue Anmerkung
+ersetzt die bisherige. Ein extern ausgestelltes Credential wird dadurch nicht widerrufen.
 
-Ein ausdrücklich widerrufener Nachweis wird durch eine erneute Prüfung nicht wieder
-gültig. Nach erneuter Beurteilung ist eine neue ausdrückliche Nachweisentscheidung
-erforderlich. Für lokale Badge-Vergaben, deren Erneuerung und Widerruf nutze
+Ein widerrufener Nachweis benötigt nach erneuter Beurteilung eine ausdrückliche
+Nachweisentscheidung; eine erneute Prüfung allein macht ihn nicht gültig.
+Für lokale Badge-Vergaben, Erneuerung und Widerruf nutze
 [Badges verwalten → Vergaben und Lernwege](../administration/badges-verwalten.mdx#vergaben-und-lernwege).
 
 ## Externe Nachweise anerkennen
@@ -150,13 +133,13 @@ Anerkennung am Standort. Die Person verwaltet ihre Quellen unter
 [Persönliche Nachweisquellen](../ueberblick/profil-nachweisquellen.mdx) und liest
 importierte Credentials unter [Meine Qualifikationen](../benutzer/kompetenzen.mdx).
 
-Die Administration legt unter
+Unter
 [Integrationen → Open Badges und externe Anbieter](../administration/integrationen.mdx#open-badges-und-externe-anbieter)
-akzeptierte Aussteller und Zuordnungen von Badge-Klassen zu Kompetenzcodes fest.
-Die serverweite Synchronisation kann daraus **Ausstehend** markierte
-Kompetenzvorschläge erzeugen. Nicht jeder persönliche Credential-Import erzeugt
-einen solchen Vorschlag. Änderungen an Anerkennungsregeln entziehen bereits
-genehmigte Kompetenzen nicht automatisch.
+legt die Administration akzeptierte Aussteller und Zuordnungen von Badge-Klassen
+zu Kompetenzcodes fest. Die serverweite Synchronisation kann daraus **Ausstehend**
+markierte Kompetenzvorschläge erzeugen; persönliche Credential-Importe tun das
+nicht immer. Geänderte Anerkennungsregeln entziehen genehmigte Kompetenzen nicht
+automatisch.
 
 ### Einen Kompetenzvorschlag entscheiden
 
@@ -164,20 +147,16 @@ genehmigte Kompetenzen nicht automatisch.
    zugeordnete Fähigkeit und unter **Herkunft und Verlauf** Quelle und externe
    Referenzen. Einträge mit Quelle **OpenBadges** stammen aus der Synchronisation;
    **Manual** bezeichnet manuell erfasste Vorschläge.
-2. Prüfe, ob der externe Nachweis zu dieser Person gehört, der Aussteller und die
-   Badge-Klasse passen und die Anforderungen am Standort abgedeckt sind. Beziehe
-   Ausstellungsdatum, Ablauf, Widerruf und den Prüfstatus ein. Falls die gespeicherten
-   Referenzen dafür nicht ausreichen, fordere die benötigten Belege an, bevor du
-   entscheidest. Das Formular zeigt nicht automatisch das vollständige externe
-   Credential oder dessen Signaturprüfung.
+2. Prüfe Personenzuordnung, Aussteller, Badge-Klasse und Abdeckung der Anforderungen
+   am Standort sowie Ausstellungsdatum, Ablauf, Widerruf und Prüfstatus. Fordere
+   fehlende Belege vor der Entscheidung an: Das Formular zeigt nicht automatisch
+   das vollständige Credential oder dessen Signaturprüfung.
 3. Wähle **Genehmigen** oder **Ablehnen**. Bei Genehmigung kannst du ein Ablaufdatum
-   mit Uhrzeit in deiner lokalen Zeitzone eintragen. Leerlassen bedeutet kein
-   Ablaufdatum für die lokale Anerkennung; die externe Laufzeit wird hier nicht
-   automatisch übernommen. Lege keine Anerkennung über die geprüfte Gültigkeit
-   des Belegs hinaus fest.
+   mit Uhrzeit in deiner lokalen Zeitzone eintragen. Leer bedeutet kein Ablaufdatum
+   für die lokale Anerkennung; die externe Laufzeit wird nicht übernommen. Überschreite
+   nicht die geprüfte Gültigkeit des Belegs.
 4. Ergänze bei Bedarf eine **Anmerkung** mit höchstens 2048 Zeichen und bestätige
-   die gewählte Aktion unten im Formular. Eine Begründung ist technisch nicht
-   vorgeschrieben; halte die für eure Entscheidung nötigen Gründe fest.
+   unten im Formular. Eine Begründung ist optional; halte die nötigen Gründe fest.
 5. Prüfe unter **Alle Vorgänge** Entscheidung, aktuelle Gültigkeit und Verlauf.
    **Ablehnen** gewährt keine Kompetenz. **Genehmigen** lässt den lokalen Nachweis
    ab dem Entscheidungszeitpunkt gelten.
@@ -186,15 +165,13 @@ genehmigte Kompetenzen nicht automatisch.
 
 - **Aktion fehlt:** Prüfe deine Rechte, das Verfahren und den Abschlussstatus.
   Für Prüfungsentscheidungen müssen Fähigkeit und Prüfrichtlinie aktiv sein.
-- **Vorgang wurde bereits entschieden oder geändert:** Öffne ihn neu und prüfe den
-  aktuellen Stand. Wiederhole die Entscheidung erst danach; eine veraltete Version
-  wird abgelehnt.
+- **Vorgang wurde bereits entschieden oder geändert:** Öffne ihn neu und prüfe
+  den Stand vor einer weiteren Entscheidung. Veraltete Versionen werden abgelehnt.
 - **Es gibt bereits einen gültigen Nachweis:** Prüfe den vorhandenen Eintrag.
   Eine weitere Genehmigung derselben Fähigkeit für dieselbe Person wird abgelehnt.
-- **Anbieter ist nicht erreichbar oder der Prüfstatus ist unbekannt:** Ein fehlendes
-  Ergebnis ist kein positiver Beleg. Kläre Quelle und Gültigkeit, bevor du anerkennst.
-  Ein unbekannter Prüfstatus ist auch nicht dasselbe wie ein nachgewiesener Widerruf.
-- **Beleg ist abgelaufen, ausgesetzt, widerrufen oder seine Signatur ungültig:** Nutze
-  ihn nicht als gültigen Beleg für eine neue Anerkennung. Prüfe bei bereits erteilten
-  lokalen Nachweisen, ob du sie widerrufen musst. Verlasse dich nicht auf eine
-  pauschale automatische Übernahme aller Änderungen beim Anbieter.
+- **Anbieter ist nicht erreichbar oder der Prüfstatus ist unbekannt:** Kläre Quelle
+  und Gültigkeit vor der Anerkennung. Ein fehlendes Ergebnis belegt weder Gültigkeit
+  noch Widerruf.
+- **Beleg ist abgelaufen, ausgesetzt, widerrufen oder seine Signatur ungültig:**
+  Erkenne ihn nicht neu an. Prüfe den Widerruf bestehender lokaler Nachweise;
+  Anbieteränderungen werden nicht pauschal automatisch übernommen.

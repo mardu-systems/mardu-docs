@@ -1,0 +1,12 @@
+{
+  "title": "Integrationen",
+  "pagesIndex": "../integrationen",
+  "defaultOpen": false,
+  "pages": [
+    "../ldap-verzeichnis",
+    "../oidc-anmeldung",
+    "../mqtt-broker",
+    "../ip500-netzwerk",
+    "../mcp-verwalten"
+  ]
+}

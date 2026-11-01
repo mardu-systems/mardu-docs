@@ -3,12 +3,10 @@ title: Ressourcenfreigaben verwalten
 description: Ressourcen für Personen oder Benutzergruppen freigeben, Gültigkeit und Wochenzeitfenster ändern und einzelne Freigaben entziehen.
 ---
 
-Eine Freigabe ordnet einem Empfänger die Nutzung einer bestimmten Ressource zu.
-In der Verwaltung heißt sie **Zugriffsvergabe**. Weitere Bedingungen der
-[Zugriffsregel](../koordination/ressourcen.mdx#nutzung-und-zugriff-nutzung-erlauben)
-gelten weiterhin, etwa eine zusätzliche Buchung, Kompetenz oder Aufsicht. Das
-Speichern einer Vergabe bestätigt keinen Zugang am Leser und schaltet keine
-Hardware.
+Die Freigabe heißt in der Verwaltung **Zugriffsvergabe**. Weitere Bedingungen
+der [Zugriffsregel](../koordination/ressourcen.mdx#nutzung-und-zugriff-nutzung-erlauben)
+gelten weiterhin, etwa Buchung, Kompetenz oder Aufsicht. Das Speichern bestätigt
+keinen Zugang am Leser und schaltet keine Hardware.
 
 ## Voraussetzungen und Rechte
 
@@ -47,13 +45,9 @@ Erstellerangabe vorliegt.
 
 - **Benutzer:** Die Vergabe gilt für eine einzelne Person.
 - **Benutzergruppe:** Sie gilt für die Mitglieder dieser Gruppe.
-- **Tag:** Vorhandene, direkt einem Tag zugeordnete Vergaben werden angezeigt
-  und können mit den entsprechenden Rechten geändert oder entzogen werden.
-  Die aktuelle Oberfläche bietet beim Neuanlegen nur **Benutzer** und
-  **Benutzergruppe** an. Ein Tag lässt sich dort nicht als neuer Empfänger wählen.
-
-Eine Tag-Vergabe bezieht sich auf dieses Medium; sie ist keine direkte Vergabe
-an dessen zugeordnete Person. Personen- und Gruppenvergaben bleiben davon getrennt.
+- **Tag:** Vorhandene Vergaben kannst du ansehen, ändern oder entziehen, aber
+  nicht neu anlegen. Sie gelten nur für das Medium, nicht für dessen zugeordnete
+  Person. Personen- und Gruppenvergaben bleiben getrennt.
 
 ## Zugriff vergeben
 
@@ -70,15 +64,13 @@ an dessen zugeordnete Person. Personen- und Gruppenvergaben bleiben davon getren
    Lege für jedes Fenster **Wochentag**, **Beginn** und **Ende** fest.
 5. Prüfe Empfänger, Gültigkeit und Zeitfenster und wähle **Speichern**.
 
-**Ergebnis:** Der Dialog schließt sich und die Liste wird neu geladen. Suche
-die Vergabe und prüfe die gespeicherten Werte. Die Vergabe gilt ab ihrem Beginn;
-ab dem Endzeitpunkt gilt sie nicht mehr.
+Prüfe die gespeicherten Werte in der neu geladenen Liste. Die Vergabe gilt ab
+ihrem Beginn bis ausschließlich zum Endzeitpunkt.
 
 ### Gültigkeit und Wochenzeiten gemeinsam prüfen
 
-Wochenzeitfenster schränken die Gültigkeit zusätzlich ein. Ohne Fenster gilt
-**Keine wöchentliche Einschränkung**. Mit mehreren Fenstern genügt eines der
-passenden Fenster; außerhalb aller Fenster gilt diese Vergabe nicht.
+Wochenzeitfenster schränken die Gültigkeit zusätzlich ein: Eines der Fenster
+muss passen. Ohne Fenster gilt **Keine wöchentliche Einschränkung**.
 
 Die Zeitzone der Wochenfenster ist unabhängig von der lokalen Anzeige der
 Gültigkeitszeitpunkte. Beispiel: Ein Fenster **Montag, 08:00–17:00** mit
@@ -103,10 +95,9 @@ darf derselbe Beginn nicht mehrfach vorkommen.
    entziehen.
 4. Wähle **Speichern** und prüfe die neu geladene Liste.
 
-Hat jemand die Vergabe zwischenzeitlich geändert, wird dein veralteter Stand
-abgewiesen. Schließe den Dialog und lade die Seite neu. Öffne danach wieder die
-Freigaben der Ressource und den aktuellen Eintrag, vergleiche die Werte und trage
-deine Änderung erneut ein.
+Bei einer zwischenzeitlichen Änderung wird dein veralteter Stand abgewiesen.
+Schließe den Dialog, lade die Seite neu und öffne den aktuellen Eintrag. Vergleiche
+die Werte, bevor du deine Änderung erneut einträgst.
 
 ## Einzelne Freigabe entziehen
 
@@ -123,12 +114,11 @@ beendet werden muss.
 
 ## Wenn etwas nicht klappt
 
-| Beobachtung                                                   | Nächster Schritt                                                                                                                                                                            |
-| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ressource öffnet sich nicht oder Rechte fehlen                | Prüfe globale Leserechte sowie die Verwaltungsrechte zum Ansehen der Topologie und Zugriffszuordnungen dieser Ressource.                                                                    |
-| Empfänger fehlt in der Auswahl                                | Prüfe, ob das Konto oder die Benutzergruppe existiert und du diesen Eintragstyp lesen darfst. Tags sind beim Neuanlegen nicht auswählbar.                                                   |
-| **Speichern** ist nicht verfügbar                             | Prüfe Empfänger, Beginn, ein Ende nach dem Beginn, gültige Zeitzone und eindeutige Fensterbeginne pro Wochentag. Beim Bearbeiten muss außerdem eine Änderung vorliegen.                     |
-| **Zugriff vergeben**, **Bearbeiten** oder **Entziehen** fehlt | Prüfe das jeweilige globale Aktionsrecht und das Verwaltungsrecht für Zugriffsvergaben an dieser Ressource.                                                                                 |
-| Speichern meldet einen Konflikt                               | Lade bei einem veralteten Änderungsstand neu. Ist die Ressource dauerhaft stillgelegt, sind Vergabeänderungen gesperrt. Lies die konkrete Fehlermeldung, bevor du wiederholst.              |
-| Die Person kann trotz Vergabe nicht zugreifen                 | Prüfe Gültigkeit und Wochenfenster, Gruppenmitgliedschaft beziehungsweise verwendeten Tag und die weiteren Bedingungen der Zugriffsregel. Prüfe den Zugang am vorgesehenen Leser gesondert. |
-| Die Person kann nach dem Entzug weiter zugreifen              | Prüfe andere direkte Vergaben, Gruppen- oder Tag-Vergaben und Buchungen sowie eine bereits laufende Sitzung. Ein einzelner Entzug ist keine vollständige Sperre aller Zugangswege.          |
+| Beobachtung                       | Nächster Schritt                                                                                                                                                               |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Ressource oder Aktion fehlt       | Prüfe die [globalen und ressourcenbezogenen Rechte](#voraussetzungen-und-rechte).                                                                                              |
+| Empfänger fehlt                   | Prüfe, ob Konto oder Gruppe existiert und du diesen Eintragstyp lesen darfst.                                                                                                  |
+| **Speichern** ist nicht verfügbar | Prüfe Pflichtfelder, Zeitraum, Zeitzone und eindeutige Fensterbeginne pro Wochentag. Beim Bearbeiten muss eine Änderung vorliegen.                                             |
+| Speichern meldet einen Konflikt   | Lies die Fehlermeldung. Bei veraltetem Stand [lade den Eintrag neu](#gültigkeit-oder-wochenzeiten-ändern); dauerhaft stillgelegte Ressourcen erlauben keine Vergabeänderungen. |
+| Zugang trotz Vergabe abgelehnt    | Prüfe Gültigkeit, Wochenfenster, Gruppenmitgliedschaft beziehungsweise verwendeten Tag und weitere Bedingungen der Zugriffsregel. Teste am vorgesehenen Leser.                 |
+| Zugang nach Entzug weiter möglich | Prüfe weitere direkte, Gruppen- oder Tag-Vergaben, Buchungen und laufende Sitzungen.                                                                                           |

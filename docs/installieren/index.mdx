@@ -3,48 +3,43 @@ title: Installieren
 description: Server vorbereiten, Geräte aufnehmen, die Funktion vor Ort prüfen und den Betrieb übergeben.
 ---
 
-Beginne mit dem Serveraufbau, wenn du eine neue Installation einrichtest. Bei
-einem bereits laufenden Server kannst du direkt zur Geräteaufnahme im Dashboard
-wechseln.
+Bei einer neuen Installation beginnst du mit dem Serveraufbau, bei einem
+laufenden Server mit der Geräteaufnahme.
 
 <span id="in-diesem-bereich" />
 
 ## Server aufbauen
 
-[Server auf dem Raspberry Pi installieren](./raspberry-pi.mdx) beschreibt
-Voraussetzungen, Installationspaket, Konfiguration, Start und Erstzugang. Prüfe
-vorher die dort genannten Voraussetzungen, Zugänge zu den Images und die
+[Server auf dem Raspberry Pi installieren](./raspberry-pi.mdx): Paket laden,
+Zugänge und Konfiguration vorbereiten, Server starten. Beachte die
 [bekannte Einschränkung beim Erstsetup](./raspberry-pi.mdx#4-starten-und-einrichten).
 
 ## Einen vorhandenen Server verwenden
 
-[Geräte in Betrieb nehmen](./inbetriebnahme.mdx) führt von einem angeschlossenen
-Controller zur Aufnahme im Dashboard, bestätigten Anschlüssen und ihrer
-Zuordnung zu einer Ressource. Ein eingerichteter Server und ein erreichbarer
-Edge-Router im IP500-Netzwerk werden vorausgesetzt. Die Anleitung verlinkt die
-Details der [Geräteverwaltung → Administration](../administration/geraete-verwalten.mdx)
-und der [Ressourceneinrichtung → Koordination](../koordination/ressourcen.mdx).
+[Geräte in Betrieb nehmen](./inbetriebnahme.mdx): Controller aufnehmen,
+Anschlüsse prüfen und einer Ressource zuordnen. Dafür müssen Server und
+IP500-Edge-Router eingerichtet sein. Details stehen unter
+[Geräteverwaltung → Administration](../administration/geraete-verwalten.mdx)
+und [Ressourcen einrichten → Administration](../koordination/ressourcen.mdx).
 
 ## Ergebnisse prüfen und übergeben
 
-[Abnahme und Übergabe](./abnahme-uebergabe.mdx) führt durch die Funktionsprüfung
-je Zutrittspunkt: Vergleiche gespeicherte Konfiguration, Geräterückmeldungen und
-die beobachtete Wirkung vor Ort. Halte erlaubte und verweigerte Testfälle,
-Ergebnisse und offene Mängel fest und vereinbare die Übergabe an den Betrieb.
+[Abnahme und Übergabe](./abnahme-uebergabe.mdx): Erlaubte und verweigerte Zugriffe
+je Zutrittspunkt testen, Geräterückmeldungen mit der Wirkung vor Ort vergleichen
+und Ergebnisse sowie offene Mängel übergeben.
 
 ## Zum Betrieb übergehen
 
-Bei Problemen führt [Störung vor Ort](./stoerung-vor-ort.mdx) durch die Prüfung
-von Server, Geräteverbindung, Anschluss und Zugangsbedingungen. Die Anleitung
-nennt auch die Angaben für eine Weitergabe an die zuständige Stelle.
+[Störung vor Ort](./stoerung-vor-ort.mdx) hilft bei Server-, Verbindungs-,
+Anschluss- und Zugangsproblemen. Weitere Aufgaben:
 
-- [Administration](../administration/index.mdx): Konten, Rollen und technische Funktionen verwalten.
-- [Sicherheit und Betrieb → Administration](../administration/sicherheit-betrieb.mdx): Betrieb, Sicherung, Wiederherstellung und Updates vorbereiten.
-- [Übersicht und Systemstatus](../benutzer/uebersicht-monitoring.mdx): gemeldete Zustände und fehlende Messwerte einordnen.
+- [Administration](../administration/index.mdx): Konten, Rechte und Technik verwalten.
+- [Sicherheit und Betrieb → Administration](../administration/sicherheit-betrieb.mdx): Sicherung, Wiederherstellung und Updates.
+- [Übersicht und Systemstatus](../benutzer/uebersicht-monitoring.mdx): Zustände und Messwerte lesen.
 - [Mardu per CLI warten](../administration/wartungs-cli.mdx): lokale Diagnose und Kontowiederherstellung.
 
 <span id="offene-dokumentationsaufgaben" />
 
-Für Montage, Verdrahtung, zulässige Stromversorgung und die Eignung des Hardware-
-und Firmwarestands brauchst du die Unterlagen des jeweiligen Geräts. Die
-Softwareaufnahme ersetzt keine Anschluss- und Funktionsprüfung vor Ort.
+Montage, Verdrahtung, Stromversorgung sowie Hardware- und Firmwareeignung richten
+sich nach den Geräteunterlagen. Die Softwareaufnahme ersetzt keine
+Anschluss- und Funktionsprüfung vor Ort.

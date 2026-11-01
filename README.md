@@ -7,7 +7,10 @@ eingehängt. Inhalte und Bilder werden hier gepflegt.
 Die [Dokumentationsregeln](AGENTS.md) und die
 [Arbeitsweise](ARBEITSWEISE.md) gelten auch für begleitende Dokumentation im
 Software-Repository. Der [Ergebnisbericht der Seitenrevision](planning/2026-11-01-seitenrevision-ergebnis.md)
-enthält den aktuellen Umfang, Einzelprüfungen und Grenzen. Die sechs Bereiche
+enthält den aktuellen Umfang, Einzelprüfungen und Grenzen. Die anschließende
+[Textverdichtung](planning/2026-11-01-distill.md) hält den jüngsten Textstand fest.
+[Sidebar-Hierarchie](planning/2026-11-01-sidebar-hierarchie.md) beschreibt die
+Gruppenüberschriften und Unterseiten. Die sechs Bereiche
 sind im Software-Consumer erschlossen; offene praktische Abnahmen stehen im
 [abgeglichenen Backlog](planning/offene-dokumentationsaufgaben.md).
 

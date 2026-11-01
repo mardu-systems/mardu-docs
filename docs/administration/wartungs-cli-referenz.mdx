@@ -3,10 +3,9 @@ title: 'Wartungs-CLI: Befehle und Optionen'
 description: Aufrufsyntax, Kontoaktionen, Diagnose, JSON-Ausgaben und Rückgabewerte von mardu-admin.
 ---
 
-Diese Referenz beschreibt `mardu-admin` im laufenden API-Container.
-Die [Anleitung zur Wartungs-CLI](./wartungs-cli.mdx) erklärt Voraussetzungen,
-Menü und Passwortwiederherstellung Schritt für Schritt. Die CLI verwendet
-englische Menüs, Eingabeaufforderungen und Ausgaben.
+Die Aufrufe gelten für `mardu-admin` im laufenden API-Container.
+Voraussetzungen, Menü und Passwortwiederherstellung erklärt die
+[Anleitung zur Wartungs-CLI](./wartungs-cli.mdx). Die CLI verwendet Englisch.
 
 ## Aufruf und Hilfe
 
@@ -81,19 +80,16 @@ keinen lokalen Passwort-Reset.
 | `system doctor`  | Gesamtzustand und Ergebnisse der im Server registrierten Zustandsprüfungen. |
 | `system version` | CLI-Version, Serverversion und Version des Wartungsprotokolls.              |
 
-Beide Befehle benötigen einen erreichbaren Wartungslistener. `--json` ist bei
-`user show`, `system doctor` und `system version` verfügbar. Diese lesenden
-Befehle benötigen kein interaktives Terminal. Mit `-T` schaltest du die
-Terminalzuweisung durch Docker Compose aus:
+Die lesenden Befehle benötigen einen erreichbaren Wartungslistener, aber kein
+interaktives Terminal. Mit `-T` schaltest du die Terminalzuweisung aus:
 
 ```bash
 docker compose exec -T --user mardu server /app/maintenance/mardu-admin system doctor --json
 ```
 
-Die Ergebnisse lesender Befehle enthalten mit `--json` keine Panels, Tabellen,
-Farben oder Statusanimationen und können als JSON eingelesen werden. Fehler
-werden auch mit `--json` als Textmeldung in einem Fehlerpanel ausgegeben, nicht
-als JSON-Fehlerobjekt. Prüfe vor dem Einlesen deshalb den Rückgabewert.
+`--json` liefert erfolgreiche Ergebnisse ohne Panels, Tabellen, Farben oder
+Statusanimationen. Fehler erscheinen weiterhin als Text in einem Fehlerpanel.
+Prüfe vor dem Einlesen den Rückgabewert.
 
 Die Diagnose-JSON-Ausgabe enthält `status` und `checks`: den Gesamtzustand sowie
 Prüfnamen mit den Zuständen `Healthy`, `Degraded` oder `Unhealthy`.
@@ -114,10 +110,8 @@ Die Versionsausgabe enthält `cliVersion` und `server` mit `version` und
 
 Passwort-Hashes, Tokens und MFA-Geheimnisse werden nicht ausgegeben.
 
-Ein erfolgreich ausgeführter Diagnosebefehl kann einen eingeschränkten
-Serverzustand melden. Beachte deshalb bei automatisierten Prüfungen auch den
-Rückgabewert. Bei `Degraded` oder `Unhealthy` liefert `system doctor --json`
-weiterhin die Diagnose als JSON, aber den Rückgabewert `1`.
+Bei `Degraded` oder `Unhealthy` liefert `system doctor --json` die Diagnose
+weiterhin als JSON, aber den Rückgabewert `1`.
 
 ## Rückgabewerte
 
@@ -149,9 +143,8 @@ veröffentlicht. Standardpfad im API-Container:
 | `LocalMaintenance__Enabled`    | `true`                                                           | Aktiviert den Wartungslistener unter Linux und macOS im Normalbetrieb. `false` deaktiviert ihn. Änderungen benötigen einen API-Neustart. |
 | `LocalMaintenance__SocketPath` | `Private/Maintenance/control.sock` unter dem Server-Content-Root | Optionaler absoluter Alternativpfad. API und CLI müssen denselben Pfad verwenden. Änderungen benötigen einen API-Neustart.               |
 
-Im Docker-Betrieb sind keine Änderungen an diesen Einstellungen nötig.
-Einen abweichenden Pfad kannst du für einen CLI-Aufruf ausdrücklich übergeben,
-beispielsweise beim Prüfen der Version:
+Im Docker-Betrieb sind keine Änderungen nötig. So übergibst du einen Socket-Pfad
+für einen einzelnen CLI-Aufruf:
 
 ```bash
 docker compose exec --user mardu \
@@ -169,7 +162,6 @@ abweichenden Pfaden ein eigenes Verzeichnis, dessen Rechte beim Start angepasst
 werden dürfen. Hebe diese Beschränkungen nicht auf, um Zugriffsfehler zu umgehen;
 führe die CLI als `mardu` aus.
 
-Änderungen werden mit dem Zielkonto und der lokalen Betreiberidentität
-`local-maintenance` protokolliert. Diese Identität bezeichnet den Zugriff über
-das Wartungswerkzeug, nicht eine Anmeldung eines Mardu-Benutzers. Passwörter,
-Hashes und Reset-Tokens werden nicht als Audit-Werte gespeichert.
+Änderungen werden mit Zielkonto und Betreiberidentität `local-maintenance` protokolliert.
+Diese kennzeichnet den Wartungszugriff, keine Mardu-Benutzeranmeldung.
+Passwörter, Hashes und Reset-Tokens werden nicht als Audit-Werte gespeichert.

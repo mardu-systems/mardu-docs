@@ -3,19 +3,15 @@ title: Lernwegteilnahmen begleiten
 description: Personen einem Lernweg zuordnen, aktuell gültige Badges prüfen und Teilnahmen abschließen oder abbrechen.
 ---
 
-Eine Teilnahme hält fest, welchen Lernweg eine Person begonnen hat und welche
-Badges dafür zählen. Du ordnest vorhandene Benutzerkonten zu und bestätigst den
-Abschluss ausdrücklich. Das Erreichen der erforderlichen Anzahl schließt eine
-Teilnahme noch nicht ab.
+Auch mit der erforderlichen Anzahl gültiger Badges musst du den Abschluss einer
+Teilnahme ausdrücklich bestätigen.
 
 Lokale Badges vergibst, erneuerst oder widerrufst du nach
 [Administration → Badges verwalten](../administration/badges-verwalten.mdx#vergaben-und-lernwege).
-Diese Anleitung behandelt den Lernfortschritt und die Teilnahme.
 
 ## Voraussetzungen und Rechte
 
-Zum Ansehen brauchst du Leserechte für **Kompetenzen**. Je nach Aufgabe kommen
-weitere Rechte für Kompetenzen hinzu:
+Du brauchst Leserechte für **Kompetenzen** und je nach Aufgabe:
 
 | Aufgabe                       | Zusätzliches Recht |
 | ----------------------------- | ------------------ |
@@ -23,10 +19,9 @@ weitere Rechte für Kompetenzen hinzu:
 | Abschluss bestätigen          | Genehmigen         |
 | Teilnahme abbrechen           | Bearbeiten         |
 
-Für die Personenauswahl brauchst du außerdem Leserechte für Benutzer. Das
-Benutzerkonto und der Lernweg müssen vorhanden sein. Neue Teilnahmen setzen einen
-aktiven Lernweg voraus; dieselbe Person darf darin noch keine offene Teilnahme
-haben.
+Die Personenauswahl erfordert Benutzer-Leserechte und ein vorhandenes Konto.
+Für eine neue Teilnahme muss der Lernweg aktiv sein; die Person darf darin noch
+keine offene Teilnahme haben.
 
 ## Eine Person zuordnen
 
@@ -39,28 +34,23 @@ haben.
 5. Prüfe die Person, **Aktuell gültige Badges** und Status in der Teilnahmeliste.
    Öffne den Eintrag, um auch die verwendete Lernwegversion zu lesen.
 
-Die Anforderungen und die Version eines vorgesehenen Abschluss-Badges werden bei
-der Zuordnung gespeichert. Spätere Änderungen am Lernweg ändern diese Teilnahme
-nicht. Die Reihenfolge der Badges dient der Orientierung; sie schreibt keine
-Erwerbsreihenfolge vor.
+Die Zuordnung speichert Anforderungen und Version eines vorgesehenen Abschluss-Badges.
+Spätere Lernwegänderungen gelten nicht für diese Teilnahme. Die Badges müssen
+nicht in der angezeigten Reihenfolge erworben werden.
 
-Die Teilnahmeansicht zeigt die verwendete Lernwegversion, aber keine vollständige
-Liste der damals gespeicherten Anforderungen. Wurde der Lernweg zwischenzeitlich
-geändert, kläre diese Anforderungen vor dem Abschluss mit der zuständigen Stelle.
-Die Liste **Enthaltene Badges** zeigt den heutigen Stand des Lernwegs.
+Die Teilnahme zeigt ihre Lernwegversion, aber nicht alle gespeicherten Anforderungen.
+**Enthaltene Badges** zeigt den heutigen Lernwegstand. Kläre bei zwischenzeitlichen
+Änderungen die ursprünglichen Anforderungen vor dem Abschluss.
 
 ## Den Fortschritt lesen
 
-Unter **Aktuell gültige Badges** steht die Anzahl der gültigen Badges aus der für
-diese Teilnahme gespeicherten Auswahl, gefolgt von der erforderlichen Anzahl.
-**2 / 3** bedeutet beispielsweise: Zwei passende Badges gelten derzeit, drei
-werden benötigt. Es zählen unterschiedliche Badges, keine mehrfachen Vergaben
-desselben Badges.
+**Aktuell gültige Badges** zählt gültige Badges aus der gespeicherten Auswahl:
+**2 / 3** bedeutet zwei gültige von drei erforderlichen Badges. Mehrfachvergaben
+desselben Badges zählen nur einmal.
 
-Bereits vor der Zuordnung erworbene lokale Badges können mitzählen. Abgelaufene,
-widerrufene oder ersetzte Vergaben zählen nicht; eine gültige erneuerte Vergabe
-kann sie ersetzen. Importierte Credentials und bestätigte Fähigkeiten werden hier
-nicht anstelle einer lokalen Badge-Vergabe gezählt.
+Früher erworbene lokale Badges können mitzählen. Abgelaufene, widerrufene oder
+ersetzte Vergaben zählen nicht, gültige erneuerte Vergaben dagegen schon.
+Importierte Credentials und bestätigte Fähigkeiten ersetzen keine lokalen Badge-Vergaben.
 
 | Status                | Bedeutung                                                                                          |
 | --------------------- | -------------------------------------------------------------------------------------------------- |
@@ -69,30 +59,27 @@ nicht anstelle einer lokalen Badge-Vergabe gezählt.
 | **Abgeschlossen**     | Ein Abschluss wurde bestätigt.                                                                     |
 | **Abgebrochen**       | Die Teilnahme wurde beendet, ohne sie abzuschließen.                                               |
 
-Aktualisiere die Teilnahmeliste nach einer Vergabe oder Erneuerung. Ein bestätigter
-Abschluss bleibt als vergangenes Ereignis erhalten, auch wenn später ein Badge
-abläuft oder widerrufen wird. Deshalb können **Abgeschlossen** und eine inzwischen
-geringere Zahl aktuell gültiger Badges zusammen angezeigt werden.
+Aktualisiere die Liste nach Vergaben oder Erneuerungen. **Abgeschlossen** bleibt
+auch bei später abgelaufenen oder widerrufenen Badges erhalten und kann deshalb
+mit einer geringeren Zahl aktuell gültiger Badges erscheinen.
 
 ## Einen Abschluss bestätigen
 
-Beim Bestätigen kann ein lokales Abschluss-Badge vergeben werden. Es verwendet
-die bei der Zuordnung gespeicherte Inhaltsversion und deren Gültigkeitsdauer ab
-Abschluss. Eine bereits gültige Vergabe dieses Abschluss-Badges wird beibehalten;
-es entsteht keine zweite. Der Abschluss erteilt keine Ressourcenfreigabe und stellt
-kein signiertes Credential aus.
+Ein vorgesehenes lokales Abschluss-Badge verwendet die gespeicherte Inhaltsversion
+und deren Gültigkeitsdauer ab Abschluss. Eine bereits gültige Vergabe bleibt
+erhalten; es entsteht keine zweite. Der Abschluss erteilt keine Ressourcenfreigabe
+und stellt kein signiertes Credential aus.
 
 1. Öffne unter **Teilnahmen** den Eintrag mit **Abschluss möglich**.
-2. Prüfe Person, Fortschritt und verwendete Lernwegversion. Kläre die
-   Erwerbskriterien der einzelnen Badges vor der Entscheidung; die Fortschrittszahl
-   bestätigt deren lokale Vergaben, keine erneute Prüfung der Fähigkeiten.
+2. Prüfe Person, Fortschritt, Lernwegversion und Erwerbskriterien der Badges.
+   Die Fortschrittszahl bestätigt lokale Vergaben, keine erneute Fähigkeitsprüfung.
 3. Wähle **Abschluss bestätigen**. Die Aktion wird direkt ausgeführt.
 4. Prüfe in der Teilnahmeliste den Status **Abgeschlossen**. Falls ein
    Abschluss-Badge vorgesehen ist, prüfe seine Vergabe und Gültigkeit unter den
    [Vergaben des Badges](../administration/badges-verwalten.mdx#vergaben-und-lernwege).
 
-Ohne vorgesehenes Abschluss-Badge wird nur die Teilnahme abgeschlossen. Eine
-abgeschlossene Teilnahme lässt sich hier nicht erneut abschließen oder abbrechen.
+Ohne Abschluss-Badge wird nur die Teilnahme abgeschlossen. Danach lässt sie sich
+nicht erneut abschließen oder abbrechen.
 
 ## Eine Teilnahme abbrechen
 
@@ -103,9 +90,8 @@ bleiben erhalten; die Badges werden dadurch nicht widerrufen.
 2. Wähle **Teilnahme abbrechen** und bestätige die Rückfrage.
 3. Prüfe den Status **Abgebrochen** in der Teilnahmeliste.
 
-Nach einem Abbruch oder Abschluss kannst du die Person erneut zuordnen. Dabei
-beginnt eine neue Teilnahme mit den dann geltenden Lernweganforderungen; die alte
-Teilnahme bleibt erhalten.
+Nach Abbruch oder Abschluss ist eine neue Teilnahme mit den dann geltenden
+Anforderungen möglich; die alte bleibt erhalten.
 
 ## Wenn eine Aktion nicht klappt
 
@@ -119,6 +105,5 @@ Teilnahme bleibt erhalten.
 - **Abschluss-Badge kann nicht vergeben werden:** Es muss weiterhin aktiv und
   lokal vergeben werden können. Kläre dies mit der Administration und prüfe
   anschließend den aktuellen Teilnahmestatus.
-- **Teilnahme wurde inzwischen geändert:** Öffne sie erneut und prüfe den neuen
-  Stand vor einer weiteren Entscheidung. Bereits abgeschlossene oder abgebrochene
-  Teilnahmen können nicht nochmals entschieden werden.
+- **Teilnahme wurde inzwischen geändert:** Öffne sie erneut und prüfe den Stand.
+  Abgeschlossene oder abgebrochene Teilnahmen lassen sich nicht nochmals entscheiden.

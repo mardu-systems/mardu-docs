@@ -3,9 +3,8 @@ title: MQTT-Zugänge verwalten
 description: Den Informationsbroker einrichten, Lesekonten und Topic-Freigaben prüfen und Zugänge widerrufen.
 ---
 
-Mit dem eingebetteten Informationsbroker stellt Mardu System- und Geräteinformationen
-für externe MQTT-Clients bereit. Hier richtest du den Listener und die Lesekonten ein.
-Die Nachrichtenformate und den Lesetest beschreibt
+Der eingebettete Informationsbroker liefert System- und Geräteinformationen an
+externe MQTT-Clients. Nachrichtenformate und Lesetest beschreibt
 [Entwickeln → MQTT-Ereignisse beziehen](../entwickeln/mqtt-events.mdx).
 
 Externe Clients dürfen ausschließlich abonnieren. Auch der Kontotyp
@@ -28,9 +27,8 @@ Die Seite lädt zusätzlich Broker-Einstellungen und Zertifikate; dafür brauchs
 | Kontotyp, Kontostatus, Passwort oder ACL ändern   | Integrationen bearbeiten    |
 | MQTT-Benutzer oder ACL löschen                    | Integrationen löschen       |
 
-Diese Dashboard-Rechte sind unabhängig vom MQTT-Kontotyp. Ein MQTT-Passwort
-ersetzt keine Dashboard-Anmeldung. Für den späteren Verbindungstest benötigst du
-einen MQTT-Client, der den Server auf dem eingestellten MQTT-Port erreichen kann.
+Dashboard-Rechte und MQTT-Kontotyp sind unabhängig. Für den Verbindungstest
+brauchst du einen MQTT-Client, der den eingestellten Serverport erreicht.
 
 ## Broker einrichten
 
@@ -46,7 +44,7 @@ an Netzwerk- oder Containerfreigaben.
 3. Wähle unter **Transportverschlüsselung** den **TLS-Modus**. Für TLS wählst du ein
    hinterlegtes **Zertifikat** mit passendem privaten Schlüssel. Ein Zertifikat
    kannst du unter [Servereinstellungen → Zertifikate](./server-einstellungen.mdx#zertifikate)
-   hinterlegen. Clients müssen dem Zertifikat vertrauen und den passenden Hostnamen verwenden.
+   hinterlegen. Clients müssen ihm vertrauen und den passenden Hostnamen verwenden.
 4. Prüfe den gesamten **Aktuellen Entwurf** und wähle **Änderungen speichern**.
 5. Wähle nach der Übernahme **Status aktualisieren**. Prüfe unter **Live-Status**,
    dass der Broker **Läuft** und der **Endpoint** zu Port und TLS-Modus passt.
@@ -65,9 +63,8 @@ Broker zu. Die Option schaltet die Zertifikatsprüfung im Client nicht aus. Ohne
 ist die Verbindung unverschlüsselt. Ein lokales Testprofil ist daher keine Vorlage
 für einen über das Netzwerk erreichbaren Zugang.
 
-Gesperrte Felder stammen aus Umgebungsvariablen oder einer geladenen `.env`-Datei.
-Der Serverbetrieb muss diese Vorgaben ändern; das Dashboard kann sie nicht überschreiben.
-Beispiele sind `MqttBrokerSettings__Port` und `MqttBrokerSettings__UseTls`.
+Gesperrte Felder muss der Serverbetrieb in den Umgebungsvariablen oder der geladenen
+`.env`-Datei ändern, etwa `MqttBrokerSettings__Port` oder `MqttBrokerSettings__UseTls`.
 Anonymer Zugriff, anonyme Topicfilter und die Freigabe von Wildcard-Abonnements
 werden über die Serverkonfiguration gesteuert; das Brokerformular bietet dafür
 keine Schalter. Verwende für einen widerrufbaren Clientzugang ein eigenes Lesekonto.
@@ -75,9 +72,8 @@ keine Schalter. Verwende für einen widerrufbaren Clientzugang ein eigenes Lesek
 ### Testverkehr bewusst verwenden
 
 Unter **Expertenoptionen** erzeugt **Demo-Heartbeat aktiv** Nachrichten für eine
-virtuelle **Demo-Geräte-ID**. Diese Nachrichten bestätigen kein vorhandenes Gerät
-und keinen Sensorzustand. Verwende dafür eine erkennbare Test-ID und schalte den
-Demo-Heartbeat nach der Diagnose wieder aus.
+virtuelle **Demo-Geräte-ID**, keine echten Geräte- oder Sensorzustände. Verwende
+eine erkennbare Test-ID und schalte den Demo-Heartbeat nach der Diagnose aus.
 
 Die Demo-Geräte-ID ist ein Pflichtfeld, auch wenn der Demo-Heartbeat ausgeschaltet
 ist. Das **Heartbeat-Intervall** liegt zwischen 5 und 3.600 Sekunden. Für einen
@@ -85,17 +81,15 @@ normalen Lesetest des Systemzustands ist kein Demo-Heartbeat nötig.
 
 ## Eingeschränktes Lesekonto anlegen
 
-Lege pro externer Anbindung ein eigenes Konto an, damit du deren Zugang getrennt
-ändern oder entziehen kannst. Passwörter werden nicht in der Kontenliste angezeigt;
-ein vergessenes Passwort ersetzt du über **Passwort**.
+Lege pro Anbindung ein Konto an, um ihren Zugang getrennt ändern oder entziehen
+zu können. Passwörter werden nicht angezeigt; ersetze ein vergessenes über **Passwort**.
 
 1. Wähle unter **MQTT-Benutzer** **Benutzer hinzufügen**.
 2. Trage einen noch nicht verwendeten **Benutzernamen** und ein **Passwort** ein.
    Ergänze eine **Beschreibung**, an der du die verwendende Anbindung erkennst.
 3. Wähle als **Kontotyp** **Lesekonto (eingeschränkt)**, lasse **Aktiv** eingeschaltet
    und wähle **Speichern**.
-4. Prüfe den neuen Eintrag in der Liste. Öffne bei diesem Konto **ACLs** und lege
-   die erlaubten Topics wie im nächsten Abschnitt fest.
+4. Öffne beim neuen Konto **ACLs** und gib die benötigten Topics frei.
 
 Ohne aktive Freigaberegel kann sich ein eingeschränktes Konto anmelden, aber keine
 Informationen abonnieren. **Lesekonto (alle Topics)** und **Administratorkonto**
@@ -105,10 +99,9 @@ ACL-Einträge begrenzen diesen Zugriff nicht. Wähle für begrenzte Freigaben de
 
 ## Topics mit ACLs freigeben
 
-Eine ACL ist eine Zugriffsregel für ein Topic oder einen Topicfilter. Das Speichern,
-Ändern oder Löschen einer Regel trennt bestehende Verbindungen des betroffenen
-Kontos und entfernt dessen gespeicherte Abonnements. Der Client muss sich danach
-neu verbinden und erneut abonnieren.
+Eine ACL ist eine Zugriffsregel für ein Topic oder einen Topicfilter. Änderungen
+trennen das betroffene Konto und entfernen seine gespeicherten Abonnements. Der
+Client muss sich neu verbinden und erneut abonnieren.
 
 1. Öffne beim eingeschränkten Konto **ACLs → ACL hinzufügen**.
 2. Wähle einen **Zugriffsbereich** aus dem Katalog oder trage im **Topic-Filter**
@@ -135,16 +128,16 @@ Filterregeln und Nachrichteninhalte stehen unter
 
 ## Zugang prüfen und übergeben
 
-1. Gib der verwendenden Anbindung Brokeradresse, Port, TLS-Vorgaben, MQTT-Benutzername,
-   Passwort und die freigegebenen Topicfilter über den vorgesehenen vertraulichen
-   Weg. Die Dashboard-Adresse ist keine MQTT-Adresse.
+1. Übergib Brokeradresse, Port, TLS-Vorgaben, MQTT-Benutzername, Passwort und
+   freigegebene Topicfilter vertraulich. Verwende die MQTT-Adresse des Brokers,
+   keine Dashboard-Adresse.
 2. Führe mit diesen Zugangsdaten den
    [begrenzten Lesetest](../entwickeln/mqtt-events.mdx#ein-begrenztes-abonnement-prüfen)
    aus. Prüfe Verbindung, Bestätigung des Abonnements und eine aktuelle Nachricht.
    Sende keine Testnachricht an den Broker: Externe Veröffentlichungen werden abgewiesen.
 3. Aktualisiere den **Live-Status**. **Verbundene Clients** und die Zähler helfen
-   bei der Fehlersuche; sie belegen nicht, dass eine bestimmte Anbindung die
-   erwarteten Daten verarbeitet hat. Die Zähler gelten seit dem letzten Anwendungsstart.
+   bei der Fehlersuche, bestätigen aber keine Verarbeitung durch die Anbindung.
+   Die Zähler gelten seit dem letzten Anwendungsstart.
 
 **Status aktualisieren** liest den Laufzeitzustand neu und speichert keinen Entwurf.
 **Broker neu starten** verwendet die aktuell wirksame Konfiguration und unterbricht
@@ -152,23 +145,20 @@ alle verbundenen Clients. Ungespeicherte Formularänderungen werden damit nicht 
 
 ## Passwort ändern oder Zugang entziehen
 
-Benutzer-, Passwort- und ACL-Änderungen wirken unmittelbar beim Speichern im
-jeweiligen Dialog. **Änderungen speichern** für das Brokerformular ist dafür
-nicht zusätzlich erforderlich. Die betroffenen Verbindungen werden getrennt und
-gespeicherte Abonnements entfernt.
+Benutzer-, Passwort- und ACL-Änderungen wirken beim Speichern im jeweiligen Dialog;
+das Brokerformular musst du dafür nicht speichern. Betroffene Verbindungen werden
+getrennt und gespeicherte Abonnements entfernt.
 
 - **Passwort ersetzen:** Öffne beim Konto **Passwort**, trage das neue Passwort ein
   und wähle **Speichern**. Aktualisiere anschließend die Anbindung und prüfe die
   erneute Anmeldung und das Abonnement.
 - **Konto vorübergehend sperren:** Öffne **Bearbeiten**, schalte **Aktiv** aus,
-  kontrolliere Kontotyp und Beschreibung und wähle **Speichern**. Das Konto bleibt
-  vorhanden; neue Anmeldungen werden abgewiesen.
+  und wähle **Speichern**. Das Konto bleibt vorhanden; neue Anmeldungen werden abgewiesen.
 - **Einzelne Freigabe entziehen:** Öffne **ACLs**, bearbeite die erlaubende Regel
   und schalte **Aktiv** aus oder lösche sie nach Bestätigung. Prüfe weitere
   Freigaben: Eine zweite aktive `allow`-Regel kann denselben Bereich weiter erlauben.
 - **Konto entfernen:** Wähle beim Konto **Löschen**, prüfe den angezeigten Kontonamen
-  und bestätige die Löschung.
-  Das Konto kann sich danach nicht erneut anmelden.
+  und bestätige die Löschung. Danach kann es sich nicht erneut anmelden.
 
 Prüfe den Entzug mit dem betroffenen Client. Bereits empfangene Daten werden durch
 den Widerruf nicht aus externen Anwendungen entfernt. Das Deaktivieren einer ACL

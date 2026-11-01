@@ -1,0 +1,6 @@
+{
+  "title": "Meine Buchungen",
+  "pagesIndex": "../buchungen",
+  "defaultOpen": false,
+  "pages": ["../kalender"]
+}
