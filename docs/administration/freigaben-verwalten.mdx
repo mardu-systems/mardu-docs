@@ -34,11 +34,29 @@ Ressourcen sind Anlegen, Ändern und Entziehen gesperrt.
 3. Wähle in der Zeile der Ressource **Zugriffsregeln**. Es erscheinen deren
    **Zugriffsvergaben**. Alternativ findest du dieselbe Liste in den
    Ressourcendetails unter **Nutzung & Zugriff**.
-4. Filtere bei Bedarf über **Nach Empfänger, Typ oder Zeitzone filtern**.
+4. Wähle bei Bedarf den **Empfängertyp**. Unter **Empfänger** kannst du dann
+   nach einem Namen suchen und einen Eintrag auswählen. **Empfänger-ID oder
+   Zeitzone suchen** durchsucht technische Kennungen und Zeitzonen, keine Namen.
+5. Wähle bei Bedarf **Kalendergültigkeit** oder eine offene Ablaufgrenze unter
+   **Ablauf ab (einschließlich)** beziehungsweise **Ablauf vor (ausschließlich)**.
+   Die Grenzen beziehen sich auf das Enddatum der Vergabe. Vergaben ohne
+   Enddatum passen nicht in einen gesetzten Ablaufzeitraum. Wähle **Anwenden**.
+6. Unter **Nach Ablaufdatum sortieren** wählst du die Reihenfolge. Die Liste
+   zeigt die Gesamtzahl der passenden Vergaben; mit der Seitennavigation und
+   Seitengröße wechselst du durch den Bestand. **Zurücksetzen** leert Such- und
+   Filterwerte und führt zur ersten Seite. Die Sortierung und Seitengröße bleiben.
+
+Die Ressourcenübersicht behält Suche, Seite und Seitengröße beim Öffnen einer
+Ressource und beim Zurückgehen. Auf der Hauptseite stehen Ressourcenauswahl und
+angewendete Freigabenfilter in der URL und bleiben beim Neuladen erhalten.
 
 Prüfe Empfänger und Typ, **Gültigkeit**, **Vergeben von** und
 **Wochenzeitfenster**. Auch zukünftige oder abgelaufene Vergaben können in der
-Liste stehen. **Ersteller nicht erfasst** bedeutet, dass keine entsprechende
+Liste stehen. **Kalendergültigkeit** unterscheidet **Geplant**, **Innerhalb
+Gültigkeit** und **Abgelaufen**. Der Status prüft nur Beginn und Ende: Ab dem
+Endzeitpunkt gilt die Vergabe als abgelaufen. Wochenzeitfenster und weitere
+Zugriffsbedingungen werden damit nicht geprüft; der Status bestätigt keinen
+Zugang. **Ersteller nicht erfasst** bedeutet, dass keine entsprechende
 Erstellerangabe vorliegt.
 
 ### Welche Empfänger sind möglich?
