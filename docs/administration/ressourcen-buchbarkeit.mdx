@@ -1,0 +1,91 @@
+---
+title: Buchbarkeit einer Ressource einrichten
+description: Belegung und Buchungszeiten festlegen und bei Bedarf eine Buchung als Zutrittsnachweis verwenden.
+---
+
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import buchbarkeitAnsicht from './bilder/ressource-buchbarkeit-aktuell.png';
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+Mit der Buchbarkeit legst du fest, wann und wie viele Personen eine Ressource
+reservieren können. Im Beispiel wird die bereits [angelegte Holzwerkstatt](../koordination/ressourcen.mdx)
+exklusiv gebucht: Eine Buchung belegt den Raum für ihren Zeitraum.
+
+## Voraussetzungen
+
+Du brauchst **Ressourcen anzeigen** und Leserechte für buchbare Ressourcen.
+Zum erstmaligen Einrichten brauchst du deren Anlegerecht, für spätere Änderungen
+das Bearbeitungsrecht. Für Buchungen müssen die Ressource und ihre Vorfahren
+aktiv sein.
+
+Soll die Buchung auch als Zutrittsnachweis gelten, brauchst du zusätzlich
+Zugriffs-Leserechte und das Verwaltungsrecht zum Anzeigen der Zugriffstopologie
+jeder Zielressource. Ohne diese Rechte bleibt die Zielauswahl schreibgeschützt;
+vorhandene Zuordnungen bleiben erhalten.
+
+<Steps>
+
+<Step>
+
+## Buchungen ermöglichen
+
+1. Öffne die **Holzwerkstatt** in der Ressourcenübersicht und wähle **Buchbarkeit**.
+2. Aktiviere **Neue Buchungen zulassen**.
+3. Wähle die exklusive Belegung. Bei kapazitätsbasierter Belegung gibst du
+   stattdessen die gleichzeitig verfügbare Kapazität an.
+4. Lege maximale Buchungsdauer, Vorlauf und Vorausbuchung fest.
+5. Ergänze Verfügbarkeitszeiten und bei Bedarf Puffer, Genehmigung und Check-in.
+6. Prüfe unter den erweiterten Einstellungen die **Zeitzone** und speichere.
+
+<ImageZoom
+  src={buchbarkeitAnsicht}
+  alt="Buchbarkeit der Holzwerkstatt mit aktivierten neuen Buchungen und exklusiver Belegung."
+/>
+
+Die Zeitzone gehört zur Buchungskonfiguration. Eine spätere Änderung der
+Systemzeitzone ändert sie nicht automatisch.
+
+Öffne anschließend unter **Allgemein** die Anzeige **Buchbarkeit und Nutzung**.
+Prüfe, ob die Ressource **Buchbar** ist oder welche Bedingungen noch fehlen.
+Ein konkreter Buchungszeitraum wird zusätzlich auf Belegung, Buchungszeiten und
+Berechtigungen geprüft.
+
+</Step>
+
+<Step>
+
+## Buchung als Zutrittsnachweis verwenden
+
+Eine Buchung kann beispielsweise die Nutzung der gebuchten Maschine und den
+Zutritt zur Holzwerkstatt erlauben. Dafür sind zwei Zuordnungen nötig:
+
+1. Wähle unter **Buchbarkeit → Zugriff durch die Buchung** ausdrücklich jede
+   Ressource, für die die Buchung gelten soll. Wähle bei Bedarf auch die gebuchte
+   Ressource selbst; die Hierarchie erzeugt keine Zuordnung.
+2. Speichere die Buchungskonfiguration.
+3. Richte für jede Zielressource eine [aktive Zugriffsregel](./ressourcen-zutritt.mdx#zugriffsregel-aktivieren)
+   ein, die Buchungen als Nachweis zulässt.
+
+Kompetenz-, Aufsichts- und Verfügbarkeitsbedingungen der Zielressource gelten
+weiterhin. Die Einstellung der Buchbarkeit allein erteilt keinen Zutritt und
+hebt keine Ressourcensperre auf.
+
+Prüfe mit einer bestätigten Testbuchung, ob Zeitraum und Zielressourcen stimmen.
+Bei elektronischem Zutritt prüfst du zusätzlich die Entscheidung am Leser.
+
+</Step>
+
+</Steps>
+
+## Wenn etwas nicht klappt
+
+| Beobachtung                               | Nächster Schritt                                                                              |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Einstellungen lassen sich nicht speichern | Prüfe Feldfehler sowie das Anlege- oder Bearbeitungsrecht für buchbare Ressourcen.            |
+| Die Ressource bleibt nicht buchbar        | Prüfe Aktivierung, Buchungskonfiguration und angezeigte Sperren einschließlich der Vorfahren. |
+| Eine Zeit ist nicht verfügbar             | Prüfe Belegung, Wochenzeiten, Vorlauf, Puffer und die gespeicherte Zeitzone.                  |
+| Die Buchung erlaubt keinen Zutritt        | Prüfe die ausgewählten Zugriffszielressourcen, deren Zugriffsregeln und weitere Nachweise.    |
+
+Gruppenlimits, allgemeine Schließzeiten und Entscheidungen über Buchungsanfragen
+verwaltest du unter [Buchungen verwalten → Koordination](../koordination/buchungen-verwalten.mdx).

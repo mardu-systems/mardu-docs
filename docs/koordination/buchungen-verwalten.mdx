@@ -1,182 +1,205 @@
 ---
 title: Buchungen verwalten
-description: Buchungsanfragen entscheiden, fremde Buchungen ändern und Buchungsbedingungen verwalten.
+description: Anfragen entscheiden und Buchungen anderer Personen verwalten.
 ---
 
-Eure vereinbarte Zuständigkeit erteilt keine Systemrechte.
-Eigene Reservierungen beschreibt [Meine Buchungen](../benutzer/buchungen.mdx).
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import anfragenAnsicht from './bilder/buchungsanfragen-aktuell.png';
+import entscheidungAnsicht from './bilder/buchungsanfrage-entscheidung-aktuell.png';
+import schliesszeitenAnsicht from './bilder/buchung-schliesszeit-aktuell.png';
 
-## Rechte und Buchungsmodell
+Im Beispiel fragt **Lina Berger** die **Holzwerkstatt** an. Eigene Reservierungen beschreibt
+[Meine Buchungen → Benutzer](../benutzer/buchungen.mdx).
 
-| Aufgabe                                                                        | Benötigte Rechte                                                                      |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
-| Buchungsanfragen und Buchungen aller Personen ansehen                          | Buchungsverwaltung anzeigen                                                           |
-| Anfragen genehmigen oder ablehnen; fremde Buchungen bearbeiten oder stornieren | Buchungsverwaltung ändern                                                             |
-| Für eine andere Person buchen                                                  | Buchungsverwaltung erstellen; für die Personenauswahl Benutzer anzeigen               |
-| Kalender und Buchungsliste öffnen                                              | Buchungen anzeigen; für fremde Buchungsdetails zusätzlich Buchungsverwaltung anzeigen |
-| Ressourcen auswählen und Verfügbarkeit prüfen                                  | Buchungsressourcen anzeigen                                                           |
-| Gruppenlimits ändern                                                           | Buchungsverwaltung anzeigen und ändern; Benutzergruppen anzeigen                      |
-| Globale Schließzeiten ändern                                                   | Buchungsverwaltung anzeigen und ändern; Buchungen anzeigen zum Öffnen des Kalenders   |
+<span id="rechte-und-buchungsmodell" className="scroll-m-28" />
 
-**Neue Buchung** benötigt außerdem das Recht zum Erstellen von Buchungen und
-Leserechte für Buchungsressourcen. Eigene Änderungen verwenden Buchungsrechte,
-die Verwaltungsansicht die Rechte der Buchungsverwaltung.
+## Voraussetzungen und Rechte
 
-Die **Buchbarkeit** einer Ressource legt Kapazität, Wochenzeiten, Fristen,
-Genehmigung und Check-in fest. Einrichtung und ressourcenbezogene Sperren stehen unter
-[Ressourcen einrichten → Administration](./ressourcen.mdx#buchbarkeit-reservierungen-ermöglichen).
-**Gruppenlimits** ergänzen Grenzen für Gruppenmitglieder, **globale Schließzeiten**
-sperren alle Ressourcen für einen Zeitraum. Eine **Buchung** reserviert Zeitraum
-und Anzahl auf einer oder mehreren Ressourcen.
+Du brauchst **Buchungsverwaltung anzeigen**. Zum Entscheiden, Ändern und Stornieren
+sowie zum Pflegen der Regeln kommt **Buchungsverwaltung ändern** hinzu.
 
-## Anfragen entscheiden
+<span id="kalender-und-auslastung" className="scroll-m-28" />
 
-1. Öffne **Buchungen → Anfragen**. Die Seite **Buchungsanfragen** zeigt zunächst
-   **Genehmigung offen**. Nutze die Suche und bei Bedarf den Statusfilter;
-   **Alle Status** zeigt auch bereits entschiedene Buchungen.
+## Buchungen finden
+
+Buchungsliste und Kalender benötigen **Buchungen anzeigen**; Ressourcenfilter und
+Verfügbarkeitsprüfungen zusätzlich **Buchungsressourcen anzeigen**.
+
+- In der Buchungsliste wechselst du von **Eigene Buchungen** zu **Alle Buchungen**.
+  Filtere nach Ressource, Status oder Person und beachte weitere Ergebnisseiten.
+  Der Personenfilter benötigt **Benutzer anzeigen**.
+- Im **Buchungskalender** wählst du Tag, Woche oder Monat und öffnest einen
+  Eintrag für Details. Ressourcen- und Statusfilter grenzen die Ansicht ein.
+
+Leere Filterergebnisse belegen keine freie Kapazität. Der Kalender zeigt die
+Planung; den [Zustand einer Ressource](../administration/ressourcen-zustand.mdx)
+prüfst du gesondert.
+
+<span id="anfragen-entscheiden" className="scroll-m-28" />
+
+## Buchungsanfragen entscheiden
+
+Offene Anfragen belegen bereits Kapazität. Als Buchungsnachweis für den Zutritt
+zählen sie erst nach der Bestätigung; weitere Zugangsbedingungen gelten weiterhin.
+
+<Steps>
+
+<Step>
+
+### Anfrage prüfen
+
+1. Öffne **Buchungen → Anfragen**. Suche Lina Bergers Anfrage im Filter
+   **Genehmigung offen**.
 2. Öffne **Details**. Prüfe Person, Ressourcen, Zeitraum, Anzahl und
-   Änderungsverlauf. Vergleiche den Zeitraum bei Bedarf mit dem Buchungskalender.
-3. Wähle **Genehmigen** oder **Ablehnen**. Gib bei einer Ablehnung einen Grund an;
-   bei einer Genehmigung ist er optional. Der Grund darf höchstens 512 Zeichen
-   enthalten. Auch wenn der Dialog ihn als optional bezeichnet, braucht eine
-   Ablehnung einen Grund.
-4. Bestätige die Entscheidung und prüfe den neuen Status. Unter
-   **Genehmigung offen** verschwindet ein entschiedener Eintrag aus der Liste.
+   Änderungsverlauf. Vergleiche den Zeitraum bei Bedarf mit dem Kalender.
+3. Schließe die Details, um die Entscheidung in der Anfragenliste zu treffen.
 
-Bei kombinierten Buchungen entscheidet die Aktion über alle zugehörigen Ressourcen.
-Termine einer Serie prüfst und entscheidest du einzeln.
-Auch offene Anfragen belegen bereits Kapazität; sie gelten noch nicht als
-bestätigter Buchungsnachweis für den Zutritt.
+<ImageZoom
+  src={anfragenAnsicht}
+  alt="Buchungsanfragen mit dem Statusfilter Genehmigung offen und zwei Anfragen von Lina Berger für die Holzwerkstatt."
+/>
 
-| Status            | Bedeutung für die Verwaltung                                                 |
-| ----------------- | ---------------------------------------------------------------------------- |
-| Genehmigung offen | Kann genehmigt oder abgelehnt werden.                                        |
-| Bestätigt         | Reservierung ist bestätigt; weitere Zugangsbedingungen gelten weiter.        |
-| Abgelehnt         | Nicht genehmigt; nicht mehr bearbeitbar oder stornierbar.                    |
-| Storniert         | Reservierung aufgehoben; der Stornierungsgrund bleibt sichtbar.              |
-| Abgeschlossen     | Beendete Buchung; nicht mehr bearbeitbar oder stornierbar.                   |
-| Nicht erschienen  | Als nicht wahrgenommen eingeordnet; nicht mehr bearbeitbar oder stornierbar. |
+</Step>
 
-Mardu erzeugt eine Benachrichtigung für die buchende Person. Zustellkanäle hängen
-von Einstellungen und Einrichtung ab; ein E-Mail-Empfang ist damit nicht bestätigt.
-Rückfragen und Vertretung klärt ihr außerhalb des Dialogs.
+<Step>
 
-### Fremde Buchungen umplanen
+### Entscheidung bestätigen
 
-1. Öffne **Alle Buchungen**, einen Kalendereintrag oder die **Details** einer
-   Buchungsanfrage und wähle **Bearbeiten**. Das ist bei bestätigten und offenen
-   Buchungen möglich.
+1. Wähle **Genehmigen** oder **Ablehnen**.
+2. Gib bei einer Ablehnung einen Grund an, auch wenn das Formular ihn als optional
+   bezeichnet. Bei einer Genehmigung ist er optional. Erlaubt sind höchstens 512 Zeichen.
+3. Bestätige die Entscheidung.
+
+Bei einer kombinierten Buchung gilt die Entscheidung für alle zugehörigen
+Ressourcen. Termine einer Serie entscheidest du einzeln.
+
+<ImageZoom
+  src={entscheidungAnsicht}
+  alt="Dialog Genehmigen für die Einweisung Holzwerkstatt mit einem eingetragenen Entscheidungsgrund."
+/>
+
+</Step>
+
+<Step>
+
+### Ergebnis prüfen
+
+Der Eintrag verschwindet aus **Genehmigung offen**. Unter **Alle Status** prüfst du
+**Bestätigt** oder **Abgelehnt**. Mardu erzeugt eine Benachrichtigung; ihre Kanäle
+hängen von der Einrichtung und den Einstellungen der buchenden Person ab.
+
+</Step>
+
+</Steps>
+
+| Status                                                | Was du noch ändern kannst                         |
+| ----------------------------------------------------- | ------------------------------------------------- |
+| Genehmigung offen                                     | Genehmigen, ablehnen, bearbeiten oder stornieren. |
+| Bestätigt                                             | Bearbeiten oder stornieren.                       |
+| Abgelehnt, Storniert, Abgeschlossen, Nicht erschienen | Nicht mehr bearbeiten oder stornieren.            |
+
+## Fremde Buchungen umplanen
+
+1. Öffne unter **Alle Buchungen**, im Kalender oder in den Anfragen die
+   **Details** und wähle **Bearbeiten**.
 2. Ändere Ressourcen, Zeitraum, Anzahl oder Beschreibung und ergänze einen
-   **Änderungsgrund**. Bei kombinierten Buchungen bearbeitest du alle Ressourcen
-   gemeinsam; ihre Anzahl lässt sich beim Ändern nicht erweitern oder verkleinern.
-3. Bei einer Serie gilt die Änderung zunächst nur für den geöffneten Termin.
-   Für bestätigte Termine kannst du
-   **Diesen und alle folgenden Termine der Serie ändern** wählen. Damit werden
-   der gewählte und die späteren bestätigten Termine verschoben; andere
-   Statuswerte bleiben unberührt.
-4. Prüfe die Verfügbarkeit, wähle **Speichern** und lies den neuen Status.
+   **Änderungsgrund**. Kombinierte Buchungen bearbeitest du gemeinsam; die Anzahl
+   ihrer Ressourcen lässt sich dabei nicht ändern.
+3. Für eine Serie gilt die Änderung zunächst nur für den geöffneten Termin.
+   Bei bestätigten Terminen kannst du stattdessen
+   **Diesen und alle folgenden Termine der Serie ändern** wählen. Spätere Termine
+   mit anderem Status bleiben unverändert.
+4. Wähle nach der Verfügbarkeitsprüfung **Speichern** und kontrolliere Zeitraum und Status.
 
-Beim Speichern gelten Verfügbarkeit und Regeln der buchenden Person. Eine
-bestätigte Buchung kann wieder auf Genehmigung warten. Bei Konflikten bleiben
-alle betroffenen Buchungen unverändert. Die Vorabprüfung verwendet dein Konto und
-kann deshalb vom Ergebnis beim Speichern für eine andere Person abweichen.
+Beim Speichern gelten die Regeln der buchenden Person; die Vorabprüfung verwendet
+dein Konto. Eine bestätigte Buchung kann erneut auf Genehmigung warten. Bei
+Konflikten bleiben alle betroffenen Buchungen unverändert.
 
-### Fremde Buchungen stornieren
+## Fremde Buchungen stornieren
 
-Eine Stornierung hebt Reservierung und Buchungsnachweis für den Zutritt auf.
+Die Stornierung hebt die Reservierung und ihren Buchungsnachweis für den Zutritt auf.
 
 1. Öffne die **Details** einer bestätigten oder offenen Buchung.
-2. Wähle **Nur dieser Termin**; bei kombinierten Buchungen wähle
-   **Alle Ressourcen**, um alle zugehörigen Reservierungen gemeinsam zu stornieren.
-   Die Verwaltungsdetails bieten keine Stornierung der ganzen Terminserie an.
-3. Gib den erforderlichen **Stornierungsgrund** mit höchstens 512 Zeichen ein.
-4. Wähle **Buchung stornieren**, prüfe den Umfang im Bestätigungsdialog und
-   bestätige. Prüfe anschließend den Status.
+2. Wähle **Nur dieser Termin** oder bei kombinierten Buchungen **Alle Ressourcen**.
+   Die Verwaltungsdetails bieten keine Stornierung der gesamten Terminserie an.
+3. Gib einen **Stornierungsgrund** mit höchstens 512 Zeichen ein.
+4. Wähle **Buchung stornieren**, prüfe den Umfang im Bestätigungsdialog und bestätige.
+5. Prüfe den Status **Storniert**. Der Grund bleibt in den Details sichtbar.
+
+## Für eine andere Person buchen
+
+Für **Neue Buchung** brauchst du **Buchungen erstellen** und
+**Buchungsressourcen anzeigen**; für die andere Person zusätzlich
+**Buchungsverwaltung erstellen** und **Benutzer anzeigen**.
+
+Wähle unter **Neue Buchung → Buchende Person (optional)** das vorhandene Konto.
+Ohne Auswahl buchst du für dich selbst. Folge [Neue Buchung erstellen → Benutzer](../benutzer/buchungen.mdx#neue-buchung-erstellen)
+und prüfe anschließend Person und Status.
+
+Es gelten die Regeln der ausgewählten Person. Für eine Serie wählst du eine einzelne
+Ressource. Bei mehreren Ressourcen bleibt **Wiederholung** ausgeschaltet; kombinierte
+Terminserien sind im Formular nicht möglich.
 
 ## Regeln und Schließzeiten
 
+[Die Buchbarkeit einer Ressource → Administration](../administration/ressourcen-buchbarkeit.mdx)
+und die Gruppenlimits bestimmen die Buchungsbedingungen. Schließzeiten gelten
+für alle Ressourcen; einzelne Ressourcen sperrst du mit einer
+[Ressourcensperre → Administration](../administration/ressourcen-wartung.mdx#eine-sperre-anlegen).
+
 ### Gruppenlimits pflegen
 
-1. Öffne **Personen → Benutzergruppen**, wähle eine Gruppe und öffne **Buchungslimits**.
-2. Trage die gewünschten Grenzen ein und wähle gegebenenfalls
-   **Genehmigung erforderlich**.
+Du brauchst zusätzlich **Benutzergruppen anzeigen**.
+
+1. Öffne **Personen → Benutzergruppen**, wähle eine Gruppe und dann **Buchungslimits**.
+2. Trage die Grenzen ein und aktiviere bei Bedarf **Genehmigung erforderlich**.
 3. Wähle **Speichern** im Bereich **Buchungslimits**.
 
-| Feld                      | Einheit und erlaubte Werte      |
-| ------------------------- | ------------------------------- |
-| Max. Dauer (Min.)         | Ganze Minuten von 1 bis 43.200  |
-| Mindestvorlauf (Min.)     | Ganze Minuten von 0 bis 525.600 |
-| Max. Vorausbuchung (Tage) | Ganze Tage von 1 bis 3.650      |
+Leere Zahlenfelder ergänzen keine Grenze. Aus Ressource und allen Gruppen gelten
+die kürzeste Höchstdauer, der längste Mindestvorlauf und die kürzeste Vorausbuchung.
+Verlangt eine Regel eine Genehmigung, bleibt sie nötig.
 
-Leere Zahlenfelder ergänzen keine Grenze. Aus Ressource und allen Gruppen der
-buchenden Person gelten die kürzeste Höchstdauer, der längste Mindestvorlauf und
-der kürzeste Vorausbuchungszeitraum. Eine Genehmigung bleibt erforderlich, sobald
-die Ressource oder eine Gruppe sie verlangt.
-
-**Gruppenlimits entfernen** löscht nach Bestätigung nur diese Gruppenregel.
-Andere Regeln gelten weiter. Änderungen und Löschungen schreiben bestehende
-Buchungen nicht um; sie gelten für neue Buchungen und Buchungsänderungen.
+**Gruppenlimits entfernen** löscht nach Bestätigung nur diese Gruppenregel. Änderungen
+und Löschungen gelten für neue oder geänderte Buchungen, nicht rückwirkend.
 
 ### Globale Schließzeiten verwalten
 
-Schließzeiten dürfen sich nicht mit bestätigten oder offenen Buchungen
-einschließlich ihrer Puffer überschneiden. Verschiebe oder storniere betroffene Buchungen
-vorher; Mardu lehnt sonst die Schließzeit ab und storniert nichts automatisch.
+<Callout type="warn" title="Betroffene Buchungen vorher klären">
+  Eine Schließzeit darf sich nicht mit bestätigten oder offenen Buchungen einschließlich ihrer
+  Puffer überschneiden. Verschiebe oder storniere sie vorher. Mardu lehnt die Schließzeit sonst ab
+  und storniert keine Buchung automatisch.
+</Callout>
 
 1. Öffne **Buchungskalender → Schließzeiten verwalten**.
-2. Gib **Zeitraum** und **Grund** an. Der Grund ist erforderlich und darf
-   höchstens 512 Zeichen enthalten; das Ende muss nach dem Beginn liegen.
-3. Wähle als **Art der Schließzeit** **Feiertag** oder **Betriebliche Schließung**.
+2. Gib **Zeitraum** und einen **Grund** mit höchstens 512 Zeichen an.
+3. Wähle **Feiertag** oder **Betriebliche Schließung**.
 4. Aktiviere bei Bedarf **Jährlich wiederholen (10 Termine)** und wähle **Speichern**.
-5. Prüfe die gespeicherten Einträge in **Globale Schließzeiten**.
+5. Prüfe die Einträge in **Globale Schließzeiten**.
 
-Es gilt die Browserzeitzone. Wiederholungen erzeugen zehn Termine; ein Konflikt
-verhindert die gesamte Serie. Schließzeiten verhindern überlappende neue Buchungen
-und Buchungsänderungen auf allen Ressourcen. Die Feiertagsanzeige im Kalender
-legt keine Schließzeiten an.
+<ImageZoom
+  src={schliesszeitenAnsicht}
+  alt="Globale Schließzeiten mit Zeitraum, Grund Inventur und der Art Betriebliche Schließung."
+/>
 
-Lösche Schließzeiten einzeln oder als Serie und prüfe den Umfang im
-Bestätigungsdialog. Für eine Ausnahme entfernst du nur den betroffenen Termin;
-zum Ändern eines Zeitraums löschst du den Eintrag und legst ihn neu an.
-Wochenzeiten, Belegung und andere Sperren gelten weiter.
+Es gilt die Browserzeitzone. Ein Konflikt verhindert die gesamte Wiederholungsserie.
+Die Feiertagsanzeige im Kalender erzeugt keine Schließzeiten.
 
-## Kalender und Auslastung
+Zum Löschen wählst du einen Termin oder die Serie und prüfst den Umfang im
+Bestätigungsdialog. Für einen geänderten Zeitraum löschst du den Eintrag und legst
+ihn neu an. Andere Buchungsregeln und Sperren gelten weiter.
 
-Im **Buchungskalender** wählst du Tages-, Wochen- oder Monatsansicht und wechselst
-mit Datumsauswahl, Zeitraum-Pfeilen oder **Heute**. Suche nach Buchungen, filtere
-nach Ressourcen und Status und öffne einen Eintrag für Details. Verwaltungs-Leserechte
-zeigen auch Buchungen und Personenangaben anderer Benutzer.
+<span id="konflikte-einordnen" className="scroll-m-28" />
 
-In der Liste wechselst du von **Eigene Buchungen** zu **Alle Buchungen**. Nutze
-Suche, Ressourcen- und Statusfilter sowie die Ergebnisseiten; mit Benutzer-Leserechten
-auch den Personenfilter. Beispiel: Suche bei einer ausgefallenen Maschine nach
-**Bestätigt** und **Genehmigung offen**, bevor du verschiebst oder stornierst.
+## Wenn etwas nicht klappt
 
-Ressourcenfilter und Auswahl benötigen Buchungsressourcen-Leserechte. Fehlende
-Auswahl oder leere Filterergebnisse belegen keine freie Kapazität. Der Kalender
-zeigt Planung, keine Auslastungsstatistik oder Bestätigung des Gerätezustands.
+| Beobachtung                                    | Nächster Schritt                                                                         |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Ressource gesperrt                             | Prüfe [Ausfälle und Wartung → Administration](../administration/ressourcen-wartung.mdx). |
+| Kapazität reicht nicht                         | Prüfe Zeitraum, Anzahl und bestätigte oder offene Buchungen einschließlich der Puffer.   |
+| Frist oder Dauer verletzt                      | Prüfe Ressourcenregeln und alle Gruppenlimits der buchenden Person.                      |
+| Genehmigung offen                              | Entscheide die Anfrage; der Status meldet keinen Geräteausfall.                          |
+| Buchung oder Verfügbarkeit inzwischen geändert | Lade den aktuellen Stand und prüfe Status und Zeitraum vor einem neuen Versuch.          |
 
-Für eine neue Buchung im Namen einer anderen Person wählst du **Neue Buchung**
-und unter **Buchende Person (optional)** das vorhandene Konto. Ohne Auswahl buchst
-du für dich selbst. Ressourcen, Zeitraum und Anzahl legst du wie unter
-[Meine Buchungen](../benutzer/buchungen.mdx#neue-buchung-erstellen) fest.
-Die Regeln der ausgewählten Person gelten auch hier; prüfe nach dem Speichern
-deren Buchung und Status. Für eine Serie wähle eine einzelne Ressource.
-Bei mehreren Ressourcen lässt du **Wiederholung** ausgeschaltet: Das Formular
-erstellt damit keine kombinierte Terminserie.
-
-### Konflikte einordnen
-
-- **Ressource gesperrt:** Prüfe ressourcenbezogene Ausfälle und Wartung unter
-  [Ressourcen einrichten](./ressourcen.mdx#ausfälle-und-wartung-betrieb-unterbrechen).
-- **Kapazität reicht nicht:** Prüfe Zeitraum, Anzahl und gleichzeitig bestätigte
-  oder offene Buchungen einschließlich der Puffer.
-- **Frist oder Dauer verletzt:** Prüfe Ressourcenregeln und alle Gruppenlimits
-  der buchenden Person.
-- **Genehmigung offen:** Es fehlt die Entscheidung; das ist kein Geräteausfall.
-- **Buchung oder Verfügbarkeit inzwischen geändert:** Lade den aktuellen Stand
-  neu und prüfe Status sowie Zeitraum, bevor du erneut entscheidest oder speicherst.
-
-Nenne bei einer Störungsmeldung Ressource, Buchung, Zeitraum mit Zeitzone, Aktion
-und Fehlermeldung. Unterscheide Speicherprobleme, fehlende Rechte, Buchungsregeln
-und physische Ausfälle.
+Für eine Störungsmeldung notiere Ressource, Buchung, Zeitraum mit Zeitzone,
+Aktion und Fehlermeldung.

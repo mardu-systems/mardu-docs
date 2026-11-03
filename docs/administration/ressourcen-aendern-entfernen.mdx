@@ -1,0 +1,100 @@
+---
+title: Ressourcen ändern und entfernen
+description: Stammdaten und Hierarchie ändern, Ressourcen dauerhaft stilllegen oder mit Löschvorschau entfernen.
+---
+
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import lebenszyklusDiagramm from './bilder/ressource-lebenszyklus.svg';
+
+Öffne die vorhandene Ressource in der Ressourcenübersicht. Zum Anzeigen brauchst
+du **Ressourcen anzeigen**, zum Ändern **Ressourcen bearbeiten** und zum Löschen
+das Ressourcen-Löschrecht. Bearbeiten und Löschen sind getrennte Rechte.
+
+<ImageZoom
+  src={lebenszyklusDiagramm}
+  alt="Eine Ressource beginnt als Entwurf, kann aktiviert und anschließend endgültig stillgelegt werden."
+/>
+
+## Stammdaten ändern
+
+1. Wähle **Allgemein** und ändere Name, Typ oder Beschreibung.
+2. Wähle **Speichern** und prüfe die gespeicherten Angaben.
+
+Der Name muss unter derselben übergeordneten Ressource eindeutig sein.
+Standort, Gebäude, Etage, Halle, Raum und Sonstiges können Unterressourcen
+enthalten. Solange eine Ressource Unterressourcen hat, muss sie einen solchen
+Typ behalten. Maschinen, Werkzeuge, Schränke und Fahrzeuge sind Blatteinträge.
+
+Unter **Foto** wählst du ein Bild aus, schneidest es zu und übernimmst es.
+Bildänderungen haben eine eigene Bestätigung: Speichere oder verwirf den
+Bildentwurf vor anderen Stammdatenänderungen.
+
+## Ressource verschieben
+
+Ein anderer übergeordneter Eintrag ändert den Pfad der Ressource und ihrer
+Unterressourcen. Status und Sperren der neuen Vorfahren können Buchbarkeit und
+Betrieb einschränken.
+
+1. Ändere unter **Allgemein → Übergeordnete Ressource** die Zuordnung.
+   Mit **Keine – oberste Ebene** verschiebst du die Ressource an die Wurzel.
+2. Speichere und bestätige das Verschieben.
+3. Prüfe den neuen Pfad und unter **Buchbarkeit und Nutzung** die Auswirkungen.
+
+Eine Ressource darf weder sich selbst noch einen eigenen Nachfahren als Elternteil
+erhalten. Aktive Ressourcen benötigen aktive Vorfahren; außer Betrieb genommene
+Ressourcen nehmen keine Unterressourcen auf. Die Hierarchie überträgt keine
+Verwaltungsrechte oder Buchungszugriffsziele auf Unterressourcen.
+
+## Dauerhaft stilllegen
+
+<Callout type="warn" title="Stilllegung ist endgültig">
+  Eine stillgelegte Ressource lässt sich nicht erneut aktivieren. Für eine vorübergehende
+  Unterbrechung verwende eine [Ressourcensperre](./ressourcen-wartung.mdx#eine-sperre-anlegen).
+</Callout>
+
+Vor der Stilllegung musst du Unterressourcen verschieben oder ebenfalls
+stilllegen, Zugriffssitzungen beenden, zugeordnete Schalter ausschalten und
+ausstehende Aufträge klären. Für Schalter ist eine aktuelle Aus-Bestätigung nötig;
+unbekannte, veraltete oder nicht erreichbare Zustände verhindern die Stilllegung.
+
+1. Speichere oder verwirf offene Änderungen in allen Bereichen.
+2. Wähle unter **Allgemein** im **Gefahrenbereich** die Aktion
+   **Dauerhaft stilllegen**.
+3. Prüfe die Folgen und bestätige.
+4. Prüfe den Status **Außer Betrieb genommen**.
+
+Bei Erfolg werden Zugriffsregel, Zutrittspunkte, Anschlusszuordnungen und
+Wartungspläne deaktiviert. Vergaben und Historie bleiben erhalten. Bei einem
+Konflikt bleibt die Konfiguration unverändert.
+
+## Ressource löschen
+
+Das Löschen entfernt die Ressource unwiderruflich. Eigene Konfigurationen,
+Zugriffsvergaben, Anschlusszuordnungen und das Foto werden entfernt; Geräte und
+Anschlüsse bleiben erhalten. Abgeschlossene Buchungen, Wartungen, Ausfälle und
+Automationsvorgänge bleiben mit ihrem ursprünglichen Ressourcenbezug gespeichert.
+
+1. Speichere oder verwirf offene Änderungen.
+2. Wähle **Allgemein → Gefahrenbereich → Ressource löschen**.
+3. Prüfe in der Löschvorschau entfernte, geänderte und erhaltene Daten sowie
+   blockierende Abhängigkeiten.
+4. Bestätige erst, wenn die Vorschau der beabsichtigten Entfernung entspricht.
+5. Prüfe, dass die Ressource aus der Übersicht entfernt wurde. Mardu öffnet ihre
+   erhaltene [Historie](./ressourcen-wartung.mdx#historie-nachschlagen).
+
+Eine Löschung ist auch für aktive und stillgelegte Ressourcen möglich.
+Unterressourcen, installierte Geräte, aktive direkte Schalterzuordnungen, offene
+Buchungen, Wartungen, Sperren sowie Zugriffs- oder Automationsvorgänge können sie
+verhindern. Auch eine Verwendung als Buchungszugriffsziel oder Ausgangsort eines
+Zutrittspunkts kann blockieren. Maßgeblich ist die aktuelle Vorschau; Historie
+allein verhindert die Löschung nicht generell.
+
+## Wenn etwas nicht klappt
+
+| Beobachtung                                                          | Nächster Schritt                                                                      |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Änderungen können nicht gespeichert werden                           | Prüfe Feldfehler, Bearbeitungsrechte und offene Bildänderungen.                       |
+| Der Stand wurde inzwischen geändert                                  | Rufe den gespeicherten Stand ab und prüfe deine Änderung erneut.                      |
+| Stilllegung wird abgelehnt                                           | Kläre die angezeigten Sitzungen, Unterressourcen, Schalterzustände oder Aufträge.     |
+| Löschen wird durch Abhängigkeiten verhindert                         | Kläre die in der Vorschau genannten Verwendungen und öffne danach eine neue Vorschau. |
+| Die Löschbestätigung ist abgelaufen oder der Stand hat sich geändert | Schließe den Dialog und prüfe eine neue Vorschau vor der Bestätigung.                 |

@@ -1,0 +1,12 @@
+{
+  "title": "Ressourcen einrichten",
+  "pagesIndex": "../../koordination/ressourcen",
+  "defaultOpen": false,
+  "pages": [
+    "[Buchbarkeit einrichten](/docs/administration/ressourcen-buchbarkeit)",
+    "[Zutritt und Technik](/docs/administration/ressourcen-zutritt)",
+    "[Ändern und Entfernen](/docs/administration/ressourcen-aendern-entfernen)",
+    "[Sperren und Wartung](/docs/administration/ressourcen-wartung)",
+    "[Zustand und Schalter](/docs/administration/ressourcen-zustand)"
+  ]
+}

@@ -1,0 +1,145 @@
+---
+title: Zutritt und Technik einer Ressource einrichten
+description: Nutzungsbedingungen festlegen, Leser und Aktoren zuordnen und die Zugriffsregel aktivieren.
+---
+
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import zugriffDiagramm from './bilder/ressource-zutritt.svg';
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+Die **Zugriffsregel** bestimmt, welche Nachweise eine Person zur Nutzung braucht.
+Ein **Zutrittspunkt** verbindet diese Regel mit einem Zugang, etwa einem
+Kartenleser und Türöffner. Alle Zutrittspunkte derselben Ressource verwenden
+dieselbe Regel.
+
+Im Beispiel erhält die [Holzwerkstatt](../koordination/ressourcen.mdx) einen
+Kartenleser. Personen benötigen eine Zugriffsvergabe für den Raum.
+
+<ImageZoom
+  src={zugriffDiagramm}
+  alt="Zugriffsregel der Holzwerkstatt mit geforderten Nachweisen und einem Zutrittspunkt aus Leser und optionalem Aktor."
+/>
+
+## Voraussetzungen und Rechte
+
+Du brauchst Ressourcen- und Zugriffs-Leserechte. Zusätzlich gelten globale Rechte
+und [Verwaltungsrechte an der Ressource](./verwaltungszustaendigkeiten.mdx):
+
+| Aufgabe                            | Globale Rechte zusätzlich zum Lesen | Verwaltungsrecht an der Ressource                         |
+| ---------------------------------- | ----------------------------------- | --------------------------------------------------------- |
+| Regel und Zutrittspunkte ansehen   | —                                   | Zugriffstopologie anzeigen                                |
+| Zugriffsregel ändern               | Zugriffe ändern                     | Zugriffsregeln verwalten                                  |
+| Leser und Freigabeaktoren zuordnen | Zugriffe ändern                     | Hardware verwalten                                        |
+| Weiteren Zutrittspunkt anlegen     | Zugriffe anlegen                    | Hardware verwalten                                        |
+| Verantwortliche Personen ändern    | Zugriffe ändern                     | Zugriffsvergaben verwalten sowie Zugriffsregeln verwalten |
+
+Verwaltungsrechte erlauben keine Nutzung und gelten nicht automatisch für
+Unterressourcen. Die Ressource selbst aktivierst du mit **Ressourcen bearbeiten**.
+
+Für native Anschlüsse muss das [Gerät aufgenommen und konfiguriert](./geraete-verwalten.mdx)
+sein. Externe Anschlüsse veröffentlichst du über [Automationen](./automationen.mdx).
+
+<Steps>
+
+<Step>
+
+## Nutzungsbedingungen festlegen
+
+1. Öffne die Holzwerkstatt und wähle **Nutzung & Zugriff**.
+2. Wähle als **Berechtigungsnachweis** die **Zugriffsvergabe**.
+   Alternativ stehen **Buchung**, **Zugriffsvergabe oder Buchung** und
+   **Zugriffsvergabe und Buchung** zur Verfügung.
+3. Ergänze erforderliche Kompetenzen und bei Bedarf eine Inaktivitätsgrenze.
+4. Prüfe unter **Weitere Zugriffsbedingungen und Zuständigkeiten** die
+   Katalogsichtbarkeit, Aufsicht, den erforderlichen Schaltausgang und
+   verantwortliche Personen.
+5. Lasse **Zugriff aktiviert** zunächst ausgeschaltet und wähle
+   **Zugriffsregel speichern**.
+
+**Sichtbar und beantragbar** ermöglicht Kataloganfragen, erteilt aber keine
+Freigabe. Die Zuständigkeiten **Kompetenz bestätigen** und **Aufsicht führen**
+erteilen ebenfalls keine allgemeinen Verwaltungs- oder Nutzungsrechte.
+
+</Step>
+
+<Step>
+
+## Anschlüsse zuordnen
+
+Ein **Anschluss** ist eine Leser-, Aktor- oder Sensorfunktion eines Geräts oder
+einer Automation. Leser und Aktor können von unterschiedlichen Geräten stammen.
+
+1. Öffne **Technik → Anschluss zuordnen**.
+2. Wähle den **Leser** und, wenn die Regel ihn verlangt, den **Schaltausgang**.
+   Die Auswahl zeigt passende Anschlussfunktionen.
+3. Speichere die Zuordnung. Bei der ersten Zuordnung legt Mardu den Zutrittspunkt
+   an und ordnet Leser und Aktor gemeinsam zu.
+4. Prüfe den Anschlusszustand sowie Erreichbarkeit und Konfigurationsbestätigung
+   der beteiligten Geräte.
+
+Bereits belegte Anschlüsse werden nicht aus einer anderen Verwendung übernommen.
+Die Zuordnung aktiviert die Zugriffsregel noch nicht und bestätigt keine
+physische Einsatzbereitschaft.
+
+### Weitere Zugänge
+
+Für **Weiteren Zugangspunkt anlegen** gibst du unter **Technischer Schlüssel**
+einen innerhalb der Ressource eindeutigen Wert ein und ordnest die Anschlüsse zu.
+Eine **Ausgangsressource**, etwa der Flur vor dem Raum, bezeichnet den Ausgangsort
+und nicht die übergeordnete Ressource.
+
+Wähle bei mehreren Punkten den Zielpunkt ausdrücklich und prüfe
+**Zugangspunkt aktiviert**. Nach dem Lösen notwendiger Hardware aktiviert eine
+neue Zuordnung den Punkt nicht automatisch wieder.
+
+</Step>
+
+<Step>
+
+## Zugriffsregel aktivieren
+
+1. Aktiviere die Ressource unter **Allgemein**, falls sie noch ein Entwurf ist.
+2. Prüfe, dass die benötigten Zutrittspunkte aktiv und ihre Leser sowie
+   erforderlichen Aktoren zugeordnet sind.
+3. Öffne **Nutzung & Zugriff**, schalte **Zugriff aktiviert** ein und wähle
+   **Zugriffsregel speichern**.
+4. Lege die benötigten [Ressourcenfreigaben](./freigaben-verwalten.mdx) an.
+   Bei Buchungen als Nachweis richtest du stattdessen beziehungsweise zusätzlich
+   die [Buchungszugriffsziele](./ressourcen-buchbarkeit.mdx#buchung-als-zutrittsnachweis-verwenden) ein.
+5. Prüfe den Ablauf mit einer berechtigten Testperson am Leser. Prüfe auch eine
+   Person ohne den benötigten Nachweis und kontrolliere die
+   [Zugangsentscheidung](./zutritt-verwalten.mdx).
+
+Bei Maschinen bestimmt die **Übernahmeregel bei belegter Maschine**, ob eine
+belegte Maschine abgelehnt oder übernommen werden darf. Auch eine Übernahme muss
+die Zugriffsbedingungen erfüllen. Regel, Übernahmeregel und Freigaben werden
+getrennt gespeichert; Bedienen und Warten besitzen keine getrennten Zugriffsregeln.
+
+</Step>
+
+</Steps>
+
+## Anschluss ersetzen oder lösen
+
+Beende vorher laufende Sitzungen und kläre ausstehende Befehle.
+
+- **Ersetzen** wechselt auf einen kompatiblen Anschluss und erhält die Historie.
+- **Zuordnung lösen** gibt den Anschluss nach Bestätigung frei. Verliert ein
+  Zutrittspunkt seinen letzten erforderlichen Leser oder Aktor, wird er
+  deaktiviert. Andere Punkte bleiben unverändert.
+
+**Zuordnung lösen** sendet keinen Abschaltbefehl. Prüfe den physischen Zustand,
+bevor du die Verbindung entfernst.
+
+Zum Einrichten und Bedienen direkter Ein/Aus-Schalter sowie zur Zuordnung von
+Messwerten siehe [Zustand und Schalter](./ressourcen-zustand.mdx).
+
+## Wenn etwas nicht klappt
+
+| Beobachtung                                   | Nächster Schritt                                                                        |
+| --------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Regel oder Hardware lässt sich nicht ändern   | Prüfe globale Rechte und die Verwaltungszuständigkeit genau dieser Ressource.           |
+| Ein Anschluss fehlt in der Auswahl            | Prüfe Anschlussfunktion, Gerätekonfiguration und vorhandene Zuordnungen.                |
+| Die Zugriffsregel lässt sich nicht aktivieren | Prüfe Ressourcenstatus, aktive Zutrittspunkte, Leser und erforderliche Aktoren.         |
+| Die Testperson wird abgewiesen                | Prüfe Freigabe oder Buchung, deren Zeiten, Kompetenzen, Aufsicht und Ressourcensperren. |

@@ -1,0 +1,106 @@
+---
+title: Ressourcenzustand prüfen und Schalter bedienen
+description: Buchbarkeit, Nutzung und Messwerte einordnen sowie direkte Schalter zuordnen und deren Rückmeldungen prüfen.
+---
+
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import schaltDiagramm from './bilder/ressource-schaltzustaende.svg';
+
+Eine aktivierte Ressource, eine erlaubte Nutzung und ein eingeschaltetes Gerät
+beschreiben unterschiedliche Zustände. Prüfe die Anzeige, die zu deiner Aufgabe
+passt, und beachte den Zeitpunkt der Rückmeldung.
+
+## Buchbarkeit und Nutzung prüfen
+
+Mit **Ressourcen anzeigen** öffnest du die Ressource unter **Allgemein**.
+**Buchbarkeit und Nutzung** zeigt **Buchbar**, **Nutzung freigegeben** oder die
+noch fehlenden Bedingungen. Die jeweiligen Buchungs- und Zugriffs-Leserechte sind
+zusätzlich nötig, um diese Bereiche vollständig zu prüfen.
+
+1. Prüfe den Status der Ressource:
+   - **Entwurf:** Einrichtung vorbereiten; noch nicht buchen oder betreiben.
+   - **Aktiv:** Weitere Buchungs-, Zugriffs- und Sperrbedingungen werden geprüft.
+   - **Außer Betrieb genommen:** Dauerhaft stillgelegt; keine erneute Aktivierung vorgesehen.
+2. Lies die angezeigten Hinderungsgründe, einschließlich der Vorfahren und Sperren.
+3. Wähle nach Änderungen bei Bedarf **Status aktualisieren** und beachte den
+   Prüfzeitpunkt. Fehlende Rechte oder fehlgeschlagene Prüfungen ergeben
+   **Nicht prüfbar**.
+
+**Buchbar** bestätigt noch keinen freien konkreten Zeitraum. **Nutzung freigegeben**
+ersetzt weder die persönliche Zugangsentscheidung noch die Prüfung des Gerätezustands.
+
+## Messwerte ansehen
+
+Du brauchst Ressourcen- und Dashboard-Leserechte. Zugriffssitzungen benötigen
+zusätzlich Zugriffs-Leserechte und das Verwaltungsrecht zum Anzeigen ihrer
+Sitzungen; die nächste Buchung erfordert Leserechte für buchbare Ressourcen.
+
+1. Öffne die Ressource und wähle **Messwerte**.
+2. Wähle **Zeitraum** und **Auflösung** für den Verlauf.
+3. Prüfe Einheit, Quell- und Empfangszeit sowie Hinweise auf unvollständige
+   oder durch ein Antwortlimit gekürzte Daten.
+
+Die Ansicht bezieht sich auf diese Ressource, ohne Unterressourcen. Nutzung und
+nächste Buchung bleiben aktuell, auch wenn du einen anderen Verlauf auswählst.
+Unterschieden werden Leistung, kumulative Laufzeit, Nutzungszähler sowie
+Textmeldungen zu Zustand und Gesundheit.
+
+Fehlende Messungen sind Lücken, keine Nullwerte. Zählerstände werden nicht
+summiert; Stundenansichten können Mittelwerte zusätzlich zum letzten Wert zeigen.
+Werte früherer Zuordnungen belegen keinen aktuellen Zustand.
+
+Für eine neue Messwertquelle öffnest du **Technik** und ordnest einen angebotenen
+Messwertanschluss mit seiner Beobachtungsrolle zu, etwa Nutzungszähler,
+Betriebsdauer oder Leistung. Dafür brauchst du Ressourcen-Bearbeitungsrechte.
+Zuordnungen lassen sich aktivieren, deaktivieren oder ersetzen; die verfügbaren
+Funktionen hängen vom Gerät beziehungsweise der [Automation](./automationen.mdx) ab.
+
+<ImageZoom
+  src={schaltDiagramm}
+  alt="Angeforderter Zustand, Auftragsausführung und gemeldeter Gerätezustand sind getrennte Angaben."
+/>
+
+## Direkten Schalter zuordnen und bedienen
+
+Direkte Schalter steuern kompatible externe Ein/Aus-Anschlüsse. Für das Zuordnen
+brauchst du **Ressourcen bearbeiten** und das Verwaltungsrecht **Hardware verwalten**,
+für die Bedienung stattdessen das Recht zur Hardwarebedienung. Ressourcen-Leserechte
+sind für den Einstieg erforderlich.
+
+1. Öffne **Technik → Schalter** und ordne den passenden externen Anschluss zu.
+2. Prüfe vor dem Schalten, welche Ressource und welchen Anschluss du bedienst.
+3. Wähle die gewünschte Schaltaktion. Einschalten setzt erlaubten Ressourcenbetrieb voraus.
+4. Prüfe **Angeforderter Zustand**, **Gemeldeter Zustand** und **Ausführung** getrennt.
+
+Ein erteilter Auftrag bestätigt noch keinen eingeschalteten oder ausgeschalteten
+Zustand. **Unbekannt** bedeutet nicht ausgeschaltet. Ein direkter Schalter ersetzt
+keinen [Freigabeaktor mit Zugriffsprüfung](./ressourcen-zutritt.mdx).
+
+### Mehrere Schalter bedienen
+
+Öffne in der **Ressourcenübersicht** den Reiter **Schalter** außerhalb der
+Ressourcendetails. Suche nach Name oder Pfad und prüfe vor **Alle ein** oder
+**Alle aus** die angezeigten bedienbaren Schalter der geladenen Ressourcen.
+Einzelne Aufträge können scheitern; prüfe die Rückmeldungen jedes betroffenen Schalters.
+
+### Zuordnung ersetzen oder lösen
+
+Beende vorher laufende Sitzungen und kläre ausstehende Befehle. Ein Austausch
+erfordert eine aktuelle Aus-Bestätigung.
+
+<Callout type="warn" title="Zuordnung lösen schaltet keine Hardware aus">
+  Beim Lösen wird kein Abschaltbefehl gesendet. Fehlt eine aktuelle Aus-Bestätigung, ist eine
+  ausdrückliche Bestätigung erforderlich. Aktive Sitzungen und ausstehende Aufträge verhindern das
+  Lösen weiterhin.
+</Callout>
+
+## Wenn etwas nicht klappt
+
+| Beobachtung                                           | Nächster Schritt                                                                      |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| **Nicht prüfbar** erscheint                           | Prüfe Leserechte und Ladefehler, bevor du den Zustand bewertest.                      |
+| Messwerte fehlen oder sind veraltet                   | Prüfe Anschlusszuordnung, Datenquelle und Quell- sowie Empfangszeit.                  |
+| Der angeforderte Schalterzustand wurde nicht gemeldet | Prüfe Erreichbarkeit und Ausführungsergebnis; sende nicht ungeprüft weitere Aufträge. |
+| Einschalten wird abgewiesen                           | Prüfe Status, Sperren und die Verwaltungszuständigkeit für die Hardwarebedienung.     |
+
+Wartungen und Ausfälle findest du in der [Ressourcenhistorie](./ressourcen-wartung.mdx#historie-nachschlagen).
