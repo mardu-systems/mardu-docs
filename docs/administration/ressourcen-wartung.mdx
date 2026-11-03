@@ -1,0 +1,104 @@
+---
+title: Ressourcen sperren und warten
+description: Vorübergehende Sperren anlegen, wiederkehrende Wartungen durchführen und frühere Vorgänge nachschlagen.
+---
+
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import sperreAnsicht from './bilder/ressource-sperre-aktuell.png';
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+Eine Sperre unterbricht Buchungen, Betrieb oder beides für einen Zeitraum.
+Ein Wartungsplan bestimmt anhand eines Intervalls oder Zählerstands, wann eine
+Prüfung fällig ist. **Wartung fällig** sperrt die Ressource noch nicht; erst
+**Wartung starten** öffnet die Wartungssperre.
+
+Zum Anzeigen brauchst du **Ressourcen anzeigen**, zum Anlegen und Ändern
+**Ressourcen bearbeiten**. Öffne die Ressource und wähle **Ausfälle und Wartung**.
+
+## Eine Sperre anlegen
+
+Im Beispiel bleibt die Holzwerkstatt während einer Reparatur geschlossen.
+
+1. Wähle **Sperre anlegen** und gib **Grund** und Zeitraum an.
+2. Wähle die Wirkung:
+   - **Buchungen sperren** verhindert Buchungen im betroffenen Zeitraum.
+   - **Betrieb und Zugriff sperren** sperrt die Nutzung.
+   - Aktiviere beide Optionen, wenn beides unterbrochen werden soll.
+3. Aktiviere bei Bedarf **Untergeordnete Ressourcen einschließen**, damit etwa
+   auch die Maschinen innerhalb der Holzwerkstatt betroffen sind.
+4. Speichere die Sperre und prüfe Zeitraum, Wirkung und betroffene Ressourcen.
+
+<ImageZoom
+  src={sperreAnsicht}
+  alt="Neue Sperre für die Holzwerkstatt mit Grund Reparatur und ausgewählten Wirkungen auf Buchungen und Betrieb."
+/>
+
+Unter **Allgemein → Buchbarkeit und Nutzung** kannst du den aktuellen Zustand
+[erneut prüfen](./ressourcen-zustand.mdx#buchbarkeit-und-nutzung-prüfen).
+Eine gespeicherte Sperre bestätigt keine physische Abschaltung und beendet nicht
+automatisch jede laufende Nutzung; prüfe Sitzungen und Gerätestatus gesondert.
+
+Mit **Sperre aufheben** beendest du eine manuelle Sperre. Andere Sperren und
+Nutzungsregeln gelten weiter. Eine laufende Wartung schließt du stattdessen mit
+**Wartung abschließen** ab.
+
+<Steps>
+
+<Step>
+
+## Wartungsplan anlegen
+
+1. Wähle **Wartungsplan anlegen** und gib einen Namen an.
+2. Wähle Tage, Wochen, Monate, Nutzungen oder Betriebsstunden und trage das
+   Intervall beziehungsweise den Schwellenwert ein. Kalenderintervalle müssen
+   positive ganze Zahlen sein.
+3. Prüfe bei nutzungsabhängigen Plänen die Datengrundlage: zugeordnete Nutzungs-
+   oder Laufzeitwerte, ersatzweise abgeschlossene Zugriffssitzungen oder deren Dauer.
+4. Speichere und lasse die automatische Auswertung aktiviert.
+
+Prüfe, ob der Plan mit dem vorgesehenen Intervall angezeigt wird. Bei
+Nutzungszählern und Betriebsstunden muss die Datenquelle zur geplanten Prüfung passen.
+
+</Step>
+
+<Step>
+
+## Wartung durchführen und abschließen
+
+1. Öffne die fällige Wartung und wähle **Wartung starten**. Dabei wird die
+   Ressource für Buchungen und Betrieb gesperrt.
+2. Führe die Prüfung durch und wähle unter **Wartungsergebnis**
+   **Durchgeführt**, **Übersprungen** oder **Abgebrochen**.
+3. Wähle **Wartung abschließen**.
+4. Prüfe den abgeschlossenen Vorgang und den aktuellen Ressourcenzustand.
+
+Der Abschluss schließt die Wartungssperre und erhält den Vorgang in der Historie.
+Andere Sperren können Buchbarkeit und Nutzung weiterhin verhindern.
+
+</Step>
+
+</Steps>
+
+## Historie nachschlagen
+
+1. Öffne in der **Ressourcenübersicht** den Reiter **Historie** außerhalb der
+   Details einer einzelnen Ressource.
+2. Wähle die Ressource und **Wartungen** oder **Ausfälle**.
+3. Öffne den gesuchten Vorgang und prüfe Zeitraum und Ergebnis.
+
+Die Historie bleibt auch nach Ressourcen- oder Wartungsplanlöschung erhalten.
+Die Namensauswahl enthält bestehende Ressourcen und geladene historische Einträge.
+Über **Weitere Filter** kannst du die ursprünglichen Kennungen verwenden, wenn
+ein gelöschter Eintrag noch nicht in der Auswahl erscheint.
+
+## Wenn etwas nicht klappt
+
+| Beobachtung                                        | Nächster Schritt                                                                  |
+| -------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Eine Sperre lässt sich nicht speichern             | Prüfe Bearbeitungsrecht, Grund, Zeitraum und mindestens eine ausgewählte Wirkung. |
+| Eine fällige Wartung sperrt noch nichts            | Starte die Wartung ausdrücklich.                                                  |
+| Die Ressource bleibt nach Abschluss gesperrt       | Prüfe andere Sperren, den Ressourcenstatus und die Vorfahren.                     |
+| Nutzungsabhängige Fälligkeit erscheint unplausibel | Prüfe Quelle und Zuordnung der Zähler beziehungsweise Laufzeitdaten.              |
+
+Für eine endgültige Außerbetriebnahme siehe [Ressourcen ändern und entfernen](./ressourcen-aendern-entfernen.mdx#dauerhaft-stilllegen).

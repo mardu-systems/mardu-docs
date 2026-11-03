@@ -66,6 +66,12 @@ Für die Überarbeitung bestehender Funktionen und neue Anleitungen verwende die
   Vergleiche. Halte Hauptaufgaben sichtbar. Akkordeons brauchen einen konkreten
   Nutzen und dürfen keine notwendigen Schritte, Voraussetzungen oder Folgen
   verstecken. Tabs eignen sich für echte alternative Abläufe.
+- Verwende soweit möglich durchgehend native Fumadocs-Komponenten und APIs für
+  Navigation, Inhaltsdarstellung und Seitenaktionen. Nutze vorhandene
+  Markdown-/MDX-Standards und prüfe die installierten Fumadocs-Mittel, bevor du
+  eigenes JSX, Styling oder zusätzliche Logik einführst. Eigene Lösungen brauchen
+  einen konkreten Bedarf, den die vorhandenen Mittel nicht abdecken; Komponenten
+  werden nach ihrem Nutzen für die Leser gewählt.
 - Vorhandene Übersetzungen müssen in Bedeutung, Beispielen und Verhalten
   übereinstimmen. Neue Sprachen benötigen einen Auftrag.
 
