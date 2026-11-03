@@ -35,10 +35,13 @@ Stimme Änderungen an einer genutzten Installation deshalb mit dem Betrieb ab.
 2. Trage unter **Broker-Verbindung** den **Broker-Host**, **Broker-Port** und die
    **Client-ID** ein. Der Host ist ein Name oder eine IP-Adresse; den Port gibst du
    im eigenen Feld an. Er muss zwischen 1 und 65.535 liegen.
-3. Trage bei erforderlicher Anmeldung **Broker-Benutzername** und das zugehörige
-   Passwort unter **Broker-Passwort ersetzen** ein. Bei aktivierter Verbindung
-   müssen Benutzername und Passwort gemeinsam vorhanden sein. Ein leeres
-   Passwortfeld behält das gespeicherte Passwort bei und zeigt es nicht an.
+3. Trage bei erforderlicher Anmeldung **Broker-Benutzername** ein. Wähle unter
+   **Passwortaktion** **Ersetzen** und gib unter **Broker-Passwort ersetzen** das
+   neue Passwort ein.
+   **Beibehalten** verwendet das gespeicherte Passwort; es wird nicht angezeigt.
+   **Leeren** entfernt es beim Speichern. Bei aktivierter Verbindung müssen
+   Benutzername und Passwort gemeinsam vorhanden oder beide leer sein. Entferne
+   beim Wechsel auf einen Zugang ohne Anmeldung deshalb auch den Benutzernamen.
 4. Stelle unter **TLS** die mit dem Broker vereinbarten Werte für **TLS verwenden**
    und **Zertifikat validieren** ein. Für eine Verbindung mit Zertifikatsprüfung
    muss der Server dem Brokerzertifikat vertrauen. Ohne Zertifikatsprüfung werden
@@ -55,8 +58,8 @@ Stimme Änderungen an einer genutzten Installation deshalb mit dem Betrieb ab.
 7. Schalte **IP500-Netzwerk aktivieren** ein und wähle **Speichern**. Broker-Host
    und Client-ID sind Pflichtfelder. Korrigiere angezeigte Fehler.
 
-Gespeicherte Brokerpasswörter lassen sich hier nicht löschen. Kläre
-Clientzertifikate mit dem Serverbetrieb; eine Zertifikatsauswahl gibt es hier nicht.
+Kläre Clientzertifikate mit dem Serverbetrieb; eine Zertifikatsauswahl gibt es
+hier nicht.
 
 ## Ergebnis prüfen
 

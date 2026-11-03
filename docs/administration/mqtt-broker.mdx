@@ -15,9 +15,10 @@ getrennt; deren Einrichtung steht unter [Integrationen](./integrationen.mdx).
 ## Voraussetzungen und Rechte
 
 Öffne **Administration → Integrationen → Embedded MQTT**. Du brauchst
-**Integrationen anzeigen** für den Menüeinstieg, Status, Topic-Katalog und Konten.
-Die Seite lädt zusätzlich Broker-Einstellungen und Zertifikate; dafür brauchst du
-**Einstellungen anzeigen**.
+**Integrationen anzeigen** und **Einstellungen anzeigen** für den Menüeinstieg.
+Die erste Berechtigung gilt für Status, Topic-Katalog und Konten; die zweite für
+Broker-Einstellungen und Zertifikate. Ohne beide Rechte ist die kombinierte Seite
+nicht verfügbar.
 
 | Aufgabe                                           | Zusätzlich benötigtes Recht |
 | ------------------------------------------------- | --------------------------- |
@@ -39,13 +40,16 @@ an Netzwerk- oder Containerfreigaben.
 
 1. Aktiviere unter **Listener** den Schalter **Broker aktiv**.
 2. Lege **Port** und **Bind-Adresse** fest. Leer bedeutet alle Netzwerkschnittstellen;
-   `127.0.0.1` begrenzt den Listener auf die lokale Laufzeitumgebung des Servers.
-   In einem Container ist das dessen Loopback-Adresse, nicht die des Hosts.
+   eine gesetzte IPv4- oder IPv6-Adresse verwendet nur diese Adressfamilie.
+   `127.0.0.1` begrenzt den IPv4-Listener auf die lokale Laufzeitumgebung des Servers
+   und öffnet keinen zusätzlichen IPv6-Listener. In einem Container ist das dessen Loopback-Adresse, nicht die des Hosts.
 3. Wähle unter **Transportverschlüsselung** den **TLS-Modus**. Für TLS wählst du ein
    hinterlegtes **Zertifikat** mit passendem privaten Schlüssel. Ein Zertifikat
    kannst du unter [Servereinstellungen → Zertifikate](./server-einstellungen.mdx#zertifikate)
    hinterlegen. Clients müssen ihm vertrauen und den passenden Hostnamen verwenden.
-4. Prüfe den gesamten **Aktuellen Entwurf** und wähle **Änderungen speichern**.
+4. Prüfe den gesamten **Aktuellen Entwurf** und wähle **Änderungen speichern** in
+   der beim Scrollen erreichbaren Leiste. Sie erscheint nur bei Änderungen;
+   während des Speicherns sind Bearbeitung und Verwerfen gesperrt.
 5. Wähle nach der Übernahme **Status aktualisieren**. Prüfe unter **Live-Status**,
    dass der Broker **Läuft** und der **Endpoint** zu Port und TLS-Modus passt.
    Eine angezeigte Bind-Adresse `0.0.0.0` ersetzt im externen Client nicht die
@@ -140,6 +144,9 @@ Filterregeln und Nachrichteninhalte stehen unter
    Die Zähler gelten seit dem letzten Anwendungsstart.
 
 **Status aktualisieren** liest den Laufzeitzustand neu und speichert keinen Entwurf.
+Scheitert eine Teilabfrage beim Aktualisieren, bleiben die bisherigen Werte
+sichtbar. Prüfe die Fehlermeldung und aktualisiere erneut; die Meldung bestätigt
+keinen vollständig neu geladenen Stand.
 **Broker neu starten** verwendet die aktuell wirksame Konfiguration und unterbricht
 alle verbundenen Clients. Ungespeicherte Formularänderungen werden damit nicht übernommen.
 
