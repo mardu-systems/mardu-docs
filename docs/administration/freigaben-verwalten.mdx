@@ -10,35 +10,63 @@ keinen Zugang am Leser und schaltet keine Hardware.
 
 ## Voraussetzungen und Rechte
 
-Ressource und Empfänger müssen bereits vorhanden sein. Für den Einstieg über die
-Ressourcenübersicht brauchst du Leserechte für Ressourcen; für die Empfängerauswahl
-Leserechte für Benutzer beziehungsweise Benutzergruppen.
+Ressource und Empfänger müssen bereits vorhanden sein. Die Freigabenliste
+braucht keine Ressourcen-Leserechte. Diese brauchst du für die Ressourcensuche
+im Filter oder beim Anlegen. Für die Empfängerauswahl brauchst du Leserechte
+für Benutzer beziehungsweise Benutzergruppen.
 
-| Aufgabe                       | Globale Rechte              | Verwaltungsrecht an der Ressource                 |
-| ----------------------------- | --------------------------- | ------------------------------------------------- |
-| Freigaben öffnen und lesen    | Zugriffe ansehen            | Zugriffstopologie und Zugriffszuordnungen ansehen |
-| Freigabe anlegen              | Zusätzlich Zugriffe anlegen | Zugriffsvergaben verwalten                        |
-| Gültigkeit oder Zeiten ändern | Zusätzlich Zugriffe ändern  | Zugriffsvergaben verwalten                        |
-| Freigabe entziehen            | Zusätzlich Zugriffe löschen | Zugriffsvergaben verwalten                        |
+| Aufgabe                       | Globale Rechte              | Verwaltungsrecht an der Ressource |
+| ----------------------------- | --------------------------- | --------------------------------- |
+| Freigaben öffnen und lesen    | Zugriffe ansehen            | Zugriffszuordnungen ansehen       |
+| Freigabe anlegen              | Zusätzlich Zugriffe anlegen | Zugriffsvergaben verwalten        |
+| Gültigkeit oder Zeiten ändern | Zusätzlich Zugriffe ändern  | Zugriffsvergaben verwalten        |
+| Freigabe entziehen            | Zusätzlich Zugriffe löschen | Zugriffsvergaben verwalten        |
 
-Die Verwaltungsaktionen heißen technisch `ViewTopology`, `ViewAccessRelations`
-und `ManageAccess`. Wie diese Rechte zugewiesen werden, erklärt
+Die Verwaltungsaktionen heißen technisch `ViewAccessRelations` und
+`ManageAccess`. Sie können auch für den gesamten Zugriffsbereich gelten.
+Die Auswahl einer Ressource beim Anlegen benötigt zusätzlich deren
+Zugriffstopologie-Leserecht (`ViewTopology`). Wie diese Rechte zugewiesen werden, erklärt
 [Verwaltungszuständigkeiten](./verwaltungszustaendigkeiten.mdx). Eine eigene
 Nutzungsfreigabe erlaubt noch keine Verwaltung. Für dauerhaft stillgelegte
 Ressourcen sind Anlegen, Ändern und Entziehen gesperrt.
 
 ## Freigaben einer Ressource öffnen
 
-1. Öffne **Zutritt → Zugänge**. Die Seite trägt den Titel **Freigaben**.
-2. Suche bei Bedarf unter **Ressource** nach dem Namen und wähle **Suchen**.
-3. Wähle in der Zeile der Ressource **Zugriffsregeln**. Es erscheinen deren
-   **Zugriffsvergaben**. Alternativ findest du dieselbe Liste in den
-   Ressourcendetails unter **Nutzung & Zugriff**.
-4. Filtere bei Bedarf über **Nach Empfänger, Typ oder Zeitzone filtern**.
+1. Öffne **Zutritt → Zugänge**. Die Seite **Freigaben** zeigt unmittelbar die
+   lesbaren Vergaben aller Ressourcen in einer Tabelle. Die Spalte **Ressource**
+   nennt das jeweilige Nutzungsziel.
+2. Öffne den Filter **Ressource**, suche einen Eintrag und wähle ihn aus.
+   Ohne Ressourcen-Leserechte kannst du mit **Nach dieser Ressource filtern**
+   in einer lesbaren Zeile denselben exakten Filter setzen. Über **Leeren** im
+   Ressourcenfilter entfernst du diese Einschränkung auch ohne Ressourcen-Leserechte.
+3. Wähle bei Bedarf den **Empfängertyp**. Unter **Empfänger** kannst du dann
+   nach einem Namen suchen und einen Eintrag auswählen. Das optionale Suchfeld
+   **Ressource, Empfänger-ID oder Zeitzone suchen…** durchsucht Ressourcennamen,
+   technische Empfängerkennungen und Zeitzonen. Empfängernamen suchst du im Auswahldialog.
+4. Wähle bei Bedarf **Kalendergültigkeit** oder öffne **Ablaufzeitraum**.
+   Dort kannst du eine oder beide Ablaufgrenzen wählen und mit **Anwenden** übernehmen.
+   **Ablauf ab (einschließlich)** und **Ablauf vor (ausschließlich)** beziehen sich
+   auf das Enddatum der Vergabe. Vergaben ohne Enddatum passen nicht in einen
+   gesetzten Ablaufzeitraum. Suche und einzelne Auswahlen wirken unmittelbar.
+5. Öffne die Optionen im Spaltenkopf **Ressource**, **Gültigkeit** oder
+   **Vergeben von**, um auf- oder absteigend zu sortieren. **Gültigkeit** sortiert
+   nach dem Enddatum. Die Gesamtzahl und Seitennavigation beziehen sich auf alle
+   passenden Vergaben. **Zurücksetzen** leert Such- und Filterwerte und führt
+   zur ersten Seite; Sortierung und Seitengröße bleiben erhalten.
+
+Ressourcen-, Empfänger- und weitere angewendete Filter sowie Sortierung und Seite
+stehen in der URL und bleiben beim Neuladen erhalten. Unter **Ansicht** wählst du
+sichtbare Spalten; diese Ansicht wird für dein Konto und Projekt im Browser
+aufbewahrt. Dieselbe ressourcenbezogene Freigabenliste findest du weiterhin in
+den Ressourcendetails unter **Nutzung & Zugriff**.
 
 Prüfe Empfänger und Typ, **Gültigkeit**, **Vergeben von** und
 **Wochenzeitfenster**. Auch zukünftige oder abgelaufene Vergaben können in der
-Liste stehen. **Ersteller nicht erfasst** bedeutet, dass keine entsprechende
+Liste stehen. **Kalendergültigkeit** unterscheidet **Geplant**, **Innerhalb
+Gültigkeit** und **Abgelaufen**. Der Status prüft nur Beginn und Ende: Ab dem
+Endzeitpunkt gilt die Vergabe als abgelaufen. Wochenzeitfenster und weitere
+Zugriffsbedingungen werden damit nicht geprüft; der Status bestätigt keinen
+Zugang. **Ersteller nicht erfasst** bedeutet, dass keine entsprechende
 Erstellerangabe vorliegt.
 
 ### Welche Empfänger sind möglich?
@@ -51,7 +79,8 @@ Erstellerangabe vorliegt.
 
 ## Zugriff vergeben
 
-1. Öffne die Freigaben der gewünschten Ressource und wähle **Zugriff vergeben**.
+1. Wähle auf der Freigabenseite **Zugriff vergeben**, suche die Zielressource
+   und wähle **Weiter**. In den Ressourcendetails ist das Ziel bereits festgelegt.
 2. Wähle den **Empfängertyp** und unter **Empfänger** die Person oder
    Benutzergruppe. Prüfe die im Dialog genannte Ressource.
 3. Trage **Gültig ab** und bei Bedarf **Gültig bis** ein. Der Beginn ist mit der

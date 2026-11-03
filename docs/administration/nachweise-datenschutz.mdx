@@ -17,25 +17,31 @@ Benutzerauswahl im Filter benötigst du zusätzlich `Permissions.Users.View`.
 ### Ereignisse eingrenzen
 
 1. Öffne in den Servereinstellungen **Audit-Ereignisse**. Die Seite heißt
-   **Audit-Trail** und zeigt zunächst die letzten 24 Stunden, neueste Ereignisse zuerst.
-2. Wähle unter **Zeitraum** die letzten **24 Stunden**, **7 Tage** oder **30 Tage**
-   oder setze **Von** und **Bis**.
+   **Audit-Trail**. Der Beginn liegt zunächst 24 Stunden zurück; das Ende ist offen.
+   Neueste Ereignisse stehen zuerst.
+2. Wähle unter **Zeitraum** **24 Stunden zurück**, **7 Tage zurück** oder **30 Tage zurück**
+   oder setze **Von (UTC)** und **Bis (UTC)**. Vorgaben setzen den Beginn relativ
+   zum Auswahlzeitpunkt und lassen das Ende offen.
 3. Grenze den Objekttyp und die Aktion ein, etwa **Benutzer** und **Aktualisiert**.
    Die Suche berücksichtigt unter anderem Benutzernamen, Aktionen, Objekttypen und Objekt-IDs.
 4. Öffne bei Bedarf **Weitere Filter**. Dort kannst du einen **Benutzer** auswählen
    oder **Objekt-ID**, **Korrelations-ID** und **Client-IP** eingeben.
-5. Öffne eine Ergebniszeile, um das **Audit-Ereignis** zu lesen.
+5. Aktiviere bei Bedarf **Nur mit Feldänderungen**, um Ereignisse mit aufgezeichneten
+   Änderungen auszuwählen. Öffne eine Ergebniszeile, um das **Audit-Ereignis** zu lesen.
 
 Der Benutzerfilter bezieht sich auf die Person, die eine Aktion **ausgeführt** hat.
 Suchst du Änderungen an einem bestimmten Konto, verwende den Objekttyp
 **Benutzer** zusammen mit dessen **Objekt-ID**. Beide Filter zusammen liefern nur
 Änderungen, bei denen dieselbe Person Ausführende und betroffenes Konto ist.
 
-Tabelle und Details zeigen UTC. Manuell gewählte Kalendertage gelten vom
-Tagesbeginn bis Tagesende in der Browser-Zeitzone und werden als UTC übertragen.
-Berücksichtige das beim Abgleich mit anderen Protokollen.
+Eingaben, Tabelle und Details verwenden UTC, unabhängig von der Browser-Zeitzone.
+**Von** und **Bis** schließen den eingegebenen Zeitpunkt ein. Leere eine Grenze,
+um sie zu öffnen; die Seitenadresse behält diese Auswahl. Bei offenem Ende lädt
+**Neu laden** auch neue Ereignisse. Ein gewählter fester Zeitraum bleibt unverändert.
+Der Beginn verschiebt sich beim Aktualisieren nicht automatisch. Bei ungültigen
+Zeitpunkten oder einem Beginn nach dem Ende wird keine Abfrage gesendet.
 
-Die Seitenadresse enthält Suche, Filter und geöffnetes Ereignis, gegebenenfalls
+Die Seitenadresse enthält Suche, Filter, Sortierung, Seite, Seitengröße und geöffnetes Ereignis, gegebenenfalls
 auch Benutzer-IDs oder IP-Adressen. Zum Öffnen sind weiterhin Leserechte nötig.
 
 ### Details lesen
@@ -60,10 +66,18 @@ Historische Einträge können auch nach dem Löschen des Kontos oder Objekts bes
 1. Prüfe Suche, Filter, Zeitraum und die angezeigte Trefferzahl.
 2. Wähle **CSV exportieren**. Der Browser lädt eine Datei mit dem Namen
    `audit-trail-YYYY-MM-DD.csv` herunter.
-3. Prüfe die Datei und gib nur den für deine Aufgabe benötigten Umfang weiter.
+3. Prüfe den Exportstatus über der Tabelle: Er nennt die exportierte Anzahl,
+   die beobachteten Treffer und ob der Export vollständig ist. Bei einem Teilexport
+   endet der Dateiname auf `-partial.csv`.
+4. Prüfe die Datei und gib nur den für deine Aufgabe benötigten Umfang weiter.
 
 Der Export übernimmt die aktuellen Suchfilter und die Sortierung, unabhängig von
 der gerade sichtbaren Tabellenseite. Er enthält **höchstens 10.000 Ereignisse**.
+Der Hinweis vor dem Export nennt die Grenze und den aktuellen Listenstand.
+Der Status nach dem Download verwendet die beim Export ermittelten Zahlen; sie
+können vom Listenstand abweichen. Liefert ein älterer Server keine Exportangaben,
+meldet die Oberfläche **Die Vollständigkeit ist unbekannt**.
+
 Bei mehr Treffern teile die Abfrage in kleinere Zeiträume auf und prüfe mögliche
 Überschneidungen anhand der Ereignis-ID. Der Export enthält UTC-Zeitpunkte,
 Identifikatoren, Aktion, Objekt, Client-IP, Korrelations-ID und eine
@@ -74,6 +88,9 @@ Die Oberfläche bietet CSV an. Über die API ist zusätzlich Excel verfügbar:
 `GET /api/v1/audit-trail/export` mit `format=excel` oder `format=xlsx` und denselben
 Filtern. Details zu Parametern und Antworten stehen in der API-Referenz unter
 **Audit Trail**. Für beide Formate gilt dieselbe Grenze von 10.000 Ereignissen.
+Trefferzahl und exportierte Zeilen werden in getrennten Lesevorgängen ermittelt.
+Bei gleichzeitig hinzukommenden oder entfernten Ereignissen bilden sie keinen
+transaktionalen Snapshot; der Teilstatus wird im Zweifel als unvollständig ausgewiesen.
 
 Die heruntergeladene Datei liegt außerhalb der Zugriffsprüfung von Mardu. Lege
 fest, wer sie erhält, wo sie abgelegt und wann sie entfernt wird.
