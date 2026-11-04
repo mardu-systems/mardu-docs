@@ -74,6 +74,13 @@ Verwende die beiden unterschiedlichen Zufallswerte für `NEXTAUTH_SECRET` und
 `POSTGRES_PASSWORD`. Lass die beiden Image-Tags auf `stable`, um freigegebene
 Updates beim nächsten Startbefehl zu übernehmen.
 
+Compose setzt aus `DOMAIN` auch `AuthBroker:PublicBaseUrl` am API-Server. OIDC-Callbacks
+verwenden dadurch die öffentliche HTTPS-Adresse, während das Dashboard intern weiter
+`http://server:8080` verwendet. Bei einem getrennten API-Host oder Pfadpräfix kannst
+du `AuthBroker__PublicBaseUrl=https://api.example.com/server` in `.env` ergänzen;
+die Proxy-Routen müssen dann zu dieser Adresse passen. Siehe
+[OIDC-Anmeldung einrichten](../administration/oidc-anmeldung.mdx).
+
 Bewahre `.env` auf. Ändere das Datenbankpasswort einer bestehenden Installation
 nicht nur in dieser Datei: PostgreSQL übernimmt diese Variable nur bei der
 erstmaligen Initialisierung eines leeren Datenvolumes.
