@@ -52,9 +52,11 @@ keinen Einrichtungsschritt ab.
    hinterlege das Client-Secret. Ein gespeichertes Secret wird nicht angezeigt;
    **Secret ersetzen** ändert es erst beim Speichern.
 3. Kopiere die angezeigte **Redirect-URI** in die Client-Registrierung beim Anbieter.
-   Neue Provider erhalten diese Adresse aus der Backend-Adresse und ihrer ID.
-   Prüfe hinter einem Reverse Proxy die öffentliche HTTPS-Adresse. Die Browseradresse
-   wird nicht zur Erzeugung des Backend-Callbacks verwendet.
+   Neue Provider erhalten diese Adresse aus der öffentlichen Backend-Basisadresse
+   und ihrer ID. Hinter einem Reverse Proxy setzt der Serverbetrieb
+   `AuthBroker__PublicBaseUrl`, zum Beispiel `https://mardu.example.com`.
+   Im Production-Compose und im Raspberry-Pi-Paket wird dafür automatisch
+   `https://<DOMAIN>` verwendet. Die interne Docker-Verbindung bleibt unverändert.
 4. Falls der Anbieter eine andere Client-Authentifizierung oder eine bereits
    registrierte Callback-Adresse benötigt, öffne **Endpunkte und Parameter anpassen**.
    Dort stehen **Client-Authentifizierung** und **Abweichende Callback-Adresse** zur
@@ -65,9 +67,11 @@ Vorhandene Redirect-URIs und Sonderwerte bleiben erhalten. Ein Vorlagenwechsel
 setzt weder Scopes noch HTTPS-Vorgaben oder Claim-Namen zurück. Eine Vorlage
 registriert keinen Client und aktiviert den Provider nicht.
 
-Die **Separate Test-Callback-Adresse** stammt aus der Backend-Anfrage und wird
-unter **Prüfung und Betrieb** bereits vor dem ersten Test angezeigt. Prüfe hinter einem Reverse Proxy, dass
-sie die öffentliche HTTPS-Adresse enthält. Die Seite zeigt außerdem an, ob ihre
+Die **Separate Test-Callback-Adresse** wird unter **Prüfung und Betrieb** bereits
+vor dem ersten Test angezeigt. Sie verwendet
+wie neue Provider-Callbacks zuerst `AuthBroker:PublicBaseUrl`. Ohne diese Vorgabe
+leitet Mardu beide Adressen aus der Backend-Anfrage ab; dann müssen vertrauenswürdige
+Proxy-Header die öffentliche Adresse und HTTPS liefern. Die Seite zeigt außerdem an, ob ihre
 vollständige Rückleitungsadresse in `AuthBroker:AllowedReturnUrls` erlaubt ist.
 Eine fehlende Freigabe verhindert die Test-Anmeldung; sie wird nicht durch eine
 Provider-Vorlage eingerichtet.
@@ -82,7 +86,29 @@ Richte die Rückleitungen getrennt ein:
 
 Die interne Dashboard-Callback-Adresse gehört nicht als Ersatz für die
 **Redirect-URI** in die Anbieterregistrierung. Bei einem vorgeschalteten Proxy
-müssen die öffentlich sichtbare Adresse und HTTPS beim Backend korrekt ankommen.
+müssen die Callback-Pfade das Backend erreichen. Das mitgelieferte Caddy leitet
+`/api/v1/auth/oidc/*`, `/signin-oidc/*` und
+`/api/v1/settings/oidc/test-login/callback` direkt an die API weiter. Die interne
+Dashboard-Callback-Adresse bleibt beim Web-Service.
+
+Bei einem anderen Deployment setzt du die öffentliche Basisadresse **am API-Server**:
+
+```bash
+export AuthBroker__PublicBaseUrl="https://api.example.com/server"
+```
+
+Ein vorhandenes öffentliches Pfadpräfix gehört vollständig in diesen Wert und muss
+vom Proxy passend an das Backend weitergeleitet werden. Ein interner `PathBase` wird
+nicht zusätzlich angehängt. Erlaubt ist eine absolute HTTPS-Adresse ohne Zugangsdaten,
+Suchparameter oder Fragment. Nach einer Änderung starte den API-Server neu.
+`STANDALONE_SERVER_URL` konfiguriert die öffentliche Backend-Verbindung des Dashboards;
+`INTERNAL_BACKEND_URL` bleibt die private Verbindung, etwa `http://server:8080`.
+Beide ersetzen die öffentliche Callback-Basis am API-Server nicht.
+
+Bestehende Provider-Redirect-URIs werden nicht umgeschrieben. Enthält eine davon noch
+einen Docker-Host, korrigiere sie unter **Abweichende Callback-Adresse** und registriere
+den korrigierten Wert beim Anbieter. Für eigene Callback-Pfade musst du die direkte
+Weiterleitung zur API im Proxy ergänzen.
 
 Das Feld **Issuer- oder Discovery-URL** zeigt bei vorhandenen Providern die bisher
 verwendete Discovery-Adresse, Authority oder Issuer-Adresse. Beim erneuten Laden
