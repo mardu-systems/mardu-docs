@@ -30,6 +30,12 @@ Durch die Umgebung gesperrte Felder muss der Serverbetrieb ändern. Für
 CA-Zertifikate nutze die vorhandene
 [Zertifikatsverwaltung](./server-einstellungen.mdx#zertifikate).
 
+Die Seite hat drei direkt erreichbare Bereiche: **Verbindung**, **Konten und
+Rollen** sowie **Prüfung und Betrieb**. Du kannst auch auf kleinen Bildschirmen
+zwischen ihnen wechseln. Bei neuen Anbietern zeigt die Einrichtungsliste fehlende
+Pflichtangaben und aktuelle Prüfnachweise. Das Öffnen eines Bereichs schließt
+keinen Einrichtungsschritt ab.
+
 ## Provider und Rückleitungen vorbereiten
 
 1. Wähle **Provider hinzufügen**. Gib einen **Anzeigenamen** für die Anmeldung
@@ -38,8 +44,10 @@ CA-Zertifikate nutze die vorhandene
    Speichern ist sie im Formular nicht mehr änderbar.
 2. Wähle bei Bedarf eine **Provider-Vorlage** oder **Benutzerdefiniert**.
    Prüfe die Startwerte gegen deine Anbieterregistrierung. Eine Vorlage
-   registriert keinen Client und aktiviert den Provider nicht.
-3. Trage im Schritt **Verbindung** unter **Endpunkte und Client** den exakten
+   registriert keinen Client und aktiviert den Provider nicht. Die Hinweise unter
+   **Client beim Anbieter registrieren** erklären die jeweilige Issuer- und
+   Discovery-Adresse.
+3. Trage im Bereich **Verbindung** unter **Endpunkte und Client** den exakten
    **Issuer** aus dem Discovery-Dokument, die **Client-ID** und die passende
    **Client-Authentifizierung** ein. Angeboten werden **Kein Secret (Public Client)**,
    **Client-Secret im Request-Body** und **Client-Secret per HTTP Basic**.
@@ -50,6 +58,13 @@ CA-Zertifikate nutze die vorhandene
    des Mardu-Backends. Trage sie in das zunächst leere Feld **Redirect-URI** ein
    und registriere sie exakt beim Anbieter. Ihr Pfad dient als OIDC-Callback;
    Zugangsdaten, Suchparameter und Fragmentkennung sind nicht erlaubt.
+
+Die **Separate Test-Callback-Adresse** stammt aus der Backend-Anfrage und wird
+bereits vor dem ersten Test angezeigt. Prüfe hinter einem Reverse Proxy, dass
+sie die öffentliche HTTPS-Adresse enthält. Die Seite zeigt außerdem an, ob ihre
+vollständige Rückleitungsadresse in `AuthBroker:AllowedReturnUrls` erlaubt ist.
+Eine fehlende Freigabe verhindert die Test-Anmeldung; sie wird nicht durch eine
+Provider-Vorlage eingerichtet.
 
 Richte die Rückleitungen getrennt ein:
 
@@ -75,22 +90,38 @@ keine OIDC-Pflichtparameter.
 Mardu verwendet automatisch den Authorization-Code-Ablauf mit **PKCE**. Die
 Prüfung bindet den Code an den gestarteten Anmeldevorgang.
 
+### Hinweise zu den Vorlagen
+
+| Anbieter                  | Issuer und Besonderheiten                                                                                                                                                         |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Microsoft Entra ID        | Verwende den konkreten Mandanten unter `https://login.microsoftonline.com/<tenant-id>/v2.0`. Ein `common`-Endpunkt ersetzt nicht den exakten Issuer des Tokens.                   |
+| Google / Google Workspace | Der Issuer lautet `https://accounts.google.com`. Die Vorlage beschränkt keine Workspace-Domain. Der Parameter `hd` ist ein Anmeldehinweis, keine Zugriffsbeschränkung.            |
+| Okta                      | Org Authorization Server (`https://<domain>`) und eigene Server (`https://<domain>/oauth2/<server-id>`) haben unterschiedliche Issuer.                                            |
+| Auth0                     | Verwende den exakten Issuer der Domain und gleiche die Client-Authentifizierung mit den Anwendungseinstellungen ab.                                                               |
+| Keycloak                  | Der Issuer enthält den Realm: `https://<server>/realms/<realm>`.                                                                                                                  |
+| Authentik                 | Die Discovery-Adresse enthält üblicherweise `/application/o/<slug>/.well-known/openid-configuration`. Bei globalem Issuer kann eine separate Discovery-Adresse erforderlich sein. |
+| Benutzerdefiniert         | Übernimm den exakten `issuer` aus dem Discovery-Dokument und setze eine abweichende Discovery-Adresse bei Bedarf ausdrücklich.                                                    |
+
+Die Seite verlinkt die Dokumentation des gewählten Anbieters. Eine Vorlage
+wendet nur die vorhandenen Startwerte für HTTPS und Scopes an; Kontozuordnung,
+Client-Authentifizierung und Rollen musst du gegen deine Registrierung prüfen.
+
 ## Tokenprüfung, Kontozuordnung und Rollen festlegen
 
-1. Prüfe im Schritt **Sicherheit** die **Zertifikatsprüfung** und lasse
+1. Öffne im Bereich **Verbindung** **Token- und Zertifikatsprüfung anpassen** und prüfe die **Zertifikatsprüfung**. Lasse
    **HTTPS für Discovery erzwingen** eingeschaltet. Verwende den
    **System-Zertifikatsspeicher** oder wähle bei **Nur ausgewählte verwaltete CAs**
    die benötigten Zertifizierungsstellen. **Zertifikatsfehler ignorieren (unsicher)**
    hebt die Zertifikatsprüfung auf; eine solche Diagnoseeinstellung verlangt eine
    ausdrückliche Risikobestätigung. Begrenze **Erlaubte Signaturalgorithmen** nur
    auf Verfahren, die der Anbieter tatsächlich liefert, und trage eines pro Zeile ein.
-2. Entscheide im Schritt **Identität**, ob **Benutzer automatisch anlegen**
+2. Entscheide unter **Konten und Rollen**, ob **Benutzer automatisch anlegen**
    erlaubt sein soll, und prüfe **Kontoverknüpfung** anhand der folgenden Regeln.
 3. Öffne **Claims anpassen**, wenn der Anbieter andere Claim-Namen liefert.
    Claims sind Tokenangaben. Standardnamen sind **Subject-Claim** `sub`, E-Mail
    `email`, Rollen `roles` und Gruppen `groups`. Benötigte Angaben müssen im
    ID-Token stehen; Mardu fragt dafür nicht den UserInfo-Endpunkt ab.
-4. Lege im Schritt **Zugriff** nur die benötigten **Rollen-Zuordnungen** und
+4. Lege unter **Konten und Rollen** nur die benötigten **Rollen-Zuordnungen** und
    **Gruppen-Zuordnungen** zu bereits vorhandenen lokalen Rollen an. Externe
    Rollen oder Gruppen werden durch ihren Namen allein nicht zu lokalen Rechten.
    Die [Benutzerverwaltung](./benutzer-rollen.mdx#rollen-und-gruppen-zuweisen)
@@ -120,7 +151,7 @@ lokalen Konto. Für unbekannte Kombinationen gilt:
 ### Welche Rollen und MFA-Nachweise gelten
 
 Bei jeder regulären Anmeldung werden passende lokale Rollen aus den
-konfigurierten Zuordnungen ergänzt. Unter **Erweiterte Autorisierung → Verwaltete Rollen**
+konfigurierten Zuordnungen ergänzt. Unter **Konten und Rollen → Verwaltete Rollen**
 legst du fest, welche lokalen Rollen Mardu wieder entfernen darf, wenn sie nicht
 mehr aus den aktuellen Claims hervorgehen. Andere bestehende Rollen bleiben
 erhalten. Plane die Entfernung einer Zuordnungsregel deshalb zusammen mit ihrer
@@ -128,7 +159,7 @@ Rollenverwaltung.
 
 Für die lokale Rolle **Admin** verlangt Mardu einen akzeptierten Nachweis der
 Mehrfaktor-Authentifizierung (MFA) vom Anbieter. Auch kontobezogene MFA-Pflichten
-gelten bei OIDC. Trage unter **Erweiterte Autorisierung** die vom Anbieter
+gelten bei OIDC. Trage unter **Konten und Rollen** die vom Anbieter
 tatsächlich gelieferten **Erlaubten AMR-Werte für Admin-Rechte** oder
 **Erlaubten ACR-Werte für Admin-Rechte** ein. Mindestens ein gelieferter Wert
 muss exakt zu einer dieser Listen passen. Ein beliebiger vorhandener Claim oder
@@ -141,7 +172,7 @@ Anbietertokens an der API. Für die Dashboard-Anmeldung brauchst du keine
 
 ## Entwurf testen und aktivieren
 
-1. Öffne den Schritt **Prüfen** und wähle **Verbindung testen**. Kontrolliere
+1. Öffne **Prüfung und Betrieb** und wähle **Verbindung testen**. Kontrolliere
    die Ergebnisse für Discovery, Issuer, Endpunkte, TLS und Signaturschlüssel.
    Behebe Fehler, bevor du fortfährst. Der Test prüft weder eine Benutzeranmeldung
    noch den Tokenaustausch mit Client-Secret und Anbieterregistrierung.
@@ -151,15 +182,19 @@ Anbietertokens an der API. Für die Dashboard-Anmeldung brauchst du keine
    **Authentifizierung beim Provider**, **Code gegen Token tauschen** und
    **Token validieren** sowie die angezeigte Zuordnung.
 3. Nutze unter **Claim-Vorschau** die Aktion **Claims der Test-Anmeldung auswerten**.
-   Alternativ kannst du ein JSON-Objekt als **Beispiel-Claims** eingeben und
+   Unter **Eigene Beispiel-Claims prüfen** kannst du alternativ ein JSON-Objekt als **Beispiel-Claims** eingeben und
    **Claims auswerten** wählen. Kontrolliere Zielkonto, fehlende Claims und
    lokale Rollen, besonders administrative Zuordnungen.
-4. Aktiviere **Provider aktivieren**, wenn Verbindung und Zuordnungsregeln passen.
+4. Aktiviere unter **Prüfung und Betrieb → Anmeldung aktivieren** den Schalter **Provider aktivieren**, wenn Verbindung und Zuordnungsregeln passen.
    Wähle **Konfiguration prüfen** und anschließend **Änderungen speichern**.
    Bestätige gegebenenfalls die angezeigten Risiken. Alle Provider werden
    gemeinsam gespeichert. Aktivierung und Verbindungsänderungen aktiver Provider
    benötigen einen aktuellen erfolgreichen Verbindungstest; nach weiteren
-   Änderungen oder Ablauf wiederholst du ihn.
+   Änderungen am geprüften Entwurf oder Ablauf wiederholst du ihn. Du kannst den
+   Verbindungstest bereits beim deaktivierten Anbieter ausführen und anschließend
+   aktivieren. Ein unvollständiger zweiter Anbieter blockiert diesen einzelnen
+   Test nicht, muss aber vor dem gemeinsamen Speichern vervollständigt oder aus
+   dem Entwurf entfernt werden.
 5. Kontrolliere im Status **Gespeicherter Stand ist aktiv** und
    **Zuletzt angewendet**. Die Übernahme erfolgt ohne Serverneustart.
    Prüfe danach in einem getrennten Browserfenster die reguläre Anmeldung über
@@ -170,6 +205,12 @@ Verbindungstest, Test-Anmeldung und Claim-Vorschau speichern nichts und ändern
 keine lokalen Benutzer oder Rollen. Globale Registrierung, Freigabe, Kontosperren
 und MFA können die reguläre Anmeldung zusätzlich verhindern. Prüfe sie deshalb
 auch nach erfolgreicher Test-Anmeldung.
+
+Die Test-Anmeldung ist empfohlen, aber keine zusätzliche Pflicht zum Speichern.
+Ein Verbindungstest prüft keine Zugangsdaten. Ergebnisse von Test-Anmeldung und
+Claim-Vorschau werden bei Änderungen am Entwurf verworfen. Nach dem Neuladen der
+Seite musst du eine neue Test-Anmeldung starten. Der Entwurf wird einschließlich
+eingegebener Secrets nur im Arbeitsspeicher gehalten.
 
 ## Ändern oder abschalten
 
@@ -186,10 +227,22 @@ kein ausdrücklicher Sitzungswiderruf. Für laufende Anmeldesitzungen nutze die
 unter [Sicherheit und Betrieb](./sicherheit-betrieb.mdx#sitzungen-und-anmeldehistorie)
 beschriebenen Widerrufswege.
 
+### Gleichzeitige Änderungen und unvollständige Entwürfe
+
+**Gespeicherten Stand abrufen** behält lokale Änderungen. Hat inzwischen eine
+andere Person die Serverkonfiguration geändert, wird das Speichern blockiert.
+Übertrage nötige eigene Angaben, wähle **Änderungen verwerfen** und bearbeite den
+neu geladenen Stand. Während des Abrufs und Speicherns sind Änderungen gesperrt.
+Die Versionskennung eines bestehenden Entwurfs wird beim Abrufen nicht ersetzt.
+
+**Alle Anbieter gemeinsam speichern** übernimmt die vollständige Providerliste;
+der Speichervorgang gilt nicht nur für den gerade ausgewählten Anbieter.
+Unvollständige Konfigurationen können auch deaktiviert nicht gespeichert werden.
+Beim Verlassen der Seite warnt Mardu vor ungespeicherten Änderungen.
+
 ## Wenn etwas nicht klappt
 
-- **Seite sichtbar, Laden oder Aktion abgewiesen:** Prüfe sowohl Integrations-
-  als auch Settings-Rechte. Fehlende Rollenvorschläge benötigen `Roles.View`.
+- **Seite sichtbar, Laden oder Aktion abgewiesen:** Prüfe die Settings-Rechte für Ansicht beziehungsweise Bearbeiten. Fehlende Rollenvorschläge benötigen `Roles.View`.
 - **Discovery oder TLS fehlgeschlagen:** Prüfe Issuer, Discovery-Adresse,
   Erreichbarkeit vom Server und Zertifikatsvertrauen anhand der Diagnose.
 - **Rückleitung abgelehnt:** Prüfe die getrennten Callback-Adressen beim
