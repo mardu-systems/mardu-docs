@@ -16,10 +16,10 @@ Passwort sowie die Suchbereiche und verwendeten Benutzer-/Gruppenattribute berei
 Ein **DN** ist der vollständige Name eines Eintrags im Verzeichnis, beispielsweise
 `cn=mardu,ou=services,dc=example,dc=org`.
 
-Der Menüpunkt benötigt **Integrationen anzeigen** (`Integrations.View`). Zum Laden
-der Konfiguration und des Verlaufs brauchst du zusätzlich **Einstellungen anzeigen**
-(`Settings.View`). Speichern, Verbindungstest, Vorschau und manueller Abgleich
-benötigen **Einstellungen bearbeiten** (`Settings.Update`).
+Für den Menüpunkt, die Konfiguration und den Verlauf brauchst du
+**Einstellungen anzeigen** (`Settings.View`). Speichern, Verbindungstest,
+Vorschau und manueller Abgleich benötigen **Einstellungen bearbeiten**
+(`Settings.Update`).
 
 Für die Auswahl lokaler Rollen brauchst du außerdem **Rollen anzeigen**
 (`Roles.View`). Die CA-Zertifikatsliste verwendet `Settings.View`.
@@ -64,8 +64,9 @@ Serverbetrieb ändern.
 Attribute für **Benutzername**, **Anzeigename**, **Vorname**, **Nachname**,
 **E-Mail** und **Gruppen**.
 
-Unter **Stabile ID-Attribute** steht ein Attribut pro Zeile. Die erste vorhandene
-Kennung dient als **Subject**, der externen Kennung der Person. Sie soll bei
+Unter **Stabile ID-Attribute** steht ein Attribut pro Zeile. Speichern ersetzt
+die vollständige Liste; entfernte Einträge und Standardwerte werden nicht ergänzt.
+Die erste vorhandene Kennung dient als **Subject**, der externen Kennung der Person. Sie soll bei
 Namensänderungen erhalten bleiben. Eine geänderte Zuordnung kann die Verknüpfung
 mit bestehenden Konten verändern.
 
@@ -132,7 +133,7 @@ kann daher spätere Abgleiche mit den gewählten Folgen auslösen, auch ohne
    von der Vorschau abweichen.
 3. Wähle **Änderungen speichern** und prüfe Validierungsfehler, Risikodialog und
    Erfolgsmeldung. Kontrolliere gespeicherten Stand und Laufzeitstatus.
-   **Verwerfen** setzt deine Eingaben auf den zuletzt geladenen Stand zurück.
+   **Änderungen verwerfen** verwirft den Entwurf und ruft den aktuellen gespeicherten Stand vom Server ab.
 4. Erstelle nach dem Speichern eine aktuelle Vorschau für diesen Stand. Für den
    manuellen Abgleich müssen LDAP aktiviert, alle Änderungen gespeichert und die
    Vorschau aktuell sein. Wähle dann **Jetzt synchronisieren**. Bei Kandidaten für
@@ -162,7 +163,7 @@ Mardu-Kontorichtlinien und eine erforderliche lokale Zwei-Faktor-Prüfung weiter
 
 | Beobachtung                                             | Nächster Schritt                                                                                                                                |
 | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Die Konfiguration oder der Verlauf lädt nicht.          | Prüfe Verbindung und `Settings.View`; der sichtbare Menüpunkt allein genügt nicht.                                                              |
+| Die Konfiguration oder der Verlauf lädt nicht.          | Prüfe Verbindung und `Settings.View`.                                                                                                           |
 | Test, Vorschau oder Speichern wird abgewiesen.          | Prüfe `Settings.Update`, gemeldete Feldfehler und durch die Serverumgebung gesperrte Werte.                                                     |
 | Der Verbindungstest scheitert.                          | Prüfe Server/Port, Transport, Zertifikatsvorgaben, Lesekonto und Zugriff auf die Suchbasis anhand der Ergebnisangaben.                          |
 | Gruppen oder lokale Rollen fehlen in der Auswahl.       | Prüfe Gruppen-Suchbereich und Leserechte beziehungsweise die vorhandenen lokalen Rollen und die Berechtigung, sie zu laden.                     |

@@ -15,11 +15,9 @@ erteilt keine Kompetenz oder Ressourcenfreigabe.
 
 ## Voraussetzungen
 
-- Für Navigation und Ansicht brauchst du **Integrationen anzeigen**
-  (`Integrations.View`), zum Bearbeiten **Integrationen bearbeiten**
-  (`Integrations.Update`). Die Settings-API verlangt zusätzlich
-  **Einstellungen anzeigen** (`Settings.View`) beziehungsweise für Speichern,
-  Validierung und Tests **Einstellungen bearbeiten** (`Settings.Update`).
+- Für Navigation und Ansicht brauchst du **Einstellungen anzeigen**
+  (`Settings.View`), für Speichern, Validierung und Tests
+  **Einstellungen bearbeiten** (`Settings.Update`).
 - Zum Vorschlagen vorhandener Rollen brauchst du **Rollen anzeigen** (`Roles.View`).
 - Du kannst beim Identitätsanbieter einen Client registrieren und kennst dessen
   Issuer, Client-ID, Client-Authentifizierung und gegebenenfalls Client-Secret.
@@ -70,7 +68,8 @@ oder **Discovery-Adresse** abweichend setzen. Ohne eigene Discovery-Adresse
 verwendet Mardu `/.well-known/openid-configuration` unter Authority beziehungsweise
 Issuer. Autorisierungs-, Token- und Signaturschlüssel-Endpunkte werden daraus
 gelesen. Die **Scopes** enthalten mindestens `openid`; der neue Entwurf enthält
-außerdem `profile` und `email`. Zusätzliche Autorisierungsparameter ersetzen
+außerdem `profile` und `email`. Trage einen Scope pro Zeile ein.
+Zusätzliche Autorisierungsparameter ersetzen
 keine OIDC-Pflichtparameter.
 
 Mardu verwendet automatisch den Authorization-Code-Ablauf mit **PKCE**. Die
@@ -84,7 +83,7 @@ Prüfung bindet den Code an den gestarteten Anmeldevorgang.
    die benötigten Zertifizierungsstellen. **Zertifikatsfehler ignorieren (unsicher)**
    hebt die Zertifikatsprüfung auf; eine solche Diagnoseeinstellung verlangt eine
    ausdrückliche Risikobestätigung. Begrenze **Erlaubte Signaturalgorithmen** nur
-   auf Verfahren, die der Anbieter tatsächlich liefert.
+   auf Verfahren, die der Anbieter tatsächlich liefert, und trage eines pro Zeile ein.
 2. Entscheide im Schritt **Identität**, ob **Benutzer automatisch anlegen**
    erlaubt sein soll, und prüfe **Kontoverknüpfung** anhand der folgenden Regeln.
 3. Öffne **Claims anpassen**, wenn der Anbieter andere Claim-Namen liefert.

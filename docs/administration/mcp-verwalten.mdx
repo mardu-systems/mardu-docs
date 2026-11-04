@@ -10,9 +10,9 @@ widerruft jede Person im
 ## Voraussetzungen und Rechte
 
 Öffne **Administration → Integrationen → MCP & Agents**. Du benötigst
-**Einstellungen anzeigen**, zum Speichern **Einstellungen bearbeiten** und für
-den Menüweg **Integrationen anzeigen**. Für den Test muss der Client den Server
-erreichen; das Testkonto braucht die Rechte für die gewählte Aktion.
+**Einstellungen anzeigen**, zum Speichern **Einstellungen bearbeiten**. Für den
+Test muss der Client den Server erreichen; das Testkonto braucht die Rechte für
+die gewählte Aktion.
 
 ## MCP mit persönlichem Lesezugang einrichten
 
@@ -21,14 +21,19 @@ erreichen; das Testkonto braucht die Rechte für die gewählte Aktion.
    MCP-Tokens verwendet werden sollen. Clients mit normalen Benutzer-Zugangstokens
    werden dann abgewiesen.
 3. Lasse **Schreibende Tools erlauben** und **Destruktive Tools erlauben** ausgeschaltet.
-4. Prüfe die [Grenzwerte](#grenzwerte-wählen) und wähle **Speichern**.
+4. Prüfe die [Grenzwerte](#grenzwerte-wählen) und wähle **Speichern**. Wenn du
+   persönliche Verbindungen neu erlaubst, prüfe den Dialog
+   **Zugriff über MCP erweitern?** und bestätige die Freigabe.
 5. Erstelle mit dem Testkonto eine [persönliche Verbindung](../ueberblick/profil-mcp.mdx#verbindung-erstellen)
    mit der benötigten Leseberechtigung.
 6. [Richte den Client ein und führe den Lesetest aus](../entwickeln/mcp-anbindung.mdx#mcp-client-verbinden).
    Prüfe, ob er eine erfolgreiche Antwort erhält.
 
-Speichern übernimmt die Richtlinie ohne Neustart; **Verwerfen** setzt den
-Entwurf auf den geladenen Stand zurück.
+Die Leiste zum Speichern und Verwerfen erscheint bei ungespeicherten Änderungen
+und bleibt beim Scrollen erreichbar. Speichern übernimmt die Richtlinie ohne
+Neustart; währenddessen ist die Bearbeitung gesperrt. **Änderungen verwerfen**
+setzt den Entwurf auf den geladenen Stand zurück. Beim Verlassen mit ungespeicherten
+Änderungen kannst du weiter bearbeiten oder die Änderungen verwerfen.
 
 ## Grenzwerte wählen
 
@@ -46,7 +51,9 @@ Mit **Schreibende Tools erlauben** gibst du das Erstellen und Ändern von Daten 
 Geräten und Zutrittspunkten sowie das Widerrufen von Zutrittszuweisungen frei.
 Diese Freigabe setzt den Schreibzugriff voraus.
 
-1. Aktiviere die benötigte Tool-Art und wähle **Speichern**.
+1. Aktiviere die benötigte Tool-Art und wähle **Speichern**. Prüfe im Dialog
+   **Zugriff über MCP erweitern?** die zusätzlich erlaubten Möglichkeiten und
+   wähle **Bestätigen**. Das Ausschalten benötigt diese Bestätigung nicht.
 2. Lass die Person eine Verbindung mit den benötigten Berechtigungen erstellen.
    Bestehende Verbindungen erhalten keine zusätzlichen Rechte.
 3. Lade im Client die Werkzeugliste neu und prüfe die Aktion mit Testdaten.

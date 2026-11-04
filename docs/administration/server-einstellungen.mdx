@@ -33,12 +33,10 @@ Die Suche findet zunächst Seiten und Abschnitte, nicht jedes einzelne Formularf
 
 ## Einstellungen lesen und speichern
 
-Für globale Einstellungen, Auth Policy, Zertifikate, E-Mail, Tags, LDAP und OIDC benötigst du
-`Settings.View` zum Lesen und `Settings.Update` zum Ändern. Die Menüeinträge
-**Monitoring & Metriken** und **Fehlerberichte** werden erst mit `Settings.Update`
-angeboten. Die Menüs für LDAP und OIDC setzen zusätzlich `Integrations.View`
-voraus; die OIDC-Oberfläche verlangt zum Bearbeiten auch `Integrations.Update`.
-Die Einstellungs-APIs prüfen die Settings-Rechte. Für **Audit-Ereignisse** gilt
+Für globale Einstellungen, Auth Policy, Zertifikate, E-Mail, Tags, LDAP, OIDC,
+**Monitoring & Metriken** und **Fehlerberichte** benötigst du `Settings.View`
+zum Lesen und `Settings.Update` zum Ändern. Die Einstellungs-APIs prüfen dieselben
+Rechte. Für **Audit-Ereignisse** gilt
 `AuditTrail.View`.
 
 1. Öffne **Administration → Systemeinstellungen** und wähle oder suche den Bereich.
@@ -46,8 +44,11 @@ Die Einstellungs-APIs prüfen die Settings-Rechte. Für **Audit-Ereignisse** gil
    stehen am Informationssymbol.
 3. Ändere die benötigten Werte. Zahlenfelder nennen Einheit und Grenzen.
    Leere ein Feld nur, wenn seine Beschreibung diese Möglichkeit vorsieht.
-4. Wähle **Speichern**. Bei markierten Fehlern korrigierst du die betroffenen
-   Felder und speicherst erneut. Bestätigungsdialoge nennen zusätzliche Folgen.
+4. Sobald du etwas geändert hast, erscheint die beim Scrollen erreichbare
+   Leiste zum Speichern und Verwerfen. Wähle **Speichern**. Während des Speicherns
+   sind weitere Änderungen und das Verwerfen gesperrt. Bei markierten Fehlern
+   korrigierst du die betroffenen Felder und speicherst erneut.
+   Bestätigungsdialoge nennen zusätzliche Folgen.
 5. Prüfe die Erfolgsmeldung und die Hinweise zur Wirksamkeit. Rufe den Bereich
    anschließend erneut auf, um den gespeicherten Stand zu kontrollieren.
 
@@ -62,10 +63,9 @@ steht **Erneut versuchen** zur Verfügung.
 einer eingelesenen `.env`-Datei. Die zuständige Person muss sie im Deployment ändern.
 **Nur lesbar** kennzeichnet Werte ohne Bearbeitungsfunktion, etwa die Installationskennung.
 
-Der Statusbereich zeigt Konfigurationsquelle, **Aktiv** oder **Inaktiv** und
-Anwendungsmodus; **Gespeicherte Konfiguration** nennt die Herkunft der Werte.
-**Hot Reload** erlaubt Änderungen ohne Serverneustart. Beachte trotzdem
-feldbezogene Hinweise wie **Wird erst nach Neustart vollständig wirksam** und
+Die Laufzeitangaben nennen je nach Bereich Konfigurationsquelle und
+Anwendungsmodus. **Hot Reload** erlaubt Änderungen ohne Serverneustart. Beachte
+trotzdem feldbezogene Hinweise wie **Wird erst nach Neustart vollständig wirksam** und
 die Meldung nach dem Speichern.
 
 Speichern führt keinen vollständigen Serverneustart aus. Plane ihn bei
@@ -115,6 +115,9 @@ Wähle bei aktiver Selbstregistrierung eine vorhandene **Standardrolle für
 Registrierungen** und lege die **Gültigkeit Bestätigungslink (Stunden)** zwischen
 1 und 168 fest. Die Standardrolle betrifft neue Registrierungen; sie ist keine
 nachträgliche Rollenzuweisung an alle Konten.
+
+Kann die Rollenliste nicht geladen werden, bleibt die gespeicherte Auswahl
+erhalten. Wähle **Erneut versuchen**, bevor du eine andere Standardrolle auswählst.
 
 **SSO-Konten freigeben lassen** regelt die Freigabe neuer, über OpenID Connect
 angelegter Konten. Den Anbieter richtest du separat unter **Server → OIDC** ein.
