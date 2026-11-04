@@ -41,8 +41,14 @@ keinen Einrichtungsschritt ab.
 1. Wähle **Provider hinzufügen** und bei Bedarf eine **Provider-Vorlage**.
    Die Provider-ID wird einmal erzeugt. Du findest sie unter **Technische Kennungen**;
    sie muss nicht eingegeben werden. Der Anzeigename kann angepasst werden.
-2. Trage unter **Verbindung** den exakten **Issuer** aus dem Discovery-Dokument und
-   die **Client-ID** ein. Für einen Client mit Secret wähle **Secret setzen** und
+2. Füge unter **Verbindung** im Feld **Issuer- oder Discovery-URL** die Issuer-Adresse
+   oder die vollständige `.well-known`-Discovery-URL ein. Wähle **Konfiguration laden**.
+   Das Backend lädt das Dokument und übernimmt dessen Issuer und Discovery-Adresse
+   in den Entwurf. Die Eingabe von Client-ID oder Secret ist dafür noch nicht nötig.
+   Eine geänderte URL muss geladen werden, bevor du speichern oder die Anmeldung
+   testen kannst. Bei einem Fehler bleiben die bisherige Konfiguration und deine
+   Eingabe erhalten. Trage anschließend die **Client-ID** ein.
+   Für einen Client mit Secret wähle **Secret setzen** und
    hinterlege das Client-Secret. Ein gespeichertes Secret wird nicht angezeigt;
    **Secret ersetzen** ändert es erst beim Speichern.
 3. Kopiere die angezeigte **Redirect-URI** in die Client-Registrierung beim Anbieter.
@@ -78,9 +84,24 @@ Die interne Dashboard-Callback-Adresse gehört nicht als Ersatz für die
 **Redirect-URI** in die Anbieterregistrierung. Bei einem vorgeschalteten Proxy
 müssen die öffentlich sichtbare Adresse und HTTPS beim Backend korrekt ankommen.
 
-Unter **Endpunkte und Parameter anpassen** kannst du eine abweichende
-**Discovery-Adresse** und zusätzliche Autorisierungsparameter hinterlegen. Ohne
-Abweichung wird das Discovery-Dokument unter dem Issuer geladen. Eine bestehende
+Das Feld **Issuer- oder Discovery-URL** zeigt bei vorhandenen Providern die bisher
+verwendete Discovery-Adresse, Authority oder Issuer-Adresse. Beim erneuten Laden
+prüft Mardu den veröffentlichten Issuer gegen den bestehenden Wert. Die gespeicherten
+Werte bleiben dabei unverändert. Erst eine ausdrücklich geänderte und geladene URL
+übernimmt einen neuen Issuer und eine neue Discovery-Adresse. Prüfe die Kontozuordnung,
+bevor du die Anbieteridentität änderst.
+
+Bei einer Issuer-Adresse ergänzt das Backend `/.well-known/openid-configuration`.
+Vollständige `.well-known`-URLs lädt es direkt. Beispielsweise kannst du
+`https://auth.mardu.systems/application/o/mardu-test/.well-known/openid-configuration`
+verwenden. Das Laden sendet keine Client-Zugangsdaten, speichert nichts und ersetzt
+keinen Verbindungstest. Die vorhandene Zertifikatsauswahl gilt auch dafür. Neue
+Provider verlangen HTTPS; bestehende Ausnahmen bleiben erhalten.
+
+Unter **Endpunkte und Parameter anpassen** bleiben nicht standardmäßige bestehende
+**Discovery-Adressen** und zusätzliche Autorisierungsparameter zugänglich. Ist nur
+einer der Werte Issuer oder Discovery-Adresse durch die Serverumgebung gesperrt,
+bleibt der andere dort separat bearbeitbar. Eine bestehende
 **Authority** bleibt erhalten und steht unter **Technische Kennungen**. Mit
 **Discovery aus dem Issuer verwenden** entfernst du eine bestehende Authority und
 Discovery-Abweichung ausdrücklich; gesperrte Werte muss der Serverbetrieb ändern.
