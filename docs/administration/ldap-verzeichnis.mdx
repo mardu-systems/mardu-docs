@@ -21,10 +21,13 @@ Passwort sowie die Suchbereiche und verwendeten Benutzer-/Gruppenattribute berei
 Ein **DN** ist der vollständige Name eines Eintrags im Verzeichnis, beispielsweise
 `cn=mardu,ou=services,dc=example,dc=org`.
 
-Für den Menüeinstieg brauchst du **Integrationen anzeigen**, zum Laden von
-Konfiguration, Zertifikaten und Verlauf **Einstellungen anzeigen**. Speichern,
-Verbindungstest, Vorschau und manueller Abgleich benötigen **Einstellungen bearbeiten**.
-Für die Auswahl lokaler Rollen brauchst du außerdem **Rollen anzeigen**.
+Für den Menüpunkt, die Konfiguration und den Verlauf brauchst du
+**Einstellungen anzeigen** (`Settings.View`). Speichern, Verbindungstest,
+Vorschau und manueller Abgleich benötigen **Einstellungen bearbeiten**
+(`Settings.Update`).
+
+Für die Auswahl lokaler Rollen brauchst du außerdem **Rollen anzeigen**
+(`Roles.View`). Die CA-Zertifikatsliste verwendet `Settings.View`.
 
 Durch die Serverumgebung gesperrte Werte, auch das Bind-Passwort, muss der
 Serverbetrieb ändern.
@@ -82,8 +85,9 @@ dem Verbindungstest; sie bestätigt keine erreichbare Verzeichnisverbindung.
 Attribute für **Benutzername**, **Anzeigename**, **Vorname**, **Nachname**,
 **E-Mail** und **Gruppen**.
 
-Unter **Stabile ID-Attribute** steht ein Attribut pro Zeile. Die erste vorhandene
-Kennung dient als **Subject**, der externen Kennung der Person. Sie soll bei
+Unter **Stabile ID-Attribute** steht ein Attribut pro Zeile. Speichern ersetzt
+die vollständige Liste; entfernte Einträge und Standardwerte werden nicht ergänzt.
+Die erste vorhandene Kennung dient als **Subject**, der externen Kennung der Person. Sie soll bei
 Namensänderungen erhalten bleiben. Eine geänderte Zuordnung kann die Verknüpfung
 mit bestehenden Konten verändern.
 
@@ -159,7 +163,7 @@ kann daher spätere Abgleiche mit den gewählten Folgen auslösen, auch ohne
    von der Vorschau abweichen.
 3. Wähle **Änderungen speichern** und prüfe Validierungsfehler, Risikodialog und
    Erfolgsmeldung. Kontrolliere gespeicherten Stand und Laufzeitstatus.
-   **Verwerfen** setzt deine Eingaben auf den zuletzt geladenen Stand zurück.
+   **Änderungen verwerfen** verwirft den Entwurf und ruft den aktuellen gespeicherten Stand vom Server ab.
 4. Erstelle nach dem Speichern eine aktuelle Vorschau für diesen Stand. Für den
    manuellen Abgleich müssen LDAP aktiviert, alle Änderungen gespeichert und die
    Vorschau aktuell sein. Wähle dann **Jetzt synchronisieren**. Bei Kandidaten für
@@ -204,8 +208,8 @@ verwende bei Bedarf die [Widerrufswege → Sicherheit und Betrieb](./sicherheit-
 
 | Beobachtung                                             | Nächster Schritt                                                                                                                                |
 | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Die Konfiguration oder der Verlauf lädt nicht.          | Prüfe Verbindung und **Einstellungen anzeigen**; der sichtbare Menüpunkt allein genügt nicht.                                                   |
-| Test, Vorschau oder Speichern wird abgewiesen.          | Prüfe **Einstellungen bearbeiten**, Feldfehler und durch die Serverumgebung gesperrte Werte.                                                    |
+| Die Konfiguration oder der Verlauf lädt nicht.          | Prüfe Verbindung und `Settings.View`.                                                                                                           |
+| Test, Vorschau oder Speichern wird abgewiesen.          | Prüfe `Settings.Update`, gemeldete Feldfehler und durch die Serverumgebung gesperrte Werte.                                                     |
 | Der Verbindungstest scheitert.                          | Prüfe Server/Port, Transport, Zertifikatsvorgaben, Lesekonto und Zugriff auf die Suchbasis anhand der Ergebnisangaben.                          |
 | Gruppen oder lokale Rollen fehlen in der Auswahl.       | Prüfe Gruppen-Suchbereich und Leserechte beziehungsweise die vorhandenen lokalen Rollen und die Berechtigung, sie zu laden.                     |
 | „Jetzt synchronisieren“ ist nicht verfügbar.            | Aktiviere LDAP, speichere Änderungen und erstelle eine aktuelle Vorschau des gespeicherten Stands.                                              |

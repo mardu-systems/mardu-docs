@@ -51,8 +51,9 @@ keine Zustellung.
    nicht auswählbar. Das SMTP-Zertifikat muss für den angegebenen Host gelten
    und vom Mardu-Server als vertrauenswürdig erkannt werden.
 3. Trage **Absenderadresse**, bei Bedarf **Anzeigename** sowie **Benutzername**
-   und **Passwort ersetzen** ein. Ein leeres Passwortfeld behält ein bereits
-   gespeichertes Passwort bei; es löscht es nicht.
+   ein. Wähle unter **Passwortaktion** **Beibehalten**, **Ersetzen** oder
+   **Leeren**. Ein gespeichertes Passwort wird nicht angezeigt; beim Ersetzen
+   musst du ein neues eingeben. **Leeren** entfernt es erst beim Speichern.
 4. Wähle **Speichern**. Der Mailversand übernimmt die Konfiguration ohne Neustart.
 5. Trage unter **Versand testen** eine **Empfängeradresse** ein, deren Postfach
    du prüfen kannst. Wähle **Test-E-Mail senden**. Ungespeicherte Änderungen müssen
@@ -66,9 +67,11 @@ keine Zustellung.
   Schritt.
 </Callout>
 
-Auch für Test-E-Mails sind Absenderadresse, Benutzername und Passwort erforderlich.
-Ein SMTP-Relay ohne Anmeldung wird nicht unterstützt; die Formularbeschreibung
-„Optionales SMTP-Konto“ hebt diese Voraussetzung nicht auf.
+Leerst du **Absenderadresse**, **Anzeigename** oder **Benutzername**, entfernt
+Speichern den jeweiligen Wert. Absenderadresse, Benutzername und Passwort sind
+für den Versand einschließlich Test-E-Mails erforderlich. Entfernte Zugangsdaten
+musst du daher vor einem weiteren Versand wieder hinterlegen. Ein SMTP-Relay
+ohne Anmeldung wird nicht unterstützt.
 
 </Step>
 

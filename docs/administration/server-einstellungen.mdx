@@ -36,17 +36,22 @@ versuche einen anderen Begriff oder nutze die Bereichsnavigation.
 
 ## Einstellungen lesen und speichern
 
-Für globale Servereinstellungen benötigst du `Settings.View` zum Lesen und
-`Settings.Update` zum Ändern. Andere Bereiche können weitere Rechte verlangen;
-diese stehen in der jeweiligen Anleitung.
+Für globale Einstellungen, Auth Policy, Zertifikate, E-Mail, Tags, LDAP, OIDC,
+**Monitoring & Metriken** und **Fehlerberichte** benötigst du `Settings.View`
+zum Lesen und `Settings.Update` zum Ändern. Die Einstellungs-APIs prüfen dieselben
+Rechte. Für **Audit-Ereignisse** gilt
+`AuditTrail.View`.
 
 1. Öffne **Administration → Systemeinstellungen** und wähle oder suche den Bereich.
 2. Warte auf die gespeicherten Werte und lies die Feldhinweise. Weitere Erklärungen
    stehen am Informationssymbol.
 3. Ändere die benötigten Werte. Zahlenfelder nennen Einheit und Grenzen.
    Leere ein Feld nur, wenn seine Beschreibung diese Möglichkeit vorsieht.
-4. Wähle **Speichern**. Bei markierten Fehlern korrigierst du die betroffenen
-   Felder und speicherst erneut. Bestätigungsdialoge nennen zusätzliche Folgen.
+4. Sobald du etwas geändert hast, erscheint die beim Scrollen erreichbare
+   Leiste zum Speichern und Verwerfen. Wähle **Speichern**. Während des Speicherns
+   sind weitere Änderungen und das Verwerfen gesperrt. Bei markierten Fehlern
+   korrigierst du die betroffenen Felder und speicherst erneut.
+   Bestätigungsdialoge nennen zusätzliche Folgen.
 5. Prüfe die Erfolgsmeldung und die Hinweise zur Wirksamkeit. Rufe den Bereich
    anschließend erneut auf, um den gespeicherten Stand zu kontrollieren.
 
@@ -61,10 +66,9 @@ steht **Erneut versuchen** zur Verfügung.
 einer eingelesenen `.env`-Datei. Die zuständige Person muss sie im Deployment ändern.
 **Nur lesbar** kennzeichnet Werte ohne Bearbeitungsfunktion, etwa die Installationskennung.
 
-Der Statusbereich zeigt Konfigurationsquelle, **Aktiv** oder **Inaktiv** und
-Anwendungsmodus; **Gespeicherte Konfiguration** nennt die Herkunft der Werte.
-**Hot Reload** erlaubt Änderungen ohne Serverneustart. Beachte trotzdem
-feldbezogene Hinweise wie **Wird erst nach Neustart vollständig wirksam** und
+Die Laufzeitangaben nennen je nach Bereich Konfigurationsquelle und
+Anwendungsmodus. **Hot Reload** erlaubt Änderungen ohne Serverneustart. Beachte
+trotzdem feldbezogene Hinweise wie **Wird erst nach Neustart vollständig wirksam** und
 die Meldung nach dem Speichern.
 
 Speichern führt keinen vollständigen Serverneustart aus. Plane ihn bei
