@@ -3,6 +3,9 @@ title: Übersicht und Systemstatus
 description: Betriebsdashboards anpassen, Systemmesswerte lesen und Zeiträume sowie Datenlücken einordnen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import transaktionenAnsicht from './bilder/datenbank-transaktionen.png';
+
 Die **Übersicht** zeigt dein ausgewähltes **Betriebsdashboard**. Unter
 **Betrieb → Systemstatus** stehen Systemmetriken in fester Anordnung, etwa
 **System**, **HTTP** und **Datenbank**. Eigene Betriebsdashboards speichern deine
@@ -69,7 +72,10 @@ Hauptzahl gelten für den gewählten Zeitraum.
 Gezählt werden Transaktionen der Anwendungsdatenbank samt Hintergrundabfragen
 und Monitoring, keine Benutzeraktionen.
 
-![Transaktionen als gemeinsame Balken aus Commits und Rollbacks je 30 Minuten, mit Zeitraum im Tooltip](bilder/datenbank-transaktionen.png)
+<ImageZoom
+  src={transaktionenAnsicht}
+  alt="Transaktionen als gemeinsame Balken aus Commits und Rollbacks je 30 Minuten, mit Zeitraum im Tooltip."
+/>
 
 ## Fehlende und begrenzte Messwerte
 
@@ -130,9 +136,13 @@ Betriebsdashboards speichern.
    und Entfernen im Drei-Punkte-Menü.
 5. Wähle **Speichern**, um Name und Ansicht für dein Konto zu übernehmen.
 
-Die Warnschwellen markieren nur die Anzeige in der angegebenen Einheit. Sie lösen
-keine Alarme aus und ändern keine Ressourcenregeln. Das Entfernen eines Widgets
-entfernt keine Messungen oder Geräte. Ein Dashboard kann bis zu 40 Widgets enthalten.
+<Callout title="Widget-Schwellen markieren die Anzeige">
+  Die Warnschwellen markieren nur die Anzeige in der angegebenen Einheit. Sie lösen keine Alarme aus
+  und ändern keine Ressourcenregeln.
+</Callout>
+
+Das Entfernen eines Widgets entfernt keine Messungen oder Geräte.
+Ein Dashboard kann bis zu 40 Widgets enthalten.
 
 Neue Karten erhalten eine zur Darstellung passende Größe; gespeicherte eigene
 Größen bleiben erhalten. Auf schmalen Bildschirmen stehen die Karten untereinander.
@@ -173,8 +183,6 @@ Monitoring-Ansicht dort verwendet den gewählten Zeitraum und die Auflösung fü
 dieses Gerät. Eine gespeicherte Widget-Anordnung gilt für alle Geräte, die du mit
 deinem Konto öffnest. Sie wird getrennt von deinen Betriebsdashboards gespeichert.
 
-![Systemstatus mit Systemwidgets und einer Anzeige ohne Temperaturmesswerte](bilder/systemstatus-metriken.png)
-
 ## Benachrichtigungen
 
 Die Glocke öffnet den [persönlichen Posteingang](./benachrichtigungen.mdx).
@@ -197,5 +205,4 @@ Serverdiagnose.
 ## Umfang dieser Anleitung
 
 Die Verfügbarkeit einzelner Host- und Gerätemesswerte hängt von der Installation
-und den angeschlossenen Geräten ab. Für eigene Buchungen und Qualifikationen
-siehe [persönliches Dashboard im Benutzerbereich](./dashboard.mdx).
+und den angeschlossenen Geräten ab.

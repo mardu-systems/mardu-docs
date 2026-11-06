@@ -1,6 +1,6 @@
 ---
 title: Rollen und Gruppen verwalten
-description: Rollen und ihre Rechte pflegen, Benutzergruppen anlegen und löschen und die Folgen für zugeordnete Personen prüfen.
+description: Rollen und ihre Rechte pflegen, Benutzergruppen verwalten und Mitglieder sowie Gruppenrollen zuweisen.
 ---
 
 Eine Rolle gewährt Rechte für Aktionen. Eine Benutzergruppe weist ihren Mitgliedern
@@ -8,13 +8,13 @@ Rollen zu, auch später hinzugefügten Personen. Rollenänderungen betreffen dir
 Benutzer und Gruppenmitglieder.
 
 Öffne **Administration → Rollen** für die Rollenpflege und **Personen →
-Benutzergruppen** für Gruppen. Die Kategorien im Reiter **Rechte** ordnen die
+Benutzergruppen** für Gruppen. Die Kategorien im Reiter **Berechtigungen** ordnen die
 Berechtigungen in der Anzeige; sie sind keine Benutzergruppen.
 
 Wie du eine Rolle oder Gruppe einem einzelnen Konto zuweist, steht unter
 [Rollen und Gruppen zuweisen](./benutzer-rollen.mdx#rollen-und-gruppen-zuweisen).
 Rollenrechte ersetzen keine
-[Zutrittsfreigabe → Koordination](../koordination/ressourcen.mdx#nutzung-und-zugriff-nutzung-erlauben).
+[Zutrittsregel → Administration](./ressourcen-zutritt.mdx#nutzungsbedingungen-festlegen).
 
 ## Voraussetzungen und Rechte
 
@@ -42,35 +42,34 @@ brauchst du außerdem das Leserecht für Benutzer.
 
 ## Rolle erstellen und Rechte festlegen
 
-**Rolle erstellen** legt die Rolle sofort unter dem Namen **Neue Rolle** an, bei
-Bedarf mit einer Nummer. Das Schließen des Fensters löscht diese Rolle nicht.
-Für den anschließenden Namen und die Rechte brauchst du auch die jeweiligen
-Bearbeitungsrechte.
+**Rolle erstellen** öffnet zunächst ein Formular. Erst beim Absenden wird eine
+Rolle angelegt; das Schließen vor dem Absenden erstellt keine Rolle.
 
 1. Öffne **Administration → Rollen** und wähle **Rolle erstellen**.
-2. Trage unter **Allgemein** im Feld **Name** einen eindeutigen Namen mit höchstens
-   75 Zeichen ein, etwa **Werkstattverwaltung**, und bei Bedarf eine **Beschreibung**.
-3. Öffne **Rechte**. Suche die benötigte Aktion und schalte die entsprechenden
-   Rechte ein. Klappe bei Bedarf die Kategorie auf. Bei als **Kritisch** markierten
-   Rechten bestätigst du die Einzelaktivierung mit **Aktivieren**.
-4. Prüfe die gesamte Auswahl. Beim Einschalten einiger Bearbeitungsrechte ergänzt
-   die Oberfläche zugehörige Leserechte. **Nur aktiv** zeigt die ausgewählten
-   Rechte; **Alle** zeigt wieder die vollständige Auswahl.
+2. Trage einen eindeutigen **Namen** mit höchstens 75 Zeichen ein und ergänze bei
+   Bedarf eine **Beschreibung**. Bestätige mit **Rolle erstellen**.
+3. Öffne im Rollenfenster **Berechtigungen**. Suche die benötigte Aktion und
+   schalte ihre Rechte ein. Bei kritischen Rechten bestätigst du mit **Aktivieren**.
+   **Angezeigte aktivieren** betrifft nur die angezeigten Rechte und bestätigt
+   kritische Erweiterungen gemeinsam.
+4. Prüfe die Auswahl. Zugehörige Leserechte können als Voraussetzung ergänzt
+   werden. **Nur zugewiesene** zeigt die ausgewählten Rechte; **Alle** zeigt die
+   vollständige Auswahl.
 5. Wähle **Speichern** unten im Rollenfenster.
 
 Die gespeicherte Rolle ist noch niemandem zugewiesen. Ordne sie
 über die [Benutzerdetails](./benutzer-rollen.mdx#rollen-und-gruppen-zuweisen) oder
-die [Gruppenverwaltung](./benutzer-rollen.mdx#benutzergruppen-verwalten) zu.
+die [Gruppenverwaltung](#mitglieder-und-rollen-zuweisen) zu.
 
 ### Eine bestehende Rolle ändern
 
 Prüfe vor einer Rechteänderung, welche Benutzer und Gruppen die Rolle verwenden.
-**Direkte Nutzer** und der Reiter **Nutzer** zeigen nur direkte Zuweisungen;
+**Direkte Benutzer** und der Reiter **Benutzer** zeigen nur direkte Zuweisungen;
 Gruppenmitglieder sind darin nicht enthalten. Prüfe die **Zugewiesenen Rollen**
 der betroffenen Benutzergruppen zusätzlich.
 
 1. Suche die Rolle unter **Administration → Rollen** und klicke auf ihre Zeile.
-2. Ändere **Allgemein** oder **Rechte** wie bei der Anlage.
+2. Ändere **Allgemein** oder **Berechtigungen** wie bei der Anlage.
 3. Wähle **Speichern**. Beim Speichern einer geänderten Rechteauswahl muss
    mindestens ein Recht ausgewählt bleiben.
 
@@ -102,12 +101,26 @@ verhindern sie dagegen nicht: Beim Löschen wird die Rolle aus den Gruppen
 entfernt, und die Mitglieder verlieren die daraus erhaltenen Rechte, soweit
 keine andere Rolle dieselben Rechte gewährt.
 
-1. Öffne die Rolle und prüfe den Reiter **Nutzer** sowie die Gruppen, denen die
+1. Öffne die Rolle und prüfe den Reiter **Benutzer** sowie die Gruppen, denen die
    Rolle zugewiesen ist.
 2. Entferne noch vorhandene direkte Zuweisungen über die
    [Benutzerdetails](./benutzer-rollen.mdx#rollen-und-gruppen-zuweisen).
-3. Wähle **Löschen** unten im Rollenfenster und bestätige mit **Löschen**.
+3. Wähle **Rolle löschen** unten im Rollenfenster und bestätige mit **Löschen**.
 4. Prüfe in der Rollenübersicht, dass die Rolle nicht mehr aufgeführt ist.
+
+## Ressourcen-Zuständigkeiten prüfen
+
+Unter **Zuständigkeiten** im Rollenfenster und **Ressourcen-Zuständigkeiten** im
+Gruppenfenster siehst du Ressourcen, erlaubte Verwaltungsaktionen und deren
+Gültigkeitszeiträume. Die Anzeige vergibt keine persönlichen Zutrittsrechte und
+behauptet keinen Betriebszustand der Ressource.
+
+**Zuständigkeit hinzufügen** und **Entziehen** werden sofort gespeichert;
+**Speichern** unten betrifft die übrigen Entwürfe. Zum Entziehen brauchst du die
+entsprechenden Rechte, und der Server muss die Aktion für die Zuweisung anbieten.
+Bei einem Ladefehler kannst du **Erneut versuchen** wählen. Nach einem teilweise
+fehlgeschlagenen Entzug wird die Liste neu geladen; die Fehlermeldung bleibt sichtbar.
+Details stehen unter [Verwaltungszuständigkeiten](./verwaltungszustaendigkeiten.mdx).
 
 ## Benutzergruppe erstellen
 
@@ -117,10 +130,44 @@ keine andere Rolle dieselben Rechte gewährt.
 3. Ergänze bei Bedarf eine **Beschreibung** und wähle **Speichern**.
 4. Suche die neue Gruppe in der Liste und öffne sie.
 
-Die Gruppe hat zunächst keine Mitglieder oder Rollen. Folge
-[Benutzergruppen verwalten](./benutzer-rollen.mdx#benutzergruppen-verwalten), um sie
-zuzuweisen oder die Gruppendaten zu ändern. **Anwenden** im Auswahldialog ersetzt
-**Speichern** im Gruppenfenster nicht.
+Die Gruppe hat zunächst keine Mitglieder oder Rollen. Weise sie anschließend
+[im Gruppenfenster zu](#mitglieder-und-rollen-zuweisen).
+
+## Benutzergruppe bearbeiten
+
+1. Öffne **Personen → Benutzergruppen**, suche die Gruppe und klicke auf ihre Zeile.
+2. Ändere unter **Übersicht** **Name** oder **Beschreibung**. Für den Namen gelten
+   dieselben Vorgaben wie [bei der Anlage](#benutzergruppe-erstellen).
+3. Wähle **Speichern** unten im Gruppenfenster. Prüfe anschließend die Angaben
+   in der Liste.
+
+### Mitglieder und Rollen zuweisen
+
+Gruppenrollen gelten für alle Mitglieder, auch für später hinzugefügte Personen.
+Prüfe deshalb vor einer Rollenänderung unter **Mitglieder**, wen sie betrifft.
+
+1. Öffne die Gruppe und wähle **Mitglieder → Mitglieder auswählen**. Suche nach
+   Name, Benutzername oder E-Mail, wähle Personen an oder ab und bestätige mit
+   **Anwenden**.
+2. Öffne **Zugewiesene Rollen → Rollen auswählen**. Suche die benötigten Rollen,
+   wähle sie an oder ab und bestätige mit **Anwenden**.
+3. Prüfe beide Auswahlen und wähle **Speichern** unten im Gruppenfenster.
+4. Kontrolliere nach dem Speichern die Listen **Mitglieder** und **Zugewiesene Rollen**.
+
+Du kannst Mitglieder und Rollen unabhängig voneinander ändern.
+
+Entfernst du eine Person, entfallen für sie die Rollen dieser Gruppe. Entfernst
+du eine Gruppenrolle, entfällt sie für alle Mitglieder. Direkte Rollen und Rollen
+aus anderen Gruppen bleiben erhalten. Die verbleibenden Rechte und ihre Herkunft
+prüfst du unter [Effektive Berechtigungen](./benutzer-rollen.mdx#rollen-und-gruppen-zuweisen)
+im jeweiligen Benutzerkonto.
+
+**Anwenden** übernimmt die Auswahl zunächst als Entwurf. Beim Reiterwechsel
+bleibt sie erhalten; erst **Speichern** übernimmt sie auf dem Server. Mit
+**Abbrechen** kannst du ungespeicherte Änderungen nach Rückfrage verwerfen.
+Name und Beschreibung, Mitglieder und Rollen werden getrennt gespeichert.
+Prüfe nach einem Speicherfehler die Meldung und lade die Gruppendetails neu:
+Einzelne Änderungen können bereits übernommen sein.
 
 ## Benutzergruppe löschen
 

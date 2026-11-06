@@ -1,0 +1,162 @@
+---
+title: Automationsanschlüsse bereitstellen
+description: Node-RED-Anschlüsse veröffentlichen, einer Ressource anbieten und mit einem bestätigten Deploy ändern oder entfernen.
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+Ein **Anschluss** verbindet einen Schalter oder Messwert aus Node-RED mit einer
+Ressource in Mardu. Er gehört zur vorhandenen **Mardu-Verbindung**. Ein
+gewöhnlicher Ein/Aus-Schalter ist keine Maschinenfreigabe.
+
+## Voraussetzungen
+
+[Node-RED und die Mardu-Verbindung](./automationen.mdx#automatisierungen-aktivieren)
+müssen eingerichtet und erreichbar sein. Zum Öffnen des Editors brauchst du
+**Automation-Editor anzeigen**, zum Bearbeiten und Deployen **Automation-Editor
+bearbeiten**. Verwende die vorhandene Mardu-Verbindung; Zugangsdaten gehören
+nicht in Flow-Nachrichten oder exportierte Flows.
+
+Beginne in einer Testumgebung. Für ein echtes Gerät brauchst du dessen
+Protokollvertrag und einen bestätigten Antwortpfad. Die Ressource wird unter
+[Ressourcen einrichten → Administration](../koordination/ressourcen.mdx)
+vorbereitet. Für die Zuordnung gelten zusätzlich:
+
+| Aufgabe                           | Globale Rechte        | Verwaltungsrecht an der Ressource |
+| --------------------------------- | --------------------- | --------------------------------- |
+| Direkten Schalter zuordnen        | Ressourcen bearbeiten | Hardware verwalten                |
+| Leser oder Freigabeaktor zuordnen | Zugriffe ändern       | Hardware verwalten                |
+
+Die jeweiligen Ressourcen- und Zugriffs-Leserechte sind für den Einstieg nötig.
+Die Mardu-Laufzeit kann alle unterstützten Ressourcen lesen und registrierte
+Aktionen ausführen; eine Auswahl in einem Node beschränkt nur diesen Node.
+
+<Steps>
+
+<Step>
+
+## Einen Schalter veröffentlichen
+
+1. Im Node-RED-Editor einen **Schaltaktor** anlegen. Unter **Protokoll** die Auswahl **Vorhandenen Flow** verwenden und in einer **Anschluss**-Zeile über das Plus einen Anschluss anlegen.
+2. **Name**, unter **Mardu** die vorhandene Verbindung und einen eindeutigen **Schlüssel** eingeben. Der Name erscheint in Mardu und bleibt änderbar. Schlüssel und Verbindung sind nur bis zur ersten Veröffentlichung änderbar; danach benötigst du für einen anderen Anschluss einen neuen Config-Node.
+3. Als **Art** einen **Schaltausgang** und unter **Funktionen** die Funktion **Ein/Aus** wählen.
+4. Den Ausgang mit dem Geräteprotokoll verbinden. Nur die bestätigte Geräteantwort zum Eingang des Schaltaktors zurückführen. Die Übertragung eines Befehls bestätigt noch keine Ausführung. Die Node-Hilfe beschreibt das Nachrichtenformat.
+5. **Deploy** ausführen. Erst der gestartete Schaltaktor veröffentlicht den verwendeten Schaltausgang. Ein gespeicherter Anschluss allein genügt nicht.
+
+Das Feld **Name** am Schaltaktor beschriftet nur diesen Node im Flow. **Name** im Anschlussdialog ändert den Namen in der Mardu-Auswahl. Belegte Anschlüsse stehen nicht für eine weitere aktive Zuordnung zur Verfügung.
+
+</Step>
+
+<Step>
+
+## Anschluss zuordnen und Rückmeldung prüfen
+
+Nach dem Deploy muss der Anschluss in Mardu auswählbar sein. Verwende die
+Anleitung für seine Funktion; die Zuordnung allein bestätigt keine physische
+Einsatzbereitschaft.
+
+| Funktion                     | Zuordnung und Prüfung                                                                                                                                                                                                  |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Direkter Ein/Aus-Schalter    | [Direkten Schalter zuordnen und bedienen](./ressourcen-zustand.mdx#direkten-schalter-zuordnen-und-bedienen)                                                                                                            |
+| Leser oder Maschinenfreigabe | [Zutrittsanschlüsse zuordnen](./ressourcen-zutritt.mdx#anschlüsse-zuordnen); für die Kombination mit einem nativen Reader den [Gerätetest unten](#nativen-reader-und-node-red-maschinenaktor-kombinieren) durchführen. |
+| Messwert oder Textzustand    | [Messwertquelle zuordnen und Werte prüfen](./ressourcen-zustand.mdx#messwerte-ansehen)                                                                                                                                 |
+
+Nur eine Geräteantwort darf einen Schaltauftrag bestätigen. Bei **Ausgang
+unbekannt** zuerst einen neuen Zustand vom Gerät lesen lassen; ein alter oder
+beibehaltener MQTT-Wert genügt nicht. Einen Impuls nicht blind wiederholen.
+
+</Step>
+
+<Step>
+
+## Mit Beispielen prüfen
+
+Importiere die JSON-Beispiele des Mardu-Node-Pakets in eine Testumgebung und verwende die bereits provisionierte Verbindung. Die Anschlussnamen mit **Simulation** unterscheiden Testwerte von echten Geräten.
+
+- **Schalter mit simuliertem Gerät** bestätigt Ein/Aus. Prüfe angeforderten Zustand, gemeldeten Zustand und Abschluss in Mardu.
+- **Schalter mit Fehlerantwort** lehnt Einschalten ab und bestätigt Ausschalten. Bei der Ablehnung muss die Ausführung **Fehlgeschlagen** zeigen; der gemeldete Zustand bleibt Aus.
+- **Nativer Reader mit MQTT-Maschinenaktor** ist eine deaktivierte Hardwarevorlage für ein MQTT-5-Gerät mit eigener Abschaltfrist. Der [Ablauf unten](#nativen-reader-und-node-red-maschinenaktor-kombinieren) beschreibt Einrichtung und Test.
+- **Messwerte und Zustand melden** veröffentlicht fünf getrennte Anschlüsse. Nach dem Deploy die Veröffentlichung abwarten, die Anschlüsse den passenden Beobachtungsrollen zuordnen und erst danach die Inject-Nodes auslösen. Erwartet werden 120 Watt, Zählerstand 42, 7200 Betriebssekunden sowie die Textwerte `off` und `ok`.
+
+Die Beispiele ersetzen keine physische Gerätebestätigung. Für echte Geräte den simulierten Antwortpfad durch deren Protokollantwort ersetzen. Wiederholte Auftragsantworten behalten ihre ursprüngliche Quellzeit; neue spontane Zustandsmeldungen werden ohne Auftragskennung gesendet. Beim Lösen prüft Mardu, ob die Aus-Meldung nach dem letzten Schaltauftrag liegt. Eine ältere Meldung genügt auch innerhalb des üblichen Zeitfensters nicht.
+
+</Step>
+
+</Steps>
+
+## Nativen Reader und Node-RED-Maschinenaktor kombinieren
+
+1. Die deaktivierte Vorlage **08 Nativer Reader mit MQTT-Maschinenaktor** importieren. Vorhandene Mardu-Verbindung auswählen und das MQTT-Profil einschließlich TLS, Zugangsdaten und erlaubter Topics für dein Gerät konfigurieren. Der Beispielhost ist ein Platzhalter.
+2. Im Anschluss die Funktion **Maschinenfreigabe** auswählen. **Geräte-Timer** nur bestätigen, wenn das Gerät die Abschaltung auch ohne Node-RED, Mardu und MQTT durchsetzt. **Max. Dauer (s)** auf die dokumentierte Geräteobergrenze setzen.
+3. Den Tab aktivieren und **Deploy** ausführen. In Mardu am selben Zutrittspunkt den nativen Reader und den veröffentlichten Anschluss als Maschinenfreigabe zuordnen. Eine direkte Schalterzuordnung ist dafür nicht vorgesehen.
+4. Die Übernahme an der Ressource erlauben und zwei Testpersonen berechtigen. Nach Veröffentlichung und Zuordnung **Zustand lesen** in Node-RED auslösen und die aktuelle Geräteantwort abwarten.
+5. Karte A startet die Freigabe. Karte B übernimmt; die Abschaltfrist verlängert sich dadurch nicht. Karte B erneut beendet die Sitzung. Der Reader bestätigt Erfolg jeweils erst nach der Geräteantwort.
+6. In der Testumgebung während einer Freigabe die Verbindung unterbrechen. Das Gerät muss spätestens zur bestätigten Frist abschalten. Mardu zeigt ohne Rückmeldung keinen bestätigten Aus-Zustand. Nach Wiederverbindung **Zustand lesen** auslösen; verlorene Startaufträge nicht erneut senden.
+
+Der Kommentar im importierten Flow erläutert Einrichtung und Testschritte. Die mit dem Node-Paket ausgelieferte Datei `examples/README.md` beschreibt die erforderlichen Geräteantworten. Ein anderer MQTT-Gerätevertrag benötigt eine passende Übersetzung der Nachrichten, die Auftragskennung und Abschaltfrist erhält.
+
+## Anschluss ersetzen oder bearbeiten
+
+Für den Austausch oder das Lösen gelten die Schritte unter
+[Direkte Schalter → Zuordnung ersetzen oder lösen](./ressourcen-zustand.mdx#zuordnung-ersetzen-oder-lösen)
+beziehungsweise [Zutrittsanschluss ersetzen oder lösen](./ressourcen-zutritt.mdx#anschluss-ersetzen-oder-lösen).
+Der Node-RED-Node bleibt beim Lösen einer Zuordnung bestehen.
+Für Maschinenfreigaben sind eine aktuelle Zustandsmeldung und die Abschaltung
+im Gerät erforderlich, wie im [Gerätetest](#nativen-reader-und-node-red-maschinenaktor-kombinieren) beschrieben.
+
+**Name** im Anschlussdialog kannst du auch bei bestehender Zuordnung ändern. Art, Funktionen und
+Geräteabschaltung sind bei aktiver Zuordnung gesperrt. Löse zuerst die Zuordnung in Mardu,
+wenn diese Eigenschaften geändert werden müssen. Vor dem Deploy prüft Mardu die Auswirkungen
+erneut; inzwischen geänderte Zuordnungen oder Flows erfordern eine neue Vorschau.
+
+## Einen Anschluss in Node-RED entfernen
+
+1. Laufende Sitzungen beenden und ausstehende Schaltaufträge abschließen lassen.
+2. Den Anschluss-Config-Node oder seinen letzten veröffentlichenden Node beziehungsweise
+   Schaltausgang entfernen und **Deploy** wählen. Solange ein weiterer Node denselben Anschluss
+   veröffentlicht, bleibt er bestehen.
+3. Die Vorschau prüfen. Sie nennt entfernte Anschlüsse, gelöste Zuordnungen und Zugangspunkte,
+   die ohne benötigten Leser oder Freigabeaktor deaktiviert werden. Solange Sitzungen oder
+   Aufträge offen sind, bleibt der Deploy blockiert.
+4. Fehlt beim direkt zugeordneten Schalter eine aktuelle Aus-Bestätigung, ausdrücklich bestätigen, dass Hardware eingeschaltet
+   bleiben kann. Das Entfernen sendet keinen Abschaltbefehl. Die angezeigte Deaktivierung
+   unvollständiger Zugangspunkte ebenfalls ausdrücklich bestätigen.
+5. **Änderungen übernehmen** wählen. Erst nachdem Mardu den gespeicherten Flow geprüft hat, werden
+   die bisherigen Zuordnungen inaktiv. Ressource, Berechtigungen, Beobachtungen und Historie
+   bleiben erhalten.
+
+Bei einer bekannten Ablehnung bleiben die Zuordnungen bestehen. Bei verlorener Antwort zeigt
+Mardu die ausstehende Prüfung. Bis zum Ergebnis keinen weiteren Deploy starten.
+**Status erneut prüfen** fragt denselben Vorgang ab und schaltet keine Hardware erneut.
+
+Wird der Anschluss später mit derselben Mardu-Verbindung und demselben Schlüssel wieder
+veröffentlicht, erhält er dieselbe ID. Frühere Zuordnungen und deaktivierte Zugangspunkte
+werden nicht automatisch aktiviert. Ordne den Anschluss für die neue Verwendung erneut zu.
+
+## Wenn ein Node oder die Verbindung ausfällt
+
+Deaktivierte Nodes, deaktivierte Flows und Verbindungsabbrüche lösen keine Zuordnung.
+Bei einem Ausfall gilt der Anschluss standardmäßig nach 45 Sekunden ohne Lebenszeichen
+als **Nicht erreichbar**; die Ressource zeigt die gespeicherte Zuordnung weiterhin.
+Aktiviere denselben Node wieder oder stelle die Verbindung her. Bei dauerhaft ausgefallener
+Hardware löse die Zuordnung nach der [Ressourcenanleitung](./ressourcen-zustand.mdx#zuordnung-ersetzen-oder-lösen) beziehungsweise der [Zutrittsanleitung](./ressourcen-zutritt.mdx#anschluss-ersetzen-oder-lösen). Die Node-RED-Dialoge zeigen vorhandene
+Zuordnungen und im eingebetteten Editor einen Link zur Ressource.
+
+Das erfolgreiche Löschen einer Ressource entfernt deren eigene technische Zuordnungen nach
+der vorhandenen Löschvorschau. Die Anschlüsse und Node-RED-Nodes bleiben bestehen und können
+für eine andere Ressource verwendet werden. Laufende Vorgänge und die weiteren Löschsperren
+der Ressource müssen vorher behoben sein.
+
+## Wenn die Veröffentlichung fehlschlägt
+
+Ein einzelner fehlerhafter Anschluss wird am betroffenen Node gemeldet und trennt
+die übrige Mardu-Verbindung nicht. Prüfe zuerst den Node-Status und den Schlüssel.
+
+Anschlussschlüssel enthalten nur Kleinbuchstaben, Ziffern, Punkte und Bindestriche und beginnen mit einem Kleinbuchstaben. Verwende zum Beispiel `holz.q1`; `holz.Q1` ist ungültig. Der Anzeigename darf davon unabhängig Großbuchstaben enthalten. Korrigiere den Schlüssel vor der ersten Veröffentlichung im Anschlussdialog. Ein Ladefehler beim Anschlussstatus belegt nicht, dass er noch änderbar ist.
+
+Fehlt die gesamte Mardu-Verbindung, verwende die
+[Verbindungsreparatur](./automationen.mdx#wenn-das-verbinden-fehlschlägt).
+
+## Gemeinsamer Versionswechsel
+
+Der Anschlussvertrag gehört zu Node-Paket 1.0.0. Backend, Web und das verwaltete Node-RED-Image müssen gemeinsam umgestellt werden. Der bestätigte Deploy benötigt dessen Mardu-Editor-Anpassungen; eine externe ungepatchte Node-RED-Installation bietet diesen Ablauf nicht. Die Datenbank übernimmt vorhandene gespeicherte Daten. Eigene Flows müssen den neuen Vertrag verwenden; es gibt keine Legacy-Aliase oder Flow-Konverter. Vorhandene Geräte-Endpunkt-Nodes werden durch den Node **Anschluss lesen** mit Ressourcentyp `resource-endpoint` ersetzt.

@@ -1,0 +1,683 @@
+{
+  "date": "2026-11-03",
+  "baseline": {
+    "docs": "ed9fdd67",
+    "web": "e61d2aae",
+    "root": "a6c5b506"
+  },
+  "assignments": {
+    "profil": [
+      "ueberblick/benutzerkonten.mdx",
+      "ueberblick/fehlersuche.mdx",
+      "ueberblick/profil-benachrichtigungen.mdx",
+      "ueberblick/profil-erscheinungsbild.mdx",
+      "ueberblick/profil-mcp.mdx",
+      "ueberblick/profil-nachweisquellen.mdx",
+      "ueberblick/profil-sicherheit.mdx",
+      "ueberblick/profil-sitzungen.mdx",
+      "ueberblick/profil-zutrittsmedien.mdx",
+      "ueberblick/profil.mdx"
+    ],
+    "benutzer": [
+      "benutzer/benachrichtigungen.mdx",
+      "benutzer/berechtigungsanfragen.mdx",
+      "benutzer/buchungen.mdx",
+      "benutzer/dashboard.mdx",
+      "benutzer/erste-schritte.mdx",
+      "benutzer/geraete-status.mdx",
+      "benutzer/index.mdx",
+      "benutzer/kalender.mdx",
+      "benutzer/kompetenzen.mdx",
+      "benutzer/uebersicht-monitoring.mdx",
+      "benutzer/zutritt.mdx"
+    ],
+    "koordination_kompetenzen": [
+      "koordination/bewertungen.mdx",
+      "koordination/vergaben-lernwegteilnahmen.mdx",
+      "koordination/zugangsantraege-entscheiden.mdx",
+      "administration/badges-verwalten.mdx",
+      "administration/kompetenzen-lernwege.mdx",
+      "administration/nachweissysteme-anbinden.mdx",
+      "koordination/badge-vergaben.mdx"
+    ],
+    "personen_technik": [
+      "administration/benutzer-rollen.mdx",
+      "administration/rollen-gruppen.mdx",
+      "administration/verwaltungszustaendigkeiten.mdx",
+      "administration/tags-verwalten.mdx",
+      "administration/geraete-verwalten.mdx",
+      "administration/zutritt-verwalten.mdx"
+    ],
+    "anbindungen": [
+      "administration/integrationen.mdx",
+      "administration/ldap-verzeichnis.mdx",
+      "administration/oidc-anmeldung.mdx",
+      "administration/mqtt-broker.mdx",
+      "administration/ip500-netzwerk.mdx",
+      "administration/mcp-verwalten.mdx",
+      "administration/benachrichtigungen-verwalten.mdx"
+    ],
+    "betrieb_installieren": [
+      "administration/server-einstellungen.mdx",
+      "administration/sicherheit-betrieb.mdx",
+      "administration/nachweise-datenschutz.mdx",
+      "administration/zertifikate-https.mdx",
+      "administration/wartungs-cli.mdx",
+      "administration/wartungs-cli-referenz.mdx",
+      "installieren/abnahme-uebergabe.mdx",
+      "installieren/inbetriebnahme.mdx",
+      "installieren/index.mdx",
+      "installieren/raspberry-pi.mdx",
+      "installieren/stoerung-vor-ort.mdx",
+      "administration/anmeldevorgaben.mdx",
+      "administration/integrationszertifikate.mdx",
+      "administration/monitoring-einrichten.mdx"
+    ],
+    "entwickeln_automationen": [
+      "entwickeln/api-integration.mdx",
+      "entwickeln/automationsfluesse.mdx",
+      "entwickeln/http-api.mdx",
+      "entwickeln/index.mdx",
+      "entwickeln/mcp-anbindung.mdx",
+      "entwickeln/mqtt-events.mdx",
+      "administration/automationen.mdx",
+      "administration/automationen-anschluesse.mdx"
+    ],
+    "root": [
+      "administration/freigaben-verwalten.mdx",
+      "administration/index.mdx",
+      "administration/ressourcen-aendern-entfernen.mdx",
+      "administration/ressourcen-buchbarkeit.mdx",
+      "administration/ressourcen-wartung.mdx",
+      "administration/ressourcen-zustand.mdx",
+      "administration/ressourcen-zutritt.mdx",
+      "index.mdx",
+      "koordination/buchungen-verwalten.mdx",
+      "koordination/index.mdx",
+      "koordination/ressourcen.mdx",
+      "ueberblick/grundlagen-begriffe.mdx",
+      "ueberblick/index.mdx",
+      "ueberblick/neuerungen.mdx",
+      "v1/index.mdx",
+      "v2/index.mdx"
+    ]
+  },
+  "pages": [
+    {
+      "path": "administration/anmeldevorgaben.mdx",
+      "owner": "betrieb_installieren",
+      "status": "inhalt_und_darstellung_geprueft",
+      "new": true,
+      "decision": "neu_ausgearbeitet",
+      "review": "reviews/2026-11-03-gesamtrevision/betrieb_installieren.md"
+    },
+    {
+      "path": "administration/automationen-anschluesse.mdx",
+      "owner": "entwickeln_automationen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "new": true,
+      "decision": "neu_ausgearbeitet",
+      "review": "reviews/2026-11-03-gesamtrevision/entwickeln_automationen.md"
+    },
+    {
+      "path": "administration/automationen.mdx",
+      "owner": "entwickeln_automationen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/entwickeln_automationen.md"
+    },
+    {
+      "path": "administration/badges-verwalten.mdx",
+      "owner": "koordination_kompetenzen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/koordination_kompetenzen.md"
+    },
+    {
+      "path": "administration/benachrichtigungen-verwalten.mdx",
+      "owner": "anbindungen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/anbindungen.md"
+    },
+    {
+      "path": "administration/benutzer-rollen.mdx",
+      "owner": "personen_technik",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/personen_technik.md"
+    },
+    {
+      "path": "administration/freigaben-verwalten.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    },
+    {
+      "path": "administration/geraete-verwalten.mdx",
+      "owner": "personen_technik",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/personen_technik.md"
+    },
+    {
+      "path": "administration/index.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    },
+    {
+      "path": "administration/integrationen.mdx",
+      "owner": "anbindungen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/anbindungen.md"
+    },
+    {
+      "path": "administration/integrationszertifikate.mdx",
+      "owner": "betrieb_installieren",
+      "status": "inhalt_und_darstellung_geprueft",
+      "new": true,
+      "decision": "neu_ausgearbeitet",
+      "review": "reviews/2026-11-03-gesamtrevision/betrieb_installieren.md"
+    },
+    {
+      "path": "administration/ip500-netzwerk.mdx",
+      "owner": "anbindungen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/anbindungen.md"
+    },
+    {
+      "path": "administration/kompetenzen-lernwege.mdx",
+      "owner": "koordination_kompetenzen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/koordination_kompetenzen.md"
+    },
+    {
+      "path": "administration/ldap-verzeichnis.mdx",
+      "owner": "anbindungen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/anbindungen.md"
+    },
+    {
+      "path": "administration/mcp-verwalten.mdx",
+      "owner": "anbindungen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/anbindungen.md"
+    },
+    {
+      "path": "administration/monitoring-einrichten.mdx",
+      "owner": "betrieb_installieren",
+      "status": "inhalt_und_darstellung_geprueft",
+      "new": true,
+      "decision": "neu_ausgearbeitet",
+      "review": "reviews/2026-11-03-gesamtrevision/betrieb_installieren.md"
+    },
+    {
+      "path": "administration/mqtt-broker.mdx",
+      "owner": "anbindungen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/anbindungen.md"
+    },
+    {
+      "path": "administration/nachweise-datenschutz.mdx",
+      "owner": "betrieb_installieren",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/betrieb_installieren.md"
+    },
+    {
+      "path": "administration/nachweissysteme-anbinden.mdx",
+      "owner": "koordination_kompetenzen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/koordination_kompetenzen.md"
+    },
+    {
+      "path": "administration/oidc-anmeldung.mdx",
+      "owner": "anbindungen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/anbindungen.md"
+    },
+    {
+      "path": "administration/ressourcen-aendern-entfernen.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    },
+    {
+      "path": "administration/ressourcen-buchbarkeit.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    },
+    {
+      "path": "administration/ressourcen-wartung.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    },
+    {
+      "path": "administration/ressourcen-zustand.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    },
+    {
+      "path": "administration/ressourcen-zutritt.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    },
+    {
+      "path": "administration/rollen-gruppen.mdx",
+      "owner": "personen_technik",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/personen_technik.md"
+    },
+    {
+      "path": "administration/server-einstellungen.mdx",
+      "owner": "betrieb_installieren",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/betrieb_installieren.md"
+    },
+    {
+      "path": "administration/sicherheit-betrieb.mdx",
+      "owner": "betrieb_installieren",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/betrieb_installieren.md"
+    },
+    {
+      "path": "administration/tags-verwalten.mdx",
+      "owner": "personen_technik",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/personen_technik.md"
+    },
+    {
+      "path": "administration/verwaltungszustaendigkeiten.mdx",
+      "owner": "personen_technik",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/personen_technik.md"
+    },
+    {
+      "path": "administration/wartungs-cli-referenz.mdx",
+      "owner": "betrieb_installieren",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/betrieb_installieren.md"
+    },
+    {
+      "path": "administration/wartungs-cli.mdx",
+      "owner": "betrieb_installieren",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/betrieb_installieren.md"
+    },
+    {
+      "path": "administration/zertifikate-https.mdx",
+      "owner": "betrieb_installieren",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/betrieb_installieren.md"
+    },
+    {
+      "path": "administration/zutritt-verwalten.mdx",
+      "owner": "personen_technik",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/personen_technik.md"
+    },
+    {
+      "path": "benutzer/benachrichtigungen.mdx",
+      "owner": "benutzer",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/benutzer.md"
+    },
+    {
+      "path": "benutzer/berechtigungsanfragen.mdx",
+      "owner": "benutzer",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/benutzer.md"
+    },
+    {
+      "path": "benutzer/buchungen.mdx",
+      "owner": "benutzer",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/benutzer.md"
+    },
+    {
+      "path": "benutzer/dashboard.mdx",
+      "owner": "benutzer",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/benutzer.md"
+    },
+    {
+      "path": "benutzer/erste-schritte.mdx",
+      "owner": "benutzer",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/benutzer.md"
+    },
+    {
+      "path": "benutzer/geraete-status.mdx",
+      "owner": "benutzer",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/benutzer.md"
+    },
+    {
+      "path": "benutzer/index.mdx",
+      "owner": "benutzer",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/benutzer.md"
+    },
+    {
+      "path": "benutzer/kalender.mdx",
+      "owner": "benutzer",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/benutzer.md"
+    },
+    {
+      "path": "benutzer/kompetenzen.mdx",
+      "owner": "benutzer",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/benutzer.md"
+    },
+    {
+      "path": "benutzer/uebersicht-monitoring.mdx",
+      "owner": "benutzer",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/benutzer.md"
+    },
+    {
+      "path": "benutzer/zutritt.mdx",
+      "owner": "benutzer",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/benutzer.md"
+    },
+    {
+      "path": "entwickeln/api-integration.mdx",
+      "owner": "entwickeln_automationen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/entwickeln_automationen.md"
+    },
+    {
+      "path": "entwickeln/automationsfluesse.mdx",
+      "owner": "entwickeln_automationen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/entwickeln_automationen.md"
+    },
+    {
+      "path": "entwickeln/http-api.mdx",
+      "owner": "entwickeln_automationen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/entwickeln_automationen.md"
+    },
+    {
+      "path": "entwickeln/index.mdx",
+      "owner": "entwickeln_automationen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/entwickeln_automationen.md"
+    },
+    {
+      "path": "entwickeln/mcp-anbindung.mdx",
+      "owner": "entwickeln_automationen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/entwickeln_automationen.md"
+    },
+    {
+      "path": "entwickeln/mqtt-events.mdx",
+      "owner": "entwickeln_automationen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/entwickeln_automationen.md"
+    },
+    {
+      "path": "index.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    },
+    {
+      "path": "installieren/abnahme-uebergabe.mdx",
+      "owner": "betrieb_installieren",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/betrieb_installieren.md"
+    },
+    {
+      "path": "installieren/inbetriebnahme.mdx",
+      "owner": "betrieb_installieren",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/betrieb_installieren.md"
+    },
+    {
+      "path": "installieren/index.mdx",
+      "owner": "betrieb_installieren",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/betrieb_installieren.md"
+    },
+    {
+      "path": "installieren/raspberry-pi.mdx",
+      "owner": "betrieb_installieren",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/betrieb_installieren.md"
+    },
+    {
+      "path": "installieren/stoerung-vor-ort.mdx",
+      "owner": "betrieb_installieren",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/betrieb_installieren.md"
+    },
+    {
+      "path": "koordination/badge-vergaben.mdx",
+      "owner": "koordination_kompetenzen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "new": true,
+      "decision": "neu_ausgearbeitet",
+      "review": "reviews/2026-11-03-gesamtrevision/koordination_kompetenzen.md"
+    },
+    {
+      "path": "koordination/bewertungen.mdx",
+      "owner": "koordination_kompetenzen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/koordination_kompetenzen.md"
+    },
+    {
+      "path": "koordination/buchungen-verwalten.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    },
+    {
+      "path": "koordination/index.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    },
+    {
+      "path": "koordination/ressourcen.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    },
+    {
+      "path": "koordination/vergaben-lernwegteilnahmen.mdx",
+      "owner": "koordination_kompetenzen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/koordination_kompetenzen.md"
+    },
+    {
+      "path": "koordination/zugangsantraege-entscheiden.mdx",
+      "owner": "koordination_kompetenzen",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/koordination_kompetenzen.md"
+    },
+    {
+      "path": "ueberblick/benutzerkonten.mdx",
+      "owner": "profil",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/profil.md"
+    },
+    {
+      "path": "ueberblick/fehlersuche.mdx",
+      "owner": "profil",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/profil.md"
+    },
+    {
+      "path": "ueberblick/grundlagen-begriffe.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    },
+    {
+      "path": "ueberblick/index.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    },
+    {
+      "path": "ueberblick/neuerungen.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    },
+    {
+      "path": "ueberblick/profil-benachrichtigungen.mdx",
+      "owner": "profil",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/profil.md"
+    },
+    {
+      "path": "ueberblick/profil-erscheinungsbild.mdx",
+      "owner": "profil",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/profil.md"
+    },
+    {
+      "path": "ueberblick/profil-mcp.mdx",
+      "owner": "profil",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/profil.md"
+    },
+    {
+      "path": "ueberblick/profil-nachweisquellen.mdx",
+      "owner": "profil",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/profil.md"
+    },
+    {
+      "path": "ueberblick/profil-sicherheit.mdx",
+      "owner": "profil",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/profil.md"
+    },
+    {
+      "path": "ueberblick/profil-sitzungen.mdx",
+      "owner": "profil",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/profil.md"
+    },
+    {
+      "path": "ueberblick/profil-zutrittsmedien.mdx",
+      "owner": "profil",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/profil.md"
+    },
+    {
+      "path": "ueberblick/profil.mdx",
+      "owner": "profil",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "gezielt_angepasst",
+      "review": "reviews/2026-11-03-gesamtrevision/profil.md"
+    },
+    {
+      "path": "v1/index.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    },
+    {
+      "path": "v2/index.mdx",
+      "owner": "root",
+      "status": "inhalt_und_darstellung_geprueft",
+      "decision": "bewusst_erhalten",
+      "review": "reviews/2026-11-03-gesamtrevision/root.md"
+    }
+  ],
+  "initialPages": 74,
+  "currentPages": 79,
+  "checks": {
+    "webBuild": "passed",
+    "documentationTests": 79,
+    "renderedViews": 158,
+    "historicalIds": 617,
+    "internalArticleLinks": 1201,
+    "screenshotsAdded": 28,
+    "websiteSourceTests": 49,
+    "websiteDeployedSourceTests": 49,
+    "websiteTypecheckedFiles": 523,
+    "apiReferenceSample": "passed",
+    "externalProviderAndHardware": "not_executed",
+    "publication": "not_requested",
+    "keyboardAndNativeGroups": "passed",
+    "extra320pxViews": 8
+  }
+}

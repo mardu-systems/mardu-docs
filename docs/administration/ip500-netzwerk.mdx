@@ -3,6 +3,8 @@ title: IP500-Netzwerk anbinden
 description: Die ausgehende MQTT-Verbindung zum IP500-Netzwerk im Dashboard einrichten, ändern und prüfen.
 ---
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
 Öffne **Administration → Systemeinstellungen → IP500-Netzwerk**. Diese
 MQTT-Verbindung führt vom Mardu-Server zum Broker deines IP500-Netzwerks und ist
 vom eingebetteten Informationsbroker unter **Integrationen → Embedded MQTT**
@@ -24,9 +26,15 @@ Brokerdaten bereit:
 - Benutzername und Passwort, falls der Broker eine Anmeldung verlangt.
 - Vorgaben für TLS und Zertifikatsvertrauen.
 
-Änderungen starten den ausgehenden MQTT-Client automatisch neu. Während der
-Wiederverbindung ist die Kommunikation über diese Verbindung unterbrochen.
-Stimme Änderungen an einer genutzten Installation deshalb mit dem Betrieb ab.
+<Callout type="warn" title="Speichern unterbricht die Verbindung">
+  Änderungen starten den ausgehenden MQTT-Client neu. Bis zur Wiederverbindung ist die Kommunikation
+  über diese Verbindung unterbrochen. Stimme Änderungen an einer genutzten Installation mit dem
+  Betrieb ab.
+</Callout>
+
+<Steps>
+
+<Step>
 
 ## Verbindung einrichten oder ändern
 
@@ -58,11 +66,15 @@ Stimme Änderungen an einer genutzten Installation deshalb mit dem Betrieb ab.
 Gespeicherte Brokerpasswörter lassen sich hier nicht löschen. Kläre
 Clientzertifikate mit dem Serverbetrieb; eine Zertifikatsauswahl gibt es hier nicht.
 
+</Step>
+
+<Step>
+
 ## Ergebnis prüfen
 
-Nach dem Speichern startet der MQTT-Client ohne Serverneustart mit den neuen
-Werten und wiederholt fehlgeschlagene Verbindungsversuche. Die Speichermeldung
-bestätigt weder Brokeranmeldung noch Edge-Router-Erreichbarkeit.
+Der MQTT-Client übernimmt die gespeicherten Werte ohne Serverneustart und
+wiederholt fehlgeschlagene Verbindungsversuche. Prüfe das Ergebnis getrennt
+von der Speichermeldung:
 
 1. Öffne die Seite erneut und prüfe die gespeicherten Verbindungswerte.
 2. Lass den Serverbetrieb im Serverprotokoll prüfen, ob der IP500-MQTT-Client
@@ -74,8 +86,12 @@ bestätigt weder Brokeranmeldung noch Edge-Router-Erreichbarkeit.
    [Gerät hinzufügen und verbinden](./geraete-verwalten.mdx#gerät-hinzufügen-und-verbinden)
    fort. Prüfe anschließend die benötigten Anschlüsse nach der Geräteanleitung.
 
-Eine Brokerverbindung bestätigt noch keine Geräteaufnahme, Anschlussbestätigung
-oder physische Funktion.
+Speichern bestätigt keine Brokeranmeldung; eine Brokerverbindung belegt keine
+Edge-Router-Erreichbarkeit, Geräteaufnahme oder physische Funktion.
+
+</Step>
+
+</Steps>
 
 ## Wenn etwas nicht klappt
 

@@ -3,6 +3,8 @@ title: Benachrichtigungen einrichten und prüfen
 description: Zustellkanäle vorbereiten, E-Mail-Versand testen und fehlende oder verzögerte Mitteilungen untersuchen.
 ---
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
 Jede Person verwaltet ihre
 [Kanäle und Ruhezeiten im Profil](../ueberblick/profil-benachrichtigungen.mdx)
 und liest den [eigenen Posteingang](../benutzer/benachrichtigungen.mdx).
@@ -18,6 +20,10 @@ Der Systemstatus benötigt **Dashboard anzeigen**; einzelne Datenquellen können
 weitere Rechte verlangen. Profilrechte gelten nur für den eigenen Posteingang
 und die eigenen Einstellungen.
 
+<Steps>
+
+<Step>
+
 ## Zustellkanäle vorbereiten
 
 | Kanal    | Voraussetzung                                                                                                                                                                                                                                                                     |
@@ -31,6 +37,10 @@ Die technische Administration richtet Web-Push-Schlüssel und SMS-Versanddienst
 in der Serverkonfiguration ein. Die Kanalwahl im Profil registriert keine
 Web-Push-Verbindung. Ein verfügbarer Versanddienst bestätigt die Konfiguration,
 keine Zustellung.
+
+</Step>
+
+<Step>
 
 ## E-Mail einrichten und testen
 
@@ -49,14 +59,20 @@ keine Zustellung.
    vorher gespeichert werden.
 6. Prüfe das Testergebnis und den Eingang im Zielpostfach einschließlich Spamordner.
 
-**Versand erfolgreich** bestätigt die Übergabe an den Mailserver. Erst die
-eingegangene Nachricht belegt den Empfang im Zielpostfach. Die Test-E-Mail prüft
-die gespeicherte SMTP-Konfiguration; sie prüft weder persönliche Ereigniseinstellungen
-noch die Empfangsberechtigung für eine Betriebsmeldung.
+<Callout type="info" title="Übergabe und Empfang getrennt prüfen">
+  **Versand erfolgreich** bestätigt die Übergabe an den Mailserver. Erst die eingegangene Nachricht
+  belegt den Empfang im Zielpostfach. Die Test-E-Mail prüft die gespeicherte SMTP-Konfiguration;
+  persönliche Ereigniseinstellungen und Empfangsrechte für Betriebsmeldungen prüfst du im nächsten
+  Schritt.
+</Callout>
 
-Absenderadresse, Benutzername und Passwort sind auch für Test-E-Mails erforderlich.
-Das gilt trotz der Formularbeschreibung, die das SMTP-Konto als optional bezeichnet.
-Ein SMTP-Relay ohne Anmeldung wird nicht unterstützt.
+Auch für Test-E-Mails sind Absenderadresse, Benutzername und Passwort erforderlich.
+Ein SMTP-Relay ohne Anmeldung wird nicht unterstützt; die Formularbeschreibung
+„Optionales SMTP-Konto“ hebt diese Voraussetzung nicht auf.
+
+</Step>
+
+<Step>
 
 ## Eine Benachrichtigung bis zum Empfang prüfen
 
@@ -75,9 +91,14 @@ Die Ereignisauswahl richtet sich nach den aktuellen Rechten und Zuständigkeiten
 die Kanalwahl erweitert diese nicht. Fehlende oder archivierte Posteingangseinträge
 belegen keinen fehlgeschlagenen E-Mail-Versand.
 
-SMTP-Testmails werden direkt verschickt. Hintergrundaufträge prüfen fällige
-Benachrichtigungen minütlich; ein Posteingangseintrag kann daher vor der E-Mail
-sichtbar sein.
+SMTP-Testmails werden direkt verschickt. Benachrichtigungen laufen über
+Hintergrundaufträge: Sofort fällige Zustellungen werden direkt angestoßen, weitere
+fällige Aufträge zusätzlich minütlich geprüft. Ein Posteingangseintrag kann vor
+der E-Mail sichtbar sein.
+
+</Step>
+
+</Steps>
 
 ## Pflichtkanäle und Ruhezeiten verstehen
 
@@ -100,7 +121,7 @@ Welche Ausnahmen für Ruhezeiten gelten, zeigt die Ereignisanzeige im Profil.
 ## Fehlende oder verzögerte Zustellung untersuchen
 
 1. Notiere Zeitpunkt mit Zeitzone, Kanal, Ereignis und betroffene Funktion.
-   Falls die Mitteilung vorhanden ist, findest du in der Verwaltung unter
+   Falls die Mitteilung vorhanden ist, findest du im persönlichen Posteingang der Verwaltungsoberfläche unter
    **Technische Details** ihre Ereignis- und Mitteilungskennung.
 2. Prüfe im [Posteingang](../benutzer/benachrichtigungen.mdx) Reiter und Filter.
    Prüfe danach Empfangsrechte, bestätigte Kontaktdaten, Kanalfreigabe,

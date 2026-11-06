@@ -8,36 +8,11 @@ Konten, Rollen, Audit-Ereignisse und Messwerte haben eigene Rechte.
 
 ## Anmeldeverfahren und Kontowiederherstellung
 
-Öffne in den **Server**-Einstellungen **Auth Policy**. Dort stehen unter anderem
-Kennwortanforderungen, Kontosperren, E-Mail-Bestätigung, erlaubte Anmeldeverfahren
-und Vorgaben für Administratoren. Eine Vorgabe richtet das verlangte Verfahren
-nicht am Konto ein.
-
-Prüfe vor einer Änderung die Folgen für betroffene Konten:
-
-| Einstellung                          | Wirkung und Voraussetzung                                                                                                                                                            |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Zwei-Faktor für Admins erzwingen** | Eine Passwortanmeldung eines Administrators ohne eingerichtete Zwei-Faktor-Authentifizierung wird abgewiesen. Richte den zweiten Faktor vor dem Einschalten im jeweiligen Konto ein. |
-| **Passkeys erlauben**                | Ausgeschaltet werden Passkey-Anmeldung und -Registrierung abgewiesen. Prüfe vorher, ob die betroffenen Personen ein anderes verfügbares Anmeldeverfahren haben.                      |
-| **Passkeys für Admins erzwingen**    | Verhindert das Deaktivieren des letzten aktiven Administrator-Passkeys. Die Einstellung allein beschränkt die Passwortanmeldung derzeit nicht auf Passkeys.                          |
-| **Recovery-Codes ausgeben**          | Erlaubt die Ausgabe und Verwendung von Wiederherstellungscodes für die Zwei-Faktor-Anmeldung. Ausgeschaltet stehen diese Codes nicht als zweiter Faktor zur Verfügung.               |
-
-1. Lass die betroffenen Personen ihr Verfahren unter
-   [Anmeldesicherheit](../ueberblick/profil-sicherheit.mdx) einrichten und prüfen.
-2. Ändere die benötigte Vorgabe und wähle **Speichern**. Durch die Bereitstellung
-   gesperrte Felder lassen sich hier nicht ändern. Änderungen an Token-Laufzeiten
-   benötigen einen Serverneustart.
-3. Prüfe eine neue Anmeldung in einem getrennten Browserfenster, bevor du deine
-   vorhandene Sitzung beendest. Eine weiterhin offene Sitzung belegt nicht, dass
-   eine neue Anmeldung mit den geänderten Regeln funktioniert.
-
-Bei einer Anmeldung über **OpenID Connect (OIDC)** muss der externe Anbieter für
-Administratoren einen von Mardu akzeptierten Nachweis der Mehrfaktoranmeldung
-liefern. Eine lokale 2FA-Einrichtung ersetzt diesen Nachweis beim Anbieter nicht.
-
-Ein passwortloser Anmeldelink ersetzt keine erforderliche Mehrfaktoranmeldung.
-Ist 2FA eingerichtet oder vorgeschrieben, ist der Link kein Ausweg aus einer
-fehlenden zweiten Bestätigung.
+Prüfe Anmeldeverfahren und Wiederherstellungswege, bevor du eine Pflicht für
+Administratoren einschaltest oder ein Verfahren abschaltest. Die Anleitung
+[Registrierung und Anmeldevorgaben einrichten](./anmeldevorgaben.mdx) beschreibt
+Voraussetzungen, Wirkung und die Prüfung einer neuen Anmeldung. Eine neue Vorgabe
+richtet das verlangte Verfahren nicht am Konto ein.
 
 Die [Hilfe bei Anmeldeproblemen](./benutzer-rollen.mdx#bei-anmeldeproblemen-helfen)
 beschreibt Passwort-Reset, kontobezogene 2FA-Vorgaben und das Deaktivieren einzelner
@@ -131,18 +106,23 @@ Inhalte aus mitgegebenen Auszügen.
 
 ### Zertifikatsablauf prüfen
 
-Prüfe unter **Server → Server-Zertifikate** Name, Aussteller, Gültigkeit und Status.
-Die Übersicht markiert noch nicht gültige und abgelaufene Zertifikate, zeigt aber
-keine vollständige Zuordnung aktiver TLS-Verbindungen. Kläre vor Ersetzen oder
-Löschen den verwendenden Dienst nach
-[HTTPS-Zertifikatswechsel vorbereiten und prüfen](./zertifikate-https.mdx).
+Prüfe gespeichertes Material unter **Server → Server-Zertifikate** nach
+[Zertifikate für Integrationen verwalten](./integrationszertifikate.mdx).
+Die Liste zeigt keine vollständige Zuordnung aktiver TLS-Verbindungen. Den Wechsel
+des vom Browser verwendeten Zertifikats beschreibt die getrennte
+[HTTPS-Anleitung](./zertifikate-https.mdx).
 
 ## Sicherung, Wiederherstellung und Update
 
-**Datenbank-Backup** ist im Dashboard noch nicht freigegeben. Die Wartungs-CLI
-erstellt ebenfalls keine Sicherungen. Verwende den für eure konkrete Installation
-geprüften Betriebsablauf; diese Anleitung beschreibt weder eine vollständige
-Sicherung und Wiederherstellung noch ein Release-Update.
+<Callout type="warn" title="Sicherung außerhalb des Dashboards vorbereiten">
+  **Datenbank-Backup** ist im Dashboard noch nicht freigegeben. Die Wartungs-CLI erstellt ebenfalls
+  keine Sicherungen. Verwende den für eure Installation geprüften Betriebsablauf, bevor du eine
+  Wiederherstellung oder ein Update beginnst.
+</Callout>
+
+Den Update-Aufruf des Installationspakets beschreibt
+[Neue Versionen übernehmen → Installieren](../installieren/raspberry-pi.mdx#5-neue-versionen-übernehmen).
+Diese Anleitung ersetzt keinen vollständigen Sicherungs- und Wiederherstellungsablauf.
 
 Kontowiederherstellung per CLI stellt keine Datenbank oder Dateien wieder her.
 Prüfe nach Wiederherstellung oder Update Anmeldung, Zutritt, Buchungen, Geräte

@@ -3,6 +3,11 @@ title: Anmeldung über OpenID Connect einrichten
 description: Einen externen Identitätsanbieter verbinden, Kontozuordnung und Rollen prüfen und die Anmeldung aktivieren.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import oidcPruefung from './bilder/oidc-pruefen-entwurf-aktuell.png';
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
 Bei **OpenID Connect (OIDC)** wird die vom externen Anbieter bestätigte Identität
 einem lokalen Mardu-Konto zugeordnet. Dessen Anmelde- und Berechtigungsregeln
 gelten weiter.
@@ -15,12 +20,10 @@ erteilt keine Kompetenz oder Ressourcenfreigabe.
 
 ## Voraussetzungen
 
-- Für Navigation und Ansicht brauchst du **Integrationen anzeigen**
-  (`Integrations.View`), zum Bearbeiten **Integrationen bearbeiten**
-  (`Integrations.Update`). Die Settings-API verlangt zusätzlich
-  **Einstellungen anzeigen** (`Settings.View`) beziehungsweise für Speichern,
-  Validierung und Tests **Einstellungen bearbeiten** (`Settings.Update`).
-- Zum Vorschlagen vorhandener Rollen brauchst du **Rollen anzeigen** (`Roles.View`).
+- Für Navigation und Ansicht brauchst du **Integrationen anzeigen** und
+  **Einstellungen anzeigen**. Bearbeiten, Speichern und Tests benötigen
+  **Integrationen bearbeiten** und **Einstellungen bearbeiten**.
+- Zum Vorschlagen vorhandener Rollen brauchst du **Rollen anzeigen**.
 - Du kannst beim Identitätsanbieter einen Client registrieren und kennst dessen
   Issuer, Client-ID, Client-Authentifizierung und gegebenenfalls Client-Secret.
   Browser und Mardu-Server müssen die jeweils benötigten Anbieterendpunkte erreichen.
@@ -30,7 +33,11 @@ erteilt keine Kompetenz oder Ressourcenfreigabe.
 
 Durch die Umgebung gesperrte Felder muss der Serverbetrieb ändern. Für
 CA-Zertifikate nutze die vorhandene
-[Zertifikatsverwaltung](./server-einstellungen.mdx#zertifikate).
+[Zertifikatsverwaltung](./integrationszertifikate.mdx).
+
+<Steps>
+
+<Step>
 
 ## Provider und Rückleitungen vorbereiten
 
@@ -76,6 +83,10 @@ keine OIDC-Pflichtparameter.
 Mardu verwendet automatisch den Authorization-Code-Ablauf mit **PKCE**. Die
 Prüfung bindet den Code an den gestarteten Anmeldevorgang.
 
+</Step>
+
+<Step>
+
 ## Tokenprüfung, Kontozuordnung und Rollen festlegen
 
 1. Prüfe im Schritt **Sicherheit** die **Zertifikatsprüfung** und lasse
@@ -115,7 +126,7 @@ lokalen Konto. Für unbekannte Kombinationen gilt:
   Auswahl der Kontoverknüpfung haben unterschiedliche Wirkungen.
 - **SSO-Konten freigeben lassen** hält neu angelegte Konten bis zur Freigabe
   inaktiv. Auch **Bestätigtes Konto verlangen** bleibt wirksam. Prüfe diese
-  Vorgaben unter [Registrierung und Anmelderichtlinie](./server-einstellungen.mdx#registrierung-und-anmelderichtlinie),
+  Vorgaben unter [Registrierung und Anmelderichtlinie](./anmeldevorgaben.mdx),
   bevor du neue Personen zur Anmeldung aufforderst.
 
 ### Welche Rollen und MFA-Nachweise gelten
@@ -140,7 +151,19 @@ nicht. Leere Listen erlauben keine Anmeldung eines Administrators über OIDC.
 Anbietertokens an der API. Für die Dashboard-Anmeldung brauchst du keine
 **API-Audiences** und kein **Bearer-Scheme** einzutragen.
 
+</Step>
+
+<Step>
+
 ## Entwurf testen und aktivieren
+
+Im Schritt **Prüfen** stehen drei getrennte Prüfungen bereit. Die Beispielansicht
+zeigt einen ungespeicherten Entwurf ohne ausgeführten Anbieter- oder Anmeldetest.
+
+<ImageZoom
+  src={oidcPruefung}
+  alt="OIDC-Schritt Prüfen mit getrennten Aktionen für Verbindungstest, Test-Anmeldung und Claim-Vorschau; noch kein Test ausgeführt."
+/>
 
 1. Öffne den Schritt **Prüfen** und wähle **Verbindung testen**. Kontrolliere
    die Ergebnisse für Discovery, Issuer, Endpunkte, TLS und Signaturschlüssel.
@@ -167,10 +190,15 @@ Anbietertokens an der API. Für die Dashboard-Anmeldung brauchst du keine
    **Mit … anmelden**, einschließlich Kontofreigabe und erwarteter Rechte.
    Beende deine bisherige Administrationssitzung erst danach.
 
-Verbindungstest, Test-Anmeldung und Claim-Vorschau speichern nichts und ändern
-keine lokalen Benutzer oder Rollen. Globale Registrierung, Freigabe, Kontosperren
-und MFA können die reguläre Anmeldung zusätzlich verhindern. Prüfe sie deshalb
-auch nach erfolgreicher Test-Anmeldung.
+<Callout type="info" title="Test-Anmeldung ersetzt keine reguläre Anmeldung">
+  Verbindungstest, Test-Anmeldung und Claim-Vorschau ändern weder Konfiguration noch lokale Benutzer
+  oder Rollen. Registrierung, Freigabe, Kontosperren und MFA können die reguläre Anmeldung
+  zusätzlich verhindern. Prüfe diese nach dem Speichern mit dem vorgesehenen Testkonto.
+</Callout>
+
+</Step>
+
+</Steps>
 
 ## Ändern oder abschalten
 
@@ -190,7 +218,7 @@ beschriebenen Widerrufswege.
 ## Wenn etwas nicht klappt
 
 - **Seite sichtbar, Laden oder Aktion abgewiesen:** Prüfe sowohl Integrations-
-  als auch Settings-Rechte. Fehlende Rollenvorschläge benötigen `Roles.View`.
+  als auch Settings-Rechte. Für Rollenvorschläge ist **Rollen anzeigen** erforderlich.
 - **Discovery oder TLS fehlgeschlagen:** Prüfe Issuer, Discovery-Adresse,
   Erreichbarkeit vom Server und Zertifikatsvertrauen anhand der Diagnose.
 - **Rückleitung abgelehnt:** Prüfe die getrennten Callback-Adressen beim

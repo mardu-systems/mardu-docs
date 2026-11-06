@@ -3,6 +3,9 @@ title: Benachrichtigungseinstellungen
 description: Versandkanäle, Ereignisse und Ruhezeiten für das eigene Konto einstellen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import kanaeleAnsicht from './bilder/profil-benachrichtigungen-kanaele-aktuell.png';
+
 Öffne im Kontomenü **Kontoeinstellungen → Benachrichtigungen**.
 Zum Lesen brauchst du Profil-Leserechte, zum Speichern Änderungsrechte.
 Die Einstellungen gelten für dein Konto im Portal und in der Verwaltung.
@@ -16,24 +19,34 @@ Die Einstellungen gelten für dein Konto im Portal und in der Verwaltung.
    die optionale Zustellung auch bei ausgewählten Ereignissen.
 3. Wähle **Einstellungen speichern** in der angehefteten Speicherleiste.
 
-Gesperrte Auswahlen nennen den Grund. Pflichtkanäle bleiben auch bei ausgeschaltetem
-Zustellkanal aktiv und umgehen Ruhezeiten und Stummschaltungen.
-E-Mail und SMS benötigen eine Serveranbindung und eine bestätigte E-Mail-Adresse
-beziehungsweise Telefonnummer. Das gilt auch für Pflichtkanäle. Eine gespeicherte
-Auswahl oder ein verfügbarer Versanddienst bestätigt noch keine Zustellung.
+<ImageZoom
+  src={kanaeleAnsicht}
+  alt="Zustellkanäle mit getrennten Angaben zur Serververfügbarkeit, Schaltern und dem Bereich Ruhezeiten."
+/>
 
-**Web Push** benötigt zusätzlich einen unterstützten Browser, dessen Erlaubnis
-für Benachrichtigungen und ein registriertes Browser-Abo. Der Kanalschalter
-registriert keinen Browser. In diesem Formular kannst du Browser-Abos weder
-anlegen noch entfernen.
+In der Testumgebung sind E-Mail und SMS nicht verfügbar. Ein eingeschalteter
+Kanalschalter bestätigt daher noch keinen eingerichteten Versanddienst.
+
+Gesperrte Auswahlen nennen den Grund. Für externe Kanäle gelten zusätzlich:
+
+| Kanal    | Voraussetzung                                                                                             |
+| -------- | --------------------------------------------------------------------------------------------------------- |
+| E-Mail   | Eingerichteter Versanddienst und bestätigte E-Mail-Adresse.                                               |
+| SMS      | Eingerichteter Versanddienst und bestätigte Telefonnummer.                                                |
+| Web Push | Verfügbarer Push-Dienst, unterstützter Browser, Benachrichtigungserlaubnis und registriertes Browser-Abo. |
+
+Der Web-Push-Schalter registriert keinen Browser; Browser-Abos legst du in diesem
+Formular nicht an und entfernst sie dort auch nicht. Eine gespeicherte Auswahl
+oder ein verfügbarer Versanddienst bestätigt noch keine Zustellung.
+
+<Callout title="Pflichtkanäle bleiben aktiv">
+  Pflichtkanäle gelten auch bei ausgeschaltetem Zustellkanal und umgehen Ruhezeiten und
+  Stummschaltungen. Sie benötigen weiterhin die Voraussetzungen des jeweiligen Kanals.
+</Callout>
 
 Mit **Ereignisse und Zustellung → Schnellauswahl** änderst du mehrere Ereignisse
 auf einmal. Kanalwahl und Pflichtmeldungen bleiben erhalten. Speichere die
 Auswahl anschließend.
-
-Tägliche E-Mail-Zusammenfassungen lassen sich in diesem Formular nicht auswählen
-oder zeitlich einstellen. Bereits hinterlegte Zusammenfassungseinstellungen
-bleiben beim Speichern erhalten; sie gelten nur für dafür unterstützte Ereignisse.
 
 ## Ruhezeiten und Stummschaltung
 

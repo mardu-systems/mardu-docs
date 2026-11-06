@@ -1,6 +1,6 @@
 ---
 title: Fähigkeiten, Kataloge und Lernwege einrichten
-description: Fähigkeiten und Kataloge pflegen, Lernwege einrichten sowie Teilnahme und Abschluss prüfen.
+description: Fähigkeiten und Kataloge pflegen, externe Definitionen übernehmen und Lernwege einrichten.
 ---
 
 Eine **Fähigkeit** beschreibt, was eine Person können soll; ein **Bereich** gliedert
@@ -17,13 +17,11 @@ beschreibt [Koordination → Bewertungen](../koordination/bewertungen.mdx).
 
 Du brauchst das Recht zum Anzeigen von **Kompetenzen**. Weitere Aktionen benötigen:
 
-| Aufgabe                                                                                                      | Zusätzliches Recht für Kompetenzen |
-| ------------------------------------------------------------------------------------------------------------ | ---------------------------------- |
-| Definition, Katalog oder Lernweg anlegen; importieren; lokale Kopie erstellen; Person einem Lernweg zuordnen | Anlegen                            |
-| Lokale Definitionen, Kataloge und Lernwege bearbeiten; importierte Definition einordnen; Teilnahme abbrechen | Bearbeiten                         |
-| Lernwegabschluss bestätigen                                                                                  | Genehmigen                         |
+| Aufgabe                                                                                 | Zusätzliches Recht für Kompetenzen |
+| --------------------------------------------------------------------------------------- | ---------------------------------- |
+| Definition, Katalog oder Lernweg anlegen; importieren; lokale Kopie erstellen           | Anlegen                            |
+| Lokale Definitionen, Kataloge und Lernwege bearbeiten; importierte Definition einordnen | Bearbeiten                         |
 
-Für die Personenauswahl brauchst du außerdem Leserechte für Benutzer.
 Ein Lernweg benötigt vorhandene aktive Badge-Definitionen. Ein optionales
 Abschluss-Badge muss aktiv und lokal erstellt sein.
 
@@ -42,12 +40,12 @@ Abschluss-Badge muss aktiv und lokal erstellt sein.
 
 Art und Katalogzuordnung sind nach der Anlage fest. Für einen anderen Katalog
 erstelle eine lokale Kopie. **Bearbeiten** ändert eine eigene Definition und erzeugt
-einen neuen Inhaltsstand; frühere Inhalte bleiben unter **Weitere Angaben** erhalten.
+einen neuen Inhaltsstand; frühere Inhalte bleiben unter **Herkunft, Zuordnung & weitere Angaben → Versionen** erhalten.
 Persönliche Nachweisentscheidungen ändern sich dadurch nicht.
 
 ### Zusammenhänge beschreiben
 
-Öffne bei der Definition **Weitere Angaben → Beziehungen bearbeiten**. Wähle eine
+Öffne bei der Definition **Herkunft, Zuordnung & weitere Angaben → Beziehungen bearbeiten**. Wähle eine
 **Beziehung**, danach über **Kompetenz zuordnen** das Ziel und speichere. Beispielsweise
 kann eine Fähigkeit **Ist Teil von** einem Bereich sein. Die gespeicherten Beziehungen
 erscheinen unter **Zusammenhänge**.
@@ -83,7 +81,7 @@ Definitionen, keine persönlichen Nachweise oder Anerkennungsentscheidungen.
 4. Lies das Ergebnis **Katalog importiert**. Es nennt übernommene Beziehungen und
    solche, die nur im Original erhalten bleiben.
 5. Öffne die importierten Einträge über die Fähigkeitsverwaltung. Sie sind zunächst
-   **Noch nicht eingeordnet**. Wähle unter **Weitere Angaben** nach Prüfung des Inhalts
+   **Noch nicht eingeordnet**. Wähle unter **Herkunft, Zuordnung & weitere Angaben** nach Prüfung des Inhalts
    **Als Fähigkeit einordnen** oder **Als Bereich einordnen**.
 
 Diese Einordnung ist einmalig; sie verändert das gespeicherte externe Original nicht.
@@ -92,7 +90,7 @@ wird nicht erneut angelegt oder durch einen weiteren Import aktualisiert.
 
 ### Eine eigene Variante erstellen
 
-Für eigene Inhalte öffnest du die Quelldefinition und wählst unter **Weitere Angaben**
+Für eigene Inhalte öffnest du die Quelldefinition und wählst unter **Herkunft, Zuordnung & weitere Angaben**
 **Lokale Kopie erstellen**. Gib einen neuen Code und einen Namen an und wähle bei
 Bedarf einen aktiven eigenen Katalog. Speichere und öffne die neue Definition zum Bearbeiten.
 
@@ -126,26 +124,14 @@ Deaktivieren verhindert neue Zuordnungen und beendet keine vorhandene Teilnahme.
 
 ## Teilnahme und Abschluss prüfen
 
-1. Öffne beim Lernweg **Teilnahmen → Person zuordnen**, wähle die Person unter
-   **Benutzer** und speichere. Die Teilnahme übernimmt die aktuelle Lernwegversion mit
-   Badges, Mindestanzahl und gegebenenfalls Abschluss-Badge-Version.
-2. Prüfe **Aktuell gültige Badges** und den Status. Es zählen gültige lokale
-   Badge-Vergaben der enthaltenen Badges. Fähigkeiten oder importierte persönliche
-   Credentials zählen hier nicht automatisch als Badge-Vergabe.
-3. Ist die Mindestanzahl erreicht, erscheint **Abschluss möglich**. Öffne die Teilnahme,
-   prüfe Person und Anforderungen und ergänze bei Bedarf eine **Notiz zur Entscheidung**.
-4. Wähle mit dem Genehmigungsrecht **Abschluss bestätigen**. Die Aktion wird direkt
-   ausgeführt. Prüfe anschließend den Status **Abgeschlossen**.
+Öffne beim Lernweg **Teilnahmen**, um Personen zuzuordnen und ihren Fortschritt zu
+lesen. Neue Teilnahmen speichern den aktuellen Anforderungsstand; Änderungen am
+Lernweg gelten nur für spätere Zuordnungen.
 
-Erst **Abschluss bestätigen** schließt die Teilnahme ab. Ein hinterlegtes Abschluss-Badge
-wird dabei in der gespeicherten Inhaltsversion lokal vergeben und muss weiterhin aktiv
-sein. Eine bereits gültige Vergabe wird nicht dupliziert. Der Abschluss gewährt keinen
-Ressourcenzugriff und erzeugt kein signiertes Credential.
-
-Der Abschlussstatus bleibt historisch erhalten, auch wenn einzelne Vergaben später
-ablaufen oder widerrufen werden. Die Fortschrittszahl zeigt dagegen die jetzt gültigen
-Vergaben. Eine offene Teilnahme kannst du mit **Teilnahme abbrechen** und Bestätigung
-beenden. Bereits vergebene Badges und der Teilnahmeverlauf bleiben erhalten.
+Die Schritte und Rechte für Zuordnung, Abschluss und Abbruch stehen unter
+[Koordination → Lernwegteilnahmen begleiten](../koordination/vergaben-lernwegteilnahmen.mdx).
+**Abschluss möglich** verlangt noch eine Entscheidung; der Lernweg schließt sich
+nicht automatisch ab.
 
 ## Wenn etwas nicht klappt
 
@@ -156,9 +142,5 @@ beenden. Bereits vergebene Badges und der Teilnahmeverlauf bleiben erhalten.
   gehört zum [Profilimport](../ueberblick/profil-nachweisquellen.mdx).
 - **Lernweg lässt sich nicht speichern:** Wähle aktive Badges, eine Mindestanzahl
   zwischen eins und der Anzahl enthaltener Badges und ein separates lokales Abschluss-Badge.
-- **Zuordnung oder Abschluss wird abgelehnt:** Prüfe, ob der Lernweg für eine neue
-  Zuordnung aktiv ist, bereits eine offene Teilnahme besteht oder die Teilnahme
-  schon abgeschlossen beziehungsweise abgebrochen wurde. Für den Abschluss müssen
-  genügend Vergaben jetzt gültig und ein hinterlegtes Abschluss-Badge aktiv sein.
 - **Stand zwischenzeitlich geändert:** Notiere ungespeicherte Eingaben, lade den
   betroffenen Eintrag neu und prüfe den aktuellen Stand vor dem erneuten Speichern.

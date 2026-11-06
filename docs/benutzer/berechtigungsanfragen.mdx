@@ -3,6 +3,9 @@ title: Meine Berechtigungsanfragen
 description: Zugriff auf anforderbare Ressourcen beantragen, Entscheidungen lesen und offene Anträge zurückziehen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import anfragenAnsicht from './bilder/berechtigungsanfragen-aktuell.png';
+
 Unter **Zugänge & Ressourcen → Meine Berechtigungsanfragen** stehen deine eigenen
 Anträge. Dafür benötigst du Leserechte für den Zugriffskatalog. Stellen und
 Zurückziehen benötigen zusätzlich die Anfragerechte für den Zugriffskatalog.
@@ -32,7 +35,10 @@ vorhanden, deine Nachricht, das Bearbeitungsdatum und die Rückmeldung.
 | Abgelehnt     | Keine Freigabe aus diesem Antrag; lies die Rückmeldung.                               |
 | Zurückgezogen | Zurückgenommen, bleibt im Verlauf sichtbar.                                           |
 
-![Eigene offene und genehmigte Berechtigungsanfrage mit Nachricht und Rückmeldung](bilder/berechtigungsanfragen.png)
+<ImageZoom
+  src={anfragenAnsicht}
+  alt="Eigener offener Antrag für die Holzwerkstatt mit Nachricht, Statusfilter und der Aktion Antrag zurückziehen."
+/>
 
 Beispiel mit fiktiven Daten.
 

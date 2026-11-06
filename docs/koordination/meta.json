@@ -3,11 +3,12 @@
   "pages": [
     "---Buchungen und Ressourcen---",
     "buchungen-verwalten",
-    "[Verfügbarkeit und Wartung → Administration](/docs/koordination/ressourcen#ausfälle-und-wartung-betrieb-unterbrechen)",
-    "[Buchbarkeit ändern → Administration](/docs/koordination/ressourcen#buchbarkeit-reservierungen-ermöglichen)",
+    "[Verfügbarkeit und Wartung → Administration](/docs/administration/ressourcen-wartung)",
+    "[Buchbarkeit ändern → Administration](/docs/administration/ressourcen-buchbarkeit)",
     "---Zugang und Qualifikationen---",
     "zugangsantraege-entscheiden",
     "bewertungen",
+    "badge-vergaben",
     "vergaben-lernwegteilnahmen"
   ]
 }

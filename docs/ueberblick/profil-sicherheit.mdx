@@ -3,6 +3,10 @@ title: E-Mail und Anmeldesicherheit
 description: Eigene E-Mail, Passwort, Zwei-Faktor-Anmeldung, Wiederherstellungscodes und Passkeys verwalten.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import passwortAnsicht from './bilder/passwort-aendern.png';
+import zweiFaktorAnsicht from './bilder/profil-sicherheit.png';
+
 Öffne im Kontomenü **Sicherheit** oder **Kontoeinstellungen → Authentifizierung**.
 Zum Lesen brauchst du Profil-Leserechte, für Änderungen Profil-Änderungsrechte.
 Sind E-Mail- oder Passwortänderung deaktiviert, beachte den Hinweis zum lokalen
@@ -31,14 +35,21 @@ Bereite dich darauf vor, dich mit dem neuen Passwort erneut anzumelden.
 Lade fehlgeschlagene Anforderungen erneut. Bei einem Speicherfehler korrigiere die
 Eingaben entsprechend der Meldung im Dialog.
 
-![Dialog zum Passwortwechsel mit Passwortanforderungen und beschrifteten Eingaben](bilder/passwort-aendern.png)
+<ImageZoom
+  src={passwortAnsicht}
+  alt="Dialog zum Passwortwechsel mit Passwortanforderungen und beschrifteten Eingaben"
+/>
 
 Testumgebung; für dich gelten die angezeigten Regeln deines Standorts.
 
 ## Zwei-Faktor-Anmeldung einrichten
 
 Bei der Passwortanmeldung benötigst du danach zusätzlich den Code deiner
-Authenticator-App. **Beim Aktivieren werden vorhandene Passkeys deaktiviert.**
+Authenticator-App.
+
+<Callout type="warn" title="Aktivierung deaktiviert vorhandene Passkeys">
+  Prüfe vor der Aktivierung, dass du deine Authenticator-App nutzen kannst.
+</Callout>
 
 1. Wähle unter **Zwei-Faktor-Authentifizierung** die Aktion **QR-Code erzeugen**.
 2. Scanne den Code mit deiner Authenticator-App oder übernimm den manuellen Schlüssel.
@@ -50,7 +61,10 @@ prüfe Kontoeintrag und Gerätezeit. Eine vorgeschriebene Einrichtung musst du v
 der Nutzung abschließen.
 Bei Verlust aller Faktoren benötigst du den Wiederherstellungsweg des Standorts.
 
-![Zwei-Faktor-Bereich vor der Einrichtung mit der Aktion QR-Code erzeugen](bilder/profil-sicherheit.png)
+<ImageZoom
+  src={zweiFaktorAnsicht}
+  alt="Zwei-Faktor-Bereich vor der Einrichtung mit der Aktion QR-Code erzeugen"
+/>
 
 Ansicht vor der Schlüsselerzeugung.
 
@@ -67,8 +81,10 @@ Du benötigst aktivierte Zwei-Faktor-Anmeldung; der Standort muss
 Wiederherstellungscodes erlauben. Ein Code ersetzt bei der Anmeldung den Code
 aus der Authenticator-App, nicht dein Passwort.
 
-**Eine Neuerzeugung macht alle bisherigen Codes ungültig.** Bereits erzeugte Codes
-können nach dem Schließen des Dialogs nicht erneut angezeigt werden.
+<Callout type="warn" title="Neue Codes ersetzen alle bisherigen Codes">
+  Sichere die neuen Codes vor dem Schließen des Dialogs. Danach können sie nicht erneut angezeigt
+  werden.
+</Callout>
 
 1. Öffne **Wiederherstellungscodes verwalten** und wähle **Neue Codes generieren**.
 2. Kopiere die neuen Codes oder wähle **Als Datei speichern**. Bewahre sie getrennt

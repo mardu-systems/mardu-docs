@@ -3,11 +3,14 @@ title: Geräte verwalten
 description: Geräte aufnehmen, Anschlüsse konfigurieren, Verbindungen prüfen und Hardware ersetzen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import anschlussAnsicht from './bilder/personen-technik-geraete-anschluesse-2026-11-03.png';
+
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 Ein Controller stellt Anschlüsse für Kartenleser und **Aktoren** bereit, die
 Türen entriegeln oder Maschinen schalten. Lege Räume und Maschinen gesondert unter
-**Ressourcen** an und ordne ihre Anschlüsse an der [Ressource unter Technik](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen) zu.
+**Ressourcen** an und ordne ihre Anschlüsse an der [Ressource unter Technik](./ressourcen-zutritt.mdx#anschlüsse-zuordnen) zu.
 
 ## Gerät hinzufügen und verbinden
 
@@ -58,7 +61,7 @@ verwende dafür [Erneut ins Netzwerk aufnehmen](#gerät-erneut-aufnehmen).
 
 ## Übersicht und Verbindungsstatus
 
-Unter **Übersicht** bearbeitest du mit Geräte-Änderungsrechten die **Technische Gerätekennung** und wählst **Speichern**. Das Gerätemodell wird automatisch erkannt.
+Unter **Übersicht** bearbeitest du mit Geräte-Änderungsrechten die **Technische Gerätekennung** und wählst **Änderungen speichern**. Das Gerätemodell wird automatisch erkannt.
 
 Unter **Verbindung und Hardware** findest du Netzwerkanbindung, letzte Verbindung, Firmwareversion und Hardwareadresse. **Online** bedeutet, dass innerhalb der letzten fünf Minuten eine Meldung eingegangen ist. Prüfe die Bereitschaft der benötigten Anschlüsse zusätzlich unter **Anschlüsse**; die Online-Anzeige bestätigt keinen physischen Tür- oder Schaltzustand.
 
@@ -111,7 +114,7 @@ Du brauchst Geräte-Lese- und Änderungsrechte. Die verfügbaren Leser, Schaltau
 3. Wähle **An Gerät senden** in derselben Anschlusskarte. Prüfe anschließend die Rückmeldung unter **Letzter Auftragsstatus**. Zum erneuten Abrufen der gespeicherten Rückmeldung öffnest du **Details und Verwaltung → Serverstand aktualisieren**.
 
 **Noch nicht gesendet** kennzeichnet Änderungen im Formular. Mit **Änderungen verwerfen**
-kehrst du zum geladenen Stand zurück. Das **Speichern** in der Geräteübersicht sendet
+kehrst du zum geladenen Stand zurück. Das **Änderungen speichern** in der Geräteübersicht sendet
 keine Anschlusskonfiguration.
 
 | Rückmeldung                                                          | Bedeutung                                                                                                                            |
@@ -121,11 +124,19 @@ keine Anschlusskonfiguration.
 | Übernahme nicht bestätigt / Keine Gerätebestätigung                  | Es liegt keine bestätigte Übernahme vor. Das bedeutet keine Ablehnung. Prüfe die letzte Verbindung und aktualisiere den Serverstand. |
 | Vom Gerät abgelehnt                                                  | Prüfe die angezeigte Fehlermeldung und die Einstellungen des Anschlusses. Korrigiere sie und wähle erneut **An Gerät senden**.       |
 
+<ImageZoom
+  src={anschlussAnsicht}
+  alt="Anschlüsse des Testgeräts door-r-holz mit Leser und Aktor an der Holzwerkstatt: Hardwarezustand unbekannt und Gerätebestätigung ausstehend."
+/>
+
+Im Beispiel ist das Gerät offline. Beim Leser fehlt eine Gerätebestätigung,
+beim Aktor steht sie aus. Beide Anzeigen bestätigen keine Betriebsbereitschaft.
+
 Leser und Aktoren verwenden teilweise unterschiedliche Beschriftungen für denselben Auftragszustand.
 
 **Vom Gerät bestätigt** und ein passender gemeldeter Hardwarezustand müssen für jeden benötigten Anschluss vorliegen. **Details und Verwaltung → Vom Gerät auslesen** fragt die Gerätekonfiguration neu ab, **Serverstand aktualisieren** nur gespeicherte Angaben. Teste anschließend die physische Funktion mit Controller, Edge-Router und den vorgesehenen Lesern oder Aktoren.
 
-Ordne die Anschlüsse anschließend unter [Ressource → Technik](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen) zu. Dort brauchst du die in der Ressourcenanleitung genannten Zugriffs- und Hardwareverwaltungsrechte. Leser und Aktor können auf verschiedenen Geräten liegen. Ein Anschluss kann höchstens eine aktive Zuordnung haben.
+Ordne die Anschlüsse anschließend unter [Ressource → Technik](./ressourcen-zutritt.mdx#anschlüsse-zuordnen) zu. Dort brauchst du die in der Ressourcenanleitung genannten Zugriffs- und Hardwareverwaltungsrechte. Leser und Aktor können auf verschiedenen Geräten liegen. Ein Anschluss kann höchstens eine aktive Zuordnung haben.
 
 **Details und Verwaltung → Konfiguration löschen** entfernt die gespeicherte Sollkonfiguration
 und sendet den Löschauftrag an das Gerät. Prüfe auch dafür die Gerätebestätigung. Um einen
@@ -136,7 +147,7 @@ an der bisherigen Ressource.
 
 ### Hardware ersetzen
 
-Beende vor dem Austausch laufende Zugriffssitzungen und kläre ausstehende Befehle. Für den Austausch einer Aktorzuordnung ist eine aktuelle Aus-Bestätigung erforderlich. Beachte die Voraussetzungen unter [Technik: Anschlüsse zuordnen](../koordination/ressourcen.mdx#technik-anschlüsse-zuordnen).
+Beende vor dem Austausch laufende Zugriffssitzungen und kläre ausstehende Befehle. Für den Austausch einer Aktorzuordnung ist eine aktuelle Aus-Bestätigung erforderlich. Beachte die Voraussetzungen unter [Technik: Anschlüsse zuordnen](./ressourcen-zutritt.mdx#anschlüsse-zuordnen).
 
 1. Registriere das neue Gerät und konfiguriere seine benötigten Anschlüsse wie oben beschrieben.
 2. Öffne die betroffene **Ressource → Technik**. Wähle für die bisherige Zuordnung **Ersetzen** und den kompatiblen Anschluss des neuen Geräts.
@@ -173,15 +184,16 @@ Die gemeldete Firmwareversion steht unter **Übersicht → Verbindung und Hardwa
 Für gespeicherte Firmware-Updates über das Netzwerk (OTA) brauchst du Geräte-Leserechte.
 
 1. Öffne **Geräte** und wähle im Seitenkopf **Weitere → Historie**. Ohne Filter siehst du die gespeicherten Update-Vorgänge aller Geräte.
-2. Wähle bei Bedarf **Gerät auswählen** oder trage die **Ursprüngliche Geräte-ID**
-   ein. Für ein gelöschtes Gerät verwendest du seine ursprüngliche ID im GUID-Format.
-3. Wähle einen **Status** oder begrenze den Startzeitpunkt mit **Gestartet ab
-   (einschließlich)** und **Gestartet vor (ausschließlich)**. Beide Zeitgrenzen
-   können einzeln leer bleiben. Die Eingaben verwenden die lokale Zeitzone deines
-   Browsers; der Server vergleicht die Zeitpunkte in UTC.
-4. Wähle **Anwenden**. Unter den Filtern steht die angewendete Geräte-ID. Eine
-   Änderung im Eingabefeld gilt erst nach **Anwenden**. **Zurücksetzen** entfernt
-   die Filter sofort und öffnet die erste Seite.
+2. Wähle bei Bedarf **Gerät auswählen**. Die Auswahl filtert sofort. Für ein
+   gelöschtes Gerät öffnest du **Ursprüngliche Geräte-ID**, trägst seine ID im
+   GUID-Format ein und wählst dort **Anwenden**.
+3. Wähle einen **Status**; auch dieser Filter gilt sofort. Den Startzeitpunkt
+   begrenzt du über **Zeitraum** mit **Gestartet ab (einschließlich)** und
+   **Gestartet vor (ausschließlich)**. Bestätige diese Zeitgrenzen mit **Anwenden**.
+   Beide Grenzen können einzeln leer bleiben. Die Eingaben verwenden die lokale
+   Browser-Zeitzone; der Server vergleicht die Zeitpunkte in UTC.
+4. Prüfe die angewendete Geräte-ID unter den Filtern. **Zurücksetzen** entfernt
+   alle Filter sofort und öffnet die erste Seite.
 5. Prüfe **Zielversion**, **Status** und **Gestartet**. Öffne **Details**, um das
    letzte Ergebnis und den Zeitpunkt **Zuletzt aktualisiert** zu lesen.
 
@@ -199,9 +211,27 @@ Die aktuelle Geräteansicht bietet keine Aktion zum Starten oder Abbrechen eines
 
 ## Diagnose lesen
 
-Für **Diagnose** brauchst du zusätzlich Dashboard-Leserechte und die Leserechte für
-die jeweilige Datenquelle. Dort findest du die für deine Rechte verfügbaren Geräte-
-und Zugangsmetriken. Prüfe Zeitraum und Aktualität. Eine leere Anzeige kann durch fehlende Daten, nicht unterstützte Messwerte oder fehlende Rechte entstehen. Zugangsmetriken zeigen gespeicherte Entscheidungen; sie bestätigen keinen physischen Tür- oder Schaltzustand.
+Für **Diagnose** brauchst du Dashboard-Leserechte und die Leserechte für die
+jeweilige Datenquelle. Die Ansicht zeigt gespeicherte Geräte- und Zugangswerte
+für das geöffnete Gerät.
+
+1. Öffne das Gerät und wähle **Diagnose**.
+2. Prüfe **Zeitraum** und **Auflösung**. Voreingestellt sind die letzten 24 Stunden
+   und automatische Auflösung. Fehlende Messpunkte bleiben als Lücken sichtbar.
+3. Wähle bei Bedarf **Messwerte aktualisieren**. Ein Strich bedeutet, dass kein
+   Wert vorliegt; null ist ein gemessener oder gezählter Wert.
+
+Mit Dashboard-Bearbeitungsrechten kannst du über **Ansicht bearbeiten** Anzeigen
+verschieben oder über **Widget hinzufügen** ergänzen. **Ansicht speichern**
+übernimmt die Anordnung für alle Geräte in deinem Administrationskonto; andere
+Konten behalten ihre eigene Ansicht. Auch **Änderungen speichern** unten im Gerätefenster
+übernimmt einen noch offenen Ansichtsentwurf.
+
+Eine leere Anzeige kann durch fehlende Daten, nicht unterstützte Messwerte oder
+fehlende Rechte entstehen. Zugangsmetriken zeigen gespeicherte Entscheidungen;
+sie bestätigen keinen physischen Tür- oder Schaltzustand. Der feste
+[Sieben-Tage-Zeitraum der Benutzermetriken](./zutritt-verwalten.mdx#zugangsmetriken)
+ist von der hier gewählten Gerätediagnose zu unterscheiden.
 
 ## Probleme prüfen
 
@@ -241,4 +271,4 @@ Zugriffssitzungen und klärst ausstehende Befehle sowie ungeklärte Aktorzustän
 Öffne die betroffene Ressource. Prüfe unter **Allgemein** ihren Status, unter **Technik** die
 Anschlusszuordnung und unter **Nutzung & Zugriff** die aktive Zugriffsregel und den
 erforderlichen Berechtigungsnachweis. Die einzelnen Einstellungen erklärt [Ressourcen
-einrichten](../koordination/ressourcen.mdx#nutzung-und-zugriff-nutzung-erlauben).
+einrichten](./ressourcen-zutritt.mdx#nutzungsbedingungen-festlegen).

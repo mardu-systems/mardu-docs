@@ -3,132 +3,111 @@ title: Integrationen
 description: Die passende Anbindung für Anmeldung, MQTT, Nachweise, E-Mail, Automationen und Agenten finden.
 ---
 
-Die Anbindungen liegen unter **Administration → Integrationen** oder
-**Administration → Systemeinstellungen**.
-
-MQTT, LDAP und OIDC verwenden Rechte für **Integrationen** und **Einstellungen**;
-die jeweilige Anleitung nennt die benötigten Rechte. Durch die Serverumgebung
+Wähle die Anleitung nach der Aufgabe. Anbindungen liegen unter
+**Administration → Integrationen** oder **Administration → Systemeinstellungen**;
+die Einzelanleitung nennt die benötigten Rechte. Durch die Serverumgebung
 gesperrte Werte muss der Serverbetrieb ändern.
 
 ## Eine Integration finden
 
-Gib mindestens zwei Zeichen direkt in **Einstellungen durchsuchen** in der
-Bereichsnavigation ein, zum Beispiel `MQTT`, `TLS`, `LDAP` oder `SMTP`.
-Die Treffer erscheinen unter dem Feld und enthalten
-auch zugelassene Servereinstellungen; der Bereichspfad zeigt den Zielbereich.
-Mit Pfeiltasten und **Enter** oder durch Auswahl öffnest du den Abschnitt.
+Gib mindestens zwei Zeichen in **Einstellungen durchsuchen** in der
+Bereichsnavigation ein, etwa `MQTT`, `LDAP` oder `SMTP`. Der Bereichspfad im
+Treffer zeigt das Ziel. Mit Pfeiltasten und **Enter** oder durch Auswahl öffnest
+du den Abschnitt.
 
 Die [Einstellungssuche](./server-einstellungen.mdx#einstellungen-suchen) erklärt
-Suchumfang, Tastaturbedienung und den Umgang mit ungespeicherten Änderungen.
-Die Suche nach eigenen Kontoeinstellungen liegt getrennt unter
-[Profil](../ueberblick/profil.mdx#einstellungen-im-profil-finden).
+Suchumfang und ungespeicherte Änderungen. Eigene Kontoeinstellungen findest du
+getrennt im [Profil](../ueberblick/profil.mdx#einstellungen-im-profil-finden).
 
 ## MQTT
 
 Unter **Administration → Integrationen → Embedded MQTT** verwaltest du den
-**eingebetteten Informationsbroker**: Listener, TLS, Status, Benutzer und
-Zugriffsregeln. Externe Clients dürfen Informationen abonnieren, aber auch als
-MQTT-Administratorkonto keine Nachrichten veröffentlichen.
+**eingebetteten Informationsbroker** mit Listener, TLS, Lesekonten und Topic-Freigaben.
+Externe Clients dürfen auch mit einem MQTT-Administratorkonto ausschließlich
+abonnieren. Änderungen können bestehende Verbindungen trennen.
 
-[MQTT-Zugänge verwalten](./mqtt-broker.mdx) erklärt Einrichtung, Rechte und ACLs
-(Regeln für erlaubte Topics). Geänderte Broker-Einstellungen starten den Broker
-nach dem Speichern neu. Auch **Broker neu starten** und Passwort-, Benutzer- oder
-ACL-Änderungen trennen Clients; sie müssen sich neu verbinden und abonnieren.
-Die Nachrichtenformate stehen unter
-[Entwickeln → MQTT für Entwickler](../entwickeln/mqtt-events.mdx).
-
-Die ausgehende MQTT-Verbindung für das IP500-Netzwerk liegt getrennt unter
-[Netzwerk und Gateways](#netzwerk-und-gateways).
+Folge [MQTT-Zugänge verwalten](./mqtt-broker.mdx) für Einrichtung und Widerruf.
+Nachrichtenformate und Clienttest stehen unter
+[Entwickeln → MQTT-Ereignisse beziehen](../entwickeln/mqtt-events.mdx).
+Die ausgehende IP500-Verbindung wird [getrennt eingerichtet](#netzwerk-und-gateways).
 
 ## LDAP
 
-**LDAP** gleicht Benutzerinformationen und Gruppenzuordnungen mit einem
-Verzeichnisdienst ab. Unter **Administration → Systemeinstellungen → LDAP**
-richtest du Verbindung, Suchbereiche, Attributzuordnung, Rollenregeln und
-Synchronisierung ein. Die frühere Adresse unter Integrationen leitet dorthin weiter.
+Unter **Administration → Systemeinstellungen → LDAP** verbindest du ein
+Benutzerverzeichnis, ordnest Attribute und Gruppen lokalen Rollen zu und
+konfigurierst den Abgleich. Die frühere Adresse unter Integrationen leitet dorthin weiter.
 
-Folge [LDAP-Verzeichnis anbinden](./ldap-verzeichnis.mdx) für Verbindungstest,
-Vorschau und Synchronisierung. Prüfe besonders **Wenn Benutzer nicht mehr im LDAP
-vorhanden sind**: Die Auswahl kann Konten deaktivieren oder dauerhaft löschen.
-Ein gestarteter Hintergrundauftrag bestätigt noch keinen abgeschlossenen Abgleich;
-kontrolliere **Letzte Sync-Läufe anzeigen**.
+[LDAP-Verzeichnis anbinden](./ldap-verzeichnis.mdx) führt durch Verbindungstest,
+Vorschau und Synchronisierung. Prüfe vor der Aktivierung die Behandlung fehlender
+Benutzer: Sie kann lokale Konten deaktivieren oder dauerhaft löschen.
 
 ## Anmeldung über OpenID Connect
 
-**OpenID Connect (OIDC)** ermöglicht die Mardu-Anmeldung über einen externen
-Identitätsanbieter. Öffne **Administration → Systemeinstellungen → OIDC**;
-die frühere Adresse unter Integrationen leitet dorthin weiter.
+Unter **Administration → Systemeinstellungen → OIDC** richtest du die Anmeldung
+über einen externen Identitätsanbieter ein. Die frühere Adresse unter
+Integrationen leitet dorthin weiter.
 
-[OpenID Connect einrichten](./oidc-anmeldung.mdx) führt durch Anbieterregistrierung,
-**Redirect-URI**, Kontozuordnung, Rollenregeln und Tests. Eine Registrierung als
-Badge-Anbieter ersetzt diese Einrichtung nicht. Eine persönliche Nachweisquelle
-ermöglicht keine Mardu-Anmeldung und erteilt keine Zugriffsrechte. Prüfe neben den technischen
-Endpunkten auch die Browser-Anmeldung und nach dem Speichern die angezeigte
-Übernahme in die Laufzeit.
+[OpenID Connect einrichten](./oidc-anmeldung.mdx) erklärt Anbieterregistrierung,
+Rückleitungen, Kontozuordnung, Rollen und Anmeldetests. Eine
+[persönliche Nachweisquelle](../ueberblick/profil-nachweisquellen.mdx) zum
+Badge-Abruf ist ein anderer Zugang und erlaubt keine Mardu-Anmeldung.
 
 ## Netzwerk und Gateways
 
-Unter **Administration → Systemeinstellungen → IP500-Netzwerk** richtest du den
-**ausgehenden MQTT-Client** ein. Du benötigst **Einstellungen anzeigen/bearbeiten**.
-Verbindungsdaten, TLS und Grenzen des Refresh-Felds erklärt
-[IP500-Netzwerk anbinden](./ip500-netzwerk.mdx).
+Unter **Administration → Systemeinstellungen → IP500-Netzwerk** konfigurierst du
+den **ausgehenden MQTT-Client** mit Brokerzugang und TLS.
+[IP500-Netzwerk anbinden](./ip500-netzwerk.mdx) erklärt Einrichtung und Prüfung.
 
-Die Verbindung nimmt kein Gerät auf und ordnet keine Ressource zu; dafür nutze
-[Geräte verwalten](./geraete-verwalten.mdx). Eine Brokerverbindung bestätigt noch
-keine Gateway-Erreichbarkeit oder Gerätefunktion.
+Die Verbindung nimmt kein Gerät auf und ordnet keine Ressource zu. Fahre dafür
+mit [Geräte verwalten](./geraete-verwalten.mdx) fort; eine Brokerverbindung
+bestätigt noch keine Gateway-Erreichbarkeit oder Gerätefunktion.
 
 ## E-Mail
 
 Unter **Administration → Systemeinstellungen → E-Mail & SMTP** richtest du den
-Versand durch den Mardu-Server ein. SMTP-Einrichtung, Absender, Zugangsdaten und
-Versandtest sind unter
+Versand durch den Mardu-Server ein. Folge
 [E-Mail einrichten und testen](./benachrichtigungen-verwalten.mdx#e-mail-einrichten-und-testen)
-beschrieben. Die Anbindung gilt auch für System-E-Mails; persönliche
-Ereigniseinstellungen regeln nur die jeweils angebotenen Benachrichtigungen.
+für Absender, Zugangsdaten und Versandtest.
+
+Die Anbindung gilt auch für System-E-Mails wie Einladungen. Persönliche
+Ereigniseinstellungen regeln die jeweils angebotenen Benachrichtigungen.
 
 ## Open Badges und externe Anbieter
 
-Unter **Administration → Integrationen → Open Badges** findest du mehrere getrennte Aufgaben:
+Unter **Administration → Integrationen → Open Badges** findest du getrennte Aufgaben:
 
-| Bereich                | Zweck                                                                                                                                                    |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Mardu-Aussteller**   | Eigene Ausstellung und Nachweisprüfung, Ausstelleridentität, Signaturschlüssel und Statusliste konfigurieren. Dafür sind Rechte für Einstellungen nötig. |
-| **Synchronisation**    | Die serverweite Verbindung zu einem externen Badge-System, Import, persönliche API-Verknüpfung und externe Ausstellung konfigurieren.                    |
-| **Konto-Anbieter**     | Anbieter registrieren, bei denen Personen ihr eigenes Konto per Anmeldung verbinden und Open-Badges-3-Nachweise abrufen können.                          |
-| **Anerkennungsregeln** | Akzeptierte Aussteller und die Zuordnung externer Badge-Klassen zu lokalen Kompetenzcodes verwalten.                                                     |
-| **Vergaberegeln**      | Regeln für die externe Ausstellung nach abgeschlossener Tag-Einrichtung verwalten.                                                                       |
+| Bereich                | Zweck                                                                                                                             |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Mardu-Aussteller**   | Eigene Ausstellung und Prüfung signierter Nachweise, Ausstelleridentität, Schlüssel und Statusliste konfigurieren.                |
+| **Synchronisation**    | Serverweite Verbindung zu einem externen Badge-System, Import, persönliche API-Verknüpfung und externe Ausstellung konfigurieren. |
+| **Konto-Anbieter**     | Anbieter für die persönliche Anmeldung und den Abruf von Open-Badges-3-Nachweisen registrieren.                                   |
+| **Anerkennungsregeln** | Akzeptierte Aussteller und Zuordnung externer Badge-Klassen zu lokalen Kompetenzcodes verwalten.                                  |
+| **Vergaberegeln**      | Externe Ausstellung nach abgeschlossener Tag-Einrichtung konfigurieren.                                                           |
 
-Einrichtung, Rechte und Rückleitungs-URL erklärt
-[Nachweissysteme anbinden](./nachweissysteme-anbinden.mdx). Die persönliche
-Anmeldung beschreibt [Nachweisquellen im Profil](../ueberblick/profil-nachweisquellen.mdx).
+Einrichtung und Rechte erklärt [Nachweissysteme anbinden](./nachweissysteme-anbinden.mdx).
+Serverweite Synchronisation und persönliche Konto-Anbieter verwenden unterschiedliche
+Zugänge. Import und technische Prüfung ersetzen keine
+[Anerkennungsentscheidung → Koordination](../koordination/bewertungen.mdx) und
+gewähren keinen Zutritt.
 
-Serverweite Synchronisation und Konto-Anbieter verwenden unterschiedliche Zugänge.
-Import und technische Prüfung ersetzen keine Anerkennungsentscheidung und gewähren
-keinen Zutritt. Für die Bewertung nutze
-[Koordination → Bewertungen](../koordination/bewertungen.mdx).
-
-[Badges verwalten](./badges-verwalten.mdx) behandelt Definitionen, lokale Vergaben und
-Veröffentlichungen. Eine lokale Badge-Vergabe ist von einem signierten Nachweis zu
-unterscheiden. Plane Änderungen an Aussteller-URL, Schlüssel- oder Statuslistenpfad
-mit dem Serverbetrieb: Ein neuer Pfad migriert keine vorhandenen Dateien und rotiert
-keinen Schlüssel.
+[Badges verwalten](./badges-verwalten.mdx) behandelt Definitionen, lokale Vergaben
+und Veröffentlichungen. Eine lokale Vergabe ist von einem signierten Nachweis zu
+unterscheiden.
 
 ## Automationen
 
-[Automationen](./automationen.mdx) beschreibt unter
-**Administration → Integrationen → Automationen** die Aktivierung,
-Node-RED-Verbindung, Editorrechte und Anschlusszuordnung.
+Unter **Administration → Integrationen → Automationen** richtest du die
+Node-RED-Verbindung, Editorrechte und Anschlusszuordnung ein.
+[Automationen](./automationen.mdx) erklärt die Einrichtung und ihre Folgen.
 
-Die eingerichtete Node-RED-Verbindung kann alle unterstützten Ressourcen lesen und
-registrierte Aktionen ausführen. Eine Anschlusszuordnung begrenzt diesen
-Laufzeitzugriff nicht. Das Deaktivieren der Integration ist kein Gerätestopp;
-bereits deployte Flows laufen weiter. Prüfe die Auswirkungen eines Flows vor dem Deploy.
+Die Verbindung kann alle unterstützten Ressourcen lesen und registrierte Aktionen
+ausführen; eine Anschlusszuordnung begrenzt diesen Laufzeitzugriff nicht. Das
+Deaktivieren der Integration stoppt bereits deployte Flows nicht.
 
 ## MCP
 
-Unter [MCP für Agenten freigeben](./mcp-verwalten.mdx) aktivierst du den Endpunkt,
-begrenzt Tool-Arten und Laufzeiten und sperrst den Zugriff bei Bedarf wieder.
-Persönliche Tokens erstellt und widerruft jede Person unter
-[MCP-Verbindungen im Profil](../ueberblick/profil-mcp.mdx).
-Die [Clientkonfiguration](../entwickeln/mcp-anbindung.mdx#mcp-client-verbinden)
-beschreibt Transport, Verbindungstest und Fehler für die Entwicklung.
+Unter [MCP für Agenten freigeben](./mcp-verwalten.mdx) aktivierst du den Endpunkt
+und begrenzt Tool-Arten und Laufzeiten. Persönliche Tokens erstellt und widerruft
+jede Person in den [MCP-Verbindungen im Profil](../ueberblick/profil-mcp.mdx).
+Die [Clientkonfiguration → Entwickeln](../entwickeln/mcp-anbindung.mdx#mcp-client-verbinden)
+erklärt Verbindungstest und technische Fehler.

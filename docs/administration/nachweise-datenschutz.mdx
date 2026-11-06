@@ -3,6 +3,9 @@ title: Nachweise und Datenschutz
 description: Verwaltungsänderungen suchen und exportieren, Datenquellen unterscheiden und Löschfolgen prüfen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import auditFilter from './bilder/audit-trail-filter-aktuell.png';
+
 Der **Audit-Trail** erfasst Verwaltungsänderungen. Anmeldeereignisse,
 Zutrittsentscheidungen und persönliche Kompetenzvergaben sind eigene Datenquellen;
 ein Auditexport ist keine vollständige Personenauskunft.
@@ -24,8 +27,8 @@ Benutzerauswahl im Filter benötigst du zusätzlich `Permissions.Users.View`.
    zum Auswahlzeitpunkt und lassen das Ende offen.
 3. Grenze den Objekttyp und die Aktion ein, etwa **Benutzer** und **Aktualisiert**.
    Die Suche berücksichtigt unter anderem Benutzernamen, Aktionen, Objekttypen und Objekt-IDs.
-4. Öffne bei Bedarf **Weitere Filter**. Dort kannst du einen **Benutzer** auswählen
-   oder **Objekt-ID**, **Korrelations-ID** und **Client-IP** eingeben.
+4. Wähle bei Bedarf unter **Benutzer** die ausführende Person. Unter
+   **Weitere Filter** gibst du **Objekt-ID**, **Korrelations-ID** oder **Client-IP** ein.
 5. Aktiviere bei Bedarf **Nur mit Feldänderungen**, um Ereignisse mit aufgezeichneten
    Änderungen auszuwählen. Öffne eine Ergebniszeile, um das **Audit-Ereignis** zu lesen.
 
@@ -33,6 +36,11 @@ Der Benutzerfilter bezieht sich auf die Person, die eine Aktion **ausgeführt** 
 Suchst du Änderungen an einem bestimmten Konto, verwende den Objekttyp
 **Benutzer** zusammen mit dessen **Objekt-ID**. Beide Filter zusammen liefern nur
 Änderungen, bei denen dieselbe Person Ausführende und betroffenes Konto ist.
+
+<ImageZoom
+  src={auditFilter}
+  alt="Audit-Trail mit Objekttyp Einstellungen, dem eigenen Benutzerfilter und geöffneten weiteren Filtern für Objekt-ID, Korrelations-ID und Client-IP."
+/>
 
 Eingaben, Tabelle und Details verwenden UTC, unabhängig von der Browser-Zeitzone.
 **Von** und **Bis** schließen den eingegebenen Zeitpunkt ein. Leere eine Grenze,
@@ -75,7 +83,7 @@ Der Export übernimmt die aktuellen Suchfilter und die Sortierung, unabhängig v
 der gerade sichtbaren Tabellenseite. Er enthält **höchstens 10.000 Ereignisse**.
 Der Hinweis vor dem Export nennt die Grenze und den aktuellen Listenstand.
 Der Status nach dem Download verwendet die beim Export ermittelten Zahlen; sie
-können vom Listenstand abweichen. Liefert ein älterer Server keine Exportangaben,
+können vom Listenstand abweichen. Liefert der Server keine gültigen Exportangaben,
 meldet die Oberfläche **Die Vollständigkeit ist unbekannt**.
 
 Bei mehr Treffern teile die Abfrage in kleinere Zeiträume auf und prüfe mögliche
@@ -92,8 +100,10 @@ Trefferzahl und exportierte Zeilen werden in getrennten Lesevorgängen ermittelt
 Bei gleichzeitig hinzukommenden oder entfernten Ereignissen bilden sie keinen
 transaktionalen Snapshot; der Teilstatus wird im Zweifel als unvollständig ausgewiesen.
 
-Die heruntergeladene Datei liegt außerhalb der Zugriffsprüfung von Mardu. Lege
-fest, wer sie erhält, wo sie abgelegt und wann sie entfernt wird.
+<Callout type="warn" title="Exportdatei getrennt schützen">
+  Die heruntergeladene Datei liegt außerhalb der Zugriffsprüfung von Mardu. Lege fest, wer sie
+  erhält, wo sie abgelegt und wann sie entfernt wird.
+</Callout>
 
 ### Wenn Ergebnisse fehlen
 
@@ -123,15 +133,9 @@ Türöffnung oder Geräteausführung.
 | Benachrichtigungen                   | Mitteilungen und Zustellinformationen. Lesen, Stummschalten oder Kanalwahl sind keine allgemeine Datenlöschung.                                          |
 | Technische Messwerte                 | Eigene Aufbewahrung für Rohdaten und Stundenaggregate; diese Fristen gelten nicht für Audit- oder Zutrittshistorie.                                      |
 
-Für technische Messwerte findest du in den Servereinstellungen **Rohdaten (Tage)**
-und **Stundenaggregate (Tage)**. Die zulässigen Bereiche sind 1–365 beziehungsweise
-1–3650 Tage; die Aggregatfrist muss mindestens der Rohdatenfrist entsprechen.
-Die Servervorgaben sind 30 und 365 Tage. Maßgeblich sind die gespeicherten Werte
-deiner Installation. Eine längere Frist stellt bereits entfernte Daten nicht
-wieder her.
-
-Diese Fristen gelten ausschließlich für technische Messwerte, nicht für die
-anderen Datenarten.
+Die Aufbewahrungsfristen für technische Messwerte stellst du unter
+[Monitoring einrichten → Metriksammlung und Aufbewahrung](./monitoring-einrichten.mdx#metriksammlung-und-aufbewahrung-einstellen)
+ein. Diese Fristen gelten nicht für die anderen Datenarten.
 
 ## Auskunft, Berichtigung und Löschung
 

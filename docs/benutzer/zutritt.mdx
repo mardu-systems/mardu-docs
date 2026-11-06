@@ -3,6 +3,10 @@ title: Zugänge & Ressourcen
 description: Sichtbare Ressourcen, eigene Freigaben und die Bedingungen ihrer Nutzung prüfen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import freigabenAnsicht from './bilder/freigaben-aktuell.png';
+import katalogAnsicht from './bilder/ressourcenkatalog-aktuell.png';
+
 Unter **Zugänge & Ressourcen**, auf dem Handy **Ressourcen**, findest du deine
 Freigaben und den Ressourcenkatalog. Freigaben können auch ohne Katalogeintrag sichtbar sein.
 
@@ -30,6 +34,14 @@ Eine Freigabe über ein **Zutrittsmedium** gilt nur mit dem angegebenen Medium.
 Prüfe dessen **Medienstatus** und Gültigkeit. **Keine wöchentliche Einschränkung**
 hebt den Gültigkeitszeitraum der Freigabe nicht auf.
 
+<ImageZoom
+  src={freigabenAnsicht}
+  alt="Freigabe für Seminarraum klein über die Benutzergruppe Mitarbeitende, ohne Enddatum und ohne wöchentliche Einschränkung."
+/>
+
+Das Beispiel verwendet eine fiktive Gruppenfreigabe. Sie gilt für die Mitglieder
+der angezeigten Benutzergruppe.
+
 ## Ressource im Katalog finden
 
 1. Suche unter **Ressourcen entdecken** nach dem Ressourcennamen. Nutze bei Bedarf
@@ -39,6 +51,11 @@ hebt den Gültigkeitszeitraum der Freigabe nicht auf.
    oder beides. Öffne **Details**, um die Katalogangaben zur Ressource einzeln anzusehen.
 3. Wähle **Zugriff anfragen**, soweit angeboten. Siehe
    [Berechtigungsanfragen](./berechtigungsanfragen.mdx).
+
+<ImageZoom
+  src={katalogAnsicht}
+  alt="Katalogsuche nach Holzwerkstatt mit dem benötigten Zugang, der erforderlichen Einweisung sowie Details und Zugriff anfragen."
+/>
 
 Der Katalog nennt Einweisungen auch dann, wenn du sie nicht besitzt.
 **Verfügbar** beschreibt den Betriebsstatus, nicht deinen persönlichen Zugang

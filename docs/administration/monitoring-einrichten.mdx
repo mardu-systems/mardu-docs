@@ -1,0 +1,120 @@
+---
+title: Monitoring und Fehlerberichte einrichten
+description: Messwerte aufbewahren, Alarmgrenzen festlegen und die getrennte Übertragung von Fehler- und Performance-Daten steuern.
+---
+
+Wähle zuerst, welche Daten du benötigst. Betriebsmetriken und Fehlerberichte
+haben unterschiedliche Aufgaben und werden auf getrennten Einstellungsseiten verwaltet.
+
+| Bereich                   | Zweck und Ergebnis                                                                                                                                                                                                 |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Monitoring & Metriken** | Speichert Betriebs-, Geräte- und Ressourcenmesswerte. Alarmgrenzen können Vorfälle zu Systemzustand, HTTP-Fehlerquote und Speicherplatz erzeugen.                                                                  |
+| **Fehlerberichte**        | Gibt die Übertragung bereinigter Diagnoseereignisse und optionaler Performance-Daten an den konfigurierten Fehlerdienst frei. Die Sentry-kompatible Anbindung ersetzt keine Betriebsmetriken oder Alarmzustellung. |
+
+## Voraussetzungen und Rechte
+
+Die Einstellungs-APIs benötigen `Settings.View` zum Lesen und `Settings.Update`
+zum Ändern. Die Menüeinträge **Monitoring & Metriken** und **Fehlerberichte**
+werden erst mit `Settings.Update` angeboten. Änderungen werden ohne
+Serverneustart übernommen. Gesperrte Deployment-Vorgaben änderst du außerhalb
+des Formulars; siehe [Servereinstellungen](./server-einstellungen.mdx#gesperrte-werte-und-neustartbedarf).
+
+Die Anzeige von Messwerten und die Zustellung von Benachrichtigungen benötigen
+eigene Rechte und Konfigurationen. Eine gespeicherte Einstellung bestätigt keine
+externe Zustellung.
+
+## Metriksammlung und Aufbewahrung einstellen
+
+1. Öffne **Administration → Systemeinstellungen → Monitoring & Metriken**.
+2. Entscheide mit **Metriksammlung aktiv**, ob regelmäßig Messwerte gespeichert
+   werden sollen. Ausschalten löscht vorhandene Daten nicht.
+3. Lege das **Abtastintervall (Sekunden)** und die beiden Aufbewahrungsfristen fest.
+
+| Einstellung                | Bedeutung und Grenzen                                        |
+| -------------------------- | ------------------------------------------------------------ |
+| Abtastintervall (Sekunden) | 15–300 Sekunden. Kürzere Intervalle erzeugen mehr Messdaten. |
+| Rohdaten (Tage)            | 1–365 Tage Aufbewahrung.                                     |
+| Stundenaggregate (Tage)    | 1–3.650 Tage; mindestens so lang wie die Rohdatenfrist.      |
+
+Die Servervorgaben für Rohdaten und Stundenaggregate sind 30 beziehungsweise
+365 Tage. Maßgeblich sind die gespeicherten Werte deiner Installation. Eine
+längere Frist stellt bereits entfernte Daten nicht wieder her. Diese Fristen
+gelten ausschließlich für technische Messwerte, nicht für Audit-, Anmelde-,
+Buchungs- oder Zutrittshistorie. Deren Grenzen erklärt
+[Nachweise und Datenschutz](./nachweise-datenschutz.mdx#datenarten-und-aufbewahrung).
+
+## Alarmgrenzen festlegen
+
+Aktiviere bei Bedarf **Metrikalarme aktiv**. Mit **Bestätigungssamples** zwischen
+1 und 20 bestimmst du, wie viele aufeinanderfolgende Messungen eine Verletzung
+oder Erholung bestätigen müssen.
+
+### HTTP-Fehlerquote
+
+Öffne die erweiterten HTTP-Einstellungen:
+
+- **Auswertungsfenster (Minuten)**: 1–60 Minuten.
+- **Mindestanzahl Anfragen**: 1–1.000.000. Erst bei ausreichendem Anfragevolumen
+  wird die 5xx-Quote ausgewertet.
+- **Alarm ab 5xx-Quote (%)** und **Erholung unter 5xx-Quote (%)**: jeweils 0–100.
+  Die Erholungsgrenze muss unter der Alarmgrenze liegen.
+
+### Freier Speicher
+
+Die Speichergrenzen verwenden freien Speicher in Prozent und in Bytes.
+Ein Alarm kann beim Erreichen einer der beiden Alarmgrenzen entstehen.
+Zur Erholung müssen beide Erholungsgrenzen erreicht sein. Jeder Erholungswert
+muss höher als der zugehörige Alarmwert sein. Beispiel: 1.073.741.824 Bytes sind 1 GiB.
+
+### Speichern und Messwerte prüfen
+
+1. Prüfe Erfassungsintervall, Fristen und Alarmgrenzen und wähle **Speichern**.
+2. Öffne die Seite erneut und kontrolliere die gespeicherten Werte.
+3. Öffne **Betrieb → Systemstatus**. Prüfe Aktualität und passende Zeiträume
+   nach [Übersicht und Systemstatus](../benutzer/uebersicht-monitoring.mdx).
+   Erzeuge für diese Kontrolle keine künstliche produktive Störung.
+
+Messwerte und Vorfälle sind von ihrer Zustellung zu unterscheiden. Zustellkanäle
+und SMTP-Test beschreibt [Benachrichtigungen einrichten und prüfen](./benachrichtigungen-verwalten.mdx).
+Zustellmetriken stehen unter
+[Systemstatus → Benachrichtigungen](../benutzer/uebersicht-monitoring.mdx#benachrichtigungen).
+
+## Fehlerberichte freigeben oder abschalten
+
+<Callout type="warn" title="Abschalten löscht keine bereits übertragenen Berichte">
+  Beim Ausschalten werden auch Performance-Daten abgeschaltet und lokal vorgemerkte Serverereignisse
+  gelöscht. Bereits beim Fehlerdienst eingegangene Berichte werden dadurch nicht entfernt.
+</Callout>
+
+1. Öffne **Administration → Systemeinstellungen → Fehlerberichte**.
+2. Prüfe vor einer Freigabe unter den Laufzeitangaben **Transport konfiguriert**,
+   **Zielprojekt** und **Ziel**. Die Transportadresse wird im Deployment
+   eingerichtet und ist hier nicht änderbar. Ohne konfigurierten Transport
+   reicht die Freigabe nicht für einen Versand.
+3. Lege mit **Anonymisierte Fehlerberichte** die Versandfreigabe fest.
+   Berichte können bereinigte Fehlermeldungen, Stacktraces, Softwareversion und
+   Umgebung enthalten. Benutzer-/Anfragekontexte werden entfernt; erkennbare
+   Zugangsdaten und direkte Kennungen werden gefiltert.
+4. Aktiviere bei Bedarf zusätzlich **Performance-Daten**. Die dann sichtbare
+   **Trace-Samplerate** liegt zwischen 0 und 0,05: 0 deaktiviert das Sampling,
+   0,05 entspricht fünf Prozent.
+5. Wähle **Speichern** und bestätige den angezeigten Dialog.
+6. Öffne die Seite erneut und prüfe die gespeicherte Entscheidung. Lade
+   geöffnete Dashboard-Sitzungen neu, damit sie den aktuellen Freigabestand abrufen.
+
+Server und Dashboard benötigen jeweils eine Anbindung. **Umgebung**, **Release**,
+die anonyme Installationskennung, **Datenschutzhinweis** und
+**Letzte Entscheidung (UTC)** sind nur lesbar. Die Seite zeigt
+**Lokal vorgemerkte Ereignisse**, bietet aber keinen eigenen Versandtest oder Export.
+Ein aktiver Status und gespeicherte Zustimmung belegen keinen Empfang beim Fehlerdienst.
+
+## Wenn etwas nicht klappt
+
+| Beobachtung                                       | Nächster Schritt                                                                                                     |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Eine Einstellungsseite fehlt                      | Prüfe `Settings.Update`; die Einstellungs-APIs verlangen zum Lesen außerdem `Settings.View`.                         |
+| Metrikeinstellungen werden abgewiesen             | Prüfe Wertebereiche, Aufbewahrungsfristen und die Reihenfolge von Alarm- und Erholungsgrenzen.                       |
+| Messwerte fehlen                                  | Prüfe Erfassung, Zeitraum, Aktualität und Rechte der Datenquelle. Fehlende Daten bedeuten nicht null Fehler.         |
+| Eine erwartete HTTP-Warnung fehlt                 | Prüfe Anfragevolumen, Auswertungsfenster und Bestätigungssamples.                                                    |
+| Fehlerberichte sind freigegeben, aber nicht aktiv | Prüfe **Transport konfiguriert** und die Vorgaben des Deployments. Server und Dashboard haben getrennte Anbindungen. |
+| Performance-Felder fehlen                         | Aktiviere zuerst **Anonymisierte Fehlerberichte**, danach **Performance-Daten**.                                     |

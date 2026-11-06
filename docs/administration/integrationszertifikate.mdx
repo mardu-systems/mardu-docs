@@ -1,0 +1,90 @@
+---
+title: Zertifikate für Integrationen verwalten
+description: Zertifikatsmaterial hinterlegen, ersetzen oder löschen und die Verwendung durch LDAP, OIDC oder MQTT prüfen.
+---
+
+Unter **Server-Zertifikate** hinterlegst du Zertifikatsmaterial, das du etwa LDAP,
+OIDC oder MQTT zuordnest. Das Hochladen allein stellt noch keine Verbindung her.
+
+<Callout title="Das HTTPS-Zertifikat hat einen eigenen Wechselweg">
+  Der Zertifikatsspeicher ändert nicht das Zertifikat, das der Browser vom API-Webserver oder einem
+  vorgeschalteten Proxy erhält. Dafür gilt [HTTPS-Zertifikatswechsel vorbereiten und
+  prüfen](./zertifikate-https.mdx).
+</Callout>
+
+## Voraussetzungen und Rechte
+
+Du brauchst `Settings.View` zum Lesen sowie `Settings.Update` zum Hochladen,
+Ersetzen oder Löschen. Für die Zuordnung und Verbindungsprüfung können in der
+jeweiligen Integration weitere Rechte nötig sein.
+
+Kläre vorab den Verwendungszweck und prüfe Herkunft, Gültigkeit, Hostnamen und
+Zertifikatskette. Ein CA-Zertifikat zum Prüfen einer Gegenstelle benötigt keinen
+privaten Schlüssel; ein Serverzertifikat für TLS benötigt das passende
+Schlüsselmaterial. Halte Zertifikatsdatei und gegebenenfalls privaten Schlüssel
+sowie Dateipasswort bereit.
+
+## Bestand und Handlungsbedarf prüfen
+
+1. Öffne **Administration → Systemeinstellungen → Server-Zertifikate**.
+2. Suche nach Name, Subject oder Fingerabdruck. **Handlungsbedarf** filtert
+   auffällige Gültigkeitszustände.
+3. Prüfe Gültigkeitsstatus, Ablauf und Eigenschaften wie **CA** oder
+   **Privater Schlüssel**. Kläre, welcher Dienst den Eintrag verwendet.
+
+Die Übersicht markiert auch noch nicht gültige und abgelaufene Zertifikate.
+Sie bietet keine vollständige Zuordnung aktiver TLS-Verbindungen und keine
+automatische Zertifikatserneuerung.
+
+## Zertifikat hinzufügen
+
+1. Wähle **Zertifikat hinzufügen** und gib einen Namen ein, der den
+   Verwendungszweck erkennen lässt.
+2. Wähle **PEM** oder **PFX / P12** und lade die **Zertifikatsdatei** hoch.
+   Für PEM kannst du eine separate **Datei mit privatem Schlüssel** angeben.
+3. Trage bei einer passwortgeschützten PFX-/P12-Datei oder einem verschlüsselten
+   privaten PEM-Schlüssel das **Dateipasswort** ein.
+4. Aktiviere **Selbstsigniertes Zertifikat zulassen** nur, wenn Herkunft und
+   Fingerabdruck unabhängig geprüft sind. Ohne diese Freigabe wird ein
+   selbstsigniertes Zertifikat abgelehnt. Abgelaufene Zertifikate werden
+   ebenfalls abgelehnt.
+5. Wähle **Zertifikat hinzufügen** und kontrolliere den neuen Eintrag.
+6. Ordne das Zertifikat im benötigten Integrationsformular zu. Prüfe dort
+   Verbindung und mögliche Neustarthinweise nach der jeweiligen
+   [Integrationsanleitung](./integrationen.mdx).
+
+Private Schlüssel und Passwörter werden nach dem Upload nicht erneut angezeigt.
+**Abbrechen** verwirft geänderte Eingaben nach Bestätigung.
+
+## Zertifikat ersetzen
+
+1. Kläre die betroffenen Dienste und halte das neue Zertifikatsmaterial bereit.
+2. Wähle beim vorhandenen Eintrag **Ersetzen**, lade das neue Material hoch und
+   bestätige mit **Ersetzen**. Die Zertifikats-ID bleibt erhalten.
+3. Kontrolliere den neuen Fingerabdruck und die Gültigkeit. Prüfe anschließend
+   die Verbindungen, die dieses Zertifikat verwenden.
+
+Die Bestätigung im Speicher belegt noch keine erfolgreiche Verbindung.
+LDAP, OIDC und MQTT haben eigene Einstellungen für die Zertifikatsverwendung.
+
+## Zertifikat löschen
+
+<Callout type="warn" title="Verwendung vor dem Löschen klären">
+  Nach Bestätigung werden der gespeicherte Eintrag und die zugehörige Datei entfernt. Die Liste
+  zeigt keine Abhängigkeiten. Kläre vorher, welche Dienste das Zertifikat benötigen, und ersetze
+  oder entferne dort die Zuordnung.
+</Callout>
+
+1. Prüfe Name, Fingerabdruck und Verwendungszweck des Eintrags.
+2. Wähle **Löschen** und bestätige die Rückfrage.
+3. Kontrolliere, dass der Eintrag aus der Liste verschwunden ist, und prüfe die
+   betroffenen Dienste.
+
+## Wenn etwas nicht klappt
+
+| Beobachtung                                              | Nächster Schritt                                                                                                                          |
+| -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Upload oder Ersetzen wird abgewiesen                     | Die Eingaben bleiben im Dialog. Prüfe Format, Datei, passenden Schlüssel, Dateipasswort und Gültigkeit anhand der Fehlermeldung.          |
+| Ein selbstsigniertes Zertifikat wird abgewiesen          | Prüfe Herkunft und Fingerabdruck vor der ausdrücklichen Freigabe. Diese Freigabe installiert kein Vertrauen auf Endgeräten.               |
+| Nach dem Ersetzen scheitert eine Integration             | Prüfe Zuordnung, Zertifikatszweck, Hostname und Verbindung im jeweiligen Integrationsbereich. Beachte Neustarthinweise.                   |
+| Der Browser zeigt unverändert sein bisheriges Zertifikat | Bestimme den zuständigen HTTPS-Listener oder Proxy nach der [HTTPS-Anleitung](./zertifikate-https.mdx#1-zuständige-komponente-bestimmen). |

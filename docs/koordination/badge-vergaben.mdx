@@ -1,0 +1,123 @@
+---
+title: Badge-Vergaben verwalten
+description: Lokale Badges an Personen vergeben, ihre Gültigkeit prüfen und Vergaben erneuern oder widerrufen.
+---
+
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import vergabenAnsicht from './bilder/badge-vergaben-erneuerung-aktuell.png';
+
+Eine lokale Badge-Vergabe hält fest, welche Person ein Badge mit einer bestimmten
+Inhaltsversion erhalten hat. Sie ist kein signiertes Open-Badges-Credential und
+gewährt allein keinen Ressourcenzugriff.
+
+Die Definition mit Fähigkeiten, Erwerbskriterien und Gültigkeitsdauer pflegst du
+unter [Administration → Badges verwalten](../administration/badges-verwalten.mdx).
+Lernwegteilnahmen begleitest du nach [dieser Anleitung](./vergaben-lernwegteilnahmen.mdx).
+
+## Voraussetzungen und Rechte
+
+Du brauchst Leserechte für **Kompetenzen**, für die Personenauswahl außerdem
+Benutzer-Leserechte. Zum Vergeben, Erneuern und Widerrufen brauchst du zusätzlich
+**Kompetenzen genehmigen**. Die Bezeichnung „Koordination“ erteilt diese Rechte nicht.
+
+Neue lokale Vergaben und Erneuerungen setzen ein **aktives lokales Badge** und ein
+vorhandenes Benutzerkonto voraus. Importierte Originale lassen sich nicht lokal
+vergeben; die Administration muss dafür eine lokale Kopie erstellen. Ein inaktives
+Badge verhindert neue Vergaben und Erneuerungen, widerruft aber keine vorhandene Vergabe.
+
+## Vergaben einer Person finden
+
+Öffne **Kompetenzen → Personen** und suche die Person. Die Übersicht zeigt je Person
+bis zu drei gültige Badge-Vergaben und laufende Lernwege; **+N** nennt weitere Einträge.
+Mehrere Vergaben desselben Badges zählen als getrennte Vergabedatensätze.
+
+Wähle einen Badge-Namen, um dessen **Vergaben** für diese Person zu öffnen. Ein Lernwegname
+öffnet entsprechend dessen **Teilnahmen** für die Person. Die Liste gehört weiterhin zum
+gewählten Badge oder Lernweg. Die Übersicht zeigt keine Gesamtliste früherer Vergaben.
+Mit der Zurückfunktion des Browsers gelangst du zur vorherigen Personensuche zurück.
+
+**Wird geladen …**, **Nicht geladen** oder **Unbekannt** bestätigt keinen leeren Bestand.
+Verwende bei einem Fehler **Badge-Vergaben erneut laden** bzw. **Lernwegteilnahmen erneut laden**.
+**Neu laden** aktualisiert die Personenübersicht und beide Zuordnungsquellen, etwa nach
+Vergaben oder dem Abschluss einer Teilnahme.
+
+## Vergaben und Lernwege
+
+Unter **Vergaben** siehst du Personen, Status, Gültigkeit und Inhaltsversion. Neue
+Vergaben und Erneuerungen verwenden den aktuellen gespeicherten Stand; bestehende
+Vergaben bleiben von Inhaltsänderungen unberührt.
+
+Beim Ansehen einer historischen Version und während ungespeicherter Änderungen sind Vergabeaktionen
+nicht verfügbar. Kehre zur aktuellen Version zurück und speichere oder verwirf deine Änderungen.
+
+### Ein Badge vergeben
+
+<Callout type="warn" title="Vergabe und Erneuerung verlangen eine eigene Prüfung">
+  Die Aktionen prüfen die Anforderungsgruppen nicht. Prüfe Fähigkeiten und manuelle Erwerbskriterien
+  vor jeder Entscheidung selbst. Erfüllte Voraussetzungen vergeben kein Badge automatisch.
+</Callout>
+
+1. Prüfe selbst, ob die Person die erforderlichen Fähigkeiten und Erwerbskriterien erfüllt.
+2. Öffne beim aktiven lokalen Badge **Vergaben → Badge vergeben**.
+3. Wähle die Person aus. Das Badge ist bereits festgelegt. Ergänze bei Bedarf eine
+   **Notiz zur Entscheidung** mit höchstens 2000 Zeichen.
+4. Wähle **Vergabe bestätigen**.
+5. Prüfe in der Vergabeliste Person, **Inhaltsversion**, Status **Gültig** und Ablaufdatum.
+   Öffne die Vergabe, um **Vergeben am** und die Notiz zu lesen.
+
+Die Vergabe beginnt sofort. Ihre Gültigkeit ergibt sich aus der aktuellen Badge-Version; im
+Vergabeformular wählst du kein eigenes Beginn- oder Ablaufdatum. Bei **Unbefristet** hat sie kein Ablaufdatum.
+Eine weitere gültige Vergabe desselben Badges an dieselbe Person wird abgelehnt.
+
+### Eine Vergabe erneuern
+
+Eine Erneuerung ersetzt die bisherige Vergabe. Der alte Datensatz bleibt erhalten und erscheint als
+**Widerrufen oder ersetzt**. Die neue Vergabe verwendet die aktuelle Inhaltsversion und beginnt mit
+einer neuen Gültigkeitsdauer ab dem Zeitpunkt der Erneuerung, nicht ab dem bisherigen Ablaufdatum.
+
+1. Prüfe Fähigkeiten, Erwerbskriterien und Nachweise anhand der aktuellen Badge-Version erneut.
+2. Öffne unter **Vergaben** eine gültige oder abgelaufene Vergabe, die noch nicht widerrufen oder ersetzt wurde.
+3. Ergänze bei Bedarf eine **Notiz zur Entscheidung** und wähle **Erneuern**.
+   Die Aktion wird direkt ausgeführt.
+4. Prüfe den neuen Eintrag mit Inhaltsversion und Gültigkeit sowie den erhaltenen alten Eintrag.
+
+Im fiktiven Beispiel erhält Miriam Brandt nach der Erneuerung die aktuelle
+Inhaltsversion mit 180 Tagen Gültigkeit. Ihre bisherige Vergabe mit 90 Tagen
+bleibt als **Widerrufen oder ersetzt** erhalten.
+
+<ImageZoom
+  src={vergabenAnsicht}
+  alt="Zwei Vergaben desselben Badges an Miriam Brandt: aktuelle Version 1 mit Status Gültig und erhaltene Version 0 mit Status Widerrufen oder ersetzt."
+/>
+
+Eine widerrufene oder ersetzte Vergabe kann nicht erneuert werden. Nach erneuter Prüfung kannst du
+**Badge vergeben** verwenden, sofern keine andere gültige Vergabe desselben Badges besteht.
+
+### Eine Vergabe widerrufen
+
+Ein Widerruf beendet die Gültigkeit der ausgewählten lokalen Vergabe. Er löscht den Datensatz nicht
+und widerruft kein extern ausgestelltes Credential.
+
+1. Öffne die betreffende Vergabe unter **Vergaben**.
+2. Ergänze bei Bedarf eine **Notiz zur Entscheidung**. Sie ist optional und ersetzt beim Widerruf
+   die bisherige Notiz dieses Eintrags.
+3. Wähle **Widerrufen** und bestätige die Rückfrage.
+4. Prüfe den Status **Widerrufen oder ersetzt** in der Vergabeliste.
+
+### Zugehörige Lernwege ansehen
+
+Unter **Lernwege** stehen Lernwege, die dieses Badge enthalten oder als Abschluss-Badge verwenden.
+Der Lernfortschritt ersetzt keine Fähigkeitsvoraussetzungen des Badges.
+
+## Wenn eine Aktion nicht klappt
+
+| Beobachtung                            | Nächster Schritt                                                                                                   |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Aktion fehlt oder ist gesperrt         | Prüfe Rechte, lokale Herkunft, Aktivstatus, angezeigte Version und ungespeicherte Änderungen.                      |
+| Person fehlt                           | Prüfe, ob das Konto vorhanden ist und du Benutzer lesen darfst.                                                    |
+| Bereits eine gültige Vergabe vorhanden | Öffne die vorhandene Vergabe und prüfe, ob sie erneuert werden soll.                                               |
+| Erneuern ist nicht verfügbar           | Eine widerrufene oder ersetzte Vergabe lässt sich nicht erneuern. Prüfe die Person vor einer neuen Vergabe erneut. |
+| Stand wurde zwischenzeitlich geändert  | Lade die Vergabeliste neu und prüfe den aktuellen Stand vor einer weiteren Entscheidung.                           |
+
+Kompetenzprüfungen und die Anerkennung externer Nachweise sind eigene Entscheidungen
+unter [Bewertungen](./bewertungen.mdx).

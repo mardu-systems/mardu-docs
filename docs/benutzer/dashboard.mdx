@@ -3,6 +3,9 @@ title: Persönliches Dashboard
 description: Eigene Buchungen, Freigaben und Qualifikationen überblicken und die Widget-Anordnung speichern.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import dashboardAnsicht from './bilder/dashboard-aktuell.png';
+
 Öffne **Dashboard**, auf dem Handy **Start**. Du benötigst Profil-Leserechte. Buchungswidgets stehen
 mit Buchungs-Leserechten zur Verfügung; zum Anpassen brauchst du
 Profil-Änderungsrechte.
@@ -29,7 +32,10 @@ Diese Anzeige zählt aktuell wirksame Einweisungen, die innerhalb von 30 Tagen a
 Freigaben und Einweisungen allein bestätigen keinen aktuellen Hardwarezugang;
 prüfe die Bedingungen unter [Zugänge & Ressourcen](./zutritt.mdx).
 
-![Persönliches Dashboard mit eigenen Buchungen, einer Freigabe und einer gültigen Einweisung](bilder/dashboard-desktop.png)
+<ImageZoom
+  src={dashboardAnsicht}
+  alt="Persönliches Dashboard mit einer kommenden Buchung und fünf zugeordneten Freigaben; für das Beispielkonto sind keine Qualifikationen erfasst."
+/>
 
 Beispiel mit fiktiven Daten.
 

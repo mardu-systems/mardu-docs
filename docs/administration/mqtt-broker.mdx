@@ -3,6 +3,11 @@ title: MQTT-Zugänge verwalten
 description: Den Informationsbroker einrichten, Lesekonten und Topic-Freigaben prüfen und Zugänge widerrufen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import mqttLeseregel from './bilder/mqtt-leseregel-aktuell.png';
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
 Der eingebettete Informationsbroker liefert System- und Geräteinformationen an
 externe MQTT-Clients. Nachrichtenformate und Lesetest beschreibt
 [Entwickeln → MQTT-Ereignisse beziehen](../entwickeln/mqtt-events.mdx).
@@ -30,12 +35,17 @@ Die Seite lädt zusätzlich Broker-Einstellungen und Zertifikate; dafür brauchs
 Dashboard-Rechte und MQTT-Kontotyp sind unabhängig. Für den Verbindungstest
 brauchst du einen MQTT-Client, der den eingestellten Serverport erreicht.
 
+<Steps>
+
+<Step>
+
 ## Broker einrichten
 
-Änderungen an Broker-Einstellungen starten den Broker automatisch neu und trennen
-verbundene Clients. Plane die Unterbrechung vor dem Speichern ein. Ein Wechsel von
-Port, Bind-Adresse oder TLS erfordert passende Änderungen am Client und gegebenenfalls
-an Netzwerk- oder Containerfreigaben.
+<Callout type="warn" title="Speichern unterbricht verbundene Clients">
+  Geänderte Broker-Einstellungen starten den Broker neu. Plane die Unterbrechung vor dem Speichern
+  ein. Änderungen an Port, Bind-Adresse oder TLS müssen auch zum Client und den Netzwerk- oder
+  Containerfreigaben passen.
+</Callout>
 
 1. Aktiviere unter **Listener** den Schalter **Broker aktiv**.
 2. Lege **Port** und **Bind-Adresse** fest. Leer bedeutet alle Netzwerkschnittstellen;
@@ -43,7 +53,7 @@ an Netzwerk- oder Containerfreigaben.
    In einem Container ist das dessen Loopback-Adresse, nicht die des Hosts.
 3. Wähle unter **Transportverschlüsselung** den **TLS-Modus**. Für TLS wählst du ein
    hinterlegtes **Zertifikat** mit passendem privaten Schlüssel. Ein Zertifikat
-   kannst du unter [Servereinstellungen → Zertifikate](./server-einstellungen.mdx#zertifikate)
+   kannst du unter [Servereinstellungen → Zertifikate](./integrationszertifikate.mdx)
    hinterlegen. Clients müssen ihm vertrauen und den passenden Hostnamen verwenden.
 4. Prüfe den gesamten **Aktuellen Entwurf** und wähle **Änderungen speichern**.
 5. Wähle nach der Übernahme **Status aktualisieren**. Prüfe unter **Live-Status**,
@@ -71,13 +81,15 @@ keine Schalter. Verwende für einen widerrufbaren Clientzugang ein eigenes Lesek
 
 ### Testverkehr bewusst verwenden
 
-Unter **Expertenoptionen** erzeugt **Demo-Heartbeat aktiv** Nachrichten für eine
-virtuelle **Demo-Geräte-ID**, keine echten Geräte- oder Sensorzustände. Verwende
-eine erkennbare Test-ID und schalte den Demo-Heartbeat nach der Diagnose aus.
+Für den Lesetest des Systemzustands brauchst du keinen Demo-Heartbeat.
+**Expertenoptionen → Demo-Heartbeat aktiv** erzeugt nur Nachrichten für eine
+virtuelle **Demo-Geräte-ID**. Verwende eine erkennbare Test-ID und schalte den
+Testverkehr danach aus. Die Demo-Geräte-ID bleibt auch bei ausgeschaltetem
+Heartbeat ein Pflichtfeld; das **Heartbeat-Intervall** beträgt 5–3.600 Sekunden.
 
-Die Demo-Geräte-ID ist ein Pflichtfeld, auch wenn der Demo-Heartbeat ausgeschaltet
-ist. Das **Heartbeat-Intervall** liegt zwischen 5 und 3.600 Sekunden. Für einen
-normalen Lesetest des Systemzustands ist kein Demo-Heartbeat nötig.
+</Step>
+
+<Step>
 
 ## Eingeschränktes Lesekonto anlegen
 
@@ -97,11 +109,15 @@ erhalten Lesezugriff auf den gesamten Informationsbaum `v1/info/#`; ihre eigenen
 ACL-Einträge begrenzen diesen Zugriff nicht. Wähle für begrenzte Freigaben deshalb
 **Lesekonto (eingeschränkt)**.
 
+</Step>
+
+<Step>
+
 ## Topics mit ACLs freigeben
 
-Eine ACL ist eine Zugriffsregel für ein Topic oder einen Topicfilter. Änderungen
-trennen das betroffene Konto und entfernen seine gespeicherten Abonnements. Der
-Client muss sich neu verbinden und erneut abonnieren.
+Eine ACL ist eine Zugriffsregel für ein Topic oder einen Topicfilter. Beim
+Speichern werden die Verbindungen des betroffenen Kontos getrennt und gespeicherte
+Abonnements entfernt. Der Client muss sich neu verbinden und abonnieren.
 
 1. Öffne beim eingeschränkten Konto **ACLs → ACL hinzufügen**.
 2. Wähle einen **Zugriffsbereich** aus dem Katalog oder trage im **Topic-Filter**
@@ -118,6 +134,14 @@ Client muss sich neu verbinden und erneut abonnieren.
 6. Wähle **Speichern** und kontrolliere Filter, `subscribe / allow` und Status
    in **Benutzer-ACLs**.
 
+<ImageZoom
+  src={mqttLeseregel}
+  alt="Zugriffsregel mit dem exakten Topic v1/info/public/system/state, Zugriff erlauben und aktivierter Regel."
+/>
+
+Die Beispielregel erlaubt nur den Systemzustand. Sie verwendet keine MQTT-Wildcards
+und muss vor der Übergabe an den Client gespeichert werden.
+
 Ein angefragtes Abonnement muss vollständig von einer erlaubten Regel abgedeckt
 sein. Eine aktive Regel **Zugriff sperren** (`deny`) hat bei Überschneidungen Vorrang:
 Sie kann dadurch auch ein breiteres Abonnement ablehnen. Eine deaktivierte Regel
@@ -125,6 +149,10 @@ gewährt oder sperrt keinen Zugriff. Wildcards benötigen zusätzlich die Freiga
 `MqttBrokerSettings__AllowWildcardReaders` in der Serverkonfiguration.
 Filterregeln und Nachrichteninhalte stehen unter
 [Entwickeln → MQTT-Ereignisse beziehen](../entwickeln/mqtt-events.mdx#topicfilter-verwenden).
+
+</Step>
+
+<Step>
 
 ## Zugang prüfen und übergeben
 
@@ -142,6 +170,10 @@ Filterregeln und Nachrichteninhalte stehen unter
 **Status aktualisieren** liest den Laufzeitzustand neu und speichert keinen Entwurf.
 **Broker neu starten** verwendet die aktuell wirksame Konfiguration und unterbricht
 alle verbundenen Clients. Ungespeicherte Formularänderungen werden damit nicht übernommen.
+
+</Step>
+
+</Steps>
 
 ## Passwort ändern oder Zugang entziehen
 

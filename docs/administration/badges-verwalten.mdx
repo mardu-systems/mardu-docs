@@ -1,7 +1,14 @@
 ---
 title: Badges verwalten
-description: Badge-Definitionen pflegen, lokale Vergaben verwalten und Definitionen importieren, exportieren oder veröffentlichen.
+description: Badge-Definitionen mit Fähigkeiten und Kriterien erstellen, versionieren, importieren und veröffentlichen.
 ---
+
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import erstellenVoraussetzungen from './bilder/badge-erstellen-voraussetzungen-aktuell.png';
+import erstellenPruefen from './bilder/badge-erstellen-pruefen-aktuell.png';
+import eigenschaftenAnsicht from './bilder/badge-eigenschaften-aktuell.png';
+import versionenAnsicht from './bilder/badge-versionen-aktuell.png';
 
 Ein Badge beschreibt Fähigkeiten und Erwerbskriterien. Seine **Definition** legt fest, was erworben
 werden kann; eine **Vergabe** hält fest, welche Person es erhalten hat. Eine lokale Vergabe ist kein
@@ -13,40 +20,81 @@ Du brauchst Leserechte für **Kompetenzen** und je nach Aufgabe weitere Rechte:
 
 | Aufgabe                                                                          | Zusätzliches Recht für Kompetenzen |
 | -------------------------------------------------------------------------------- | ---------------------------------- |
-| Definition, Versionen und Vergaben ansehen; exportieren                          | Kein weiteres Recht                |
+| Definition und Versionen ansehen; exportieren                                    | Kein weiteres Recht                |
 | Badge erstellen, Definition importieren, lokale Kopie erstellen, veröffentlichen | Anlegen                            |
 | Lokale Inhalte oder Aktivstatus ändern; Veröffentlichung zurückziehen            | Bearbeiten                         |
-| Lokal vergeben, erneuern oder widerrufen                                         | Genehmigen                         |
 
-Für die Personenauswahl brauchst du außerdem Leserechte für Benutzer. Neue lokale Vergaben und
-Erneuerungen setzen ein **aktives lokales Badge** und ein vorhandenes Benutzerkonto voraus.
-Importierte Originale lassen sich nicht bearbeiten oder lokal vergeben; erstelle dafür eine lokale Kopie.
-Fehlt eine Aktion, prüfe die Rechte sowie den Aktivstatus, die Herkunft und die angezeigte Version.
+Importierte Originale lassen sich nicht bearbeiten; erstelle dafür eine lokale Kopie.
+Fehlt eine Aktion, prüfe die Rechte, die Herkunft und die angezeigte Version.
 
 ## Ein Badge erstellen
 
-Öffne **Kompetenzen → Badges → Badge erstellen** und folge dem Assistenten:
+Die Bilder verwenden fiktive Beispieldaten. Öffne **Kompetenzen → Badges → Badge erstellen** und folge dem Assistenten:
 
-1. **Badge beschreiben:** Gib Name und Beschreibung an und wähle ein Symbol.
-2. **Voraussetzungen:** Wähle die Fähigkeiten aus, die zum Erwerb erforderlich sind.
-   Neue Fähigkeiten werden als **Erforderlich** einer Anforderungsgruppe zugeordnet.
-   Standardmäßig sind alle ausgewählten Fähigkeiten erforderlich. Unter **Erfüllungsregeln anpassen**
-   kannst du Gruppen und deren Mindestanzahl ändern. Gib unter **Beschreibung der Erwerbskriterien**
-   an, was zum Erwerb nachgewiesen werden muss, und ergänze gegebenenfalls manuelle Prüfungen.
-   Der Text ist erforderlich und wird nicht automatisch ausgewertet. Ein optionaler Link führt zu ausführlichen Kriterien.
-   Soll das Badge ohne Fähigkeitsvoraussetzungen auskommen, wähle ausdrücklich
-   **Ohne Fähigkeitsvoraussetzungen erstellen** und gib die manuell zu prüfenden Kriterien an.
-3. **Gültigkeit:** Wähle **Unbefristet** oder eine Dauer von 1 bis 36500 Tagen ab Vergabe.
-   Beim Aus- und Einschalten von **Unbefristet** bleibt die zuletzt eingegebene Dauer im Entwurf erhalten.
-4. **Prüfen:** Kontrolliere Beschreibung, erforderliche Fähigkeiten, Erfüllungsregeln, Kriterien
-   und Gültigkeit. **Bearbeiten** führt zum jeweiligen Schritt zurück. Wähle, ob das Badge
-   **Aktiv** sein soll, und bestätige mit **Badge erstellen**.
+<Steps>
+
+<Step>
+
+### Badge beschreiben
+
+Gib Name und Beschreibung an und wähle ein Symbol.
+
+</Step>
+
+<Step>
+
+### Voraussetzungen festlegen
+
+Wähle die Fähigkeiten aus, die zum Erwerb erforderlich sind. Neue Fähigkeiten sind
+**Erforderlich** und gehören zu einer Anforderungsgruppe; standardmäßig müssen alle
+ausgewählten Fähigkeiten nachgewiesen sein. Unter **Erfüllungsregeln anpassen**
+änderst du Gruppen und Mindestanzahl.
+
+Gib unter **Beschreibung der Erwerbskriterien** an, was zum Erwerb nachgewiesen
+werden muss, und ergänze gegebenenfalls manuelle Prüfungen. Der Text ist erforderlich
+und wird nicht automatisch ausgewertet. Ein optionaler Link führt zu ausführlichen Kriterien.
+
+Soll das Badge ohne Fähigkeitsvoraussetzungen auskommen, wähle ausdrücklich
+**Ohne Fähigkeitsvoraussetzungen erstellen** und beschreibe die manuell zu prüfenden Kriterien.
+
+<ImageZoom
+  src={erstellenVoraussetzungen}
+  alt="Schritt Voraussetzungen der Badge-Erstellung mit ausgewählten Fähigkeiten, Erfüllungsregeln und manuellen Erwerbskriterien."
+/>
+
+</Step>
+
+<Step>
+
+### Gültigkeit festlegen
+
+Wähle **Unbefristet** oder eine Dauer von 1 bis 36500 Tagen ab Vergabe. Beim Aus-
+und Einschalten von **Unbefristet** bleibt die zuletzt eingegebene Dauer im Entwurf erhalten.
+
+</Step>
+
+<Step>
+
+### Prüfen und erstellen
+
+Kontrolliere Beschreibung, erforderliche Fähigkeiten, Erfüllungsregeln, Kriterien
+und Gültigkeit. **Bearbeiten** führt zum jeweiligen Schritt zurück. Wähle, ob das
+Badge **Aktiv** sein soll, und bestätige mit **Badge erstellen**.
+
+<ImageZoom
+  src={erstellenPruefen}
+  alt="Prüfschritt mit Fähigkeiten, Erwerbskriterien, Gültigkeit von 90 Tagen und Aktivstatus vor der Badge-Erstellung."
+/>
+
+</Step>
+
+</Steps>
 
 Der Assistent verlangt gültige Angaben; beim Zurückgehen bleiben Eingaben erhalten.
 **Badge erstellen** ist erst verfügbar, wenn alle ausgewählten Fähigkeiten geladen sind.
 Bei einem Ladefehler wähle **Erneut versuchen**.
 
-Nach der Erstellung steht die Definition mit Inhaltsversion 1 in der Liste. Öffne sie für
+Nach der Erstellung steht die Definition mit ihrer ersten Inhaltsversion in der Liste. Öffne sie für
 weitere Änderungen; diese erzeugen neue Versionen und verändern keine vorhandenen Vergaben.
 Die Erstellung vergibt kein Badge und veröffentlicht keine Inhalte.
 
@@ -55,21 +103,18 @@ Bei **Abbrechen**, **Schließen**, Escape oder einem Klick außerhalb des Sheets
 der Browser. Der Entwurf bleibt nur im geöffneten Formular und wird nicht automatisch auf
 dem Server gespeichert. Nach einem Fehler kannst du die Erstellung mit den erhaltenen Eingaben wiederholen.
 
-Die Bilder zeigen fiktive Beispieldaten.
-
-![Badge-Erstellung: ausgewählte Fähigkeiten werden als erforderlich übernommen; zusätzliche Regeln sind aufklappbar.](./bilder/badge-erstellen-voraussetzungen.png)
-
-![Prüfschritt vor der Erstellung mit Fähigkeiten, Kriterien, Gültigkeit und Aktivstatus.](./bilder/badge-erstellen-pruefen.png)
-
 ## Ein Badge öffnen
 
 Öffne **Kompetenzen → Badges** und wähle ein Badge. Lokale Badges kannst du mit dem
 Bearbeitungsrecht direkt ändern. Für importierte Originale nutze mit dem Anlegerecht
 **Weitere Angaben → Lokale Kopie erstellen**.
 
-![Badge-Sheet mit Eigenschaften, Aktivstatus und Auswahl der Inhaltsversion.](./bilder/badge-eigenschaften.png)
-
 ## Eigenschaften ändern
+
+<ImageZoom
+  src={eigenschaftenAnsicht}
+  alt="Eigenschaften des Beispiel-Badges mit explizitem Unbefristet-Schalter, Gültigkeit von 90 Tagen und der Aktion Badge deaktivieren."
+/>
 
 Unter **Eigenschaften** änderst du Name, Beschreibung, Symbol und Gültigkeitsdauer.
 Eine geänderte Dauer oder **Unbefristet** gilt nur für neue Vergaben und Erneuerungen;
@@ -117,17 +162,17 @@ Bei der Auswahl einer noch nicht gespeicherten ESCO-Fähigkeit wird diese übern
 du das Recht zum Anlegen von Kompetenzen. Ist ESCO nicht erreichbar, bleiben bereits gespeicherte
 und eigene Fähigkeiten auswählbar.
 
-Die Prüfung von Voraussetzungen vergibt kein Badge automatisch. Vergabe und Erneuerung
-prüfen die Anforderungsgruppen nicht: Prüfe Fähigkeiten und manuelle Kriterien vor jeder
-Entscheidung selbst. Ein Lernweg enthält Badges; er ist keine Voraussetzung für ein einzelnes Badge.
+Erfüllte Voraussetzungen vergeben kein Badge automatisch. Prüfe Fähigkeiten und
+manuelle Kriterien vor jeder [lokalen Vergabe oder Erneuerung](../koordination/badge-vergaben.mdx).
+Die Vergabeaktionen prüfen die Anforderungsgruppen nicht.
 
-![Gemeinsame Fähigkeitsauswahl mit erforderlichen Fähigkeiten und Erfüllungsregeln.](./bilder/badge-voraussetzungen.png)
+Ein Lernweg enthält Badges; er ist keine Voraussetzung für ein einzelnes Badge.
 
 ## Badge aktivieren oder deaktivieren
 
 1. Öffne die aktuelle Version eines lokalen Badges und wähle **Eigenschaften**.
 2. Speichere oder verwirf vorhandene Inhaltsänderungen.
-3. Wähle unter **Aktivstatus** **Badge deaktivieren** beziehungsweise **Badge aktivieren**.
+3. Wähle **Badge deaktivieren** beziehungsweise **Badge aktivieren**.
 4. Bestätige die Aktion.
 
 Der Aktivstatus gilt für das gesamte Badge und legt keine Inhaltsversion an. Ein inaktives Badge
@@ -145,79 +190,24 @@ vorherigen Stand unterscheiden, jeweils mit **Vorher** und **Nachher**. Zeitpunk
 werden angezeigt, soweit sie erfasst wurden; andernfalls steht dort **Nicht erfasst**.
 Der Aktivstatus gehört zum gesamten Badge und wird nicht als historischer Aktivstatus dargestellt.
 
-![Versionshistorie mit Vorher-/Nachher-Werten und erfassten Auditangaben.](./bilder/badge-versionen.png)
+<ImageZoom
+  src={versionenAnsicht}
+  alt="Versionsvergleich des Beispiel-Badges Werkstattstart: Arbeitsschutz mit Änderung der Gültigkeit von 90 auf 180 Tage."
+/>
 
-![Schreibgeschützte historische Badge-Version mit Rückkehr zur aktuellen Version.](./bilder/badge-version-historisch.png)
+<span id="vergaben-einer-person-finden" className="scroll-m-28" />
+<span id="vergaben-und-lernwege" className="scroll-m-28" />
+<span id="ein-badge-vergeben" className="scroll-m-28" />
+<span id="eine-vergabe-erneuern" className="scroll-m-28" />
+<span id="eine-vergabe-widerrufen" className="scroll-m-28" />
+<span id="zugehörige-lernwege-ansehen" className="scroll-m-28" />
 
-## Vergaben einer Person finden
+## Badge-Vergaben verwalten
 
-Öffne **Kompetenzen → Personen** und suche die Person. Die Übersicht zeigt je Person
-bis zu drei gültige Badge-Vergaben und laufende Lernwege; **+N** nennt weitere Einträge.
-Mehrere Vergaben desselben Badges zählen als getrennte Vergabedatensätze.
-
-Wähle einen Badge-Namen, um dessen **Vergaben** für diese Person zu öffnen. Ein Lernwegname
-öffnet entsprechend dessen **Teilnahmen** für die Person. Die Liste gehört weiterhin zum
-gewählten Badge oder Lernweg. Die Übersicht zeigt keine Gesamtliste früherer Vergaben.
-Mit der Zurückfunktion des Browsers gelangst du zur vorherigen Personensuche zurück.
-
-**Wird geladen …**, **Nicht geladen** oder **Unbekannt** bestätigt keinen leeren Bestand.
-Verwende bei einem Fehler **Badge-Vergaben erneut laden** bzw. **Lernwegteilnahmen erneut laden**.
-**Neu laden** aktualisiert die Personenübersicht und beide Zuordnungsquellen, etwa nach
-Vergaben oder dem Abschluss einer Teilnahme.
-
-## Vergaben und Lernwege
-
-Unter **Vergaben** siehst du Personen, Status, Gültigkeit und Inhaltsversion. Neue
-Vergaben und Erneuerungen verwenden den aktuellen gespeicherten Stand; bestehende
-Vergaben bleiben von Inhaltsänderungen unberührt.
-
-Beim Ansehen einer historischen Version und während ungespeicherter Änderungen sind Vergabeaktionen
-nicht verfügbar. Kehre zur aktuellen Version zurück und speichere oder verwirf deine Änderungen.
-
-### Ein Badge vergeben
-
-1. Prüfe selbst, ob die Person die erforderlichen Fähigkeiten und Erwerbskriterien erfüllt.
-2. Öffne beim aktiven lokalen Badge **Vergaben → Badge vergeben**.
-3. Wähle die Person aus. Das Badge ist bereits festgelegt. Ergänze bei Bedarf eine
-   **Notiz zur Entscheidung** mit höchstens 2000 Zeichen.
-4. Wähle **Vergabe bestätigen**.
-5. Prüfe in der Vergabeliste Person, **Inhaltsversion**, Status **Gültig** und Ablaufdatum.
-   Öffne die Vergabe, um **Vergeben am** und die Notiz zu lesen.
-
-Die Vergabe beginnt sofort. Ihre Gültigkeit ergibt sich aus der aktuellen Badge-Version; im
-Vergabeformular wählst du kein eigenes Beginn- oder Ablaufdatum. Bei **Unbefristet** hat sie kein Ablaufdatum.
-Eine weitere gültige Vergabe desselben Badges an dieselbe Person wird abgelehnt.
-
-### Eine Vergabe erneuern
-
-Eine Erneuerung ersetzt die bisherige Vergabe. Der alte Datensatz bleibt erhalten und erscheint als
-**Widerrufen oder ersetzt**. Die neue Vergabe verwendet die aktuelle Inhaltsversion und beginnt mit
-einer neuen Gültigkeitsdauer ab dem Zeitpunkt der Erneuerung, nicht ab dem bisherigen Ablaufdatum.
-
-1. Prüfe Fähigkeiten, Erwerbskriterien und Nachweise anhand der aktuellen Badge-Version erneut.
-2. Öffne unter **Vergaben** eine gültige oder abgelaufene Vergabe, die noch nicht widerrufen oder ersetzt wurde.
-3. Ergänze bei Bedarf eine **Notiz zur Entscheidung** und wähle **Erneuern**.
-   Die Aktion wird direkt ausgeführt.
-4. Prüfe den neuen Eintrag mit Inhaltsversion und Gültigkeit sowie den erhaltenen alten Eintrag.
-
-Eine widerrufene oder ersetzte Vergabe kann nicht erneuert werden. Nach erneuter Prüfung kannst du
-**Badge vergeben** verwenden, sofern keine andere gültige Vergabe desselben Badges besteht.
-
-### Eine Vergabe widerrufen
-
-Ein Widerruf beendet die Gültigkeit der ausgewählten lokalen Vergabe. Er löscht den Datensatz nicht
-und widerruft kein extern ausgestelltes Credential.
-
-1. Öffne die betreffende Vergabe unter **Vergaben**.
-2. Ergänze bei Bedarf eine **Notiz zur Entscheidung**. Sie ist optional und ersetzt beim Widerruf
-   die bisherige Notiz dieses Eintrags.
-3. Wähle **Widerrufen** und bestätige die Rückfrage.
-4. Prüfe den Status **Widerrufen oder ersetzt** in der Vergabeliste.
-
-### Zugehörige Lernwege ansehen
-
-Unter **Lernwege** stehen Lernwege, die dieses Badge enthalten oder als Abschluss-Badge verwenden.
-Der Lernfortschritt ersetzt keine Fähigkeitsvoraussetzungen des Badges.
+Personen, persönliche Gültigkeit, Erneuerung und Widerruf gehören zur
+[Koordination → Badge-Vergaben verwalten](../koordination/badge-vergaben.mdx).
+Dort findest du auch die Personenübersicht und zugehörige Lernwege.
+Die Definitionspflege vergibt kein Badge; Inhaltsänderungen verändern keine vorhandenen Vergaben.
 
 ## Definition importieren, kopieren oder exportieren
 

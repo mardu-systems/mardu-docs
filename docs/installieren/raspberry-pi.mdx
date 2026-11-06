@@ -3,6 +3,8 @@ title: Server auf dem Raspberry Pi installieren
 description: Mardu aus privaten GitHub-Container-Images installieren und mit Docker Compose aktualisieren.
 ---
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
 Das Paket startet API, Dashboard, Datenbank und HTTPS-Proxy auf dem Pi mit fertigen
 Images aus der GitHub Container Registry (GHCR). Ein lokaler Build ist nicht nötig.
 
@@ -25,7 +27,13 @@ Images aus der GitHub Container Registry (GHCR). Ein lokaler Build ist nicht nö
 - Einen aus dem API-Container erreichbaren externen IP500-MQTT-Broker und dessen
   Verbindungsdaten. Der Einrichtungsassistent setzt diese Verbindung voraus.
 
-## 1. Installationspaket herunterladen
+<Steps>
+
+<Step>
+
+<span id="1-installationspaket-herunterladen" className="scroll-m-28" />
+
+## Installationspaket herunterladen
 
 Lade `mardu-raspberry-pi.tar.gz` aus einem freigegebenen GitHub-Release von
 `mardu-systems/mardu-rpi-api` und übertrage das Paket auf den Pi.
@@ -42,7 +50,13 @@ Der Ordner enthält `compose.yaml`, `Caddyfile` und `.env.example`. Behalte den
 Ordnernamen bei: Compose leitet daraus standardmäßig die Namen der Datenvolumes
 ab. Ein anderer Projektname verwendet andere Volumes.
 
-## 2. Zugang zu privaten Images einrichten
+</Step>
+
+<Step>
+
+<span id="2-zugang-zu-privaten-images-einrichten" className="scroll-m-28" />
+
+## Zugang zu privaten Images einrichten
 
 Erstelle in deinem GitHub-Konto einen Personal Access Token **classic** mit
 `read:packages`. Das Konto muss beide Pakete lesen dürfen. Falls die Organisation
@@ -59,7 +73,13 @@ Ersetze den Benutzernamen und gib den Token in der verdeckten Passwortabfrage ei
 Docker speichert ihn für diesen Linux-Benutzer. Schütze diesen Zugang; der Token
 gehört weder in `compose.yaml` noch in `.env`.
 
-## 3. Installation konfigurieren
+</Step>
+
+<Step>
+
+<span id="3-installation-konfigurieren" className="scroll-m-28" />
+
+## Installation konfigurieren
 
 ```bash
 umask 077
@@ -74,11 +94,25 @@ Verwende die beiden unterschiedlichen Zufallswerte für `NEXTAUTH_SECRET` und
 `POSTGRES_PASSWORD`. Lass die beiden Image-Tags auf `stable`, um freigegebene
 Updates beim nächsten Startbefehl zu übernehmen.
 
-Bewahre `.env` auf. Ändere das Datenbankpasswort einer bestehenden Installation
-nicht nur in dieser Datei: PostgreSQL übernimmt diese Variable nur bei der
-erstmaligen Initialisierung eines leeren Datenvolumes.
+<Callout type="warn" title="Zugangsdaten für den weiteren Betrieb aufbewahren">
+  Bewahre `.env` geschützt auf. Ändere das Datenbankpasswort einer bestehenden Installation nicht
+  nur in dieser Datei: PostgreSQL übernimmt diese Variable nur bei der erstmaligen Initialisierung
+  eines leeren Datenvolumes.
+</Callout>
 
-## 4. Starten und einrichten
+</Step>
+
+<Step>
+
+<span id="4-starten-und-einrichten" className="scroll-m-28" />
+
+## Starten und einrichten
+
+<Callout type="warn" title="Erstsetup im verwendeten Release prüfen">
+  Im geprüften Quellstand verwendet Production-Compose intern Port `8080`, der Assistent übermittelt
+  `5001`. Die Validierung lehnt den Konflikt ab und verhindert den Setup-Abschluss. Prüfe vor dem
+  Start, ob dein Release ihn behebt; gesunde Container allein bestätigen das nicht.
+</Callout>
 
 ```bash
 docker compose config --quiet
@@ -95,11 +129,6 @@ docker compose exec server cat /app/Private/setup-token.txt
 
 Der Token autorisiert die Ersteinrichtung; er ist kein Anmeldepasswort. Gib ihn
 nicht weiter. Nach erfolgreichem Setup wird die Token-Datei gelöscht.
-
-**Bekannte Einschränkung des Erstsetups:** Im geprüften Quellstand verwendet
-Production-Compose intern Port `8080`, der Assistent übermittelt `5001`. Die
-Validierung lehnt den Konflikt ab und verhindert den Setup-Abschluss. Prüfe vorab,
-ob dein Release ihn behebt; gesunde Container allein bestätigen das nicht.
 
 Der Einrichtungsablauf für eine Version ohne diesen Konflikt:
 
@@ -143,7 +172,13 @@ muss bei Bedarf samt Authentifizierung und TLS eingerichtet werden. Der angepass
 Node-RED-Dienst gehört nicht zu diesem Paket und benötigt für Automationen eine
 separate Bereitstellung.
 
-## 5. Neue Versionen übernehmen
+</Step>
+
+</Steps>
+
+<span id="5-neue-versionen-übernehmen" className="scroll-m-28" />
+
+## Neue Versionen übernehmen
 
 Sichere vor einem Update die Datenbank und die persistenten Volumes. Die API kann
 beim Start Datenbankmigrationen ausführen. Ein Rückwechsel des Image-Tags allein
@@ -164,7 +199,10 @@ laufen nur bei diesem Aufruf, nicht im Hintergrund. Prüfe danach `/health/ready
 Die Compose-Datei selbst wird dadurch nicht heruntergeladen. Verlangt ein Release
 neue Dienste oder Einstellungen, übernimm die zugehörigen Installationsdateien
 aus dessen Anhang und behalte deine `.env` und den Installationsordner bei.
-`docker compose down -v` löscht die Datenvolumes; verwende es nicht für Updates.
+
+<Callout type="warn" title="Datenvolumes beim Update erhalten">
+  `docker compose down -v` löscht die Datenvolumes. Verwende es nicht für Updates.
+</Callout>
 
 Für eine festgelegte Version setze `API_IMAGE_TAG` und `WEB_IMAGE_TAG` in `.env`
 auf die jeweils passenden Release-Tags. Solange die Tags festgelegt sind, folgt

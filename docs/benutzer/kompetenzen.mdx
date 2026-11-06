@@ -3,6 +3,11 @@ title: Meine Qualifikationen
 description: Eigene Einweisungen, lokale Vergaben und importierte Nachweise mit Status und Gültigkeit lesen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import qualifikationenDesktop from './bilder/qualifikationen-desktop.png';
+import qualifikationenMobil from './bilder/qualifikationen-mobil.png';
+
 Öffne im Portal **Meine Qualifikationen**, auf dem Handy **Nachweise**. Die Ansicht
 zeigt ausschließlich deine eigenen Einweisungen und Nachweise in drei Bereichen.
 Du benötigst Profil-Leserechte.
@@ -62,6 +67,17 @@ getrennt geladen; andere bereits geladene Nachweise bleiben sichtbar.
 Die Beispiele verwenden fiktive Mitgliedsdaten. Am Handy stehen die Angaben
 untereinander.
 
-![Die drei Qualifikationsbereiche mit einer Einweisung, einem lokalen Nachweis und einem importierten Nachweis](bilder/qualifikationen-desktop.png)
-
-![Mobile Einweisung mit Status, Gültigkeitszeitraum und nächster Prüfung](bilder/qualifikationen-mobil.png)
+<Tabs items={['Desktop', 'Handy']}>
+  <Tab value="Desktop">
+    <ImageZoom
+      src={qualifikationenDesktop}
+      alt="Die drei Qualifikationsbereiche mit einer Einweisung, einem lokalen Nachweis und einem importierten Nachweis."
+    />
+  </Tab>
+  <Tab value="Handy">
+    <ImageZoom
+      src={qualifikationenMobil}
+      alt="Mobile Einweisung mit Status, Gültigkeitszeitraum und nächster Prüfung."
+    />
+  </Tab>
+</Tabs>

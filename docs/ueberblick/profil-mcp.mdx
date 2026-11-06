@@ -3,29 +3,48 @@ title: Eigene MCP-Verbindungen
 description: Persönliche Agentenzugänge erstellen, im Client einrichten, erneuern und widerrufen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import verbindungAnsicht from './bilder/profil-mcp.png';
+import erstellenAnsicht from './bilder/profil-mcp-erstellen.png';
+
 Mit **MCP (Model Context Protocol)** verbindest du einen kompatiblen Agenten mit
 deinem Konto. Die Administration muss [MCP und persönliche Verbindungen freigeben](../administration/mcp-verwalten.mdx).
 Zum Ansehen brauchst du Profil-Leserechte, zum Erstellen, Erneuern und Widerrufen
 Profil-Änderungsrechte.
 
+<Steps>
+
+<Step>
+
 ## Verbindung erstellen
 
-Der Token wird nur einmal angezeigt. Teile ihn nicht in Screenshots oder Nachrichten.
+<Callout title="Token vor dem Schließen sichern">
+  Der Token wird nur einmal angezeigt. Übernimm ihn in den vorgesehenen Client und teile ihn nicht
+  in Screenshots oder Nachrichten.
+</Callout>
 
 1. Öffne im Kontomenü **Kontoeinstellungen → MCP-Verbindungen** und wähle **Verbindung erstellen**.
 2. Fülle die Angaben aus und wähle nur die benötigten Berechtigungen.
 3. Wähle **Token erstellen**.
 4. Kopiere **MCP-Route** und **Bearer-Token**, bevor du **Ich habe den Token gespeichert** wählst.
 
-| Feld                           | Eingabe                                                                                       |
-| ------------------------------ | --------------------------------------------------------------------------------------------- |
-| Name                           | Höchstens 128 Zeichen, etwa „Buchungsassistent“.                                              |
-| Gültigkeit in Tagen (optional) | Leer für den Serverstandard oder kürzer wählen. Die Servergrenze kann unter 365 Tagen liegen. |
-| Berechtigungen                 | Mindestens eine der angebotenen Berechtigungen auswählen.                                     |
+| Feld                           | Eingabe                                                                        |
+| ------------------------------ | ------------------------------------------------------------------------------ |
+| Name                           | Pflichtangabe mit 1 bis 128 Zeichen, etwa „Buchungsassistent“.                 |
+| Gültigkeit in Tagen (optional) | Leer für den Serverstandard; sonst 1 bis 365 Tage, höchstens die Servergrenze. |
+| Berechtigungen                 | Mindestens eine der angebotenen Berechtigungen auswählen.                      |
 
-![MCP-Erstellungsdialog mit Name, Laufzeit und ausgewählter Leseberechtigung](bilder/profil-mcp-erstellen.png)
+<ImageZoom
+  src={erstellenAnsicht}
+  alt="MCP-Erstellungsdialog mit Name, Laufzeit und ausgewählter Leseberechtigung"
+/>
 
 Abbildungen mit fiktiven Daten.
+
+</Step>
+
+<Step>
 
 ## Zugang im Client eintragen
 
@@ -40,14 +59,23 @@ Abbildungen mit fiktiven Daten.
 Der Agent kann nur ausgewählte Rechte nutzen, die dein Konto und die
 Serverrichtlinie weiterhin erlauben.
 
+</Step>
+
+</Steps>
+
 ## Zugang ersetzen oder widerrufen
 
-![Eigene MCP-Verbindung mit Ablaufdatum und den Aktionen Token erneuern und Widerrufen](bilder/profil-mcp.png)
+<ImageZoom
+  src={verbindungAnsicht}
+  alt="Eigene MCP-Verbindung mit Ablaufdatum und den Aktionen Token erneuern und Widerrufen"
+/>
 
 ### Token erneuern
 
-**Token erneuern** macht den bisherigen Token sofort ungültig. Ersetze ihn im
-Client durch den neu angezeigten Token. Das Ablaufdatum bleibt unverändert.
+<Callout type="warn" title="Erneuern ersetzt den bisherigen Token sofort">
+  Ersetze den bisherigen Token im Client durch den neu angezeigten Token. Das Ablaufdatum bleibt
+  unverändert.
+</Callout>
 
 ### Verbindung widerrufen
 

@@ -1,153 +1,180 @@
 ---
 title: Ressourcenfreigaben verwalten
-description: Ressourcen für Personen oder Benutzergruppen freigeben, Gültigkeit und Wochenzeitfenster ändern und einzelne Freigaben entziehen.
+description: Zugriff für Personen oder Gruppen vergeben, zeitlich begrenzen und wieder entziehen.
 ---
 
-Die Freigabe heißt in der Verwaltung **Zugriffsvergabe**. Weitere Bedingungen
-der [Zugriffsregel](../koordination/ressourcen.mdx#nutzung-und-zugriff-nutzung-erlauben)
-gelten weiterhin, etwa Buchung, Kompetenz oder Aufsicht. Das Speichern bestätigt
-keinen Zugang am Leser und schaltet keine Hardware.
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import freigabenAnsicht from './bilder/ressourcenfreigaben-liste-aktuell.png';
+import vergabeAnsicht from './bilder/ressourcenfreigabe-vergeben-aktuell.png';
+import wochenzeitenAnsicht from './bilder/ressourcenfreigabe-wochenzeiten-aktuell.png';
+
+Eine Freigabe heißt in der Verwaltung **Zugriffsvergabe**. Sie gilt für eine
+Ressource und einen Empfänger. Im Beispiel erhält **Lina Berger** eine Freigabe
+für die **Holzwerkstatt**. Weitere Bedingungen der
+[Zugriffsregel](./ressourcen-zutritt.mdx#nutzungsbedingungen-festlegen), etwa Buchung,
+Kompetenz oder Aufsicht, gelten weiterhin.
 
 ## Voraussetzungen und Rechte
 
-Ressource und Empfänger müssen bereits vorhanden sein. Die Freigabenliste
-braucht keine Ressourcen-Leserechte. Diese brauchst du für die Ressourcensuche
-im Filter oder beim Anlegen. Für die Empfängerauswahl brauchst du Leserechte
-für Benutzer beziehungsweise Benutzergruppen.
+Ressource und Empfänger müssen vorhanden sein. Zum Lesen brauchst du **Zugriffe
+ansehen** und das Verwaltungsrecht **Zugriffszuordnungen ansehen** für die Ressource
+oder den gesamten Zugriffsbereich. Eine eigene Nutzungsfreigabe erteilt kein
+Verwaltungsrecht.
 
-| Aufgabe                       | Globale Rechte              | Verwaltungsrecht an der Ressource |
-| ----------------------------- | --------------------------- | --------------------------------- |
-| Freigaben öffnen und lesen    | Zugriffe ansehen            | Zugriffszuordnungen ansehen       |
-| Freigabe anlegen              | Zusätzlich Zugriffe anlegen | Zugriffsvergaben verwalten        |
-| Gültigkeit oder Zeiten ändern | Zusätzlich Zugriffe ändern  | Zugriffsvergaben verwalten        |
-| Freigabe entziehen            | Zusätzlich Zugriffe löschen | Zugriffsvergaben verwalten        |
+Für Änderungen brauchst du **Zugriffsvergaben verwalten** und das passende globale Recht:
 
-Die Verwaltungsaktionen heißen technisch `ViewAccessRelations` und
-`ManageAccess`. Sie können auch für den gesamten Zugriffsbereich gelten.
-Die Auswahl einer Ressource beim Anlegen benötigt zusätzlich deren
-Zugriffstopologie-Leserecht (`ViewTopology`). Wie diese Rechte zugewiesen werden, erklärt
-[Verwaltungszuständigkeiten](./verwaltungszustaendigkeiten.mdx). Eine eigene
-Nutzungsfreigabe erlaubt noch keine Verwaltung. Für dauerhaft stillgelegte
-Ressourcen sind Anlegen, Ändern und Entziehen gesperrt.
+| Aufgabe                             | Globales Recht   |
+| ----------------------------------- | ---------------- |
+| Freigabe anlegen                    | Zugriffe anlegen |
+| Gültigkeit oder Wochenzeiten ändern | Zugriffe ändern  |
+| Freigabe entziehen                  | Zugriffe löschen |
 
-## Freigaben einer Ressource öffnen
+Die Ressourcenauswahl benötigt zusätzlich Ressourcen-Leserechte und beim Anlegen
+**Zugriffstopologie ansehen**. Für Empfänger brauchst du Benutzer- beziehungsweise
+Benutzergruppen-Leserechte. Die Freigabenliste selbst benötigt keine
+Ressourcen-Leserechte. Zuständigkeiten vergibst du unter
+[Verwaltungszuständigkeiten](./verwaltungszustaendigkeiten.mdx).
 
-1. Öffne **Zutritt → Zugänge**. Die Seite **Freigaben** zeigt unmittelbar die
-   lesbaren Vergaben aller Ressourcen in einer Tabelle. Die Spalte **Ressource**
-   nennt das jeweilige Nutzungsziel.
-2. Öffne den Filter **Ressource**, suche einen Eintrag und wähle ihn aus.
-   Ohne Ressourcen-Leserechte kannst du mit **Nach dieser Ressource filtern**
-   in einer lesbaren Zeile denselben exakten Filter setzen. Über **Leeren** im
-   Ressourcenfilter entfernst du diese Einschränkung auch ohne Ressourcen-Leserechte.
-3. Wähle bei Bedarf den **Empfängertyp**. Unter **Empfänger** kannst du dann
-   nach einem Namen suchen und einen Eintrag auswählen. Das optionale Suchfeld
-   **Ressource, Empfänger-ID oder Zeitzone suchen…** durchsucht Ressourcennamen,
-   technische Empfängerkennungen und Zeitzonen. Empfängernamen suchst du im Auswahldialog.
-4. Wähle bei Bedarf **Kalendergültigkeit** oder öffne **Ablaufzeitraum**.
-   Dort kannst du eine oder beide Ablaufgrenzen wählen und mit **Anwenden** übernehmen.
-   **Ablauf ab (einschließlich)** und **Ablauf vor (ausschließlich)** beziehen sich
-   auf das Enddatum der Vergabe. Vergaben ohne Enddatum passen nicht in einen
-   gesetzten Ablaufzeitraum. Suche und einzelne Auswahlen wirken unmittelbar.
-5. Öffne die Optionen im Spaltenkopf **Ressource**, **Gültigkeit** oder
-   **Vergeben von**, um auf- oder absteigend zu sortieren. **Gültigkeit** sortiert
-   nach dem Enddatum. Die Gesamtzahl und Seitennavigation beziehen sich auf alle
-   passenden Vergaben. **Zurücksetzen** leert Such- und Filterwerte und führt
-   zur ersten Seite; Sortierung und Seitengröße bleiben erhalten.
+Dauerhaft stillgelegte Ressourcen erlauben keine Vergabeänderungen.
 
-Ressourcen-, Empfänger- und weitere angewendete Filter sowie Sortierung und Seite
-stehen in der URL und bleiben beim Neuladen erhalten. Unter **Ansicht** wählst du
-sichtbare Spalten; diese Ansicht wird für dein Konto und Projekt im Browser
-aufbewahrt. Dieselbe ressourcenbezogene Freigabenliste findest du weiterhin in
-den Ressourcendetails unter **Nutzung & Zugriff**.
+<span id="freigaben-einer-ressource-öffnen" className="scroll-m-28" />
 
-Prüfe Empfänger und Typ, **Gültigkeit**, **Vergeben von** und
-**Wochenzeitfenster**. Auch zukünftige oder abgelaufene Vergaben können in der
-Liste stehen. **Kalendergültigkeit** unterscheidet **Geplant**, **Innerhalb
-Gültigkeit** und **Abgelaufen**. Der Status prüft nur Beginn und Ende: Ab dem
-Endzeitpunkt gilt die Vergabe als abgelaufen. Wochenzeitfenster und weitere
-Zugriffsbedingungen werden damit nicht geprüft; der Status bestätigt keinen
-Zugang. **Ersteller nicht erfasst** bedeutet, dass keine entsprechende
-Erstellerangabe vorliegt.
+## Freigaben finden
+
+1. Öffne **Zutritt → Zugänge**. Die Seite **Freigaben** zeigt alle Vergaben,
+   die du lesen darfst, über mehrere Ressourcen hinweg.
+2. Wähle im Filter **Ressource** die Holzwerkstatt. Alternativ setzt
+   **Nach dieser Ressource filtern** in einer Zeile denselben Filter, auch ohne
+   Ressourcen-Leserechte. **Leeren** entfernt ihn wieder.
+3. Wähle bei Bedarf **Empfängertyp** und **Empfänger**. Namen suchst du im
+   Empfängerdialog; das Freitextfeld durchsucht Ressourcennamen, Empfänger-IDs
+   und Zeitzonen.
+
+<ImageZoom
+  src={freigabenAnsicht}
+  alt="Freigabentabelle mit den Ressourcen Holzwerkstatt und Besprechungsraum sowie Lina Berger als Empfängerin."
+/>
+
+**Kalendergültigkeit** filtert nach **Geplant**, **Innerhalb Gültigkeit** oder
+**Abgelaufen**. Der Status berücksichtigt nur Beginn und Ende, weder Wochenzeiten
+noch weitere Zugangsbedingungen. Er bestätigt keinen Zutritt.
+
+Mit **Ablaufzeitraum → Anwenden** filterst du das Enddatum: **Ablauf ab** zählt den
+Grenzzeitpunkt mit, **Ablauf vor** nicht. Vergaben ohne Enddatum sind dann ausgeschlossen.
+Im Spaltenkopf kannst du nach **Ressource**, **Gültigkeit** oder **Vergeben von**
+sortieren; **Gültigkeit** sortiert nach dem Ende.
+
+Filter, Sortierung und Seite bleiben über die URL erhalten. **Zurücksetzen** leert
+Suche und Filter, behält aber Sortierung und Seitengröße. Unter **Ansicht** speicherst
+du sichtbare Spalten für dein Konto und Projekt in diesem Browser. Dieselbe Liste
+findest du ressourcenbezogen unter **Nutzung & Zugriff**.
 
 ### Welche Empfänger sind möglich?
 
-- **Benutzer:** Die Vergabe gilt für eine einzelne Person.
-- **Benutzergruppe:** Sie gilt für die Mitglieder dieser Gruppe.
-- **Tag:** Vorhandene Vergaben kannst du ansehen, ändern oder entziehen, aber
-  nicht neu anlegen. Sie gelten nur für das Medium, nicht für dessen zugeordnete
-  Person. Personen- und Gruppenvergaben bleiben getrennt.
+- **Benutzer:** Freigabe für eine Person.
+- **Benutzergruppe:** Freigabe für deren Mitglieder.
+- **Tag:** Bestehende Vergaben kannst du ändern oder entziehen, aber nicht neu
+  anlegen. Sie gelten nur für das Medium, getrennt von Personen- und Gruppenvergaben.
 
 ## Zugriff vergeben
 
-1. Wähle auf der Freigabenseite **Zugriff vergeben**, suche die Zielressource
-   und wähle **Weiter**. In den Ressourcendetails ist das Ziel bereits festgelegt.
-2. Wähle den **Empfängertyp** und unter **Empfänger** die Person oder
-   Benutzergruppe. Prüfe die im Dialog genannte Ressource.
-3. Trage **Gültig ab** und bei Bedarf **Gültig bis** ein. Der Beginn ist mit der
-   aktuellen Zeit vorbelegt. Du gibst beide Zeitpunkte in deiner lokalen
-   Zeitzone ein. Ein leeres Ende bedeutet **Ohne Enddatum**; ein gesetztes Ende
-   muss nach dem Beginn liegen.
-4. Soll die Vergabe nur zu wiederkehrenden Zeiten gelten, öffne
-   **Zugriff auf Wochenzeiten beschränken**. Prüfe die
-   **Zeitzone der Wochenzeitfenster** und wähle **Zeitfenster hinzufügen**.
-   Lege für jedes Fenster **Wochentag**, **Beginn** und **Ende** fest.
-5. Prüfe Empfänger, Gültigkeit und Zeitfenster und wähle **Speichern**.
+<Steps>
 
-Prüfe die gespeicherten Werte in der neu geladenen Liste. Die Vergabe gilt ab
-ihrem Beginn bis ausschließlich zum Endzeitpunkt.
+<Step>
+
+### Ressource und Empfänger wählen
+
+1. Wähle **Zugriff vergeben**, suche die **Holzwerkstatt** und wähle **Weiter**.
+   In den Ressourcendetails ist die Ressource bereits festgelegt.
+2. Wähle **Benutzer** als **Empfängertyp** und unter **Empfänger** **Lina Berger**.
+   Für eine Gruppe wählst du stattdessen **Benutzergruppe**.
+
+</Step>
+
+<Step>
+
+### Gültigkeit festlegen
+
+1. Trage **Gültig ab** und bei Bedarf **Gültig bis** in deiner lokalen Zeitzone ein.
+   Der Beginn ist mit der aktuellen Zeit vorbelegt; ein leeres Ende bedeutet
+   **Ohne Enddatum**. Ein gesetztes Ende muss nach dem Beginn liegen.
+2. Soll die Vergabe nur zu bestimmten Wochenzeiten gelten, öffne
+   **Zugriff auf Wochenzeiten beschränken**. Wähle **Zeitzone der Wochenzeitfenster**
+   und **Zeitfenster hinzufügen**, dann **Wochentag**, **Beginn** und **Ende**.
+
+<ImageZoom
+  src={vergabeAnsicht}
+  alt="Zugriff vergeben für die Holzwerkstatt mit Lina Berger als Empfängerin und den Feldern Gültig ab und Gültig bis."
+/>
+
+</Step>
+
+<Step>
+
+### Speichern und prüfen
+
+Prüfe Ressource, Empfänger und Zeiten und wähle **Speichern**. Kontrolliere
+Empfänger, **Gültigkeit** und **Wochenzeitfenster** in der neu geladenen Liste;
+fehlende Spalten blendest du unter **Ansicht** ein.
+
+Die Vergabe gilt ab Beginn bis ausschließlich zum Endzeitpunkt; ohne
+Wochenzeitfenster gilt **Keine wöchentliche Einschränkung**.
+
+</Step>
+
+</Steps>
 
 ### Gültigkeit und Wochenzeiten gemeinsam prüfen
 
-Wochenzeitfenster schränken die Gültigkeit zusätzlich ein: Eines der Fenster
-muss passen. Ohne Fenster gilt **Keine wöchentliche Einschränkung**.
+Wochenzeitfenster schränken die Gültigkeit zusätzlich ein. Eines der Fenster muss
+passen. Seine Zeitzone ist unabhängig von der lokalen Anzeige der Gültigkeitsdaten:
+**Montag, 08:00–17:00** mit **Europe/Berlin** gilt nach Berliner Ortszeit,
+einschließlich Beginn und ausschließlich Ende.
 
-Die Zeitzone der Wochenfenster ist unabhängig von der lokalen Anzeige der
-Gültigkeitszeitpunkte. Beispiel: Ein Fenster **Montag, 08:00–17:00** mit
-**Europe/Berlin** gilt nach Berliner Ortszeit. Der Beginn zählt dazu, das Ende
-nicht mehr. Liegt das Ende vor oder genau auf der Startzeit, behandelt die
-Oberfläche es als Ende am **Folgetag**: **Freitag, 22:00–02:00** reicht bis
-Samstag 02:00. Gleiche Start- und Endzeit ergeben ein Fenster bis zur gleichen
-Uhrzeit am Folgetag.
+<ImageZoom
+  src={wochenzeitenAnsicht}
+  alt="Wochenzeitfenster mit Europe/Berlin als Zeitzone und Montag von 08:00 bis 17:00 Uhr."
+/>
 
-Mit **Entfernen** löschst du ein Fenster aus dem Formular. Entfernst du alle
-Fenster und speicherst, entfällt die wöchentliche Einschränkung. Pro Wochentag
-darf derselbe Beginn nicht mehrfach vorkommen.
+Liegt das Ende vor oder auf der Startzeit, setzt die Oberfläche **Folgetag**:
+**Freitag, 22:00–02:00** endet am Samstag. Gleiche Uhrzeiten ergeben 24 Stunden.
+Derselbe Beginn darf pro Wochentag nur einmal vorkommen.
+
+Mit **Entfernen** löschst du ein Fenster. Entfernst du alle und speicherst,
+entfällt die wöchentliche Einschränkung.
 
 ## Gültigkeit oder Wochenzeiten ändern
 
-1. Öffne die Freigaben der Ressource und suche den betreffenden Eintrag.
-2. Wähle **Bearbeiten**. Falls nur **Details** erscheint, kannst du den Eintrag
-   lesen, aber nicht ändern.
-3. Ändere Gültigkeitsbeginn, optionales Ende oder Wochenzeitfenster samt Zeitzone.
-   Empfängertyp und Empfänger sind bei bestehenden Vergaben gesperrt. Für einen
-   anderen Empfänger musst du eine neue Vergabe anlegen und die alte gesondert
-   entziehen.
-4. Wähle **Speichern** und prüfe die neu geladene Liste.
+1. Suche die Vergabe und wähle **Bearbeiten**. **Details** erlaubt nur das Lesen.
+2. Ändere Gültigkeit oder Wochenzeitfenster samt Zeitzone. Empfängertyp und Empfänger
+   sind gesperrt; für einen anderen Empfänger legst du eine neue Vergabe an und
+   entziehst die alte gesondert.
+3. Wähle **Speichern** und prüfe die neu geladene Liste.
 
-Bei einer zwischenzeitlichen Änderung wird dein veralteter Stand abgewiesen.
-Schließe den Dialog, lade die Seite neu und öffne den aktuellen Eintrag. Vergleiche
-die Werte, bevor du deine Änderung erneut einträgst.
+Wird dein Stand wegen einer zwischenzeitlichen Änderung abgewiesen, schließe den
+Dialog, lade neu und öffne den aktuellen Eintrag, bevor du erneut bearbeitest.
 
 ## Einzelne Freigabe entziehen
 
-**Entziehen** löscht die ausgewählte Vergabe. Andere direkte Vergaben,
-Gruppenvergaben und Buchungen bleiben bestehen und können weiter zur Nutzung
-berechtigen. Der Entzug beendet keine laufende Sitzung und sendet keinen
-Abschaltauftrag. Prüfe deshalb vorab, ob zusätzlich ein laufender Betrieb
-beendet werden muss.
+<Callout type="warn" title="Entziehen beendet keinen laufenden Betrieb">
+  Die Aktion löscht nur diese Vergabe. Andere direkte, Gruppen- oder Tag-Vergaben und Buchungen
+  können weiterhin zur Nutzung berechtigen. Laufende Sitzungen werden nicht beendet; es wird kein
+  Abschaltauftrag gesendet.
+</Callout>
 
-1. Suche die Vergabe und prüfe Ressource, Empfänger und Zeitraum.
-2. Wähle in ihrer Zeile **Entziehen**.
-3. Prüfe den Dialog **Zugriff entziehen?** und bestätige mit **Entziehen**.
-4. Prüfe, dass der Eintrag nach dem Neuladen nicht mehr in der Liste steht.
+1. Prüfe Ressource, Empfänger, Zeitraum und gegebenenfalls den laufenden Betrieb.
+2. Wähle in der Zeile **Entziehen**.
+3. Prüfe **Zugriff entziehen?** und bestätige mit **Entziehen**.
+4. Kontrolliere, dass die Vergabe aus der neu geladenen Liste verschwunden ist.
 
 ## Wenn etwas nicht klappt
 
-| Beobachtung                       | Nächster Schritt                                                                                                                                                               |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Ressource oder Aktion fehlt       | Prüfe die [globalen und ressourcenbezogenen Rechte](#voraussetzungen-und-rechte).                                                                                              |
-| Empfänger fehlt                   | Prüfe, ob Konto oder Gruppe existiert und du diesen Eintragstyp lesen darfst.                                                                                                  |
-| **Speichern** ist nicht verfügbar | Prüfe Pflichtfelder, Zeitraum, Zeitzone und eindeutige Fensterbeginne pro Wochentag. Beim Bearbeiten muss eine Änderung vorliegen.                                             |
-| Speichern meldet einen Konflikt   | Lies die Fehlermeldung. Bei veraltetem Stand [lade den Eintrag neu](#gültigkeit-oder-wochenzeiten-ändern); dauerhaft stillgelegte Ressourcen erlauben keine Vergabeänderungen. |
-| Zugang trotz Vergabe abgelehnt    | Prüfe Gültigkeit, Wochenfenster, Gruppenmitgliedschaft beziehungsweise verwendeten Tag und weitere Bedingungen der Zugriffsregel. Teste am vorgesehenen Leser.                 |
-| Zugang nach Entzug weiter möglich | Prüfe weitere direkte, Gruppen- oder Tag-Vergaben, Buchungen und laufende Sitzungen.                                                                                           |
+| Beobachtung                       | Nächster Schritt                                                                                                   |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Ressource oder Aktion fehlt       | Prüfe globale Rechte und die Zuständigkeit für genau diese Ressource.                                              |
+| Empfänger fehlt                   | Prüfe, ob Konto oder Gruppe existiert und du sie lesen darfst.                                                     |
+| **Speichern** ist gesperrt        | Prüfe Pflichtfelder, Zeiten, Zeitzone und doppelte Fensterbeginne. Beim Bearbeiten muss eine Änderung vorliegen.   |
+| Speichern meldet einen Konflikt   | Lade bei veraltetem Stand den Eintrag neu. Dauerhaft stillgelegte Ressourcen erlauben keine Vergabeänderungen.     |
+| Zugang trotz Vergabe abgelehnt    | Prüfe Gültigkeit, Wochenzeiten, Gruppenmitgliedschaft oder Tag und die übrige Zugriffsregel am vorgesehenen Leser. |
+| Zugang nach Entzug weiter möglich | Prüfe weitere Vergaben, Buchungen und laufende Sitzungen.                                                          |

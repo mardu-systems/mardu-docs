@@ -3,6 +3,8 @@ title: Einen Node-RED-Flow entwickeln und prüfen
 description: Eine vorhandene Mardu-Ressource lesen, Nachrichten auswerten und einen Flow kontrolliert deployen.
 ---
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
 Die fiktive Ressource **Testarbeitsplatz** dient als Beispiel; der lesende Flow braucht
 keine zusätzliche Protokollverbindung und sendet keine Gerätebefehle.
 
@@ -25,6 +27,10 @@ Verbindung und kann alle unterstützten Ressourcen lesen sowie registrierte
 Aktionen ausführen. Eine Ressourcenauswahl begrenzt nur den jeweiligen Node.
 Die Auswahl unter **Flow-Einstellungen** legt eine zusätzliche Zugangsprüfung
 fest, beschränkt aber nicht den übrigen Laufzeitzugriff.
+
+<Steps>
+
+<Step>
 
 ## Den lesenden Flow anlegen
 
@@ -63,6 +69,10 @@ Eine konfigurierte, aufgelöste ID hat Vorrang vor dem Nachrichtenwert. Für ein
 ID aus einer Nachrichteneigenschaft wählst du im ID-Feld den Typ `msg` und einen
 Pfad ohne das Präfix `msg.`, beispielsweise `payload.id`.
 
+</Step>
+
+<Step>
+
 ## Deployen und das Ergebnis prüfen
 
 Ein Deploy übernimmt die Flow-Konfiguration in die gemeinsame Laufzeit. Nodes
@@ -76,7 +86,7 @@ anderen noch nicht übernommenen Änderungen im Editor.
    übernehmen**. Bei diesem reinen Leseversuch sind solche Auswirkungen ein
    Anlass, die übrigen Änderungen zu prüfen. Entfernen und Ersetzen von
    Anschlüssen beschreibt die
-   [Administrationsanleitung](../administration/automationen.mdx#einen-anschluss-in-node-red-entfernen).
+   [Administrationsanleitung](../administration/automationen-anschluesse.mdx#einen-anschluss-in-node-red-entfernen).
 3. Löse den Inject-Node einmal manuell aus. Im Debug-Ausgang muss eine Antwort
    für den gewählten Ressourcentyp und dieselbe ID erscheinen.
 4. Prüfe `schemaId`, `version`, `online`, `observedAtUtc`, `receivedAtUtc` und
@@ -99,6 +109,10 @@ Ablehnung prüfst du den gespeicherten Stand und die Änderungen vor einem neuen
 Versuch. Das Schließen des Editors beendet nur deine Editor-Sitzung; deployte
 Flows laufen weiter.
 
+</Step>
+
+<Step>
+
 ## Änderungen und Verbindungsstatus beobachten
 
 Verbinde **Zustands-Änderung** aus **Mardu Erweitert** für dieselbe Ressource mit
@@ -119,19 +133,23 @@ REST-Leseabfragen funktionieren auch ohne MQTT. `mqttConnected: false` allein
 bedeutet deshalb keinen Ausfall der REST-Verbindung. Ein Verbindungsstatus
 bestätigt weder einen neuen Gerätewert noch die Ausführung eines Befehls.
 
+</Step>
+
+</Steps>
+
 ## Weitere Nachrichtenwege passend wählen
 
 Die Node-Hilfe im Editor beschreibt Eingang, Ausgang und Konfiguration. Wähle
 für Erweiterungen den passenden Nachrichtenweg:
 
-| Aufgabe                          | Verfügbare Nodes und Vertrag                                                                                                                                                                                                                                                                            |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ressourcen finden                | **Ressourcen auflisten** liefert `items` und `nextCursor`. Für die nächste Seite den Cursor unverändert als `msg.payload.cursor` senden und Verbindung sowie Filter beibehalten. `nextCursor: null` beendet die Liste. Ein Fähigkeitsfilter führt keine Aktion aus.                                     |
-| Ereignishinweise empfangen       | **Mardu-Ereignis** liefert ein vollständiges CloudEvent in `msg.payload`: Typ unter `type`, Inhalt unter `data`; ID und Typ zusätzlich unter `msg.mardu.eventId` und `msg.mardu.eventType`. Der Ereignistypfilter vergleicht exakt. Er benötigt die für die Verbindung eingerichteten MQTT-Abonnements. |
-| Einen Aktionsabschluss verfolgen | **Aktion beendet** liefert `space.mardu.automation.execution.completed.v1`. Nach `msg.payload.data.executionId` auf den eigenen Auftrag filtern. **Aktions-Status** mit ID-Pfad `payload.data.executionId` lädt den aktuellen Stand über REST nach.                                                     |
-| Eine Aktion anfordern            | **Aktion ausführen** unterstützt hier **Sitzung beenden** (`end-session`) für eine Ressource, mit deren Sitzungs-ID. Die Antwort mit `executionId`, `status`, `correlationId` und `acceptedAtUtc` bestätigt die Annahme. Sie bestätigt noch keinen Abschluss. Das gehört nicht zum lesenden Beispiel.   |
-| Eine Zugangsprüfung beantworten  | **Freigabe-Anfrage** liefert den übernommenen Checkpoint; **Freigabe entscheiden** benötigt dessen `msg.mardu.checkpointId` und dieselbe Verbindung. Eine beliebige Ereignisnachricht ersetzt diese übernommene Prüfung nicht. Die Zuordnung wird in der Administration eingerichtet.                   |
-| Einen Messwert melden            | **Beobachtung melden** nimmt genau ein unterstütztes Wertfeld entgegen und hat keinen Ausgang. Der Anschluss muss zuerst veröffentlicht und der passenden Beobachtungsrolle einer Ressource zugeordnet sein. Das ist eine Meldung an Mardu, kein Gerätebefehl.                                          |
+| Aufgabe                          | Verfügbare Nodes und Vertrag                                                                                                                                                                                                                                                                                     |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ressourcen finden                | **Ressourcen auflisten** liefert `items` und `nextCursor`. Für die nächste Seite den Cursor unverändert als `msg.payload.cursor` senden und Verbindung sowie Filter beibehalten. `nextCursor: null` beendet die Liste. Ein Fähigkeitsfilter führt keine Aktion aus.                                              |
+| Ereignishinweise empfangen       | **Mardu-Ereignis** liefert ein vollständiges CloudEvent in `msg.payload`: Typ unter `type`, Inhalt unter `data`; ID und Typ zusätzlich unter `msg.mardu.eventId` und `msg.mardu.eventType`. Der Ereignistypfilter vergleicht exakt. Er benötigt die für die Verbindung eingerichteten MQTT-Abonnements.          |
+| Einen Aktionsabschluss verfolgen | **Aktion beendet** liefert `space.mardu.automation.execution.completed.v1`. Nach `msg.payload.data.executionId` auf den eigenen Auftrag filtern. **Aktions-Status** mit ID-Pfad `payload.data.executionId` lädt den aktuellen Stand über REST nach.                                                              |
+| Eine Aktion anfordern            | **Aktion ausführen** unterstützt hier **Sitzung beenden** (`end-session`) für eine Ressource, mit deren Sitzungs-ID. Die Antwort mit `executionId`, `status`, `correlationId` und `acceptedAtUtc` bestätigt die Annahme. Sie bestätigt noch keinen Abschluss. Das gehört nicht zum lesenden Beispiel.            |
+| Eine Zugangsprüfung beantworten  | **Freigabe-Anfrage** liefert den übernommenen Checkpoint; **Freigabe entscheiden** benötigt dessen `msg.mardu.checkpointId` und dieselbe Verbindung. Eine beliebige Ereignisnachricht ersetzt diese übernommene Prüfung nicht. Die Zuordnung wird in der Administration eingerichtet.                            |
+| Einen Messwert melden            | **Beobachtung melden** nimmt genau ein unterstütztes Wertfeld entgegen und hat keinen Ausgang. Der Anschluss muss zuerst [veröffentlicht](../administration/automationen-anschluesse.mdx) und der passenden Beobachtungsrolle einer Ressource zugeordnet sein. Das ist eine Meldung an Mardu, kein Gerätebefehl. |
 
 Aktionsabschlüsse können `succeeded`, `failed`, `rejected`, `timed-out`,
 `cancelled` oder `outcome-unknown` melden. Bei `outcome-unknown` fehlt eine

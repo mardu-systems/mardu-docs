@@ -1,0 +1,116 @@
+---
+title: Registrierung und Anmeldevorgaben einrichten
+description: Selbstregistrierung, erlaubte Anmeldeverfahren, Passwortregeln und Token-Laufzeiten festlegen und ihre Wirkung prüfen.
+---
+
+Die **Auth Policy** legt Regeln für neue Konten und Anmeldungen fest. Eine Vorgabe
+richtet das verlangte Verfahren nicht am Konto ein. Bereite betroffene Konten
+vor, bevor du beispielsweise die Zwei-Faktor-Anmeldung für Administratoren verlangst.
+
+## Voraussetzungen und Rechte
+
+Du brauchst `Settings.View` zum Lesen und `Settings.Update` zum Ändern.
+Durch Umgebungsvariablen gesperrte Felder muss die für das Deployment zuständige
+Person ändern. Das [Speichermodell der Servereinstellungen](./server-einstellungen.mdx#einstellungen-lesen-und-speichern)
+erklärt Entwürfe und Neustarthinweise.
+
+Prüfe vor strengeren Vorgaben mit den betroffenen Personen ihre
+[Anmeldesicherheit](../ueberblick/profil-sicherheit.mdx) und den vereinbarten
+Wiederherstellungsweg. Ein [lokaler Passwort-Reset](./wartungs-cli.mdx#admin-passwort-ohne-e-mail-zurücksetzen)
+hebt fehlende Zwei-Faktor-Einrichtung, Deaktivierung oder fehlende
+E-Mail-Bestätigung nicht auf.
+
+## Selbstregistrierung einstellen
+
+1. Öffne **Administration → Systemeinstellungen → Auth Policy**.
+2. Wähle unter **Selbstregistrierung**, wie neue Konten angelegt werden dürfen.
+3. Wähle bei aktiver Selbstregistrierung eine vorhandene **Standardrolle für
+   Registrierungen**. Lege die **Gültigkeit Bestätigungslink (Stunden)** zwischen
+   1 und 168 fest.
+4. Entscheide, ob **Bestätigtes Konto verlangen** eingeschaltet sein muss.
+   Bei **Mit Freigabe** ist das verpflichtend.
+
+| Selbstregistrierung | Wirkung                                                                                                                                        |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Deaktiviert         | Personen können kein Konto durch Selbstregistrierung anlegen. Administrative Kontoanlage ist ein eigener Vorgang.                              |
+| Direkt              | Keine administrative Registrierungsfreigabe. Ob vor der Anmeldung eine E-Mail-Bestätigung nötig ist, bestimmt **Bestätigtes Konto verlangen**. |
+| Mit Freigabe        | Das Konto bleibt bis zur Freigabe inaktiv. **Bestätigtes Konto verlangen** muss eingeschaltet sein.                                            |
+
+Die Standardrolle gilt für neue Registrierungen; sie weist bestehenden Konten
+keine Rolle zu. **SSO-Konten freigeben lassen** regelt die Freigabe neuer, über
+OpenID Connect angelegter Konten. Den Anbieter richtest du separat unter
+[OIDC](./oidc-anmeldung.mdx) ein. Die
+[Benutzerverwaltung](./benutzer-rollen.mdx) beschreibt die Kontoanlage und Freigabe.
+
+## Anmeldeverfahren und Wiederherstellung festlegen
+
+Die Verfahren haben unterschiedliche Folgen. Lies sie vor dem Ausschalten eines
+Verfahrens oder dem Einschalten einer Pflicht:
+
+| Einstellung                       | Wirkung und Grenze                                                                                                                                                                                              |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Passwortlose Anmeldung aktivieren | Erlaubt Anfragen für Anmelde-Links. Ausschalten verhindert weitere passwortlose Anfragen.                                                                                                                       |
+| Passkeys erlauben                 | Erlaubt Passkey-Anmeldung und -Registrierung. Prüfe vor dem Ausschalten, ob die betroffenen Personen ein anderes Anmeldeverfahren haben. Das Formular schaltet dabei auch die Passkey-Pflicht für Admins aus.   |
+| Passkeys für Admins erzwingen     | Verhindert das Deaktivieren des letzten aktiven Administrator-Passkeys. Die Einstellung allein beschränkt die Passwortanmeldung derzeit nicht auf Passkeys. Sie setzt erlaubte Passkeys voraus.                 |
+| Zwei-Faktor für Admins erzwingen  | Eine Passwortanmeldung eines Administrators ohne eingerichtete Zwei-Faktor-Authentifizierung wird abgewiesen. Richte den zweiten Faktor vor dem Einschalten im jeweiligen Konto ein.                            |
+| Recovery-Codes ausgeben           | Erlaubt Ausgabe und Verwendung von Wiederherstellungscodes für die Zwei-Faktor-Anmeldung. Ausgeschaltet stehen diese Codes nicht als zweiter Faktor zur Verfügung. Du kannst hier keine fremden Codes anzeigen. |
+
+Unter **Zeitfenster & Wiederherstellung** legst du die Ablaufzeiten für
+passwortlose Anfragen und die Anzahl der Wiederherstellungscodes fest:
+
+| Feld                  | Bereich       |
+| --------------------- | ------------- |
+| Ablauf Nutzeranfrage  | 1–60 Minuten  |
+| Ablauf Admin-Anfrage  | 1–120 Minuten |
+| Ablauf nach Freigabe  | 1–60 Minuten  |
+| Anzahl Recovery-Codes | 1–20          |
+
+Ein passwortloser Link ersetzt keine erforderliche Mehrfaktoranmeldung. Bei
+OpenID Connect muss der externe Anbieter für Administratoren einen von Mardu
+akzeptierten Nachweis der Mehrfaktoranmeldung liefern. Eine lokale
+Zwei-Faktor-Einrichtung ersetzt diesen Nachweis beim Anbieter nicht.
+
+## Passwortregeln und Kontosperre einstellen
+
+| Einstellung            | Bedeutung und Grenzen                                                                                                                                                                                 |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Minimale Passwortlänge | 6–128 Zeichen. Zusätzliche Regeln **Ziffer verlangen**, **Kleinbuchstaben verlangen**, **Großbuchstaben verlangen** und **Sonderzeichen verlangen** stehen unter **Klassische Komplexitätsvorgaben**. |
+| Kontosperre aktivieren | Schaltet die Sperre nach fehlgeschlagenen Anmeldungen ein. Unter **Kontosperre feinabstimmen** legst du **Maximale Fehlversuche** (1–20) und **Sperrdauer (Minuten)** (1–1.440) fest.                 |
+
+Eine zeitliche Kontosperre ist von der Deaktivierung eines Kontos zu unterscheiden.
+Bei bestehenden Anmeldeproblemen hilft
+[Benutzer verwalten → Bei Anmeldeproblemen helfen](./benutzer-rollen.mdx#bei-anmeldeproblemen-helfen).
+
+## Token-Laufzeiten ändern
+
+Unter **Token-Laufzeiten** stehen **Access-Token-Laufzeit (Minuten)** mit 1–1.440
+Minuten und **Refresh-Token-Laufzeit (Tage)** mit 1–365 Tagen.
+
+<Callout type="warn" title="Serverneustart für Token-Laufzeiten einplanen">
+  Änderungen an beiden Laufzeiten werden erst nach einem vollständigen Serverneustart wirksam.
+  Speichern startet den Server nicht neu. Eine kürzere Laufzeit ersetzt keinen ausdrücklichen
+  Sitzungswiderruf.
+</Callout>
+
+## Speichern und neue Anmeldung prüfen
+
+1. Prüfe die geänderten Vorgaben und wähle **Speichern**. Korrigiere angezeigte
+   Feldfehler; beachte anschließend die Wirksamkeits- und Neustarthinweise.
+2. Öffne **Auth Policy** erneut und kontrolliere den gespeicherten Stand.
+3. Prüfe eine neue Anmeldung mit einem dafür vorgesehenen Konto in einem
+   getrennten Browserfenster, bevor du deine vorhandene Sitzung beendest.
+   Prüfe bei geänderter Registrierung zusätzlich den gewählten Registrierungs-
+   und Freigabeweg mit einem Testkonto.
+
+Eine offene Sitzung belegt keine erfolgreiche neue Anmeldung. Bestehende
+Sitzungen verwaltest du getrennt nach
+[Sicherheit und Betrieb](./sicherheit-betrieb.mdx#sitzungen-und-anmeldehistorie).
+
+## Wenn etwas nicht klappt
+
+| Beobachtung                                     | Nächster Schritt                                                                                                                            |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ein Feld ist gesperrt                           | Prüfe die angezeigte Deployment-Vorgabe; eine Formularänderung überschreibt sie nicht.                                                      |
+| Speichern meldet einen Fehler                   | Prüfe Pflichtfelder und Wertebereiche. **Mit Freigabe** benötigt **Bestätigtes Konto verlangen**; die Standardrolle muss vorhanden sein.    |
+| Neue Anmeldungen werden abgewiesen              | Prüfe Kontostatus, E-Mail-Bestätigung, Sperre und das verlangte Verfahren. Eine Passwortwiederherstellung hebt diese Bedingungen nicht auf. |
+| Gespeicherte Token-Laufzeiten gelten noch nicht | Prüfe, ob der erforderliche vollständige Serverneustart erfolgt ist.                                                                        |

@@ -36,22 +36,24 @@ Voraussetzungen. Den Zusammenhang erklärt
 
 ## Ressourcen und Zutritt
 
-- [Ressourcen einrichten](../koordination/ressourcen.mdx): Struktur, Nutzungsbedingungen, technische Anschlüsse und Buchbarkeit.
+- [Ressourcen einrichten](../koordination/ressourcen.mdx): einen Raum oder eine Maschine anlegen und aktivieren.
+- [Buchbarkeit einrichten](./ressourcen-buchbarkeit.mdx) und [Zutritt und Technik zuordnen](./ressourcen-zutritt.mdx): die benötigten Funktionen ergänzen.
 - [Ressourcenfreigaben verwalten](./freigaben-verwalten.mdx): Nutzung für Personen oder Benutzergruppen freigeben, zeitlich begrenzen und entziehen.
 - [Zugangs-Tags verwalten](./tags-verwalten.mdx): Karten mit Mardu Connect zuweisen, bei Verlust sperren und ersetzen.
 
-Die Ressourcenanleitung gehört zur Administration und umfasst Zugriffsregeln,
-Zutrittspunkte und Wartung. Laufende Entscheidungen über Anträge, Buchungen und
-Verfügbarkeit beschreibt [Koordination](../koordination/index.mdx).
+Im laufenden Betrieb helfen [Zustand und Schalter](./ressourcen-zustand.mdx)
+sowie [Sperren und Wartung](./ressourcen-wartung.mdx). Entscheidungen über Anträge
+und Buchungen beschreibt [Koordination](../koordination/index.mdx).
 
 ## Kompetenzen und Nachweise
 
 - [Fähigkeiten, Kataloge und Lernwege einrichten](./kompetenzen-lernwege.mdx): festlegen, was erworben werden kann und welche Badges zu einem Lernweg gehören.
-- [Badges verwalten](./badges-verwalten.mdx): Definitionen und Versionen pflegen, lokal vergeben, importieren oder veröffentlichen.
+- [Badges verwalten](./badges-verwalten.mdx): Definitionen und Versionen pflegen, importieren oder veröffentlichen.
 - [Nachweissysteme anbinden](./nachweissysteme-anbinden.mdx): persönliche Nachweisquellen bereitstellen oder die serverweite Synchronisation einrichten und prüfen.
 
 Definition, persönlicher Erwerb und Ressourcenfreigabe sind getrennte Vorgänge.
-Bewertungen und laufende Lernwegteilnahmen gehören zur
+Persönliche [Badge-Vergaben](../koordination/badge-vergaben.mdx), Bewertungen und
+laufende Lernwegteilnahmen gehören zur
 [Koordination](../koordination/index.mdx#qualifikationen-einordnen).
 
 <span id="weitere-verwaltungsaufgaben" />
@@ -59,7 +61,8 @@ Bewertungen und laufende Lernwegteilnahmen gehören zur
 ## Geräte und Automationen
 
 - [Geräte verwalten](./geraete-verwalten.mdx): aufnehmen, Anschlüsse konfigurieren, einer Ressource zuordnen und Fehler untersuchen.
-- [Automationen](./automationen.mdx): Runtime und Editor freigeben, externe Anschlüsse bereitstellen und Rückmeldungen prüfen.
+- [Automationen](./automationen.mdx): Runtime und Editor einrichten sowie den Zugang bei Bedarf an eine Flow-Freigabe knüpfen.
+- [Automationsanschlüsse bereitstellen](./automationen-anschluesse.mdx): externe Anschlüsse veröffentlichen, zuordnen und ihre Rückmeldungen prüfen.
 
 ## Anbindungen
 
@@ -78,7 +81,9 @@ und Gerätekommunikation.
 Bei Anmeldeproblemen, Wiederherstellung und Störungen beginne mit
 [Sicherheit und Betrieb](./sicherheit-betrieb.mdx). Für geplante Änderungen und Prüfungen:
 
-- [Servereinstellungen](./server-einstellungen.mdx): globale Vorgaben, Registrierung und Anmelderichtlinie ändern; gesperrte Felder und Neustartbedarf erkennen.
+- [Servereinstellungen](./server-einstellungen.mdx): globale Vorgaben ändern; gesperrte Felder und Neustartbedarf erkennen.
+- [Anmeldevorgaben einrichten](./anmeldevorgaben.mdx): Registrierung, Anmeldeverfahren und Laufzeiten festlegen.
+- [Integrationszertifikate verwalten](./integrationszertifikate.mdx) und [Monitoring einrichten](./monitoring-einrichten.mdx): die jeweilige Konfiguration mit ihren Auswirkungen prüfen.
 - [HTTPS-Zertifikatswechsel vorbereiten und prüfen](./zertifikate-https.mdx): die zuständige HTTPS-Komponente bestimmen und die verwendete Verbindung kontrollieren.
 - [Benachrichtigungen einrichten und prüfen](./benachrichtigungen-verwalten.mdx): E-Mail-Versand testen und eine Mitteilung bis zum Empfang verfolgen.
 - [Übersicht und Systemstatus](../benutzer/uebersicht-monitoring.mdx): Betriebsdashboards, Messwerte, Datenlücken und Zustellmetriken einordnen. Auch diese Anleitung gehört zur Administration.

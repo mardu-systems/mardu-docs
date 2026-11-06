@@ -3,6 +3,8 @@ title: Nachweissysteme anbinden
 description: Konto-Anbieter für persönliche Nachweisquellen bereitstellen und die serverweite OpenBadges-Synchronisation prüfen.
 ---
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
 Wähle unter **Administration → Integrationen → Open Badges** den Verbindungsweg:
 
 | Ziel                                                                                                                              | Bereich             |
@@ -32,31 +34,57 @@ Die OAuth-Anmeldung verwendet **Authorization Code und PKCE S256**. Die Person
 stimmt dem Lesen ihres Profils und ihrer Nachweise zu. Die serverweite Option
 **Kontoverknüpfung erlauben** ist dafür nicht nötig.
 
-1. Registriere Mardu beim Anbieter für diesen Anmeldeablauf. Kläre, welche
-   Authentifizierung am Token-Endpunkt die Registrierung verlangt.
-2. Öffne **Konto-Anbieter → Anbieter hinzufügen**. Trage **Anbietername**,
-   **Open-Badges-3-API: Basis-URL**, **URL für Anmeldung und Zustimmung** und
-   **Token-URL** ein. Verwende die vom Anbieter für die Open-Badges-3-API genannten
-   Adressen, nicht die Adresse seiner Startseite.
-3. Wähle unter **Authentifizierung am Token-Endpunkt** die passende Methode:
+<Steps>
 
-   | Auswahl                             | Zugangsdaten                                                                                    |
-   | ----------------------------------- | ----------------------------------------------------------------------------------------------- |
-   | `client_secret_basic`               | Client-ID und Client-Secret; Übertragung als HTTP-Basic-Authentifizierung.                      |
-   | `client_secret_post`                | Client-ID und Client-Secret; Übertragung im Token-Anfrageformular.                              |
-   | **Öffentlicher Client ohne Secret** | Client-ID ohne Client-Secret; nur verwenden, wenn der Anbieter diese Registrierung unterstützt. |
+<Step>
 
-4. Trage die vorhandenen Client-Daten ein und lasse **Für Benutzer auswählbar**
-   zunächst ausgeschaltet. Wähle **Speichern**.
-5. Öffne den gespeicherten Anbieter. Übernimm **Rückleitungs-URL bei diesem Anbieter**
-   exakt in seine Registrierung. Ist die Adresse falsch oder extern nicht
-   erreichbar, lasse zuerst die öffentliche Backendadresse korrigieren.
-6. Ergänze gegebenenfalls die nun ausgegebenen Client-Daten, schalte
-   **Für Benutzer auswählbar** ein und speichere erneut.
-7. Prüfe mit einem persönlichen Testkonto Anmeldung und Abruf gemäß
-   [Persönliche Nachweisquellen](../ueberblick/profil-nachweisquellen.mdx).
-   Erst dieser Test prüft Anmeldung und Abruf; die Administrationsseite bietet
-   keinen Verbindungstest.
+### Registrierung und Verbindungsdaten vorbereiten
+
+Registriere Mardu beim Anbieter für **Authorization Code und PKCE S256**. Kläre,
+welche Authentifizierung am Token-Endpunkt die Registrierung verlangt.
+
+Öffne **Konto-Anbieter → Anbieter hinzufügen**. Trage **Anbietername**,
+**Open-Badges-3-API: Basis-URL**, **URL für Anmeldung und Zustimmung** und
+**Token-URL** ein. Verwende die vom Anbieter für die Open-Badges-3-API genannten
+Adressen.
+
+Wähle unter **Authentifizierung am Token-Endpunkt** die passende Methode und
+trage die Client-Daten ein:
+
+| Auswahl                             | Zugangsdaten                                                                |
+| ----------------------------------- | --------------------------------------------------------------------------- |
+| `client_secret_basic`               | Client-ID und Client-Secret; Übertragung als HTTP-Basic-Authentifizierung.  |
+| `client_secret_post`                | Client-ID und Client-Secret; Übertragung im Token-Anfrageformular.          |
+| **Öffentlicher Client ohne Secret** | Client-ID ohne Client-Secret; nur bei entsprechender Anbieterregistrierung. |
+
+Lasse **Für Benutzer auswählbar** zunächst ausgeschaltet und wähle **Speichern**.
+
+</Step>
+
+<Step>
+
+### Rückleitungs-URL übernehmen und Anbieter freigeben
+
+Öffne den gespeicherten Anbieter. Übernimm **Rückleitungs-URL bei diesem Anbieter**
+exakt in seine Registrierung. Ist die Adresse falsch oder extern nicht erreichbar,
+lasse zuerst die öffentliche Backendadresse korrigieren.
+
+Ergänze gegebenenfalls die nun ausgegebenen Client-Daten, schalte
+**Für Benutzer auswählbar** ein und speichere erneut.
+
+</Step>
+
+<Step>
+
+### Anmeldung und Abruf prüfen
+
+Prüfe mit einem persönlichen Testkonto Anmeldung und Nachweisabruf gemäß
+[Persönliche Nachweisquellen](../ueberblick/profil-nachweisquellen.mdx).
+Die Administrationsseite bietet keinen Verbindungstest für Konto-Anbieter.
+
+</Step>
+
+</Steps>
 
 Ein gespeichertes **Client-Secret** wird nicht angezeigt. Ein leeres Feld behält
 es bei, ein neuer Wert ersetzt es. Der Wechsel auf **Öffentlicher Client ohne Secret**
@@ -74,12 +102,12 @@ getrennt werden; bereits importierte Nachweise bleiben erhalten.
 erwarteten APIs. Ein erfolgreicher Zugangstest bestätigt weder allgemeine
 Open-Badges-3-Kompatibilität noch Rechte für jede Aktion.
 
-**Die erstmalige Aktivierung ist derzeit auf dieser Seite blockiert:** Die
-Oberfläche verlangt vorher einen erfolgreichen Test; der Server lehnt Tests
-deaktiviert gespeicherter Integrationen ab. Du kannst Verbindungsdaten speichern,
-aber erst nach Behebung dieses Produktfehlers aktivieren. Ändere deswegen nicht
-die Anbieterdaten. Der folgende Prüf- und Importablauf gilt für bereits aktive
-Anbindungen.
+<Callout type="warn" title="Erstmalige Aktivierung derzeit blockiert">
+  Die Oberfläche verlangt vorher einen erfolgreichen Test; der Server lehnt Tests deaktiviert
+  gespeicherter Integrationen ab. Du kannst Verbindungsdaten speichern, aber die Anbindung auf
+  dieser Seite noch nicht aktivieren. Eine Änderung der Anbieterdaten behebt diese Sperre nicht. Der
+  folgende Prüf- und Importablauf gilt für bereits aktive Anbindungen.
+</Callout>
 
 ### Zugang und Richtungen festlegen
 

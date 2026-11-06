@@ -1,0 +1,6 @@
+{
+  "title": "Servereinstellungen",
+  "pagesIndex": "../server-einstellungen",
+  "defaultOpen": false,
+  "pages": ["../anmeldevorgaben", "../integrationszertifikate", "../monitoring-einrichten"]
+}

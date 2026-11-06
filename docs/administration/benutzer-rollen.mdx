@@ -3,10 +3,15 @@ title: Benutzer und Rollen
 description: Benutzer einladen, Konten freigeben und bearbeiten sowie Rollen und Gruppen zuweisen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import metrikAnsicht from './bilder/personen-technik-benutzermetriken-2026-11-03.png';
+
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
-Öffne **Personen → Benutzer**. Benutzergruppen findest du unter **Personen → Benutzergruppen**.
+Öffne **Personen → Benutzer**, um ein Konto einzuladen, seine Rechte zu ändern oder
+bei Anmeldeproblemen zu helfen. Benutzergruppen findest du unter **Personen →
+Benutzergruppen**.
 
 ## Was ist ein Benutzer?
 
@@ -26,7 +31,7 @@ Du brauchst die Leseberechtigung für Benutzer und folgende aufgabenbezogene Rec
 | Zugangsmetriken ansehen                                                | Zugänge ansehen                                                   |
 | Benutzer löschen                                                       | Benutzer löschen                                                  |
 
-Für Einladungen und andere E-Mails muss der Maildienst eingerichtet sein. Zusätzliche Rechte für die Übersicht aller Berechtigungen und für Änderungen an Benutzergruppen stehen beim jeweiligen Ablauf.
+Für Einladungen und andere E-Mails muss der Maildienst eingerichtet sein. Zusätzliche Rechte für die Übersicht aller Berechtigungen stehen beim jeweiligen Ablauf.
 
 ## Benutzer einladen und anlegen
 
@@ -136,15 +141,9 @@ Schlägt ein Teil des Speicherns fehl, bleibt das Fenster offen. Bereits
 übernommene Änderungen bleiben gespeichert; prüfe die Meldung, bevor du es
 erneut versuchst.
 
-Bestätigte Sicherheitsaktionen wie Deaktivieren oder Löschen werden sofort
-ausgeführt. Das Verwerfen von Profiländerungen macht sie nicht rückgängig.
-
-Bei schmalen Benutzerfenstern stehen Bildauswahl und Vorschau untereinander.
-
-<div className="max-w-sm">
-  ![Bildauswahl und Profilbildvorschau untereinander im
-  Benutzerfenster.](./bilder/benutzer-profilbild-schmal.png)
-</div>
+Bestätigte Sicherheitsaktionen wie Deaktivieren oder Löschen und die Aktion
+**Ansicht speichern** bei Metriken werden sofort ausgeführt. Das Verwerfen von
+Profiländerungen macht sie nicht rückgängig.
 
 ### Rollen und Gruppen zuweisen
 
@@ -176,46 +175,28 @@ Administratoren verbleiben.
 Eine entfernte Rolle kann über eine andere Gruppe oder eine direkte Zuweisung
 weiterhin gelten.
 
-### Benutzergruppen verwalten
+<span id="benutzergruppen-verwalten" />
 
-Gruppenrollen gelten für alle Mitglieder, auch für später hinzugefügte Personen. Prüfe deshalb vor einer Änderung, wen sie betrifft.
-
-Du brauchst Leserechte für die Gruppe und die angezeigten Zuordnungen sowie für die verfügbaren Rollen. Zum Ändern von Mitgliedern oder Rollen brauchst du die jeweiligen Bearbeitungsrechte. Für Name und Beschreibung brauchst du die Rechte zum Anlegen **und** Bearbeiten von Benutzergruppen.
-
-1. Öffne **Personen → Benutzergruppen** und klicke auf die Gruppe.
-2. Ändere in **Übersicht** den Namen oder die Beschreibung.
-3. Öffne **Mitglieder** oder **Zugewiesene Rollen**, ändere die Auswahl und bestätige mit **Anwenden**.
-4. Wähle **Speichern** im Gruppenfenster.
-
-Entfernst du eine Person aus der Gruppe, entfallen für sie die Rollen dieser Gruppe.
-Direkte Rollen und Rollen aus anderen Gruppen gelten weiterhin.
+Gruppen anlegen, ihre Mitglieder und Rollen ändern oder Gruppen löschen
+beschreibt [Rollen und Gruppen verwalten](./rollen-gruppen.mdx#benutzergruppe-erstellen).
 
 ### Zugangs-Tags prüfen und benennen
 
-Öffne unter **Personen → Benutzer** das Konto und wähle **Tags**.
-Folge der Anleitung zum [Anmelden und Zuweisen](./tags-verwalten.mdx#tag-anmelden-und-zuweisen)
-oder zum [Prüfen und Umbenennen eines Tags](./tags-verwalten.mdx#tag-prüfen-und-benennen).
+Öffne im Benutzerkonto **Tags**. Die Anleitung
+[Zugangs-Tags verwalten](./tags-verwalten.mdx) führt durch das Anmelden,
+Zuweisen und Umbenennen einer Karte.
 
-#### Verlorenen Tag sperren
+<span id="verlorenen-tag-sperren" />
+<span id="tag-datensatz-löschen" />
 
-**Als verloren melden → Dauerhaft sperren** ist unwiderruflich und verhindert
-neue vom Server geprüfte Zutrittsanfragen. Laufende Nutzungen enden dadurch nicht.
-Folge [Verlorenen Tag sperren](./tags-verwalten.mdx#verlorenen-tag-sperren).
-
-#### Tag-Datensatz löschen
-
-**Tag löschen** entfernt den gespeicherten Datensatz. Für eine Verlustmeldung
-verwende die Sperre, damit der Verlustnachweis erhalten bleibt. Prüfe vor dem
-Bestätigen die [Löschfolgen](./tags-verwalten.mdx#tag-datensatz-löschen).
+Bei Verlust folge [Verlorenen Tag dauerhaft sperren](./tags-verwalten.mdx#verlorenen-tag-sperren).
+Zum Entfernen eines Datensatzes folge [Tag-Datensatz löschen](./tags-verwalten.mdx#tag-datensatz-löschen).
 
 ### Zugangsentscheidungen und Sitzungen prüfen
 
-1. Öffne die Benutzerdetails und wähle **Metriken**.
-2. Prüfe die Kennzahlen und den **Zugangsverlauf**.
-3. Vergleiche die Werte mit **Letzte Zugänge**. Bei Bedarf lade die Daten über **Zugangsmetriken aktualisieren** neu.
-
-Zeitraum, Kennzahlen und Sichtbarkeitsgrenzen sind unter
-[Zugangsmetriken](./zutritt-verwalten.mdx#zugangsmetriken) beschrieben.
+Öffne im Benutzerkonto **Metriken**, um gespeicherte Entscheidungen und aktive
+Sitzungen zu sehen. [Zugangsmetriken lesen](./zutritt-verwalten.mdx) erklärt die
+Kennzahlen, den Zeitraum, Aktualisieren und die Grenzen deiner Sicht.
 
 #### Metrikansicht anpassen
 
@@ -223,23 +204,23 @@ Du brauchst Lese- und Bearbeitungsrechte für Dashboards.
 
 1. Wähle **Ansicht bearbeiten**.
 2. Verschiebe oder vergrößere Karten. Entferne nicht benötigte Anzeigen und
-   füge sie bei Bedarf über **Kennzahl hinzufügen** wieder hinzu.
-3. Wähle **Speichern** unten im Benutzerfenster.
+   füge sie bei Bedarf über **Widget hinzufügen** wieder hinzu.
+3. Wähle **Ansicht speichern** im Metrikbereich. Alternativ übernimmt
+   **Speichern** unten im Benutzerfenster den Entwurf mit den übrigen Änderungen.
 
-Sind alle Kennzahlen enthalten, ist **Alle Kennzahlen hinzugefügt** deaktiviert.
+Sind alle Kennzahlen enthalten, ist **Alle Widgets hinzugefügt** deaktiviert.
 Für den Zugangsverlauf kannst du in den Karteneinstellungen Balken, Linien
 oder Fläche wählen.
 
 Deine **Metrikansicht gilt für alle Benutzer**: Beim Kontowechsel ändern sich die
-Werte, die Anordnung bleibt. Andere Administratoren haben eigene Ansichten. Ohne
-Dashboard-Leserecht siehst du bei vorhandenem Zugänge-Leserecht die Standardanzeige.
+Werte, die Anordnung bleibt. Andere Administratoren haben eigene Ansichten.
 Bei einer zwischenzeitlichen Änderung in einem anderen Fenster wird das Speichern
-abgelehnt. Verwirf den Entwurf und wähle **Zugangsmetriken aktualisieren**.
+abgelehnt. Wähle **Änderungen verwerfen**, dann **Messwerte aktualisieren**.
 
-![Benutzermetriken mit Kennzahlen, Zugangsverlauf und letzten
-Zugängen.](./bilder/benutzer-metriken-dashboard.png)
-
-Die Anzeige zeigt gespeicherte Entscheidungen, keine zukünftige Zutrittsberechtigung.
+<ImageZoom
+  src={metrikAnsicht}
+  alt="Benutzermetriken von Jonas Sommer im Bearbeitungsmodus mit Ansicht speichern, null Zugangsereignissen und Alle Widgets hinzugefügt."
+/>
 
 ### Bei Anmeldeproblemen helfen
 
@@ -260,6 +241,27 @@ nicht mehr erneuert werden.
 
 Eine Erfolgsmeldung bestätigt nicht den Empfang der E-Mail. Das Anfordern des
 Links ändert das Passwort noch nicht.
+
+#### Passwortlosen Zugang ermöglichen
+
+Der Standort muss die passwortlose Anmeldung erlauben. Bei Konten mit
+eingerichteter oder vorgeschriebener 2FA wird sie abgewiesen; verwende dort das
+vorgesehene Anmeldeverfahren.
+
+- Unter **Passwortloser Zugang → Einmalcode per E-Mail** fordert **Code senden**
+  einen Code für die bestätigte E-Mail-Adresse des Kontos an. Die Erfolgsmeldung
+  bestätigt keinen Versand oder Empfang.
+- Für einen Administrationslink brauchst du das Recht zum Anfordern eines
+  passwortlosen Administrationszugangs; eine andere Person braucht das Recht
+  zur Freigabe. Wähle **Freigabecode erstellen** und gib den **Freigabecode** an
+  diese Person weiter. Sie öffnet denselben Bereich, fügt ihn unter **Als zweite
+  Administration freigeben** ein und wählt **Anfrage freigeben**.
+
+Die freigebende Person kopiert den danach angezeigten **Anmeldelink** und gibt
+ihn ausschließlich an die vorgesehene Person weiter. **Öffne den Link nicht in
+deiner Administrationssitzung.** Er ist einmalig verwendbar; abgelaufene Codes
+müssen neu angefordert werden. Die anfragende Person kann ihre eigene Anfrage
+nicht freigeben.
 
 #### Zwei-Faktor-Authentifizierung verwalten
 
@@ -309,10 +311,8 @@ Eine Deaktivierung sperrt neue Anmeldungen. Bestehende Zugriffe enden nicht sofo
 
 Zum Reaktivieren prüfst du zuerst die erhaltenen Rollen, Gruppen und Zutrittszuweisungen. Wähle danach **Benutzer aktivieren** und bestätige. Der Status lautet anschließend **Aktiv**; die übrigen Anmeldebedingungen gelten weiter. Beide Aktionen findest du auch im Dreipunktmenü der Benutzerzeile, jeweils mit Bestätigung.
 
-<div className="max-w-sm">
-  ![Bestätigung der Deaktivierung eines
+![Bestätigung der Deaktivierung eines
   Benutzerkontos.](./bilder/benutzer-verwalten-deaktivieren.png)
-</div>
 
 ### Benutzer löschen
 
@@ -328,10 +328,8 @@ Buchungs- und Zutrittshistorie sowie Anmeldeereignisse bleiben nach der Löschun
 
 **Ergebnis:** Das Benutzerkonto wird gelöscht. Für mehrere Konten nutzt du die Kontrollkästchen in der Benutzerliste und die gemeinsame Löschaktion; prüfe vor der Bestätigung die gesamte Auswahl.
 
-<div className="max-w-sm">
-  ![Löschbestätigung für Lina Berger mit der Vorschau der
+![Löschbestätigung für Lina Berger mit der Vorschau der
   Löschfolgen.](./bilder/benutzer-verwalten-loeschen.png)
-</div>
 
 ## Wenn etwas nicht klappt
 
@@ -350,8 +348,9 @@ Bei Eingabefehlern bleiben die Angaben erhalten. Korrigiere die markierten Felde
 übereinstimmen.](./bilder/benutzer-anlegen-fehler.png)
 
 <span id="offene-dokumentationsaufgaben" />
+<span id="prüfstand-und-grenzen" />
 
-## Prüfstand und Grenzen
+## Weitere Verwaltung
 
 Rollenpflege sowie Gruppenanlage und -löschung beschreibt
 [Rollen und Gruppen verwalten](./rollen-gruppen.mdx).

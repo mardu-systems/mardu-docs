@@ -3,6 +3,12 @@ title: Meine Buchungen
 description: Eigene Termine und Serien erstellen, Details prüfen, ändern und stornieren.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import buchungenAnsicht from './bilder/buchungen-uebersicht-aktuell.png';
+import buchungErstellen from './bilder/buchung-erstellen-aktuell.png';
+import buchungDetails from './bilder/buchung-details-aktuell.png';
+
 **Meine Buchungen** zeigt deine eigenen Reservierungen, auch mit Verwaltungsrechten.
 Du brauchst Leserechte für Buchungen. Zum Erstellen brauchst du Erstellrechte;
 Bearbeiten, Stornieren und Anwesenheitsaktionen benötigen Änderungsrechte für Buchungen.
@@ -16,37 +22,68 @@ und Statusfilter, um eine eigene Buchung zu finden. Einen neuen Zeitraum prüfst
 im Buchungsformular mit **Verfügbarkeit prüfen**. Beachte dort auch
 **Buchbare Zeiten und Regeln**.
 
-![Eigene Buchungen mit Suche, Statusfilter und den Aktionen zum Erstellen und Abonnieren](bilder/buchungen-uebersicht.png)
+<ImageZoom
+  src={buchungenAnsicht}
+  alt="Eigene Buchungen mit Suche, Ressourcen- und Statusfilter sowie den Aktionen Neue Buchung und Kalender abonnieren."
+/>
 
 Beispiel mit fiktiven Daten.
 
 ## Neue Buchung erstellen
 
-1. Wähle **Neue Buchung** und die benötigten Ressourcen. Wähle für eine Serie
-   eine einzelne Ressource.
-2. Lege unter **Zeitraum** Datum und Uhrzeit für Beginn und Ende fest.
-   Gib **Anzahl / Kapazität** an, beispielsweise die Zahl benötigter Plätze.
-   Ergänze bei Bedarf Titel und Beschreibung; ohne Titel entsteht ein Name aus
-   den ausgewählten Ressourcen.
-3. Wähle für eine Serie unter **Wiederholung** täglich, wöchentlich oder monatlich.
-   Lege Intervall und Ende nach Anzahl oder Datum fest; bei wöchentlichen Terminen
-   zusätzlich die Wochentage. Eine Serie kann höchstens 200 Termine enthalten.
-4. Wähle **Verfügbarkeit prüfen**, beachte die Rückmeldung und wähle **Buchen**.
-5. Öffne die Buchung und prüfe ihren Status.
+<Steps>
+
+<Step>
+
+### Ressourcen und Zeitraum wählen
+
+Wähle **Neue Buchung** und die benötigten Ressourcen. Für eine Serie wählst du
+eine einzelne Ressource.
+
+Lege unter **Zeitraum** Datum und Uhrzeit für Beginn und Ende fest.
+Gib **Anzahl / Kapazität** an, beispielsweise die Zahl benötigter Plätze.
+Ergänze bei Bedarf Titel und Beschreibung; ohne Titel entsteht ein Name aus den
+ausgewählten Ressourcen.
+
+Die Zeiteingabe verwendet die Zeitzone deines Browsers. Die Wochenzeiten der
+Ressource werden mit ihrer eigenen Zeitzone angezeigt.
+
+</Step>
+
+<Step>
+
+### Bei Bedarf eine Serie festlegen
+
+Wähle unter **Wiederholung** täglich, wöchentlich oder monatlich. Lege Intervall
+und Ende nach Anzahl oder Datum fest; bei wöchentlichen Terminen zusätzlich die
+Wochentage. Eine Serie kann höchstens 200 Termine enthalten.
+
+</Step>
+
+<Step>
+
+### Verfügbarkeit prüfen und buchen
+
+Wähle **Verfügbarkeit prüfen**, beachte die Rückmeldung und wähle **Buchen**.
+Öffne anschließend die Buchung und prüfe ihren Status. Prüfe bei Serien über eine
+Zeitumstellung auch die gespeicherten Termine.
 
 Öffnungszeiten, Dauer, Vorlauf, Kapazität und Freigabepflicht können die Buchung
 begrenzen. Die Verfügbarkeitsprüfung reserviert noch nichts; die Belegung kann
 sich bis zum Buchen ändern. Bei Serien prüft die Vorabprüfung nur den ersten
 Termin; die weiteren Termine werden beim Buchen geprüft.
 
-Die Zeiteingabe verwendet die Zeitzone deines Browsers. Die Wochenzeiten der
-Ressource werden mit ihrer eigenen Zeitzone angezeigt. Prüfe besonders bei Serien
-über eine Zeitumstellung die gespeicherten Termine.
-
 Mehrere Ressourcen werden gemeinsam gebucht. Ist eine davon nicht verfügbar,
 wird die kombinierte Buchung nicht angelegt.
 
-![Buchungsformular mit Ressource, Zeitraum, Kapazität und Wiederholung](bilder/buchung-erstellen.png)
+</Step>
+
+</Steps>
+
+<ImageZoom
+  src={buchungErstellen}
+  alt="Buchungsformular für Abrichthobel und Dickenhobel mit Zeitraum, Buchungsregeln und erfolgreicher Verfügbarkeitsprüfung sowie der Aktion Buchen."
+/>
 
 Formular mit fiktiver Ressource.
 
@@ -81,7 +118,10 @@ Kombinierte Buchungen stornierst du mit **Alle Ressourcen**; einzelne Ressourcen
 lassen sich hier nicht separat stornieren. Gib den **Stornierungsgrund** ein und
 bestätige **Buchung stornieren**. Prüfe anschließend den Status für den gewählten Umfang.
 
-![Buchungsdetails mit Status, Stornierungsgrund und Aktionen für Anwesenheit und Kalenderexport](bilder/buchung-details.png)
+<ImageZoom
+  src={buchungDetails}
+  alt="Bestätigte Buchung mit Stornierungsgrund und den Aktionen Einchecken, Kalender exportieren und Bearbeiten."
+/>
 
 Beispiel mit fiktiven Daten.
 
@@ -96,10 +136,12 @@ Ist die Freigabe bei Nichterscheinen eingerichtet, wird eine Buchung ohne Check-
 nach Ablauf der Nachfrist als **Nicht erschienen** markiert und die Ressource
 wieder freigegeben.
 
-Nach dem Check-in kannst du **Auschecken** wählen. Damit wird die Buchung
-**Abgeschlossen**: Die verbleibende Kapazität wird sofort freigegeben; die Buchung
-zählt nicht mehr als Zutrittsnachweis. Check-in und Check-out betätigen selbst
-keine Türen oder Maschinen.
+<Callout type="warn" title="Auschecken beendet die Buchung">
+  Nach dem Check-in kannst du **Auschecken** wählen. Die Buchung wird dadurch **Abgeschlossen**: Die
+  verbleibende Kapazität wird sofort freigegeben; die Buchung zählt nicht mehr als Zutrittsnachweis.
+</Callout>
+
+Check-in und Check-out betätigen selbst keine Türen oder Maschinen.
 
 ## Fehler und Entwürfe
 

@@ -3,6 +3,11 @@ title: LDAP-Verzeichnis anbinden
 description: LDAP-Verbindung, Benutzer- und Rollenzuordnung einrichten, den Abgleich prüfen und die Folgen für die Anmeldung verstehen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import ldapVerbindung from './bilder/ldap-verbindung-entwurf-aktuell.png';
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
 Eine LDAP-Identität wird mit einem lokalen Mardu-Konto verknüpft. Dort liegen
 Rechte und Einstellungen; LDAP-Gruppen können lokalen Rollen zugeordnet werden.
 
@@ -16,23 +21,24 @@ Passwort sowie die Suchbereiche und verwendeten Benutzer-/Gruppenattribute berei
 Ein **DN** ist der vollständige Name eines Eintrags im Verzeichnis, beispielsweise
 `cn=mardu,ou=services,dc=example,dc=org`.
 
-Der Menüpunkt benötigt **Integrationen anzeigen** (`Integrations.View`). Zum Laden
-der Konfiguration und des Verlaufs brauchst du zusätzlich **Einstellungen anzeigen**
-(`Settings.View`). Speichern, Verbindungstest, Vorschau und manueller Abgleich
-benötigen **Einstellungen bearbeiten** (`Settings.Update`).
-
-Für die Auswahl lokaler Rollen brauchst du außerdem **Rollen anzeigen**
-(`Roles.View`). Die CA-Zertifikatsliste verwendet `Settings.View`.
+Für den Menüeinstieg brauchst du **Integrationen anzeigen**, zum Laden von
+Konfiguration, Zertifikaten und Verlauf **Einstellungen anzeigen**. Speichern,
+Verbindungstest, Vorschau und manueller Abgleich benötigen **Einstellungen bearbeiten**.
+Für die Auswahl lokaler Rollen brauchst du außerdem **Rollen anzeigen**.
 
 Durch die Serverumgebung gesperrte Werte, auch das Bind-Passwort, muss der
 Serverbetrieb ändern.
+
+<Steps>
+
+<Step>
 
 ## Verbindung und Suchbereich einrichten
 
 1. Wähle unter **Verzeichnistyp** eine passende Vorlage oder **Benutzerdefiniert**.
    Prüfe die vorbelegten Filter, Attribute, Kennung und Transport gegen dein
    Verzeichnis.
-2. Trage **Server** ohne Protokollpräfix und den **Port** ein. Wähle unter
+2. Trage unter **Server & Port** den Hostnamen ohne Protokollpräfix und den Port ein. Wähle unter
    **Transport** das vom Verzeichnis vorgesehene Verfahren: **LDAPS**,
    **StartTLS** oder **LDAP ohne TLS**. Mit ausgefüllter **Bind DN** verlangt Mardu
    TLS.
@@ -57,6 +63,18 @@ Serverbetrieb ändern.
    bestimmt auch die zu übernehmenden Personen. Verwende etwa
    `(&(objectClass=inetOrgPerson)(uid={0}))` nur, wenn Objektklasse und Attribut
    zu deinem Verzeichnis passen.
+
+Beispielentwurf für ein OpenLDAP-Verzeichnis. Die Ansicht zeigt die Eingaben vor
+dem Verbindungstest; sie bestätigt keine erreichbare Verzeichnisverbindung.
+
+<ImageZoom
+  src={ldapVerbindung}
+  alt="LDAP-Verbindungsentwurf mit OpenLDAP, ldap.example.org, LDAPS und getrennten Suchbereichen; noch nicht getestet."
+/>
+
+</Step>
+
+<Step>
 
 ## Benutzer und Rollen zuordnen
 
@@ -93,11 +111,14 @@ die lokale Rolle: Regeln für dieselbe Rolle teilen sich die Auswahl. Das Entfer
 der letzten Regel für eine Rolle beendet deren LDAP-Verwaltung; es entfernt die
 Rolle nicht unmittelbar von bisherigen Konten.
 
+</Step>
+
+<Step>
+
 ## Folgen für fehlende Benutzer festlegen
 
 Lege vor dem Speichern unter **3. Synchronisierung** fest, was mit bisherigen
 LDAP-Konten passiert, deren Eintrag beim Abgleich nicht mehr gefunden wird.
-Auch ein zu enger Suchbereich oder Filter kann Personen aus dem Ergebnis entfernen.
 
 | Auswahl unter „Wenn Benutzer nicht mehr im LDAP vorhanden sind“ | Folge                                                                                                                |
 | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -105,17 +126,23 @@ Auch ein zu enger Suchbereich oder Filter kann Personen aus dem Ergebnis entfern
 | **Deaktivieren**                                                | Ein aktives Konto wird deaktiviert und seine Tokens werden widerrufen.                                               |
 | **Dauerhaft löschen**                                           | Das lokale Konto wird gelöscht und seine Tokens werden widerrufen. Beim Speichern ist eine Bestätigung erforderlich. |
 
-Diese Behandlung betrifft LDAP-Konten und ist unabhängig vom Rollenentzug durch
-Gruppenregeln. Übersprungen werden nur Konten, denen die Rolle **Admin direkt**
-zugewiesen ist; eine über Benutzergruppen erhaltene Admin-Rolle schützt nicht.
-Prüfe diese Konten in der
-Vorschau, bevor du **Deaktivieren** oder **Dauerhaft löschen** verwendest.
+<Callout type="warn" title="Suchfilter können Konten aus dem Abgleich entfernen">
+  Auch ein zu enger Suchbereich oder Filter kann Personen aus dem Ergebnis entfernen. Die Behandlung
+  betrifft LDAP-Konten unabhängig vom Rollenentzug. Nur eine direkt zugewiesene Rolle **Admin**
+  schützt vor Deaktivierung oder Löschung; eine über Benutzergruppen erhaltene Admin-Rolle schützt
+  nicht. Prüfe unerwartet fehlende Personen in der Vorschau, bevor du speicherst oder
+  synchronisierst.
+</Callout>
 
 Stelle das **Sync-Intervall (Minuten)** zwischen 1 und 59 ein. Der regelmäßige
 Abgleich wird mit der aktivierten Konfiguration eingerichtet. **Beim Dienststart
 synchronisieren** steuert zusätzlich den Abgleich beim Serverstart. Das Speichern
 kann daher spätere Abgleiche mit den gewählten Folgen auslösen, auch ohne
 **Jetzt synchronisieren** zu wählen.
+
+</Step>
+
+<Step>
 
 ## Testen, speichern und abgleichen
 
@@ -145,6 +172,10 @@ kann daher spätere Abgleiche mit den gewählten Folgen auslösen, auch ohne
 Der Abgleich übernimmt Benutzerangaben und Rollen; Verzeichnispasswörter ändert
 er nicht.
 
+</Step>
+
+</Steps>
+
 ## Anmeldung nach der Einrichtung prüfen
 
 Melde dich mit einem Testkonto über Benutzerkennung und Passwort an. Mardu sucht
@@ -158,12 +189,23 @@ der Passwort-Anmeldeweg prüft ein solches Passwort zuerst. LDAP aktiviert desha
 keine allgemeine Sperre lokaler Anmeldung. Nach der Passwortprüfung gelten die
 Mardu-Kontorichtlinien und eine erforderliche lokale Zwei-Faktor-Prüfung weiterhin.
 
+## Anbindung abschalten
+
+Prüfe zuerst, welche Personen ausschließlich ihr Verzeichnispasswort zur Anmeldung
+verwenden. Halte für die Administration einen anderen geprüften Anmeldeweg bereit.
+Schalte **LDAP verwenden** aus und wähle **Änderungen speichern**. Dadurch werden
+die LDAP-Anmeldung und der regelmäßige Abgleich abgeschaltet.
+
+Lokale Konten, Verknüpfungen und bereits zugewiesene Rollen bleiben bestehen.
+Vorhandene lokale Passwörter funktionieren weiterhin; für laufende Sitzungen
+verwende bei Bedarf die [Widerrufswege → Sicherheit und Betrieb](./sicherheit-betrieb.mdx#sitzungen-und-anmeldehistorie).
+
 ## Wenn etwas nicht klappt
 
 | Beobachtung                                             | Nächster Schritt                                                                                                                                |
 | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Die Konfiguration oder der Verlauf lädt nicht.          | Prüfe Verbindung und `Settings.View`; der sichtbare Menüpunkt allein genügt nicht.                                                              |
-| Test, Vorschau oder Speichern wird abgewiesen.          | Prüfe `Settings.Update`, gemeldete Feldfehler und durch die Serverumgebung gesperrte Werte.                                                     |
+| Die Konfiguration oder der Verlauf lädt nicht.          | Prüfe Verbindung und **Einstellungen anzeigen**; der sichtbare Menüpunkt allein genügt nicht.                                                   |
+| Test, Vorschau oder Speichern wird abgewiesen.          | Prüfe **Einstellungen bearbeiten**, Feldfehler und durch die Serverumgebung gesperrte Werte.                                                    |
 | Der Verbindungstest scheitert.                          | Prüfe Server/Port, Transport, Zertifikatsvorgaben, Lesekonto und Zugriff auf die Suchbasis anhand der Ergebnisangaben.                          |
 | Gruppen oder lokale Rollen fehlen in der Auswahl.       | Prüfe Gruppen-Suchbereich und Leserechte beziehungsweise die vorhandenen lokalen Rollen und die Berechtigung, sie zu laden.                     |
 | „Jetzt synchronisieren“ ist nicht verfügbar.            | Aktiviere LDAP, speichere Änderungen und erstelle eine aktuelle Vorschau des gespeicherten Stands.                                              |

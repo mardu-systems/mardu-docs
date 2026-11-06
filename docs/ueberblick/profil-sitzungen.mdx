@@ -3,6 +3,9 @@ title: Eigene Sitzungen verwalten
 description: Anmeldesitzungen prüfen, andere Sitzungen widerrufen und unbekannte Zugriffe einordnen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import sitzungenAnsicht from './bilder/profil-sitzungen-aktuell.png';
+
 Öffne im Kontomenü **Aktive Sitzungen** oder **Kontoeinstellungen → Sitzungen**.
 Zum Lesen brauchst du Profil-Leserechte, zum Widerrufen Änderungsrechte.
 Die Liste zeigt deine aktiven Anmeldesitzungen beim aktuellen Mardu-Server.
@@ -11,23 +14,28 @@ Die Liste zeigt deine aktiven Anmeldesitzungen beim aktuellen Mardu-Server.
 
 Prüfe Gerät, Betriebssystem, Browser, IP-Adresse und **Zuletzt aktiv**. Suche und
 Gerätefilter grenzen die Liste ein. Eine leere Trefferliste kann an den Filtern
-liegen; leere die Suche und wähle **Alle Geräte**.
+liegen; leere die Suche und entferne den Gerätefilter.
 
 **Aktuell** kennzeichnet deine derzeitige Sitzung. Dort ist **Dieses Gerät**
 deaktiviert, damit du sie nicht versehentlich einzeln abmeldest.
 Der Standort kann fehlen. IP- und Ortsangaben allein belegen keine Identität
 oder Anwesenheit.
 
-Über die Spaltenüberschriften der Tabelle kannst du sortieren.
+Am Desktop sortierst du über die Spaltenüberschriften, mobil über die Auswahlen
+für Sortierung und Richtung.
 
-![Eigene Sitzungen mit aktuellem Gerät und Aktionen zum Abmelden anderer Sitzungen](bilder/profil-sitzungen.png)
+<ImageZoom
+  src={sitzungenAnsicht}
+  alt="Aktuelle Sitzungsliste mit Suche, Gerätefilter, markierter eigener Sitzung und Aktionen zum Abmelden."
+/>
 
-Fiktive Geräte und IP-Adressen.
+Isolierte Testumgebung mit eigener und weiteren Sitzungen.
 
 ## Einzelne oder andere Sitzungen widerrufen
 
-Prüfe vor **Alle abmelden**, dass du dich anschließend wieder anmelden kannst:
-Diese Aktion beendet auch deine aktuelle Anmeldung.
+<Callout type="warn" title="Alle abmelden beendet auch deine aktuelle Anmeldung">
+  Prüfe vorher, dass du dich anschließend wieder anmelden kannst.
+</Callout>
 
 Wähle die passende Aktion und bestätige sie im Dialog:
 

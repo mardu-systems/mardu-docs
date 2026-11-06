@@ -3,6 +3,8 @@ title: MCP-Client anbinden
 description: Einen MCP-Client mit einem persönlichen Token verbinden, einen Leseaufruf prüfen und Fehler behandeln.
 ---
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
 Der MCP-Endpunkt bietet Mardu-Daten und Aktionen an, keine Dokumentationssuche.
 
 ## MCP-Client verbinden
@@ -12,18 +14,38 @@ Client, eine erreichbare HTTPS-Adresse des Mardu-Servers und eine von der
 Administration [freigegebene MCP-Richtlinie](../administration/mcp-verwalten.mdx).
 Die Tokenverwaltung benötigt Profil-Lese- und Änderungsrechte.
 
+<Steps>
+
+<Step>
+
+### Persönlichen Zugang erstellen
+
 1. Erstelle im Profil eine [persönliche MCP-Verbindung](../ueberblick/profil-mcp.mdx#verbindung-erstellen).
    Wähle für den folgenden Test nur **Eigene Benachrichtigungen ansehen**.
 2. Kopiere **MCP-Route** und **Bearer-Token** aus der einmaligen Zugangsanzeige.
    Speichere den Token außerhalb des Repositories und gib ihn nicht in Logs aus.
-3. Wähle im Client den Transport **Streamable HTTP**. Verwende die erreichbare
+
+</Step>
+
+<Step>
+
+### Client konfigurieren
+
+1. Wähle im Client den Transport **Streamable HTTP**. Verwende die erreichbare
    Serveradresse mit der angezeigten Route, beispielsweise
    `https://mardu.example.invalid/mcp`. Ersetze die Beispieladresse und
    gegebenenfalls `/mcp` durch die Werte deiner Installation.
-4. Hinterlege den Token im Authentifizierungsfeld des Clients. Verlangt der Client
+2. Hinterlege den Token im Authentifizierungsfeld des Clients. Verlangt der Client
    einen HTTP-Header, verwende `Authorization: Bearer <dein-token>`.
-5. Initialisiere die Verbindung mit `initialize` und lade die Werkzeuge mit `tools/list`.
-6. Rufe `notifications_list` mit `limit: 1` auf. Das Tool liest nur den
+
+</Step>
+
+<Step>
+
+### Einen Leseaufruf prüfen
+
+1. Initialisiere die Verbindung mit `initialize` und lade die Werkzeuge mit `tools/list`.
+2. Rufe `notifications_list` mit `limit: 1` auf. Das Tool liest nur den
    Posteingang des Tokeninhabers; eine leere Liste ist eine gültige Antwort.
 
 Falls der Client Tool-Aufrufe als JSON annimmt, lautet der Inhalt für `tools/call`:
@@ -44,6 +66,10 @@ jeder HTTP-Anfrage senden, auch nach erfolgreicher Initialisierung.
 `notifications_list` benötigt `Permissions.Profile.View`. Die Seitengröße muss
 zwischen 1 und dem Serverlimit liegen; mit `afterCursor` kann der Client eine
 weitere Seite anfordern.
+
+</Step>
+
+</Steps>
 
 ### Rechte und Tokenwechsel
 
@@ -74,15 +100,11 @@ Widerruf erstellst du eine neue Verbindung, ohne gesonderte Antragsfreigabe.
 
 Prüfe HTTP-Status und MCP-Tool-Fehler im Client; protokolliere keine Zugangsdaten.
 
-## Node-RED und Ereignisse
+<span id="node-red-und-ereignisse" />
+<span id="echtzeit-und-aufgabenverteilung" />
 
-Für Node-RED brauchst du einen eigenen Editorzugang und die durch die
-[Administration eingerichtete Automation](../administration/automationen.mdx).
-Beginne mit dem lesenden Beispiel unter
-[Eigene Automationsflüsse entwickeln](./automationsfluesse.mdx).
+## Weitere Integrationswege
 
-## Echtzeit und Aufgabenverteilung
-
-Einzelne Abläufe verwenden SignalR-Hubs mit eigener Zugangs- und Gruppenprüfung.
-Die [Integrationsübersicht](./api-integration.mdx#referenz-und-integrationsweg)
-ordnet diese Echtzeitmeldungen den übrigen Zugängen zu.
+Für Flows in Node-RED, MQTT-Abonnements und ablaufbezogene SignalR-Meldungen
+verwende die [Integrationsübersicht](./api-integration.mdx#referenz-und-integrationsweg).
+Diese Zugänge haben eigene Authentifizierungs- und Ereignisverträge.

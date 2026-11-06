@@ -3,6 +3,9 @@ title: Kalender exportieren und abonnieren
 description: Eigene Buchungen als Datei übernehmen oder über einen widerrufbaren persönlichen Link abonnieren.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import kalenderaboAnsicht from './bilder/kalender-abo.png';
+
 Ein Kalenderabo ruft deine Buchungen regelmäßig ab; eine importierte ICS-Datei
 bleibt eine einmalige Kopie. Änderungen im Kalenderprogramm ändern keine Mardu-Buchung.
 
@@ -26,8 +29,13 @@ nicht.
 
 ## Persönliches Kalenderabo einrichten
 
-Der persönliche Link erlaubt Kalenderabrufe ohne Anmeldung. Behandle ihn wie ein
-Passwort. Verwende eine vom Kalenderprogramm erreichbare HTTPS-Serveradresse;
+<Callout type="warn" title="Der Kalenderlink erlaubt Zugriff auf deine Termine">
+  Wer den persönlichen Link kennt, kann deinen Kalender ohne Anmeldung lesen. Behandle ihn wie ein
+  Passwort. Erstelle bei Verlust oder Weitergabe einen neuen Link und ersetze den bisherigen in
+  allen deinen Kalenderabos.
+</Callout>
+
+Verwende eine vom Kalenderprogramm erreichbare HTTPS-Serveradresse;
 `localhost` verweist auf das abrufende Gerät.
 
 1. Öffne **Meine Buchungen → Kalender abonnieren**, auf dem Handy unter **Buchungen**.
@@ -56,7 +64,10 @@ auch, wenn du den bisherigen Link nicht mehr hast.
 **Zugang widerrufen** beendet nach Bestätigung weitere Abrufe. Bereits geladene
 Termine bleiben im Kalenderprogramm; Mardu-Buchungen werden nicht storniert.
 
-![Aktives Kalenderabo mit Zugang widerrufen und Neuen Link erstellen](bilder/kalender-abo.png)
+<ImageZoom
+  src={kalenderaboAnsicht}
+  alt="Aktives Kalenderabo mit den Aktionen Zugang widerrufen und Neuen Link erstellen; der persönliche Link wird nicht angezeigt."
+/>
 
 Beispiel mit fiktivem Abo-Status, ohne persönlichen Link.
 

@@ -3,47 +3,40 @@ title: Eigenes Profil
 description: Eigene Kontodaten und das Profilbild ändern und die passenden Sicherheits- und Einstellungshilfen finden.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import profilbildAnsicht from './bilder/profilbild.png';
+import navigationAnsicht from './bilder/profil-navigation-mobil-aktuell.png';
+
 Öffne im Kontomenü
 **Mein Profil → Kontoeinstellungen**, in der mobilen Benutzeransicht anschließend
 **Profildaten**. Zum Lesen brauchst du Profil-Leserechte, zum Ändern
 Profil-Änderungsrechte.
 
-![Mobile Profilübersicht mit Kontodaten, Sicherheit, Zutrittsmedien und weiteren Verbindungen](bilder/profil-navigation-mobil.png)
+<ImageZoom
+  src={navigationAnsicht}
+  alt="Mobile Profilnavigation mit dem Suchbutton Profil durchsuchen und den Bereichen Profildaten, Authentifizierung und Verbindungen."
+/>
 
-Fiktive Kontodaten. Von den Unterseiten führt **Profil** zurück zu dieser Liste.
+Von den Unterseiten führt **Profil** zurück zur Bereichsliste.
 
 ## Einstellungen im Profil finden
 
-Gib deinen Suchbegriff direkt in **Profil durchsuchen** in der Bereichsnavigation
-ein. Im mobilen Profil steht das Suchfeld oberhalb des Inhalts, auch auf den
-Unterseiten. Die Treffer erscheinen direkt unter dem Feld.
+1. Wähle **Profil durchsuchen**, um den Suchdialog zu öffnen. Außerhalb von
+   Eingabefeldern und anderen Dialogen kannst du dafür auch **Strg + K**
+   beziehungsweise **⌘ + K** verwenden.
+2. Gib mindestens zwei Zeichen ein, etwa `Handynummer`, `2FA` oder `Passwort ändern`.
+   Prüfe Titel und Bereichspfad der Treffer.
+3. Wähle einen Treffer oder nutze die Pfeiltasten und **Enter**. Der Dialog schließt
+   sich, der passende Abschnitt öffnet sich und wird kurz markiert.
 
-Klicke auf das Tastaturkürzel am rechten Rand des Suchfelds, um zusätzlich den
-Suchdialog zu öffnen. **Strg + K** beziehungsweise **⌘ + K** funktioniert auch
-im direkten Suchfeld und außerhalb anderer Eingabefelder oder Dialoge.
-Der Suchbegriff bleibt beim Wechsel zwischen beiden Ansichten erhalten;
-das direkte Suchfeld bleibt im Hintergrund sichtbar.
+**Escape** oder **Schließen** schließt den Dialog ohne Seitenwechsel. Die Suche
+berücksichtigt Abschnittstitel, Beschreibungen und Synonyme im eigenen Profil,
+keine gespeicherten persönlichen Angaben oder anderen Einstellungsbereiche.
+Suchanfragen werden nicht als Verlauf gespeichert. Bei **Suche konnte nicht
+geladen werden** wähle **Erneut versuchen** oder nutze die normale Profilnavigation.
 
-1. Gib mindestens zwei Zeichen ein, zum Beispiel `Handynummer`, `2FA`,
-   `Profilbild` oder `Passwort ändern`.
-2. Prüfe Titel und Bereichspfad des Treffers. Die Suche berücksichtigt
-   Abschnittstitel, Beschreibungen und hinterlegte Synonyme; sie durchsucht keine
-   gespeicherten persönlichen Angaben.
-3. Wähle den Treffer oder verwende die Pfeiltasten und **Enter**. Der passende
-   Abschnitt wird geöffnet und kurz markiert. **Suche leeren** oder **Escape** im
-   direkten Suchfeld stellt die Bereichsliste wieder her; im Dialog schließt
-   **Escape** das Fenster.
-
-Beim Wechsel auf eine andere Seite bleiben ungespeicherte Eingaben geschützt.
-Wähle **Weiter bearbeiten**, um auf der aktuellen Seite zu bleiben, oder bestätige
-**Änderungen verwerfen**. Ein Sprung zu einem anderen Abschnitt derselben Seite
-verwirft keine Eingaben.
-
-Die Suche bleibt auf das eigene Profil begrenzt. Server- und
-Integrationseinstellungen findest du in deren Einstellungsbereich; andere Personen
-oder gespeicherte Profilwerte werden hier nicht gesucht. Suchanfragen werden nicht
-als Verlauf gespeichert. Bei **Suche konnte nicht geladen werden** wähle
-**Erneut versuchen**; die normale Profilnavigation bleibt verfügbar.
+Beim Seitenwechsel mit ungespeicherten Eingaben kannst du **Weiter bearbeiten**
+oder **Änderungen verwerfen**. Ein Sprung innerhalb derselben Seite verwirft nichts.
 
 ## Kontodaten
 
@@ -71,10 +64,6 @@ Prüfe nach dem Speichern die Erfolgsmeldung und die angezeigten Werte. Bei eine
 Speicherfehler bleiben deine Eingaben erhalten. Korrigiere gemeldete ungültige
 Angaben oder versuche es nach einem Verbindungsfehler erneut.
 
-![Kontaktinformationen mit zugeordneten Eingabefeldern und eigener Speicheraktion](bilder/profildaten.png)
-
-Fiktive Kontodaten.
-
 ## Profilbild
 
 1. Wähle unter **Profilbild** über **Datei auswählen** ein JPEG-, PNG- oder
@@ -86,7 +75,10 @@ Fiktive Kontodaten.
 **Zurücksetzen** verwirft die Bildauswahl. **Bild entfernen** löscht das aktuelle
 Profilbild nach erfolgreicher Ausführung ohne weiteres Speichern.
 
-![Profilbildbereich mit Dateiauswahl und Vorschau für Profil, Sidebar und Liste](bilder/profilbild.png)
+<ImageZoom
+  src={profilbildAnsicht}
+  alt="Profilbildbereich mit Dateiauswahl und Vorschau für Profil, Sidebar und Liste"
+/>
 
 Beispiel mit Initialen eines fiktiven Kontos.
 

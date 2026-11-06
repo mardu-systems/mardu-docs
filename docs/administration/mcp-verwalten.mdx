@@ -3,6 +3,9 @@ title: MCP für Agenten freigeben
 description: MCP aktivieren, Agentenzugänge begrenzen, eine Verbindung prüfen und den Zugriff abschalten.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import mcpLesezugang from './bilder/mcp-lesezugang-aktuell.png';
+
 Persönliche Zugänge für das **Model Context Protocol (MCP)** erstellt und
 widerruft jede Person im
 [eigenen Profil](../ueberblick/profil-mcp.mdx).
@@ -29,6 +32,11 @@ erreichen; das Testkonto braucht die Rechte für die gewählte Aktion.
 
 Speichern übernimmt die Richtlinie ohne Neustart; **Verwerfen** setzt den
 Entwurf auf den geladenen Stand zurück.
+
+<ImageZoom
+  src={mcpLesezugang}
+  alt="Gespeicherte MCP-Richtlinie mit aktiviertem Endpunkt, persönlichen Verbindungen und nur Agent-Token; Schreib- und destruktive Tools sind ausgeschaltet."
+/>
 
 ## Grenzwerte wählen
 

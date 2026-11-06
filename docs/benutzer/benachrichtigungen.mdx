@@ -3,6 +3,9 @@ title: Benachrichtigungen lesen
 description: Persönliche Mitteilungen finden, als gelesen markieren, archivieren und wiederherstellen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import posteingangAnsicht from './bilder/posteingang.png';
+
 Die Glocke öffnet deinen Posteingang; ihre Zahl zählt ungelesene, nicht archivierte Mitteilungen.
 Ein Mondsymbol an der Glocke zeigt aktive Ruhezeiten an. Der Hinweis erscheint
 auch beim Zeigen auf die Glocke oder beim Fokussieren mit der Tastatur.
@@ -19,7 +22,10 @@ Zum Lesen brauchst du Profil-Leserechte, für Änderungen Profil-Änderungsrecht
 Das Öffnen ändert den Lesestatus nicht. Wenn **Bereich öffnen** angeboten wird,
 führt der Schalter zum passenden Bereich, etwa zu deinen Buchungen.
 
-![Posteingang mit Buchungsbestätigung, Passwortänderung und Systemwarnung](bilder/posteingang.png)
+<ImageZoom
+  src={posteingangAnsicht}
+  alt="Posteingang mit Buchungsbestätigung, Passwortänderung und Systemwarnung sowie den Reitern Eingang, Ungelesen und Archiv."
+/>
 
 Beispiel mit fiktiven Meldungen. Betriebsmeldungen hängen von deinen Rechten ab.
 
@@ -31,9 +37,11 @@ Wähle am Eintrag **Als gelesen markieren** oder **Als ungelesen markieren**.
 Nach dem Archivieren eines einzelnen Eintrags bietet die Erfolgsmeldung
 **Rückgängig** an. Die zugehörige Buchung oder Freigabe bleibt unverändert.
 
-Unter **Aktionen** stehen **Alle als gelesen markieren** und **Gelesene archivieren**.
-Diese Sammelaktionen können auch Einträge außerhalb der aktuellen Suche oder Filter
-und noch nicht geladene Einträge ändern. Sie sind im Archiv deaktiviert.
+<Callout type="warn" title="Sammelaktionen gelten über die angezeigte Liste hinaus">
+  Unter **Aktionen** stehen **Alle als gelesen markieren** und **Gelesene archivieren**. Sie können
+  auch Einträge außerhalb der aktuellen Suche oder Filter und noch nicht geladene Einträge ändern.
+  Im Archiv sind sie deaktiviert.
+</Callout>
 
 Während eine Änderung gespeichert wird, sind weitere Lese- und Archivaktionen
 deaktiviert. Du kannst den Posteingang weiterhin durchsuchen und Meldungen öffnen.

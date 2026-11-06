@@ -3,43 +3,42 @@ title: Servereinstellungen
 description: Serverwerte ändern, gesperrte Felder erkennen und die Wirksamkeit gespeicherter Änderungen prüfen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import einstellungenSuche from './bilder/server-einstellungen-suche-aktuell.png';
+import globaleEinstellungen from './bilder/server-einstellungen-global-aktuell.png';
+
 ## Einstellungen suchen
 
-Gib deinen Suchbegriff direkt in **Einstellungen durchsuchen** in der
-Bereichsnavigation ein. Die Treffer erscheinen unter dem Feld. Die Suche umfasst
-Server- und Integrationseinstellungen, für die du die benötigten Rechte hast,
-und ist auch auf Mobilgeräten verfügbar.
+1. Öffne **Administration → Systemeinstellungen** und wähle
+   **Einstellungen durchsuchen**. Der Dialog heißt **In Einstellungen suchen**.
+2. Gib mindestens zwei Zeichen ein, etwa `SMTP`, `TLS` oder `passwordless`.
+3. Wähle einen Treffer oder nutze Pfeiltasten und **Enter**. Die Treffer nennen
+   Abschnitt und Bereichspfad; sie können zu Server- oder Integrationseinstellungen
+   führen, für die du Leserechte hast.
 
-Klicke auf das Tastaturkürzel am rechten Rand des Suchfelds, um zusätzlich den
-Suchdialog zu öffnen. **Strg + K** beziehungsweise **⌘ + K** funktioniert auch
-im direkten Suchfeld und außerhalb anderer Eingabefelder oder Dialoge.
-Beide Ansichten behalten denselben Suchbegriff; das direkte Suchfeld bleibt
-im Hintergrund sichtbar.
+<ImageZoom
+  src={einstellungenSuche}
+  alt="Einstellungssuche nach TLS mit Treffern für Broker-Einstellungen und Server-Zertifikate samt Bereichspfad."
+/>
 
-Gib mindestens zwei Zeichen ein, etwa `SMTP`, `TLS` oder `passwordless`. Treffer
-nennen den Abschnitt und seinen Bereichspfad. Wähle einen Treffer oder verwende
-Pfeiltasten und **Enter**, um die Einstellung zu öffnen. Ein Treffer kann in den
-anderen Einstellungsbereich führen. **Suche leeren** oder **Escape** im direkten
-Suchfeld stellt die Bereichsliste wieder her; im Dialog schließt **Escape** das Fenster.
+Die Suche funktioniert auch mobil. **Strg + K** beziehungsweise **⌘ + K** öffnet
+den Dialog außerhalb anderer Eingabefelder und Dialoge. **Escape** oder
+**Schließen** beendet die Suche.
 
-Titel, Beschreibungen und hinterlegte Synonyme sind durchsuchbar. Die Suche liest
-keine gespeicherten Einstellungswerte oder Zugangsdaten aus und speichert keinen
-Suchverlauf. Sie führt keine Änderungen aus. Ungespeicherte Änderungen musst du
-vor einem Seitenwechsel verwerfen oder mit **Weiter bearbeiten** behalten.
+Durchsucht werden Titel, Beschreibungen und Synonyme von Seiten und Abschnitten,
+nicht alle Formularfelder oder gespeicherte Werte. Zugangsdaten werden nicht
+ausgelesen, ein Suchverlauf wird nicht gespeichert. Vor einem Seitenwechsel
+musst du ungespeicherte Änderungen verwerfen oder mit **Weiter bearbeiten** im
+Formular bleiben.
 
 Bei **Suche konnte nicht geladen werden** wähle **Erneut versuchen**. Ohne Treffer
-versuche einen anderen Begriff oder verwende die normale Bereichsnavigation.
-Die Suche findet zunächst Seiten und Abschnitte, nicht jedes einzelne Formularfeld.
+versuche einen anderen Begriff oder nutze die Bereichsnavigation.
 
 ## Einstellungen lesen und speichern
 
-Für globale Einstellungen, Auth Policy, Zertifikate, E-Mail, Tags, LDAP und OIDC benötigst du
-`Settings.View` zum Lesen und `Settings.Update` zum Ändern. Die Menüeinträge
-**Monitoring & Metriken** und **Fehlerberichte** werden erst mit `Settings.Update`
-angeboten. Die Menüs für LDAP und OIDC setzen zusätzlich `Integrations.View`
-voraus; die OIDC-Oberfläche verlangt zum Bearbeiten auch `Integrations.Update`.
-Die Einstellungs-APIs prüfen die Settings-Rechte. Für **Audit-Ereignisse** gilt
-`AuditTrail.View`.
+Für globale Servereinstellungen benötigst du `Settings.View` zum Lesen und
+`Settings.Update` zum Ändern. Andere Bereiche können weitere Rechte verlangen;
+diese stehen in der jeweiligen Anleitung.
 
 1. Öffne **Administration → Systemeinstellungen** und wähle oder suche den Bereich.
 2. Warte auf die gespeicherten Werte und lies die Feldhinweise. Weitere Erklärungen
@@ -78,6 +77,11 @@ Verbindungsaufbau zu einem externen Dienst.
 Öffne **Server → Globale Server-Einstellungen**. Die Seite selbst heißt
 **Global App**.
 
+<ImageZoom
+  src={globaleEinstellungen}
+  alt="Global App in den Servereinstellungen mit gespeicherter Konfiguration, Aktiv, Hot Reload und dem nur lesbaren Installationsschlüssel."
+/>
+
 | Feld                                                         | Bedeutung und Eingabe                                                                                                                                   |
 | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Projektname                                                  | Anzeigename der Instanz; 2–100 Zeichen.                                                                                                                 |
@@ -95,152 +99,32 @@ Werte ersetzen diese nicht.
 richtet keine Cloud-Anbindung und kein Cloud-Konto ein. Richte die benötigte
 Anbindung im jeweiligen Integrationsbereich ein und prüfe sie dort.
 
-## Registrierung und Anmelderichtlinie
+## Weitere Serveraufgaben
 
-Öffne **Server → Auth Policy**. Prüfe vor strengeren Anmeldevorgaben, ob die
-betroffenen Konten das verlangte Verfahren eingerichtet haben und wie du den
-Zugang wiederherstellen kannst. Die
-[lokale Wartungs-CLI](./wartungs-cli.mdx#admin-passwort-ohne-e-mail-zurücksetzen)
-ersetzt keine fehlende Zwei-Faktor-Einrichtung.
+<span id="registrierung-und-anmelderichtlinie" className="scroll-m-28" />
+<span id="selbstregistrierung-einstellen" className="scroll-m-28" />
+<span id="anmeldeschutz-und-laufzeiten-ändern" className="scroll-m-28" />
 
-### Selbstregistrierung einstellen
+[Anmeldevorgaben einrichten](./anmeldevorgaben.mdx): Selbstregistrierung,
+Anmeldeverfahren, Passwortregeln und Token-Laufzeiten festlegen. Prüfe die
+Voraussetzungen betroffener Konten vor strengeren Vorgaben.
 
-| Auswahl unter Selbstregistrierung | Ergebnis                                                                                                                                       |
-| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| Deaktiviert                       | Personen können kein Konto durch Selbstregistrierung anlegen. Administrative Kontoanlage ist ein eigener Vorgang.                              |
-| Direkt                            | Keine administrative Registrierungsfreigabe. Ob vor der Anmeldung eine E-Mail-Bestätigung nötig ist, bestimmt **Bestätigtes Konto verlangen**. |
-| Mit Freigabe                      | Das Konto bleibt bis zur Freigabe inaktiv. **Bestätigtes Konto verlangen** muss eingeschaltet sein.                                            |
+<span id="zertifikate" className="scroll-m-28" />
+<span id="zertifikat-hinzufügen" className="scroll-m-28" />
+<span id="ersetzen-oder-löschen" className="scroll-m-28" />
 
-Wähle bei aktiver Selbstregistrierung eine vorhandene **Standardrolle für
-Registrierungen** und lege die **Gültigkeit Bestätigungslink (Stunden)** zwischen
-1 und 168 fest. Die Standardrolle betrifft neue Registrierungen; sie ist keine
-nachträgliche Rollenzuweisung an alle Konten.
+[Zertifikate für Integrationen verwalten](./integrationszertifikate.mdx):
+Zertifikatsmaterial hinterlegen, ersetzen oder löschen und dem verwendenden Dienst
+zuordnen. Der Speicher ändert nicht das HTTPS-Zertifikat des Browsers; dafür gilt
+[HTTPS-Zertifikatswechsel](./zertifikate-https.mdx).
 
-**SSO-Konten freigeben lassen** regelt die Freigabe neuer, über OpenID Connect
-angelegter Konten. Den Anbieter richtest du separat unter **Server → OIDC** ein.
-Die Erstellung und Freigabe von Konten ist unter
-[Benutzer verwalten](./benutzer-rollen.mdx) beschrieben.
+<span id="monitoring-und-fehlerberichte" className="scroll-m-28" />
+<span id="metriken-und-alarmgrenzen" className="scroll-m-28" />
+<span id="fehlerberichte-freigeben-oder-abschalten" className="scroll-m-28" />
 
-### Anmeldeschutz und Laufzeiten ändern
-
-| Felder                                                                | Bedeutung und Grenzen                                                                                                                                                                                      |
-| --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Passwortlose Anmeldung aktivieren                                     | Erlaubt Anfragen für Anmelde-Links. Ausschalten verhindert weitere passwortlose Anfragen.                                                                                                                  |
-| Ablauf Nutzeranfrage / Ablauf Admin-Anfrage / Ablauf nach Freigabe    | Minuten: 1–60 / 1–120 / 1–60. Unter **Zeitfenster & Wiederherstellung**.                                                                                                                                   |
-| Passkeys erlauben                                                     | Erlaubt Passkey-Vorgänge. Beim Ausschalten wird im Formular auch die Passkey-Pflicht für Admins ausgeschaltet.                                                                                             |
-| Recovery-Codes ausgeben / Anzahl Recovery-Codes                       | Erlaubt Wiederherstellungscodes; Anzahl 1–20. Das ist keine Aktion zum Anzeigen fremder Codes.                                                                                                             |
-| Passkeys für Admins erzwingen / Zwei-Faktor für Admins erzwingen      | Zusätzliche Anmeldevorgaben für Administratorkonten. Passkey-Pflicht setzt erlaubte Passkeys voraus.                                                                                                       |
-| Kontosperre aktivieren / Maximale Fehlversuche / Sperrdauer (Minuten) | 1–20 Fehlversuche; Sperrdauer 1–1.440 Minuten. Die Detailwerte stehen unter **Kontosperre feinabstimmen**.                                                                                                 |
-| Minimale Passwortlänge                                                | 6–128 Zeichen. Die zusätzlichen Regeln **Ziffer verlangen**, **Kleinbuchstaben verlangen**, **Großbuchstaben verlangen** und **Sonderzeichen verlangen** stehen unter **Klassische Komplexitätsvorgaben**. |
-| Access-Token-Laufzeit (Minuten)                                       | 1–1.440 Minuten. Erst nach vollständigem Serverneustart wirksam.                                                                                                                                           |
-| Refresh-Token-Laufzeit (Tage)                                         | 1–365 Tage. Erst nach vollständigem Serverneustart wirksam.                                                                                                                                                |
-
-Die beiden Tokenfelder findest du unter **Token-Laufzeiten**. Eine verkürzte
-Laufzeit ist kein Ersatz für das Widerrufen einer Sitzung. Prüfe Änderungen an
-Anmeldepflichten anschließend mit einem dafür vorgesehenen Konto; Hinweise zur
-Kontowiederherstellung stehen unter [Sicherheit und Betrieb](./sicherheit-betrieb.mdx).
-
-## Zertifikate
-
-Unter **Server → Server-Zertifikate** siehst du hinterlegte Zertifikate,
-Gültigkeitsstatus, Ablauf und Eigenschaften wie **CA** oder **Privater Schlüssel**.
-Suche nach Name, Subject oder Fingerabdruck; mit **Handlungsbedarf** filterst du
-auffällige Gültigkeitszustände.
-
-### Zertifikat hinzufügen
-
-1. Wähle **Zertifikat hinzufügen** und gib einen Namen ein, der den
-   Verwendungszweck erkennen lässt.
-2. Wähle **PEM** oder **PFX / P12** und lade die **Zertifikatsdatei** hoch.
-   Für PEM kannst du eine separate **Datei mit privatem Schlüssel** angeben.
-   Ein CA-Zertifikat zum Prüfen einer Gegenstelle benötigt keinen privaten Schlüssel;
-   ein Serverzertifikat für TLS benötigt das passende Schlüsselmaterial.
-3. Trage bei einer passwortgeschützten PFX-/P12-Datei das **Dateipasswort** ein.
-4. Aktiviere **Selbstsigniertes Zertifikat zulassen** nur, wenn Herkunft und
-   Fingerabdruck geprüft sind. Ohne diese Freigabe wird ein selbstsigniertes
-   Zertifikat abgelehnt. Abgelaufene Zertifikate werden ebenfalls abgelehnt.
-5. Wähle **Zertifikat hinzufügen**. Kontrolliere anschließend den Eintrag und
-   ordne das Zertifikat im benötigten Integrationsformular zu.
-
-Private Schlüssel und Passwörter werden nach dem Upload nicht erneut angezeigt.
-Bei Fehlern bleiben die Eingaben im Dialog; prüfe Format, Datei, Schlüssel und
-Dateipasswort anhand der Fehlermeldung. **Abbrechen** verwirft geänderte Eingaben
-nach Bestätigung.
-
-### Ersetzen oder löschen
-
-Wähle beim vorhandenen Eintrag **Ersetzen**, lade das neue Material hoch und
-bestätige mit **Ersetzen**. Die Zertifikats-ID bleibt erhalten. Prüfe danach die
-Verbindungen, die dieses Zertifikat verwenden.
-
-Kläre vor **Löschen**, welche Dienste das Zertifikat benötigen. Nach Bestätigung
-werden der gespeicherte Eintrag und die zugehörige Datei entfernt. Eine
-Abhängigkeitsansicht und automatische Zertifikatserneuerung werden hier nicht
-angeboten.
-
-Das Hinterlegen allein aktiviert kein Zertifikat für HTTP, MQTT oder einen
-vorgeschalteten Proxy. LDAP, OIDC und MQTT besitzen eigene Einstellungen für die
-Zertifikatsverwendung. Prüfe dort Zuordnung, Verbindung und mögliche
-Neustarthinweise; ein Upload ersetzt keine TLS-Konfiguration des Deployments.
-
-## Monitoring und Fehlerberichte
-
-### Metriken und Alarmgrenzen
-
-Öffne **Server → Monitoring & Metriken**. Änderungen werden ohne Serverneustart
-übernommen.
-
-| Einstellung                | Bedeutung und Grenzen                                                                                                                       |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Metriksammlung aktiv       | Schaltet die regelmäßige Speicherung von Betriebs-, Geräte- und Ressourcenmetriken ein oder aus. Ausschalten löscht vorhandene Daten nicht. |
-| Abtastintervall (Sekunden) | 15–300 Sekunden. Kürzere Intervalle erzeugen mehr Messdaten.                                                                                |
-| Rohdaten (Tage)            | 1–365 Tage Aufbewahrung.                                                                                                                    |
-| Stundenaggregate (Tage)    | 1–3.650 Tage; mindestens so lang wie die Rohdatenfrist.                                                                                     |
-| Metrikalarme aktiv         | Aktiviert die Erzeugung von Vorfällen zu Systemzustand, HTTP-Fehlerquote und Speicherplatz.                                                 |
-| Bestätigungssamples        | 1–20 aufeinanderfolgende Messungen für eine bestätigte Verletzung oder Erholung.                                                            |
-
-Unter den erweiterten HTTP-Einstellungen legst du **Auswertungsfenster (Minuten)**
-(1–60) und **Mindestanzahl Anfragen** (1–1.000.000) fest. Erst bei ausreichendem
-Anfragevolumen wird die 5xx-Quote ausgewertet. **Erholung unter 5xx-Quote (%)**
-muss unter **Alarm ab 5xx-Quote (%)** liegen; Prozentwerte liegen zwischen 0 und 100.
-
-Die Speichergrenzen verwenden freien Speicher in Prozent und in Bytes.
-Ein Alarm kann bei Erreichen einer der beiden Alarmgrenzen entstehen. Zur
-Erholung müssen beide Erholungsgrenzen erreicht sein. Jeder Erholungswert muss
-höher als der zugehörige Alarmwert sein. Beispiel: 1.073.741.824 Bytes sind 1 GiB.
-
-Messwerte erklärt [Systemstatus](../benutzer/uebersicht-monitoring.mdx),
-Zustellkanäle und SMTP-Test die [Benachrichtigungs-Anleitung](./benachrichtigungen-verwalten.mdx).
-Zustellmetriken stehen unter
-[Systemstatus → Benachrichtigungen](../benutzer/uebersicht-monitoring.mdx#benachrichtigungen).
-
-### Fehlerberichte freigeben oder abschalten
-
-Öffne **Server → Fehlerberichte**. **Anonymisierte Fehlerberichte** ist die
-Freigabe zum Versand an den konfigurierten Fehlerdienst. Für Laufzeitmessungen
-aktivierst du zusätzlich **Performance-Daten**. Die **Trace-Samplerate** liegt
-zwischen 0 und 0,05; 0 deaktiviert das Sampling, 0,05 entspricht fünf Prozent.
-
-Prüfe vor dem Speichern unter den Laufzeitangaben **Transport konfiguriert**,
-**Zielprojekt** und **Ziel**. Die Transportadresse wird im Deployment eingerichtet;
-du kannst sie hier nicht ändern. Ohne konfigurierten Transport reicht die
-Freigabe nicht für einen Versand. **Umgebung**, **Release**, die anonyme
-Installationskennung, **Datenschutzhinweis** und **Letzte Entscheidung (UTC)**
-sind ebenfalls nur lesbar.
-
-Server und Dashboard benötigen jeweils eine Anbindung. Berichte können bereinigte
-Fehlermeldungen, Stacktraces, Softwareversion und Umgebung sowie optional
-Performance-Daten enthalten. Benutzer-/Anfragekontexte werden entfernt;
-erkennbare Zugangsdaten und direkte Kennungen werden gefiltert.
-
-Wähle **Speichern** und bestätige den angezeigten Dialog. Beim Ausschalten werden
-auch Performance-Daten abgeschaltet und lokal vorgemerkte Serverereignisse
-gelöscht. Das löscht keine bereits beim Fehlerdienst eingegangenen Berichte.
-Lade geöffnete Dashboard-Sitzungen anschließend neu, damit sie den aktuellen
-Freigabestand abrufen.
-
-Die Seite zeigt **Lokal vorgemerkte Ereignisse**, bietet aber keinen eigenen
-Versandtest oder Export an.
+[Monitoring und Fehlerberichte einrichten](./monitoring-einrichten.mdx):
+Messwerterfassung, Aufbewahrung und Alarmgrenzen festlegen oder die getrennte
+Übertragung von Fehler- und Performance-Daten freigeben.
 
 ## Weitere Einstellungsbereiche
 
@@ -261,7 +145,7 @@ lassen sich in diesem Formular nicht bearbeiten. Den Ausgabeablauf beschreibt
 - **Server → LDAP**, **OIDC** und **IP500-Netzwerk**: [Integrationen](./integrationen.mdx).
 - **Integrationen → MCP & Agents**: [MCP für Agenten freigeben](./mcp-verwalten.mdx), einschließlich Endpunkt, persönlicher Verbindungen und Grenzwerte.
 - **Integrationen → Automationen**: [Automationen](./automationen.mdx).
-- Ressourcen- und Buchungsregeln: [Ressourcen einrichten → Koordination](../koordination/ressourcen.mdx) und [Buchungen verwalten](../koordination/buchungen-verwalten.mdx).
+- Ressourcen- und Buchungsregeln: [Ressourcen einrichten → Administration](../koordination/ressourcen.mdx) und [Buchungen verwalten → Koordination](../koordination/buchungen-verwalten.mdx).
 - Open-Badges-Ausstellung: [Badges verwalten](./badges-verwalten.mdx).
 
 ## Sicherung und Wiederherstellung

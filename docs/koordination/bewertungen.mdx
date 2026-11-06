@@ -3,9 +3,12 @@ title: Bewertungen
 description: Kompetenzprüfungen entscheiden, vorgeschlagene Nachweise prüfen und ihre Gültigkeit einordnen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import gueltigkeitAnsicht from './bilder/kompetenznachweis-entscheidung-gueltigkeit-aktuell.png';
+
 Öffne **Kompetenzen → Einstellungen → Erweiterte Prüfungen und Kompetenznachweise →
 Prüfen & vergeben**.
-Lokale Badges vergibst du nach [Administration → Badges verwalten](../administration/badges-verwalten.mdx#vergaben-und-lernwege).
+Lokale Badges vergibst du nach [Badge-Vergaben verwalten](./badge-vergaben.mdx).
 
 Du brauchst Kompetenzrechte: Anzeigen zum Lesen, Anlegen zum Starten einer Prüfung
 und Genehmigen für Entscheidungen, neue Nachweise einschließlich Vorschlägen und
@@ -13,15 +16,16 @@ Widerrufe. Die Bezeichnung „Koordination“ erteilt diese Rechte nicht.
 
 ## Kompetenzstandards und Anforderungen
 
-Eine **Fähigkeit** beschreibt, was eine Person können soll; Bereiche und Kataloge
-ordnen diese Definitionen. Ein **Kompetenznachweis** hält die Entscheidung für eine
-Person fest, etwa nach einer Einweisung. Ein importierter Badge ersetzt diese
-Einweisung nicht automatisch.
+Prüfe zuerst, welchen Eintrag du beurteilst:
 
-Eine **Badge-Definition** beschreibt Erwerbskriterien und gegebenenfalls erforderliche
-Fähigkeiten; die persönliche **Badge-Vergabe** bezieht sich auf ihre Inhaltsversion.
-Ein signiertes **Credential** ist ein eigener Nachweis mit Aussteller, Empfänger
-und Prüfstatus. Diese Einträge sind nicht austauschbar.
+| Eintrag                                | Aussage                                                                                                                             |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **Fähigkeit**                          | Beschreibt, was eine Person können soll. Bereiche und Kataloge ordnen die Definitionen.                                             |
+| **Kompetenznachweis**                  | Hält die Entscheidung über die Fähigkeit einer Person fest, etwa nach einer Einweisung.                                             |
+| **Badge-Definition und Badge-Vergabe** | Die Definition nennt Erwerbskriterien und gegebenenfalls Fähigkeiten. Die persönliche Vergabe bezieht sich auf eine Inhaltsversion. |
+| **Signiertes Credential**              | Eigener Nachweis mit Aussteller, Empfänger und Prüfstatus; bestätigt allein keine Anerkennung am Standort.                          |
+
+Ein importierter Badge ersetzt eine erforderliche Einweisung nicht automatisch.
 
 Öffne die Fähigkeit unter **Kompetenzen → Einstellungen → Fähigkeiten und Kataloge
 verwalten**. Gleiche Lernziel, **So wird die Fähigkeit nachgewiesen** und
@@ -71,9 +75,13 @@ bereits ein Credential-Datensatz mit dem Kompetenznachweis verknüpft sein.
 
 Kläre, wer die Prüfung am Standort durchführen darf. **Prüfer** zeigt eine Person
 oder einen Auswertungstyp, reserviert den Vorgang aber nicht. Die eigene Prüfung
-darfst du nicht entscheiden. Das Ergebnis schließt die Prüfung ab und kann einen
-Nachweis gültig machen oder aussetzen. Lies vorher die Prüfrichtlinie samt
-Auswirkung bei Nichtbestehen.
+darfst du nicht entscheiden.
+
+<Callout type="warn" title="Das Ergebnis schließt die Prüfung ab">
+  Die Entscheidung kann einen Nachweis gültig machen oder aussetzen. Lies vorher die Prüfrichtlinie
+  samt Auswirkung bei Nichtbestehen. Eine abgeschlossene Prüfung lässt sich nicht erneut
+  entscheiden.
+</Callout>
 
 1. Öffne eine noch nicht abgeschlossene Prüfung mit **Bestätigung durch Aufsicht**
    oder **Online-Prüfung**. Fähigkeit und Prüfrichtlinie müssen weiterhin aktiv sein.
@@ -90,7 +98,7 @@ Auswirkung bei Nichtbestehen.
 **Bestanden** legt einen Kompetenznachweis an oder aktualisiert ihn.
 Gültigkeitsdauer, nächste Prüfung und eine mögliche Aussetzung bei **Nicht bestanden**
 richten sich nach der Prüfrichtlinie. Prüfe danach die **Aktuelle Gültigkeit** des
-Nachweises. Abgeschlossene Prüfungen lassen sich nicht erneut entscheiden.
+Nachweises.
 
 ## Vergaben und Gültigkeit
 
@@ -103,6 +111,14 @@ Prüfe **Nachweisstatus**, **Gültig ab**, **Gültig bis**, **Nächste Prüfung*
 **Nachfrist bis**. Ein genehmigter Nachweis kann abgelaufen, ausgesetzt oder
 widerrufen sein. Bei **Erneute Prüfung erforderlich** kann er noch innerhalb einer
 Nachfrist gelten, sofern sein Ablaufdatum nicht überschritten ist.
+
+Im fiktiven Beispiel bleibt die Entscheidung **Genehmigt** erhalten, obwohl der
+Nachweis später **Widerrufen** wurde und **Derzeit nicht gültig** ist.
+
+<ImageZoom
+  src={gueltigkeitAnsicht}
+  alt="Kompetenznachweis von Ines Besuch mit Entscheidung Genehmigt, Nachweisstatus Widerrufen und aktueller Gültigkeit Derzeit nicht gültig."
+/>
 
 **Herkunft und Verlauf** zeigt Quelle, Vorschlags-, Entscheidungs- und Widerrufszeitpunkt,
 **Entschieden durch**, Anmerkung und Referenzen auf externen Nachweis, Credential
@@ -124,7 +140,7 @@ ersetzt die bisherige. Ein extern ausgestelltes Credential wird dadurch nicht wi
 Ein widerrufener Nachweis benötigt nach erneuter Beurteilung eine ausdrückliche
 Nachweisentscheidung; eine erneute Prüfung allein macht ihn nicht gültig.
 Für lokale Badge-Vergaben, Erneuerung und Widerruf nutze
-[Badges verwalten → Vergaben und Lernwege](../administration/badges-verwalten.mdx#vergaben-und-lernwege).
+[Badge-Vergaben verwalten](./badge-vergaben.mdx).
 
 ## Externe Nachweise anerkennen
 

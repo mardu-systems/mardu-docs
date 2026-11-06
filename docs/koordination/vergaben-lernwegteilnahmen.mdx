@@ -3,11 +3,14 @@ title: Lernwegteilnahmen begleiten
 description: Personen einem Lernweg zuordnen, aktuell gültige Badges prüfen und Teilnahmen abschließen oder abbrechen.
 ---
 
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import teilnahmenAnsicht from './bilder/lernweg-teilnahmen-fortschritt-aktuell.png';
+
 Auch mit der erforderlichen Anzahl gültiger Badges musst du den Abschluss einer
 Teilnahme ausdrücklich bestätigen.
 
 Lokale Badges vergibst, erneuerst oder widerrufst du nach
-[Administration → Badges verwalten](../administration/badges-verwalten.mdx#vergaben-und-lernwege).
+[Badge-Vergaben verwalten](./badge-vergaben.mdx).
 
 ## Voraussetzungen und Rechte
 
@@ -38,15 +41,26 @@ Die Zuordnung speichert Anforderungen und Version eines vorgesehenen Abschluss-B
 Spätere Lernwegänderungen gelten nicht für diese Teilnahme. Die Badges müssen
 nicht in der angezeigten Reihenfolge erworben werden.
 
-Die Teilnahme zeigt ihre Lernwegversion, aber nicht alle gespeicherten Anforderungen.
-**Enthaltene Badges** zeigt den heutigen Lernwegstand. Kläre bei zwischenzeitlichen
-Änderungen die ursprünglichen Anforderungen vor dem Abschluss.
+<Callout type="warn" title="Teilnahme und heutiger Lernwegstand unterscheiden">
+  Die Teilnahme zeigt ihre Lernwegversion, aber nicht alle gespeicherten Anforderungen. **Enthaltene
+  Badges** zeigt den heutigen Lernwegstand. Kläre bei zwischenzeitlichen Änderungen die
+  ursprünglichen Anforderungen vor dem Abschluss.
+</Callout>
 
 ## Den Fortschritt lesen
 
 **Aktuell gültige Badges** zählt gültige Badges aus der gespeicherten Auswahl:
 **2 / 3** bedeutet zwei gültige von drei erforderlichen Badges. Mehrfachvergaben
 desselben Badges zählen nur einmal.
+
+Im Beispiel **Vom Entwurf zum Prototyp** sind beliebige zwei von drei Badges nötig.
+**2 / 2** erfüllt diese Mindestanzahl. **3 / 2** bedeutet, dass sogar drei passende
+Badges gültig sind; der Nenner bleibt die erforderliche Anzahl.
+
+<ImageZoom
+  src={teilnahmenAnsicht}
+  alt="Teilnahmen am Beispiel-Lernweg: Felix Neumann und Hannah Zimmermann mit 2 von 2 erforderlichen Badges und Abschluss möglich; Tom Lindner mit 3 von 2 und Abgeschlossen."
+/>
 
 Früher erworbene lokale Badges können mitzählen. Abgelaufene, widerrufene oder
 ersetzte Vergaben zählen nicht, gültige erneuerte Vergaben dagegen schon.
@@ -76,7 +90,7 @@ und stellt kein signiertes Credential aus.
 3. Wähle **Abschluss bestätigen**. Die Aktion wird direkt ausgeführt.
 4. Prüfe in der Teilnahmeliste den Status **Abgeschlossen**. Falls ein
    Abschluss-Badge vorgesehen ist, prüfe seine Vergabe und Gültigkeit unter den
-   [Vergaben des Badges](../administration/badges-verwalten.mdx#vergaben-und-lernwege).
+   [Vergaben des Badges](./badge-vergaben.mdx#vergaben-und-lernwege).
 
 Ohne Abschluss-Badge wird nur die Teilnahme abgeschlossen. Danach lässt sie sich
 nicht erneut abschließen oder abbrechen.

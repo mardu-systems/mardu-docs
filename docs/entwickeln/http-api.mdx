@@ -3,6 +3,8 @@ title: HTTP-API nutzen
 description: Am Server anmelden, Daten mit Bearer-Token lesen und einen Ressourcenentwurf mit Versionsprüfung ändern.
 ---
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
 Für die Beispiele brauchst du eine für Ressourcenänderungen vorgesehene
 Testinstallation, ein aktives Konto sowie `curl` und `jq`.
 
@@ -158,55 +160,77 @@ Prüfe bei anderen Listen deren eigenen Paginierungsvertrag.
 
 ### Einen Ressourcenentwurf anlegen und ändern
 
-1. Lege in der Testinstallation einen Entwurf mit einem dort noch nicht
-   verwendeten Namen an. `resourceType: 9` bedeutet **Other**.
+<Steps>
 
-   ```bash
-   curl --silent --show-error --fail-with-body \
-     --request POST \
-     --header "Authorization: Bearer $ACCESS_TOKEN" \
-     --header 'Content-Type: application/json' \
-     --data '{"name":"HTTP-Demo-Ressource","description":"Test der HTTP-Anbindung","resourceType":9}' \
-     "$API_BASE/api/v1/managed-resources"
-   ```
+<Step>
 
-   Anlegen (`POST /api/v1/managed-resources`) liefert `201`,
-   den `Location`-Header und die angelegte Ressource mit `id`, `version` und
-   `lifecycleStatus: 0` (**Draft**). Ein Entwurf ist noch nicht buchbar oder
-   betreibbar. Dieser Aufruf konfiguriert weder Hardware noch eine Zutrittsfreigabe.
+#### Entwurf anlegen
 
-2. Übernimm die zurückgegebene `id` als `RESOURCE_ID` und lies den gespeicherten
-   Stand. Diesen Aufruf nutzt du auch nach späteren Änderungen zum Prüfen.
+Lege in der Testinstallation einen Entwurf mit einem dort noch nicht
+verwendeten Namen an. `resourceType: 9` bedeutet **Other**.
 
-   ```bash
-   RESOURCE_ID='00000000-0000-0000-0000-000000000001' # Durch die erhaltene ID ersetzen.
-   curl --silent --show-error --fail-with-body \
-     --header "Authorization: Bearer $ACCESS_TOKEN" \
-     "$API_BASE/api/v1/managed-resources/$RESOURCE_ID"
-   ```
+```bash
+curl --silent --show-error --fail-with-body \
+  --request POST \
+  --header "Authorization: Bearer $ACCESS_TOKEN" \
+  --header 'Content-Type: application/json' \
+  --data '{"name":"HTTP-Demo-Ressource","description":"Test der HTTP-Anbindung","resourceType":9}' \
+  "$API_BASE/api/v1/managed-resources"
+```
 
-3. Lies die Detailantwort (`GET /api/v1/managed-resources/{resourceId}`) und
-   übernimm deren aktuelle `version` und editierbare Felder. Dieses Beispiel
-   ersetzt die Beschreibung und sendet den Body mit
-   `PUT /api/v1/managed-resources/{resourceId}`:
+Anlegen (`POST /api/v1/managed-resources`) liefert `201`,
+den `Location`-Header und die angelegte Ressource mit `id`, `version` und
+`lifecycleStatus: 0` (**Draft**). Ein Entwurf ist noch nicht buchbar oder
+betreibbar. Dieser Aufruf konfiguriert weder Hardware noch eine Zutrittsfreigabe.
 
-   ```bash
-   CURRENT_RESOURCE=$(curl --silent --show-error --fail-with-body \
-     --header "Authorization: Bearer $ACCESS_TOKEN" \
-     "$API_BASE/api/v1/managed-resources/$RESOURCE_ID") && \
-   printf '%s' "$CURRENT_RESOURCE" | \
-     jq '{parentResourceId, name, resourceType, occupiedMachinePolicy, version,
-          description: "HTTP-Änderung geprüft"}' | \
-     curl --silent --show-error --fail-with-body \
-       --request PUT \
-       --header "Authorization: Bearer $ACCESS_TOKEN" \
-       --header 'Content-Type: application/json' \
-       --data-binary @- \
-       "$API_BASE/api/v1/managed-resources/$RESOURCE_ID"
-   ```
+</Step>
 
-   Erfolg liefert `200` mit dem gespeicherten Stand und erhöhter `version`.
-   Prüfe die Beschreibung mit dem Leseaufruf aus Schritt 2.
+<Step>
+
+#### Gespeicherten Stand lesen
+
+Übernimm die zurückgegebene `id` als `RESOURCE_ID` und lies den gespeicherten
+Stand. Diesen Aufruf nutzt du auch nach späteren Änderungen zum Prüfen.
+
+```bash
+RESOURCE_ID='00000000-0000-0000-0000-000000000001' # Durch die erhaltene ID ersetzen.
+curl --silent --show-error --fail-with-body \
+  --header "Authorization: Bearer $ACCESS_TOKEN" \
+  "$API_BASE/api/v1/managed-resources/$RESOURCE_ID"
+```
+
+</Step>
+
+<Step>
+
+#### Beschreibung ändern und prüfen
+
+Lies die Detailantwort (`GET /api/v1/managed-resources/{resourceId}`) und
+übernimm deren aktuelle `version` und editierbare Felder. Dieses Beispiel
+ersetzt die Beschreibung und sendet den Body mit
+`PUT /api/v1/managed-resources/{resourceId}`:
+
+```bash
+CURRENT_RESOURCE=$(curl --silent --show-error --fail-with-body \
+  --header "Authorization: Bearer $ACCESS_TOKEN" \
+  "$API_BASE/api/v1/managed-resources/$RESOURCE_ID") && \
+printf '%s' "$CURRENT_RESOURCE" | \
+  jq '{parentResourceId, name, resourceType, occupiedMachinePolicy, version,
+       description: "HTTP-Änderung geprüft"}' | \
+  curl --silent --show-error --fail-with-body \
+    --request PUT \
+    --header "Authorization: Bearer $ACCESS_TOKEN" \
+    --header 'Content-Type: application/json' \
+    --data-binary @- \
+    "$API_BASE/api/v1/managed-resources/$RESOURCE_ID"
+```
+
+Erfolg liefert `200` mit dem gespeicherten Stand und erhöhter `version`.
+Prüfe die Beschreibung mit dem vorherigen Leseaufruf.
+
+</Step>
+
+</Steps>
 
 Für diesen Vertrag gilt: `name` ist erforderlich, maximal 160 Zeichen lang und
 wird getrimmt. Namen müssen unter demselben Elternknoten unabhängig von Groß- und
