@@ -1,6 +1,6 @@
 ---
 title: Zutritt und Technik einer Ressource einrichten
-description: Nutzungsbedingungen festlegen, Leser und Aktoren zuordnen und die Zugriffsregel aktivieren.
+description: Nutzungsbedingungen festlegen, Leser oder QR-Zugang und Aktoren zuordnen und die Zugriffsregel aktivieren.
 ---
 
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
@@ -82,6 +82,56 @@ Bereits belegte Anschlüsse werden nicht aus einer anderen Verwendung übernomme
 Die Zuordnung aktiviert die Zugriffsregel noch nicht und bestätigt keine
 physische Einsatzbereitschaft.
 
+### QR-Code für eine Maschine einrichten
+
+Unter **Technik → Leser & QR-Code** kannst du einen **Web- & QR-Code-Zugang aktivieren**.
+Er ergänzt einen Leser oder ersetzt ihn als Eingang. Ein aktiver Zugangspunkt
+braucht mindestens einen dieser Eingänge und den erforderlichen Aktor.
+
+1. Wähle den gewünschten Zugangspunkt. Der Eintrag **QR-Zugang** unter
+   **Leser & QR-Code** bleibt auch ohne Einrichtung sichtbar. Wähle **Einrichten**
+   und bestätige im geöffneten Dialog
+   **Web- & QR-Code-Zugang aktivieren**.
+   Ohne vorhandenen Punkt wird ein zunächst inaktiver Punkt angelegt.
+2. Prüfe die im Dialog genannten offenen Voraussetzungen. Über
+   **Zugangspunkt bearbeiten**, **Zugriffsregel öffnen** und **Aktoren anzeigen**
+   erreichst du die vorhandenen Einstellungen. Ordne der Maschine einen
+   Freigabeaktor zu und aktiviere Zugangspunkt und Zugriffsregel ausdrücklich.
+   **Webzugang aktiviert** bedeutet nicht, dass diese Einrichtung abgeschlossen ist.
+   Eine Zuordnung als **Dauerausgang** an der Ressource ersetzt die
+   **Maschinenfreigabe** am Zugangspunkt nicht, auch wenn der Anschlussname
+   „Maschinenfreigabe“ enthält. Entscheidend ist die zugewiesene Betriebsart.
+3. Nach der Aktivierung steht der QR-Eintrag zugeklappt bei **Leser & QR-Code**.
+   Klappe ihn mit dem Pfeil links neben dem QR-Symbol auf, um den Zugangslink und
+   **Link kopieren** zu sehen. **QR-Code anzeigen** öffnet die Vorschau.
+   **Schild drucken** öffnet die Druckansicht mit Ressourcenname, QR-Code und
+   der Anleitung zum Scannen, Anmelden und Freischalten. Über **Grafik herunterladen**
+   kannst du **PNG herunterladen** oder **SVG herunterladen** wählen.
+   Der QR-Code verwendet das Mardu-Logo und öffnet denselben Zugangslink.
+4. Prüfe den Aufkleber mit einem Handy und einer berechtigten Testperson.
+   [Maschine per QR-Code nutzen](../benutzer/zutritt.mdx#maschine-per-qr-code-nutzen)
+   beschreibt Start und Ende der eigenen Sitzung.
+
+Die Deaktivierung findest du im QR-Dialog unter **Zugang verwalten**. Sie beendet
+keine laufende Nutzung und schaltet die Hardware nicht aus. Verliert ein aktiver
+Zugangspunkt dadurch seinen letzten Eingang, wird er nach Bestätigung ebenfalls
+deaktiviert. Eine spätere Aktivierung des Webzugangs aktiviert den Punkt nicht mit.
+
+QR-Links benötigen eine Standalone-Installation mit festem Backend und eine
+konfigurierte Webadresse, die vom Handy erreichbar ist. Eine Standortadresse
+kann den Zugang auf das Standort-WLAN begrenzen. Fehlt die Adresse oder ist sie
+ungeeignet, zeigt Mardu einen Hinweis statt eines QR-Codes. Die Installation
+verwendet dafür im Docker-Compose-Setup die Umgebungsvariable `WEB_PUBLIC_URL`.
+Bei einem eigenen Frontend-Build heißt sie `NEXT_PUBLIC_APP_BASE_URL`.
+Die Adresse wird beim Build übernommen; nach einer Änderung das Web-Image neu
+bauen. Sie wird nicht im Ressourcenformular eingestellt. Der lokale Standard
+`http://localhost:3000` funktioniert nur auf dem jeweiligen Gerät und wird daher
+für QR-Codes abgewiesen. Ändere die Adresse vor dem Drucken dauerhafter Aufkleber.
+
+Der QR-Code enthält keine Nutzungsberechtigung. Die Anmeldung und die
+Zugriffsbedingungen bleiben erforderlich. Webzugang zu aktivieren aktiviert
+weder den Zugangspunkt noch die Ressourcenregel und schaltet keine Hardware.
+
 ### Weitere Zugänge
 
 Für **Weiteren Zugangspunkt anlegen** gibst du unter **Technischer Schlüssel**
@@ -100,7 +150,7 @@ neue Zuordnung den Punkt nicht automatisch wieder.
 ## Zugriffsregel aktivieren
 
 1. Aktiviere die Ressource unter **Allgemein**, falls sie noch ein Entwurf ist.
-2. Prüfe, dass die benötigten Zutrittspunkte aktiv und ihre Leser sowie
+2. Prüfe, dass die benötigten Zutrittspunkte aktiv und ein Leser oder Webzugang sowie
    erforderlichen Aktoren zugeordnet sind.
 3. Öffne **Nutzung & Zugriff**, schalte **Zugriff aktiviert** ein und wähle
    **Zugriffsregel speichern**.
