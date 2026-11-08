@@ -98,12 +98,19 @@ braucht mindestens einen dieser Eingänge und den erforderlichen Aktor.
    erreichst du die vorhandenen Einstellungen. Ordne der Maschine einen
    Freigabeaktor zu und aktiviere Zugangspunkt und Zugriffsregel ausdrücklich.
    **Webzugang aktiviert** bedeutet nicht, dass diese Einrichtung abgeschlossen ist.
-   Eine Zuordnung als **Dauerausgang** an der Ressource ersetzt die
-   **Maschinenfreigabe** am Zugangspunkt nicht, auch wenn der Anschlussname
-   „Maschinenfreigabe“ enthält. Entscheidend ist die zugewiesene Betriebsart.
+   Die angezeigten Nutzungsmöglichkeiten kommen vom Backend und gelten für dein
+   angemeldetes Konto. Ist in der Zugriffsregel eine Aktorrolle vorgegeben, muss
+   sie am Zugangspunkt zugeordnet sein. Ohne diese Vorgabe berücksichtigt das
+   Backend den **Dauerausgang** der Ressource, sofern der Anschluss Sitzungen
+   unterstützt und erreichbar ist. Eine fehlende persönliche Freigabe ist kein
+   Beleg für einen fehlenden Aktor. Beim späteren Start wird erneut geprüft.
 3. Nach der Aktivierung steht der QR-Eintrag zugeklappt bei **Leser & QR-Code**.
-   Klappe ihn mit dem Pfeil links neben dem QR-Symbol auf, um den Zugangslink und
-   **Link kopieren** zu sehen. **QR-Code anzeigen** öffnet die Vorschau.
+   Klappe ihn mit dem Pfeil links neben dem QR-Symbol auf, um den Zugangslink zu sehen.
+   Mit dem Kopiericon rechts im Feld kopierst du ihn. **QR-Code anzeigen** öffnet die Vorschau.
+   Dort findest du dasselbe Kopierfeld. **QR-Bild kopieren** oben rechts am
+   Vorschaurahmen kopiert die Grafik als PNG. Dafür muss der Browser Bildzugriff
+   auf die Zwischenablage erlauben; verwende eine HTTPS-Verbindung. Falls das
+   Kopieren nicht möglich ist, kannst du die Grafik herunterladen.
    **Schild drucken** öffnet die Druckansicht mit Ressourcenname, QR-Code und
    der Anleitung zum Scannen, Anmelden und Freischalten. Über **Grafik herunterladen**
    kannst du **PNG herunterladen** oder **SVG herunterladen** wählen.
@@ -112,7 +119,8 @@ braucht mindestens einen dieser Eingänge und den erforderlichen Aktor.
    [Maschine per QR-Code nutzen](../benutzer/zutritt.mdx#maschine-per-qr-code-nutzen)
    beschreibt Start und Ende der eigenen Sitzung.
 
-Die Deaktivierung findest du im QR-Dialog unter **Zugang verwalten**. Sie beendet
+**Web- & QR-Code-Zugang deaktivieren** findest du links im Footer des QR-Dialogs
+oder direkt im aufgeklappten QR-Eintrag. Bestätige die Deaktivierung. Sie beendet
 keine laufende Nutzung und schaltet die Hardware nicht aus. Verliert ein aktiver
 Zugangspunkt dadurch seinen letzten Eingang, wird er nach Bestätigung ebenfalls
 deaktiviert. Eine spätere Aktivierung des Webzugangs aktiviert den Punkt nicht mit.
