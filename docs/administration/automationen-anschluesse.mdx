@@ -95,6 +95,30 @@ Die Beispiele ersetzen keine physische Gerätebestätigung. Für echte Geräte d
 
 Der Kommentar im importierten Flow erläutert Einrichtung und Testschritte. Die mit dem Node-Paket ausgelieferte Datei `examples/README.md` beschreibt die erforderlichen Geräteantworten. Ein anderer MQTT-Gerätevertrag benötigt eine passende Übersetzung der Nachrichten, die Auftragskennung und Abschaltfrist erhält.
 
+## Getrennte Aktor-Nodes verwenden
+
+Für einen neuen Flow-Aktor **Aktorauftrag** und **Aktorrückmeldung** wählen. In beiden
+Nodes denselben Anschluss auswählen oder über den Anschlussdialog anlegen. Nach dem
+Deploy diesen Anschluss wie oben der passenden Ressource und Funktion zuordnen.
+Die Anschlussidentität und die Prüfung beim Ändern oder Entfernen gelten unverändert.
+Aktorrückmeldung allein stellt keinen Schaltausgang bereit.
+
+Der Ausgang rechts am Aktorauftrag führt zum Geräteablauf; dessen geprüfte Antwort
+führt links in Aktorrückmeldung. Die Auftragskennung aus `msg.mardu` muss erhalten
+bleiben. Spontane Gerätezustände an **Beobachtung melden** senden. Die deaktivierte
+Vorlage **15 Aktorauftrag und Rückmeldung (Simulation)** zeigt die Verdrahtung mit
+simulierter Antwort. Für echte Geräte die Simulation durch deren bestätigten
+Protokollablauf ersetzen. Weitere Verträge beschreibt
+[Flows entwickeln](../entwickeln/automationsfluesse.mdx#aktorauftrag-und-freigabeantwort-verdrahten).
+
+Der bisherige Schaltaktor ist als **veraltet** gekennzeichnet und bleibt einschließlich
+integriertem S7 und Mehrkanaltabelle unterstützt. Beim Umstellen eines einzelnen
+Flow-Aktors laufende Aufträge zuerst abschließen, Anschluss und Schlüssel beibehalten
+und den bisherigen Node durch das neue Paar ersetzen. Nicht beide Auftragsquellen
+parallel deployen. Unveränderte Anschlussidentität verursacht durch diesen Austausch
+keine Anschlussentfernung; weitere Änderungen im selben Deploy werden weiterhin geprüft.
+Entfernen sendet keinen Abschaltbefehl.
+
 ## Anschluss ersetzen oder bearbeiten
 
 Für den Austausch oder das Lösen gelten die Schritte unter
