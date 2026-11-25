@@ -98,20 +98,22 @@ Heartbeat ein Pflichtfeld; das **Heartbeat-Intervall** beträgt 5–3.600 Sekund
 ## Eingeschränktes Lesekonto anlegen
 
 Lege pro Anbindung ein Konto an, um ihren Zugang getrennt ändern oder entziehen
-zu können. Passwörter werden nicht angezeigt; ersetze ein vergessenes über **Passwort**.
+zu können. Ein vergessenes Passwort kannst du über **Passwort ändern** ersetzen.
 
 1. Wähle unter **MQTT-Benutzer** **Benutzer hinzufügen**.
 2. Trage einen noch nicht verwendeten **Benutzernamen** und ein **Passwort** ein.
-   Ergänze eine **Beschreibung**, an der du die verwendende Anbindung erkennst.
+   Der Benutzername darf nach Entfernen äußerer Leerzeichen höchstens 100 Zeichen
+   enthalten. Die optionale **Beschreibung** darf bis zu 500 Zeichen lang sein.
 3. Wähle als **Kontotyp** **Lesekonto (eingeschränkt)**, lasse **Aktiv** eingeschaltet
-   und wähle **Speichern**.
-4. Öffne beim neuen Konto **ACLs** und gib die benötigten Topics frei.
+   und wähle **Benutzer anlegen**.
+4. Im Dialog **MQTT-Zugriffsregeln** kannst du für das neue Konto über
+   **Zugriffsregel hinzufügen** die benötigten Topics freigeben.
 
-Ohne aktive Freigaberegel kann sich ein eingeschränktes Konto anmelden, aber keine
-Informationen abonnieren. **Lesekonto (alle Topics)** und **Administratorkonto**
-erhalten Lesezugriff auf den gesamten Informationsbaum `v1/info/#`; ihre eigenen
-ACL-Einträge begrenzen diesen Zugriff nicht. Wähle für begrenzte Freigaben deshalb
-**Lesekonto (eingeschränkt)**.
+Ein aktives Konto kann sich anmelden, sobald der Broker läuft. Ein eingeschränktes
+Konto braucht eine aktive Freigaberegel, um Informationen zu abonnieren.
+**Lesekonto (Informationsbaum)** und **Administratorkonto** haben beide Lesezugriff auf
+`v1/info/#`. Die für sie gespeicherten Zugriffsregeln werden erst wirksam, wenn das
+Konto wieder ein **Lesekonto (eingeschränkt)** ist.
 
 </Step>
 
@@ -123,7 +125,7 @@ Eine ACL ist eine Zugriffsregel für ein Topic oder einen Topicfilter. Beim
 Speichern werden die Verbindungen des betroffenen Kontos getrennt und gespeicherte
 Abonnements entfernt. Der Client muss sich neu verbinden und abonnieren.
 
-1. Öffne beim eingeschränkten Konto **ACLs → ACL hinzufügen**.
+1. Öffne beim eingeschränkten Konto **Zugriffsregeln → Zugriffsregel hinzufügen**.
 2. Wähle einen **Zugriffsbereich** aus dem Katalog oder trage im **Topic-Filter**
    das benötigte Topic ein. Für einen begrenzten Systemtest eignet sich
    `v1/info/public/system/state`.
@@ -135,8 +137,8 @@ Abonnements entfernt. Der Client muss sich neu verbinden und abonnieren.
    **Gespeicherte Nachricht senden**. Eine QoS-Grenze begrenzt die gewährte
    Zustellqualität; der Schalter bestimmt, ob beim Abonnieren der zuletzt
    gespeicherte Retained-Wert gesendet wird. Er erzeugt keine neue Nachricht.
-6. Wähle **Speichern** und kontrolliere Filter, `subscribe / allow` und Status
-   in **Benutzer-ACLs**.
+6. Wähle **Speichern** und kontrolliere Filter, Zugriff und Status in
+   **MQTT-Zugriffsregeln**.
 
 <ImageZoom
   src={mqttLeseregel}

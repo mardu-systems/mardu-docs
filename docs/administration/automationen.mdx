@@ -71,8 +71,11 @@ bestimmten Flows. Sie begrenzt nicht den übrigen Laufzeitzugriff von Node-RED.
 Zum Anzeigen von **Flow-Einstellungen** brauchst du Anzeigerechte für
 **Automation-Editor**, **Automationen** und **Einstellungen**; zum Ändern die
 jeweiligen Bearbeitungsrechte. Eine neue Regel benötigt eine aktive
-Mardu-Verbindung und einen aktivierten, deployten Flow mit genau einem Node
-**Freigabe-Anfrage** an dieser Verbindung.
+Mardu-Verbindung und einen aktivierten, veröffentlichten Flow mit genau einem
+aktiven Anfrage-Node an dieser Verbindung. Geeignet sind **Freigabeanfrage** und
+die bisherige **Freigabe-Anfrage**. Teste die Antwort des Flows in Node-RED, bevor
+du die Prüfung verpflichtend machst. Bei unbekanntem Verbindungsstatus kannst du
+im Formular **Erneut prüfen** wählen.
 
 ### Regel speichern oder entfernen
 
@@ -83,11 +86,17 @@ Mardu-Verbindung und einen aktivierten, deployten Flow mit genau einem Node
    Mardu künftig vor dem Zugang die Freigabe dieses Flows.
 4. Setze **Zeitlimit (Sekunden)** auf 0,25 bis 30 Sekunden. Ohne rechtzeitige
    Freigabe wird der Zugang abgelehnt, auch bei Ausfall oder deaktiviertem Flow.
-5. Wähle **Speichern** und bestätige die Auswirkungen im Dialog.
+5. Wähle **Speichern** und bestätige die Auswirkungen im Dialog. Die Regel gilt
+   für neue Zugangsversuche. Änderungen am Flow selbst übernimmst du per
+   **Deploy** im Node-RED-Editor.
 
 Bei Ladefehlern bleiben gespeicherte Ressourcenreferenzen erhalten. Speichern ist
 erst möglich, wenn die ausgewählten Ressourcen geprüft sind; fehlende Referenzen
 musst du entfernen oder ersetzen.
+
+Wenn Mardu das Speichern wegen eines Konflikts ablehnt, wähle **Aktuelle
+Einstellungen laden**. Der Entwurf bleibt geöffnet. Bei einer neuen Version
+prüfst du die aktuell gespeicherte Regel und wählst **Entwurf weiterbearbeiten**.
 
 Zum Entfernen der Anforderung schalte **Vor Zugang auf diesen Flow warten** aus,
 speichere und bestätige. Das ist auch während eines Ausfalls möglich und gilt für

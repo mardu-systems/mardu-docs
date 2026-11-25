@@ -137,6 +137,51 @@ bestätigt weder einen neuen Gerätewert noch die Ausführung eines Befehls.
 
 </Steps>
 
+## Aktorauftrag und Freigabeantwort verdrahten
+
+Für neue Geräteabläufe **Aktorauftrag → Geräteprotokoll und Rückmeldung prüfen →
+Aktorrückmeldung** verwenden. Beide Aktor-Nodes wählen denselben vorhandenen Anschluss.
+Der Auftragsausgang liegt rechts, der Rückmeldeeingang links. Der Auftrag enthält
+`payload.action` und seine Parameter; `msg.mardu.executionId`, `endpointKey` und
+`expiresAtUtc` bis zur Geräteantwort erhalten. Aktorrückmeldung erwartet ein Objekt
+mit `succeeded` und dem zum Auftrag passenden `reportedState`; erfolgreiche
+Maschinenstarts benötigen zusätzlich die vom Gerät bestätigte Abschaltzeit.
+Eine MQTT-Transportbestätigung genügt nicht. Spontane Zustände ohne Auftrag weiter
+über **Beobachtung melden** führen. Ein Rückmelde-Node allein veröffentlicht keinen Aktor.
+
+Für zusätzliche Zugangsprüfungen **Freigabeanfrage → Bedingungen prüfen →
+Freigabeantwort** verwenden. Anfrage und Antwort wählen dieselbe Mardu-Verbindung.
+Die bestehende Flow-Zuordnung in Mardu bleibt erforderlich. Genau einen Anfrage-Node
+pro zugeordnetem Flow aktivieren; deaktivierte Anfrage-Nodes zählen nicht mit.
+`msg.mardu.checkpointId` und `checkpointSourceId` erhalten und vor der
+Checkpoint-Frist antworten. Entscheidung und Grund können im Antwortnode stehen;
+vorhandene `payload.verdict`- und `payload.reasonCode`-Werte haben Vorrang.
+Eine positive Prüfantwort ersetzt nicht Mardus abschließende Zugangsprüfung.
+Nach Austausch oder Schließen der neuen Anfrage-Node werden deren alte Nachrichten
+abgewiesen. Beim Schließen des Antwortnodes noch wartende Antworten werden nicht mehr
+gesendet. Bereits abgesendete Anfragen können nicht zurückgenommen werden; bei
+unklarem Ausgang den Checkpoint-Stand über **Freigabe laden** prüfen.
+
+**Aktorrückmeldung** und **Freigabeantwort** haben keinen normalen Ausgang. **Catch**
+behandelt Fehler. **Complete** zeigt die erfolgreiche Übermittlung der jeweiligen
+Antwort an; es bestätigt keine zusätzliche Hardwarewirkung oder endgültige
+Zugangsfreigabe. Den kanonischen Prüfstand bei Bedarf mit **Freigabe laden** nachladen.
+Bei Zustandsabfragen innerhalb einer Prüfung `msg.mardu` erhalten und Quellzeit sowie
+Verfügbarkeit der Werte berücksichtigen.
+
+Die bisherigen **Schaltaktor**, **Freigabe-Anfrage** und **Freigabe entscheiden** sind
+als **veraltet** gekennzeichnet und bleiben mit ihren bisherigen Ports und Nachrichten
+funktionsfähig. Integriertes S7 und Mehrkanaltabelle bleiben beim bisherigen Schaltaktor.
+Beim manuellen Wechsel Anschluss und Schlüssel erhalten, laufende Aufträge abschließen
+und beide Änderungen gemeinsam deployen. Alte und neue Auftragsquelle nicht gleichzeitig
+am selben Anschluss betreiben. Ausgehende Leitungen von **Freigabe entscheiden** benötigen
+beim Wechsel auf **Freigabeantwort** ausdrücklich einen Complete-, Ereignis- oder Abfragepfad.
+
+Die deaktivierten Beispiele **15 Aktorauftrag und Rückmeldung (Simulation)** und
+**16 Freigabeanfrage und Freigabeantwort** ergänzen die bisherigen Vorlagen. Der erste
+simuliert die Geräteantwort; der zweite entscheidet nur anhand der Operation und prüft
+keine Sensoren. Für reale Freigabebedingungen eigene Prüfungen ergänzen.
+
 ## Weitere Nachrichtenwege passend wählen
 
 Die Node-Hilfe im Editor beschreibt Eingang, Ausgang und Konfiguration. Wähle
@@ -148,7 +193,7 @@ für Erweiterungen den passenden Nachrichtenweg:
 | Ereignishinweise empfangen       | **Mardu-Ereignis** liefert ein vollständiges CloudEvent in `msg.payload`: Typ unter `type`, Inhalt unter `data`; ID und Typ zusätzlich unter `msg.mardu.eventId` und `msg.mardu.eventType`. Der Ereignistypfilter vergleicht exakt. Er benötigt die für die Verbindung eingerichteten MQTT-Abonnements.          |
 | Einen Aktionsabschluss verfolgen | **Aktion beendet** liefert `space.mardu.automation.execution.completed.v1`. Nach `msg.payload.data.executionId` auf den eigenen Auftrag filtern. **Aktions-Status** mit ID-Pfad `payload.data.executionId` lädt den aktuellen Stand über REST nach.                                                              |
 | Eine Aktion anfordern            | **Aktion ausführen** unterstützt hier **Sitzung beenden** (`end-session`) für eine Ressource, mit deren Sitzungs-ID. Die Antwort mit `executionId`, `status`, `correlationId` und `acceptedAtUtc` bestätigt die Annahme. Sie bestätigt noch keinen Abschluss. Das gehört nicht zum lesenden Beispiel.            |
-| Eine Zugangsprüfung beantworten  | **Freigabe-Anfrage** liefert den übernommenen Checkpoint; **Freigabe entscheiden** benötigt dessen `msg.mardu.checkpointId` und dieselbe Verbindung. Eine beliebige Ereignisnachricht ersetzt diese übernommene Prüfung nicht. Die Zuordnung wird in der Administration eingerichtet.                            |
+| Eine Zugangsprüfung beantworten  | **Freigabeanfrage** liefert den übernommenen Checkpoint; **Freigabeantwort** benötigt dessen `msg.mardu.checkpointId` und dieselbe Verbindung. Eine beliebige Ereignisnachricht ersetzt diese übernommene Prüfung nicht. Die Zuordnung wird in der Administration eingerichtet.                            |
 | Einen Messwert melden            | **Beobachtung melden** nimmt genau ein unterstütztes Wertfeld entgegen und hat keinen Ausgang. Der Anschluss muss zuerst [veröffentlicht](../administration/automationen-anschluesse.mdx) und der passenden Beobachtungsrolle einer Ressource zugeordnet sein. Das ist eine Meldung an Mardu, kein Gerätebefehl. |
 
 Aktionsabschlüsse können `succeeded`, `failed`, `rejected`, `timed-out`,
